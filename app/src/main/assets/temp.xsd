@@ -95,6 +95,14 @@
                                     <attribute name="ReadyTimeout" type="int" use="required"/>
                                     <attribute name="Require" type="string" use="required"/>
                                     <sequence>
+                                        <element maxOccurs="1" name="Function">
+                                            <complexType>
+                                                <attribute name="Qualify" type="boolean" use="required"  default="false"/>
+                                                <attribute name="Camera" type="boolean" use="required" default="true"/>
+                                                <attribute name="Handwriting" type="boolean" use="required" default="true"/>
+                                                <attribute name="Chart" type="boolean" use="required" default="true"/>
+                                            </complexType>
+                                        </element>
                                         <element maxOccurs="1" name="Msgs">
                                             <complexType>
                                                 <attribute name="AbortMsg" type="string" use="required"/>

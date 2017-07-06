@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
+import com.kstech.zoomlion.model.xml.XMLAPI;
 import com.kstech.zoomlion.utils.LogUtils;
 import com.kstech.zoomlion.utils.MyHttpUtils;
 
@@ -74,5 +75,12 @@ public class ExampleInstrumentedTest {
 
             }
         });
+    }
+
+    @Test
+    public void TestXml() throws Exception {
+        Context appContext = InstrumentationRegistry.getTargetContext();
+        Object o = XMLAPI.readXML(appContext.getAssets().open("temp.xml"));
+        XMLAPI.SHOWXMLINFO(o);
     }
 }
