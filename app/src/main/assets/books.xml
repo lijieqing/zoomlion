@@ -1,0 +1,1203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Device DevBornDate="2014-12" DevDieDate="2019-12" DevStatus="" Id="" Name="" subDevId=""
+    subDevName="">
+    <DataSet>
+        <DSItem DataType="BYTE" DecLen="0" LinkTo=" " Name="档位" Rows=" " Unit="a" Value=" " />
+        <DSItem DataType="WORD" DecLen="0" LinkTo=" " Name="发动机转速" Rows=" " Unit="r/M" Value=" " />
+        <DSItem DataType="WORD" DecLen="0" LinkTo=" " Name="发动机扭矩" Rows=" " Unit="a" Value=" " />
+        <DSItem DataType="WORD" DecLen="0" LinkTo=" " Name="发动机扭矩模式" Rows=" " Unit="a" Value=" " />
+        <DSItem DataType="WORD" DecLen="0" LinkTo=" " Name="实际高精度扭矩百分比" Rows=" " Unit="a"
+            Value=" " />
+        <DSItem DataType="WORD" DecLen="0" LinkTo=" " Name="驾驶员请求扭矩百分比" Rows=" " Unit="a"
+            Value=" " />
+        <DSItem DataType="WORD" DecLen="0" LinkTo=" " Name="实际扭矩百分比" Rows=" " Unit="a" Value=" " />
+        <DSItem DataType="WORD" DecLen="0" LinkTo=" " Name="发动机控制设备源地址" Rows=" " Unit="a"
+            Value=" " />
+        <DSItem DataType="WORD" DecLen="0" LinkTo=" " Name="发动机启动模式" Rows=" " Unit="a" Value=" " />
+        <DSItem DataType="WORD" DecLen="0" LinkTo=" " Name="发动机请求扭矩百分比" Rows=" " Unit="a"
+            Value=" " />
+        <DSItem DataType="WORD" DecLen="0" LinkTo=" " Name="液力变矩器锁止" Rows=" " Unit="a" Value=" " />
+        <DSItem DataType="WORD" DecLen="0" LinkTo=" " Name="输出轴转速" Rows=" " Unit="a" Value=" " />
+        <DSItem DataType="WORD" DecLen="0" LinkTo=" " Name="输入轴转速" Rows=" " Unit="a" Value=" " />
+        <DSItem DataType="FLOAT" DecLen="2" LinkTo=" " Name="左泵压力" Rows=" " Unit="MPa" Value=" " />
+        <DSItem DataType="FLOAT" DecLen="2" LinkTo=" " Name="右泵压力" Rows=" " Unit="MPa" Value=" " />
+        <DSItem DataType="FLOAT" DecLen="2" LinkTo=" " Name="附属压力" Rows=" " Unit="MPa" Value=" " />
+        <DSItem DataType="FLOAT" DecLen="2" LinkTo=" " Name="先导压力" Rows=" " Unit="MPa" Value=" " />
+        <DSItem DataType="FLOAT" DecLen="2" LinkTo=" " Name="铲斗激光位移" Rows=" " Unit="mm" Value=" " />
+        <DSItem DataType="FLOAT" DecLen="2" LinkTo=" " Name="斗杆激光位移" Rows=" " Unit="mm" Value=" " />
+        <DSItem DataType="FLOAT" DecLen="2" LinkTo=" " Name="动臂激光位移" Rows=" " Unit="mm" Value=" " />
+        <DSItem DataType="FLOAT" DecLen="2" LinkTo=" " Name="空行走速度" Rows=" " Unit="s" Value=" " />
+        <DSItem DataType="FLOAT" DecLen="0" LinkTo=" " Name="油温温度" Rows=" " Unit="℃" Value=" " />
+        <DSItem DataType="FLOAT" DecLen="1" LinkTo=" " Name="流量计" Rows=" " Unit="L/min" Value=" " />
+        <DSItem DataType="FLOAT" DecLen="0" LinkTo=" " Name="电量" Rows=" " Unit="%" Value=" " />
+        <DSItem DataType="FLOAT" DecLen="0" LinkTo=" " Name="检测终端节点号" Rows=" " Unit="a" Value=" " />
+        <DSItem DataType="FLOAT" DecLen="0" LinkTo=" " Name="检测终端Id" Rows=" " Unit="a" Value=" " />
+        <DSItem DataType="FLOAT" DecLen="2" LinkTo="左泵压力" Name="主系统压力" Rows=" " Unit="Mpa"
+            Value=" " />
+        <DSItem DataType="FLOAT" DecLen="2" LinkTo="左泵压力" Name="主系统压力(增压)" Rows=" " Unit="Mpa"
+            Value=" " />
+        <DSItem DataType="FLOAT" DecLen="2" LinkTo="左泵压力" Name="左回转压力" Rows=" " Unit="Mpa"
+            Value=" " />
+        <DSItem DataType="FLOAT" DecLen="2" LinkTo="左泵压力" Name="右回转压力" Rows=" " Unit="Mpa"
+            Value=" " />
+        <DSItem DataType="FLOAT" DecLen="2" LinkTo="左泵压力" Name="左行走压力" Rows=" " Unit="Mpa"
+            Value=" " />
+        <DSItem DataType="FLOAT" DecLen="2" LinkTo="左泵压力" Name="右行走压力" Rows=" " Unit="Mpa"
+            Value=" " />
+        <DSItem DataType="FLOAT" DecLen="2" LinkTo="右泵压力" Name="手柄控制双向辅助管路压力" Rows=" " Unit="Mpa"
+            Value=" " />
+        <DSItem DataType="FLOAT" DecLen="2" LinkTo="右泵压力" Name="脚踏控制双向辅助管路压力" Rows=" " Unit="Mpa"
+            Value=" " />
+        <DSItem DataType="FLOAT" DecLen="2" LinkTo="右泵压力" Name="手柄控制单向辅助管路压力" Rows=" " Unit="Mpa"
+            Value=" " />
+        <DSItem DataType="FLOAT" DecLen="2" LinkTo="右泵压力" Name="脚踏控制单向辅助管路压力" Rows=" " Unit="Mpa"
+            Value=" " />
+        <DSItem DataType="FLOAT" DecLen="2" LinkTo="附属压力" Name="附属回转管路压力" Rows=" " Unit="Mpa"
+            Value=" " />
+        <DSItem DataType="FLOAT" DecLen="2" LinkTo="附属压力" Name="高压快换管路压力" Rows=" " Unit="Mpa"
+            Value=" " />
+        <DSItem DataType="FLOAT" DecLen="2" LinkTo="附属压力" Name="低压快换管路压力" Rows=" " Unit="Mpa"
+            Value=" " />
+        <DSItem DataType="FLOAT" DecLen="2" LinkTo="先导压力" Name="先导压力最高转速" Rows=" " Unit="Mpa"
+            Value=" " />
+        <DSItem DataType="FLOAT" DecLen="2" LinkTo="先导压力" Name="先导压力怠速" Rows=" " Unit="Mpa"
+            Value=" " />
+        <DSItem DataType="FLOAT" DecLen="2" LinkTo="右泵压力" Name="动臂油缸伸出速度" Rows=" " Unit="s"
+            Value=" " />
+        <DSItem DataType="FLOAT" DecLen="2" LinkTo="右泵压力" Name="斗杆油缸收缩速度" Rows=" " Unit="s"
+            Value=" " />
+        <DSItem DataType="FLOAT" DecLen="2" LinkTo="右泵压力" Name="斗杆油缸伸出速度" Rows=" " Unit="s"
+            Value=" " />
+        <DSItem DataType="FLOAT" DecLen="2" LinkTo="右泵压力" Name="铲斗油缸收缩速度" Rows=" " Unit="s"
+            Value=" " />
+        <DSItem DataType="FLOAT" DecLen="2" LinkTo="右泵压力" Name="铲斗油缸伸出速度" Rows=" " Unit="s"
+            Value=" " />
+        <DSItem DataType="FLOAT" DecLen="2" LinkTo=" " Name="油缸沉降量(斗杆缩回)" Rows=" " Unit="a"
+            Value=" " />
+        <DSItem DataType="FLOAT" DecLen="2" LinkTo=" " Name="油缸沉降量(斗杆伸出)" Rows=" " Unit="a"
+            Value=" " />
+        <DSItem DataType="FLOAT" DecLen="2" LinkTo=" " Name="铲斗油缸沉降量(斗杆缩回)" Rows=" " Unit="mm"
+            Value=" " />
+        <DSItem DataType="FLOAT" DecLen="2" LinkTo=" " Name="斗杆油缸沉降量(斗杆缩回)" Rows=" " Unit="mm"
+            Value=" " />
+        <DSItem DataType="FLOAT" DecLen="2" LinkTo=" " Name="动臂油缸沉降量(斗杆缩回)" Rows=" " Unit="mm"
+            Value=" " />
+        <DSItem DataType="FLOAT" DecLen="2" LinkTo=" " Name="斗杆油缸沉降量(斗杆伸出)" Rows=" " Unit="mm"
+            Value=" " />
+        <DSItem DataType="FLOAT" DecLen="2" LinkTo=" " Name="铲斗油缸沉降量(斗杆伸出)" Rows=" " Unit="mm"
+            Value=" " />
+        <DSItem DataType="FLOAT" DecLen="2" LinkTo="空行走速度" Name="左履带前进慢档空行走速度" Rows=" " Unit="s"
+            Value=" " />
+        <DSItem DataType="FLOAT" DecLen="2" LinkTo="空行走速度" Name="左履带后退慢档空行走速度" Rows=" " Unit="s"
+            Value=" " />
+        <DSItem DataType="FLOAT" DecLen="2" LinkTo="空行走速度" Name="左履带前进快档空行走速度" Rows=" " Unit="s"
+            Value=" " />
+        <DSItem DataType="FLOAT" DecLen="2" LinkTo="空行走速度" Name="左履带后退快档空行走速度" Rows=" " Unit="s"
+            Value=" " />
+        <DSItem DataType="FLOAT" DecLen="2" LinkTo="空行走速度" Name="右履带前进慢档空行走速度" Rows=" " Unit="s"
+            Value=" " />
+        <DSItem DataType="FLOAT" DecLen="2" LinkTo="空行走速度" Name="右履带后退慢档空行走速度" Rows=" " Unit="s"
+            Value=" " />
+        <DSItem DataType="FLOAT" DecLen="2" LinkTo="空行走速度" Name="右履带前进快档空行走速度" Rows=" " Unit="s"
+            Value=" " />
+        <DSItem DataType="FLOAT" DecLen="2" LinkTo="空行走速度" Name="右履带后退快档空行走速度" Rows=" " Unit="s"
+            Value=" " />
+        <DSItem DataType="FLOAT" DecLen="1" LinkTo="流量计" Name="主泵流量" Rows=" " Unit="L/min"
+            Value=" " />
+        <DSItem DataType="FLOAT" DecLen="2" LinkTo=" " Name="左回转速度" Rows=" " Unit="s" Value=" " />
+        <DSItem DataType="FLOAT" DecLen="2" LinkTo=" " Name="左回转制动距离" Rows=" " Unit="a" Value=" " />
+        <DSItem DataType="FLOAT" DecLen="2" LinkTo=" " Name="右回转速度" Rows=" " Unit="s" Value=" " />
+        <DSItem DataType="FLOAT" DecLen="2" LinkTo=" " Name="右回转制动距离" Rows=" " Unit="a" Value=" " />
+        <DSItem DataType="FLOAT" DecLen="2" LinkTo=" " Name="回转垂直支承间隙" Rows=" " Unit="a"
+            Value=" " />
+        <DSItem DataType="FLOAT" DecLen="2" LinkTo=" " Name="回转水平支承间隙" Rows=" " Unit="a"
+            Value=" " />
+        <DSItem DataType="FLOAT" DecLen="2" LinkTo=" " Name="实际行走速度" Rows=" " Unit="a" Value=" " />
+        <DSItem DataType="FLOAT" DecLen="2" LinkTo=" " Name="整机跑偏量" Rows=" " Unit="a" Value=" " />
+        <DSItem DataType="FLOAT" DecLen="2" LinkTo=" " Name="履带张紧度" Rows=" " Unit="a" Value=" " />
+        <DSItem DataType="FLOAT" DecLen="2" LinkTo=" " Name="驾驶室空调效果" Rows=" " Unit="a" Value=" " />
+        <DSItem DataType="FLOAT" DecLen="2" LinkTo=" " Name="液压油清洁度" Rows=" " Unit="a" Value=" " />
+        <DSItem DataType="FLOAT" DecLen="2" LinkTo=" " Name="风扇转速" Rows=" " Unit="a" Value=" " />
+        <DSItem DataType="BYTE" DecLen=" " LinkTo=" " Name="温度分度表行数" Rows=" " Unit=" " Value="10" />
+        <DSItem DataType="BYTE" DecLen=" " LinkTo=" " Name="温度分度表采样值宽度" Rows=" " Unit="字节"
+            Value="4" />
+        <DSItem DataType="BYTE" DecLen=" " LinkTo=" " Name="温度分度表工程值宽度" Rows=" " Unit="字节"
+            Value="4" />
+        <DSItem DataType="FLOAT" DecLen=" " LinkTo=" " Name="温度分度表采样值" Rows="10" Unit=" " Value=" ">
+            <Data Value="361100.0" />
+            <Data Value="33650.0" />
+            <Data Value="10000.0" />
+            <Data Value="3510.0" />
+            <Data Value="2400.0" />
+            <Data Value="1680.0" />
+            <Data Value="1195.0" />
+            <Data Value="865.0" />
+            <Data Value="640.0" />
+            <Data Value="170.0" />
+        </DSItem>
+        <DSItem DataType="FLOAT" DecLen=" " LinkTo=" " Name="温度分度表工程值" Rows="10" Unit=" " Value=" ">
+            <Data Value="0.0" />
+            <Data Value="40.0" />
+            <Data Value="65.0" />
+            <Data Value="90.0" />
+            <Data Value="100.0" />
+            <Data Value="110.0" />
+            <Data Value="120.0" />
+            <Data Value="130.0" />
+            <Data Value="140.0" />
+            <Data Value="190.0" />
+        </DSItem>
+        <DSItem DataType="BYTE" DecLen=" " LinkTo=" " Name="左泵压力分度表行数" Rows=" " Unit=" "
+            Value="2" />
+        <DSItem DataType="BYTE" DecLen=" " LinkTo=" " Name="左泵压力分度表采样值宽度" Rows=" " Unit="字节"
+            Value="4" />
+        <DSItem DataType="BYTE" DecLen=" " LinkTo=" " Name="左泵压力分度表工程值宽度" Rows=" " Unit="字节"
+            Value="4" />
+        <DSItem DataType="FLOAT" DecLen=" " LinkTo=" " Name="左泵压力分度表采样值" Rows="2" Unit=" "
+            Value=" ">
+            <Data Value="4000.0" />
+            <Data Value="20000.0" />
+        </DSItem>
+        <DSItem DataType="FLOAT" DecLen=" " LinkTo=" " Name="左泵压力分度表工程值" Rows="2" Unit=" "
+            Value=" ">
+            <Data Value="0.0" />
+            <Data Value="40000.0" />
+        </DSItem>
+        <DSItem DataType="BYTE" DecLen=" " LinkTo=" " Name="右泵压力分度表行数" Rows=" " Unit=" "
+            Value="2" />
+        <DSItem DataType="BYTE" DecLen=" " LinkTo=" " Name="右泵压力分度表采样值宽度" Rows=" " Unit="字节"
+            Value="4" />
+        <DSItem DataType="BYTE" DecLen=" " LinkTo=" " Name="右泵压力分度表工程值宽度" Rows=" " Unit="字节"
+            Value="4" />
+        <DSItem DataType="FLOAT" DecLen=" " LinkTo=" " Name="右泵压力分度表采样值" Rows="2" Unit=" "
+            Value=" ">
+            <Data Value="4000.0" />
+            <Data Value="20000.0" />
+        </DSItem>
+        <DSItem DataType="FLOAT" DecLen=" " LinkTo=" " Name="右泵压力分度表工程值" Rows="2" Unit=" "
+            Value=" ">
+            <Data Value="0.0" />
+            <Data Value="40000.0" />
+        </DSItem>
+        <DSItem DataType="BYTE" DecLen=" " LinkTo=" " Name="附属压力分度表行数" Rows=" " Unit=" "
+            Value="2" />
+        <DSItem DataType="BYTE" DecLen=" " LinkTo=" " Name="附属压力分度表采样值宽度" Rows=" " Unit="字节"
+            Value="4" />
+        <DSItem DataType="BYTE" DecLen=" " LinkTo=" " Name="附属压力分度表工程值宽度" Rows=" " Unit="字节"
+            Value="4" />
+        <DSItem DataType="FLOAT" DecLen=" " LinkTo=" " Name="附属压力分度表采样值" Rows="2" Unit=" "
+            Value=" ">
+            <Data Value="4000.0" />
+            <Data Value="20000.0" />
+        </DSItem>
+        <DSItem DataType="FLOAT" DecLen=" " LinkTo=" " Name="附属压力分度表工程值" Rows="2" Unit=" "
+            Value=" ">
+            <Data Value="0.0" />
+            <Data Value="40000.0" />
+        </DSItem>
+        <DSItem DataType="BYTE" DecLen=" " LinkTo=" " Name="先导压力分度表行数" Rows=" " Unit=" "
+            Value="2" />
+        <DSItem DataType="BYTE" DecLen=" " LinkTo=" " Name="先导压力分度表采样值宽度" Rows=" " Unit="字节"
+            Value="4" />
+        <DSItem DataType="BYTE" DecLen=" " LinkTo=" " Name="先导压力分度表工程值宽度" Rows=" " Unit="字节"
+            Value="4" />
+        <DSItem DataType="FLOAT" DecLen=" " LinkTo=" " Name="先导压力分度表采样值" Rows="2" Unit=" "
+            Value=" ">
+            <Data Value="4000.0" />
+            <Data Value="20000.0" />
+        </DSItem>
+        <DSItem DataType="FLOAT" DecLen=" " LinkTo=" " Name="先导压力分度表工程值" Rows="2" Unit=" "
+            Value=" ">
+            <Data Value="0.0" />
+            <Data Value="6000.0" />
+        </DSItem>
+        <DSItem DataType="BYTE" DecLen=" " LinkTo=" " Name="铲斗激光位移分度表行数" Rows=" " Unit=" "
+            Value="2" />
+        <DSItem DataType="BYTE" DecLen=" " LinkTo=" " Name="铲斗激光位移分度表采样值宽度" Rows=" " Unit="字节"
+            Value="4" />
+        <DSItem DataType="BYTE" DecLen=" " LinkTo=" " Name="铲斗激光位移分度表工程值宽度" Rows=" " Unit="字节"
+            Value="4" />
+        <DSItem DataType="FLOAT" DecLen=" " LinkTo=" " Name="铲斗激光位移分度表采样值" Rows="2" Unit=" "
+            Value=" ">
+            <Data Value="4000.0" />
+            <Data Value="20000.0" />
+        </DSItem>
+        <DSItem DataType="FLOAT" DecLen=" " LinkTo=" " Name="铲斗激光位移分度表工程值" Rows="2" Unit=" "
+            Value=" ">
+            <Data Value="10000.0" />
+            <Data Value="40000.0" />
+        </DSItem>
+        <DSItem DataType="BYTE" DecLen=" " LinkTo=" " Name="斗杆激光位移分度表行数" Rows=" " Unit=" "
+            Value="2" />
+        <DSItem DataType="BYTE" DecLen=" " LinkTo=" " Name="斗杆激光位移分度表采样值宽度" Rows=" " Unit="字节"
+            Value="4" />
+        <DSItem DataType="BYTE" DecLen=" " LinkTo=" " Name="斗杆激光位移分度表工程值宽度" Rows=" " Unit="字节"
+            Value="4" />
+        <DSItem DataType="FLOAT" DecLen=" " LinkTo=" " Name="斗杆激光位移分度表采样值" Rows="2" Unit=" "
+            Value=" ">
+            <Data Value="4000.0" />
+            <Data Value="20000.0" />
+        </DSItem>
+        <DSItem DataType="FLOAT" DecLen=" " LinkTo=" " Name="斗杆激光位移分度表工程值" Rows="2" Unit=" "
+            Value=" ">
+            <Data Value="10000.0" />
+            <Data Value="40000.0" />
+        </DSItem>
+        <DSItem DataType="BYTE" DecLen=" " LinkTo=" " Name="动臂激光位移分度表行数" Rows=" " Unit=" "
+            Value="2" />
+        <DSItem DataType="BYTE" DecLen=" " LinkTo=" " Name="动臂激光位移分度表采样值宽度" Rows=" " Unit="字节"
+            Value="4" />
+        <DSItem DataType="BYTE" DecLen=" " LinkTo=" " Name="动臂激光位移分度表工程值宽度" Rows=" " Unit="字节"
+            Value="4" />
+        <DSItem DataType="FLOAT" DecLen=" " LinkTo=" " Name="动臂激光位移分度表采样值" Rows="2" Unit=" "
+            Value=" ">
+            <Data Value="4000.0" />
+            <Data Value="20000.0" />
+        </DSItem>
+        <DSItem DataType="FLOAT" DecLen=" " LinkTo=" " Name="动臂激光位移分度表工程值" Rows="2" Unit=" "
+            Value=" ">
+            <Data Value="10000.0" />
+            <Data Value="40000.0" />
+        </DSItem>
+        <DSItem DataType="BYTE" DecLen=" " LinkTo=" " Name="流量计分度表行数" Rows=" " Unit=" " Value="2" />
+        <DSItem DataType="BYTE" DecLen=" " LinkTo=" " Name="流量计分度表采样值宽度" Rows=" " Unit="字节"
+            Value="4" />
+        <DSItem DataType="BYTE" DecLen=" " LinkTo=" " Name="流量计分度表工程值宽度" Rows=" " Unit="字节"
+            Value="4" />
+        <DSItem DataType="FLOAT" DecLen=" " LinkTo=" " Name="流量计分度表采样值" Rows="2" Unit=" " Value=" ">
+            <Data Value="0.0" />
+            <Data Value="3000.0" />
+        </DSItem>
+        <DSItem DataType="FLOAT" DecLen=" " LinkTo=" " Name="流量计分度表工程值" Rows="2" Unit=" " Value=" ">
+            <Data Value="0.0" />
+            <Data Value="6186.0" />
+        </DSItem>
+        <DSItem DataType="BYTE" DecLen=" " LinkTo=" " Name="电压分度表行数" Rows=" " Unit=" " Value="2" />
+        <DSItem DataType="BYTE" DecLen=" " LinkTo=" " Name="电压分度表采样值宽度" Rows=" " Unit="字节"
+            Value="4" />
+        <DSItem DataType="BYTE" DecLen=" " LinkTo=" " Name="电压分度表工程值宽度" Rows=" " Unit="字节"
+            Value="4" />
+        <DSItem DataType="FLOAT" DecLen=" " LinkTo=" " Name="电压分度表采样值" Rows="2" Unit=" " Value=" ">
+            <Data Value="29.0" />
+            <Data Value="22.0" />
+        </DSItem>
+        <DSItem DataType="FLOAT" DecLen=" " LinkTo=" " Name="电压分度表工程值" Rows="2" Unit=" " Value=" ">
+            <Data Value="100.0" />
+            <Data Value="0.0" />
+        </DSItem>
+        <DSItem DataType="FLOAT" DecLen=" " LinkTo=" " Name="动臂伸出参数" Rows=" " Unit=" "
+            Value="8000.0" />
+        <DSItem DataType="FLOAT" DecLen=" " LinkTo=" " Name="斗杆伸出参数" Rows=" " Unit=" "
+            Value="8000.0" />
+        <DSItem DataType="FLOAT" DecLen=" " LinkTo=" " Name="斗杆收缩参数" Rows=" " Unit=" "
+            Value="8000.0" />
+        <DSItem DataType="FLOAT" DecLen=" " LinkTo=" " Name="铲斗伸出参数" Rows=" " Unit=" "
+            Value="8000.0" />
+        <DSItem DataType="FLOAT" DecLen=" " LinkTo=" " Name="铲斗收缩参数" Rows=" " Unit=" "
+            Value="8000.0" />
+        <DSItem DataType="BYTE" DecLen=" " LinkTo=" " Name="当前检测项目" Rows=" " Unit=" " Value=" " />
+        <DSItem DataType="BYTE" DecLen=" " LinkTo=" " Name="当前检测次序" Rows=" " Unit=" " Value=" " />
+        <DSItem DataType="BYTE" DecLen=" " LinkTo=" " Name="检测命令" Rows=" " Unit=" " Value=" " />
+        <DSItem DataType="BYTE" DecLen=" " LinkTo=" " Name="应答的当前检测项目" Rows=" " Unit=" "
+            Value=" " />
+        <DSItem DataType="BYTE" DecLen=" " LinkTo=" " Name="应答的当前检测次序" Rows=" " Unit=" "
+            Value=" " />
+        <DSItem DataType="BYTE" DecLen=" " LinkTo=" " Name="应答的检测命令" Rows=" " Unit=" " Value=" " />
+        <DSItem DataType="BYTE" DecLen=" " LinkTo=" " Name="检测应答状态" Rows=" " Unit=" " Value=" " />
+        <DSItem DataType="BYTE" DecLen=" " LinkTo=" " Name="检测指示码" Rows=" " Unit=" " Value=" " />
+        <DSItem DataType="DWORD" DecLen=" " LinkTo=" " Name="最新接收的测量值PGN" Rows=" " Unit=" "
+            Value=" " />
+        <DSItem DataType="DWORD" DecLen=" " LinkTo=" " Name="测试帧序号" Rows=" " Unit=" " Value=" " />
+    </DataSet>
+    <J1939 Cycle="10" NodeAddr="0x35" TaskPrio="10">
+        <PG Dir="Rx" Len="8" PGN="0xF004" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x00" Type="2">
+            <SP Bits="4" Bytes="0" Off="0" Ref="发动机扭矩模式" Res="1" SBit="1" SByte="1" SPN="899"
+                Type="1" />
+            <SP Bits="4" Bytes="0" Off="0" Ref="实际高精度扭矩百分比" Res="0.125" SBit="5" SByte="1"
+                SPN="4154" Type="1" />
+            <SP Bits="0" Bytes="1" Off="-125" Ref="驾驶员请求扭矩百分比" Res="1" SBit="1" SByte="2" SPN="512"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="-125" Ref="实际扭矩百分比" Res="1" SBit="1" SByte="3" SPN="513"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="发动机转速" Res="0.125" SBit="1" SByte="4" SPN="190"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="发动机控制设备源地址" Res="1" SBit="1" SByte="6" SPN="1483"
+                Type="1" />
+            <SP Bits="4" Bytes="0" Off="0" Ref="发动机启动模式" Res="1" SBit="1" SByte="7" SPN="1675"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="-125" Ref="发动机请求扭矩百分比" Res="1" SBit="1" SByte="8" SPN="2432"
+                Type="1" />
+        </PG>
+        <PG Dir="Rx" Len="8" PGN="0xF002" Prio="3" Rate="100" Req="0" ReqCyc="2000" SA="0x00"
+            Type="2">
+            <SP Bits="2" Bytes="0" Off="0" Ref="液力变矩器锁止" Res="1" SBit="3" SByte="1" SPN="573"
+                Type="0" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="输出轴转速" Res="0.125" SBit="1" SByte="2" SPN="191"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="输入轴转速" Res="0.125" SBit="1" SByte="6" SPN="161"
+                Type="1" />
+        </PG>
+        <PG Dir="Rx" Len="8" PGN="0xFF00" Prio="3" Rate="100" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="0" Bytes="1" Off="0" Ref="检测终端节点号" Res="1" SBit="1" SByte="1" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="7" Off="0" Ref="检测终端Id" Res="1" SBit="1" SByte="2" SPN="0"
+                Type="1" />
+        </PG>
+        <PG Dir="Rx" Len="8" PGN="0xFF01" Prio="3" Rate="100" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="0" Bytes="4" Off="0" Ref="左泵压力" Res="0.001" SBit="1" SByte="1" SPN="52211"
+                Type="1">
+                <DTC FMI="5" Icon="60" MsgId="4" />
+                <DTC FMI="6" Icon="60" MsgId="6" />
+            </SP>
+            <SP Bits="0" Bytes="4" Off="0" Ref="右泵压力" Res="0.001" SBit="1" SByte="5" SPN="52212"
+                Type="1">
+                <DTC FMI="5" Icon="60" MsgId="5" />
+                <DTC FMI="6" Icon="60" MsgId="6" />
+            </SP>
+        </PG>
+        <PG Dir="Rx" Len="8" PGN="0xFF02" Prio="3" Rate="100" Req="0" ReqCyc="2000" SA="0x01"
+            Type="2">
+            <SP Bits="0" Bytes="4" Off="0" Ref="先导压力" Res="0.001" SBit="1" SByte="1" SPN="52213"
+                Type="1">
+                <DTC FMI="5" Icon="60" MsgId="6" />
+            </SP>
+            <SP Bits="0" Bytes="4" Off="0" Ref="附属压力" Res="0.001" SBit="1" SByte="5" SPN="52214"
+                Type="1">
+                <DTC FMI="5" Icon="60" MsgId="5" />
+                <DTC FMI="6" Icon="60" MsgId="6" />
+            </SP>
+        </PG>
+        <PG Dir="Rx" Len="8" PGN="0xFF03" Prio="3" Rate="100" Req="0" ReqCyc="2000" SA="0x01"
+            Type="2">
+            <SP Bits="0" Bytes="4" Off="0" Ref="铲斗激光位移" Res="0.01" SBit="1" SByte="1" SPN="52215"
+                Type="1">
+                <DTC FMI="5" Icon="60" MsgId="8" />
+            </SP>
+            <SP Bits="0" Bytes="4" Off="0" Ref="斗杆激光位移" Res="0.01" SBit="1" SByte="5" SPN="52216"
+                Type="1">
+                <DTC FMI="5" Icon="60" MsgId="8" />
+            </SP>
+        </PG>
+        <PG Dir="Rx" Len="8" PGN="0xFF04" Prio="3" Rate="100" Req="0" ReqCyc="2000" SA="0x01"
+            Type="2">
+            <SP Bits="0" Bytes="4" Off="0" Ref="动臂激光位移" Res="0.01" SBit="1" SByte="1" SPN="52217"
+                Type="1">
+                <DTC FMI="5" Icon="60" MsgId="8" />
+            </SP>
+            <SP Bits="0" Bytes="4" Off="-40" Ref="油温温度" Res="1" SBit="1" SByte="5" SPN="52218"
+                Type="1">
+                <DTC FMI="5" Icon="60" MsgId="7" />
+            </SP>
+        </PG>
+        <PG Dir="Rx" Len="8" PGN="0xFF05" Prio="3" Rate="100" Req="0" ReqCyc="2000" SA="0x01"
+            Type="2">
+            <SP Bits="0" Bytes="4" Off="0" Ref="流量计" Res="1" SBit="1" SByte="1" SPN="52219"
+                Type="1" />
+            <SP Bits="0" Bytes="4" Off="0" Ref="空行走速度" Res="0.001" SBit="1" SByte="5" SPN="52220"
+                Type="1" />
+        </PG>
+        <PG Dir="Rx" Len="8" PGN="0xFF06" Prio="3" Rate="100" Req="0" ReqCyc="2000" SA="0x01"
+            Type="2">
+            <SP Bits="0" Bytes="4" Off="0" Ref="电量" Res="1" SBit="1" SByte="1" SPN="52221"
+                Type="1" />
+        </PG>
+        <PG Dir="Tx" Len="82" PGN="0xFF10" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="8" Bytes="1" Off="0" Ref="温度分度表行数" Res="1" SBit="1" SByte="1" SPN=" "
+                Type="1" />
+            <SP Bits="4" Bytes="0" Off="0" Ref="温度分度表采样值宽度" Res="1" SBit="1" SByte="2" SPN=" "
+                Type="1" />
+            <SP Bits="4" Bytes="0" Off="0" Ref="温度分度表工程值宽度" Res="1" SBit="5" SByte="2" SPN=" "
+                Type="1" />
+            <SP Bits="0" Bytes="温度分度表采样值宽度" Off="0" Ref="温度分度表采样值" Res="1" SBit="1" SByte="3"
+                SPN=" " Type="1" />
+            <SP Bits="0" Bytes="温度分度表工程值宽度" Off="0" Ref="温度分度表工程值" Res="1" SBit="1" SByte="0"
+                SPN=" " Type="1" />
+        </PG>
+        <PG Dir="Tx" Len="18" PGN="0xFF11" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="8" Bytes="1" Off="0" Ref="左泵压力分度表行数" Res="1" SBit="1" SByte="1" SPN=" "
+                Type="1" />
+            <SP Bits="4" Bytes="0" Off="0" Ref="左泵压力分度表采样值宽度" Res="1" SBit="1" SByte="2" SPN=" "
+                Type="1" />
+            <SP Bits="4" Bytes="0" Off="0" Ref="左泵压力分度表工程值宽度" Res="1" SBit="5" SByte="2" SPN=" "
+                Type="1" />
+            <SP Bits="0" Bytes="左泵压力分度表采样值宽度" Off="0" Ref="左泵压力分度表采样值" Res="1" SBit="1" SByte="3"
+                SPN=" " Type="1" />
+            <SP Bits="0" Bytes="左泵压力分度表工程值宽度" Off="0" Ref="左泵压力分度表工程值" Res="1" SBit="1" SByte="0"
+                SPN=" " Type="1" />
+        </PG>
+        <PG Dir="Tx" Len="18" PGN="0xFF12" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="8" Bytes="1" Off="0" Ref="右泵压力分度表行数" Res="1" SBit="1" SByte="1" SPN=" "
+                Type="1" />
+            <SP Bits="4" Bytes="0" Off="0" Ref="右泵压力分度表采样值宽度" Res="1" SBit="1" SByte="2" SPN=" "
+                Type="1" />
+            <SP Bits="4" Bytes="0" Off="0" Ref="右泵压力分度表工程值宽度" Res="1" SBit="5" SByte="2" SPN=" "
+                Type="1" />
+            <SP Bits="0" Bytes="右泵压力分度表采样值宽度" Off="0" Ref="右泵压力分度表采样值" Res="1" SBit="1" SByte="3"
+                SPN=" " Type="1" />
+            <SP Bits="0" Bytes="右泵压力分度表工程值宽度" Off="0" Ref="右泵压力分度表工程值" Res="1" SBit="1" SByte="0"
+                SPN=" " Type="1" />
+        </PG>
+        <PG Dir="Tx" Len="18" PGN="0xFF13" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="8" Bytes="1" Off="0" Ref="附属压力分度表行数" Res="1" SBit="1" SByte="1" SPN=" "
+                Type="1" />
+            <SP Bits="4" Bytes="0" Off="0" Ref="附属压力分度表采样值宽度" Res="1" SBit="1" SByte="2" SPN=" "
+                Type="1" />
+            <SP Bits="4" Bytes="0" Off="0" Ref="附属压力分度表工程值宽度" Res="1" SBit="5" SByte="2" SPN=" "
+                Type="1" />
+            <SP Bits="0" Bytes="附属压力分度表采样值宽度" Off="0" Ref="附属压力分度表采样值" Res="1" SBit="1" SByte="3"
+                SPN=" " Type="1" />
+            <SP Bits="0" Bytes="附属压力分度表工程值宽度" Off="0" Ref="附属压力分度表工程值" Res="1" SBit="1" SByte="0"
+                SPN=" " Type="1" />
+        </PG>
+        <PG Dir="Tx" Len="18" PGN="0xFF14" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="8" Bytes="1" Off="0" Ref="先导压力分度表行数" Res="1" SBit="1" SByte="1" SPN=" "
+                Type="1" />
+            <SP Bits="4" Bytes="0" Off="0" Ref="先导压力分度表采样值宽度" Res="1" SBit="1" SByte="2" SPN=" "
+                Type="1" />
+            <SP Bits="4" Bytes="0" Off="0" Ref="先导压力分度表工程值宽度" Res="1" SBit="5" SByte="2" SPN=" "
+                Type="1" />
+            <SP Bits="0" Bytes="先导压力分度表采样值宽度" Off="0" Ref="先导压力分度表采样值" Res="1" SBit="1" SByte="3"
+                SPN=" " Type="1" />
+            <SP Bits="0" Bytes="先导压力分度表工程值宽度" Off="0" Ref="先导压力分度表工程值" Res="1" SBit="1" SByte="0"
+                SPN=" " Type="1" />
+        </PG>
+        <PG Dir="Tx" Len="18" PGN="0xFF15" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="8" Bytes="1" Off="0" Ref="铲斗激光位移分度表行数" Res="1" SBit="1" SByte="1" SPN=" "
+                Type="1" />
+            <SP Bits="4" Bytes="0" Off="0" Ref="铲斗激光位移分度表采样值宽度" Res="1" SBit="1" SByte="2" SPN=" "
+                Type="1" />
+            <SP Bits="4" Bytes="0" Off="0" Ref="铲斗激光位移分度表工程值宽度" Res="1" SBit="5" SByte="2" SPN=" "
+                Type="1" />
+            <SP Bits="0" Bytes="铲斗激光位移分度表采样值宽度" Off="0" Ref="铲斗激光位移分度表采样值" Res="1" SBit="1"
+                SByte="3" SPN=" " Type="1" />
+            <SP Bits="0" Bytes="铲斗激光位移分度表工程值宽度" Off="0" Ref="铲斗激光位移分度表工程值" Res="1" SBit="1"
+                SByte="0" SPN=" " Type="1" />
+        </PG>
+        <PG Dir="Tx" Len="18" PGN="0xFF16" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="8" Bytes="1" Off="0" Ref="斗杆激光位移分度表行数" Res="1" SBit="1" SByte="1" SPN=" "
+                Type="1" />
+            <SP Bits="4" Bytes="0" Off="0" Ref="斗杆激光位移分度表采样值宽度" Res="1" SBit="1" SByte="2" SPN=" "
+                Type="1" />
+            <SP Bits="4" Bytes="0" Off="0" Ref="斗杆激光位移分度表工程值宽度" Res="1" SBit="5" SByte="2" SPN=" "
+                Type="1" />
+            <SP Bits="0" Bytes="斗杆激光位移分度表采样值宽度" Off="0" Ref="斗杆激光位移分度表采样值" Res="1" SBit="1"
+                SByte="3" SPN=" " Type="1" />
+            <SP Bits="0" Bytes="斗杆激光位移分度表工程值宽度" Off="0" Ref="斗杆激光位移分度表工程值" Res="1" SBit="1"
+                SByte="0" SPN=" " Type="1" />
+        </PG>
+        <PG Dir="Tx" Len="18" PGN="0xFF17" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="8" Bytes="1" Off="0" Ref="动臂激光位移分度表行数" Res="1" SBit="1" SByte="1" SPN=" "
+                Type="1" />
+            <SP Bits="4" Bytes="0" Off="0" Ref="动臂激光位移分度表采样值宽度" Res="1" SBit="1" SByte="2" SPN=" "
+                Type="1" />
+            <SP Bits="4" Bytes="0" Off="0" Ref="动臂激光位移分度表工程值宽度" Res="1" SBit="5" SByte="2" SPN=" "
+                Type="1" />
+            <SP Bits="0" Bytes="动臂激光位移分度表采样值宽度" Off="0" Ref="动臂激光位移分度表采样值" Res="1" SBit="1"
+                SByte="3" SPN=" " Type="1" />
+            <SP Bits="0" Bytes="动臂激光位移分度表工程值宽度" Off="0" Ref="动臂激光位移分度表工程值" Res="1" SBit="1"
+                SByte="0" SPN=" " Type="1" />
+        </PG>
+        <PG Dir="Tx" Len="18" PGN="0xFF18" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="8" Bytes="1" Off="0" Ref="流量计分度表行数" Res="1" SBit="1" SByte="1" SPN=" "
+                Type="1" />
+            <SP Bits="4" Bytes="0" Off="0" Ref="流量计分度表采样值宽度" Res="1" SBit="1" SByte="2" SPN=" "
+                Type="1" />
+            <SP Bits="4" Bytes="0" Off="0" Ref="流量计分度表工程值宽度" Res="1" SBit="5" SByte="2" SPN=" "
+                Type="1" />
+            <SP Bits="0" Bytes="流量计分度表采样值宽度" Off="0" Ref="流量计分度表采样值" Res="1" SBit="1" SByte="3"
+                SPN=" " Type="1" />
+            <SP Bits="0" Bytes="流量计分度表工程值宽度" Off="0" Ref="流量计分度表工程值" Res="1" SBit="1" SByte="0"
+                SPN=" " Type="1" />
+        </PG>
+        <PG Dir="Tx" Len="18" PGN="0xFF19" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="8" Bytes="1" Off="0" Ref="电压分度表行数" Res="1" SBit="1" SByte="1" SPN=" "
+                Type="1" />
+            <SP Bits="4" Bytes="0" Off="0" Ref="电压分度表采样值宽度" Res="1" SBit="1" SByte="2" SPN=" "
+                Type="1" />
+            <SP Bits="4" Bytes="0" Off="0" Ref="电压分度表工程值宽度" Res="1" SBit="5" SByte="2" SPN=" "
+                Type="1" />
+            <SP Bits="0" Bytes="电压分度表采样值宽度" Off="0" Ref="电压分度表采样值" Res="1" SBit="1" SByte="3"
+                SPN=" " Type="1" />
+            <SP Bits="0" Bytes="电压分度表工程值宽度" Off="0" Ref="电压分度表工程值" Res="1" SBit="1" SByte="0"
+                SPN=" " Type="1" />
+        </PG>
+        <PG Dir="Tx" Len="20" PGN="0xFF1A" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="0" Bytes="4" Off="0" Ref="动臂伸出参数" Res="1" SBit="1" SByte="1" SPN=" "
+                Type="1" />
+            <SP Bits="0" Bytes="4" Off="0" Ref="斗杆伸出参数" Res="1" SBit="1" SByte="5" SPN=" "
+                Type="1" />
+            <SP Bits="0" Bytes="4" Off="0" Ref="斗杆收缩参数" Res="1" SBit="1" SByte="9" SPN=" "
+                Type="1" />
+            <SP Bits="0" Bytes="4" Off="0" Ref="铲斗伸出参数" Res="1" SBit="1" SByte="13" SPN=" "
+                Type="1" />
+            <SP Bits="0" Bytes="4" Off="0" Ref="铲斗收缩参数" Res="1" SBit="1" SByte="17" SPN=" "
+                Type="1" />
+        </PG>
+        <PG Dir="Rx" Len="8" PGN="0xFF20" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="8" Bytes="4" Off="0" Ref="主系统压力" Res="0.001" SBit="1" SByte="1" SPN="0"
+                Type="1" />
+        </PG>
+        <PG Dir="Rx" Len="8" PGN="0xFF21" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="8" Bytes="4" Off="0" Ref="主系统压力(增压)" Res="0.001" SBit="1" SByte="1" SPN="0"
+                Type="1" />
+        </PG>
+        <PG Dir="Rx" Len="8" PGN="0xFF22" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="8" Bytes="4" Off="0" Ref="左回转压力" Res="0.001" SBit="1" SByte="1" SPN="0"
+                Type="1" />
+        </PG>
+        <PG Dir="Rx" Len="8" PGN="0xFF23" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="8" Bytes="4" Off="0" Ref="右回转压力" Res="0.001" SBit="1" SByte="1" SPN="0"
+                Type="1" />
+        </PG>
+        <PG Dir="Rx" Len="8" PGN="0xFF24" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="8" Bytes="4" Off="0" Ref="左行走压力" Res="0.001" SBit="1" SByte="1" SPN="0"
+                Type="1" />
+            <SP Bits="8" Bytes="4" Off="0" Ref="右行走压力" Res="0.001" SBit="1" SByte="5" SPN="0"
+                Type="1" />
+        </PG>
+        <PG Dir="Rx" Len="8" PGN="0xFF26" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="8" Bytes="4" Off="0" Ref="手柄控制双向辅助管路压力" Res="0.001" SBit="1" SByte="1" SPN="0"
+                Type="1" />
+        </PG>
+        <PG Dir="Rx" Len="8" PGN="0xFF27" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="8" Bytes="4" Off="0" Ref="脚踏控制双向辅助管路压力" Res="0.001" SBit="1" SByte="1" SPN="0"
+                Type="1" />
+        </PG>
+        <PG Dir="Rx" Len="8" PGN="0xFF28" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="8" Bytes="4" Off="0" Ref="手柄控制单向辅助管路压力" Res="0.001" SBit="1" SByte="1" SPN="0"
+                Type="1" />
+        </PG>
+        <PG Dir="Rx" Len="8" PGN="0xFF29" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="8" Bytes="4" Off="0" Ref="脚踏控制单向辅助管路压力" Res="0.001" SBit="1" SByte="1" SPN="0"
+                Type="1" />
+        </PG>
+        <PG Dir="Rx" Len="8" PGN="0xFF2A" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="8" Bytes="4" Off="0" Ref="附属回转管路压力" Res="0.001" SBit="1" SByte="1" SPN="0"
+                Type="1" />
+        </PG>
+        <PG Dir="Rx" Len="8" PGN="0xFF2B" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="8" Bytes="4" Off="0" Ref="高压快换管路压力" Res="0.001" SBit="1" SByte="1" SPN="0"
+                Type="1" />
+        </PG>
+        <PG Dir="Rx" Len="8" PGN="0xFF2C" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="8" Bytes="4" Off="0" Ref="低压快换管路压力" Res="0.001" SBit="1" SByte="1" SPN="0"
+                Type="1" />
+        </PG>
+        <PG Dir="Rx" Len="8" PGN="0xFF2D" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="8" Bytes="4" Off="0" Ref="先导压力最高转速" Res="0.001" SBit="1" SByte="1" SPN="0"
+                Type="1" />
+        </PG>
+        <PG Dir="Rx" Len="8" PGN="0xFF2E" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="0" Bytes="4" Off="0" Ref="先导压力怠速" Res="0.001" SBit="1" SByte="1" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="4" Off="0" Ref="测试帧序号" Res="1" SBit="1" SByte="5" SPN="0"
+                Type="1" />
+        </PG>
+        <PG Dir="Rx" Len="8" PGN="0xFF2F" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="8" Bytes="4" Off="0" Ref="动臂油缸伸出速度" Res="0.001" SBit="1" SByte="1" SPN="0"
+                Type="1" />
+        </PG>
+        <PG Dir="Rx" Len="8" PGN="0xFF30" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="8" Bytes="4" Off="0" Ref="斗杆油缸收缩速度" Res="0.001" SBit="1" SByte="1" SPN="0"
+                Type="1" />
+        </PG>
+        <PG Dir="Rx" Len="8" PGN="0xFF31" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="8" Bytes="4" Off="0" Ref="斗杆油缸伸出速度" Res="0.001" SBit="1" SByte="1" SPN="0"
+                Type="1" />
+        </PG>
+        <PG Dir="Rx" Len="8" PGN="0xFF32" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="8" Bytes="4" Off="0" Ref="铲斗油缸收缩速度" Res="0.001" SBit="1" SByte="1" SPN="0"
+                Type="1" />
+        </PG>
+        <PG Dir="Rx" Len="8" PGN="0xFF33" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="8" Bytes="4" Off="0" Ref="铲斗油缸伸出速度" Res="0.001" SBit="1" SByte="1" SPN="0"
+                Type="1" />
+        </PG>
+        <PG Dir="Rx" Len="8" PGN="0xFF34" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="8" Bytes="4" Off="0" Ref="左履带前进慢档空行走速度" Res="0.001" SBit="1" SByte="1" SPN="0"
+                Type="1" />
+        </PG>
+        <PG Dir="Rx" Len="8" PGN="0xFF35" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="8" Bytes="4" Off="0" Ref="左履带后退慢档空行走速度" Res="0.001" SBit="1" SByte="1" SPN="0"
+                Type="1" />
+        </PG>
+        <PG Dir="Rx" Len="8" PGN="0xFF36" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="8" Bytes="4" Off="0" Ref="左履带前进快档空行走速度" Res="0.001" SBit="1" SByte="1" SPN="0"
+                Type="1" />
+        </PG>
+        <PG Dir="Rx" Len="8" PGN="0xFF37" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="8" Bytes="4" Off="0" Ref="左履带后退快档空行走速度" Res="0.001" SBit="1" SByte="1" SPN="0"
+                Type="1" />
+        </PG>
+        <PG Dir="Rx" Len="8" PGN="0xFF38" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="8" Bytes="4" Off="0" Ref="右履带前进慢档空行走速度" Res="0.001" SBit="1" SByte="1" SPN="0"
+                Type="1" />
+        </PG>
+        <PG Dir="Rx" Len="8" PGN="0xFF39" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="8" Bytes="4" Off="0" Ref="右履带后退慢档空行走速度" Res="0.001" SBit="1" SByte="1" SPN="0"
+                Type="1" />
+        </PG>
+        <PG Dir="Rx" Len="8" PGN="0xFF3A" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="8" Bytes="4" Off="0" Ref="右履带前进快档空行走速度" Res="0.001" SBit="1" SByte="1" SPN="0"
+                Type="1" />
+        </PG>
+        <PG Dir="Rx" Len="8" PGN="0xFF3B" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="8" Bytes="4" Off="0" Ref="右履带后退快档空行走速度" Res="0.001" SBit="1" SByte="1" SPN="0"
+                Type="1" />
+        </PG>
+        <PG Dir="Rx" Len="8" PGN="0xFF3C" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="8" Bytes="2" Off="0" Ref="动臂油缸沉降量(斗杆缩回)" Res="0.01" SBit="1" SByte="1" SPN="0"
+                Type="1" />
+            <SP Bits="8" Bytes="2" Off="0" Ref="斗杆油缸沉降量(斗杆缩回)" Res="0.01" SBit="1" SByte="3" SPN="0"
+                Type="1" />
+            <SP Bits="8" Bytes="2" Off="0" Ref="铲斗油缸沉降量(斗杆缩回)" Res="0.01" SBit="1" SByte="5" SPN="0"
+                Type="1" />
+        </PG>
+        <PG Dir="Rx" Len="8" PGN="0xFF3D" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="8" Bytes="4" Off="0" Ref="斗杆油缸沉降量(斗杆伸出)" Res="0.01" SBit="1" SByte="1" SPN="0"
+                Type="1" />
+            <SP Bits="8" Bytes="4" Off="0" Ref="铲斗油缸沉降量(斗杆伸出)" Res="0.01" SBit="1" SByte="5" SPN="0"
+                Type="1" />
+        </PG>
+        <PG Dir="Rx" Len="8" PGN="0xFF3F" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="8" Bytes="4" Off="0" Ref="主泵流量" Res="1" SBit="1" SByte="1" SPN="0" Type="1" />
+        </PG>
+        <PG Dir="Rx" Len="8" PGN="0xFF40" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="8" Bytes="4" Off="0" Ref="左回转速度" Res="0.001" SBit="1" SByte="1" SPN="0"
+                Type="1" />
+        </PG>
+        <PG Dir="Rx" Len="8" PGN="0xFF41" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="8" Bytes="4" Off="0" Ref="右回转速度" Res="0.001" SBit="1" SByte="1" SPN="0"
+                Type="1" />
+        </PG>
+        <PG Dir="Rx" Len="8" PGN="0xFF47" Prio="3" Rate="100" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="8" Bytes="4" Off="0" Ref="回转垂直支承间隙" Res="1" SBit="1" SByte="1" SPN="0"
+                Type="1" />
+        </PG>
+        <PG Dir="Rx" Len="8" PGN="0xFF48" Prio="3" Rate="100" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="8" Bytes="4" Off="0" Ref="回转水平支承间隙" Res="1" SBit="1" SByte="1" SPN="0"
+                Type="1" />
+        </PG>
+        <PG Dir="Rx" Len="8" PGN="0xFF49" Prio="3" Rate="100" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="8" Bytes="4" Off="0" Ref="实际行走速度" Res="1" SBit="1" SByte="1" SPN="0"
+                Type="1" />
+        </PG>
+        <PG Dir="Rx" Len="8" PGN="0xFF4A" Prio="3" Rate="100" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="8" Bytes="4" Off="0" Ref="整机跑偏量" Res="1" SBit="1" SByte="1" SPN="0"
+                Type="1" />
+        </PG>
+        <PG Dir="Rx" Len="8" PGN="0xFF4B" Prio="3" Rate="100" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="8" Bytes="4" Off="0" Ref="履带张紧度" Res="1" SBit="1" SByte="1" SPN="0"
+                Type="1" />
+        </PG>
+        <PG Dir="Rx" Len="8" PGN="0xFF4C" Prio="3" Rate="100" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="8" Bytes="4" Off="0" Ref="驾驶室空调效果" Res="1" SBit="1" SByte="1" SPN="0"
+                Type="1" />
+        </PG>
+        <PG Dir="Rx" Len="8" PGN="0xFF4D" Prio="3" Rate="100" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="8" Bytes="4" Off="0" Ref="液压油清洁度" Res="1" SBit="1" SByte="1" SPN="0"
+                Type="1" />
+        </PG>
+        <PG Dir="Rx" Len="8" PGN="0xFF4E" Prio="3" Rate="100" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="8" Bytes="4" Off="0" Ref="风扇转速" Res="1" SBit="1" SByte="1" SPN="0" Type="1" />
+        </PG>
+        <PG Dir="Tx" Len="8" PGN="0xFF80" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x00" Type="2">
+            <SP Bits="8" Bytes="1" Off="0" Ref="当前检测项目" Res="1" SBit="1" SByte="1" SPN=" "
+                Type="1" />
+            <SP Bits="8" Bytes="1" Off="0" Ref="当前检测次序" Res="1" SBit="1" SByte="2" SPN=" "
+                Type="1" />
+            <SP Bits="8" Bytes="1" Off="0" Ref="检测命令" Res="1" SBit="1" SByte="3" SPN=" " Type="1" />
+        </PG>
+        <PG Dir="Rx" Len="8" PGN="0xFF81" Prio="3" Rate="100" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="8" Bytes="1" Off="0" Ref="应答的当前检测项目" Res="1" SBit="1" SByte="1" SPN=" "
+                Type="1" />
+            <SP Bits="8" Bytes="1" Off="0" Ref="应答的当前检测次序" Res="1" SBit="1" SByte="2" SPN=" "
+                Type="1" />
+            <SP Bits="8" Bytes="1" Off="0" Ref="应答的检测命令" Res="1" SBit="1" SByte="3" SPN=" "
+                Type="1" />
+            <SP Bits="8" Bytes="1" Off="0" Ref="检测应答状态" Res="1" SBit="1" SByte="4" SPN=" "
+                Type="1" />
+            <SP Bits="8" Bytes="1" Off="0" Ref="检测指示码" Res="1" SBit="1" SByte="5" SPN=" "
+                Type="1" />
+        </PG>
+        <PG Dir="Tx" Len="8" PGN="0xFF82" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x00" Type="2">
+            <SP Bits="8" Bytes="1" Off="0" Ref="应答的当前检测项目" Res="1" SBit="1" SByte="1" SPN=" "
+                Type="1" />
+            <SP Bits="8" Bytes="1" Off="0" Ref="应答的当前检测次序" Res="1" SBit="1" SByte="2" SPN=" "
+                Type="1" />
+            <SP Bits="8" Bytes="1" Off="0" Ref="应答的检测命令" Res="1" SBit="1" SByte="3" SPN=" "
+                Type="1" />
+            <SP Bits="8" Bytes="1" Off="0" Ref="检测应答状态" Res="1" SBit="1" SByte="4" SPN=" "
+                Type="1" />
+            <SP Bits="8" Bytes="1" Off="0" Ref="检测指示码" Res="1" SBit="1" SByte="5" SPN=" "
+                Type="1" />
+        </PG>
+        <PG Dir="Tx" Len="8" PGN="0xFF83" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x00" Type="2">
+            <SP Bits="0" Bytes="4" Off="0" Ref="最新接收的测量值PGN" Res="1" SBit="1" SByte="1" SPN=" "
+                Type="1" />
+        </PG>
+    </J1939>
+    <QCSet>
+        <QCItem Id="11" Name="先导压力最低档位" QCTimeout="20" QCTimes="3" ReadyTimeout="1" Require="必检">
+            <Msgs AbortMsg="" NotReadyMsg="fmi1" OkMsg="fmi31" ReadyMsg="fmi50">
+                <QCProgressMsg>
+                    <QCProgress Code="4" Msg="fmi20" />
+                    <QCProgress Code="" Msg="" />
+                </QCProgressMsg>
+                <QCErrMsg />
+            </Msgs>
+            <QCParams>
+                <QCParam Param="先导压力怠速" ValidAvg="" ValidMax="4.0" ValidMin="3.5" />
+            </QCParams>
+            <ENVParams>
+                <ENVParam Param="油温温度" ValidAvg="" ValidMax="100" ValidMin="0" />
+            </ENVParams>
+            <RealTimeParams>
+                <RealTimeParam Name="先导压力" />
+                <RealTimeParam Name="油温温度" />
+            </RealTimeParams>
+        </QCItem>
+        <QCItem Id="10" Name="先导压力最高档位" QCTimeout="20" QCTimes="3" ReadyTimeout="1" Require="必检">
+            <Msgs AbortMsg="" NotReadyMsg="fmi1" OkMsg="fmi31" ReadyMsg="fmi50">
+                <QCProgressMsg>
+                    <QCProgress Code="4" Msg="fmi20" />
+                    <QCProgress Code="" Msg="" />
+                </QCProgressMsg>
+                <QCErrMsg />
+            </Msgs>
+            <QCParams>
+                <QCParam Param="先导压力最高转速" ValidAvg="" ValidMax="4.1" ValidMin="3.9" />
+            </QCParams>
+            <ENVParams>
+                <ENVParam Param="油温温度" ValidAvg="" ValidMax="100" ValidMin="0" />
+            </ENVParams>
+            <RealTimeParams>
+                <RealTimeParam Name="先导压力" />
+                <RealTimeParam Name="油温温度" />
+            </RealTimeParams>
+        </QCItem>
+        <QCItem Id="1" Name="主系统压力" QCTimeout="20" QCTimes="3" ReadyTimeout="1" Require="必检">
+            <Msgs AbortMsg="fmi19" NotReadyMsg="fmi1" OkMsg="fmi31" ReadyMsg="fmi50">
+                <QCProgressMsg>
+                    <QCProgress Code="1" Msg="fmi20" />
+                    <QCProgress Code="2" Msg="fmi20" />
+                    <QCProgress Code="4" Msg="fmi20" />
+                </QCProgressMsg>
+                <QCErrMsg />
+            </Msgs>
+            <QCParams>
+                <QCParam Param="主系统压力" ValidAvg="55" ValidMax="35.5" ValidMin="34.3" />
+            </QCParams>
+            <ENVParams>
+                <ENVParam Param="油温温度" ValidAvg="0" ValidMax="100" ValidMin="0" />
+            </ENVParams>
+            <RealTimeParams>
+                <RealTimeParam Name="左泵压力" />
+                <RealTimeParam Name="右泵压力" />
+                <RealTimeParam Name="油温温度" />
+            </RealTimeParams>
+        </QCItem>
+        <QCItem Id="3" Name="主系统压力(增压)" QCTimeout="20" QCTimes="3" ReadyTimeout="1" Require="必检">
+            <Msgs AbortMsg="" NotReadyMsg="fmi1" OkMsg="fmi31" ReadyMsg="fmi50">
+                <QCProgressMsg>
+                    <QCProgress Code="4" Msg="fmi20" />
+                    <QCProgress Code="" Msg="" />
+                </QCProgressMsg>
+                <QCErrMsg />
+            </Msgs>
+            <QCParams>
+                <QCParam Param="主系统压力(增压)" ValidAvg="" ValidMax="38.4" ValidMin="37.2" />
+            </QCParams>
+            <ENVParams>
+                <ENVParam Param="油温温度" ValidAvg="" ValidMax="100" ValidMin="0" />
+            </ENVParams>
+            <RealTimeParams>
+                <RealTimeParam Name="左泵压力" />
+                <RealTimeParam Name="右泵压力" />
+                <RealTimeParam Name="油温温度" />
+            </RealTimeParams>
+        </QCItem>
+        <QCItem Id="5" Name="左回转压力" QCTimeout="20" QCTimes="3" ReadyTimeout="1" Require="必检">
+            <Msgs AbortMsg="" NotReadyMsg="fmi1" OkMsg="fmi31" ReadyMsg="fmi50">
+                <QCProgressMsg>
+                    <QCProgress Code="4" Msg="fmi20" />
+                    <QCProgress Code="" Msg="" />
+                </QCProgressMsg>
+                <QCErrMsg />
+            </Msgs>
+            <QCParams>
+                <QCParam Param="左回转压力" ValidAvg="" ValidMax="28.5" ValidMin="26.5" />
+            </QCParams>
+            <ENVParams>
+                <ENVParam Param="油温温度" ValidAvg="" ValidMax="100" ValidMin="0" />
+            </ENVParams>
+            <RealTimeParams>
+                <RealTimeParam Name="左泵压力" />
+                <RealTimeParam Name="右泵压力" />
+                <RealTimeParam Name="油温温度" />
+            </RealTimeParams>
+        </QCItem>
+        <QCItem Id="6" Name="右回转压力" QCTimeout="20" QCTimes="3" ReadyTimeout="1" Require="必检">
+            <Msgs AbortMsg="" NotReadyMsg="fmi1" OkMsg="fmi31" ReadyMsg="fmi50">
+                <QCProgressMsg>
+                    <QCProgress Code="4" Msg="fmi20" />
+                    <QCProgress Code="" Msg="" />
+                </QCProgressMsg>
+                <QCErrMsg />
+            </Msgs>
+            <QCParams>
+                <QCParam Param="右回转压力" ValidAvg="" ValidMax="28.5" ValidMin="26.5" />
+            </QCParams>
+            <ENVParams>
+                <ENVParam Param="油温温度" ValidAvg="" ValidMax="100" ValidMin="0" />
+            </ENVParams>
+            <RealTimeParams>
+                <RealTimeParam Name="左泵压力" />
+                <RealTimeParam Name="右泵压力" />
+                <RealTimeParam Name="油温温度" />
+            </RealTimeParams>
+        </QCItem>
+        <QCItem Id="9" Name="行走压力" QCTimeout="20" QCTimes="3" ReadyTimeout="1" Require="必检">
+            <Msgs AbortMsg="" NotReadyMsg="fmi1" OkMsg="fmi31" ReadyMsg="fmi50">
+                <QCProgressMsg>
+                    <QCProgress Code="4" Msg="fmi20" />
+                    <QCProgress Code="" Msg="" />
+                </QCProgressMsg>
+                <QCErrMsg />
+            </Msgs>
+            <QCParams>
+                <QCParam Param="左行走压力" ValidAvg="" ValidMax="35.5" ValidMin="34.3" />
+                <QCParam Param="右行走压力" ValidAvg="" ValidMax="35.5" ValidMin="34.3" />
+            </QCParams>
+            <ENVParams>
+                <ENVParam Param="油温温度" ValidAvg="" ValidMax="100" ValidMin="0" />
+            </ENVParams>
+            <RealTimeParams>
+                <RealTimeParam Name="左泵压力" />
+                <RealTimeParam Name="右泵压力" />
+                <RealTimeParam Name="油温温度" />
+            </RealTimeParams>
+        </QCItem>
+        <QCItem Id="12" Name="动臂油缸伸出速度" QCTimeout="20" QCTimes="3" ReadyTimeout="1" Require="必检">
+            <Msgs AbortMsg="" NotReadyMsg="fmi1" OkMsg="fmi31" ReadyMsg="fmi50">
+                <QCProgressMsg>
+                    <QCProgress Code="4" Msg="fmi20" />
+                    <QCProgress Code="" Msg="" />
+                </QCProgressMsg>
+                <QCErrMsg />
+            </Msgs>
+            <QCParams>
+                <QCParam Param="动臂油缸伸出速度" ValidAvg="" ValidMax="4" ValidMin="3" />
+            </QCParams>
+            <ENVParams>
+                <ENVParam Param="油温温度" ValidAvg="" ValidMax="100" ValidMin="0" />
+            </ENVParams>
+            <RealTimeParams>
+                <RealTimeParam Name="右泵压力" />
+                <RealTimeParam Name="油温温度" />
+            </RealTimeParams>
+        </QCItem>
+        <QCItem Id="14" Name="斗杆油缸收缩速度" QCTimeout="20" QCTimes="3" ReadyTimeout="1" Require="必检">
+            <Msgs AbortMsg="" NotReadyMsg="fmi1" OkMsg="fmi31" ReadyMsg="fmi50">
+                <QCProgressMsg>
+                    <QCProgress Code="4" Msg="fmi20" />
+                    <QCProgress Code="" Msg="" />
+                </QCProgressMsg>
+                <QCErrMsg />
+            </Msgs>
+            <QCParams>
+                <QCParam Param="斗杆油缸收缩速度" ValidAvg="" ValidMax="3.1" ValidMin="2.1" />
+            </QCParams>
+            <ENVParams>
+                <ENVParam Param="油温温度" ValidAvg="" ValidMax="100" ValidMin="0" />
+            </ENVParams>
+            <RealTimeParams>
+                <RealTimeParam Name="右泵压力" />
+                <RealTimeParam Name="油温温度" />
+            </RealTimeParams>
+        </QCItem>
+        <QCItem Id="15" Name="斗杆油缸伸出速度" QCTimeout="20" QCTimes="3" ReadyTimeout="1" Require="必检">
+            <Msgs AbortMsg="" NotReadyMsg="fmi1" OkMsg="fmi31" ReadyMsg="fmi50">
+                <QCProgressMsg>
+                    <QCProgress Code="4" Msg="fmi20" />
+                    <QCProgress Code="" Msg="" />
+                </QCProgressMsg>
+                <QCErrMsg />
+            </Msgs>
+            <QCParams>
+                <QCParam Param="斗杆油缸伸出速度" ValidAvg="" ValidMax="3.5" ValidMin="2.5" />
+            </QCParams>
+            <ENVParams>
+                <ENVParam Param="油温温度" ValidAvg="" ValidMax="100" ValidMin="0" />
+            </ENVParams>
+            <RealTimeParams>
+                <RealTimeParam Name="右泵压力" />
+                <RealTimeParam Name="油温温度" />
+            </RealTimeParams>
+        </QCItem>
+        <QCItem Id="18" Name="铲斗油缸收缩速度" QCTimeout="20" QCTimes="3" ReadyTimeout="1" Require="必检">
+            <Msgs AbortMsg="" NotReadyMsg="fmi1" OkMsg="fmi31" ReadyMsg="fmi50">
+                <QCProgressMsg>
+                    <QCProgress Code="4" Msg="fmi20" />
+                    <QCProgress Code="" Msg="" />
+                </QCProgressMsg>
+                <QCErrMsg />
+            </Msgs>
+            <QCParams>
+                <QCParam Param="铲斗油缸收缩速度" ValidAvg="" ValidMax="2.4" ValidMin="1.4" />
+            </QCParams>
+            <ENVParams>
+                <ENVParam Param="油温温度" ValidAvg="" ValidMax="100" ValidMin="0" />
+            </ENVParams>
+            <RealTimeParams>
+                <RealTimeParam Name="右泵压力" />
+                <RealTimeParam Name="油温温度" />
+            </RealTimeParams>
+        </QCItem>
+        <QCItem Id="19" Name="铲斗油缸伸出速度" QCTimeout="20" QCTimes="3" ReadyTimeout="1" Require="必检">
+            <Msgs AbortMsg="" NotReadyMsg="fmi1" OkMsg="fmi31" ReadyMsg="fmi50">
+                <QCProgressMsg>
+                    <QCProgress Code="4" Msg="fmi20" />
+                    <QCProgress Code="" Msg="" />
+                </QCProgressMsg>
+                <QCErrMsg />
+            </Msgs>
+            <QCParams>
+                <QCParam Param="铲斗油缸伸出速度" ValidAvg="" ValidMax="2.9" ValidMin="1.9" />
+            </QCParams>
+            <ENVParams>
+                <ENVParam Param="油温温度" ValidAvg="" ValidMax="100" ValidMin="0" />
+            </ENVParams>
+            <RealTimeParams>
+                <RealTimeParam Name="右泵压力" />
+                <RealTimeParam Name="油温温度" />
+            </RealTimeParams>
+        </QCItem>
+        <QCItem Id="22" Name="左履带前进慢档空行走速度" QCTimeout="65" QCTimes="3" ReadyTimeout="1"
+            Require="必检">
+            <Msgs AbortMsg="" NotReadyMsg="fmi1" OkMsg="fmi31" ReadyMsg="fmi50">
+                <QCProgressMsg>
+                    <QCProgress Code="1" Msg="fmi41" />
+                    <QCProgress Code="2" Msg="fmi42" />
+                    <QCProgress Code="3" Msg="fmi43" />
+                    <QCProgress Code="4" Msg="fmi20" />
+                </QCProgressMsg>
+                <QCErrMsg />
+            </Msgs>
+            <QCParams>
+                <QCParam Param="左履带前进慢档空行走速度" ValidAvg="50" ValidMax="32.5" ValidMin="27.5" />
+            </QCParams>
+            <ENVParams>
+                <ENVParam Param="油温温度" ValidAvg="50" ValidMax="100" ValidMin="0" />
+            </ENVParams>
+            <RealTimeParams>
+                <RealTimeParam Name="空行走速度" />
+                <RealTimeParam Name="油温温度" />
+            </RealTimeParams>
+        </QCItem>
+        <QCItem Id="23" Name="左履带后退慢档空行走速度" QCTimeout="65" QCTimes="3" ReadyTimeout="1"
+            Require="必检">
+            <Msgs AbortMsg="" NotReadyMsg="fmi1" OkMsg="fmi31" ReadyMsg="fmi50">
+                <QCProgressMsg>
+                    <QCProgress Code="1" Msg="fmi41" />
+                    <QCProgress Code="2" Msg="fmi42" />
+                    <QCProgress Code="3" Msg="fmi43" />
+                    <QCProgress Code="4" Msg="fmi20" />
+                </QCProgressMsg>
+                <QCErrMsg />
+            </Msgs>
+            <QCParams>
+                <QCParam Param="左履带后退慢档空行走速度" ValidAvg="50" ValidMax="32.5" ValidMin="27.5" />
+            </QCParams>
+            <ENVParams>
+                <ENVParam Param="油温温度" ValidAvg="50" ValidMax="100" ValidMin="0" />
+            </ENVParams>
+            <RealTimeParams>
+                <RealTimeParam Name="空行走速度" />
+            </RealTimeParams>
+        </QCItem>
+        <QCItem Id="24" Name="左履带前进快档空行走速度" QCTimeout="65" QCTimes="3" ReadyTimeout="1"
+            Require="必检">
+            <Msgs AbortMsg="" NotReadyMsg="fmi1" OkMsg="fmi31" ReadyMsg="fmi50">
+                <QCProgressMsg>
+                    <QCProgress Code="1" Msg="fmi41" />
+                    <QCProgress Code="2" Msg="fmi42" />
+                    <QCProgress Code="3" Msg="fmi43" />
+                    <QCProgress Code="4" Msg="fmi20" />
+                </QCProgressMsg>
+                <QCErrMsg />
+            </Msgs>
+            <QCParams>
+                <QCParam Param="左履带前进快档空行走速度" ValidAvg="50" ValidMax="19" ValidMin="16" />
+            </QCParams>
+            <ENVParams>
+                <ENVParam Param="油温温度" ValidAvg="50" ValidMax="100" ValidMin="0" />
+            </ENVParams>
+            <RealTimeParams>
+                <RealTimeParam Name="空行走速度" />
+            </RealTimeParams>
+        </QCItem>
+        <QCItem Id="25" Name="左履带后退快档空行走速度" QCTimeout="65" QCTimes="3" ReadyTimeout="1"
+            Require="必检">
+            <Msgs AbortMsg="" NotReadyMsg="fmi1" OkMsg="fmi31" ReadyMsg="fmi50">
+                <QCProgressMsg>
+                    <QCProgress Code="1" Msg="fmi41" />
+                    <QCProgress Code="2" Msg="fmi42" />
+                    <QCProgress Code="3" Msg="fmi43" />
+                    <QCProgress Code="4" Msg="fmi20" />
+                </QCProgressMsg>
+                <QCErrMsg />
+            </Msgs>
+            <QCParams>
+                <QCParam Param="左履带后退快档空行走速度" ValidAvg="50" ValidMax="19" ValidMin="16" />
+            </QCParams>
+            <ENVParams>
+                <ENVParam Param="油温温度" ValidAvg="50" ValidMax="100" ValidMin="0" />
+            </ENVParams>
+            <RealTimeParams>
+                <RealTimeParam Name="空行走速度" />
+            </RealTimeParams>
+        </QCItem>
+        <QCItem Id="26" Name="右履带前进慢档空行走速度" QCTimeout="65" QCTimes="3" ReadyTimeout="1"
+            Require="必检">
+            <Msgs AbortMsg="" NotReadyMsg="fmi1" OkMsg="fmi31" ReadyMsg="fmi50">
+                <QCProgressMsg>
+                    <QCProgress Code="1" Msg="fmi41" />
+                    <QCProgress Code="2" Msg="fmi42" />
+                    <QCProgress Code="3" Msg="fmi43" />
+                    <QCProgress Code="4" Msg="fmi20" />
+                </QCProgressMsg>
+                <QCErrMsg />
+            </Msgs>
+            <QCParams>
+                <QCParam Param="右履带前进慢档空行走速度" ValidAvg="50" ValidMax="32.5" ValidMin="27.5" />
+            </QCParams>
+            <ENVParams>
+                <ENVParam Param="油温温度" ValidAvg="50" ValidMax="100" ValidMin="0" />
+            </ENVParams>
+            <RealTimeParams>
+                <RealTimeParam Name="空行走速度" />
+            </RealTimeParams>
+        </QCItem>
+        <QCItem Id="27" Name="右履带后退慢档空行走速度" QCTimeout="65" QCTimes="3" ReadyTimeout="1"
+            Require="必检">
+            <Msgs AbortMsg="" NotReadyMsg="fmi1" OkMsg="fmi31" ReadyMsg="fmi50">
+                <QCProgressMsg>
+                    <QCProgress Code="1" Msg="fmi41" />
+                    <QCProgress Code="2" Msg="fmi42" />
+                    <QCProgress Code="3" Msg="fmi43" />
+                    <QCProgress Code="4" Msg="fmi20" />
+                </QCProgressMsg>
+                <QCErrMsg />
+            </Msgs>
+            <QCParams>
+                <QCParam Param="右履带后退慢档空行走速度" ValidAvg="50" ValidMax="32.5" ValidMin="27.5" />
+            </QCParams>
+            <ENVParams>
+                <ENVParam Param="油温温度" ValidAvg="50" ValidMax="100" ValidMin="0" />
+            </ENVParams>
+            <RealTimeParams>
+                <RealTimeParam Name="空行走速度" />
+            </RealTimeParams>
+        </QCItem>
+        <QCItem Id="28" Name="右履带前进快档空行走速度" QCTimeout="65" QCTimes="3" ReadyTimeout="1"
+            Require="必检">
+            <Msgs AbortMsg="" NotReadyMsg="fmi1" OkMsg="fmi31" ReadyMsg="fmi50">
+                <QCProgressMsg>
+                    <QCProgress Code="1" Msg="fmi41" />
+                    <QCProgress Code="2" Msg="fmi42" />
+                    <QCProgress Code="3" Msg="fmi43" />
+                    <QCProgress Code="4" Msg="fmi20" />
+                </QCProgressMsg>
+                <QCErrMsg />
+            </Msgs>
+            <QCParams>
+                <QCParam Param="右履带前进快档空行走速度" ValidAvg="50" ValidMax="19" ValidMin="16" />
+            </QCParams>
+            <ENVParams>
+                <ENVParam Param="油温温度" ValidAvg="50" ValidMax="100" ValidMin="0" />
+            </ENVParams>
+            <RealTimeParams>
+                <RealTimeParam Name="空行走速度" />
+            </RealTimeParams>
+        </QCItem>
+        <QCItem Id="29" Name="右履带后退快档空行走速度" QCTimeout="65" QCTimes="3" ReadyTimeout="1"
+            Require="必检">
+            <Msgs AbortMsg="" NotReadyMsg="fmi1" OkMsg="fmi31" ReadyMsg="fmi50">
+                <QCProgressMsg>
+                    <QCProgress Code="1" Msg="fmi41" />
+                    <QCProgress Code="2" Msg="fmi42" />
+                    <QCProgress Code="3" Msg="fmi43" />
+                    <QCProgress Code="4" Msg="fmi20" />
+                </QCProgressMsg>
+                <QCErrMsg />
+            </Msgs>
+            <QCParams>
+                <QCParam Param="右履带后退快档空行走速度" ValidAvg="50" ValidMax="19" ValidMin="16" />
+            </QCParams>
+            <ENVParams>
+                <ENVParam Param="油温温度" ValidAvg="50" ValidMax="100" ValidMin="0" />
+            </ENVParams>
+            <RealTimeParams>
+                <RealTimeParam Name="空行走速度" />
+            </RealTimeParams>
+        </QCItem>
+        <QCItem Id="31" Name="油缸沉降量(斗杆伸出)" QCTimeout="720" QCTimes="1" ReadyTimeout="1"
+            Require="必检">
+            <Msgs AbortMsg="" NotReadyMsg="fmi1" OkMsg="fmi31" ReadyMsg="fmi50">
+                <QCProgressMsg>
+                    <QCProgress Code="1" Msg="fmi41" />
+                    <QCProgress Code="2" Msg="fmi42" />
+                    <QCProgress Code="3" Msg="fmi43" />
+                    <QCProgress Code="4" Msg="fmi20" />
+                </QCProgressMsg>
+                <QCErrMsg />
+            </Msgs>
+            <QCParams>
+                <QCParam Param="斗杆油缸沉降量(斗杆伸出)" ValidAvg="5" ValidMax="50" ValidMin="0" />
+                <QCParam Param="铲斗油缸沉降量(斗杆伸出)" ValidAvg="5" ValidMax="50" ValidMin="0" />
+            </QCParams>
+            <ENVParams />
+            <RealTimeParams>
+                <RealTimeParam Name="斗杆激光位移" />
+                <RealTimeParam Name="铲斗激光位移" />
+            </RealTimeParams>
+        </QCItem>
+        <QCItem Id="30" Name="油缸沉降量(斗杆缩回)" QCTimeout="720" QCTimes="1" ReadyTimeout="1"
+            Require="必检">
+            <Msgs AbortMsg="" NotReadyMsg="fmi1" OkMsg="fmi31" ReadyMsg="fmi50">
+                <QCProgressMsg>
+                    <QCProgress Code="1" Msg="fmi41" />
+                    <QCProgress Code="2" Msg="fmi42" />
+                    <QCProgress Code="3" Msg="fmi43" />
+                    <QCProgress Code="4" Msg="fmi20" />
+                </QCProgressMsg>
+                <QCErrMsg />
+            </Msgs>
+            <QCParams>
+                <QCParam Param="动臂油缸沉降量(斗杆缩回)" ValidAvg="0" ValidMax="5" ValidMin="0" />
+                <QCParam Param="斗杆油缸沉降量(斗杆缩回)" ValidAvg="0" ValidMax="50" ValidMin="0" />
+                <QCParam Param="铲斗油缸沉降量(斗杆缩回)" ValidAvg="0" ValidMax="50" ValidMin="0" />
+            </QCParams>
+            <ENVParams />
+            <RealTimeParams>
+                <RealTimeParam Name="铲斗激光位移" />
+                <RealTimeParam Name="斗杆激光位移" />
+                <RealTimeParam Name="动臂激光位移" />
+            </RealTimeParams>
+        </QCItem>
+    </QCSet>
+    <RealTimeSet>
+        <RealTimeParam Name="左泵压力" />
+        <RealTimeParam Name="右泵压力" />
+        <RealTimeParam Name="附属压力" />
+        <RealTimeParam Name="先导压力" />
+        <RealTimeParam Name="铲斗激光位移" />
+        <RealTimeParam Name="斗杆激光位移" />
+        <RealTimeParam Name="动臂激光位移" />
+        <RealTimeParam Name="油温温度" />
+        <RealTimeParam Name="流量计" />
+        <RealTimeParam Name="电量" />
+        <RealTimeParam Name="空行走速度" />
+    </RealTimeSet>
+</Device>

@@ -12,11 +12,11 @@ public class QCErrMsg {
         qcErrs = new ArrayList<>();
     }
 
-    public List<QCErr> getQcProgresses() {
+    public List<QCErr> getqcErrs() {
         return qcErrs;
     }
 
-    public void setQcProgresses(List<QCErr> qcErrs) {
+    public void setqcErrs(List<QCErr> qcErrs) {
         for (Object qcErr : qcErrs) {
             this.qcErrs.add((QCErr) qcErr);
         }

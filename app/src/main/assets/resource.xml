@@ -1,0 +1,56 @@
+<MsgSet>
+    <!-- J1939规定的故障代码（FMI)
+            0 – 数据有效但超出了正常操作范围
+            1 – 数据有效但低于正常操作范围
+            2 – 数据不稳定，断断续续或不正确
+            3 – 电压高于正常值，或与高端短路
+            4 – 电压低于正常值，或与低端 短路
+            5 – 电流低于正常值或断路
+            6 – 电流高于正常值或电路接地
+            7 – 机械系统不响应或无法调节
+            8 – 非正常的频率或脉冲宽度或周期
+            9 – 非正常的更新速度
+            10 – 非正常的速度或变化
+            11 – 引起故障的原因未知
+            12 – 坏的智能装置或部件
+            13 – 超出标定范围
+            14 – 特殊指令
+            15 – 数据有效但高于正常工作范围（上限）
+            16 – 数据有效但高于正常工作范围（上上限）
+            17 – 有效数据但低于正常工作范围（下限）
+            18 – 有效数据但低于正常工作范围（下下限）
+            19 – 错误地接收到的网络数据
+            31 – 未知或条件存在
+            当从DM1帧中收到SPN的故障代码匹配某DTC配置时，应显示的错误信息为MsgId所指的信息串
+
+           -->
+    <Msg Content="准备就绪，可以开始检测" Id="50" RefName="fmi50" />
+    <Msg Content="因以下故障无法开始检测：" Id="0" RefName="fmi0" />
+    <Msg Content="传感器有故障或未连接" Id="1" RefName="fmi1" /><!--//DTC中msgid=0-->
+    <Msg Content="测量失败，测量超时" Id="2" RefName="fmi2" />
+    <Msg Content="电压高于正常值，或与高端短路" Id="3" RefName="fmi3" />
+    <Msg Content="电压低于正常值，或与低端短路" Id="4" RefName="fmi4" />
+    <Msg Content="请确认左泵压力传感器连接正常" Id="5" RefName="fmi5" />
+    <Msg Content="请确认右泵压力传感器连接正常" Id="6" RefName="fmi6" /><!--//5-->
+    <Msg Content="请确认先导压力传感器连接正常" Id="22" RefName="fmi22" /><!--//6-->
+    <Msg Content="请确认温度传感器已连接" Id="23" RefName="fmi23" />
+    <Msg Content="--------" Id="21" RefName="fmi21" />
+    <Msg Content="机械系统不响应或无法调节" Id="7" RefName="fmi7" />
+    <Msg Content="请确认温度传感器已连接" Id="8" RefName="fmi8" /><!--//7-->
+    <Msg Content="请确认激光位移传感器连接正常或挡板在有效范围内" Id="9" RefName="fmi9" /><!--//8-->
+    <Msg Content="非正常的速度或变化" Id="10" RefName="fmi10" />
+    <Msg Content="引起故障的原因未知" Id="11" RefName="fmi11" />
+    <Msg Content="坏的智能装置或部件" Id="12" RefName="fmi12" />
+    <Msg Content="超出标定范围" Id="13" RefName="fmi13" />
+    <Msg Content="特殊指令" Id="14" RefName="fmi14" />
+    <Msg Content="数据有效但高于正常工作范围（上限）" Id="15" RefName="fmi15" />
+    <Msg Content="数据有效但高于正常工作范围（上上限）" Id="16" RefName="fmi16" />
+    <Msg Content="有效数据但低于正常工作范围（下限）" Id="17" RefName="fmi17" />
+    <Msg Content="有效数据但低于正常工作范围（下下限）" Id="18" RefName="fmi18" />
+    <Msg Content="错误地接收到的网络数据" Id="19" RefName="fmi19" />
+    <Msg Content="正在检测 - - - -" Id="20" RefName="fmi20" />
+    <Msg Content="测量完成" Id="31" RefName="fmi31" />
+    <Msg Content="正在检测 - - - - 第一圈" Id="41" RefName="fmi41" />
+    <Msg Content="正在检测 - - - - 第二圈" Id="42" RefName="fmi42" />
+    <Msg Content="正在检测 - - - - 第三圈" Id="43" RefName="fmi43" />
+</MsgSet>

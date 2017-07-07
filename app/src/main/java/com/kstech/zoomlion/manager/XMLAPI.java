@@ -1,6 +1,11 @@
-package com.kstech.zoomlion.model.xml;
+package com.kstech.zoomlion.manager;
 
 
+import com.kstech.zoomlion.model.xml.XMLAttribute;
+import com.kstech.zoomlion.model.xml.XMLBase;
+import com.kstech.zoomlion.model.xml.XMLHasKids;
+import com.kstech.zoomlion.model.xml.XmlGenerate;
+import com.kstech.zoomlion.model.xml.XmlReader;
 import com.kstech.zoomlion.model.xmlbean.*;
 import com.kstech.zoomlion.utils.LogUtils;
 
@@ -11,7 +16,9 @@ import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,53 +65,16 @@ public class XMLAPI {
 
 
     /**
-     * Showxmlinfo.
+     * writeXML2File.
      *
-     * @param object xml parsed
+     * @param object 数据源，待转化成xml的实体类
+     * @param DesPath xml文件生成路径
+     * @throws InvocationTargetException the invocation target exception
+     * @throws IllegalAccessException    the illegal access exception
+     * @throws IOException               the io exception
      */
-    public static void SHOWXMLINFO(Object o){
-        Device device = (Device) o;
-        RealTimeSet rels = device.getRealTimeSet();
-        List<RealTimeParam> reals = rels.getRealTimeParams();
-        for (RealTimeParam real : reals) {
-            LogUtils.i(device.getDevBornDate()+"real RealTimeParam "+real.getName());
-        }
-
-        DataSet dataset = device.getDataSet();
-        List<DSItem> dsitems = dataset.getDsItems();
-        for (DSItem dsitem : dsitems) {
-            LogUtils.i(device.getDevBornDate()+"dsitem DSItem "+dsitem.getName());
-        }
-
-        J1939 j1939 = device.getJ1939();
-        List<PG> pgs = j1939.getPgs();
-        for (PG pg : pgs) {
-            LogUtils.i(device.getDevBornDate()+"pg PG "+pg.getPGN());
-            List<SP> sps = pg.getSps();
-            for (SP sp : sps) {
-                LogUtils.i(device.getDevBornDate()+"--- SP sp "+sp.getSPN());
-            }
-        }
-
-        QCSet qcset = device.getQcSet();
-        List<QCItem> qcitems = qcset.getQcItems();
-        for (QCItem qcitem : qcitems) {
-            LogUtils.i(device.getDevBornDate()+"--- QCItem qcitem "+qcitem.getName());
-            LogUtils.i(device.getDevBornDate()+"--- QCItem qcitem "+qcitem.getFunction().toString());
-        }
-
-        LogUtils.i(device.toString());
-    }
-
-
-    public static void main(String[] args) {
-        try {
-            InputStream inputStream = new FileInputStream("D:/temp.xml");
-            Object o = readXML(inputStream);
-            SHOWXMLINFO(o);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+    public static void writeXML2File(Object object,String path) throws IllegalAccessException, IOException, InvocationTargetException {
+        XmlGenerate.generate(object,path);
     }
 
 }

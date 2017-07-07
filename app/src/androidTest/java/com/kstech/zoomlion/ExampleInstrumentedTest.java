@@ -1,17 +1,28 @@
 package com.kstech.zoomlion;
 
 import android.content.Context;
+import android.os.Environment;
+import android.os.SystemClock;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
-import com.kstech.zoomlion.model.xml.XMLAPI;
+import com.kstech.zoomlion.manager.DeviceModelFile;
+import com.kstech.zoomlion.manager.XMLAPI;
+import com.kstech.zoomlion.model.db.MsgSetDB;
+import com.kstech.zoomlion.model.db.greendao.MsgSetDBDao;
+import com.kstech.zoomlion.model.vo.CheckItemVO;
+import com.kstech.zoomlion.model.xmlbean.Device;
+import com.kstech.zoomlion.model.xmlbean.Msg;
+import com.kstech.zoomlion.model.xmlbean.MsgSet;
 import com.kstech.zoomlion.utils.LogUtils;
 import com.kstech.zoomlion.utils.MyHttpUtils;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.io.File;
 import java.util.HashMap;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -80,7 +91,37 @@ public class ExampleInstrumentedTest {
     @Test
     public void TestXml() throws Exception {
         Context appContext = InstrumentationRegistry.getTargetContext();
-        Object o = XMLAPI.readXML(appContext.getAssets().open("temp.xml"));
-        XMLAPI.SHOWXMLINFO(o);
+        Device o = (Device) XMLAPI.readXML(appContext.getAssets().open("temp.xml"));
+        DeviceModelFile result = DeviceModelFile.readFromFile(o);
+        for (CheckItemVO checkItemVO : result.checkItemList) {
+            LogUtils.d("KSTECH",checkItemVO.getName());
+        }
+    }
+
+    @Test
+    public void TestRES() throws Exception {
+        MsgSetDBDao msgDao = MyApplication.getApplication().getDaoSession().getMsgSetDBDao();
+        Context appContext = InstrumentationRegistry.getTargetContext();
+        MsgSet m = (MsgSet) XMLAPI.readXML(appContext.getAssets().open("resource.xml"));
+        List<Msg> msgs = m.getMsgs();
+        LogUtils.d("KSTECH",msgs.size()+"");
+        for (Msg msg : msgs) {
+            MsgSetDB msd = new MsgSetDB(null,Integer.parseInt(msg.getId()),msg.getRefName(),msg.getContent());
+            msgDao.insert(msd);
+        }
+        SystemClock.sleep(1000);
+        for (MsgSetDB msgSetDB : msgDao.queryBuilder().list()) {
+            LogUtils.d("KSTECH",msgSetDB.toString());
+        }
+    }
+
+    @Test
+    public void TestXmlGenerate() throws Exception {
+        Context appContext = InstrumentationRegistry.getTargetContext();
+        Device o = (Device) XMLAPI.readXML(appContext.getAssets().open("temp.xml"));
+        String path = Environment.getExternalStorageDirectory().getAbsolutePath();
+        path = path+ File.separator+"out.xml";
+        XMLAPI.writeXML2File(o,path);
+        LogUtils.d("KSTECH",path);
     }
 }
