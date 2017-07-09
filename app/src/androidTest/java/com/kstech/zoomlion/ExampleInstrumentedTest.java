@@ -14,6 +14,8 @@ import com.kstech.zoomlion.model.vo.CheckItemVO;
 import com.kstech.zoomlion.model.xmlbean.Device;
 import com.kstech.zoomlion.model.xmlbean.Msg;
 import com.kstech.zoomlion.model.xmlbean.MsgSet;
+import com.kstech.zoomlion.model.xmlbean.Phone;
+import com.kstech.zoomlion.model.xmlbean.PhoneStore;
 import com.kstech.zoomlion.utils.LogUtils;
 import com.kstech.zoomlion.utils.MyHttpUtils;
 
@@ -21,6 +23,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -118,10 +123,10 @@ public class ExampleInstrumentedTest {
     @Test
     public void TestXmlGenerate() throws Exception {
         Context appContext = InstrumentationRegistry.getTargetContext();
-        Device o = (Device) XMLAPI.readXML(appContext.getAssets().open("temp.xml"));
         String path = Environment.getExternalStorageDirectory().getAbsolutePath();
         path = path+ File.separator+"out.xml";
-        XMLAPI.writeXML2File(o,path);
-        LogUtils.d("KSTECH",path);
+        InputStream inputStream = new FileInputStream(path);
+        PhoneStore ps = (PhoneStore) XMLAPI.readXML(inputStream);
+        LogUtils.d("KSTECH",ps.toString());
     }
 }

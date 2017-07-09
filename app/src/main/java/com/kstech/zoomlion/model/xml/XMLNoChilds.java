@@ -2,6 +2,7 @@ package com.kstech.zoomlion.model.xml;
 
 import com.kstech.zoomlion.utils.Globals;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
@@ -32,6 +33,7 @@ public class XMLNoChilds extends XMLBase {
         System.out.println("name:"+name+"XMLAttributes:--end");
     }
 
+    @SuppressWarnings("Duplicates")
     @Override
     public Object transform() {
         String className = Globals.CLASSNAME+this.name;
@@ -40,13 +42,20 @@ public class XMLNoChilds extends XMLBase {
             Class clazz = Class.forName(className);
             o = clazz.newInstance();
             Method[] methods = clazz.getDeclaredMethods();
+            Field[] filds = clazz.getDeclaredFields();
             //属性操作
             for (XMLAttribute XMLAttribute : XMLAttributes) {
                 String name = XMLAttribute.getName().toLowerCase();
+                String type = "";
+                for (Field fild : filds) {
+                    if (fild.getName().toLowerCase().equals(name)){
+                        type = fild.getGenericType().toString();
+                    }
+                }
                 for (Method method : methods) {
                     String mName = method.getName().toLowerCase();
-                    if (("set"+name).equals(mName)){
-                        method.invoke(o,XMLAttribute.getValues());
+                    if (("set"+name).equals(mName)) {
+                        valueFormat(type,o,XMLAttribute,method);
                     }
                 }
             }
