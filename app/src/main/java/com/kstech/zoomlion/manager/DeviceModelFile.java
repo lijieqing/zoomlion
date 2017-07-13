@@ -16,6 +16,7 @@ import com.kstech.zoomlion.model.xmlbean.QCErr;
 import com.kstech.zoomlion.model.xmlbean.QCItem;
 import com.kstech.zoomlion.model.xmlbean.QCParam;
 import com.kstech.zoomlion.model.xmlbean.QCProgress;
+import com.kstech.zoomlion.model.xmlbean.QCType;
 import com.kstech.zoomlion.model.xmlbean.RealTimeParam;
 import com.kstech.zoomlion.model.xmlbean.RealTimeSet;
 import com.kstech.zoomlion.model.xmlbean.SP;
@@ -71,7 +72,9 @@ public class DeviceModelFile {
 	/**
 	 * 检查项集合，通过解析配置文件的<QCSet>标记及其子标记形成
 	 */
-	public List<CheckItemVO> checkItemList = new ArrayList<>();
+	public List<CheckItemVO> allCheckItemList = new ArrayList<>();
+
+	public Map<String,List<CheckItemVO>> checkItemMap = new HashMap<>();
 
 	private List<RealTimeParamVO> realTimeParamList = new ArrayList<>();
 
@@ -90,7 +93,7 @@ public class DeviceModelFile {
 	 * @return the check item list
 	 */
 	public List<CheckItemVO> getCheckItemList() {
-		return checkItemList;
+		return allCheckItemList;
 	}
 
 	/**
@@ -100,7 +103,7 @@ public class DeviceModelFile {
 	 * @return the check item vo
 	 */
 	public CheckItemVO getCheckItemVO(String checkItemId) {
-		for (CheckItemVO item : checkItemList) {
+		for (CheckItemVO item : allCheckItemList) {
 			if (item.getId().equals(checkItemId)) {
 				return item;
 			}
@@ -131,8 +134,8 @@ public class DeviceModelFile {
 	 *
 	 * @param checkItemVO the check item vo
 	 */
-	public void addCheckItem(CheckItemVO checkItemVO) {
-		checkItemList.add(checkItemVO);
+	public void addCheckItemInAll(CheckItemVO checkItemVO) {
+		allCheckItemList.add(checkItemVO);
 	}
 
 	/**
@@ -431,53 +434,59 @@ public class DeviceModelFile {
 
 	@SuppressWarnings("unchecked")
 	private static void parseQCSet(DeviceModelFile result, Device device) throws ExcException{
-		List<QCItem> qcitemxmls = device.getQcSet().getQcItems();
-		// 获取DeviceSet节点 下的 Device 节点集合
-		for (QCItem qcitemxml : qcitemxmls) {
-			CheckItemVO checkItem = new CheckItemVO();
-			checkItem.setId(qcitemxml.getId());
-			checkItem.setName(qcitemxml.getName());
-			checkItem.setRequire(qcitemxml.getRequire());
-			checkItem.setTimes(qcitemxml.getQCTimes());
-			checkItem.setReadyTimeout(qcitemxml.getReadyTimeout());
-			checkItem.setQcTimeout(qcitemxml.getQCTimeout());
-			// 解析Msgs
-			checkItem.setReadyMsg(qcitemxml.getMsgs().getReadyMsg());
-			checkItem.setNotReadyMsg(qcitemxml.getMsgs().getNotReadyMsg());
-			checkItem.setAbortMsg(qcitemxml.getMsgs().getAbortMsg());
-			checkItem.setOkMsg(qcitemxml.getMsgs().getOkMsg());
+		List<QCType> qcTypes = device.getQcSet().getQcTypes();
+		for (QCType qcType : qcTypes) {
+			List<CheckItemVO> values = new ArrayList<>();
+			List<QCItem> qcitemxmls = qcType.getQcItems();
+			// 遍历xml 检测项目 标签类 生成到vo中
+			for (QCItem qcitemxml : qcitemxmls) {
+				CheckItemVO checkItem = new CheckItemVO();
+				checkItem.setId(qcitemxml.getId());
+				checkItem.setName(qcitemxml.getName());
+				checkItem.setRequire(qcitemxml.getRequire());
+				checkItem.setTimes(qcitemxml.getQCTimes());
+				checkItem.setReadyTimeout(qcitemxml.getReadyTimeout());
+				checkItem.setQcTimeout(qcitemxml.getQCTimeout());
+				// 解析Msgs
+				checkItem.setReadyMsg(qcitemxml.getMsgs().getReadyMsg());
+				checkItem.setNotReadyMsg(qcitemxml.getMsgs().getNotReadyMsg());
+				checkItem.setAbortMsg(qcitemxml.getMsgs().getAbortMsg());
+				checkItem.setOkMsg(qcitemxml.getMsgs().getOkMsg());
 
-			List<QCProgress> qcprogress = qcitemxml.getMsgs().getQcProgressMsg().getQcProgresss();
-			for (QCProgress progressqc : qcprogress) {
-				checkItem.putProgressMsg(progressqc.getCode(), progressqc.getMsg());
+				List<QCProgress> qcprogress = qcitemxml.getMsgs().getQcProgressMsg().getQcProgresss();
+				for (QCProgress progressqc : qcprogress) {
+					checkItem.putProgressMsg(progressqc.getCode(), progressqc.getMsg());
+				}
+				List<QCErr> qcerrss = qcitemxml.getMsgs().getQcErrMsg().getqcErrs();
+				for (QCErr errqc : qcerrss) {
+					checkItem.putErrorMsg(errqc.getCode(), errqc.getMsg());
+				}
+				List<QCParam> qcparams = qcitemxml.getQcParams().getQcParams();
+				List<ENVParam> qcenvs = qcitemxml.getEnvParams().getEnvParams();
+				List<RealTimeParam> qcrealtimes = qcitemxml.getRealTimeParams().getRealTimeParams();
+				for (QCParam qcparam : qcparams) {
+					checkItem.addQcParam(qcparam.getParam(),
+							qcparam.getValidMin(),
+							qcparam.getValidMax(),
+							qcparam.getValidAvg());
+				}
+				for (ENVParam env : qcenvs) {
+					checkItem.addEnvParam(env.getParam(),
+							env.getValidMin(),
+							env.getValidMax(),
+							env.getValidAvg());
+				}
+				for (RealTimeParam real : qcrealtimes) {
+					RealTimeParamVO rtp = new RealTimeParamVO();
+					rtp.setName(real.getName());
+					rtp.setUnit(result.getDataSetVO().getDSItem(real.getName()).sUnit);
+					checkItem.addRtParam(rtp);
+				}
+				checkItem.sortParamList();
+				result.addCheckItemInAll(checkItem);//添加到 所有检测项目集合中
+				values.add(checkItem); //添加到map对应的list集合中
 			}
-			List<QCErr> qcerrss = qcitemxml.getMsgs().getQcErrMsg().getqcErrs();
-			for (QCErr errqc : qcerrss) {
-				checkItem.putErrorMsg(errqc.getCode(), errqc.getMsg());
-			}
-			List<QCParam> qcparams = qcitemxml.getQcParams().getQcParams();
-			List<ENVParam> qcenvs = qcitemxml.getEnvParams().getEnvParams();
-			List<RealTimeParam> qcrealtimes = qcitemxml.getRealTimeParams().getRealTimeParams();
-			for (QCParam qcparam : qcparams) {
-				checkItem.addQcParam(qcparam.getParam(),
-						qcparam.getValidMin(),
-						qcparam.getValidMax(),
-						qcparam.getValidAvg());
-			}
-			for (ENVParam env : qcenvs) {
-				checkItem.addEnvParam(env.getParam(),
-						env.getValidMin(),
-						env.getValidMax(),
-						env.getValidAvg());
-			}
-			for (RealTimeParam real : qcrealtimes) {
-				RealTimeParamVO rtp = new RealTimeParamVO();
-				rtp.setName(real.getName());
-				rtp.setUnit(result.getDataSetVO().getDSItem(real.getName()).sUnit);
-				checkItem.addRtParam(rtp);
-			}
-			checkItem.sortParamList();
-			result.addCheckItem(checkItem);
+			result.checkItemMap.put(qcType.getName(),values);
 		}
 	}
 

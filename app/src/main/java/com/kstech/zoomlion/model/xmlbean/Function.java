@@ -1,48 +1,61 @@
 package com.kstech.zoomlion.model.xmlbean;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by lijie on 2017/7/6.
  */
 
 public class Function {
-    private String Camera;
-    private String Chart;
-    private String Handwriting;
-    private String Qualify;
+    private Boolean Camera;
+    private Boolean Chart;
+    private Boolean Handwriting;
+    private Boolean Qualify;
 
+    private List<DataCollectParam> dataCollectParams;
     public Function() {
+        dataCollectParams = new ArrayList<>();
     }
 
-    public String getCamera() {
+    public Boolean getCamera() {
         return Camera;
     }
 
-    public void setCamera(String camera) {
+    public void setCamera(Boolean camera) {
         Camera = camera;
     }
 
-    public String getChart() {
+    public Boolean getChart() {
         return Chart;
     }
 
-    public void setChart(String chart) {
+    public void setChart(Boolean chart) {
         Chart = chart;
     }
 
-    public String getHandwriting() {
+    public Boolean getHandwriting() {
         return Handwriting;
     }
 
-    public void setHandwriting(String handwriting) {
+    public void setHandwriting(Boolean handwriting) {
         Handwriting = handwriting;
     }
 
-    public String getQualify() {
+    public Boolean getQualify() {
         return Qualify;
     }
 
-    public void setQualify(String qualify) {
+    public void setQualify(Boolean qualify) {
         Qualify = qualify;
+    }
+
+    public List<DataCollectParam> getDataCollectParams() {
+        return dataCollectParams;
+    }
+
+    public void setDataCollectParams(List<DataCollectParam> dataCollectParams) {
+        this.dataCollectParams.addAll(dataCollectParams);
     }
 
     @Override

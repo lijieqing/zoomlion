@@ -11,11 +11,14 @@ import com.kstech.zoomlion.manager.XMLAPI;
 import com.kstech.zoomlion.model.db.MsgSetDB;
 import com.kstech.zoomlion.model.db.greendao.MsgSetDBDao;
 import com.kstech.zoomlion.model.vo.CheckItemVO;
+import com.kstech.zoomlion.model.xmlbean.DataCollectParam;
 import com.kstech.zoomlion.model.xmlbean.Device;
 import com.kstech.zoomlion.model.xmlbean.Msg;
 import com.kstech.zoomlion.model.xmlbean.MsgSet;
 import com.kstech.zoomlion.model.xmlbean.Phone;
 import com.kstech.zoomlion.model.xmlbean.PhoneStore;
+import com.kstech.zoomlion.model.xmlbean.QCItem;
+import com.kstech.zoomlion.model.xmlbean.QCType;
 import com.kstech.zoomlion.utils.LogUtils;
 import com.kstech.zoomlion.utils.MyHttpUtils;
 
@@ -97,9 +100,11 @@ public class ExampleInstrumentedTest {
     public void TestXml() throws Exception {
         Context appContext = InstrumentationRegistry.getTargetContext();
         Device o = (Device) XMLAPI.readXML(appContext.getAssets().open("temp.xml"));
-        DeviceModelFile result = DeviceModelFile.readFromFile(o);
-        for (CheckItemVO checkItemVO : result.checkItemList) {
-            LogUtils.d("KSTECH",checkItemVO.getName());
+        for (QCType qcType : o.getQcSet().getQcTypes()) {
+            LogUtils.d("KSTECH",qcType.toString());
+            for (QCItem qcItem : qcType.getQcItems()) {
+                LogUtils.d("KSTECH",qcItem.getName());
+            }
         }
     }
 
@@ -128,5 +133,19 @@ public class ExampleInstrumentedTest {
         InputStream inputStream = new FileInputStream(path);
         PhoneStore ps = (PhoneStore) XMLAPI.readXML(inputStream);
         LogUtils.d("KSTECH",ps.toString());
+    }
+
+    @Test
+    public void TestDeviceModel() throws Exception {
+        Context appContext = InstrumentationRegistry.getTargetContext();
+        Device o = (Device) XMLAPI.readXML(appContext.getAssets().open("temp.xml"));
+        DeviceModelFile result = DeviceModelFile.readFromFile(o);
+        for (String s : result.checkItemMap.keySet()) {
+            LogUtils.d("KSTECH",s);
+            List<CheckItemVO> ls = result.checkItemMap.get(s);
+            for (CheckItemVO l : ls) {
+                LogUtils.d("KSTECH",l.getName());
+            }
+        }
     }
 }

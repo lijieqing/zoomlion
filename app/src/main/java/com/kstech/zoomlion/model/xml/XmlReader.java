@@ -61,48 +61,6 @@ public class XmlReader {
      */
 
 
-    /**
-     * ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
-     * 对于transform 后的xmlbean 进行测试
-     */
-        Device device = (Device) o;
-        RealTimeSet rels = device.getRealTimeSet();
-        List<RealTimeParam> reals = rels.getRealTimeParams();
-        for (RealTimeParam real : reals) {
-            System.out.println(device.getName()+"real RealTimeParam "+real.getName());
-        }
-
-        DataSet dataset = device.getDataSet();
-        List<DSItem> dsitems = dataset.getDsItems();
-        for (DSItem dsitem : dsitems) {
-            System.out.println(device.getName()+"dsitem DSItem "+dsitem.getName());
-        }
-
-        J1939 j1939 = device.getJ1939();
-        List<PG> pgs = j1939.getPgs();
-        for (PG pg : pgs) {
-            System.out.println(device.getName()+"pg PG "+pg.getPGN());
-            List<SP> sps = pg.getSps();
-
-            for (SP sp : sps) {
-                System.out.println(device.getName()+"--- SP sp "+sp.getSPN());
-            }
-        }
-
-        QCSet qcset = device.getQcSet();
-        List<QCItem> qcitems = qcset.getQcItems();
-        for (QCItem qcitem : qcitems) {
-            System.out.println(device.getName()+"--- QCItem qcitem "+qcitem.getName());
-        }
-
-        System.out.println(device);
-
-    /**
-     * ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
-     * 对于transform 后的xmlbean 进行测试
-     */
-
-
     }
     public static void XMLparse(Element rootElement,XMLBase root){
         XMLBase cur;

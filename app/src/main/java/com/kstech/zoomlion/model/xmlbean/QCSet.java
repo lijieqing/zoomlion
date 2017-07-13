@@ -7,24 +7,24 @@ import java.util.List;
  * Created by lijie on 2017/6/14.
  */
 public class QCSet {
-    private List<QCItem> qcItems;
+    private List<QCType> qcTypes;
 
     public QCSet() {
-        qcItems = new ArrayList<>();
+        this.qcTypes = new ArrayList<>();
     }
 
-    public List<QCItem> getQcItems() {
-        return qcItems;
+    public List<QCType> getQcTypes() {
+        return qcTypes;
     }
 
-    public void setQcItems(List<QCItem> qcItems) {
-        this.qcItems.addAll(qcItems);
+    public void setQcTypes(List<QCType> qcTypes) {
+        this.qcTypes.addAll(qcTypes);
     }
 
     @Override
     public String toString() {
         return "QCSet{" +
-                "qcItems=" + qcItems.size() +
+                "qcTypes=" + qcTypes.size() +
                 '}';
     }
 }
