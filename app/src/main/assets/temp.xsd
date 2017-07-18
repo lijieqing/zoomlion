@@ -101,14 +101,29 @@
                                                 <sequence>
                                                     <element maxOccurs="1" name="Function">
                                                         <complexType>
-                                                            <attribute name="Qualify" type="boolean" use="required"  default="false"/>
-                                                            <attribute name="Camera" type="boolean" use="required" default="true"/>
-                                                            <attribute name="Handwriting" type="boolean" use="required" default="true"/>
-                                                            <attribute name="Chart" type="boolean" use="required" default="true"/>
+                                                            <attribute name="Alter" type="boolean" use="required"  fixed="false"/>
+                                                            <attribute name="Dialogue" type="boolean" use="required"  fixed="false"/>
+                                                            <attribute name="Qualify" type="boolean" use="required"  fixed="false"/>
+                                                            <attribute name="Camera" type="boolean" use="required" fixed="true"/>
+                                                            <attribute name="Handwriting" type="boolean" use="required" fixed="true"/>
+                                                            <attribute name="Chart" type="boolean" use="required" fixed="true"/>
                                                             <sequence>
                                                                 <element name="DataCollectParam" maxOccurs="unbounded">
                                                                     <complexType>
                                                                         <attribute name="Name" type="string" use="required"/>
+                                                                    </complexType>
+                                                                </element>
+                                                                <element name="AlterDatas" maxOccurs="unbounded">
+                                                                    <complexType>
+                                                                        <attribute name="Name" type="string" use="required"/>
+                                                                        <sequence>
+                                                                            <element name="AlterData" maxOccurs="unbounded">
+                                                                                <complexType>
+                                                                                    <attribute name="XValue" type="string" use="required" />
+                                                                                    <attribute name="YValue" type="string" use="required" />
+                                                                                </complexType>
+                                                                            </element>
+                                                                        </sequence>
                                                                     </complexType>
                                                                 </element>
                                                             </sequence>

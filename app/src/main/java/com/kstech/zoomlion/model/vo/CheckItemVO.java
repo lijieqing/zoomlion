@@ -2,6 +2,7 @@ package com.kstech.zoomlion.model.vo;
 
 
 import com.kstech.zoomlion.ExcException;
+import com.kstech.zoomlion.model.xmlbean.Function;
 import com.kstech.zoomlion.utils.JsonUtils;
 
 import java.io.Serializable;
@@ -40,6 +41,8 @@ public class CheckItemVO implements Serializable {
 	 * 检测超时时间，发出开始检测命令到收至检测完成应答之间的最大时长
 	 */
 	private int qcTimeout;
+
+	private Function function;
 
 	private Msgs msgs = new Msgs();
 
@@ -183,6 +186,14 @@ public class CheckItemVO implements Serializable {
 
 	public String getErrorMsg(String code) {
 		return msgs.errMap.get(code);
+	}
+
+	public Function getFunction() {
+		return function;
+	}
+
+	public void setFunction(Function function) {
+		this.function = function;
 	}
 
 	private static class Msgs {

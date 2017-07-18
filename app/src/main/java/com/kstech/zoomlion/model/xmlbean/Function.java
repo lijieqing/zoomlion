@@ -8,12 +8,16 @@ import java.util.List;
  */
 
 public class Function {
+    private Boolean Dialogue;
     private Boolean Camera;
     private Boolean Chart;
     private Boolean Handwriting;
     private Boolean Qualify;
 
     private List<DataCollectParam> dataCollectParams;
+
+    private AlterDatas alterDatas;
+
     public Function() {
         dataCollectParams = new ArrayList<>();
     }
@@ -58,13 +62,32 @@ public class Function {
         this.dataCollectParams.addAll(dataCollectParams);
     }
 
+    public Boolean getDialogue() {
+        return Dialogue;
+    }
+
+    public void setDialogue(Boolean dialogue) {
+        Dialogue = dialogue;
+    }
+
+    public AlterDatas getAlterDatas() {
+        return alterDatas;
+    }
+
+    public void setAlterDatas(AlterDatas alterDatas) {
+        this.alterDatas = alterDatas;
+    }
+
     @Override
     public String toString() {
         return "Function{" +
-                "Camera='" + Camera + '\'' +
-                ", Chart='" + Chart + '\'' +
-                ", Handwriting='" + Handwriting + '\'' +
-                ", Qualify='" + Qualify + '\'' +
+                "Dialogue=" + Dialogue +
+                ", Camera=" + Camera +
+                ", Chart=" + Chart +
+                ", Handwriting=" + Handwriting +
+                ", Qualify=" + Qualify +
+                ", dataCollectParams=" + dataCollectParams +
+                ", alterDatas=" + alterDatas +
                 '}';
     }
 }

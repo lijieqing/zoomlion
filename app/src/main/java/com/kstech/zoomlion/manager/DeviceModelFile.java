@@ -453,6 +453,9 @@ public class DeviceModelFile {
 				checkItem.setAbortMsg(qcitemxml.getMsgs().getAbortMsg());
 				checkItem.setOkMsg(qcitemxml.getMsgs().getOkMsg());
 
+				//存入Function
+				checkItem.setFunction(qcitemxml.getFunction());
+
 				List<QCProgress> qcprogress = qcitemxml.getMsgs().getQcProgressMsg().getQcProgresss();
 				for (QCProgress progressqc : qcprogress) {
 					checkItem.putProgressMsg(progressqc.getCode(), progressqc.getMsg());

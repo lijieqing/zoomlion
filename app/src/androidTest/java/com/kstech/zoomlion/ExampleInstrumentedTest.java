@@ -11,6 +11,7 @@ import com.kstech.zoomlion.manager.XMLAPI;
 import com.kstech.zoomlion.model.db.MsgSetDB;
 import com.kstech.zoomlion.model.db.greendao.MsgSetDBDao;
 import com.kstech.zoomlion.model.vo.CheckItemVO;
+import com.kstech.zoomlion.model.xmlbean.AlterData;
 import com.kstech.zoomlion.model.xmlbean.DataCollectParam;
 import com.kstech.zoomlion.model.xmlbean.Device;
 import com.kstech.zoomlion.model.xmlbean.Msg;
@@ -139,12 +140,23 @@ public class ExampleInstrumentedTest {
     public void TestDeviceModel() throws Exception {
         Context appContext = InstrumentationRegistry.getTargetContext();
         Device o = (Device) XMLAPI.readXML(appContext.getAssets().open("temp.xml"));
-        DeviceModelFile result = DeviceModelFile.readFromFile(o);
-        for (String s : result.checkItemMap.keySet()) {
-            LogUtils.d("KSTECH",s);
-            List<CheckItemVO> ls = result.checkItemMap.get(s);
-            for (CheckItemVO l : ls) {
-                LogUtils.d("KSTECH",l.getName());
+//        DeviceModelFile result = DeviceModelFile.readFromFile(o);
+//        for (String s : result.checkItemMap.keySet()) {
+//            LogUtils.d("KSTECH",s);
+//            List<CheckItemVO> ls = result.checkItemMap.get(s);
+//            for (CheckItemVO l : ls) {
+//                LogUtils.d("KSTECH",l.getName());
+//                LogUtils.d("KSTECH",l.getFunction().toString());
+//            }
+//        }
+        for (QCType qcType : o.getQcSet().getQcTypes()) {
+            for (QCItem qcItem : qcType.getQcItems()) {
+                for (DataCollectParam dataCollectParam : qcItem.getFunction().getDataCollectParams()) {
+                    LogUtils.d("KSTECH","dataCollectParam "+dataCollectParam.getName());
+                }
+                for (AlterData alterData : qcItem.getFunction().getAlterDatas().getAlterDatas()) {
+                    LogUtils.d("KSTECH",qcItem.getFunction().getAlterDatas()+alterData.toString());
+                }
             }
         }
     }
