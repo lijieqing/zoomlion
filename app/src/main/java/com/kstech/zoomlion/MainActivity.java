@@ -1,16 +1,24 @@
 package com.kstech.zoomlion;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.TextView;
 
+import com.kstech.zoomlion.utils.BitmapUtils;
 import com.kstech.zoomlion.utils.LogUtils;
 import com.kstech.zoomlion.utils.MyHttpUtils;
 
 import java.util.HashMap;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
     private TextView tvNet;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,5 +71,9 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    public void camera(View view) {
+        startActivity(new Intent(this,CameraActivity.class));
     }
 }

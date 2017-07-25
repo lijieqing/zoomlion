@@ -1,24 +1,5 @@
 package com.kstech.zoomlion.utils;
 
-import android.annotation.SuppressLint;
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.Bitmap.Config;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Matrix;
-import android.graphics.Paint;
-import android.graphics.PixelFormat;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffXfermode;
-import android.graphics.Rect;
-import android.graphics.RectF;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.NinePatchDrawable;
-import android.util.Base64;
-
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -31,7 +12,24 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
-
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Matrix;
+import android.graphics.Paint;
+import android.graphics.PixelFormat;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
+import android.graphics.RectF;
+import android.graphics.Bitmap.Config;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.NinePatchDrawable;
+import android.util.Base64;
 /**
  * Created by lijie on 2017/3/29.
  */
@@ -169,7 +167,7 @@ public class BitmapUtils {
         paint.setColor(color);
         canvas.drawRoundRect(rectF, roundPx, roundPx, paint);
         paint.setXfermode(new PorterDuffXfermode(
-                android.graphics.PorterDuff.Mode.SRC_IN));
+                PorterDuff.Mode.SRC_IN));
         canvas.drawBitmap(bitmap, src, dst, paint);
         return output;
     }
@@ -190,7 +188,7 @@ public class BitmapUtils {
         Drawable imageDrawable = new BitmapDrawable(image);
 
         // 新建一个新的输出图片
-        Bitmap output = Bitmap.createBitmap(x, y, Bitmap.Config.ARGB_8888);
+        Bitmap output = Bitmap.createBitmap(x, y, Config.ARGB_8888);
         Canvas canvas = new Canvas(output);
 
         // 新建一个矩形
@@ -268,18 +266,8 @@ public class BitmapUtils {
      * @return
      */
     public Bitmap getZoomBitmap(Bitmap bitmap, int w, int h) {
-        Bitmap newbmp = null;
-        if (bitmap != null) {
-            int width = bitmap.getWidth();
-            int height = bitmap.getHeight();
-            Matrix matrix = new Matrix();
-            float scaleWidht = ((float) w / width);
-            float scaleHeight = ((float) h / height);
-            matrix.postScale(scaleWidht, scaleHeight);
-            newbmp = Bitmap.createBitmap(bitmap, 0, 0, width, height, matrix,
-                    true);
-        }
-        return newbmp;
+        int scale = reckonThumbnail(bitmap.getWidth(),bitmap.getHeight(), w, h);
+        return PicZoom(bitmap, bitmap.getWidth() / scale, bitmap.getHeight() / scale);
     }
 
 
@@ -338,8 +326,8 @@ public class BitmapUtils {
                     .createBitmap(
                             drawable.getIntrinsicWidth(),
                             drawable.getIntrinsicHeight(),
-                            drawable.getOpacity() != PixelFormat.OPAQUE ? Bitmap.Config.ARGB_8888
-                                    : Bitmap.Config.RGB_565);
+                            drawable.getOpacity() != PixelFormat.OPAQUE ? Config.ARGB_8888
+                                    : Config.RGB_565);
             Canvas canvas = new Canvas(bitmap);
             drawable.setBounds(0, 0, drawable.getIntrinsicWidth(),
                     drawable.getIntrinsicHeight());
@@ -366,7 +354,7 @@ public class BitmapUtils {
         try {
             f.createNewFile();
             out = new FileOutputStream(f);
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 80, out);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
             out.flush();
             out.close();
 
@@ -424,7 +412,7 @@ public class BitmapUtils {
         opts.inInputShareable = true;
         opts.inDither = false;
         opts.inPurgeable = true;
-        opts.inPreferredConfig = Bitmap.Config.RGB_565;
+        opts.inPreferredConfig = Config.RGB_565;
         opts.inTempStorage = new byte[100 * 1024];
         FileInputStream is = null;
         Bitmap bmp = null;
@@ -516,6 +504,32 @@ public class BitmapUtils {
         } else {
             return upperBound;
         }
+    }
+
+    private static int reckonThumbnail(int oldWidth, int oldHeight, int newWidth, int newHeight) {
+        if ((oldHeight > newHeight && oldWidth > newWidth)
+                || (oldHeight <= newHeight && oldWidth > newWidth)) {
+            int be = (int) (oldWidth / (float) newWidth);
+            if (be <= 1)
+                be = 1;
+            return be;
+        } else if (oldHeight > newHeight && oldWidth <= newWidth) {
+            int be = (int) (oldHeight / (float) newHeight);
+            if (be <= 1)
+                be = 1;
+            return be;
+        }
+        return 1;
+    }
+
+    private static Bitmap PicZoom(Bitmap bmp, int width, int height) {
+        int bmpWidth = bmp.getWidth();
+        int bmpHeght = bmp.getHeight();
+        Matrix matrix = new Matrix();
+        matrix.postScale((float) width / bmpWidth, (float) height / bmpHeght);
+
+
+        return Bitmap.createBitmap(bmp, 0, 0, bmpWidth, bmpHeght, matrix, true);
     }
 
 }
