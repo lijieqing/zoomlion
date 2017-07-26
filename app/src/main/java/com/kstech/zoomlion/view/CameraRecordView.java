@@ -24,7 +24,11 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.target.Target;
+import com.kstech.zoomlion.CameraActivity;
+import com.kstech.zoomlion.MyApplication;
 import com.kstech.zoomlion.R;
+import com.kstech.zoomlion.model.db.CheckImageData;
+import com.kstech.zoomlion.model.db.greendao.CheckImageDataDao;
 import com.kstech.zoomlion.utils.BitmapUtils;
 import com.kstech.zoomlion.utils.DateUtil;
 import com.kstech.zoomlion.utils.LogUtils;
@@ -42,10 +46,10 @@ import java.util.List;
 
 public class CameraRecordView extends RelativeLayout implements View.OnClickListener,RadioGroup.OnCheckedChangeListener{
     private Context context;
-    private Activity activity;
+    private CameraActivity activity;
     public RelativeLayout takephoto,imageshowlayout;
     public ImageView photoshow;
-    public Button Camerabtn,agin,finish;
+    public Button Camerabtn,agin,finish,save;
     public RadioGroup rgParams;
     private List<RadioButton> paramsRB = new ArrayList<>();
     public RadioButton rbPic,rbZoomPic;
@@ -71,7 +75,7 @@ public class CameraRecordView extends RelativeLayout implements View.OnClickList
         this.context = context;
     }
 
-    public CameraRecordView(Context context, Activity activity) {
+    public CameraRecordView(Context context, CameraActivity activity) {
         super(context);
         this.activity = activity;
         this.context = context;
@@ -94,9 +98,11 @@ public class CameraRecordView extends RelativeLayout implements View.OnClickList
         rgParams = view.findViewById(R.id.rg_params);
         rbPic = view.findViewById(R.id.rb_pic);
         rbZoomPic = view.findViewById(R.id.rb_zoom_pic);
+        save = view.findViewById(R.id.btn_save);
 
         Camerabtn.setOnClickListener(this);
         agin.setOnClickListener(this);
+        save.setOnClickListener(this);
         finish.setOnClickListener(this);
         rgParams.setOnCheckedChangeListener(this);
 
@@ -120,6 +126,10 @@ public class CameraRecordView extends RelativeLayout implements View.OnClickList
 
         switch (v.getId()) {
             case R.id.Camerabtn:
+                if (!hasButtonChecked()){
+                    Toast.makeText(activity,"请选择照片所关联参数",Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 imageUri = Uri.fromFile(new File(Environment.getExternalStorageDirectory(),"workupload.jpg"));
                 //指定照片保存路径（SD卡），workupload.jpg为一个临时文件，每次拍照后这个图片都会被替换
@@ -134,6 +144,12 @@ public class CameraRecordView extends RelativeLayout implements View.OnClickList
                 activity.startActivityForResult(cameraIntent, 1);
                 break;
             case R.id.finish:
+                enableParams(true);
+                takephoto.setVisibility(View.VISIBLE);
+                imageshowlayout.setVisibility(View.GONE);
+                break;
+            case R.id.btn_save:
+                copyPic();
                 enableParams(true);
                 takephoto.setVisibility(View.VISIBLE);
                 imageshowlayout.setVisibility(View.GONE);
@@ -157,8 +173,8 @@ public class CameraRecordView extends RelativeLayout implements View.OnClickList
     }
 
     public void copyPic(){
-        int userID = 12;
-        int itemID = 40;
+        long userID = 12;
+        long itemDetailID = 40;
         String Status = Environment.getExternalStorageState();
         if (!Status.equals(Environment.MEDIA_MOUNTED)) { // 检测sd是否可用
             Log.v("TestFile",
@@ -166,8 +182,11 @@ public class CameraRecordView extends RelativeLayout implements View.OnClickList
             return;
         }
         String date = DateUtil.getDateTimeFormat14(new Date());
-        String fname= Environment.getExternalStorageDirectory()+"/photograph/test/"+date+"-"+userID+"-"+itemID+"-"+paramName+".jpg";
+        String fname= Environment.getExternalStorageDirectory()+"/photograph/test/"+date+"-"+userID+"-"+itemDetailID+"-"+paramName+".jpg";
         FileUtil.copy(Environment.getExternalStorageDirectory()+"/workupload.jpg",fname);
+        CheckImageDataDao imgDao = MyApplication.getApplication().getDaoSession().getCheckImageDataDao();
+        imgDao.insert(new CheckImageData(null,itemDetailID,paramName,fname));
+        Toast.makeText(activity,"已保存",Toast.LENGTH_SHORT).show();
     }
 
     @Override

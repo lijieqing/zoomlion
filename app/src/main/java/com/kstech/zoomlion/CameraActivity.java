@@ -28,18 +28,7 @@ public class CameraActivity extends AppCompatActivity {
         cameraRecordView = new CameraRecordView(this,this);
         dialog = new AlertDialog.Builder(this)
                 .setTitle("拍照")
-                .setNegativeButton("取消",null)
-                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        if (null != cameraRecordView.bitmap){
-                            cameraRecordView.copyPic();
-                            dialog.cancel();
-                        }else {
-                            dialog.cancel();
-                        }
-                    }
-                })
+                .setNegativeButton("结束",null)
                 .setCancelable(false)
                 .create();
         dialog.setView(cameraRecordView);
