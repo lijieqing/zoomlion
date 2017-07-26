@@ -2,37 +2,103 @@ package com.kstech.zoomlion;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.Environment;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.KeyEvent;
+import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ImageView;
+import android.widget.ListView;
 
+import com.kstech.zoomlion.model.db.greendao.CheckImageDataDao;
 import com.kstech.zoomlion.utils.BitmapUtils;
+import com.kstech.zoomlion.utils.Globals;
 import com.kstech.zoomlion.view.CameraRecordView;
+import com.kstech.zoomlion.view.adapter.ImgDataListAdapter;
+
+import java.lang.ref.WeakReference;
+
 
 public class CameraActivity extends AppCompatActivity {
-    AlertDialog dialog;
+    AlertDialog picCatchDialog;
+    AlertDialog picShowDialog;
     CameraRecordView cameraRecordView;
     Bitmap bitmap;
+    Bitmap bp;
+    ListView listView;
+    ImgDataListAdapter imgDataListAdapter;
+    Activity activity;
+    CheckImageDataDao imgDao;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
+        activity = this;
+        imgDao = MyApplication.getApplication().getDaoSession().getCheckImageDataDao();
+        //先查询已存在的记录项目集合
+        Globals.values = imgDao.queryBuilder().where(CheckImageDataDao.Properties.ItemDetailId.eq(40)).build().list();
+
+        picShowDialog = new AlertDialog.Builder(activity,android.R.style.Theme_DeviceDefault_Dialog_MinWidth)
+                .create();
+        imgDataListAdapter = new ImgDataListAdapter(this);
+
+        listView = (ListView) findViewById(R.id.lv_param);
+        listView.setAdapter(imgDataListAdapter);
+
+
+        //实现item点击事件
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, final int i, long l) {
+                new Thread(){
+                    @Override
+                    public void run() {
+                        if (bp != null)
+                            bp.recycle();
+                        bp = BitmapFactory.decodeFile(Globals.values.get(i).getImgPath());
+                        handler.sendEmptyMessage(0);
+                    }
+                }.start();
+            }
+        });
     }
+
+    //更新图片展示界面
+    public void updateDialog(){
+        ImageView iv = new ImageView(activity);
+
+        iv.setLayoutParams(new ActionBar.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        iv.setImageBitmap(bp);
+        if (picShowDialog.isShowing()){
+            picShowDialog.cancel();
+            picShowDialog = new AlertDialog.Builder(activity,android.R.style.Theme_DeviceDefault_Dialog_MinWidth)
+                    .create();
+            picShowDialog.setView(iv);
+            picShowDialog.show();
+        }else {
+            picShowDialog = new AlertDialog.Builder(activity,android.R.style.Theme_DeviceDefault_Dialog_MinWidth)
+                    .create();
+            picShowDialog.setView(iv);
+            picShowDialog.show();
+        }
+    }
+
     public void camera(View view) {
         cameraRecordView = new CameraRecordView(this,this);
-        dialog = new AlertDialog.Builder(this)
+        picCatchDialog = new AlertDialog.Builder(this)
                 .setTitle("拍照")
                 .setNegativeButton("结束",null)
                 .setCancelable(false)
                 .create();
-        dialog.setView(cameraRecordView);
-        dialog.show();
+        picCatchDialog.setView(cameraRecordView);
+        picCatchDialog.show();
     }
 
     @Override
@@ -58,18 +124,26 @@ public class CameraActivity extends AppCompatActivity {
             }
         }
     }
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        // TODO Auto-generated method stub
-        if (keyCode == KeyEvent.KEYCODE_BACK) { // 监控/拦截/屏蔽返回键
-            if (cameraRecordView.imageshowlayout.getVisibility() == View.VISIBLE) {
-                cameraRecordView.imageshowlayout.setVisibility(View.GONE);
-                cameraRecordView.takephoto.setVisibility(View.VISIBLE);
-            } else {
-                finish();
-            }
-            return false;
+    public void updateList(){
+        Globals.values = imgDao.queryBuilder().where(CheckImageDataDao.Properties.ItemDetailId.eq(40)).build().list();
+        imgDataListAdapter.notifyDataSetChanged();
+    }
+
+    private InnerHandler handler = new InnerHandler(this);
+
+    private static class InnerHandler extends Handler{
+        private final WeakReference<CameraActivity> cameraActivity;
+
+        private InnerHandler(CameraActivity activity) {
+            this.cameraActivity = new WeakReference<>(activity);
         }
-        return super.onKeyDown(keyCode, event);
+
+        @Override
+        public void handleMessage(Message msg) {
+            CameraActivity mActivity = cameraActivity.get();
+            if (mActivity != null){
+                mActivity.updateDialog();
+            }
+        }
     }
 }
