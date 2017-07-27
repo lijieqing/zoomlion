@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_item"
+                style="@style/ItemTitle"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="5dp"
+                android:text="项目名称：" />
+
+            <TextView
+                style="@style/ItemTitle"
+                android:layout_toRightOf="@id/tv_item"
+                android:text="某某检测项目" />
+
+            <CheckBox
+                android:id="@+id/ck_ignore"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="15dp"
+                android:text="忽略" />
+
+            <TextView
+                android:id="@+id/tv_item_desc"
+                style="@style/ItemTitle"
+                android:layout_marginRight="20dp"
+                android:layout_toLeftOf="@id/ck_ignore"
+                android:drawableLeft="@drawable/describe"
+                android:text="项目描述" />
+            <TextView
+                android:background="@drawable/split"
+                android:layout_alignParentBottom="true"
+                android:layout_width="match_parent"
+                android:layout_height="1dp" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+            <TextView
+                android:text="开始时间"
+                style="@style/ItemHead" />
+            <TextView
+                android:text="结束时间"
+                style="@style/ItemHead" />
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_head"
+                android:layout_width="0dp"
+                android:layout_weight="5"
+                android:layout_height="match_parent">
+
+            </android.support.v7.widget.RecyclerView>
+            <TextView
+                android:text="结论"
+                style="@style/ItemHead" />
+            <TextView
+                android:text="检验员"
+                style="@style/ItemHead" />
+        </LinearLayout>
+
+        <TextView
+            android:background="@drawable/split_gray"
+            android:layout_width="match_parent"
+            android:layout_height="1dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="7">
+
+        </LinearLayout>
+
+        <TextView
+            android:background="@drawable/split_gray"
+            android:layout_width="match_parent"
+            android:layout_height="1dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+            <TextView
+                android:text="检测结果"
+                style="@style/ItemResult" />
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_result"
+                android:layout_width="0dp"
+                android:layout_weight="5"
+                android:layout_height="match_parent">
+
+            </android.support.v7.widget.RecyclerView>
+            <TextView
+                android:text="项目结论"
+                style="@style/ItemResult" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

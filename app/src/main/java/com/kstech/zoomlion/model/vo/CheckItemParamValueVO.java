@@ -2,6 +2,7 @@ package com.kstech.zoomlion.model.vo;
 
 
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 
 import com.kstech.zoomlion.ExcException;
 import com.kstech.zoomlion.utils.JsonUtils;
@@ -44,17 +45,25 @@ public class CheckItemParamValueVO implements Comparable<CheckItemParamValueVO>,
 	}
 
 	public List<Long> getIMGs(){
-		if (imgIds != null)
+		if (imgIds != null){
+			if (imgIds.trim().equals("")){
+				return new ArrayList<>();
+			}
 			return JsonUtils.fromArrayJson(imgIds,Long.class);
-		else
+		} else{
 			return new ArrayList<>();
+		}
 	}
 
 	public List<Long> getCharts(){
-		if (chartIds != null)
+		if (chartIds != null){
+			if (chartIds.trim().equals("")){
+				return new ArrayList<>();
+			}
 			return JsonUtils.fromArrayJson(chartIds,Long.class);
-		else
+		} else{
 			return new ArrayList<>();
+		}
 	}
 
 	public void setImgIds(String imgIds) {

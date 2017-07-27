@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.kstech.zoomlion.utils.BitmapUtils;
 import com.kstech.zoomlion.utils.LogUtils;
 import com.kstech.zoomlion.utils.MyHttpUtils;
+import com.kstech.zoomlion.view.ItemShowView;
 
 import java.util.HashMap;
 
@@ -75,5 +76,13 @@ public class MainActivity extends AppCompatActivity{
 
     public void camera(View view) {
         startActivity(new Intent(this,CameraActivity.class));
+    }
+
+    public void itemview(View view) {
+        ItemShowView itemShowView = new ItemShowView(this);
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setView(itemShowView)
+                .create();
+        dialog.show();
     }
 }

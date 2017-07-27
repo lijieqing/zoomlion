@@ -32,5 +32,10 @@
         android:onClick="camera"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+    <Button
+        android:text="checkitem"
+        android:onClick="itemview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>
