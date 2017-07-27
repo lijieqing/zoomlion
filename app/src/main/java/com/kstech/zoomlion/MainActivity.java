@@ -12,7 +12,10 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.TextView;
 
+import com.kstech.zoomlion.model.vo.CheckItemParamValueVO;
 import com.kstech.zoomlion.utils.BitmapUtils;
+import com.kstech.zoomlion.utils.Globals;
+import com.kstech.zoomlion.utils.JsonUtils;
 import com.kstech.zoomlion.utils.LogUtils;
 import com.kstech.zoomlion.utils.MyHttpUtils;
 import com.kstech.zoomlion.view.ItemShowView;
@@ -79,6 +82,20 @@ public class MainActivity extends AppCompatActivity{
     }
 
     public void itemview(View view) {
+        String source2 = "{\"itemName\":\"压力检测\",\"paramName\":\"底盘\",\"value\":\"40\",\"unit\":\"\",\"type\":\"环境参数\",\"validMin\":\"30\",\"validMax\":\"50\",\"validAvg\":\"40\",\"imgIds\":\"\",\"chartIds\":\"\"}";
+        String source3 = "{\"itemName\":\"压力检测\",\"paramName\":\"灯管\",\"value\":\"40\",\"unit\":\"\",\"type\":\"环境参数\",\"validMin\":\"30\",\"validMax\":\"50\",\"validAvg\":\"40\",\"imgIds\":\"\",\"chartIds\":\"\"}";
+        String source4 = "{\"itemName\":\"压力检测\",\"paramName\":\"油缸沉降量(洞壁深处)\",\"value\":\"40\",\"unit\":\"℃\",\"type\":\"环境参数\",\"validMin\":\"30\",\"validMax\":\"50\",\"validAvg\":\"40\",\"imgIds\":\"\",\"chartIds\":\"\"}";
+        String source5 = "{\"itemName\":\"压力检测\",\"paramName\":\"左回转压力\",\"value\":\"40\",\"unit\":\"℃\",\"type\":\"环境参数\",\"validMin\":\"30\",\"validMax\":\"50\",\"validAvg\":\"40\",\"imgIds\":\"\",\"chartIds\":\"\"}";
+
+        CheckItemParamValueVO checkItemParamValueVO;
+        checkItemParamValueVO = (CheckItemParamValueVO) JsonUtils.fromJson(source2, CheckItemParamValueVO.class);
+        Globals.paramValueVOs.add(checkItemParamValueVO);
+        checkItemParamValueVO = (CheckItemParamValueVO) JsonUtils.fromJson(source3, CheckItemParamValueVO.class);
+        Globals.paramValueVOs.add(checkItemParamValueVO);
+        checkItemParamValueVO = (CheckItemParamValueVO) JsonUtils.fromJson(source4, CheckItemParamValueVO.class);
+        Globals.paramValueVOs.add(checkItemParamValueVO);
+        checkItemParamValueVO = (CheckItemParamValueVO) JsonUtils.fromJson(source5, CheckItemParamValueVO.class);
+        Globals.paramValueVOs.add(checkItemParamValueVO);
         ItemShowView itemShowView = new ItemShowView(this);
         AlertDialog dialog = new AlertDialog.Builder(this)
                 .setView(itemShowView)

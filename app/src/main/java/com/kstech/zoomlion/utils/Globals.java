@@ -1,6 +1,7 @@
 package com.kstech.zoomlion.utils;
 
 import com.kstech.zoomlion.model.db.CheckImageData;
+import com.kstech.zoomlion.model.vo.CheckItemParamValueVO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,4 +14,6 @@ public class Globals {
     public static String CLASSNAME = "com.kstech.zoomlion.model.xmlbean.";
 
     public static List<CheckImageData> values = new ArrayList<>();
+
+    public static List<CheckItemParamValueVO> paramValueVOs = new ArrayList<>();
 }

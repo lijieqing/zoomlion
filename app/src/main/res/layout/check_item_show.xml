@@ -53,17 +53,14 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_weight="0.75">
             <TextView
-                android:text="开始时间"
-                style="@style/ItemHead" />
-            <TextView
-                android:text="结束时间"
-                style="@style/ItemHead" />
+                android:text="检测时间"
+                style="@style/ItemResult" />
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_head"
                 android:layout_width="0dp"
-                android:layout_weight="5"
+                android:layout_weight="6"
                 android:layout_height="match_parent">
 
             </android.support.v7.widget.RecyclerView>
@@ -83,8 +80,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="7">
-
+            android:layout_weight="7.5">
         </LinearLayout>
 
         <TextView
@@ -95,14 +91,14 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_weight="0.75">
             <TextView
                 android:text="检测结果"
                 style="@style/ItemResult" />
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_result"
                 android:layout_width="0dp"
-                android:layout_weight="5"
+                android:layout_weight="6"
                 android:layout_height="match_parent">
 
             </android.support.v7.widget.RecyclerView>
