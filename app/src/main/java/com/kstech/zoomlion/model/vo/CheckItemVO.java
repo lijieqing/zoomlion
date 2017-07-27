@@ -71,8 +71,8 @@ public class CheckItemVO implements Serializable {
 	public void addQcParam(String param, String validMin, String validMax,
                            String validAvg) throws ExcException {
 		CheckItemParamValueVO vo = new CheckItemParamValueVO();
-		vo.setBelongTo(name);
-		vo.setParam(param);
+		vo.setItemName(name);
+		vo.setParamName(param);
 		vo.setValidAvg(validAvg);
 		vo.setValidMax(validMax);
 		vo.setValidMin(validMin);
@@ -83,8 +83,8 @@ public class CheckItemVO implements Serializable {
 	public void addEnvParam(String param, String validMin, String validMax,
                             String validAvg) throws ExcException{
 		CheckItemParamValueVO vo = new CheckItemParamValueVO();
-		vo.setBelongTo(name);
-		vo.setParam(param);
+		vo.setItemName(name);
+		vo.setParamName(param);
 		vo.setValidAvg(validAvg);
 		vo.setValidMax(validMax);
 		vo.setValidMin(validMin);

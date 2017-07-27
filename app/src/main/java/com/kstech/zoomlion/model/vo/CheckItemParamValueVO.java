@@ -1,9 +1,14 @@
 package com.kstech.zoomlion.model.vo;
 
 
+import android.support.annotation.NonNull;
+
 import com.kstech.zoomlion.ExcException;
+import com.kstech.zoomlion.utils.JsonUtils;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 检查项目参数值对象
@@ -13,29 +18,74 @@ public class CheckItemParamValueVO implements Comparable<CheckItemParamValueVO>,
 	/**
 	 * 数据库存储内容如下
 	 */
-//	[{"param":"主溢流压力","value":"30","unit":"Mpa",type:"主参数"},
-//	 {"param":"液压油温度","value":"30","unit":"℃",type:"环境参数"}]
+//	[{"paramName":"主溢流压力","value":"30","unit":"Mpa",type:"主参数"},
+//	 {"paramName":"液压油温度","value":"30","unit":"℃",type:"环境参数"}]
 	/**
 	 * 配置文件配置如下
 	 */
 //	<QCParam Param="主溢流压力" ValidMin="" ValidMax="" ValidAvg=""/>
 //  <ENVParam Param="液压油温度" ValidMin="" ValidMax="" ValidAvg=""/>
-	private String BelongTo;
-	private String param;
+	private String itemName;
+	private String paramName;
 	private String value="";
 	private String unit="";
 	private String type;
 	private String validMin;
 	private String validMax;
 	private String validAvg;
-	public void setBelongTo(String itemname){
-		this.BelongTo = itemname;
+	private String imgIds;
+
+	public String getItemName() {
+		return itemName;
 	}
-	public String getParam() {
-		return param;
+
+	public String getImgIds() {
+		return imgIds;
 	}
-	public void setParam(String param) {
-		this.param = param;
+
+	public List<Long> getIMGs(){
+		if (imgIds != null)
+			return JsonUtils.fromArrayJson(imgIds,Long.class);
+		else
+			return new ArrayList<>();
+	}
+
+	public List<Long> getCharts(){
+		if (chartIds != null)
+			return JsonUtils.fromArrayJson(chartIds,Long.class);
+		else
+			return new ArrayList<>();
+	}
+
+	public void setImgIds(String imgIds) {
+		this.imgIds = imgIds;
+	}
+
+	public void setImgIds(@NonNull List<Long> imgIds) {
+		this.imgIds = JsonUtils.toJson(imgIds);
+	}
+
+	public String getChartIds() {
+		return chartIds;
+	}
+
+	public void setChartIds(String chartIds) {
+		this.chartIds = chartIds;
+	}
+	public void setChartIds(@NonNull List<Long> chartIds) {
+		this.chartIds = JsonUtils.toJson(chartIds);
+	}
+
+	private String chartIds;
+
+	public void setItemName(String itemname){
+		this.itemName = itemname;
+	}
+	public String getParamName() {
+		return paramName;
+	}
+	public void setParamName(String paramName) {
+		this.paramName = paramName;
 	}
 	public String getValue() {
 		return value;
@@ -63,7 +113,7 @@ public class CheckItemParamValueVO implements Comparable<CheckItemParamValueVO>,
 		try {
 			Float.valueOf(validMin);
 		}catch (NumberFormatException e){
-			throw new ExcException(e,"配置信息异常！\n检测项目:"+BelongTo+"\n 参数"+param+"最小值 "+validMin+" 为非数字");
+			throw new ExcException(e,"配置信息异常！\n检测项目:"+ itemName +"\n 参数"+ paramName +"最小值 "+validMin+" 为非数字");
 		}
 	}
 	public String getValidMax() {
@@ -74,7 +124,7 @@ public class CheckItemParamValueVO implements Comparable<CheckItemParamValueVO>,
 		try {
 			Float.valueOf(validMax);
 		}catch (NumberFormatException e){
-			throw new ExcException(e,"配置信息异常！\n检测项目:"+BelongTo+"\n 参数"+param+"最大值 "+validMax+" 为非数字");
+			throw new ExcException(e,"配置信息异常！\n检测项目:"+ itemName +"\n 参数"+ paramName +"最大值 "+validMax+" 为非数字");
 		}
 	}
 	public String getValidAvg() {
@@ -87,7 +137,7 @@ public class CheckItemParamValueVO implements Comparable<CheckItemParamValueVO>,
 	public int compareTo(CheckItemParamValueVO arg0) {
 		int i = this.type.compareTo(arg0.type);
 		if (i==0) {
-			i = this.param.compareTo(arg0.param);
+			i = this.paramName.compareTo(arg0.paramName);
 		}
 		return i;
 	}
