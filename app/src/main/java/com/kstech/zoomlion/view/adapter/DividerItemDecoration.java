@@ -1,4 +1,4 @@
-package com.kstech.zoomlion.view;
+package com.kstech.zoomlion.view.adapter;
 
 import android.content.Context;
 import android.content.res.TypedArray;
