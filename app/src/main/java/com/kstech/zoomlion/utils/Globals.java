@@ -35,10 +35,9 @@ public class Globals {
         }
     }
 
-    public static void onScroll(@NonNull IRecyclerFlingListener listener,int x, int y){
+    public static void onScroll(int x, int y){
         for (IRecyclerFlingListener recyclerFlingListener : recyclerFlingListeners) {
-            if (listener != recyclerFlingListener)
-                recyclerFlingListener.onFling(x,y);
+            recyclerFlingListener.onFling(x,y);
         }
     }
 }

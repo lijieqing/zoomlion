@@ -24,11 +24,14 @@ import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity{
     private TextView tvNet;
+    ItemShowView itemShowView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         tvNet = (TextView) findViewById(R.id.tv_net);
+        itemShowView = (ItemShowView) findViewById(R.id.isv);
+        initData();
     }
 
     public void net(View view) {
@@ -82,6 +85,14 @@ public class MainActivity extends AppCompatActivity{
     }
 
     public void itemview(View view) {
+        ItemShowView itemShowView = new ItemShowView(this);
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setView(itemShowView)
+                .create();
+        dialog.show();
+    }
+
+    private void initData(){
         Globals.paramValueVOs.clear();
         String source0 = "{\"itemName\":\"压力检测\",\"paramName\":\"底盘\",\"value\":\"40\",\"unit\":\"\",\"type\":\"环境参数\",\"validMin\":\"30\",\"validMax\":\"50\",\"validAvg\":\"40\",\"imgIds\":\"\",\"chartIds\":\"\"}";
         String source1 = "{\"itemName\":\"压力检测\",\"paramName\":\"底盘\",\"value\":\"40\",\"unit\":\"\",\"type\":\"环境参数\",\"validMin\":\"30\",\"validMax\":\"50\",\"validAvg\":\"40\",\"imgIds\":\"\",\"chartIds\":\"\"}";
@@ -109,19 +120,14 @@ public class MainActivity extends AppCompatActivity{
         Globals.paramValueVOs.add(checkItemParamValueVO);
         checkItemParamValueVO = (CheckItemParamValueVO) JsonUtils.fromJson(source7, CheckItemParamValueVO.class);
         Globals.paramValueVOs.add(checkItemParamValueVO);
-        checkItemParamValueVO = (CheckItemParamValueVO) JsonUtils.fromJson(source7, CheckItemParamValueVO.class);
+    }
+
+    public void update(View view) {
+        String source7 = "{\"itemName\":\"压力检测\",\"paramName\":\"左回转压力\",\"value\":\"40\",\"unit\":\"℃\",\"type\":\"环境参数\",\"validMin\":\"30\",\"validMax\":\"50\",\"validAvg\":\"40\",\"imgIds\":\"\",\"chartIds\":\"\"}";
+        CheckItemParamValueVO checkItemParamValueVO = (CheckItemParamValueVO) JsonUtils.fromJson(source7, CheckItemParamValueVO.class);
         Globals.paramValueVOs.add(checkItemParamValueVO);
-        checkItemParamValueVO = (CheckItemParamValueVO) JsonUtils.fromJson(source7, CheckItemParamValueVO.class);
         Globals.paramValueVOs.add(checkItemParamValueVO);
-        checkItemParamValueVO = (CheckItemParamValueVO) JsonUtils.fromJson(source7, CheckItemParamValueVO.class);
         Globals.paramValueVOs.add(checkItemParamValueVO);
-        checkItemParamValueVO = (CheckItemParamValueVO) JsonUtils.fromJson(source7, CheckItemParamValueVO.class);
-        Globals.paramValueVOs.add(checkItemParamValueVO);
-        ItemShowView itemShowView = new ItemShowView(this);
-        Globals.addFlingListener(itemShowView);
-        AlertDialog dialog = new AlertDialog.Builder(this)
-                .setView(itemShowView)
-                .create();
-        dialog.show();
+        itemShowView.update();
     }
 }

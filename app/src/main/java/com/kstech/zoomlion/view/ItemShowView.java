@@ -4,7 +4,6 @@ import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -13,14 +12,13 @@ import android.widget.RelativeLayout;
 import com.kstech.zoomlion.R;
 import com.kstech.zoomlion.utils.DeviceUtil;
 import com.kstech.zoomlion.utils.Globals;
-import com.kstech.zoomlion.utils.LogUtils;
 import com.kstech.zoomlion.view.adapter.HeaderAdapter;
 
 /**
  * Created by lijie on 2017/7/27.
  */
 
-public class ItemShowView extends RelativeLayout implements IRecyclerFlingListener{
+public class ItemShowView extends RelativeLayout{
     private Context context;
     private RecyclerView rvHeader;
     private RecyclerView rvResult;
@@ -62,6 +60,7 @@ public class ItemShowView extends RelativeLayout implements IRecyclerFlingListen
             Globals.addFlingListener(ibs);
         }
 
+        //对header设置滑动监听，监测到后更新记录体内的布局
         rvHeader.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
@@ -71,15 +70,23 @@ public class ItemShowView extends RelativeLayout implements IRecyclerFlingListen
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                Globals.onScroll(ItemShowView.this,dx,dy);
+                Globals.onScroll(dx,dy);
             }
         });
 
         return v;
     }
 
-    @Override
-    public void onFling(int x, int y) {
-        rvHeader.scrollBy(x,y);
+
+    public void update(){
+        headerAdapter.notifyDataSetChanged();
+        bodyContains.removeAllViews();
+        Globals.recyclerFlingListeners.clear();
+        for (int i = 0; i < 7; i++) {
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,DeviceUtil.deviceHeight(context)/15);
+            ItemBodyShowView ibs = new ItemBodyShowView(context);
+            bodyContains.addView(ibs,params);
+            Globals.addFlingListener(ibs);
+        }
     }
 }
