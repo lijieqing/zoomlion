@@ -9,7 +9,7 @@
         android:textColor="#1e1e1e"
         android:layout_margin="3dp"
         android:textSize="15sp"
-        android:ems="5"
+        android:ems="8"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 </LinearLayout>

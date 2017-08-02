@@ -15,6 +15,7 @@ import com.kstech.zoomlion.model.db.CheckItemDetailData;
 import com.kstech.zoomlion.model.vo.CheckItemParamValueVO;
 import com.kstech.zoomlion.utils.DateUtil;
 import com.kstech.zoomlion.view.adapter.BodyAdapter;
+import com.kstech.zoomlion.view.adapter.DividerItemDecoration;
 
 import java.util.List;
 
@@ -65,6 +66,7 @@ public class ItemBodyShowView extends RelativeLayout implements IRecyclerFlingLi
 
         rvBody.setLayoutManager(gridLayoutManager);
         rvBody.setAdapter(bodyAdapter);
+        rvBody.addItemDecoration(new DividerItemDecoration(context,DividerItemDecoration.HORIZONTAL_LIST));
 
         return view;
     }

@@ -19,6 +19,7 @@ import com.kstech.zoomlion.utils.DeviceUtil;
 import com.kstech.zoomlion.utils.Globals;
 import com.kstech.zoomlion.utils.JsonUtils;
 import com.kstech.zoomlion.utils.LogUtils;
+import com.kstech.zoomlion.view.adapter.DividerItemDecoration;
 import com.kstech.zoomlion.view.adapter.HeaderAdapter;
 
 import java.util.List;
@@ -69,6 +70,7 @@ public class ItemShowView extends RelativeLayout {
         headerAdapter = new HeaderAdapter(context);
         rvHeader.setLayoutManager(gridLayoutManager);
         rvHeader.setAdapter(headerAdapter);
+        rvHeader.addItemDecoration(new DividerItemDecoration(context,DividerItemDecoration.HORIZONTAL_LIST));
 
         //对header设置滑动监听，监测到后更新记录体内的布局
         rvHeader.addOnScrollListener(new RecyclerView.OnScrollListener() {
