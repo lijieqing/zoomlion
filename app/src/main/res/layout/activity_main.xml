@@ -50,13 +50,13 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <ListView
-            android:id="@+id/lv_item"
+        <ExpandableListView
+            android:id="@+id/elv_item"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent">
 
-        </ListView>
+        </ExpandableListView>
         <com.kstech.zoomlion.view.ItemShowView
             android:id="@+id/isv"
             android:layout_width="0dp"
