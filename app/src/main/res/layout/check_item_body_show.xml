@@ -17,10 +17,20 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:orientation="horizontal">
-
+            <ImageView
+                android:src="@drawable/show_detail"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="0.6"
+                android:gravity="center"
+                android:textSize="15sp" />
             <TextView
                 android:id="@+id/tv_time_start"
-                style="@style/ItemResult"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1.4"
+                android:gravity="center"
+                android:textSize="15sp"
                 android:text="检测时间" />
 
             <android.support.v7.widget.RecyclerView

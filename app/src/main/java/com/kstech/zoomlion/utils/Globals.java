@@ -19,7 +19,7 @@ public class Globals {
 
     public static List<CheckImageData> values = new ArrayList<>();
 
-    public static List<CheckItemParamValueVO> paramValueVOs = new ArrayList<>();
+    public static List<CheckItemParamValueVO> paramHeadVOs = new ArrayList<>();
 
     public static List<IRecyclerFlingListener> recyclerFlingListeners = new ArrayList<>();
 

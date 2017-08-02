@@ -5,16 +5,18 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.kstech.zoomlion.R;
-import com.kstech.zoomlion.utils.Globals;
-import com.kstech.zoomlion.utils.LogUtils;
+import com.kstech.zoomlion.model.db.CheckItemDetailData;
+import com.kstech.zoomlion.model.vo.CheckItemParamValueVO;
+import com.kstech.zoomlion.utils.DateUtil;
 import com.kstech.zoomlion.view.adapter.BodyAdapter;
+
+import java.util.List;
 
 /**
  * Created by lijie on 2017/7/28.
@@ -27,10 +29,14 @@ public class ItemBodyShowView extends RelativeLayout implements IRecyclerFlingLi
     RecyclerView rvBody;
     BodyAdapter bodyAdapter;
     GridLayoutManager gridLayoutManager;
+    List<CheckItemParamValueVO> list;
+    CheckItemDetailData paramValue;
 
     LinearLayout llScroll;
-    public ItemBodyShowView(Context context) {
+    public ItemBodyShowView(Context context, List<CheckItemParamValueVO> list, CheckItemDetailData paramValue) {
         super(context);
+        this.list = list;
+        this.paramValue = paramValue;
         this.addView(initView(context));
     }
 
@@ -52,7 +58,9 @@ public class ItemBodyShowView extends RelativeLayout implements IRecyclerFlingLi
         rvBody = view.findViewById(R.id.rv_body);
         llScroll = view.findViewById(R.id.ll_body_scroll);
 
-        bodyAdapter = new BodyAdapter(context);
+        tvStartTime.setText(DateUtil.getDateTimeFormat(paramValue.getStartTime()));
+
+        bodyAdapter = new BodyAdapter(context,list);
         gridLayoutManager = new GridLayoutManager(context,1, LinearLayoutManager.HORIZONTAL,false);
 
         rvBody.setLayoutManager(gridLayoutManager);

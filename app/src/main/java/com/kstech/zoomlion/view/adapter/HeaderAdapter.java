@@ -31,12 +31,12 @@ public class HeaderAdapter extends RecyclerView.Adapter<HeaderAdapter.MyViewHold
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         holder.view.setMinimumWidth(DeviceUtil.deviceWidth(context)/15);
-        holder.textView.setText(Globals.paramValueVOs.get(position).getParamName());
+        holder.textView.setText(Globals.paramHeadVOs.get(position).getParamName());
     }
 
     @Override
     public int getItemCount() {
-        return Globals.paramValueVOs.size();
+        return Globals.paramHeadVOs.size();
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder{
