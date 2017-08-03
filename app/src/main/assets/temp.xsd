@@ -194,6 +194,18 @@
                                                         </complexType>
                                                     </element>
 
+                                                    <element name="PICParams" maxOccurs="1">
+                                                        <complexType>
+                                                            <sequence>
+                                                                <element name="PICParam" minOccurs="0">
+                                                                    <complexType>
+                                                                        <attribute name="Param" type="string" use="required"/>
+                                                                    </complexType>
+                                                                </element>
+                                                            </sequence>
+                                                        </complexType>
+                                                    </element>
+
                                                     <element name="RealTimeParams">
                                                         <complexType>
                                                             <sequence>

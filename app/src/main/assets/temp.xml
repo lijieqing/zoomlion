@@ -824,6 +824,10 @@
                 <QCParams>
                     <QCParam Param="先导压力怠速" ValidAvg="" ValidMax="4.0" ValidMin="3.5" />
                 </QCParams>
+                <PICParams>
+                    <PICParam Param="底盘"/>
+                    <PICParam Param="反光镜"/>
+                </PICParams>
                 <ENVParams>
                     <ENVParam Param="油温温度" ValidAvg="" ValidMax="100" ValidMin="0" />
                 </ENVParams>
@@ -857,6 +861,10 @@
                 <ENVParams>
                     <ENVParam Param="油温温度" ValidAvg="" ValidMax="100" ValidMin="0" />
                 </ENVParams>
+                <PICParams>
+                    <PICParam Param="底盘"/>
+                    <PICParam Param="反光镜"/>
+                </PICParams>
                 <RealTimeParams>
                     <RealTimeParam Name="先导压力" />
                     <RealTimeParam Name="油温温度" />
@@ -899,6 +907,10 @@
                         只要有一个环境参数不满足条件就不能发出命令 -->
                     <ENVParam Param="油温温度" ValidAvg="0" ValidMax="100" ValidMin="0" />
                 </ENVParams>
+                <PICParams>
+                    <PICParam Param="底盘"/>
+                    <PICParam Param="反光镜"/>
+                </PICParams>
                 <RealTimeParams>
                     <RealTimeParam Name="左泵压力" />
                     <RealTimeParam Name="右泵压力" />
@@ -929,6 +941,10 @@
                 <ENVParams>
                     <ENVParam Param="油温温度" ValidAvg="" ValidMax="100" ValidMin="0" />
                 </ENVParams>
+                <PICParams>
+                    <PICParam Param="底盘"/>
+                    <PICParam Param="反光镜"/>
+                </PICParams>
                 <RealTimeParams>
                     <RealTimeParam Name="左泵压力" />
                     <RealTimeParam Name="右泵压力" />
@@ -959,6 +975,10 @@
                 <ENVParams>
                     <ENVParam Param="油温温度" ValidAvg="" ValidMax="100" ValidMin="0" />
                 </ENVParams>
+                <PICParams>
+                    <PICParam Param="底盘"/>
+                    <PICParam Param="反光镜"/>
+                </PICParams>
                 <RealTimeParams>
                     <RealTimeParam Name="左泵压力" />
                     <RealTimeParam Name="右泵压力" />
@@ -989,6 +1009,10 @@
                 <ENVParams>
                     <ENVParam Param="油温温度" ValidAvg="" ValidMax="100" ValidMin="0" />
                 </ENVParams>
+                <PICParams>
+                    <PICParam Param="底盘"/>
+                    <PICParam Param="反光镜"/>
+                </PICParams>
                 <RealTimeParams>
                     <RealTimeParam Name="左泵压力" />
                     <RealTimeParam Name="右泵压力" />
@@ -1020,6 +1044,10 @@
                 <ENVParams>
                     <ENVParam Param="油温温度" ValidAvg="" ValidMax="100" ValidMin="0" />
                 </ENVParams>
+                <PICParams>
+                    <PICParam Param="底盘"/>
+                    <PICParam Param="反光镜"/>
+                </PICParams>
                 <RealTimeParams>
                     <RealTimeParam Name="左泵压力" />
                     <RealTimeParam Name="右泵压力" />
@@ -1052,6 +1080,10 @@
                 <ENVParams>
                     <ENVParam Param="油温温度" ValidAvg="" ValidMax="100" ValidMin="0" />
                 </ENVParams>
+                <PICParams>
+                    <PICParam Param="底盘"/>
+                    <PICParam Param="反光镜"/>
+                </PICParams>
                 <RealTimeParams>
                     <RealTimeParam Name="右泵压力" />
                     <RealTimeParam Name="油温温度" />
@@ -1081,6 +1113,10 @@
                 <ENVParams>
                     <ENVParam Param="油温温度" ValidAvg="" ValidMax="100" ValidMin="0" />
                 </ENVParams>
+                <PICParams>
+                    <PICParam Param="底盘"/>
+                    <PICParam Param="反光镜"/>
+                </PICParams>
                 <RealTimeParams>
                     <RealTimeParam Name="右泵压力" />
                     <RealTimeParam Name="油温温度" />
@@ -1110,6 +1146,10 @@
                 <ENVParams>
                     <ENVParam Param="油温温度" ValidAvg="" ValidMax="100" ValidMin="0" />
                 </ENVParams>
+                <PICParams>
+                    <PICParam Param="底盘"/>
+                    <PICParam Param="反光镜"/>
+                </PICParams>
                 <RealTimeParams>
                     <RealTimeParam Name="右泵压力" />
                     <RealTimeParam Name="油温温度" />
@@ -1139,6 +1179,10 @@
                 <ENVParams>
                     <ENVParam Param="油温温度" ValidAvg="" ValidMax="100" ValidMin="0" />
                 </ENVParams>
+                <PICParams>
+                    <PICParam Param="底盘"/>
+                    <PICParam Param="反光镜"/>
+                </PICParams>
                 <RealTimeParams>
                     <RealTimeParam Name="右泵压力" />
                     <RealTimeParam Name="油温温度" />
@@ -1168,6 +1212,10 @@
                 <ENVParams>
                     <ENVParam Param="油温温度" ValidAvg="" ValidMax="100" ValidMin="0" />
                 </ENVParams>
+                <PICParams>
+                    <PICParam Param="底盘"/>
+                    <PICParam Param="反光镜"/>
+                </PICParams>
                 <RealTimeParams>
                     <RealTimeParam Name="右泵压力" />
                     <RealTimeParam Name="油温温度" />
@@ -1200,6 +1248,10 @@
                 <ENVParams>
                     <ENVParam Param="油温温度" ValidAvg="50" ValidMax="100" ValidMin="0" />
                 </ENVParams>
+                <PICParams>
+                    <PICParam Param="底盘"/>
+                    <PICParam Param="反光镜"/>
+                </PICParams>
                 <RealTimeParams>
                     <RealTimeParam Name="空行走速度" />
                     <RealTimeParam Name="油温温度" />
@@ -1232,6 +1284,10 @@
                 <ENVParams>
                     <ENVParam Param="油温温度" ValidAvg="50" ValidMax="100" ValidMin="0" />
                 </ENVParams>
+                <PICParams>
+                    <PICParam Param="底盘"/>
+                    <PICParam Param="反光镜"/>
+                </PICParams>
                 <RealTimeParams>
                     <RealTimeParam Name="空行走速度" />
                 </RealTimeParams>
@@ -1263,6 +1319,10 @@
                 <ENVParams>
                     <ENVParam Param="油温温度" ValidAvg="50" ValidMax="100" ValidMin="0" />
                 </ENVParams>
+                <PICParams>
+                    <PICParam Param="底盘"/>
+                    <PICParam Param="反光镜"/>
+                </PICParams>
                 <RealTimeParams>
                     <RealTimeParam Name="空行走速度" />
                 </RealTimeParams>
@@ -1294,6 +1354,10 @@
                 <ENVParams>
                     <ENVParam Param="油温温度" ValidAvg="50" ValidMax="100" ValidMin="0" />
                 </ENVParams>
+                <PICParams>
+                    <PICParam Param="底盘"/>
+                    <PICParam Param="反光镜"/>
+                </PICParams>
                 <RealTimeParams>
                     <RealTimeParam Name="空行走速度" />
                 </RealTimeParams>
@@ -1325,6 +1389,10 @@
                 <ENVParams>
                     <ENVParam Param="油温温度" ValidAvg="50" ValidMax="100" ValidMin="0" />
                 </ENVParams>
+                <PICParams>
+                    <PICParam Param="底盘"/>
+                    <PICParam Param="反光镜"/>
+                </PICParams>
                 <RealTimeParams>
                     <RealTimeParam Name="空行走速度" />
                 </RealTimeParams>
@@ -1356,6 +1424,10 @@
                 <ENVParams>
                     <ENVParam Param="油温温度" ValidAvg="50" ValidMax="100" ValidMin="0" />
                 </ENVParams>
+                <PICParams>
+                    <PICParam Param="底盘"/>
+                    <PICParam Param="反光镜"/>
+                </PICParams>
                 <RealTimeParams>
                     <RealTimeParam Name="空行走速度" />
                 </RealTimeParams>
@@ -1387,6 +1459,10 @@
                 <ENVParams>
                     <ENVParam Param="油温温度" ValidAvg="50" ValidMax="100" ValidMin="0" />
                 </ENVParams>
+                <PICParams>
+                    <PICParam Param="底盘"/>
+                    <PICParam Param="反光镜"/>
+                </PICParams>
                 <RealTimeParams>
                     <RealTimeParam Name="空行走速度" />
                 </RealTimeParams>
@@ -1418,6 +1494,10 @@
                 <ENVParams>
                     <ENVParam Param="油温温度" ValidAvg="50" ValidMax="100" ValidMin="0" />
                 </ENVParams>
+                <PICParams>
+                    <PICParam Param="底盘"/>
+                    <PICParam Param="反光镜"/>
+                </PICParams>
                 <RealTimeParams>
                     <RealTimeParam Name="空行走速度" />
                 </RealTimeParams>
@@ -1450,6 +1530,10 @@
                     <QCParam Param="铲斗油缸沉降量(斗杆伸出)" ValidAvg="5" ValidMax="50" ValidMin="0" />
                 </QCParams>
                 <ENVParams></ENVParams>
+                <PICParams>
+                    <PICParam Param="底盘"/>
+                    <PICParam Param="反光镜"/>
+                </PICParams>
                 <RealTimeParams>
                     <RealTimeParam Name="斗杆激光位移" />
                     <RealTimeParam Name="铲斗激光位移" />
@@ -1482,6 +1566,10 @@
                     <QCParam Param="铲斗油缸沉降量(斗杆缩回)" ValidAvg="0" ValidMax="50" ValidMin="0" />
                 </QCParams>
                 <ENVParams></ENVParams>
+                <PICParams>
+                    <PICParam Param="底盘"/>
+                    <PICParam Param="反光镜"/>
+                </PICParams>
                 <RealTimeParams>
                     <RealTimeParam Name="铲斗激光位移" />
                     <RealTimeParam Name="斗杆激光位移" />

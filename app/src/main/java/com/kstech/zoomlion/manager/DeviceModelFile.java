@@ -12,6 +12,7 @@ import com.kstech.zoomlion.model.xmlbean.Data;
 import com.kstech.zoomlion.model.xmlbean.Device;
 import com.kstech.zoomlion.model.xmlbean.ENVParam;
 import com.kstech.zoomlion.model.xmlbean.PG;
+import com.kstech.zoomlion.model.xmlbean.PICParam;
 import com.kstech.zoomlion.model.xmlbean.QCErr;
 import com.kstech.zoomlion.model.xmlbean.QCItem;
 import com.kstech.zoomlion.model.xmlbean.QCParam;
@@ -466,6 +467,7 @@ public class DeviceModelFile {
 				}
 				List<QCParam> qcparams = qcitemxml.getQcParams().getQcParams();
 				List<ENVParam> qcenvs = qcitemxml.getEnvParams().getEnvParams();
+				List<PICParam> picParams = qcitemxml.getPicParams().getPicParams();
 				List<RealTimeParam> qcrealtimes = qcitemxml.getRealTimeParams().getRealTimeParams();
 				for (QCParam qcparam : qcparams) {
 					checkItem.addQcParam(qcparam.getParam(),
@@ -478,6 +480,9 @@ public class DeviceModelFile {
 							env.getValidMin(),
 							env.getValidMax(),
 							env.getValidAvg());
+				}
+				for (PICParam picParam : picParams) {
+					checkItem.addPICParam(picParam.getParam());
 				}
 				for (RealTimeParam real : qcrealtimes) {
 					RealTimeParamVO rtp = new RealTimeParamVO();

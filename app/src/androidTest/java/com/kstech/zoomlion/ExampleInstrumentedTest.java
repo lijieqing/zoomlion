@@ -16,6 +16,7 @@ import com.kstech.zoomlion.model.xmlbean.DataCollectParam;
 import com.kstech.zoomlion.model.xmlbean.Device;
 import com.kstech.zoomlion.model.xmlbean.Msg;
 import com.kstech.zoomlion.model.xmlbean.MsgSet;
+import com.kstech.zoomlion.model.xmlbean.PICParam;
 import com.kstech.zoomlion.model.xmlbean.Phone;
 import com.kstech.zoomlion.model.xmlbean.PhoneStore;
 import com.kstech.zoomlion.model.xmlbean.QCItem;
@@ -151,11 +152,8 @@ public class ExampleInstrumentedTest {
 //        }
         for (QCType qcType : o.getQcSet().getQcTypes()) {
             for (QCItem qcItem : qcType.getQcItems()) {
-                for (DataCollectParam dataCollectParam : qcItem.getFunction().getDataCollectParams()) {
-                    LogUtils.d("KSTECH","dataCollectParam "+dataCollectParam.getName());
-                }
-                for (AlterData alterData : qcItem.getFunction().getAlterDatas().getAlterDatas()) {
-                    LogUtils.d("KSTECH",qcItem.getFunction().getAlterDatas()+alterData.toString());
+                for (PICParam picParam : qcItem.getPicParams().getPicParams()) {
+                    LogUtils.d("KSTECH",qcItem.getName()+"--"+picParam.getParam());
                 }
             }
         }

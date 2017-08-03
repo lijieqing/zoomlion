@@ -15,6 +15,7 @@ public class QCItem {
     private Msgs msgs;
     private QCParams qcParams;
     private ENVParams envParams;
+    private PICParams picParams;
     private RealTimeParams realTimeParams;
 
     public QCItem() {
@@ -98,6 +99,14 @@ public class QCItem {
 
     public void setRealTimeParams(Object realTimeParams) {
         this.realTimeParams = (RealTimeParams) realTimeParams;
+    }
+
+    public PICParams getPicParams() {
+        return picParams;
+    }
+
+    public void setPicParams(Object picParams) {
+        this.picParams = (PICParams) picParams;
     }
 
     public Function getFunction() {

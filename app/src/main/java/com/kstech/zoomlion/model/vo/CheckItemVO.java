@@ -91,6 +91,13 @@ public class CheckItemVO implements Serializable {
 		vo.setType("环境参数");
 		paramList.add(vo);
 	}
+	public void addPICParam(String param){
+		CheckItemParamValueVO vo = new CheckItemParamValueVO();
+		vo.setItemName(name);
+		vo.setParamName(param);
+		vo.setType("图片");
+		paramList.add(vo);
+	}
 
 	public String getId() {
 		return id;
