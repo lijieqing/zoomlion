@@ -72,7 +72,6 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_head"
                 android:layout_width="0dp"
-                app:fastScrollEnabled="false"
                 android:layout_weight="6"
                 android:layout_height="match_parent">
 

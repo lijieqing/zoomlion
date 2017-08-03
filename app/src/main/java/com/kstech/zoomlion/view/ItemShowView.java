@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -18,7 +19,6 @@ import com.kstech.zoomlion.model.vo.CheckItemVO;
 import com.kstech.zoomlion.utils.DeviceUtil;
 import com.kstech.zoomlion.utils.Globals;
 import com.kstech.zoomlion.utils.JsonUtils;
-import com.kstech.zoomlion.utils.LogUtils;
 import com.kstech.zoomlion.view.adapter.DividerItemDecoration;
 import com.kstech.zoomlion.view.adapter.HeaderAdapter;
 
@@ -34,7 +34,7 @@ import java.util.List;
  */
 
 
-public class ItemShowView extends RelativeLayout {
+public class ItemShowView extends RelativeLayout{
     private Context context;
     private RecyclerView rvHeader;
     private RecyclerView rvResult;
@@ -82,7 +82,7 @@ public class ItemShowView extends RelativeLayout {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                Globals.onScroll(dx, dy);
+                Globals.onHeadScroll(dx, dy);
             }
         });
 
@@ -98,13 +98,13 @@ public class ItemShowView extends RelativeLayout {
      */
     public void updateBody(@NonNull List<CheckItemDetailData> paramValues) {
         bodyContains.removeAllViews();
-        Globals.recyclerFlingListeners.clear();
+        Globals.headerListener.clear();
         for (CheckItemDetailData paramValue : paramValues) {
             List<CheckItemParamValueVO> list = JsonUtils.fromArrayJson(paramValue.getParamsValues(), CheckItemParamValueVO.class);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, DeviceUtil.deviceHeight(context) / 15);
             ItemBodyShowView ibs = new ItemBodyShowView(context, list, paramValue);
             bodyContains.addView(ibs, params);
-            Globals.addFlingListener(ibs);
+            Globals.addHeadScrollListener(ibs);
         }
     }
     public void updateHead(@NonNull CheckItemVO item){
