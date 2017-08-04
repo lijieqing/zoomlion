@@ -8,8 +8,12 @@ import android.support.test.runner.AndroidJUnit4;
 
 import com.kstech.zoomlion.manager.DeviceModelFile;
 import com.kstech.zoomlion.manager.XMLAPI;
+import com.kstech.zoomlion.model.db.CheckImageData;
+import com.kstech.zoomlion.model.db.CheckItemDetailData;
 import com.kstech.zoomlion.model.db.MsgSetDB;
+import com.kstech.zoomlion.model.db.greendao.CheckItemDetailDataDao;
 import com.kstech.zoomlion.model.db.greendao.MsgSetDBDao;
+import com.kstech.zoomlion.model.vo.CheckItemParamValueVO;
 import com.kstech.zoomlion.model.vo.CheckItemVO;
 import com.kstech.zoomlion.model.xmlbean.AlterData;
 import com.kstech.zoomlion.model.xmlbean.DataCollectParam;
@@ -21,6 +25,9 @@ import com.kstech.zoomlion.model.xmlbean.Phone;
 import com.kstech.zoomlion.model.xmlbean.PhoneStore;
 import com.kstech.zoomlion.model.xmlbean.QCItem;
 import com.kstech.zoomlion.model.xmlbean.QCType;
+import com.kstech.zoomlion.utils.Globals;
+import com.kstech.zoomlion.utils.GreenDaoUtils;
+import com.kstech.zoomlion.utils.JsonUtils;
 import com.kstech.zoomlion.utils.LogUtils;
 import com.kstech.zoomlion.utils.MyHttpUtils;
 
@@ -29,6 +36,7 @@ import org.junit.runner.RunWith;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -157,5 +165,12 @@ public class ExampleInstrumentedTest {
                 }
             }
         }
+    }
+    @Test
+    public void InitItemDB() throws IOException {
+        Context appContext = InstrumentationRegistry.getTargetContext();
+        Device o = (Device) XMLAPI.readXML(appContext.getAssets().open("temp.xml"));
+        DeviceModelFile mo = DeviceModelFile.readFromFile(o);
+        GreenDaoUtils.InitDBByXML(mo);
     }
 }

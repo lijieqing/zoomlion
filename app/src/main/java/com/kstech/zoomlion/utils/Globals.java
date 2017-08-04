@@ -2,6 +2,7 @@ package com.kstech.zoomlion.utils;
 
 import android.support.annotation.NonNull;
 
+import com.kstech.zoomlion.manager.DeviceModelFile;
 import com.kstech.zoomlion.model.db.CheckImageData;
 import com.kstech.zoomlion.model.vo.CheckItemParamValueVO;
 import com.kstech.zoomlion.view.IRecyclerScrollListener;
@@ -42,4 +43,8 @@ public class Globals {
             recyclerFlingListener.onScroll(x,y);
         }
     }
+    /**
+     * DeviceModelFile 实体类存放
+     */
+    public static DeviceModelFile modelFile;
 }

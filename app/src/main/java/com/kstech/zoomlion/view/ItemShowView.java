@@ -100,9 +100,8 @@ public class ItemShowView extends RelativeLayout{
         bodyContains.removeAllViews();
         Globals.headerListener.clear();
         for (CheckItemDetailData paramValue : paramValues) {
-            List<CheckItemParamValueVO> list = JsonUtils.fromArrayJson(paramValue.getParamsValues(), CheckItemParamValueVO.class);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, DeviceUtil.deviceHeight(context) / 15);
-            ItemBodyShowView ibs = new ItemBodyShowView(context, list, paramValue);
+            ItemBodyShowView ibs = new ItemBodyShowView(context, paramValue);
             bodyContains.addView(ibs, params);
             Globals.addHeadScrollListener(ibs);
         }

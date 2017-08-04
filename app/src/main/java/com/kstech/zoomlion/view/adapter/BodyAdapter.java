@@ -5,12 +5,18 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.kstech.zoomlion.R;
+import com.kstech.zoomlion.model.db.CheckItemDetailData;
 import com.kstech.zoomlion.model.vo.CheckItemParamValueVO;
+import com.kstech.zoomlion.model.vo.CheckItemVO;
+import com.kstech.zoomlion.model.xmlbean.DataCollectParam;
 import com.kstech.zoomlion.utils.DeviceUtil;
 import com.kstech.zoomlion.utils.Globals;
+import com.kstech.zoomlion.utils.JsonUtils;
+import com.kstech.zoomlion.utils.LogUtils;
 
 import java.util.List;
 
@@ -21,10 +27,12 @@ import java.util.List;
 public class BodyAdapter extends RecyclerView.Adapter<BodyAdapter.MyViewHolder> {
     private Context context;
     private List<CheckItemParamValueVO> list;
+    private CheckItemDetailData itemDetailData;
 
-    public BodyAdapter(Context context,@NonNull List<CheckItemParamValueVO> list) {
+    public BodyAdapter(Context context,@NonNull CheckItemDetailData itemDetailData) {
         this.context = context;
-        this.list = list;
+        this.itemDetailData = itemDetailData;
+        this.list = JsonUtils.fromArrayJson(itemDetailData.getParamsValues(),CheckItemParamValueVO.class);
     }
 
     @Override
@@ -36,8 +44,29 @@ public class BodyAdapter extends RecyclerView.Adapter<BodyAdapter.MyViewHolder> 
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
+        CheckItemVO itemVO = Globals.modelFile.getCheckItemVO(itemDetailData.getItemData().getQcId() + "");
+        LogUtils.e("ItemShowView",itemDetailData.getItemId() + "");
+        String paramName = list.get(position).getParamName();
+        boolean isCollectParam = false;
+        for (DataCollectParam dataCollectParam : itemVO.getFunction().getDataCollectParams()) {
+            LogUtils.e("ItemShowView",dataCollectParam.getName()+"||"+list.get(position).getParamName());
+            if (paramName.equals(dataCollectParam.getName())){
+                isCollectParam = true;
+                break;
+            }
+        }
         holder.view.setMinimumWidth(DeviceUtil.deviceWidth(context)/15);
-        holder.textView.setText(list.get(position).getValue());
+        if ("图片".equals(list.get(position).getType())){
+            holder.imageView.setBackgroundResource(0);
+            holder.textView.setText("图片");
+        }else if (isCollectParam){
+            holder.textView.setText(list.get(position).getValue());
+            holder.imageView.setBackgroundResource(R.drawable.chart_line);
+        }else {
+            holder.imageView.setBackgroundResource(0);
+            holder.textView.setText(list.get(position).getValue());
+        }
+
     }
 
     @Override
@@ -48,10 +77,12 @@ public class BodyAdapter extends RecyclerView.Adapter<BodyAdapter.MyViewHolder> 
     class MyViewHolder extends RecyclerView.ViewHolder{
         View view;
         TextView textView;
+        ImageView imageView;
         public MyViewHolder(View itemView) {
             super(itemView);
             view = itemView;
             textView = itemView.findViewById(R.id.tv_value);
+            imageView = itemView.findViewById(R.id.iv_chart);
         }
     }
 }

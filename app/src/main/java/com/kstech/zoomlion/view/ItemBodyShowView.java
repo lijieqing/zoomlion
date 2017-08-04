@@ -18,6 +18,7 @@ import com.kstech.zoomlion.model.db.CheckItemDetailData;
 import com.kstech.zoomlion.model.vo.CheckItemParamValueVO;
 import com.kstech.zoomlion.utils.DateUtil;
 import com.kstech.zoomlion.utils.Globals;
+import com.kstech.zoomlion.utils.JsonUtils;
 import com.kstech.zoomlion.view.adapter.BodyAdapter;
 import com.kstech.zoomlion.view.adapter.DividerItemDecoration;
 
@@ -35,13 +36,11 @@ public class ItemBodyShowView extends RelativeLayout implements IRecyclerScrollL
     RecyclerView rvBody;
     BodyAdapter bodyAdapter;
     GridLayoutManager gridLayoutManager;
-    List<CheckItemParamValueVO> list;
     CheckItemDetailData paramValue;
 
     LinearLayout llScroll;
-    public ItemBodyShowView(Context context, List<CheckItemParamValueVO> list, CheckItemDetailData paramValue) {
+    public ItemBodyShowView(Context context,CheckItemDetailData paramValue) {
         super(context);
-        this.list = list;
         this.paramValue = paramValue;
         this.addView(initView(context));
     }
@@ -74,7 +73,7 @@ public class ItemBodyShowView extends RelativeLayout implements IRecyclerScrollL
             }
         });
 
-        bodyAdapter = new BodyAdapter(context,list);
+        bodyAdapter = new BodyAdapter(context,paramValue);
         gridLayoutManager = new GridLayoutManager(context,1, LinearLayoutManager.HORIZONTAL,false);
 
         rvBody.setLayoutManager(gridLayoutManager);

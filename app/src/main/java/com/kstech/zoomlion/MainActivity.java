@@ -14,7 +14,10 @@ import android.widget.TextView;
 
 import com.kstech.zoomlion.manager.DeviceModelFile;
 import com.kstech.zoomlion.manager.XMLAPI;
+import com.kstech.zoomlion.model.db.CheckItemData;
 import com.kstech.zoomlion.model.db.CheckItemDetailData;
+import com.kstech.zoomlion.model.db.greendao.CheckItemDataDao;
+import com.kstech.zoomlion.model.db.greendao.CheckItemDetailDataDao;
 import com.kstech.zoomlion.model.vo.CheckItemParamValueVO;
 import com.kstech.zoomlion.model.vo.CheckItemVO;
 import com.kstech.zoomlion.model.xmlbean.Device;
@@ -62,19 +65,32 @@ public class MainActivity extends AppCompatActivity{
                 CheckItemVO item = checkItemMap.get(key).get(i1);
                 itemShowView.updateHead(item);
                 //// TODO: 2017/8/2 查询数据库更新body 调用itemShowView.updateBody();,下面使用伪数据
-                List<CheckItemParamValueVO> volist = item.getParamNameList();
-                for (CheckItemParamValueVO value : volist) {
-                    value.setValue("45");
-                }
-                List<CheckItemDetailData> details = new ArrayList<>();
-                CheckItemDetailData data = new CheckItemDetailData();
-                data.setParamsValues(JsonUtils.toJson(volist));
-                data.setStartTime(new Date());
-                for (int j = 0; j < 5; j++) {
-                    details.add(data);
-                }
+//                List<CheckItemParamValueVO> volist = item.getParamNameList();
+//                for (CheckItemParamValueVO value : volist) {
+//                    if ("图片".equals(value.getType())){
+//                        value.setValue("图片");
+//                    }else {
+//                        value.setValue("45");
+//                    }
+//                }
+//                List<CheckItemDetailData> details = new ArrayList<>();
+//                CheckItemDetailData data = new CheckItemDetailData();
+//                data.setParamsValues(JsonUtils.toJson(volist));
+//                data.setStartTime(new Date());
+//                for (int j = 0; j < 5; j++) {
+//                    details.add(data);
+//                }
 
-                itemShowView.updateBody(details);
+                CheckItemDataDao itemDao = MyApplication.getApplication().getDaoSession().getCheckItemDataDao();
+                LogUtils.e("ItemShowView","main-"+item.getId());
+                CheckItemData itemdb = itemDao.queryBuilder()
+                        .where(CheckItemDataDao.Properties.QcId.eq(Integer.parseInt(item.getId())))
+                        .build().unique();
+                List<CheckItemDetailData> ls = new ArrayList<>();
+                if (itemdb != null){
+                    ls = itemdb.getCheckItemDetailDatas();
+                }
+                itemShowView.updateBody(ls);
                 return false;
             }
         });
@@ -166,6 +182,7 @@ public class MainActivity extends AppCompatActivity{
         public void handleMessage(Message msg) {
             MainActivity mActivity = mainActivity.get();
             if (mActivity != null){
+                Globals.modelFile = mActivity.modelFile;
                 mActivity.itemList.addAll(mActivity.modelFile.getCheckItemList());
                 Set<String> keys = mActivity.modelFile.checkItemMap.keySet();
                 mActivity.groups.addAll(keys);
