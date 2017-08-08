@@ -1,4 +1,4 @@
-package com.kstech.zoomlion;
+package com.kstech.zoomlion.view.activity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -17,10 +17,12 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 
+import com.kstech.zoomlion.MyApplication;
+import com.kstech.zoomlion.R;
 import com.kstech.zoomlion.model.db.greendao.CheckImageDataDao;
 import com.kstech.zoomlion.utils.BitmapUtils;
 import com.kstech.zoomlion.utils.Globals;
-import com.kstech.zoomlion.view.CameraRecordView;
+import com.kstech.zoomlion.view.widget.CameraRecordView;
 import com.kstech.zoomlion.view.adapter.ImgDataListAdapter;
 
 import java.lang.ref.WeakReference;

@@ -1,11 +1,10 @@
-package com.kstech.zoomlion.view;
+package com.kstech.zoomlion.view.widget;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -18,7 +17,6 @@ import com.kstech.zoomlion.model.vo.CheckItemParamValueVO;
 import com.kstech.zoomlion.model.vo.CheckItemVO;
 import com.kstech.zoomlion.utils.DeviceUtil;
 import com.kstech.zoomlion.utils.Globals;
-import com.kstech.zoomlion.utils.JsonUtils;
 import com.kstech.zoomlion.view.adapter.DividerItemDecoration;
 import com.kstech.zoomlion.view.adapter.HeaderAdapter;
 

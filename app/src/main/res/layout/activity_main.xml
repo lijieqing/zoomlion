@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.kstech.zoomlion.MainActivity">
+    tools:context="com.kstech.zoomlion.view.activity.MainActivity">
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -57,13 +57,13 @@
             android:layout_height="match_parent">
 
         </ExpandableListView>
-        <com.kstech.zoomlion.view.ItemShowView
+        <com.kstech.zoomlion.view.widget.ItemShowView
             android:id="@+id/isv"
             android:layout_width="0dp"
             android:layout_weight="6"
             android:layout_height="wrap_content">
 
-        </com.kstech.zoomlion.view.ItemShowView>
+        </com.kstech.zoomlion.view.widget.ItemShowView>
     </LinearLayout>
 
 </LinearLayout>

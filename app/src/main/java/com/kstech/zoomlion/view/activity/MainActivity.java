@@ -1,4 +1,4 @@
-package com.kstech.zoomlion;
+package com.kstech.zoomlion.view.activity;
 
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -7,32 +7,27 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ExpandableListView;
-import android.widget.ListView;
 import android.widget.TextView;
 
+import com.kstech.zoomlion.MyApplication;
+import com.kstech.zoomlion.R;
 import com.kstech.zoomlion.manager.DeviceModelFile;
 import com.kstech.zoomlion.manager.XMLAPI;
 import com.kstech.zoomlion.model.db.CheckItemData;
 import com.kstech.zoomlion.model.db.CheckItemDetailData;
 import com.kstech.zoomlion.model.db.greendao.CheckItemDataDao;
-import com.kstech.zoomlion.model.db.greendao.CheckItemDetailDataDao;
-import com.kstech.zoomlion.model.vo.CheckItemParamValueVO;
 import com.kstech.zoomlion.model.vo.CheckItemVO;
 import com.kstech.zoomlion.model.xmlbean.Device;
 import com.kstech.zoomlion.utils.Globals;
-import com.kstech.zoomlion.utils.JsonUtils;
 import com.kstech.zoomlion.utils.LogUtils;
 import com.kstech.zoomlion.utils.MyHttpUtils;
-import com.kstech.zoomlion.view.ItemShowView;
+import com.kstech.zoomlion.view.widget.ItemShowView;
 import com.kstech.zoomlion.view.adapter.ExpandItemAdapter;
-import com.kstech.zoomlion.view.adapter.ItemAdapter;
 
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

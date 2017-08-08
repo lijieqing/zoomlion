@@ -5,7 +5,7 @@ import android.support.annotation.NonNull;
 import com.kstech.zoomlion.manager.DeviceModelFile;
 import com.kstech.zoomlion.model.db.CheckImageData;
 import com.kstech.zoomlion.model.vo.CheckItemParamValueVO;
-import com.kstech.zoomlion.view.IRecyclerScrollListener;
+import com.kstech.zoomlion.view.widget.IRecyclerScrollListener;
 
 import java.util.ArrayList;
 import java.util.List;

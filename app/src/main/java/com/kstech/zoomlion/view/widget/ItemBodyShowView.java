@@ -1,6 +1,7 @@
-package com.kstech.zoomlion.view;
+package com.kstech.zoomlion.view.widget;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,14 +16,10 @@ import android.widget.Toast;
 
 import com.kstech.zoomlion.R;
 import com.kstech.zoomlion.model.db.CheckItemDetailData;
-import com.kstech.zoomlion.model.vo.CheckItemParamValueVO;
 import com.kstech.zoomlion.utils.DateUtil;
-import com.kstech.zoomlion.utils.Globals;
-import com.kstech.zoomlion.utils.JsonUtils;
+import com.kstech.zoomlion.view.activity.ItemDetailActivity;
 import com.kstech.zoomlion.view.adapter.BodyAdapter;
 import com.kstech.zoomlion.view.adapter.DividerItemDecoration;
-
-import java.util.List;
 
 /**
  * Created by lijie on 2017/7/28.
@@ -69,6 +66,8 @@ public class ItemBodyShowView extends RelativeLayout implements IRecyclerScrollL
         imgDetail.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(context, ItemDetailActivity.class);
+                context.startActivity(intent);
                 Toast.makeText(context,"展示细节",Toast.LENGTH_SHORT).show();
             }
         });

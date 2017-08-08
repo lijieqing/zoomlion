@@ -1,4 +1,4 @@
-package com.kstech.zoomlion.view;
+package com.kstech.zoomlion.view.widget;
 
 import android.content.Context;
 import android.content.Intent;
@@ -18,7 +18,7 @@ import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.kstech.zoomlion.CameraActivity;
+import com.kstech.zoomlion.view.activity.CameraActivity;
 import com.kstech.zoomlion.MyApplication;
 import com.kstech.zoomlion.R;
 import com.kstech.zoomlion.model.db.CheckImageData;

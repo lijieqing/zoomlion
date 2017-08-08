@@ -1,4 +1,4 @@
-package com.kstech.zoomlion.view;
+package com.kstech.zoomlion.view.widget;
 
 /**
  * Created by lijie on 2017/7/28.
