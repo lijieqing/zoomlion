@@ -37,7 +37,6 @@ public class MainActivity extends AppCompatActivity{
     private TextView tvNet;
     ItemShowView itemShowView;
     ExpandableListView elvItem;
-    private List<String> oneItem = new ArrayList<>();
     public DeviceModelFile modelFile;
     public List<CheckItemVO> itemList = new ArrayList<>();
     ExpandItemAdapter expandItemAdapter;

@@ -803,7 +803,7 @@
     <!-- 定义各检测项目 -->
     <QCSet>
         <QCType Name="压力">
-            <QCItem Id="11" Name="先导压力最低档位" QCTimeout="20" QCTimes="3" ReadyTimeout="1" Require="必检">
+            <QCItem Id="11" Name="先导压力最低档位" QCTimeout="20" QCTimes="3" ReadyTimeout="1" Require="false">
                 <Function Alter="true" Dialogue="true" Camera="true" Chart="true" Handwriting="true" Qualify="true" >
                     <DataCollectParam Name="先导压力怠速"/>
                     <AlterDatas Name="先导压力怠速">
@@ -836,7 +836,7 @@
                     <RealTimeParam Name="油温温度" />
                 </RealTimeParams>
             </QCItem>
-            <QCItem Id="10" Name="先导压力最高档位" QCTimeout="20" QCTimes="3" ReadyTimeout="1" Require="必检">
+            <QCItem Id="10" Name="先导压力最高档位" QCTimeout="20" QCTimes="3" ReadyTimeout="1" Require="true">
                 <Function Alter="true" Dialogue="true" Camera="true" Chart="true" Handwriting="true" Qualify="true" >
                     <DataCollectParam Name="先导压力怠速"/>
                     <DataCollectParam Name="先导压力最高转速"/>
@@ -870,7 +870,7 @@
                     <RealTimeParam Name="油温温度" />
                 </RealTimeParams>
             </QCItem>
-            <QCItem Id="1" Name="主系统压力" QCTimeout="20" QCTimes="3" ReadyTimeout="1" Require="必检">
+            <QCItem Id="1" Name="主系统压力" QCTimeout="20" QCTimes="3" ReadyTimeout="1" Require="true">
                 <Function Alter="true" Dialogue="true" Camera="true" Chart="true" Handwriting="true" Qualify="true" >
                     <DataCollectParam Name=""/>
                     <AlterDatas Name="先导压力最高转速">
@@ -917,7 +917,7 @@
                     <RealTimeParam Name="油温温度" />
                 </RealTimeParams>
             </QCItem>
-            <QCItem Id="3" Name="主系统压力(增压)" QCTimeout="20" QCTimes="3" ReadyTimeout="1" Require="必检">
+            <QCItem Id="3" Name="主系统压力(增压)" QCTimeout="20" QCTimes="3" ReadyTimeout="1" Require="true">
                 <Function Alter="true" Dialogue="true" Camera="true" Chart="true" Handwriting="true" Qualify="true" >
                     <DataCollectParam Name=""/>
                     <AlterDatas Name="先导压力最高转速">
@@ -951,7 +951,7 @@
                     <RealTimeParam Name="油温温度" />
                 </RealTimeParams>
             </QCItem>
-            <QCItem Id="5" Name="左回转压力" QCTimeout="20" QCTimes="3" ReadyTimeout="1" Require="必检">
+            <QCItem Id="5" Name="左回转压力" QCTimeout="20" QCTimes="3" ReadyTimeout="1" Require="true">
                 <Function Alter="true" Dialogue="true" Camera="true" Chart="true" Handwriting="true" Qualify="true" >
                     <DataCollectParam Name=""/>
                     <AlterDatas Name="先导压力最高转速">
@@ -985,7 +985,7 @@
                     <RealTimeParam Name="油温温度" />
                 </RealTimeParams>
             </QCItem>
-            <QCItem Id="6" Name="右回转压力" QCTimeout="20" QCTimes="3" ReadyTimeout="1" Require="必检">
+            <QCItem Id="6" Name="右回转压力" QCTimeout="20" QCTimes="3" ReadyTimeout="1" Require="true">
                 <Function Alter="true" Dialogue="true" Camera="true" Chart="true" Handwriting="true" Qualify="true" >
                     <DataCollectParam Name=""/>
                     <AlterDatas Name="先导压力最高转速">
@@ -1019,7 +1019,7 @@
                     <RealTimeParam Name="油温温度" />
                 </RealTimeParams>
             </QCItem>
-            <QCItem Id="9" Name="行走压力" QCTimeout="20" QCTimes="3" ReadyTimeout="1" Require="必检">
+            <QCItem Id="9" Name="行走压力" QCTimeout="20" QCTimes="3" ReadyTimeout="1" Require="true">
                 <Function Alter="true" Dialogue="true" Camera="true" Chart="true" Handwriting="true" Qualify="true" >
                     <DataCollectParam Name=""/>
                     <AlterDatas Name="先导压力最高转速">
@@ -1056,7 +1056,7 @@
             </QCItem>
         </QCType>
         <QCType Name="速度">
-            <QCItem Id="12" Name="动臂油缸伸出速度" QCTimeout="20" QCTimes="3" ReadyTimeout="1" Require="必检">
+            <QCItem Id="12" Name="动臂油缸伸出速度" QCTimeout="20" QCTimes="3" ReadyTimeout="1" Require="true">
                 <Function Alter="true" Dialogue="true" Camera="true" Chart="true" Handwriting="true" Qualify="true" >
                     <DataCollectParam Name=""/>
                     <AlterDatas Name="先导压力最高转速">
@@ -1089,7 +1089,7 @@
                     <RealTimeParam Name="油温温度" />
                 </RealTimeParams>
             </QCItem>
-            <QCItem Id="14" Name="斗杆油缸收缩速度" QCTimeout="20" QCTimes="3" ReadyTimeout="1" Require="必检">
+            <QCItem Id="14" Name="斗杆油缸收缩速度" QCTimeout="20" QCTimes="3" ReadyTimeout="1" Require="true">
                 <Function Alter="true" Dialogue="true" Camera="true" Chart="true" Handwriting="true" Qualify="true" >
                     <DataCollectParam Name=""/>
                     <AlterDatas Name="先导压力最高转速">
@@ -1122,7 +1122,7 @@
                     <RealTimeParam Name="油温温度" />
                 </RealTimeParams>
             </QCItem>
-            <QCItem Id="15" Name="斗杆油缸伸出速度" QCTimeout="20" QCTimes="3" ReadyTimeout="1" Require="必检">
+            <QCItem Id="15" Name="斗杆油缸伸出速度" QCTimeout="20" QCTimes="3" ReadyTimeout="1" Require="true">
                 <Function Alter="true" Dialogue="true" Camera="true" Chart="true" Handwriting="true" Qualify="true" >
                     <DataCollectParam Name=""/>
                     <AlterDatas Name="先导压力最高转速">
@@ -1155,7 +1155,7 @@
                     <RealTimeParam Name="油温温度" />
                 </RealTimeParams>
             </QCItem>
-            <QCItem Id="18" Name="铲斗油缸收缩速度" QCTimeout="20" QCTimes="3" ReadyTimeout="1" Require="必检">
+            <QCItem Id="18" Name="铲斗油缸收缩速度" QCTimeout="20" QCTimes="3" ReadyTimeout="1" Require="true">
                 <Function Alter="true" Dialogue="true" Camera="true" Chart="true" Handwriting="true" Qualify="true" >
                     <DataCollectParam Name=""/>
                     <AlterDatas Name="先导压力最高转速">
@@ -1188,7 +1188,7 @@
                     <RealTimeParam Name="油温温度" />
                 </RealTimeParams>
             </QCItem>
-            <QCItem Id="19" Name="铲斗油缸伸出速度" QCTimeout="20" QCTimes="3" ReadyTimeout="1" Require="必检">
+            <QCItem Id="19" Name="铲斗油缸伸出速度" QCTimeout="20" QCTimes="3" ReadyTimeout="1" Require="true">
                 <Function Alter="true" Dialogue="true" Camera="true" Chart="true" Handwriting="true" Qualify="true" >
                     <DataCollectParam Name=""/>
                     <AlterDatas Name="先导压力最高转速">
@@ -1222,7 +1222,7 @@
                 </RealTimeParams>
             </QCItem>
             <QCItem Id="22" Name="左履带前进慢档空行走速度" QCTimeout="65" QCTimes="3" ReadyTimeout="1"
-                Require="必检">
+                Require="true">
                 <Function Alter="true" Dialogue="true" Camera="true" Chart="true" Handwriting="true" Qualify="true" >
                     <DataCollectParam Name=""/>
                     <AlterDatas Name="先导压力最高转速">
@@ -1258,7 +1258,7 @@
                 </RealTimeParams>
             </QCItem>
             <QCItem Id="23" Name="左履带后退慢档空行走速度" QCTimeout="65" QCTimes="3" ReadyTimeout="1"
-                Require="必检">
+                Require="true">
                 <Function Alter="true" Dialogue="true" Camera="true" Chart="true" Handwriting="true" Qualify="true" >
                     <DataCollectParam Name=""/>
                     <AlterDatas Name="先导压力最高转速">
@@ -1293,7 +1293,7 @@
                 </RealTimeParams>
             </QCItem>
             <QCItem Id="24" Name="左履带前进快档空行走速度" QCTimeout="65" QCTimes="3" ReadyTimeout="1"
-                Require="必检">
+                Require="true">
                 <Function Alter="true" Dialogue="true" Camera="true" Chart="true" Handwriting="true" Qualify="true" >
                     <DataCollectParam Name=""/>
                     <AlterDatas Name="先导压力最高转速">
@@ -1328,7 +1328,7 @@
                 </RealTimeParams>
             </QCItem>
             <QCItem Id="25" Name="左履带后退快档空行走速度" QCTimeout="65" QCTimes="3" ReadyTimeout="1"
-                Require="必检">
+                Require="true">
                 <Function Alter="true" Dialogue="true" Camera="true" Chart="true" Handwriting="true" Qualify="true" >
                     <DataCollectParam Name=""/>
                     <AlterDatas Name="先导压力最高转速">
@@ -1363,7 +1363,7 @@
                 </RealTimeParams>
             </QCItem>
             <QCItem Id="26" Name="右履带前进慢档空行走速度" QCTimeout="65" QCTimes="3" ReadyTimeout="1"
-                Require="必检">
+                Require="true">
                 <Function Alter="true" Dialogue="true" Camera="true" Chart="true" Handwriting="true" Qualify="true" >
                     <DataCollectParam Name=""/>
                     <AlterDatas Name="先导压力最高转速">
@@ -1398,7 +1398,7 @@
                 </RealTimeParams>
             </QCItem>
             <QCItem Id="27" Name="右履带后退慢档空行走速度" QCTimeout="65" QCTimes="3" ReadyTimeout="1"
-                Require="必检">
+                Require="true">
                 <Function Alter="true" Dialogue="true" Camera="true" Chart="true" Handwriting="true" Qualify="true" >
                     <DataCollectParam Name=""/>
                     <AlterDatas Name="先导压力最高转速">
@@ -1433,7 +1433,7 @@
                 </RealTimeParams>
             </QCItem>
             <QCItem Id="28" Name="右履带前进快档空行走速度" QCTimeout="65" QCTimes="3" ReadyTimeout="1"
-                Require="必检">
+                Require="true">
                 <Function Alter="true" Dialogue="true" Camera="true" Chart="true" Handwriting="true" Qualify="true" >
                     <DataCollectParam Name=""/>
                     <AlterDatas Name="先导压力最高转速">
@@ -1468,7 +1468,7 @@
                 </RealTimeParams>
             </QCItem>
             <QCItem Id="29" Name="右履带后退快档空行走速度" QCTimeout="65" QCTimes="3" ReadyTimeout="1"
-                Require="必检">
+                Require="true">
                 <Function Alter="true" Dialogue="true" Camera="true" Chart="true" Handwriting="true" Qualify="true" >
                     <DataCollectParam Name=""/>
                     <AlterDatas Name="先导压力最高转速">
@@ -1505,7 +1505,7 @@
         </QCType>
         <QCType Name="位移">
             <QCItem Id="31" Name="油缸沉降量(斗杆伸出)" QCTimeout="720" QCTimes="1" ReadyTimeout="1"
-                Require="必检">
+                Require="true">
                 <Function Alter="true" Dialogue="true" Camera="true" Chart="true" Handwriting="true" Qualify="true" >
                     <DataCollectParam Name=""/>
                     <AlterDatas Name="先导压力最高转速">
@@ -1540,7 +1540,7 @@
                 </RealTimeParams>
             </QCItem>
             <QCItem Id="30" Name="油缸沉降量(斗杆缩回)" QCTimeout="720" QCTimes="1" ReadyTimeout="1"
-                Require="必检">
+                Require="true">
                 <Function Alter="true" Dialogue="true" Camera="true" Chart="true" Handwriting="true" Qualify="true" >
                     <DataCollectParam Name=""/>
                     <AlterDatas Name="先导压力最高转速">

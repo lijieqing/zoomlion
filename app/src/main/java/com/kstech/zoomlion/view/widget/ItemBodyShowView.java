@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.kstech.zoomlion.R;
 import com.kstech.zoomlion.model.db.CheckItemDetailData;
+import com.kstech.zoomlion.model.enums.CheckItemDetailResultEnum;
 import com.kstech.zoomlion.utils.DateUtil;
 import com.kstech.zoomlion.view.activity.ItemDetailActivity;
 import com.kstech.zoomlion.view.adapter.BodyAdapter;
@@ -62,6 +63,10 @@ public class ItemBodyShowView extends RelativeLayout implements IRecyclerScrollL
         imgDetail = view.findViewById(R.id.iv_detail);
 
         tvStartTime.setText(DateUtil.getDateTimeFormat(paramValue.getStartTime()));
+
+        tvResult.setText(CheckItemDetailResultEnum.getDescByCode(paramValue.getCheckResult()));
+
+        tvChecker.setText(paramValue.getCheckerName());
 
         imgDetail.setOnClickListener(new OnClickListener() {
             @Override

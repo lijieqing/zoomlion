@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -35,7 +36,7 @@ import java.util.List;
 public class ItemShowView extends RelativeLayout{
     private Context context;
     private RecyclerView rvHeader;
-    private RecyclerView rvResult;
+    private CheckBox cbIgnore;
     private HeaderAdapter headerAdapter;
     GridLayoutManager gridLayoutManager;
     LinearLayout bodyContains;
@@ -61,7 +62,7 @@ public class ItemShowView extends RelativeLayout{
     private View initView() {
         View v = View.inflate(context, R.layout.check_item_show, null);
         rvHeader = v.findViewById(R.id.rv_head);
-        rvResult = v.findViewById(R.id.rv_result);
+        cbIgnore = v.findViewById(R.id.ck_ignore);
         bodyContains = v.findViewById(R.id.ll_body);
         itemTitle = v.findViewById(R.id.tv_title);
         gridLayoutManager = new GridLayoutManager(context, 1, GridLayoutManager.HORIZONTAL, false);
@@ -106,6 +107,11 @@ public class ItemShowView extends RelativeLayout{
     }
     public void updateHead(@NonNull CheckItemVO item){
         itemTitle.setText(item.getName());
+        if (!item.isRequire()){
+            cbIgnore.setChecked(true);
+        }else {
+            cbIgnore.setChecked(false);
+        }
         Globals.paramHeadVOs.clear();
         Globals.paramHeadVOs.addAll(item.getParamNameList());
         headerAdapter.notifyDataSetChanged();

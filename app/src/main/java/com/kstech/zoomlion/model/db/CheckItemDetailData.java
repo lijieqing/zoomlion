@@ -31,6 +31,12 @@ public class CheckItemDetailData {
     private CheckItemData itemData;
 
     @Property
+    private Long checkerId;//检验员ID
+
+    @Property
+    private String checkerName;//检验员名称
+
+    @Property
     private Long measureDeviceId;//测量终端ID
 
     @Property
@@ -67,12 +73,14 @@ public class CheckItemDetailData {
     @Generated(hash = 823363946)
     private transient CheckItemDetailDataDao myDao;
 
-    @Generated(hash = 1930836440)
-    public CheckItemDetailData(Long checkItemDetailId, Long itemId,
-            Long measureDeviceId, String measureDeviceName, String paramsValues,
-            Integer checkResult, Date startTime, Date endTime, Boolean uploaded) {
+    @Generated(hash = 563909878)
+    public CheckItemDetailData(Long checkItemDetailId, Long itemId, Long checkerId, String checkerName,
+            Long measureDeviceId, String measureDeviceName, String paramsValues, Integer checkResult,
+            Date startTime, Date endTime, Boolean uploaded) {
         this.checkItemDetailId = checkItemDetailId;
         this.itemId = itemId;
+        this.checkerId = checkerId;
+        this.checkerName = checkerName;
         this.measureDeviceId = measureDeviceId;
         this.measureDeviceName = measureDeviceName;
         this.paramsValues = paramsValues;
@@ -289,6 +297,22 @@ public class CheckItemDetailData {
     public void __setDaoSession(DaoSession daoSession) {
         this.daoSession = daoSession;
         myDao = daoSession != null ? daoSession.getCheckItemDetailDataDao() : null;
+    }
+
+    public Long getCheckerId() {
+        return this.checkerId;
+    }
+
+    public void setCheckerId(Long checkerId) {
+        this.checkerId = checkerId;
+    }
+
+    public String getCheckerName() {
+        return this.checkerName;
+    }
+
+    public void setCheckerName(String checkerName) {
+        this.checkerName = checkerName;
     }
 
 }

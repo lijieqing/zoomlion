@@ -149,28 +149,29 @@ public class ExampleInstrumentedTest {
     public void TestDeviceModel() throws Exception {
         Context appContext = InstrumentationRegistry.getTargetContext();
         Device o = (Device) XMLAPI.readXML(appContext.getAssets().open("temp.xml"));
-//        DeviceModelFile result = DeviceModelFile.readFromFile(o);
-//        for (String s : result.checkItemMap.keySet()) {
-//            LogUtils.d("KSTECH",s);
-//            List<CheckItemVO> ls = result.checkItemMap.get(s);
-//            for (CheckItemVO l : ls) {
-//                LogUtils.d("KSTECH",l.getName());
-//                LogUtils.d("KSTECH",l.getFunction().toString());
-//            }
-//        }
-        for (QCType qcType : o.getQcSet().getQcTypes()) {
-            for (QCItem qcItem : qcType.getQcItems()) {
-                for (PICParam picParam : qcItem.getPicParams().getPicParams()) {
-                    LogUtils.d("KSTECH",qcItem.getName()+"--"+picParam.getParam());
-                }
+        DeviceModelFile result = DeviceModelFile.readFromFile(o);
+        for (String s : result.checkItemMap.keySet()) {
+            LogUtils.d("KSTECH",s);
+            List<CheckItemVO> ls = result.checkItemMap.get(s);
+            for (CheckItemVO l : ls) {
+                LogUtils.d("KSTECH",l.getName());
+                LogUtils.d("KSTECH","是否必须 "+l.isRequire());
+                LogUtils.d("KSTECH",l.getFunction().toString());
             }
         }
+//        for (QCType qcType : o.getQcSet().getQcTypes()) {
+//            for (QCItem qcItem : qcType.getQcItems()) {
+//                for (PICParam picParam : qcItem.getPicParams().getPicParams()) {
+//                    LogUtils.d("KSTECH",qcItem.getName()+"--"+picParam.getParam());
+//                }
+//            }
+//        }
     }
     @Test
     public void InitItemDB() throws IOException {
         Context appContext = InstrumentationRegistry.getTargetContext();
         Device o = (Device) XMLAPI.readXML(appContext.getAssets().open("temp.xml"));
         DeviceModelFile mo = DeviceModelFile.readFromFile(o);
-        GreenDaoUtils.InitDBByXML(mo);
+        GreenDaoUtils.initCheckRecord(mo);
     }
 }

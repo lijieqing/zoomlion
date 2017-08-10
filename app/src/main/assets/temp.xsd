@@ -97,7 +97,7 @@
                                                 <attribute name="QCTimeout" type="int" use="required"/>
                                                 <attribute name="QCTimes" type="int" use="required"/>
                                                 <attribute name="ReadyTimeout" type="int" use="required"/>
-                                                <attribute name="Require" type="string" use="required"/>
+                                                <attribute name="Require" type="boolean" use="required" default="true"/>
                                                 <sequence>
                                                     <element maxOccurs="1" name="Function">
                                                         <complexType>
