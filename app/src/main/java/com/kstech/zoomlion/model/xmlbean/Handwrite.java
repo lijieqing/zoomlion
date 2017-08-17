@@ -4,10 +4,10 @@ package com.kstech.zoomlion.model.xmlbean;
  * Created by lijie on 2017/8/3.
  */
 
-public class PICParam {
+public class Handwrite {
     private String Name;
 
-    public PICParam() {
+    public Handwrite() {
     }
 
     public String getName() {

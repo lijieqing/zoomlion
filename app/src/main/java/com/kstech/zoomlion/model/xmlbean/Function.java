@@ -13,13 +13,18 @@ public class Function {
     private Boolean Chart;
     private Boolean Handwriting;
     private Boolean Qualify;
+    private Boolean Alter;
 
     private List<DataCollectParam> dataCollectParams;
+    private List<Handwrite> handwrites;
+    private List<PICParam> picParams;
 
     private AlterDatas alterDatas;
 
     public Function() {
         dataCollectParams = new ArrayList<>();
+        handwrites = new ArrayList<>();
+        picParams = new ArrayList<>();
     }
 
     public Boolean getCamera() {
@@ -76,6 +81,30 @@ public class Function {
 
     public void setAlterDatas(AlterDatas alterDatas) {
         this.alterDatas = alterDatas;
+    }
+
+    public List<Handwrite> getHandwrites() {
+        return handwrites;
+    }
+
+    public void setHandwrites(List<Handwrite> handwrites) {
+        this.handwrites.addAll(handwrites);
+    }
+
+    public List<PICParam> getPicParams() {
+        return picParams;
+    }
+
+    public void setPicParams(List<PICParam> picParams) {
+        this.picParams.addAll(picParams);
+    }
+
+    public Boolean getAlter() {
+        return Alter;
+    }
+
+    public void setAlter(Boolean alter) {
+        Alter = alter;
     }
 
     @Override

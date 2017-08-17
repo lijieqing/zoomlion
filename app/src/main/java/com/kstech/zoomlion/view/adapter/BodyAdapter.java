@@ -15,6 +15,7 @@ import com.kstech.zoomlion.model.vo.CheckItemVO;
 import com.kstech.zoomlion.model.xmlbean.DataCollectParam;
 import com.kstech.zoomlion.utils.DeviceUtil;
 import com.kstech.zoomlion.utils.Globals;
+import com.kstech.zoomlion.utils.ItemFunctionUtils;
 import com.kstech.zoomlion.utils.JsonUtils;
 import com.kstech.zoomlion.utils.LogUtils;
 
@@ -44,22 +45,14 @@ public class BodyAdapter extends RecyclerView.Adapter<BodyAdapter.MyViewHolder> 
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        CheckItemVO itemVO = Globals.modelFile.getCheckItemVO(itemDetailData.getItemData().getQcId() + "");
-        LogUtils.e("ItemShowView",itemDetailData.getItemId() + "");
+        int qcID = itemDetailData.getItemData().getQcId();
         String paramName = list.get(position).getParamName();
-        boolean isCollectParam = false;
-        for (DataCollectParam dataCollectParam : itemVO.getFunction().getDataCollectParams()) {
-            LogUtils.e("ItemShowView",dataCollectParam.getName()+"||"+list.get(position).getParamName());
-            if (paramName.equals(dataCollectParam.getName())){
-                isCollectParam = true;
-                break;
-            }
-        }
+
         holder.view.setMinimumWidth(DeviceUtil.deviceWidth(context)/15);
-        if ("图片".equals(list.get(position).getType())){
-            holder.imageView.setBackgroundResource(0);
-            holder.textView.setText("图片");
-        }else if (isCollectParam){
+        if (ItemFunctionUtils.isPICParam(paramName,qcID)){
+            holder.imageView.setBackgroundResource(R.drawable.pic);
+            holder.textView.setText(list.get(position).getValue());
+        }else if (ItemFunctionUtils.isCollectParam(paramName,qcID)){
             holder.textView.setText(list.get(position).getValue());
             holder.imageView.setBackgroundResource(R.drawable.chart_line);
         }else {

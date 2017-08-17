@@ -113,6 +113,16 @@
                                                                         <attribute name="Name" type="string" use="required"/>
                                                                     </complexType>
                                                                 </element>
+                                                                <element name="Handwrite" maxOccurs="unbounded">
+                                                                    <complexType>
+                                                                        <attribute name="Name" type="string" use="required"/>
+                                                                    </complexType>
+                                                                </element>
+                                                                <element name="PICParam" maxOccurs="unbounded">
+                                                                    <complexType>
+                                                                        <attribute name="Name" type="string" use="required"/>
+                                                                    </complexType>
+                                                                </element>
                                                                 <element name="AlterDatas" maxOccurs="unbounded">
                                                                     <complexType>
                                                                         <attribute name="Name" type="string" use="required"/>
@@ -188,18 +198,6 @@
                                                                         <attribute name="ValidAvg" type="float" use="required"/>
                                                                         <attribute name="ValidMax" type="float" use="required"/>
                                                                         <attribute name="ValidMin" type="float" use="required"/>
-                                                                    </complexType>
-                                                                </element>
-                                                            </sequence>
-                                                        </complexType>
-                                                    </element>
-
-                                                    <element name="PICParams" maxOccurs="1">
-                                                        <complexType>
-                                                            <sequence>
-                                                                <element name="PICParam" minOccurs="0">
-                                                                    <complexType>
-                                                                        <attribute name="Param" type="string" use="required"/>
                                                                     </complexType>
                                                                 </element>
                                                             </sequence>
