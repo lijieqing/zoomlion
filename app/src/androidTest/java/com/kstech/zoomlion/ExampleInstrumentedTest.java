@@ -31,6 +31,9 @@ import com.kstech.zoomlion.utils.JsonUtils;
 import com.kstech.zoomlion.utils.LogUtils;
 import com.kstech.zoomlion.utils.MyHttpUtils;
 
+import org.dom4j.Document;
+import org.dom4j.DocumentException;
+import org.dom4j.io.SAXReader;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -173,5 +176,34 @@ public class ExampleInstrumentedTest {
         Device o = (Device) XMLAPI.readXML(appContext.getAssets().open("temp.xml"));
         DeviceModelFile mo = DeviceModelFile.readFromFile(o);
         GreenDaoUtils.initCheckRecord(mo);
+    }
+
+    @Test
+    public void testXMLText(){
+        Context appContext = InstrumentationRegistry.getTargetContext();
+        SAXReader reader = new SAXReader();
+        Document document;
+        try {
+            document = reader.read(appContext.getAssets().open("temp.xml"));
+            LogUtils.d("KSTECH",document.getXMLEncoding()+"");
+            String str= document.asXML();
+            Device o = (Device)XMLAPI.readXML(str);
+            DeviceModelFile result = DeviceModelFile.readFromFile(o);
+            for (String s : result.checkItemMap.keySet()) {
+                LogUtils.d("KSTECH",s);
+                List<CheckItemVO> ls = result.checkItemMap.get(s);
+                for (CheckItemVO l : ls) {
+                    LogUtils.d("KSTECH",l.getName());
+                    LogUtils.d("KSTECH","是否必须 "+l.isRequire());
+                    LogUtils.d("KSTECH",l.getFunction().toString());
+                }
+            }
+
+        } catch (DocumentException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 }

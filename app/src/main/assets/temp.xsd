@@ -103,7 +103,7 @@
                                                         <complexType>
                                                             <attribute name="Alter" type="boolean" use="required"  fixed="false"/>
                                                             <attribute name="Dialogue" type="boolean" use="required"  fixed="false"/>
-                                                            <attribute name="Qualify" type="boolean" use="required"  fixed="false"/>
+                                                            <attribute name="AutoQualify" type="boolean" use="required"  fixed="false"/>
                                                             <attribute name="Camera" type="boolean" use="required" fixed="true"/>
                                                             <attribute name="Handwriting" type="boolean" use="required" fixed="true"/>
                                                             <attribute name="Chart" type="boolean" use="required" fixed="true"/>

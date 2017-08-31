@@ -12,7 +12,7 @@ public class Function {
     private Boolean Camera;
     private Boolean Chart;
     private Boolean Handwriting;
-    private Boolean Qualify;
+    private Boolean AutoQualify;
     private Boolean Alter;
 
     private List<DataCollectParam> dataCollectParams;
@@ -51,12 +51,12 @@ public class Function {
         Handwriting = handwriting;
     }
 
-    public Boolean getQualify() {
-        return Qualify;
+    public Boolean getAutoQualify() {
+        return AutoQualify;
     }
 
-    public void setQualify(Boolean qualify) {
-        Qualify = qualify;
+    public void setAutoQualify(Boolean autoQualify) {
+        AutoQualify = autoQualify;
     }
 
     public List<DataCollectParam> getDataCollectParams() {
@@ -114,7 +114,7 @@ public class Function {
                 ", Camera=" + Camera +
                 ", Chart=" + Chart +
                 ", Handwriting=" + Handwriting +
-                ", Qualify=" + Qualify +
+                ", AutoQualify=" + AutoQualify +
                 ", dataCollectParams=" + dataCollectParams +
                 ", alterDatas=" + alterDatas +
                 '}';

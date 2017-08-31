@@ -25,6 +25,7 @@ import com.kstech.zoomlion.utils.MyHttpUtils;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.xutils.common.util.FileUtil;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -58,5 +59,12 @@ public class DaoTest {
                 LogUtils.e("ImgTest","null");
             LogUtils.e("ImgTest",checkImageData.getParamName()+" : "+checkImageData.getImgPath());
         }
+    }
+
+    @Test
+    public void CopyDB(){
+        String db = MyApplication.getApplication().getDb().getPath();
+        String t = Environment.getExternalStorageDirectory().getAbsolutePath()+"/zoomlion.db";
+        FileUtil.copy(db,t);
     }
 }

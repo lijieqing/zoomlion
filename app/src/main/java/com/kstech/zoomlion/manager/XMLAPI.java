@@ -12,6 +12,7 @@ import com.kstech.zoomlion.utils.LogUtils;
 import org.dom4j.Attribute;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
+import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 import java.io.FileInputStream;
@@ -41,6 +42,38 @@ public class XMLAPI {
         SAXReader reader = new SAXReader();
         try {
             document = reader.read(inputStream);
+        } catch (DocumentException e) {
+            e.printStackTrace();
+        }
+        //先 将root 节点解析出来
+        if (document != null)rootElement = document.getRootElement();
+        XMLBase root = new XMLHasKids(rootElement.getName());
+        List<Attribute> attributes = rootElement.attributes();
+        List<XMLAttribute> xmlAttributes = new ArrayList<>();
+        for (Attribute attribute : attributes) {
+            xmlAttributes.add(new XMLAttribute(attribute.getName(),attribute.getValue()));
+        }
+        root.setXMLAttributes(xmlAttributes);
+
+        //利用递归 将子节点逐一解析 放入xmlbase 中
+        List<Element> childelement = rootElement.elements();
+        for (Element element : childelement) {
+            XmlReader.XMLparse(element,root);
+        }
+
+        return root.transform();
+    }
+
+    /**
+     * Read xml object.
+     *
+     * @param xmlText the input stream of xml text
+     * @return the object
+     */
+    public static Object readXML(String xmlText){
+        Element rootElement = null;
+        try {
+            document = DocumentHelper.parseText(xmlText);
         } catch (DocumentException e) {
             e.printStackTrace();
         }
