@@ -5,7 +5,9 @@ import android.support.annotation.NonNull;
 import com.kstech.zoomlion.model.vo.CheckItemVO;
 import com.kstech.zoomlion.model.xmlbean.AlterData;
 import com.kstech.zoomlion.model.xmlbean.DataCollectParam;
+import com.kstech.zoomlion.model.xmlbean.DialogParam;
 import com.kstech.zoomlion.model.xmlbean.Handwrite;
+import com.kstech.zoomlion.model.xmlbean.NoValueParam;
 import com.kstech.zoomlion.model.xmlbean.PICParam;
 
 import java.util.ArrayList;
@@ -17,6 +19,62 @@ import java.util.List;
 public final class ItemFunctionUtils {
     private ItemFunctionUtils(){
     }
+
+    /**
+     * Is no value param boolean.
+     *
+     * @param paramName the param name
+     * @param qcID      the qc id
+     * @return the boolean
+     */
+    public static boolean isNoValueParam(@NonNull String paramName, String qcID){
+        boolean isNoValueParam = false;
+        CheckItemVO itemVO = Globals.modelFile.getCheckItemVO(qcID + "");
+        for (NoValueParam noValueParam : itemVO.getFunction().getNoValueParams()) {
+            if (paramName.equals(noValueParam.getName())){
+                isNoValueParam = true;
+            }
+        }
+        return isNoValueParam;
+    }
+
+    /**
+     * Is dialog param boolean.
+     *
+     * @param paramName the param name
+     * @param qcID      the qc id
+     * @return the boolean
+     */
+    public static boolean isDialogParam(@NonNull String paramName, String qcID){
+        boolean isDialogParam = false;
+        CheckItemVO itemVO = Globals.modelFile.getCheckItemVO(qcID + "");
+        for (DialogParam dialogParam : itemVO.getFunction().getDialogParams()) {
+            if (paramName.equals(dialogParam.getName())){
+                isDialogParam = true;
+            }
+        }
+        return isDialogParam;
+    }
+
+
+    /**
+     * Is hand writing param boolean.
+     *
+     * @param paramName the param name
+     * @param qcID      the qc id
+     * @return the boolean
+     */
+    public static boolean isHandWritingParam(@NonNull String paramName, String qcID){
+        boolean isHandWriting = false;
+        CheckItemVO itemVO = Globals.modelFile.getCheckItemVO(qcID + "");
+        for (Handwrite handwrite : itemVO.getFunction().getHandwrites()) {
+            if (paramName.equals(handwrite.getName())){
+                isHandWriting = true;
+            }
+        }
+        return isHandWriting;
+    }
+
 
     /**
      * Is collect param boolean.
@@ -55,28 +113,6 @@ public final class ItemFunctionUtils {
         }
 
         return isPICParam;
-    }
-
-    /**
-     * Is hand writing param boolean.
-     *
-     * @param paramName the param name
-     * @param qcID      the qc id
-     * @return the boolean
-     */
-    public static boolean isHandWritingParam(@NonNull String paramName, int qcID){
-        boolean isHandWriting = false;
-        CheckItemVO itemVO = Globals.modelFile.getCheckItemVO(qcID + "");
-        if (itemVO.getFunction().getHandwriting()){
-            for (Handwrite handwrite : itemVO.getFunction().getHandwrites()) {
-                if (paramName.equals(handwrite.getName())){
-                    isHandWriting = true;
-                }
-            }
-        }else {
-            isHandWriting = false;
-        }
-        return isHandWriting;
     }
 
     /**

@@ -9,15 +9,14 @@ import java.util.List;
 
 public class Function {
     private Boolean Dialogue;
-    private Boolean Camera;
-    private Boolean Chart;
-    private Boolean Handwriting;
     private Boolean AutoQualify;
     private Boolean Alter;
 
     private List<DataCollectParam> dataCollectParams;
     private List<Handwrite> handwrites;
     private List<PICParam> picParams;
+    private List<NoValueParam> noValueParams;
+    private List<DialogParam> dialogParams;
 
     private AlterDatas alterDatas;
 
@@ -25,30 +24,8 @@ public class Function {
         dataCollectParams = new ArrayList<>();
         handwrites = new ArrayList<>();
         picParams = new ArrayList<>();
-    }
-
-    public Boolean getCamera() {
-        return Camera;
-    }
-
-    public void setCamera(Boolean camera) {
-        Camera = camera;
-    }
-
-    public Boolean getChart() {
-        return Chart;
-    }
-
-    public void setChart(Boolean chart) {
-        Chart = chart;
-    }
-
-    public Boolean getHandwriting() {
-        return Handwriting;
-    }
-
-    public void setHandwriting(Boolean handwriting) {
-        Handwriting = handwriting;
+        noValueParams = new ArrayList<>();
+        dialogParams = new ArrayList<>();
     }
 
     public Boolean getAutoQualify() {
@@ -107,15 +84,33 @@ public class Function {
         Alter = alter;
     }
 
+    public List<NoValueParam> getNoValueParams() {
+        return noValueParams;
+    }
+
+    public void setNoValueParams(List<NoValueParam> noValueParams) {
+        this.noValueParams.addAll(noValueParams);
+    }
+
+    public List<DialogParam> getDialogParams() {
+        return dialogParams;
+    }
+
+    public void setDialogParams(List<DialogParam> dialogParams) {
+        this.dialogParams.addAll(dialogParams);
+    }
+
     @Override
     public String toString() {
         return "Function{" +
                 "Dialogue=" + Dialogue +
-                ", Camera=" + Camera +
-                ", Chart=" + Chart +
-                ", Handwriting=" + Handwriting +
                 ", AutoQualify=" + AutoQualify +
+                ", Alter=" + Alter +
                 ", dataCollectParams=" + dataCollectParams +
+                ", handwrites=" + handwrites +
+                ", picParams=" + picParams +
+                ", noValueParams=" + noValueParams +
+                ", dialogParams=" + dialogParams +
                 ", alterDatas=" + alterDatas +
                 '}';
     }

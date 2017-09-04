@@ -4,10 +4,10 @@ package com.kstech.zoomlion.model.xmlbean;
  * Created by lijie on 2017/8/3.
  */
 
-public class PICParam {
+public class DialogParam {
     private String Name;
 
-    public PICParam() {
+    public DialogParam() {
     }
 
     public String getName() {
@@ -20,7 +20,7 @@ public class PICParam {
 
     @Override
     public String toString() {
-        return "PICParam{" +
+        return "DialogParam{" +
                 "Name='" + Name + '\'' +
                 '}';
     }

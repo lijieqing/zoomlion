@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_weight="0.6"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal">
+            <TextView
+                style="@style/ItemOperateHead"
+                android:text="参数名称"/>
+            <TextView
+                style="@style/ItemOperateHead"
+                android:text="拍照"/>
+            <TextView
+                style="@style/ItemOperateHead"
+                android:text="谱图"/>
+            <TextView
+                style="@style/ItemOperateHead"
+                android:text="数值"/>
+            <TextView
+                style="@style/ItemOperateHead"
+                android:text="操作"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_operate_body"
+            android:layout_weight="4"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_weight="0.4"
+            android:gravity="center"
+            android:layout_height="0dp">
+            <Chronometer
+                android:gravity="center"
+                android:textSize="16sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:gravity="center"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <ImageView
+                    android:id="@+id/iv_save"
+                    android:layout_width="wrap_content"
+                    android:src="@drawable/save"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:text="保存"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:gravity="center"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <ImageView
+                    android:id="@+id/iv_pause"
+                    android:layout_width="wrap_content"
+                    android:src="@drawable/pause"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:text="暂停"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:gravity="center"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <ImageView
+                    android:id="@+id/iv_start"
+                    android:layout_width="wrap_content"
+                    android:src="@drawable/start"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:text="开始"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:gravity="center"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <ImageView
+                    android:id="@+id/iv_stop"
+                    android:layout_width="wrap_content"
+                    android:src="@drawable/stop"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:text="停止"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:gravity="center"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <ImageView
+                    android:id="@+id/iv_next"
+                    android:layout_width="wrap_content"
+                    android:src="@drawable/next"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:maxLines="1"
+                    android:ellipsize="marquee"
+                    android:text="下一项：某某调试项目"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+</RelativeLayout>

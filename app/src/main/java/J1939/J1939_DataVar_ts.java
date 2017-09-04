@@ -6,8 +6,18 @@ enum VARTYPE {
 	BYTE, WORD, DWORD, SHORT, INT, FLOAT
 }
 
+/**
+ * 实施参数变化监听器
+ */
 interface RealtimeChangeListener{
 	void onDataChanged(float value);
+}
+
+/**
+ * 实时参数数据采集接收器
+ */
+interface RealtimeDataCollectListener{
+	void onDataRecieved(float value);
 }
 
 /**
@@ -81,6 +91,17 @@ public class J1939_DataVar_ts {
 	//public RealtimeChangeListener listener;
 
 	private LinkedList<RealtimeChangeListener> listenerLinkedList = new LinkedList<>();
+	private LinkedList<RealtimeDataCollectListener> collectListeners = new LinkedList<>();
+
+	public void addCollectListener(RealtimeDataCollectListener listener){
+		if (listener != null && !collectListeners.contains(listener))
+			collectListeners.add(listener);
+	}
+
+	public void removeCollectListener(RealtimeDataCollectListener listener){
+		if (listener != null && collectListeners.contains(listener))
+			collectListeners.remove(listener);
+	}
 
 	public void addListener(RealtimeChangeListener listener){
 		if (listener != null && !listenerLinkedList.contains(listener))
@@ -96,10 +117,6 @@ public class J1939_DataVar_ts {
 		for (RealtimeChangeListener listener : listenerLinkedList) {
 			listener.onDataChanged(value);
 		}
-//		if (listener == null) {
-//			return;
-//		}
-//		listener.onDataChanged(value);
 	}
 
 	public boolean isFloatType() {

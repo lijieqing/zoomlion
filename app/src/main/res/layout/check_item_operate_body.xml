@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:background="#d0d0d0"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:background="#b3e286"
+            android:layout_width="match_parent"
+            android:layout_height="1dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.6"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_name"
+                style="@style/ItemOperateBody"
+                android:text="参数名称" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                style="@style/ItemOperateBody">
+                <ImageView
+                    android:id="@+id/iv_camera"
+                    android:visibility="gone"
+                    android:src="@drawable/pic_camera"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/tv_camera"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="拍照" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_chart"
+                style="@style/ItemOperateBody"
+                android:text="谱图" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                style="@style/ItemOperateBody">
+                <ImageView
+                    android:id="@+id/iv_handwriting"
+                    android:visibility="gone"
+                    android:src="@drawable/pic_handwriting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/tv_value"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="数值" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                style="@style/ItemOperateBody">
+                <RadioGroup
+                    android:visibility="gone"
+                    android:id="@+id/rg_pass"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <RadioButton
+                        android:id="@+id/rb_pass"
+                        android:text="合格"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <RadioButton
+                        android:id="@+id/rb_unpass"
+                        android:text="不合格"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </RadioGroup>
+                <TextView
+                    android:id="@+id/tv_operate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="操作" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

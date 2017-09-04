@@ -104,16 +104,23 @@
                                                             <attribute name="Alter" type="boolean" use="required"  fixed="false"/>
                                                             <attribute name="Dialogue" type="boolean" use="required"  fixed="false"/>
                                                             <attribute name="AutoQualify" type="boolean" use="required"  fixed="false"/>
-                                                            <attribute name="Camera" type="boolean" use="required" fixed="true"/>
-                                                            <attribute name="Handwriting" type="boolean" use="required" fixed="true"/>
-                                                            <attribute name="Chart" type="boolean" use="required" fixed="true"/>
                                                             <sequence>
                                                                 <element name="DataCollectParam" maxOccurs="unbounded">
                                                                     <complexType>
                                                                         <attribute name="Name" type="string" use="required"/>
                                                                     </complexType>
                                                                 </element>
+                                                                <element name="DialogParam" maxOccurs="unbounded">
+                                                                    <complexType>
+                                                                        <attribute name="Name" type="string" use="required"/>
+                                                                    </complexType>
+                                                                </element>
                                                                 <element name="Handwrite" maxOccurs="unbounded">
+                                                                    <complexType>
+                                                                        <attribute name="Name" type="string" use="required"/>
+                                                                    </complexType>
+                                                                </element>
+                                                                <element name="NoValueParam" maxOccurs="unbounded">
                                                                     <complexType>
                                                                         <attribute name="Name" type="string" use="required"/>
                                                                     </complexType>

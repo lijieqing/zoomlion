@@ -17,4 +17,11 @@ public class Handwrite {
     public void setName(String Name) {
         this.Name = Name;
     }
+
+    @Override
+    public String toString() {
+        return "Handwrite{" +
+                "Name='" + Name + '\'' +
+                '}';
+    }
 }
