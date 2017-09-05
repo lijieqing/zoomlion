@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.kstech.zoomlion.MyApplication;
 import com.kstech.zoomlion.R;
@@ -22,8 +23,8 @@ import com.kstech.zoomlion.model.xmlbean.Device;
 import com.kstech.zoomlion.utils.Globals;
 import com.kstech.zoomlion.utils.LogUtils;
 import com.kstech.zoomlion.utils.MyHttpUtils;
-import com.kstech.zoomlion.view.widget.ItemShowView;
 import com.kstech.zoomlion.view.adapter.ExpandItemAdapter;
+import com.kstech.zoomlion.view.widget.ItemShowView;
 
 import java.io.IOException;
 import java.lang.ref.WeakReference;
@@ -33,7 +34,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity {
     private TextView tvNet;
     ItemShowView itemShowView;
     ExpandableListView elvItem;
@@ -41,7 +42,9 @@ public class MainActivity extends AppCompatActivity{
     public List<CheckItemVO> itemList = new ArrayList<>();
     ExpandItemAdapter expandItemAdapter;
     List<String> groups = new ArrayList<>();
-    Map<String,List<CheckItemVO>> checkItemMap = new HashMap<>();
+    Map<String, List<CheckItemVO>> checkItemMap = new HashMap<>();
+
+    CheckItemVO checkItemVO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +53,7 @@ public class MainActivity extends AppCompatActivity{
         tvNet = (TextView) findViewById(R.id.tv_net);
         itemShowView = (ItemShowView) findViewById(R.id.isv);
         elvItem = (ExpandableListView) findViewById(R.id.elv_item);
-        expandItemAdapter = new ExpandItemAdapter(this,groups,checkItemMap);
+        expandItemAdapter = new ExpandItemAdapter(this, groups, checkItemMap);
         elvItem.setAdapter(expandItemAdapter);
         elvItem.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
@@ -58,6 +61,8 @@ public class MainActivity extends AppCompatActivity{
                 String key = groups.get(i);
                 CheckItemVO item = checkItemMap.get(key).get(i1);
                 itemShowView.updateHead(item);
+
+                checkItemVO = item;
                 //// TODO: 2017/8/2 查询数据库更新body 调用itemShowView.updateBody();,下面使用伪数据
 //                List<CheckItemParamValueVO> volist = item.getParamNameList();
 //                for (CheckItemParamValueVO value : volist) {
@@ -76,19 +81,19 @@ public class MainActivity extends AppCompatActivity{
 //                }
 
                 CheckItemDataDao itemDao = MyApplication.getApplication().getDaoSession().getCheckItemDataDao();
-                LogUtils.e("ItemShowView","main-"+item.getId());
+                LogUtils.e("ItemShowView", "main-" + item.getId());
                 CheckItemData itemdb = itemDao.queryBuilder()
                         .where(CheckItemDataDao.Properties.QcId.eq(Integer.parseInt(item.getId())))
                         .build().unique();
                 List<CheckItemDetailData> ls = new ArrayList<>();
-                if (itemdb != null){
+                if (itemdb != null) {
                     ls = itemdb.getCheckItemDetailDatas();
                 }
                 itemShowView.updateBody(ls);
                 return false;
             }
         });
-        new Thread(){
+        new Thread() {
             @Override
             public void run() {
                 try {
@@ -104,17 +109,17 @@ public class MainActivity extends AppCompatActivity{
     public void net(View view) {
         MyHttpUtils myHttpUtils = new MyHttpUtils();
         HashMap<String, String> maps = new HashMap<>();
-        maps.put("account","admin");
-        maps.put("password","1");
+        maps.put("account", "admin");
+        maps.put("password", "1");
         myHttpUtils.xutilsPost("", "http://192.168.32.102:8080/crmnew/login", maps, new MyHttpUtils.MyHttpCallback() {
             @Override
             public void onSuccess(Object result, String whereRequest) {
-                LogUtils.d("xUTILs",((String) result)+" ");
+                LogUtils.d("xUTILs", ((String) result) + " ");
             }
 
             @Override
             public void onError(Object errorMsg, String whereRequest) {
-                LogUtils.d("xUTILs",((String) errorMsg)+" ");
+                LogUtils.d("xUTILs", ((String) errorMsg) + " ");
             }
 
             @Override
@@ -127,17 +132,17 @@ public class MainActivity extends AppCompatActivity{
     public void get(View view) {
         MyHttpUtils myHttpUtils = new MyHttpUtils();
         HashMap<String, String> maps = new HashMap<>();
-        maps.put("username","admin");
-        maps.put("password","1");
+        maps.put("username", "admin");
+        maps.put("password", "1");
         myHttpUtils.xutilsGet("", "http://192.168.32.102:8080/crmnew/menu/userlist1", maps, new MyHttpUtils.MyHttpCallback() {
             @Override
             public void onSuccess(Object result, String whereRequest) {
-                LogUtils.d("xUTILs",((String) result)+" ");
+                LogUtils.d("xUTILs", ((String) result) + " ");
             }
 
             @Override
             public void onError(Object errorMsg, String whereRequest) {
-                LogUtils.d("xUTILs",((String) errorMsg)+" ");
+                LogUtils.d("xUTILs", ((String) errorMsg) + " ");
             }
 
             @Override
@@ -148,7 +153,7 @@ public class MainActivity extends AppCompatActivity{
     }
 
     public void camera(View view) {
-        startActivity(new Intent(this,CameraActivity.class));
+        startActivity(new Intent(this, CameraActivity.class));
     }
 
     public void itemview(View view) {
@@ -165,6 +170,16 @@ public class MainActivity extends AppCompatActivity{
 
     private InnerHandler handler = new InnerHandler(this);
 
+    public void gocheck(View view) {
+        if (checkItemVO == null) {
+            Toast.makeText(this, "未选中项目", Toast.LENGTH_SHORT).show();
+        } else {
+            Intent intent = new Intent(this, ItemCheckActivity.class);
+            intent.putExtra("itemID", checkItemVO.getId());
+            startActivity(intent);
+        }
+    }
+
     private static class InnerHandler extends Handler {
         private final WeakReference<MainActivity> mainActivity;
 
@@ -175,7 +190,7 @@ public class MainActivity extends AppCompatActivity{
         @Override
         public void handleMessage(Message msg) {
             MainActivity mActivity = mainActivity.get();
-            if (mActivity != null){
+            if (mActivity != null) {
                 Globals.modelFile = mActivity.modelFile;
                 mActivity.itemList.addAll(mActivity.modelFile.getCheckItemList());
                 Set<String> keys = mActivity.modelFile.checkItemMap.keySet();

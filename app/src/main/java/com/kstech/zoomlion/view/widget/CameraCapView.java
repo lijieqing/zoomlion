@@ -33,13 +33,14 @@ import java.util.Date;
  * Created by lijie on 2017/7/25.
  */
 
-public class CameraCapView extends RelativeLayout implements View.OnClickListener{
+public class CameraCapView extends RelativeLayout implements View.OnClickListener {
     private BaseFunActivity activity;
-    public RelativeLayout takephoto,imageshowlayout;
+    public RelativeLayout takephoto, imageshowlayout;
     public ImageView photoshow;
-    public Button Camerabtn,agin,finish,save;
+    public Button Camerabtn, agin, finish, save;
     public TextView tvName;
     public Bitmap bitmap;
+    public ItemOperateBodyView iobv;
 
     public String paramName;
     private long detailID;
@@ -62,19 +63,20 @@ public class CameraCapView extends RelativeLayout implements View.OnClickListene
         initView();
     }
 
-    public void itemParamInit(@NonNull CheckItemParamValueVO checkItemParamValueVO,long detailID){
+    public void itemParamInit(@NonNull CheckItemParamValueVO checkItemParamValueVO, long detailID, ItemOperateBodyView iobv) {
         paramName = checkItemParamValueVO.getParamName();
         this.detailID = detailID;
+        this.iobv = iobv;
         tvName.setText(paramName);
     }
 
-    private void initView(){
+    private void initView() {
 
         View view = View.inflate(activity, R.layout.camera_cap_view, null);
-        photoshow=view.findViewById(R.id.photoshow);
-        takephoto=view.findViewById(R.id.takephoto);
-        imageshowlayout=view.findViewById(R.id.imageshowlayout);
-        Camerabtn=view.findViewById(R.id.Camerabtn);
+        photoshow = view.findViewById(R.id.photoshow);
+        takephoto = view.findViewById(R.id.takephoto);
+        imageshowlayout = view.findViewById(R.id.imageshowlayout);
+        Camerabtn = view.findViewById(R.id.Camerabtn);
         agin = view.findViewById(R.id.agin);
         finish = view.findViewById(R.id.finish);
         save = view.findViewById(R.id.btn_save);
@@ -88,22 +90,23 @@ public class CameraCapView extends RelativeLayout implements View.OnClickListene
 
         this.addView(view);
     }
+
     @Override
     public void onClick(View v) {
-        Intent cameraIntent=null;
-        Uri imageUri=null;
+        Intent cameraIntent = null;
+        Uri imageUri = null;
 
         switch (v.getId()) {
             case R.id.Camerabtn:
                 cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                imageUri = Uri.fromFile(new File(Environment.getExternalStorageDirectory(),"workupload.jpg"));
+                imageUri = Uri.fromFile(new File(Environment.getExternalStorageDirectory(), "workupload.jpg"));
                 //指定照片保存路径（SD卡），workupload.jpg为一个临时文件，每次拍照后这个图片都会被替换
                 cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
                 activity.startActivityForResult(cameraIntent, 1);
                 break;
             case R.id.agin:
                 cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                imageUri  = Uri.fromFile(new File(Environment.getExternalStorageDirectory(),"workupload.jpg"));
+                imageUri = Uri.fromFile(new File(Environment.getExternalStorageDirectory(), "workupload.jpg"));
                 //指定照片保存路径（SD卡），workupload.jpg为一个临时文件，每次拍照后这个图片都会被替换
                 cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
                 activity.startActivityForResult(cameraIntent, 1);
@@ -117,13 +120,13 @@ public class CameraCapView extends RelativeLayout implements View.OnClickListene
                 takephoto.setVisibility(View.VISIBLE);
                 imageshowlayout.setVisibility(View.GONE);
 
-                activity.onPicSave();
+                iobv.updateCameraInfo();
                 break;
         }
     }
 
 
-    public void copyPic(){
+    public void copyPic() {
         long userID = 12;
         String Status = Environment.getExternalStorageState();
         if (!Status.equals(Environment.MEDIA_MOUNTED)) { // 检测sd是否可用
@@ -132,11 +135,11 @@ public class CameraCapView extends RelativeLayout implements View.OnClickListene
             return;
         }
         String date = DateUtil.getDateTimeFormat14(new Date());
-        String fname= Environment.getExternalStorageDirectory()+"/photograph/test/"+date+"-"+userID+"-"+detailID+"-"+paramName+".jpg";
-        FileUtil.copy(Environment.getExternalStorageDirectory()+"/workupload.jpg",fname);
+        String fname = Environment.getExternalStorageDirectory() + "/photograph/test/" + date + "-" + userID + "-" + detailID + "-" + paramName + ".jpg";
+        FileUtil.copy(Environment.getExternalStorageDirectory() + "/workupload.jpg", fname);
         CheckImageDataDao imgDao = MyApplication.getApplication().getDaoSession().getCheckImageDataDao();
-        imgDao.insert(new CheckImageData(null,detailID,paramName,fname));
-        Toast.makeText(activity,"已保存",Toast.LENGTH_SHORT).show();
+        imgDao.insert(new CheckImageData(null, detailID, paramName, fname));
+        Toast.makeText(activity, "已保存", Toast.LENGTH_SHORT).show();
     }
 
 }

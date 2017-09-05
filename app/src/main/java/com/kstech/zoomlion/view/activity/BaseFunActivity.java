@@ -1,8 +1,12 @@
 package com.kstech.zoomlion.view.activity;
 
 import android.app.Activity;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 
 import com.kstech.zoomlion.model.vo.CheckItemParamValueVO;
+import com.kstech.zoomlion.utils.StatusBarUtil;
 import com.kstech.zoomlion.view.widget.ItemOperateBodyView;
 
 /**
@@ -10,6 +14,11 @@ import com.kstech.zoomlion.view.widget.ItemOperateBodyView;
  */
 
 public abstract class BaseFunActivity extends Activity {
-    public abstract void camera(CheckItemParamValueVO checkItemParamValueVO,ItemOperateBodyView iobv);
-    public abstract void onPicSave();
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        StatusBarUtil.setColor(this, Color.argb(255, 140, 140, 145), 32);
+    }
+
+    public abstract void camera(CheckItemParamValueVO checkItemParamValueVO, ItemOperateBodyView iobv);
 }

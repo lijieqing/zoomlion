@@ -137,7 +137,7 @@ public class ItemOperateBodyView extends RelativeLayout {
         ivCamera.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                baseFunActivity.camera(checkItemParamValueVO,ItemOperateBodyView.this);
+                baseFunActivity.camera(checkItemParamValueVO, ItemOperateBodyView.this);
             }
         });
 
@@ -153,7 +153,7 @@ public class ItemOperateBodyView extends RelativeLayout {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 String value = et.getText().toString();
-                                if (!TextUtils.isEmpty(value) && !value.trim().equals("")){
+                                if (!TextUtils.isEmpty(value) && !value.trim().equals("")) {
                                     Toast.makeText(baseFunActivity, value, Toast.LENGTH_SHORT).show();
                                 }
                             }
@@ -165,5 +165,8 @@ public class ItemOperateBodyView extends RelativeLayout {
         });
     }
 
+    public void updateCameraInfo() {
+
+    }
 
 }

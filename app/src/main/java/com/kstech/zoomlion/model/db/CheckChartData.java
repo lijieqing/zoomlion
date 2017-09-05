@@ -30,6 +30,9 @@ public class CheckChartData {
     @Property
     private String chartData;
 
+    @Property
+    private String imgPath;
+
     /** Used to resolve relations */
     @Generated(hash = 2040040024)
     private transient DaoSession daoSession;
@@ -38,13 +41,14 @@ public class CheckChartData {
     @Generated(hash = 1959493665)
     private transient CheckChartDataDao myDao;
 
-    @Generated(hash = 1682136279)
-    public CheckChartData(Long chartId, Long itemDetailId, String paramName,
-            String chartData) {
+    @Generated(hash = 338886128)
+    public CheckChartData(Long chartId, Long itemDetailId, String paramName, String chartData,
+            String imgPath) {
         this.chartId = chartId;
         this.itemDetailId = itemDetailId;
         this.paramName = paramName;
         this.chartData = chartData;
+        this.imgPath = imgPath;
     }
 
     @Generated(hash = 1002407687)
@@ -159,6 +163,14 @@ public class CheckChartData {
     public void __setDaoSession(DaoSession daoSession) {
         this.daoSession = daoSession;
         myDao = daoSession != null ? daoSession.getCheckChartDataDao() : null;
+    }
+
+    public String getImgPath() {
+        return this.imgPath;
+    }
+
+    public void setImgPath(String imgPath) {
+        this.imgPath = imgPath;
     }
 
 }

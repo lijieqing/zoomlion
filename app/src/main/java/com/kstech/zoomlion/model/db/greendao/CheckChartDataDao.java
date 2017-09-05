@@ -35,6 +35,7 @@ public class CheckChartDataDao extends AbstractDao<CheckChartData, Long> {
         public final static Property ItemDetailId = new Property(1, Long.class, "itemDetailId", false, "ITEM_DETAIL_ID");
         public final static Property ParamName = new Property(2, String.class, "paramName", false, "PARAM_NAME");
         public final static Property ChartData = new Property(3, String.class, "chartData", false, "CHART_DATA");
+        public final static Property ImgPath = new Property(4, String.class, "imgPath", false, "IMG_PATH");
     }
 
     private DaoSession daoSession;
@@ -57,7 +58,8 @@ public class CheckChartDataDao extends AbstractDao<CheckChartData, Long> {
                 "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: chartId
                 "\"ITEM_DETAIL_ID\" INTEGER," + // 1: itemDetailId
                 "\"PARAM_NAME\" TEXT," + // 2: paramName
-                "\"CHART_DATA\" TEXT);"); // 3: chartData
+                "\"CHART_DATA\" TEXT," + // 3: chartData
+                "\"IMG_PATH\" TEXT);"); // 4: imgPath
     }
 
     /** Drops the underlying database table. */
@@ -89,6 +91,11 @@ public class CheckChartDataDao extends AbstractDao<CheckChartData, Long> {
         if (chartData != null) {
             stmt.bindString(4, chartData);
         }
+ 
+        String imgPath = entity.getImgPath();
+        if (imgPath != null) {
+            stmt.bindString(5, imgPath);
+        }
     }
 
     @Override
@@ -114,6 +121,11 @@ public class CheckChartDataDao extends AbstractDao<CheckChartData, Long> {
         if (chartData != null) {
             stmt.bindString(4, chartData);
         }
+ 
+        String imgPath = entity.getImgPath();
+        if (imgPath != null) {
+            stmt.bindString(5, imgPath);
+        }
     }
 
     @Override
@@ -133,7 +145,8 @@ public class CheckChartDataDao extends AbstractDao<CheckChartData, Long> {
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // chartId
             cursor.isNull(offset + 1) ? null : cursor.getLong(offset + 1), // itemDetailId
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // paramName
-            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3) // chartData
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // chartData
+            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4) // imgPath
         );
         return entity;
     }
@@ -144,6 +157,7 @@ public class CheckChartDataDao extends AbstractDao<CheckChartData, Long> {
         entity.setItemDetailId(cursor.isNull(offset + 1) ? null : cursor.getLong(offset + 1));
         entity.setParamName(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
         entity.setChartData(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
+        entity.setImgPath(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
      }
     
     @Override

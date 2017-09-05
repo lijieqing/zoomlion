@@ -37,7 +37,8 @@ public class ItemBodyShowView extends RelativeLayout implements IRecyclerScrollL
     CheckItemDetailData paramValue;
 
     LinearLayout llScroll;
-    public ItemBodyShowView(Context context,CheckItemDetailData paramValue) {
+
+    public ItemBodyShowView(Context context, CheckItemDetailData paramValue) {
         super(context);
         this.paramValue = paramValue;
         this.addView(initView(context));
@@ -53,8 +54,8 @@ public class ItemBodyShowView extends RelativeLayout implements IRecyclerScrollL
         this.addView(initView(context));
     }
 
-    private View initView(final Context context){
-        View view = View.inflate(context, R.layout.check_item_body_show,null);
+    private View initView(final Context context) {
+        View view = View.inflate(context, R.layout.check_item_body_show, null);
         tvStartTime = view.findViewById(R.id.tv_time_start);
         tvResult = view.findViewById(R.id.tv_item_result);
         tvChecker = view.findViewById(R.id.tv_item_checker);
@@ -73,16 +74,16 @@ public class ItemBodyShowView extends RelativeLayout implements IRecyclerScrollL
             public void onClick(View view) {
                 Intent intent = new Intent(context, ItemDetailActivity.class);
                 context.startActivity(intent);
-                Toast.makeText(context,"展示细节",Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "展示细节", Toast.LENGTH_SHORT).show();
             }
         });
 
-        bodyAdapter = new BodyAdapter(context,paramValue);
-        gridLayoutManager = new GridLayoutManager(context,1, LinearLayoutManager.HORIZONTAL,false);
+        bodyAdapter = new BodyAdapter(context, paramValue);
+        gridLayoutManager = new GridLayoutManager(context, 1, LinearLayoutManager.HORIZONTAL, false);
 
         rvBody.setLayoutManager(gridLayoutManager);
         rvBody.setAdapter(bodyAdapter);
-        rvBody.addItemDecoration(new DividerItemDecoration(context,DividerItemDecoration.HORIZONTAL_LIST));
+        rvBody.addItemDecoration(new DividerItemDecoration(context, DividerItemDecoration.HORIZONTAL_LIST));
         rvBody.setOnTouchListener(new OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -95,6 +96,6 @@ public class ItemBodyShowView extends RelativeLayout implements IRecyclerScrollL
 
     @Override
     public void onScroll(int x, int y) {
-        rvBody.scrollBy(x,y);
+        rvBody.scrollBy(x, y);
     }
 }

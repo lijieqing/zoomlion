@@ -3,11 +3,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.kstech.zoomlion.view.activity.ItemCheckActivity">
+    <RelativeLayout
+        android:background="#ffffff"
+        android:layout_width="match_parent"
+        android:layout_weight="0.6"
+        android:layout_height="0dp">
+        <ImageView
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
+            android:src="@drawable/header_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <com.kstech.zoomlion.view.widget.ItemShowViewInCheck
+        android:id="@+id/isv_check"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3">
+
+    </com.kstech.zoomlion.view.widget.ItemShowViewInCheck>
+
     <com.kstech.zoomlion.view.widget.ItemOperateView
         android:id="@+id/iov_test"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp"
+        android:layout_weight="4">
 
     </com.kstech.zoomlion.view.widget.ItemOperateView>
 </LinearLayout>

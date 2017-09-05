@@ -34,7 +34,7 @@ public class CheckItemDetailData {
     private Long checkerId;//检验员ID
 
     @Property
-    private String checkerName;//检验员名称
+    private String checkerName;//调试员名称
 
     @Property
     private Long measureDeviceId;//测量终端ID

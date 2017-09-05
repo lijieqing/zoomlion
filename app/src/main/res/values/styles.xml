@@ -12,6 +12,7 @@
         <item name="android:gravity">center_vertical</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">match_parent</item>
+        <item name="android:color">#FF383838</item>
     </style>
     <style name="ItemHead">
         <item name="android:layout_height">match_parent</item>

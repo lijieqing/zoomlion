@@ -7,7 +7,6 @@ import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -28,42 +27,40 @@ import java.util.List;
  */
 
 /**
- * 首先说明一个item 指的是一个检测项目记录，即db中的@{@link com.kstech.zoomlion.model.db.CheckItemDetailData}类，
+ * 首先说明一个item 指的是一个检测项目记录，即db中的@{@link CheckItemDetailData}类，
  * 其中的paramsValues储存的就是该检测记录的数据，对应多个@{@link CheckItemParamValueVO}
  */
 
 
-public class ItemShowView extends RelativeLayout {
+public class ItemShowViewInCheck extends RelativeLayout {
     private Context context;
     private RecyclerView rvHeader;
-    private CheckBox cbIgnore;
     private HeaderAdapter headerAdapter;
     GridLayoutManager gridLayoutManager;
     LinearLayout bodyContains;
     TextView itemTitle;
 
-    public ItemShowView(Context context) {
+    public ItemShowViewInCheck(Context context) {
         super(context);
         this.context = context;
         this.addView(initView());
     }
 
-    public ItemShowView(Context context, AttributeSet attrs) {
+    public ItemShowViewInCheck(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.context = context;
         this.addView(initView());
     }
 
-    public ItemShowView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public ItemShowViewInCheck(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         this.context = context;
         this.addView(initView());
     }
 
     private View initView() {
-        View v = View.inflate(context, R.layout.check_item_show, null);
+        View v = View.inflate(context, R.layout.check_item_show_in_check, null);
         rvHeader = v.findViewById(R.id.rv_head);
-        cbIgnore = v.findViewById(R.id.ck_ignore);
         bodyContains = v.findViewById(R.id.ll_body);
         itemTitle = v.findViewById(R.id.tv_title);
         gridLayoutManager = new GridLayoutManager(context, 1, GridLayoutManager.HORIZONTAL, false);
@@ -109,11 +106,6 @@ public class ItemShowView extends RelativeLayout {
 
     public void updateHead(@NonNull CheckItemVO item) {
         itemTitle.setText(item.getName());
-        if (!item.isRequire()) {
-            cbIgnore.setChecked(true);
-        } else {
-            cbIgnore.setChecked(false);
-        }
         Globals.paramHeadVOs.clear();
         Globals.paramHeadVOs.addAll(item.getParamNameList());
         headerAdapter.notifyDataSetChanged();

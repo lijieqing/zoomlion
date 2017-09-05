@@ -1,7 +1,7 @@
 package com.kstech.zoomlion.view.activity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
 import com.kstech.zoomlion.R;
@@ -14,6 +14,7 @@ import org.xutils.x;
 public class ItemDetailActivity extends AppCompatActivity {
     @ViewInject(R.id.tv_test)
     TextView textView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

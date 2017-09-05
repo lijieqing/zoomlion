@@ -18,13 +18,13 @@ import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.kstech.zoomlion.view.activity.CameraActivity;
 import com.kstech.zoomlion.MyApplication;
 import com.kstech.zoomlion.R;
 import com.kstech.zoomlion.model.db.CheckImageData;
 import com.kstech.zoomlion.model.db.greendao.CheckImageDataDao;
 import com.kstech.zoomlion.utils.DateUtil;
 import com.kstech.zoomlion.utils.LogUtils;
+import com.kstech.zoomlion.view.activity.CameraActivity;
 
 import org.xutils.common.util.FileUtil;
 
@@ -37,15 +37,15 @@ import java.util.List;
  * Created by lijie on 2017/7/25.
  */
 
-public class CameraRecordView extends RelativeLayout implements View.OnClickListener,RadioGroup.OnCheckedChangeListener{
+public class CameraRecordView extends RelativeLayout implements View.OnClickListener, RadioGroup.OnCheckedChangeListener {
     private Context context;
     private CameraActivity activity;
-    public RelativeLayout takephoto,imageshowlayout;
+    public RelativeLayout takephoto, imageshowlayout;
     public ImageView photoshow;
-    public Button Camerabtn,agin,finish,save;
+    public Button Camerabtn, agin, finish, save;
     public RadioGroup rgParams;
     private List<RadioButton> paramsRB = new ArrayList<>();
-    public RadioButton rbPic,rbZoomPic;
+    public RadioButton rbPic, rbZoomPic;
 
     private List<String> params = new ArrayList<>();
 
@@ -75,17 +75,17 @@ public class CameraRecordView extends RelativeLayout implements View.OnClickList
         initView();
     }
 
-    private void initView(){
+    private void initView() {
         params.add("温度");
         params.add("压力");
         params.add("底盘");
         params.add("灯管");
 
         View view = View.inflate(context, R.layout.camera_view, null);
-        photoshow=view.findViewById(R.id.photoshow);
-        takephoto=view.findViewById(R.id.takephoto);
-        imageshowlayout=view.findViewById(R.id.imageshowlayout);
-        Camerabtn=view.findViewById(R.id.Camerabtn);
+        photoshow = view.findViewById(R.id.photoshow);
+        takephoto = view.findViewById(R.id.takephoto);
+        imageshowlayout = view.findViewById(R.id.imageshowlayout);
+        Camerabtn = view.findViewById(R.id.Camerabtn);
         agin = view.findViewById(R.id.agin);
         finish = view.findViewById(R.id.finish);
         rgParams = view.findViewById(R.id.rg_params);
@@ -107,31 +107,32 @@ public class CameraRecordView extends RelativeLayout implements View.OnClickList
             RadioGroup.LayoutParams rblayoutparams = new RadioGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT
                     , ViewGroup.LayoutParams.MATCH_PARENT);
             rblayoutparams.weight = 1;
-            rgParams.addView(rb,rblayoutparams);
+            rgParams.addView(rb, rblayoutparams);
         }
 
         this.addView(view);
     }
+
     @Override
     public void onClick(View v) {
-        Intent cameraIntent=null;
-        Uri imageUri=null;
+        Intent cameraIntent = null;
+        Uri imageUri = null;
 
         switch (v.getId()) {
             case R.id.Camerabtn:
-                if (!hasButtonChecked()){
-                    Toast.makeText(activity,"请选择照片所关联参数",Toast.LENGTH_SHORT).show();
+                if (!hasButtonChecked()) {
+                    Toast.makeText(activity, "请选择照片所关联参数", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                imageUri = Uri.fromFile(new File(Environment.getExternalStorageDirectory(),"workupload.jpg"));
+                imageUri = Uri.fromFile(new File(Environment.getExternalStorageDirectory(), "workupload.jpg"));
                 //指定照片保存路径（SD卡），workupload.jpg为一个临时文件，每次拍照后这个图片都会被替换
                 cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
                 activity.startActivityForResult(cameraIntent, 1);
                 break;
             case R.id.agin:
                 cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                imageUri  = Uri.fromFile(new File(Environment.getExternalStorageDirectory(),"workupload.jpg"));
+                imageUri = Uri.fromFile(new File(Environment.getExternalStorageDirectory(), "workupload.jpg"));
                 //指定照片保存路径（SD卡），workupload.jpg为一个临时文件，每次拍照后这个图片都会被替换
                 cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
                 activity.startActivityForResult(cameraIntent, 1);
@@ -151,22 +152,22 @@ public class CameraRecordView extends RelativeLayout implements View.OnClickList
         }
     }
 
-    public void enableParams(boolean enable){
+    public void enableParams(boolean enable) {
         for (RadioButton radioButton : paramsRB) {
             radioButton.setEnabled(enable);
         }
     }
 
-    public boolean hasButtonChecked(){
+    public boolean hasButtonChecked() {
         for (RadioButton radioButton : paramsRB) {
-            if (radioButton.isChecked()){
+            if (radioButton.isChecked()) {
                 return true;
             }
         }
         return false;
     }
 
-    public void copyPic(){
+    public void copyPic() {
         long userID = 12;
         long itemDetailID = 40;
         String Status = Environment.getExternalStorageState();
@@ -176,17 +177,17 @@ public class CameraRecordView extends RelativeLayout implements View.OnClickList
             return;
         }
         String date = DateUtil.getDateTimeFormat14(new Date());
-        String fname= Environment.getExternalStorageDirectory()+"/photograph/test/"+date+"-"+userID+"-"+itemDetailID+"-"+paramName+".jpg";
-        FileUtil.copy(Environment.getExternalStorageDirectory()+"/workupload.jpg",fname);
+        String fname = Environment.getExternalStorageDirectory() + "/photograph/test/" + date + "-" + userID + "-" + itemDetailID + "-" + paramName + ".jpg";
+        FileUtil.copy(Environment.getExternalStorageDirectory() + "/workupload.jpg", fname);
         CheckImageDataDao imgDao = MyApplication.getApplication().getDaoSession().getCheckImageDataDao();
-        imgDao.insert(new CheckImageData(null,itemDetailID,paramName,fname));
-        Toast.makeText(activity,"已保存",Toast.LENGTH_SHORT).show();
+        imgDao.insert(new CheckImageData(null, itemDetailID, paramName, fname));
+        Toast.makeText(activity, "已保存", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onCheckedChanged(RadioGroup radioGroup, @IdRes int i) {
         RadioButton rb = (RadioButton) radioGroup.getChildAt(i);
         paramName = rb.getText().toString();
-        LogUtils.e("CAMERAVIEW",rb.getText().toString()+"");
+        LogUtils.e("CAMERAVIEW", rb.getText().toString() + "");
     }
 }

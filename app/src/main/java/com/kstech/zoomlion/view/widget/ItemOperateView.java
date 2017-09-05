@@ -19,13 +19,12 @@ import com.kstech.zoomlion.view.activity.BaseFunActivity;
  * Created by lijie on 2017/9/4.
  */
 
-public class ItemOperateView extends RelativeLayout implements View.OnClickListener{
+public class ItemOperateView extends RelativeLayout implements View.OnClickListener {
     private Context context;
     private LinearLayout ll_body;
     private BaseFunActivity baseFunActivity;
 
     private ImageView ivSave;
-    private ImageView ivPause;
     private ImageView ivStart;
     private ImageView ivStop;
     private ImageView ivNext;
@@ -56,13 +55,11 @@ public class ItemOperateView extends RelativeLayout implements View.OnClickListe
         ll_body = v.findViewById(R.id.ll_operate_body);
 
         ivSave = v.findViewById(R.id.iv_save);
-        ivPause = v.findViewById(R.id.iv_pause);
         ivStart = v.findViewById(R.id.iv_start);
         ivStop = v.findViewById(R.id.iv_stop);
         ivNext = v.findViewById(R.id.iv_next);
 
         ivSave.setOnClickListener(this);
-        ivPause.setOnClickListener(this);
         ivStart.setOnClickListener(this);
         ivStop.setOnClickListener(this);
         ivNext.setOnClickListener(this);
@@ -71,23 +68,21 @@ public class ItemOperateView extends RelativeLayout implements View.OnClickListe
     }
 
     public void update(CheckItemVO itemVO) {
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, DeviceUtil.deviceHeight(context) / 10);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, DeviceUtil.deviceHeight(context) / 11);
         for (CheckItemParamValueVO checkItemParamValueVO : itemVO.getParamNameList()) {
             ItemOperateBodyView bodyView = new ItemOperateBodyView(baseFunActivity, checkItemParamValueVO, itemVO.getId());
             ll_body.addView(bodyView, params);
         }
     }
 
-    public void setCameraActivity(@NonNull BaseFunActivity baseFunActivity){
+    public void setCameraActivity(@NonNull BaseFunActivity baseFunActivity) {
         this.baseFunActivity = baseFunActivity;
     }
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.iv_save:
-                break;
-            case R.id.iv_pause:
                 break;
             case R.id.iv_start:
                 break;
