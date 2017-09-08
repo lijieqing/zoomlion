@@ -28,7 +28,7 @@ import com.kstech.zoomlion.view.widget.CameraRecordView;
 import java.lang.ref.WeakReference;
 
 
-public class CameraActivity extends AppCompatActivity {
+public class CameraActivity extends BaseActivity {
     AlertDialog picCatchDialog;
     AlertDialog picShowDialog;
     CameraRecordView cameraRecordView;

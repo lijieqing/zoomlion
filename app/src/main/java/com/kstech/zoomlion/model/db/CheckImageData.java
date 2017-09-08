@@ -24,7 +24,7 @@ public class CheckImageData {
     private CheckItemDetailData checkItemDetailData;
 
     @Property
-    private String paramName;
+    private String paramName; //参数名称
 
     @Property
     private String imgPath; //图片路径

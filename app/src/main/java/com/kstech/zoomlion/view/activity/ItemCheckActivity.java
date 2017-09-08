@@ -50,8 +50,8 @@ public class ItemCheckActivity extends BaseFunActivity {
         itemID = intent.getStringExtra("itemID");
         itemvo = Globals.modelFile.getCheckItemVO(itemID);
 
-        iov = findViewById(R.id.iov_test);
-        isv = findViewById(R.id.isv_check);
+        iov = (ItemOperateView) findViewById(R.id.iov_test);
+        isv = (ItemShowViewInCheck) findViewById(R.id.isv_check);
         iov.setCameraActivity(this);
 
         iov.update(itemvo);

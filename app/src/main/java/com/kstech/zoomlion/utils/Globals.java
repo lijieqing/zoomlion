@@ -14,6 +14,14 @@ import java.util.List;
  * Created by lijie on 2017/6/14.
  */
 public class Globals {
+    /**
+     * 用户相关变量声明
+     */
+    public static String LAST_USER = "last_user";//上次登陆用户名
+
+    public static String USER_LOGIN_RECORD = "user_record";//历史登陆用户
+
+
     //com.lee.xml 标签 对应实体类的存放路径 后边加  .
     public static String CLASSNAME = "com.kstech.zoomlion.model.xmlbean.";
 

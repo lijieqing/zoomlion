@@ -41,7 +41,8 @@ public class CheckItemDetailDataDao extends AbstractDao<CheckItemDetailData, Lon
         public final static Property CheckResult = new Property(7, Integer.class, "checkResult", false, "CHECK_RESULT");
         public final static Property StartTime = new Property(8, java.util.Date.class, "startTime", false, "START_TIME");
         public final static Property EndTime = new Property(9, java.util.Date.class, "endTime", false, "END_TIME");
-        public final static Property Uploaded = new Property(10, Boolean.class, "uploaded", false, "UPLOADED");
+        public final static Property DESC = new Property(10, String.class, "DESC", false, "DESC");
+        public final static Property Uploaded = new Property(11, Boolean.class, "uploaded", false, "UPLOADED");
     }
 
     private DaoSession daoSession;
@@ -71,7 +72,8 @@ public class CheckItemDetailDataDao extends AbstractDao<CheckItemDetailData, Lon
                 "\"CHECK_RESULT\" INTEGER," + // 7: checkResult
                 "\"START_TIME\" INTEGER UNIQUE ," + // 8: startTime
                 "\"END_TIME\" INTEGER UNIQUE ," + // 9: endTime
-                "\"UPLOADED\" INTEGER);"); // 10: uploaded
+                "\"DESC\" TEXT," + // 10: DESC
+                "\"UPLOADED\" INTEGER);"); // 11: uploaded
     }
 
     /** Drops the underlying database table. */
@@ -134,9 +136,14 @@ public class CheckItemDetailDataDao extends AbstractDao<CheckItemDetailData, Lon
             stmt.bindLong(10, endTime.getTime());
         }
  
+        String DESC = entity.getDESC();
+        if (DESC != null) {
+            stmt.bindString(11, DESC);
+        }
+ 
         Boolean uploaded = entity.getUploaded();
         if (uploaded != null) {
-            stmt.bindLong(11, uploaded ? 1L: 0L);
+            stmt.bindLong(12, uploaded ? 1L: 0L);
         }
     }
 
@@ -194,9 +201,14 @@ public class CheckItemDetailDataDao extends AbstractDao<CheckItemDetailData, Lon
             stmt.bindLong(10, endTime.getTime());
         }
  
+        String DESC = entity.getDESC();
+        if (DESC != null) {
+            stmt.bindString(11, DESC);
+        }
+ 
         Boolean uploaded = entity.getUploaded();
         if (uploaded != null) {
-            stmt.bindLong(11, uploaded ? 1L: 0L);
+            stmt.bindLong(12, uploaded ? 1L: 0L);
         }
     }
 
@@ -224,7 +236,8 @@ public class CheckItemDetailDataDao extends AbstractDao<CheckItemDetailData, Lon
             cursor.isNull(offset + 7) ? null : cursor.getInt(offset + 7), // checkResult
             cursor.isNull(offset + 8) ? null : new java.util.Date(cursor.getLong(offset + 8)), // startTime
             cursor.isNull(offset + 9) ? null : new java.util.Date(cursor.getLong(offset + 9)), // endTime
-            cursor.isNull(offset + 10) ? null : cursor.getShort(offset + 10) != 0 // uploaded
+            cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10), // DESC
+            cursor.isNull(offset + 11) ? null : cursor.getShort(offset + 11) != 0 // uploaded
         );
         return entity;
     }
@@ -241,7 +254,8 @@ public class CheckItemDetailDataDao extends AbstractDao<CheckItemDetailData, Lon
         entity.setCheckResult(cursor.isNull(offset + 7) ? null : cursor.getInt(offset + 7));
         entity.setStartTime(cursor.isNull(offset + 8) ? null : new java.util.Date(cursor.getLong(offset + 8)));
         entity.setEndTime(cursor.isNull(offset + 9) ? null : new java.util.Date(cursor.getLong(offset + 9)));
-        entity.setUploaded(cursor.isNull(offset + 10) ? null : cursor.getShort(offset + 10) != 0);
+        entity.setDESC(cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10));
+        entity.setUploaded(cursor.isNull(offset + 11) ? null : cursor.getShort(offset + 11) != 0);
      }
     
     @Override

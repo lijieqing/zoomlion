@@ -5,6 +5,7 @@ import com.kstech.zoomlion.utils.JsonUtils;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -31,6 +32,16 @@ public class ExampleUnitTest {
         imglist.add(100l);
         checkItemParamValueVO.setImgIds(imglist);
         String s = JsonUtils.toJson(checkItemParamValueVO);
+        System.out.println(s);
+    }
+
+    @Test
+    public void JsonCreate(){
+        ArrayList<String> v = new ArrayList<>();
+        v.add("赵高");
+        v.add("李斯");
+        v.add("胡亥");
+        String s = JsonUtils.toJson(v);
         System.out.println(s);
     }
 }

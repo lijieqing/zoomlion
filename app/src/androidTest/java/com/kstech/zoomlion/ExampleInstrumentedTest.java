@@ -8,26 +8,15 @@ import android.support.test.runner.AndroidJUnit4;
 
 import com.kstech.zoomlion.manager.DeviceModelFile;
 import com.kstech.zoomlion.manager.XMLAPI;
-import com.kstech.zoomlion.model.db.CheckImageData;
-import com.kstech.zoomlion.model.db.CheckItemDetailData;
 import com.kstech.zoomlion.model.db.MsgSetDB;
-import com.kstech.zoomlion.model.db.greendao.CheckItemDetailDataDao;
 import com.kstech.zoomlion.model.db.greendao.MsgSetDBDao;
-import com.kstech.zoomlion.model.vo.CheckItemParamValueVO;
 import com.kstech.zoomlion.model.vo.CheckItemVO;
-import com.kstech.zoomlion.model.xmlbean.AlterData;
-import com.kstech.zoomlion.model.xmlbean.DataCollectParam;
 import com.kstech.zoomlion.model.xmlbean.Device;
 import com.kstech.zoomlion.model.xmlbean.Msg;
 import com.kstech.zoomlion.model.xmlbean.MsgSet;
-import com.kstech.zoomlion.model.xmlbean.PICParam;
-import com.kstech.zoomlion.model.xmlbean.Phone;
-import com.kstech.zoomlion.model.xmlbean.PhoneStore;
 import com.kstech.zoomlion.model.xmlbean.QCItem;
 import com.kstech.zoomlion.model.xmlbean.QCType;
-import com.kstech.zoomlion.utils.Globals;
 import com.kstech.zoomlion.utils.GreenDaoUtils;
-import com.kstech.zoomlion.utils.JsonUtils;
 import com.kstech.zoomlion.utils.LogUtils;
 import com.kstech.zoomlion.utils.MyHttpUtils;
 
@@ -41,7 +30,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -136,16 +124,6 @@ public class ExampleInstrumentedTest {
         for (MsgSetDB msgSetDB : msgDao.queryBuilder().list()) {
             LogUtils.d("KSTECH",msgSetDB.toString());
         }
-    }
-
-    @Test
-    public void TestXmlGenerate() throws Exception {
-        Context appContext = InstrumentationRegistry.getTargetContext();
-        String path = Environment.getExternalStorageDirectory().getAbsolutePath();
-        path = path+ File.separator+"out.xml";
-        InputStream inputStream = new FileInputStream(path);
-        PhoneStore ps = (PhoneStore) XMLAPI.readXML(inputStream);
-        LogUtils.d("KSTECH",ps.toString());
     }
 
     @Test

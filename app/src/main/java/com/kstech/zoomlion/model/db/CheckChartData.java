@@ -19,19 +19,22 @@ public class CheckChartData {
     @Id(autoincrement = true)
     private Long chartId;
 
-    private Long itemDetailId;
+    private Long itemDetailId;//调试项目细节表ID
 
     @ToOne(joinProperty = "itemDetailId")
     private CheckItemDetailData checkItemDetailData;
 
     @Property
-    private String paramName;
+    private String paramName;//参数名称
 
     @Property
-    private String chartData;
+    private String unit;//谱图的Y轴单位
 
     @Property
-    private String imgPath;
+    private String chartData;//谱图数据JSON串
+
+    @Property
+    private String imgPath;//缩略图路径
 
     /** Used to resolve relations */
     @Generated(hash = 2040040024)
@@ -41,12 +44,13 @@ public class CheckChartData {
     @Generated(hash = 1959493665)
     private transient CheckChartDataDao myDao;
 
-    @Generated(hash = 338886128)
-    public CheckChartData(Long chartId, Long itemDetailId, String paramName, String chartData,
-            String imgPath) {
+    @Generated(hash = 1451250714)
+    public CheckChartData(Long chartId, Long itemDetailId, String paramName, String unit,
+            String chartData, String imgPath) {
         this.chartId = chartId;
         this.itemDetailId = itemDetailId;
         this.paramName = paramName;
+        this.unit = unit;
         this.chartData = chartData;
         this.imgPath = imgPath;
     }
@@ -171,6 +175,14 @@ public class CheckChartData {
 
     public void setImgPath(String imgPath) {
         this.imgPath = imgPath;
+    }
+
+    public String getUnit() {
+        return this.unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
     }
 
 }

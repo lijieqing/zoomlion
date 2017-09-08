@@ -12,16 +12,16 @@ import org.greenrobot.greendao.annotation.Generated;
 @Entity(nameInDb = "tb_msg")
 public class MsgSetDB {
     @Id(autoincrement = true)
-    private Long id;
+    private Long id;//ID
 
     @Unique
-    private Integer msgID;
+    private Integer msgID;//msg信息标识ID
 
     @Unique
-    private String refName;
+    private String refName;//msg信息标识fmi
 
     @Property
-    private String Content;
+    private String Content;//msg内容
 
     @Generated(hash = 1566671909)
     public MsgSetDB(Long id, Integer msgID, String refName, String Content) {

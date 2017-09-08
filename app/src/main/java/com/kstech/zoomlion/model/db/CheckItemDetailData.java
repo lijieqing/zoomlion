@@ -57,6 +57,9 @@ public class CheckItemDetailData {
     private Date endTime;//结束时间
 
     @Property
+    private String DESC;//信息描述
+
+    @Property
     private Boolean uploaded;//是否已上传
 
     @ToMany(referencedJoinProperty = "itemDetailId")
@@ -73,10 +76,10 @@ public class CheckItemDetailData {
     @Generated(hash = 823363946)
     private transient CheckItemDetailDataDao myDao;
 
-    @Generated(hash = 563909878)
+    @Generated(hash = 1235684807)
     public CheckItemDetailData(Long checkItemDetailId, Long itemId, Long checkerId, String checkerName,
             Long measureDeviceId, String measureDeviceName, String paramsValues, Integer checkResult,
-            Date startTime, Date endTime, Boolean uploaded) {
+            Date startTime, Date endTime, String DESC, Boolean uploaded) {
         this.checkItemDetailId = checkItemDetailId;
         this.itemId = itemId;
         this.checkerId = checkerId;
@@ -87,6 +90,7 @@ public class CheckItemDetailData {
         this.checkResult = checkResult;
         this.startTime = startTime;
         this.endTime = endTime;
+        this.DESC = DESC;
         this.uploaded = uploaded;
     }
 
@@ -313,6 +317,14 @@ public class CheckItemDetailData {
 
     public void setCheckerName(String checkerName) {
         this.checkerName = checkerName;
+    }
+
+    public String getDESC() {
+        return this.DESC;
+    }
+
+    public void setDESC(String DESC) {
+        this.DESC = DESC;
     }
 
 }

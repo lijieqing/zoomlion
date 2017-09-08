@@ -11,7 +11,7 @@ import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
 @ContentView(R.layout.activity_item_detail)
-public class ItemDetailActivity extends AppCompatActivity {
+public class ItemDetailActivity extends BaseActivity {
     @ViewInject(R.id.tv_test)
     TextView textView;
 
