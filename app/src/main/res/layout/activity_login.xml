@@ -10,15 +10,16 @@
     tools:context="com.kstech.zoomlion.view.activity.LoginActivity">
 
     <LinearLayout
-        android:gravity="center"
-        android:background="@drawable/ll_change_check_title_bg"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="3">
+        android:layout_weight="3"
+        android:background="@drawable/ll_change_check_title_bg"
+        android:gravity="center">
+
         <ImageView
-            android:src="@drawable/header_logo"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:src="@drawable/header_logo" />
     </LinearLayout>
 
     <LinearLayout
@@ -122,6 +123,7 @@
                         android:layout_height="match_parent"
                         android:background="@drawable/input_login_bg"
                         android:drawableLeft="@drawable/login_terminal"
+                        android:focusableInTouchMode="true"
                         android:gravity="center_vertical"
                         android:hint="@string/terminal"
                         android:maxLines="1" />
@@ -158,24 +160,26 @@
     </LinearLayout>
 
     <RelativeLayout
-        android:background="#8c8c91"
-        android:layout_weight="0.7"
         android:layout_width="match_parent"
-        android:layout_height="0dp">
+        android:layout_height="0dp"
+        android:layout_weight="0.7"
+        android:background="#8c8c91">
+
         <TextView
-            android:text="平板ID：121212"
-            android:gravity="center"
-            android:layout_alignParentLeft="true"
             android:id="@+id/tv_pad_id"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:gravity="center"
+            android:text="平板ID：121212" />
+
         <TextView
-            android:layout_centerInParent="true"
-            android:textColor="#fff"
-            android:text="@string/copyright"
             android:id="@+id/tv_copyright"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/copyright"
+            android:textColor="#fff" />
     </RelativeLayout>
     <!-- Login progress -->
 </LinearLayout>

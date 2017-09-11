@@ -1,4 +1,4 @@
-package com.kstech.zoomlion.base;
+package com.kstech.zoomlion.model.session;
 
 /**
  * 用户实体类
@@ -6,12 +6,7 @@ package com.kstech.zoomlion.base;
 public class UserBean {
     private int id; //对应数据库中的唯一索引ID
     private String name;//用户名
-    private String password;//密码
-
-    public UserBean(String name, String password) {
-        this.name = name;
-        this.password = password;
-    }
+    private String last_time;//上次登陆时间
 
     public int getId() {
         return id;
@@ -29,11 +24,11 @@ public class UserBean {
         this.name = name;
     }
 
-    public String getPassword() {
-        return password;
+    public String getLast_time() {
+        return last_time;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setLast_time(String last_time) {
+        this.last_time = last_time;
     }
 }

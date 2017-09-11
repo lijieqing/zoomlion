@@ -1,4 +1,4 @@
-package com.kstech.zoomlion.terminal;
+package com.kstech.zoomlion.manager;
 
 
 import com.kstech.zoomlion.utils.Globals;

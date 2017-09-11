@@ -5,8 +5,8 @@ import android.os.SystemClock;
 
 import com.kstech.zoomlion.model.vo.CheckItemParamValueVO;
 import com.kstech.zoomlion.model.vo.CheckItemVO;
-import com.kstech.zoomlion.terminal.CommandResp;
-import com.kstech.zoomlion.terminal.CommandSender;
+import com.kstech.zoomlion.manager.CommandResp;
+import com.kstech.zoomlion.manager.CommandSender;
 import com.kstech.zoomlion.utils.Globals;
 
 import java.util.List;

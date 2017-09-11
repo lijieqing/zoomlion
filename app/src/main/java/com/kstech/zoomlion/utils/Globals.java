@@ -4,6 +4,8 @@ import android.support.annotation.NonNull;
 
 import com.kstech.zoomlion.manager.DeviceModelFile;
 import com.kstech.zoomlion.model.db.CheckImageData;
+import com.kstech.zoomlion.model.session.MeasureTerminal;
+import com.kstech.zoomlion.model.session.UserBean;
 import com.kstech.zoomlion.model.vo.CheckItemParamValueVO;
 import com.kstech.zoomlion.view.widget.IRecyclerScrollListener;
 
@@ -21,6 +23,8 @@ public class Globals {
 
     public static String USER_LOGIN_RECORD = "user_record";//历史登陆用户
 
+    public static String PAD_HAS_REGISTER = "pad_has_register";//平板是否已注服务器注册
+
 
     //com.lee.xml 标签 对应实体类的存放路径 后边加  .
     public static String CLASSNAME = "com.kstech.zoomlion.model.xmlbean.";
@@ -34,25 +38,36 @@ public class Globals {
     public static List<IRecyclerScrollListener> headerListener = new ArrayList<>();
     public static List<IRecyclerScrollListener> bodyListener = new ArrayList<>();
 
-    public static void addHeadScrollListener(@NonNull IRecyclerScrollListener listener){
-        if (!headerListener.contains(listener)){
+    public static void addHeadScrollListener(@NonNull IRecyclerScrollListener listener) {
+        if (!headerListener.contains(listener)) {
             headerListener.add(listener);
         }
     }
 
-    public static void removeHeadListener(@NonNull IRecyclerScrollListener listener){
-        if (headerListener.contains(listener)){
+    public static void removeHeadListener(@NonNull IRecyclerScrollListener listener) {
+        if (headerListener.contains(listener)) {
             headerListener.remove(listener);
         }
     }
 
-    public static void onHeadScroll(int x, int y){
+    public static void onHeadScroll(int x, int y) {
         for (IRecyclerScrollListener recyclerFlingListener : headerListener) {
-            recyclerFlingListener.onScroll(x,y);
+            recyclerFlingListener.onScroll(x, y);
         }
     }
+
     /**
      * DeviceModelFile 实体类存放
      */
     public static DeviceModelFile modelFile;
+
+    /**
+     * 当前登陆用户
+     */
+    public static UserBean currentUser;
+
+    /**
+     * 当前测量终端
+     */
+    public static MeasureTerminal currentTerminal;
 }

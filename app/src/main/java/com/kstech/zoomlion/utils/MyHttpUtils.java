@@ -77,7 +77,7 @@ public class MyHttpUtils {
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
                 Log.e("", "");
-                callback.onError("出错了" + "onError", whereRequest);
+                callback.onError("出错了" + ex.toString(), whereRequest);
             }
 
             @Override

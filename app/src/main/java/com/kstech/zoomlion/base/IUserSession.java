@@ -1,6 +1,8 @@
 package com.kstech.zoomlion.base;
 
 
+import com.kstech.zoomlion.model.session.UserBean;
+
 /**
  * The type Login session.
  *

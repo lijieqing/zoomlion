@@ -11,6 +11,7 @@ import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
+import android.net.wifi.WifiManager;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.telephony.TelephonyManager;
@@ -146,6 +147,18 @@ public class DeviceUtil {
             return deviceId;
         }
     }
+    /**
+     * 获取设备的唯一标识，mac地址
+     *
+     * @param context
+     * @return
+     */
+    public synchronized static String getMacid(Context context) {
+        WifiManager wm = (WifiManager)context.getSystemService(Context.WIFI_SERVICE);
+        String WLANMAC = wm.getConnectionInfo().getMacAddress();
+        return WLANMAC ;
+    }
+
 
     /**
      * 获取手机品牌

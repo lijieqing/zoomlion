@@ -1,5 +1,6 @@
 package com.kstech.zoomlion;
 
+import com.kstech.zoomlion.model.session.BaseSession;
 import com.kstech.zoomlion.model.vo.CheckItemParamValueVO;
 import com.kstech.zoomlion.utils.JsonUtils;
 

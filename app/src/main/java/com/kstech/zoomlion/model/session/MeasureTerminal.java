@@ -1,4 +1,4 @@
-package com.kstech.zoomlion.base;
+package com.kstech.zoomlion.model.session;
 
 /**
  * 测量终端对应实体类
@@ -56,5 +56,13 @@ public class MeasureTerminal {
 
     public void setJ1939ID(String j1939ID) {
         this.j1939ID = j1939ID;
+    }
+
+    @Override
+    public String toString() {
+        return "名称：'" + name + '\'' +
+                "\t\t\t终端IP：'" + ip + '\'' +
+                "\t\t\t终端端口：'" + port + '\'' +
+                "\t\t\t终端通讯ID：'" + j1939ID + '\'';
     }
 }
