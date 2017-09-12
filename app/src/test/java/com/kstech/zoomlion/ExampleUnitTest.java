@@ -1,12 +1,12 @@
 package com.kstech.zoomlion;
 
 import com.kstech.zoomlion.model.session.BaseSession;
+import com.kstech.zoomlion.model.session.UserSession;
 import com.kstech.zoomlion.model.vo.CheckItemParamValueVO;
 import com.kstech.zoomlion.utils.JsonUtils;
 
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -38,11 +38,9 @@ public class ExampleUnitTest {
 
     @Test
     public void JsonCreate(){
-        ArrayList<String> v = new ArrayList<>();
-        v.add("赵高");
-        v.add("李斯");
-        v.add("胡亥");
-        String s = JsonUtils.toJson(v);
-        System.out.println(s);
+//        BaseSession<UserBean> b = new BaseSession<>();
+        String s = "{\"data\":{\"last_login_time\":\"yyyy-MM-dd hh:mm:ss\",\"user_id\":\"1\",\"name\":\"ZS\",\"Cversion\":\"11\"}}";
+        UserSession session = JsonUtils.fromJson(s,UserSession.class);
+        UserSession d = session.getData();
     }
 }

@@ -5,7 +5,7 @@ import android.support.annotation.NonNull;
 import com.kstech.zoomlion.manager.DeviceModelFile;
 import com.kstech.zoomlion.model.db.CheckImageData;
 import com.kstech.zoomlion.model.session.MeasureTerminal;
-import com.kstech.zoomlion.model.session.UserBean;
+import com.kstech.zoomlion.model.session.UserSession;
 import com.kstech.zoomlion.model.vo.CheckItemParamValueVO;
 import com.kstech.zoomlion.view.widget.IRecyclerScrollListener;
 
@@ -64,7 +64,7 @@ public class Globals {
     /**
      * 当前登陆用户
      */
-    public static UserBean currentUser;
+    public static UserSession currentUser;
 
     /**
      * 当前测量终端

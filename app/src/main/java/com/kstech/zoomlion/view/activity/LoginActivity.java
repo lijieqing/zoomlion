@@ -24,18 +24,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kstech.zoomlion.R;
-import com.kstech.zoomlion.model.session.BaseSession;
 import com.kstech.zoomlion.model.session.MeasureTerminal;
 import com.kstech.zoomlion.model.session.URLCollections;
-import com.kstech.zoomlion.model.session.UserBean;
+import com.kstech.zoomlion.model.session.UserSession;
 import com.kstech.zoomlion.utils.DeviceUtil;
 import com.kstech.zoomlion.utils.Globals;
 import com.kstech.zoomlion.utils.JsonUtils;
 import com.kstech.zoomlion.utils.LogUtils;
 import com.kstech.zoomlion.utils.MyHttpUtils;
 import com.kstech.zoomlion.utils.SharedPreferencesUtils;
-
-import org.xutils.x;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -275,7 +272,7 @@ public class LoginActivity extends BaseActivity {
                 @Override
                 public void onSuccess(Object result, String whereRequest) {
                     LogUtils.e("LoginActivity", "onSuccess  " + result);
-                    BaseSession session = (BaseSession) JsonUtils.fromJson((String) result, BaseSession.class);
+                    UserSession session = JsonUtils.fromJson((String) result, UserSession.class);
                     if (session.isError()) {
                         mError = session.getError();
                         //// TODO: 2017/9/11 登录失败时间 status ID为1
@@ -284,7 +281,7 @@ public class LoginActivity extends BaseActivity {
                     } else {
                         status = 2;
                         //用户信息赋值给全局变量
-                        Globals.currentUser = (UserBean) session.getDataObject(UserBean.class);
+                        //Globals.currentUser = session.getData(UserBean.class);
                         onProgressUpdate();
                     }
                 }

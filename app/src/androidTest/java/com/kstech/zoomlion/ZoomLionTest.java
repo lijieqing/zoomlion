@@ -6,12 +6,12 @@ import android.support.test.runner.AndroidJUnit4;
 
 import com.kstech.zoomlion.model.session.BaseSession;
 import com.kstech.zoomlion.model.session.URLCollections;
+import com.kstech.zoomlion.model.session.UserSession;
 import com.kstech.zoomlion.utils.DeviceUtil;
 import com.kstech.zoomlion.utils.JsonUtils;
 import com.kstech.zoomlion.utils.LogUtils;
 import com.kstech.zoomlion.utils.MyHttpUtils;
 
-import org.json.JSONException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -64,8 +64,8 @@ public class ZoomLionTest {
         Context appContext = InstrumentationRegistry.getTargetContext();
         String macid = DeviceUtil.getMacid(appContext);
         HashMap<String, String> maps = new HashMap<>();
-        maps.put("username","test");
-        maps.put("password","123");
+        maps.put("username","ZhangSan");
+        maps.put("password","666666");
         maps.put("pad_mac",macid);
         maps.put("terminal_id","12");
         new MyHttpUtils().xutilsPost(null, URLCollections.USER_LOGIN, maps, new MyHttpUtils.MyHttpCallback() {
@@ -73,8 +73,7 @@ public class ZoomLionTest {
             public void onSuccess(Object result, String whereRequest){
                 LogUtils.e("ServerTest","onSuccess  " +result);
                 boolean error;
-                result = "{\"password\":\"123\",\"error\":\"\",\"pad_mac\":\"e0:a3:ac:a0:ef:e5\",\"terminal_id\":\"12\",\"username\":\"test\"}";
-                BaseSession session = (BaseSession) JsonUtils.fromJson((String) result, BaseSession.class);
+                UserSession session = JsonUtils.fromJson((String) result, UserSession.class);
                 error = session.isError();
                 LogUtils.e("ServerTest","onSuccess  " +error);
             }
@@ -93,9 +92,9 @@ public class ZoomLionTest {
     @Test
     public void DeviceListTest() throws Exception {
         HashMap<String, String> maps = new HashMap<>();
-        maps.put("user_id","16");
+        maps.put("user_id","1");
         maps.put("terminal_id","12");
-        maps.put("time","16");
+        maps.put("version","8");
         new MyHttpUtils().xutilsGet(null, URLCollections.DEVICE_LIST_GET, maps, new MyHttpUtils.MyHttpCallback() {
             @Override
             public void onSuccess(Object result, String whereRequest){

@@ -2,19 +2,14 @@ package com.kstech.zoomlion.model.session;
 
 import android.text.TextUtils;
 
-import com.kstech.zoomlion.utils.JsonUtils;
-
-import java.util.List;
-
 /**
  * Created by lijie on 2017/9/11.
  * <p>
  * 基础通讯类结构
- *
  */
-public class BaseSession {
+public class BaseSession<T> {
     private String error;
-    private String data;
+    private T data;
     private String version;
 
     /**
@@ -39,36 +34,9 @@ public class BaseSession {
         return error;
     }
 
-    /**
-     * 获取数据信息json串
-     *
-     * @return json字符串
-     */
-    public String getData() {
+
+    public T getData() {
         return data;
-    }
-
-    /**
-     * 获取数据信息Object
-     *
-     * @param <T>   the type parameter
-     * @param clazz the clazz
-     * @return 数据对象 data object
-     */
-    public <T> Object getDataObject(Class<T> clazz) {
-        return JsonUtils.fromJson(data,clazz);
-    }
-
-
-    /**
-     * 获取数据信息集合
-     *
-     * @param <T>   the type parameter
-     * @param clazz the clazz
-     * @return 对象集合 data array
-     */
-    public <T> List<T> getDataArray(Class<T> clazz) {
-        return JsonUtils.fromArrayJson(data,clazz);
     }
 
     /**
@@ -82,10 +50,9 @@ public class BaseSession {
 
     @Override
     public String toString() {
-        return "BaseSession{" +
-                "error='" + error + '\'' +
-                ", data='" + data + '\'' +
-                ", version='" + version + '\'' +
-                '}';
+        return "error='" + error +
+                ", data=" + data +
+//                ", datas=" + datas +
+                ", version='" + version;
     }
 }

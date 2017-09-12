@@ -1,7 +1,7 @@
 package com.kstech.zoomlion.base;
 
 
-import com.kstech.zoomlion.model.session.UserBean;
+import com.kstech.zoomlion.model.session.UserSession;
 
 /**
  * The type Login session.
@@ -46,7 +46,7 @@ public interface IUserSession {
      *
      * @param user 当前已登陆用户
      */
-    void userInfoLocalSave(UserBean user);
+    void userInfoLocalSave(UserSession user);
 
 
     /**
@@ -67,5 +67,5 @@ public interface IUserSession {
      * @param url     用户更新URL
      * @param handler 用来消息发送 android 对应android.os.Handler类
      */
-    void updateUserInfo(UserBean user, String url, Object handler);
+    void updateUserInfo(UserSession user, String url, Object handler);
 }

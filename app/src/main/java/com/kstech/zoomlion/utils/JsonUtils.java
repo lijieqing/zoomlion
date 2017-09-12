@@ -11,8 +11,8 @@ import java.util.List;
 
 public class JsonUtils {
 
-	public static <T extends Object> Object fromJson(String json, Class<T> clazz) {
-		Object object = null;
+	public static <T> T fromJson(String json, Class<T> clazz) {
+		T object = null;
 		try {
 			Gson gson = new Gson();
 			object = gson.fromJson(json, clazz);
