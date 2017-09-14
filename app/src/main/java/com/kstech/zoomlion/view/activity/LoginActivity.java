@@ -4,13 +4,17 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
@@ -25,6 +29,7 @@ import android.widget.Toast;
 
 import com.kstech.zoomlion.R;
 import com.kstech.zoomlion.model.session.MeasureTerminal;
+import com.kstech.zoomlion.model.session.RegisterSession;
 import com.kstech.zoomlion.model.session.URLCollections;
 import com.kstech.zoomlion.model.session.UserSession;
 import com.kstech.zoomlion.utils.DeviceUtil;
@@ -45,6 +50,7 @@ public class LoginActivity extends BaseActivity {
 
     private UserLoginTask mAuthTask = null;
     private TerminalLoadTask mTermTask = null;
+    private PadRegister padRegister = null;
 
     // UI references.
     private AutoCompleteTextView mNameView;
@@ -53,13 +59,19 @@ public class LoginActivity extends BaseActivity {
     private View mLoginFormView;
     private TextView mTerminalView;
     private TextView mPadInfoView;
+    private Button mSignInButton;
+
 
     private AlertDialog terminalDialog;
     private MeasureTerminal mMT = null;
 
+    private AlertDialog registerDialog;
+    private boolean isRegister = false;
+
     //Login Data
     private List<MeasureTerminal> terminalList = new ArrayList<>();
     private List<String> user_record;
+    private int registerID;
 
 
     @Override
@@ -74,7 +86,7 @@ public class LoginActivity extends BaseActivity {
         mPadInfoView = (TextView) findViewById(R.id.tv_pad_id);
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
-        Button mSignInButton = (Button) findViewById(R.id.email_sign_in_button);
+        mSignInButton = (Button) findViewById(R.id.email_sign_in_button);
 
         //点击空白收回键盘
         findViewById(R.id.ll_root).setOnClickListener(new OnClickListener() {
@@ -112,18 +124,82 @@ public class LoginActivity extends BaseActivity {
         });
 
         //平板mac地址显示
+        isRegister = isPadRegister();
+        changeRegisterStatus(isRegister);
+    }
+
+    /**
+     * 判断平板是否已注册
+     * @return
+     */
+    private boolean isPadRegister() {
+        boolean regist = false;
+
+        registerID = (int) SharedPreferencesUtils.getParam(this, Globals.PAD_HAS_REGISTER, -1);
+
+        if (registerID == -1) {
+            mPadInfoView.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    //创建view从当前activity获取loginactivity
+                    LayoutInflater inflater = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+                    View logview = inflater.inflate(R.layout.ll_admin_login, null);
+
+                    EditText username = logview.findViewById(R.id.txt_username);
+                    EditText password = logview.findViewById(R.id.txt_password);
+
+                    String name = username.getText().toString();
+                    String pass = password.getText().toString();
+
+                    padRegister = new PadRegister(name, pass);
+
+                    registerDialog = new AlertDialog.Builder(LoginActivity.this)
+                            .setTitle("平板注册")
+                            .setNeutralButton("注册", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    padRegister.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
+                                }
+                            })
+                            .setView(logview)
+                            .setNegativeButton("取消", null)
+                            .create();
+                    registerDialog.show();
+                }
+            });
+        } else {
+            regist = true;
+        }
+        return regist;
+    }
+
+    /**
+     * 根据是否已注册 改变相关控件的状态
+     * @param isRegister
+     */
+    private void changeRegisterStatus(boolean isRegister) {
         String id = DeviceUtil.getMacid(this);
         StringBuilder sb = new StringBuilder("平板MAC：");
         sb.append(id);
-        mPadInfoView.setText(sb.toString());
+        if (isRegister) {
+            mPadInfoView.setTextColor(Color.DKGRAY);
+            mSignInButton.setClickable(true);
+            mNameView.setEnabled(true);
+            mPasswordView.setEnabled(true);
+            mTerminalView.setEnabled(true);
+            mPadInfoView.setOnClickListener(null);
 
-    }
-
-    private void isPadRegister() {
-        boolean register = (boolean) SharedPreferencesUtils.getParam(this, Globals.PAD_HAS_REGISTER, false);
-        if (!register) {
-
+            mNameView.setText("ZhangSan");
+            mPasswordView.setText("666666");
+        } else {
+            sb.append("(未注册，点击注册)");
+            mPadInfoView.setTextColor(Color.RED);
+            mSignInButton.setClickable(false);
+            mNameView.setEnabled(false);
+            mPasswordView.setEnabled(false);
+            mTerminalView.setEnabled(false);
         }
+        mPadInfoView.setText(sb.toString());
     }
 
 
@@ -254,6 +330,12 @@ public class LoginActivity extends BaseActivity {
         private String mError;
         private int status = -1;
 
+        /**
+         * Instantiates a new User login task.
+         *
+         * @param name     the name
+         * @param password the password
+         */
         UserLoginTask(String name, String password) {
             mName = name;
             mPassword = password;
@@ -266,8 +348,8 @@ public class LoginActivity extends BaseActivity {
             HashMap<String, String> maps = new HashMap<>();
             maps.put("username", mName);
             maps.put("password", mPassword);
-            maps.put("pad_mac", macid);
-            maps.put("terminal_id", mMT.getId() + "");
+            maps.put("portable_dev_id", registerID + "");
+            maps.put("measure_dev_id", mMT.getId() + "");
             new MyHttpUtils().xutilsPost(null, URLCollections.USER_LOGIN, maps, new MyHttpUtils.MyHttpCallback() {
                 @Override
                 public void onSuccess(Object result, String whereRequest) {
@@ -348,19 +430,23 @@ public class LoginActivity extends BaseActivity {
     /**
      * 测量终端获取线程
      */
-    private class TerminalLoadTask extends AsyncTask<Void, Void, List<MeasureTerminal>> {
+    private class TerminalLoadTask extends AsyncTask<Void, Integer, List<MeasureTerminal>> {
+        /**
+         * The Adapter.
+         */
         ArrayAdapter<MeasureTerminal> adapter;
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            terminalList.clear();
             ListView view = new ListView(LoginActivity.this);
             view.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                     mMT = terminalList.get(i);
                     terminalDialog.cancel();
-                    onProgressUpdate();
+                    onProgressUpdate(2);
                 }
             });
 
@@ -379,14 +465,31 @@ public class LoginActivity extends BaseActivity {
 
         @Override
         protected List<MeasureTerminal> doInBackground(Void... voids) {
-            terminalList.clear();
-            MeasureTerminal mt;
-            for (int i = 0; i < 5; i++) {
-                mt = new MeasureTerminal(i, "192.168.0." + i, "400" + i, "name" + i, "3" + i);
-                terminalList.add(mt);
-            }
+            new MyHttpUtils().xutilsGet(null, URLCollections.TERMINAL_LIST_GET, null, new MyHttpUtils.MyHttpCallback() {
+                @Override
+                public void onSuccess(Object result, String whereRequest) {
+                    terminalList.clear();
+                    LogUtils.e("ServerTest", "onSuccess  " + result);
+                    MeasureTerminal session = JsonUtils.fromJson((String) result, MeasureTerminal.class);
+                    List<MeasureTerminal> temp = session.getData();
+                    if (temp.size() == 0) {
+                        onProgressUpdate(3);
+                    } else {
+                        terminalList.addAll(temp);
+                        onProgressUpdate(1);
+                    }
+                }
 
-            SystemClock.sleep(10000);
+                @Override
+                public void onError(Object errorMsg, String whereRequest) {
+                    LogUtils.e("ServerTest", "onError  " + errorMsg);
+                }
+
+                @Override
+                public void onLoading(long total, long current, boolean isDownloading) {
+                    LogUtils.e("ServerTest", "onLoading");
+                }
+            });
 
             return terminalList;
         }
@@ -394,15 +497,24 @@ public class LoginActivity extends BaseActivity {
         @Override
         protected void onPostExecute(List<MeasureTerminal> measureTerminals) {
             super.onPostExecute(measureTerminals);
-            terminalDialog.setMessage("");
 
-            adapter.notifyDataSetChanged();
         }
 
         @Override
-        protected void onProgressUpdate(Void... values) {
+        protected void onProgressUpdate(Integer... values) {
             super.onProgressUpdate(values);
-            mTerminalView.setText(mMT.getName());
+            switch (values[0]) {
+                case 1:
+                    terminalDialog.setTitle("测量终端选择");
+                    adapter.notifyDataSetChanged();
+                    break;
+                case 2:
+                    mTerminalView.setText(mMT.getName());
+                    break;
+                case 3:
+                    terminalDialog.setTitle("无可用测量终端");
+                    break;
+            }
         }
 
         @Override
@@ -416,28 +528,76 @@ public class LoginActivity extends BaseActivity {
     /**
      * 平板注册
      */
-    private class PadRegister extends AsyncTask<Void, Void, Integer> {
+    private class PadRegister extends AsyncTask<Void, Integer, Void> {
+        /**
+         * The Name.
+         */
+        String name;
+        /**
+         * The Pass.
+         */
+        String pass;
+        /**
+         * The Progress dialog.
+         */
+        ProgressDialog progressDialog;
+
+        /**
+         * Instantiates a new Pad register.
+         *
+         * @param name the name
+         * @param pass the pass
+         */
+        PadRegister(String name, String pass) {
+            this.name = name;
+            this.pass = pass;
+        }
 
         @Override
-        protected Integer doInBackground(Void... voids) {
-            int result = -1;
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressDialog = new ProgressDialog(LoginActivity.this);
+            progressDialog.setTitle("调试终端注册");
+            progressDialog.setMessage("验证管理员身份。。。。");
+            progressDialog.show();
+        }
 
-
+        @Override
+        protected Void doInBackground(Void... voids) {
+            SystemClock.sleep(2000);
             String id = DeviceUtil.getMacid(LoginActivity.this);
             HashMap<String, String> maps = new HashMap<>();
-            maps.put("username", "test");
-            maps.put("password", "123");
-            maps.put("pad_mac", id);
+            maps.put("username", name);
+            maps.put("password", pass);
+            maps.put("mac_addr", id);
             new MyHttpUtils().xutilsPost(null, URLCollections.REGISTER_PAD, maps, new MyHttpUtils.MyHttpCallback() {
                 @Override
                 public void onSuccess(Object result, String whereRequest) {
                     LogUtils.e("RegisterTest", "onSuccess  " + result);
+                    RegisterSession session = JsonUtils.fromJson((String) result, RegisterSession.class);
 
+                    if (session.isError()) {
+                        String error = session.getError();
+                        switch (error) {
+                            case "200":
+                                LogUtils.e("RegisterTest", "onSuccess  调试终端已注册 ");
+                                int padID = session.getData();
+                                SharedPreferencesUtils.setParam(LoginActivity.this, Globals.PAD_HAS_REGISTER, padID);
+                                publishProgress(2);
+                                break;
+                        }
+                    } else {
+                        int padID = session.getData();
+                        SharedPreferencesUtils.setParam(LoginActivity.this, Globals.PAD_HAS_REGISTER, padID);
+                        publishProgress(1);
+                        LogUtils.e("RegisterTest", "onSuccess  padID: " + padID);
+                    }
                 }
 
                 @Override
                 public void onError(Object errorMsg, String whereRequest) {
                     LogUtils.e("RegisterTest", "onError  " + errorMsg);
+                    Toast.makeText(LoginActivity.this, "与服务器通讯失败,错误信息:\n" + errorMsg, Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
@@ -445,18 +605,30 @@ public class LoginActivity extends BaseActivity {
                     LogUtils.e("RegisterTest", "onLoading");
                 }
             });
-            return result;
+
+            SystemClock.sleep(1000);
+            publishProgress(0);
+
+            return null;
         }
 
+
         @Override
-        protected void onPostExecute(Integer values) {
-            super.onPostExecute(values);
-            switch (values) {
+        protected void onProgressUpdate(Integer... values) {
+            super.onProgressUpdate(values);
+            switch (values[0]) {
                 case 1://注册成功
+                    progressDialog.setMessage("调试终端注册成功");
+                    changeRegisterStatus(true);
                     break;
-                case 2://注册失败
+                case 2://已注册
+                    progressDialog.setMessage("调试终端已注册");
+                    changeRegisterStatus(true);
                     break;
                 case 3://请求失败
+                    break;
+                case 0://取消进度条
+                    progressDialog.cancel();
                     break;
             }
         }

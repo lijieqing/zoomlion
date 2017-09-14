@@ -1,6 +1,5 @@
 package com.kstech.zoomlion;
 
-import com.kstech.zoomlion.model.session.BaseSession;
 import com.kstech.zoomlion.model.session.UserSession;
 import com.kstech.zoomlion.model.vo.CheckItemParamValueVO;
 import com.kstech.zoomlion.utils.JsonUtils;
@@ -37,10 +36,10 @@ public class ExampleUnitTest {
     }
 
     @Test
-    public void JsonCreate(){
+    public void JsonCreate() {
 //        BaseSession<UserBean> b = new BaseSession<>();
         String s = "{\"data\":{\"last_login_time\":\"yyyy-MM-dd hh:mm:ss\",\"user_id\":\"1\",\"name\":\"ZS\",\"Cversion\":\"11\"}}";
-        UserSession session = JsonUtils.fromJson(s,UserSession.class);
+        UserSession session = JsonUtils.fromJson(s, UserSession.class);
         UserSession d = session.getData();
     }
 }

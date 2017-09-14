@@ -1,21 +1,23 @@
 package com.kstech.zoomlion.model.session;
 
+import java.util.List;
+
 /**
  * 测量终端对应实体类
  */
-public class MeasureTerminal {
+public class MeasureTerminal extends BaseSession<List<MeasureTerminal>>{
     private int id;//对于服务器唯一标识ID
-    private String ip;//通讯IP
-    private String port;//通讯端口号
+    private String ip_addr;//通讯IP
+    private String port = "4004";//通讯端口号
     private String name;//测量终端名称
-    private String j1939ID;//J1939通讯ID
+    private String can_node_id;//J1939通讯ID
 
-    public MeasureTerminal(int id, String ip, String port, String name, String j1939ID) {
+    public MeasureTerminal(int id, String ip_addr, String port, String name, String can_node_id) {
         this.id = id;
-        this.ip = ip;
+        this.ip_addr = ip_addr;
         this.port = port;
         this.name = name;
-        this.j1939ID = j1939ID;
+        this.can_node_id = can_node_id;
     }
 
     public int getId() {
@@ -27,11 +29,11 @@ public class MeasureTerminal {
     }
 
     public String getIp() {
-        return ip;
+        return ip_addr;
     }
 
-    public void setIp(String ip) {
-        this.ip = ip;
+    public void setIp(String ip_addr) {
+        this.ip_addr = ip_addr;
     }
 
     public String getPort() {
@@ -51,18 +53,18 @@ public class MeasureTerminal {
     }
 
     public String getJ1939ID() {
-        return j1939ID;
+        return can_node_id;
     }
 
-    public void setJ1939ID(String j1939ID) {
-        this.j1939ID = j1939ID;
+    public void setJ1939ID(String can_node_id) {
+        this.can_node_id = can_node_id;
     }
 
     @Override
     public String toString() {
         return "名称：'" + name + '\'' +
-                "\t\t\t终端IP：'" + ip + '\'' +
+                "\t\t\t终端IP：'" + ip_addr + '\'' +
                 "\t\t\t终端端口：'" + port + '\'' +
-                "\t\t\t终端通讯ID：'" + j1939ID + '\'';
+                "\t\t\t终端通讯ID：'" + can_node_id + '\'';
     }
 }
