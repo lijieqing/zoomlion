@@ -5,6 +5,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.kstech.zoomlion.R;
+import com.kstech.zoomlion.utils.Globals;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
@@ -33,6 +34,7 @@ public class IndexActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         x.view().inject(this);
-        tvUserWelcome.setText("你好，张三，欢迎使用！");
+        String data = String.format(getString(R.string.index_welcome_user),Globals.currentUser.getName(),Globals.currentUser.getLast_login_time());
+        tvUserWelcome.setText(data);
     }
 }

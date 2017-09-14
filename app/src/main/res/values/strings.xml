@@ -22,6 +22,7 @@
     <string name="error_field_required">名字不能为空！！</string>
     <string name="copyright">Copyright 2017 Zoomlion Heavy Industry Science&amp;Technology Co., Ltd. All rights reserved. </string>
     <string name="error_no_terminal">未选择测量终端</string>
+    <string name="index_welcome_user">你好，%1$s,欢迎使用！！上次登陆时间：%2$s</string>
 
 
 </resources>

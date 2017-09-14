@@ -20,4 +20,36 @@ public class UserSession extends BaseSession<UserSession> {
                 super.toString() +
                 '}';
     }
+
+    public int getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getLast_login_time() {
+        return last_login_time;
+    }
+
+    public void setLast_login_time(String last_login_time) {
+        this.last_login_time = last_login_time;
+    }
+
+    public String getCversion() {
+        return Cversion;
+    }
+
+    public void setCversion(String cversion) {
+        Cversion = cversion;
+    }
 }

@@ -132,4 +132,45 @@ public class ZoomLionTest {
             }
         });
     }
+
+    @Test
+    public void Cancel(){
+        HashMap<String, String> maps = new HashMap<>();
+        maps.put("user_id","2");
+        new MyHttpUtils().xutilsPost(null, URLCollections.USER_CANCEL, maps, new MyHttpUtils.MyHttpCallback() {
+            @Override
+            public void onSuccess(Object result, String whereRequest){
+                LogUtils.e("ServerTest","onSuccess  " +result);
+            }
+
+            @Override
+            public void onError(Object errorMsg, String whereRequest) {
+                LogUtils.e("ServerTest","onError  "+ errorMsg);
+            }
+
+            @Override
+            public void onLoading(long total, long current, boolean isDownloading) {
+                LogUtils.e("ServerTest","onLoading");
+            }
+        });
+
+        maps.clear();
+        maps.put("user_id","1");
+        new MyHttpUtils().xutilsPost(null, URLCollections.USER_CANCEL, maps, new MyHttpUtils.MyHttpCallback() {
+            @Override
+            public void onSuccess(Object result, String whereRequest){
+                LogUtils.e("ServerTest","onSuccess  " +result);
+            }
+
+            @Override
+            public void onError(Object errorMsg, String whereRequest) {
+                LogUtils.e("ServerTest","onError  "+ errorMsg);
+            }
+
+            @Override
+            public void onLoading(long total, long current, boolean isDownloading) {
+                LogUtils.e("ServerTest","onLoading");
+            }
+        });
+    }
 }

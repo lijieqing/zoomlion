@@ -189,8 +189,6 @@ public class LoginActivity extends BaseActivity {
             mTerminalView.setEnabled(true);
             mPadInfoView.setOnClickListener(null);
 
-            mNameView.setText("ZhangSan");
-            mPasswordView.setText("666666");
         } else {
             sb.append("(未注册，点击注册)");
             mPadInfoView.setTextColor(Color.RED);
@@ -363,7 +361,7 @@ public class LoginActivity extends BaseActivity {
                     } else {
                         status = 2;
                         //用户信息赋值给全局变量
-                        //Globals.currentUser = session.getData(UserBean.class);
+                        Globals.currentUser = session.getData();
                         onProgressUpdate();
                     }
                 }
@@ -404,11 +402,11 @@ public class LoginActivity extends BaseActivity {
                     Globals.currentTerminal = mMT;
                     Toast.makeText(LoginActivity.this, "登陆成功，准备跳转", Toast.LENGTH_SHORT).show();
                     //保存用户到记录
-                    //SharedPreferencesUtils.setParam(LoginActivity.this,Globals.LAST_USER,mName);
+                    SharedPreferencesUtils.setParam(LoginActivity.this,Globals.LAST_USER,mName);
                     user_record.add(mName);
                     String sp = JsonUtils.toJson(user_record);
                     //添加到缓存列表
-                    //SharedPreferencesUtils.setParam(LoginActivity.this,Globals.USER_LOGIN_RECORD,sp);
+                    SharedPreferencesUtils.setParam(LoginActivity.this,Globals.USER_LOGIN_RECORD,sp);
                     Intent intent = new Intent(LoginActivity.this, IndexActivity.class);
                     startActivity(intent);
                     finish();
@@ -483,6 +481,7 @@ public class LoginActivity extends BaseActivity {
                 @Override
                 public void onError(Object errorMsg, String whereRequest) {
                     LogUtils.e("ServerTest", "onError  " + errorMsg);
+                    Toast.makeText(LoginActivity.this, "与服务器通讯失败,错误信息:\n" + errorMsg, Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
