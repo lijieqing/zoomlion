@@ -6,6 +6,7 @@ package com.kstech.zoomlion.model.xmlbean;
 
 public class DataCollectParam {
     private String Name;
+    private Integer Period;
 
     public String getName() {
         return Name;
@@ -15,10 +16,19 @@ public class DataCollectParam {
         Name = name;
     }
 
+    public Integer getPeriod() {
+        return Period;
+    }
+
+    public void setPeriod(Integer period) {
+        Period = period;
+    }
+
     @Override
     public String toString() {
         return "DataCollectParam{" +
                 "Name='" + Name + '\'' +
+                ", Period=" + Period +
                 '}';
     }
 }

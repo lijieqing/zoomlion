@@ -33,5 +33,6 @@ public class IndexActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         x.view().inject(this);
+        tvUserWelcome.setText("你好，张三，欢迎使用！");
     }
 }

@@ -40,7 +40,7 @@ public class ZoomLionTest {
         HashMap<String, String> maps = new HashMap<>();
         maps.put("username","test");
         maps.put("password","123");
-        maps.put("pad_mac",id);
+        maps.put("mac_addr",id);
         new MyHttpUtils().xutilsPost(null, URLCollections.REGISTER_PAD, maps, new MyHttpUtils.MyHttpCallback() {
             @Override
             public void onSuccess(Object result, String whereRequest) {
@@ -66,8 +66,8 @@ public class ZoomLionTest {
         HashMap<String, String> maps = new HashMap<>();
         maps.put("username","ZhangSan");
         maps.put("password","666666");
-        maps.put("pad_mac",macid);
-        maps.put("terminal_id","12");
+        maps.put("portable_dev_id","3");
+        maps.put("measure_dev_id","2");
         new MyHttpUtils().xutilsPost(null, URLCollections.USER_LOGIN, maps, new MyHttpUtils.MyHttpCallback() {
             @Override
             public void onSuccess(Object result, String whereRequest){
@@ -93,9 +93,29 @@ public class ZoomLionTest {
     public void DeviceListTest() throws Exception {
         HashMap<String, String> maps = new HashMap<>();
         maps.put("user_id","1");
-        maps.put("terminal_id","12");
+        maps.put("measure_dev_id","1");
         maps.put("version","8");
-        new MyHttpUtils().xutilsGet(null, URLCollections.DEVICE_LIST_GET, maps, new MyHttpUtils.MyHttpCallback() {
+        new MyHttpUtils().xutilsGet(null, URLCollections.DEVICE_LIST_GET, null, new MyHttpUtils.MyHttpCallback() {
+            @Override
+            public void onSuccess(Object result, String whereRequest){
+                LogUtils.e("ServerTest","onSuccess  " +result);
+            }
+
+            @Override
+            public void onError(Object errorMsg, String whereRequest) {
+                LogUtils.e("ServerTest","onError  "+ errorMsg);
+            }
+
+            @Override
+            public void onLoading(long total, long current, boolean isDownloading) {
+                LogUtils.e("ServerTest","onLoading");
+            }
+        });
+    }
+
+    @Test
+    public void MeasureDevListTest() throws Exception {
+        new MyHttpUtils().xutilsGet(null, URLCollections.TERMINAL_LIST_GET, null, new MyHttpUtils.MyHttpCallback() {
             @Override
             public void onSuccess(Object result, String whereRequest){
                 LogUtils.e("ServerTest","onSuccess  " +result);

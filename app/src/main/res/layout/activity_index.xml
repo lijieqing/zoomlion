@@ -7,6 +7,7 @@
     tools:context="com.kstech.zoomlion.view.activity.IndexActivity">
 
     <LinearLayout
+        android:id="@+id/index_ll_head"
         android:background="@drawable/ll_change_check_title_bg"
         android:layout_width="0dp"
         android:layout_height="85dp"
@@ -32,7 +33,6 @@
                 android:layout_height="wrap_content" />
             <TextView
                 android:id="@+id/index_tv_welcome"
-                android:text="你好，张三，欢迎使用！"
                 android:layout_alignParentBottom="true"
                 android:layout_centerInParent="true"
                 android:layout_width="wrap_content"
@@ -56,7 +56,9 @@
                 android:layout_marginBottom="8dp"
                 android:id="@+id/linearLayout"
                 app:layout_constraintHorizontal_bias="0.498"
-                app:layout_constraintVertical_bias="1.0">
+                app:layout_constraintVertical_bias="1.0"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp">
                 <ImageView
                     android:id="@+id/index_iv_server_status"
                     android:layout_gravity="center"
@@ -83,7 +85,9 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_marginBottom="8dp"
                 app:layout_constraintHorizontal_bias="0.528"
-                app:layout_constraintVertical_bias="1.0">
+                app:layout_constraintVertical_bias="1.0"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp">
                 <ImageView
                     android:id="@+id/index_iv_terminal_status"
                     android:layout_gravity="center"
@@ -99,5 +103,17 @@
             </LinearLayout>
 
         </android.support.constraint.ConstraintLayout>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="10dp"
+        android:background="@drawable/ll_change_login_bg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/index_ll_head">
+
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

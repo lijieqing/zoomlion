@@ -6,8 +6,17 @@ package com.kstech.zoomlion.model.xmlbean;
 
 public class Handwrite {
     private String Name;
+    private String Unit;
 
     public Handwrite() {
+    }
+
+    public String getUnit() {
+        return Unit;
+    }
+
+    public void setUnit(String unit) {
+        Unit = unit;
     }
 
     public String getName() {
@@ -22,6 +31,7 @@ public class Handwrite {
     public String toString() {
         return "Handwrite{" +
                 "Name='" + Name + '\'' +
+                ", Unit='" + Unit + '\'' +
                 '}';
     }
 }
