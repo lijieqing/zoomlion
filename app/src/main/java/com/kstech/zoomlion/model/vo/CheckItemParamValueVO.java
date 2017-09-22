@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
 import com.kstech.zoomlion.ExcException;
+import com.kstech.zoomlion.utils.Globals;
 import com.kstech.zoomlion.utils.JsonUtils;
 
 import java.io.Serializable;
@@ -31,6 +32,15 @@ public class CheckItemParamValueVO implements Comparable<CheckItemParamValueVO>,
 	private String value="";
 	private String unit="";
 	private String type;
+
+	private Boolean ValueReq;
+	private Boolean PicReq;
+	private String ValMode;
+	private String QCMode;
+
+	private String XParam;
+	private String XRange;
+
 	private String validMin;
 	private String validMax;
 	private String validAvg;
@@ -119,22 +129,22 @@ public class CheckItemParamValueVO implements Comparable<CheckItemParamValueVO>,
 	}
 	public void setValidMin(String validMin) {
 		this.validMin = validMin;
-		try {
-			Float.valueOf(validMin);
-		}catch (NumberFormatException e){
-			throw new ExcException(e,"配置信息异常！\n检测项目:"+ itemName +"\n 参数"+ paramName +"最小值 "+validMin+" 为非数字");
-		}
+//		try {
+//			Float.valueOf(validMin);
+//		}catch (NumberFormatException e){
+//			throw new ExcException(e,"配置信息异常！\n检测项目:"+ itemName +"\n 参数"+ paramName +"最小值 "+validMin+" 为非数字");
+//		}
 	}
 	public String getValidMax() {
 		return validMax;
 	}
 	public void setValidMax(String validMax) {
 		this.validMax = validMax;
-		try {
-			Float.valueOf(validMax);
-		}catch (NumberFormatException e){
-			throw new ExcException(e,"配置信息异常！\n检测项目:"+ itemName +"\n 参数"+ paramName +"最大值 "+validMax+" 为非数字");
-		}
+//		try {
+//			Float.valueOf(validMax);
+//		}catch (NumberFormatException e){
+//			throw new ExcException(e,"配置信息异常！\n检测项目:"+ itemName +"\n 参数"+ paramName +"最大值 "+validMax+" 为非数字");
+//		}
 	}
 	public String getValidAvg() {
 		return validAvg;
@@ -150,4 +160,57 @@ public class CheckItemParamValueVO implements Comparable<CheckItemParamValueVO>,
 		}
 		return i;
 	}
+
+	public Boolean getValueReq() {
+		return ValueReq;
+	}
+
+	public void setValueReq(Boolean valueReq) {
+		ValueReq = valueReq;
+	}
+
+	public Boolean getPicReq() {
+		if (PicReq == null){
+			PicReq = false;
+		}
+		return PicReq;
+	}
+
+	public void setPicReq(Boolean picReq) {
+		PicReq = picReq;
+	}
+
+	public String getValMode() {
+		return ValMode;
+	}
+
+	public void setValMode(String valMode) {
+		ValMode = valMode;
+	}
+
+	public String getQCMode() {
+		return QCMode;
+	}
+
+	public void setQCMode(String QCMode) {
+		this.QCMode = QCMode;
+	}
+
+	public String getXParam() {
+		return XParam;
+	}
+
+	public void setXParam(String XParam) {
+		this.XParam = XParam;
+	}
+
+	public String getXRange() {
+		return XRange;
+	}
+
+	public void setXRange(String XRange) {
+		this.XRange = XRange;
+	}
+
+
 }

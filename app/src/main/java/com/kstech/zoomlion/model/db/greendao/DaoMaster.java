@@ -21,25 +21,25 @@ public class DaoMaster extends AbstractDaoMaster {
 
     /** Creates underlying database table using DAOs. */
     public static void createAllTables(Database db, boolean ifNotExists) {
-        MsgSetDBDao.createTable(db, ifNotExists);
         AuthorizeRecordDao.createTable(db, ifNotExists);
         CheckChartDataDao.createTable(db, ifNotExists);
         CheckImageDataDao.createTable(db, ifNotExists);
         CheckItemDataDao.createTable(db, ifNotExists);
         CheckItemDetailDataDao.createTable(db, ifNotExists);
         CheckRecordDao.createTable(db, ifNotExists);
+        MsgSetDBDao.createTable(db, ifNotExists);
         ParamInitDataDao.createTable(db, ifNotExists);
     }
 
     /** Drops underlying database table using DAOs. */
     public static void dropAllTables(Database db, boolean ifExists) {
-        MsgSetDBDao.dropTable(db, ifExists);
         AuthorizeRecordDao.dropTable(db, ifExists);
         CheckChartDataDao.dropTable(db, ifExists);
         CheckImageDataDao.dropTable(db, ifExists);
         CheckItemDataDao.dropTable(db, ifExists);
         CheckItemDetailDataDao.dropTable(db, ifExists);
         CheckRecordDao.dropTable(db, ifExists);
+        MsgSetDBDao.dropTable(db, ifExists);
         ParamInitDataDao.dropTable(db, ifExists);
     }
 
@@ -59,13 +59,13 @@ public class DaoMaster extends AbstractDaoMaster {
 
     public DaoMaster(Database db) {
         super(db, SCHEMA_VERSION);
-        registerDaoClass(MsgSetDBDao.class);
         registerDaoClass(AuthorizeRecordDao.class);
         registerDaoClass(CheckChartDataDao.class);
         registerDaoClass(CheckImageDataDao.class);
         registerDaoClass(CheckItemDataDao.class);
         registerDaoClass(CheckItemDetailDataDao.class);
         registerDaoClass(CheckRecordDao.class);
+        registerDaoClass(MsgSetDBDao.class);
         registerDaoClass(ParamInitDataDao.class);
     }
 

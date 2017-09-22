@@ -11,10 +11,7 @@ import android.widget.TextView;
 import com.kstech.zoomlion.R;
 import com.kstech.zoomlion.model.db.CheckItemDetailData;
 import com.kstech.zoomlion.model.vo.CheckItemParamValueVO;
-import com.kstech.zoomlion.model.vo.CheckItemVO;
-import com.kstech.zoomlion.model.xmlbean.DataCollectParam;
 import com.kstech.zoomlion.utils.DeviceUtil;
-import com.kstech.zoomlion.utils.Globals;
 import com.kstech.zoomlion.utils.ItemFunctionUtils;
 import com.kstech.zoomlion.utils.JsonUtils;
 import com.kstech.zoomlion.utils.LogUtils;
@@ -30,15 +27,15 @@ public class BodyAdapter extends RecyclerView.Adapter<BodyAdapter.MyViewHolder> 
     private List<CheckItemParamValueVO> list;
     private CheckItemDetailData itemDetailData;
 
-    public BodyAdapter(Context context,@NonNull CheckItemDetailData itemDetailData) {
+    public BodyAdapter(Context context, @NonNull CheckItemDetailData itemDetailData) {
         this.context = context;
         this.itemDetailData = itemDetailData;
-        this.list = JsonUtils.fromArrayJson(itemDetailData.getParamsValues(),CheckItemParamValueVO.class);
+        this.list = JsonUtils.fromArrayJson(itemDetailData.getParamsValues(), CheckItemParamValueVO.class);
     }
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = View.inflate(context, R.layout.rv_check_item,null);
+        View view = View.inflate(context, R.layout.rv_check_item, null);
 
         return new MyViewHolder(view);
     }
@@ -46,16 +43,17 @@ public class BodyAdapter extends RecyclerView.Adapter<BodyAdapter.MyViewHolder> 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         int qcID = itemDetailData.getItemData().getQcId();
-        String paramName = list.get(position).getParamName();
-
-        holder.view.setMinimumWidth(DeviceUtil.deviceWidth(context)/15);
-        if (ItemFunctionUtils.isPICParam(paramName,qcID)){
+        CheckItemParamValueVO param = list.get(position);
+        String paramName = param.getParamName();
+        LogUtils.d("BodyAdapter",param.getParamName()+param.getPicReq());
+        holder.view.setMinimumWidth(DeviceUtil.deviceWidth(context) / 15);
+        if (param.getPicReq()) {
             holder.imageView.setBackgroundResource(R.drawable.pic);
             holder.textView.setText(list.get(position).getValue());
-        }else if (ItemFunctionUtils.isCollectParam(paramName,qcID)){
+        } else if (ItemFunctionUtils.isSpectrumParam(paramName, qcID)) {
             holder.textView.setText(list.get(position).getValue());
             holder.imageView.setBackgroundResource(R.drawable.chart_line);
-        }else {
+        } else {
             holder.imageView.setBackgroundResource(0);
             holder.textView.setText(list.get(position).getValue());
         }
@@ -67,10 +65,11 @@ public class BodyAdapter extends RecyclerView.Adapter<BodyAdapter.MyViewHolder> 
         return list.size();
     }
 
-    class MyViewHolder extends RecyclerView.ViewHolder{
+    class MyViewHolder extends RecyclerView.ViewHolder {
         View view;
         TextView textView;
         ImageView imageView;
+
         public MyViewHolder(View itemView) {
             super(itemView);
             view = itemView;

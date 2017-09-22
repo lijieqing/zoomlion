@@ -40,6 +40,9 @@ public class ItemOperateBodyView extends RelativeLayout {
     boolean isHandwriting = false;//是否手动输入参数值
     boolean isnovalue = false;//是否为无数值参数
 
+    boolean valueReq = true;//是否需要值
+    boolean picReq = false;//是否需要拍照
+
     private AlertDialog handwritingDialog;
     EditText et;
 
@@ -75,10 +78,6 @@ public class ItemOperateBodyView extends RelativeLayout {
         ivHandWriting = v.findViewById(R.id.iv_handwriting);
         radioGroup = v.findViewById(R.id.rg_pass);
 
-        isDialog = ItemFunctionUtils.isDialogParam(checkItemParamValueVO.getParamName(), qcID);
-        isHandwriting = ItemFunctionUtils.isHandWritingParam(checkItemParamValueVO.getParamName(), qcID);
-        isnovalue = ItemFunctionUtils.isNoValueParam(checkItemParamValueVO.getParamName(), qcID);
-
         //初始化参数功能信息
         paramFunInit();
 
@@ -88,14 +87,43 @@ public class ItemOperateBodyView extends RelativeLayout {
 
     private void paramFunInit() {
         tvParamName.setText(checkItemParamValueVO.getParamName());
-        if (isHandwriting) {
-            tvValue.setText("手动输入");
-            ivHandWriting.setVisibility(VISIBLE);
-            tvOperate.setText("手动输入数值");
-        } else if (isnovalue) {
+
+        if (checkItemParamValueVO.getValueReq()){//判断是否需要数值
+            String valMode = checkItemParamValueVO.getValMode();
+            switch (valMode){
+                case "Auto":
+                    tvValue.setText("测量终端获取");
+                    tvOperate.setText("测量终端获取数值");
+                    break;
+
+                case "Mann":
+                    tvValue.setText("手动输入");
+                    ivHandWriting.setVisibility(VISIBLE);
+                    tvOperate.setText("手动输入数值");
+                    break;
+
+                case "RealParam":
+                    tvValue.setText("实时参数数据");
+                    tvOperate.setText("自动采集");
+                    break;
+
+                case "Express":
+                    tvValue.setText("表达式计算");
+                    tvOperate.setText(checkItemParamValueVO.getValidAvg());
+                    break;
+
+            }
+
+            if (ItemFunctionUtils.isSpectrumParam(checkItemParamValueVO.getParamName(),Integer.parseInt(qcID))){
+                tvChart.setText("需要谱图");
+            }else {
+                tvChart.setText("无需谱图");
+            }
+        } else{
             tvValue.setText("无需数值");
             radioGroup.setVisibility(VISIBLE);
             tvOperate.setVisibility(GONE);
+            tvChart.setText("无需谱图");
 
             radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                 @Override
@@ -110,30 +138,14 @@ public class ItemOperateBodyView extends RelativeLayout {
                     }
                 }
             });
-
-        } else {
-            isDialog = true;
-            tvValue.setText("测量终端获取");
-            tvOperate.setText("测量终端获取数值");
         }
 
-        if (ItemFunctionUtils.isCollectParam(checkItemParamValueVO.getParamName(), Integer.parseInt(qcID))) {
-            if (isDialog) {
-                tvChart.setText("谱图采集");
-            } else {
-                tvChart.setText("非通讯参数");
-            }
-        } else {
-            tvChart.setText("无需");
-        }
-
-        if (ItemFunctionUtils.isPICParam(checkItemParamValueVO.getParamName(), Integer.parseInt(qcID))) {
+        if (checkItemParamValueVO.getPicReq()){//是否需要图片
             tvCamera.setText("拍照采集");
             ivCamera.setVisibility(VISIBLE);
-        } else {
+        }else {
             tvCamera.setText("无需");
         }
-
         ivCamera.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {

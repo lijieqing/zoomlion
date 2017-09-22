@@ -10,8 +10,9 @@ public class QCItem {
     private String QCTimes;
     private String ReadyTimeout;
     private String Require;
+    private String AttachPGN;
 
-    private Function function;
+    private Spectrum spectrum;
     private Msgs msgs;
     private QCParams qcParams;
     private ENVParams envParams;
@@ -99,11 +100,37 @@ public class QCItem {
     public void setRealTimeParams(Object realTimeParams) {
         this.realTimeParams = (RealTimeParams) realTimeParams;
     }
-    public Function getFunction() {
-        return function;
+
+    public String getAttachPGN() {
+        return AttachPGN;
     }
 
-    public void setFunction(Function function) {
-        this.function = function;
+    public Spectrum getSpectrum() {
+        return spectrum;
+    }
+
+    public void setSpectrum(Spectrum spectrum) {
+        this.spectrum = spectrum;
+    }
+
+    public void setAttachPGN(String attachPGN) {
+        AttachPGN = attachPGN;
+    }
+
+    @Override
+    public String toString() {
+        return "QCItem{" +
+                "Id='" + Id + '\'' +
+                ", Name='" + Name + '\'' +
+                ", QCTimeout='" + QCTimeout + '\'' +
+                ", QCTimes='" + QCTimes + '\'' +
+                ", ReadyTimeout='" + ReadyTimeout + '\'' +
+                ", Require='" + Require + '\'' +
+                ", AttachPGN='" + AttachPGN + '\'' +
+                ", msgs=" + msgs +
+                ", qcParams=" + qcParams +
+                ", envParams=" + envParams +
+                ", realTimeParams=" + realTimeParams +
+                '}';
     }
 }

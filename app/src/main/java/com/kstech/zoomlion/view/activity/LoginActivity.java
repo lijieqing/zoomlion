@@ -472,6 +472,7 @@ public class LoginActivity extends BaseActivity {
                     List<MeasureTerminal> temp = session.getData();
                     if (temp.size() == 0) {
                         onProgressUpdate(3);
+                        Toast.makeText(LoginActivity.this, "可用测量终端数为0  ！！", Toast.LENGTH_SHORT).show();
                     } else {
                         terminalList.addAll(temp);
                         onProgressUpdate(1);
@@ -481,6 +482,7 @@ public class LoginActivity extends BaseActivity {
                 @Override
                 public void onError(Object errorMsg, String whereRequest) {
                     LogUtils.e("ServerTest", "onError  " + errorMsg);
+                    onProgressUpdate(3);
                     Toast.makeText(LoginActivity.this, "与服务器通讯失败,错误信息:\n" + errorMsg, Toast.LENGTH_SHORT).show();
                 }
 

@@ -39,6 +39,7 @@
         <DSItem DataType="WORD" DecLen="0" Name="发动机转速" Unit="r/M" />
         <DSItem DataType="FLOAT" DecLen="2" Name="臂架泵压力" Unit="MPa"/>
         <DSItem DataType="FLOAT" DecLen="2" Name="液压油温温度" Unit="℃"/>
+        <DSItem DataType="Boolean" DecLen="0" Name="高低压" Unit="高压/低压"/>
 
         <DSItem DataType="FLOAT" DecLen="2" Name="左前支腿水平伸出时间" Unit="s" />
 
@@ -831,6 +832,7 @@
                     <QCParam Param="左前支腿水平伸出时间" ValidAvg="" ValidMax="" ValidMin="" />
                 </QCParams>
                 <ENVParams>
+                    <ENVParam Param="液压油温温度" ValidAvg="" ValidMax="" ValidMin=""/>
                 </ENVParams>
                 <RealTimeParams>
                     <RealTimeParam Name="液压油温温度" />
@@ -1170,8 +1172,6 @@
                     <RealTimeParam Name="主油泵压力" />
                     <RealTimeParam Name="高低压" />
                     <RealTimeParam Name="正反泵" />
-                    <RealTimeParam Name="档位（1）" />
-                    <RealTimeParam Name="档位（1）" />
                     <RealTimeParam Name="档位（10）" />
                 </RealTimeParams>
             </QCItem>
@@ -1812,6 +1812,7 @@
 
             <QCItem Id="82" Name="风扇开启情况" QCTimeout="20" QCTimes="1" ReadyTimeout="10"
                 Require="true">
+                <!--强制启动通讯，并且不处理返回数据-->
                 <Function Alter="false" Dialogue="true" AutoQualify="true">
                     <DataCollectParam Name="" Period="" />
                     <DialogParam Name="" />
@@ -1884,6 +1885,7 @@
                 </Msgs>
                 <QCParams>
                     <QCParam Param="模拟负载压力" ValidAvg="" ValidMax="" ValidMin="" />
+                    <QCParam Param="主油泵压力" ValidAvg="" ValidMax="" ValidMin="" />
                 </QCParams>
                 <ENVParams>
                 </ENVParams>

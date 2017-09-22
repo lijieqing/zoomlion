@@ -97,7 +97,7 @@ public class MainActivity extends BaseActivity {
             @Override
             public void run() {
                 try {
-                    modelFile = DeviceModelFile.readFromFile((Device) XMLAPI.readXML(getAssets().open("temp.xml")));
+                    modelFile = DeviceModelFile.readFromFile((Device) XMLAPI.readXML(getAssets().open("new.xml")));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

@@ -12,7 +12,6 @@ import com.kstech.zoomlion.model.db.CheckItemDetailData;
 import com.kstech.zoomlion.model.db.greendao.CheckImageDataDao;
 import com.kstech.zoomlion.model.vo.CheckItemVO;
 import com.kstech.zoomlion.model.xmlbean.Device;
-import com.kstech.zoomlion.model.xmlbean.Function;
 import com.kstech.zoomlion.utils.LogUtils;
 
 import org.junit.Test;
@@ -64,11 +63,6 @@ public class DaoTest {
         InputStream is = appContext.getAssets().open("temp.xml");
         Device device = (Device) XMLAPI.readXML(is);
         DeviceModelFile modle = DeviceModelFile.readFromFile(device);
-        for (CheckItemVO checkItemVO : modle.getCheckItemList()) {
-            Function fun = checkItemVO.getFunction();
-            LogUtils.e("TestXML",checkItemVO.getName());
-            LogUtils.e("TestXML",fun.toString());
-            LogUtils.e("TestXML","-------------------------");
-        }
+
     }
 }

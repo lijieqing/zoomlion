@@ -137,7 +137,6 @@ public class ExampleInstrumentedTest {
             for (CheckItemVO l : ls) {
                 LogUtils.d("KSTECH",l.getName());
                 LogUtils.d("KSTECH","是否必须 "+l.isRequire());
-                LogUtils.d("KSTECH",l.getFunction().toString());
             }
         }
 //        for (QCType qcType : o.getQcSet().getQcTypes()) {
@@ -151,7 +150,7 @@ public class ExampleInstrumentedTest {
     @Test
     public void InitItemDB() throws IOException {
         Context appContext = InstrumentationRegistry.getTargetContext();
-        Device o = (Device) XMLAPI.readXML(appContext.getAssets().open("temp.xml"));
+        Device o = (Device) XMLAPI.readXML(appContext.getAssets().open("new.xml"));
         DeviceModelFile mo = DeviceModelFile.readFromFile(o);
         GreenDaoUtils.initCheckRecord(mo);
     }
@@ -173,7 +172,6 @@ public class ExampleInstrumentedTest {
                 for (CheckItemVO l : ls) {
                     LogUtils.d("KSTECH",l.getName());
                     LogUtils.d("KSTECH","是否必须 "+l.isRequire());
-                    LogUtils.d("KSTECH",l.getFunction().toString());
                 }
             }
 

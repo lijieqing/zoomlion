@@ -454,9 +454,7 @@ public class DeviceModelFile {
 				checkItem.setAbortMsg(qcitemxml.getMsgs().getAbortMsg());
 				checkItem.setOkMsg(qcitemxml.getMsgs().getOkMsg());
 
-				//存入Function
-				checkItem.setFunction(qcitemxml.getFunction());
-
+				checkItem.setSpectrum(qcitemxml.getSpectrum());
 				List<QCProgress> qcprogress = qcitemxml.getMsgs().getQcProgressMsg().getQcProgresss();
 				for (QCProgress progressqc : qcprogress) {
 					checkItem.putProgressMsg(progressqc.getCode(), progressqc.getMsg());
@@ -470,6 +468,8 @@ public class DeviceModelFile {
 				List<RealTimeParam> qcrealtimes = qcitemxml.getRealTimeParams().getRealTimeParams();
 				for (QCParam qcparam : qcparams) {
 					checkItem.addQcParam(qcparam.getParam(),
+							qcparam.getValueReq(),qcparam.getPicReq(),qcparam.getValMode(),qcparam.getQCMode(),
+							qcparam.getXParam(),qcparam.getXRange(),
 							qcparam.getValidMin(),
 							qcparam.getValidMax(),
 							qcparam.getValidAvg());

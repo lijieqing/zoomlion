@@ -252,11 +252,11 @@
             <Data Value="0.0" />
         </DSItem>
         <!-- XXX校准系数和XXX校准偏移量，用于与检测终端同步 -->
-        <DSItem DataType="FLOAT"  Name="动臂伸出参数"  Value="8000.0" />
-        <DSItem DataType="FLOAT"  Name="斗杆伸出参数"  Value="8000.0" />
-        <DSItem DataType="FLOAT"  Name="斗杆收缩参数"  Value="8000.0" />
-        <DSItem DataType="FLOAT"  Name="铲斗伸出参数"  Value="8000.0" />
-        <DSItem DataType="FLOAT"  Name="铲斗收缩参数"  Value="8000.0" />
+        <DSItem DataType="FLOAT" Name="动臂伸出参数" Value="8000.0" />
+        <DSItem DataType="FLOAT" Name="斗杆伸出参数" Value="8000.0" />
+        <DSItem DataType="FLOAT" Name="斗杆收缩参数" Value="8000.0" />
+        <DSItem DataType="FLOAT" Name="铲斗伸出参数" Value="8000.0" />
+        <DSItem DataType="FLOAT" Name="铲斗收缩参数" Value="8000.0" />
         <!-- 命令与应答变量 -->
         <DSItem DataType="BYTE" Name="当前检测项目" />
         <DSItem DataType="BYTE" Name="当前检测次序" />
@@ -316,14 +316,14 @@
         <PG Dir="Rx" Len="8" PGN="0xF004" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x00" Type="2">
             <SP Bits="4" Bytes="0" Off="0" Ref="发动机扭矩模式" Res="1" SBit="1" SByte="1" SPN="899"
                 Type="1" />
-            <SP Bits="4" Bytes="0" Off="0" Ref="实际高精度扭矩百分比" Res="0.125" SBit="5" SByte="1" SPN="4154"
-                Type="1" />
+            <SP Bits="4" Bytes="0" Off="0" Ref="实际高精度扭矩百分比" Res="0.125" SBit="5" SByte="1"
+                SPN="4154" Type="1" />
             <SP Bits="0" Bytes="1" Off="-125" Ref="驾驶员请求扭矩百分比" Res="1" SBit="1" SByte="2" SPN="512"
                 Type="1" />
             <SP Bits="0" Bytes="1" Off="-125" Ref="实际扭矩百分比" Res="1" SBit="1" SByte="3" SPN="513"
                 Type="1" />
             <SP Bits="0" Bytes="2" Off="0" Ref="发动机转速" Res="0.125" SBit="1" SByte="4" SPN="190"
-                Type="1"/>
+                Type="1" />
             <SP Bits="0" Bytes="1" Off="0" Ref="发动机控制设备源地址" Res="1" SBit="1" SByte="6" SPN="1483"
                 Type="1" />
             <SP Bits="4" Bytes="0" Off="0" Ref="发动机启动模式" Res="1" SBit="1" SByte="7" SPN="1675"
@@ -406,22 +406,22 @@
         <PG Dir="Rx" Len="8" PGN="0xFF03" Prio="3" Rate="100" Req="0" ReqCyc="2000" SA="0x01"
             Type="2">
             <SP Bits="0" Bytes="4" Off="0" Ref="铲斗激光位移" Res="0.01" SBit="1" SByte="1" SPN="52215"
-                Type="1" >
+                Type="1">
                 <DTC FMI="5" Icon="60" MsgId="8" />
             </SP>
             <SP Bits="0" Bytes="4" Off="0" Ref="斗杆激光位移" Res="0.01" SBit="1" SByte="5" SPN="52216"
-                Type="1" >
+                Type="1">
                 <DTC FMI="5" Icon="60" MsgId="8" />
             </SP>
         </PG>
         <PG Dir="Rx" Len="8" PGN="0xFF04" Prio="3" Rate="100" Req="0" ReqCyc="2000" SA="0x01"
             Type="2">
             <SP Bits="0" Bytes="4" Off="0" Ref="动臂激光位移" Res="0.01" SBit="1" SByte="1" SPN="52217"
-                Type="1" >
+                Type="1">
                 <DTC FMI="5" Icon="60" MsgId="8" />
             </SP>
             <SP Bits="0" Bytes="4" Off="-40" Ref="油温温度" Res="1" SBit="1" SByte="5" SPN="52218"
-                Type="1" >
+                Type="1">
                 <DTC FMI="5" Icon="60" MsgId="7" />
             </SP>
         </PG>
@@ -503,10 +503,10 @@
                 Type="1" />
             <SP Bits="4" Bytes="0" Off="0" Ref="铲斗激光位移分度表工程值宽度" Res="1" SBit="5" SByte="2"
                 Type="1" />
-            <SP Bits="0" Bytes="铲斗激光位移分度表采样值宽度" Off="0" Ref="铲斗激光位移分度表采样值" Res="1" SBit="1" SByte="3"
-                Type="1" />
-            <SP Bits="0" Bytes="铲斗激光位移分度表工程值宽度" Off="0" Ref="铲斗激光位移分度表工程值" Res="1" SBit="1" SByte="0"
-                Type="1" />
+            <SP Bits="0" Bytes="铲斗激光位移分度表采样值宽度" Off="0" Ref="铲斗激光位移分度表采样值" Res="1" SBit="1"
+                SByte="3" Type="1" />
+            <SP Bits="0" Bytes="铲斗激光位移分度表工程值宽度" Off="0" Ref="铲斗激光位移分度表工程值" Res="1" SBit="1"
+                SByte="0" Type="1" />
         </PG>
         <PG Dir="Tx" Len="18" PGN="0xFF16" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
             <SP Bits="8" Bytes="1" Off="0" Ref="斗杆激光位移分度表行数" Res="1" SBit="1" SByte="1" Type="1" />
@@ -514,10 +514,10 @@
                 Type="1" />
             <SP Bits="4" Bytes="0" Off="0" Ref="斗杆激光位移分度表工程值宽度" Res="1" SBit="5" SByte="2"
                 Type="1" />
-            <SP Bits="0" Bytes="斗杆激光位移分度表采样值宽度" Off="0" Ref="斗杆激光位移分度表采样值" Res="1" SBit="1" SByte="3"
-                Type="1" />
-            <SP Bits="0" Bytes="斗杆激光位移分度表工程值宽度" Off="0" Ref="斗杆激光位移分度表工程值" Res="1" SBit="1" SByte="0"
-                Type="1" />
+            <SP Bits="0" Bytes="斗杆激光位移分度表采样值宽度" Off="0" Ref="斗杆激光位移分度表采样值" Res="1" SBit="1"
+                SByte="3" Type="1" />
+            <SP Bits="0" Bytes="斗杆激光位移分度表工程值宽度" Off="0" Ref="斗杆激光位移分度表工程值" Res="1" SBit="1"
+                SByte="0" Type="1" />
         </PG>
         <PG Dir="Tx" Len="18" PGN="0xFF17" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
             <SP Bits="8" Bytes="1" Off="0" Ref="动臂激光位移分度表行数" Res="1" SBit="1" SByte="1" Type="1" />
@@ -525,10 +525,10 @@
                 Type="1" />
             <SP Bits="4" Bytes="0" Off="0" Ref="动臂激光位移分度表工程值宽度" Res="1" SBit="5" SByte="2"
                 Type="1" />
-            <SP Bits="0" Bytes="动臂激光位移分度表采样值宽度" Off="0" Ref="动臂激光位移分度表采样值" Res="1" SBit="1" SByte="3"
-                Type="1" />
-            <SP Bits="0" Bytes="动臂激光位移分度表工程值宽度" Off="0" Ref="动臂激光位移分度表工程值" Res="1" SBit="1" SByte="0"
-                Type="1" />
+            <SP Bits="0" Bytes="动臂激光位移分度表采样值宽度" Off="0" Ref="动臂激光位移分度表采样值" Res="1" SBit="1"
+                SByte="3" Type="1" />
+            <SP Bits="0" Bytes="动臂激光位移分度表工程值宽度" Off="0" Ref="动臂激光位移分度表工程值" Res="1" SBit="1"
+                SByte="0" Type="1" />
         </PG>
         <PG Dir="Tx" Len="18" PGN="0xFF18" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
             <SP Bits="8" Bytes="1" Off="0" Ref="流量计分度表行数" Res="1" SBit="1" SByte="1" Type="1" />
@@ -696,11 +696,13 @@
 
         </PG>
         <PG Dir="Rx" Len="8" PGN="0xFF40" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
-            <SP Bits="8" Bytes="4" Off="0" Ref="左回转速度" Res="0.001" SBit="1" SByte="1" SPN="0" Type="1" />
+            <SP Bits="8" Bytes="4" Off="0" Ref="左回转速度" Res="0.001" SBit="1" SByte="1" SPN="0"
+                Type="1" />
         </PG>
 
         <PG Dir="Rx" Len="8" PGN="0xFF41" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
-            <SP Bits="8" Bytes="4" Off="0" Ref="右回转速度" Res="0.001" SBit="1" SByte="1" SPN="0" Type="1" />
+            <SP Bits="8" Bytes="4" Off="0" Ref="右回转速度" Res="0.001" SBit="1" SByte="1" SPN="0"
+                Type="1" />
         </PG>
 
         <PG Dir="Rx" Len="8" PGN="0xFF47" Prio="3" Rate="100" Req="0" ReqCyc="0" SA="0x01" Type="2">
@@ -800,719 +802,1344 @@
     <!-- ************************************************************************************************************** -->
 
 
-    <!-- 定义各检测项目
-    Alter：是否需要标定、Dialogue：是否需要与测量终端通讯、
-    AutoQualify：是否需要自动判定结果、Camera：是否需要拍照、
-    Handwriting：是否需要手动输入结论、Chart：是否需要捕获谱图-->
     <QCSet>
-        <QCType Name="压力">
-            <QCItem Id="11" Name="先导压力最低档位" QCTimeout="20" QCTimes="3" ReadyTimeout="1" Require="false">
-                <Function Alter="true" Dialogue="true" AutoQualify="true" >
-                    <DataCollectParam Name="先导压力怠速"/>
-                    <PICParam Name="油温温度"/>
-                    <Handwrite Name="油温温度"/>
-                    <DialogParam Name="先导压力怠速"/>
-                    <AlterDatas Name="先导压力怠速">
-                        <AlterData XValue="1" YValue="45"/>
-                        <AlterData XValue="2" YValue="90"/>
-                    </AlterDatas>
-                </Function>
-                <Msgs AbortMsg="" NotReadyMsg="fmi1" OkMsg="fmi31" ReadyMsg="fmi50">
-                    <QCProgressMsg>
-                        <QCProgress Code="4" Msg="fmi20" />
-                        <QCProgress Code="" Msg="" />
-                    </QCProgressMsg>
-                    <QCErrMsg>
-                        <QCErr Code="1" Msg="fmi1" />
-                        <QCErr Code="2" Msg="fmi2" />
-                    </QCErrMsg>
-                </Msgs>
-                <QCParams>
-                    <QCParam Param="先导压力怠速" ValidAvg="" ValidMax="4.0" ValidMin="3.5" />
-                </QCParams>
-                <ENVParams>
-                    <ENVParam Param="油温温度" ValidAvg="" ValidMax="100" ValidMin="0" />
-                </ENVParams>
-                <RealTimeParams>
-                    <RealTimeParam Name="先导压力" />
-                    <RealTimeParam Name="油温温度" />
-                </RealTimeParams>
-            </QCItem>
-            <QCItem Id="10" Name="先导压力最高档位" QCTimeout="20" QCTimes="3" ReadyTimeout="1" Require="true">
-                <Function Alter="true" Dialogue="true" AutoQualify="true">
-                    <NoValueParam Name="先导压力最高转速"/>
-                    <PICParam Name="先导压力最高转速"/>
-                    <Handwrite Name="油温温度"/>
-                </Function>
-                <Msgs AbortMsg="" NotReadyMsg="fmi1" OkMsg="fmi31" ReadyMsg="fmi50">
-                    <QCProgressMsg>
-                        <QCProgress Code="4" Msg="fmi20" />
-                        <QCProgress Code="" Msg="" />
-                    </QCProgressMsg>
-                    <QCErrMsg>
-                        <QCErr Code="1" Msg="fmi1" />
-                        <QCErr Code="2" Msg="fmi2" />
-                    </QCErrMsg>
-                </Msgs>
-                <QCParams>
-                    <QCParam Param="先导压力最高转速" ValidAvg="" ValidMax="4.1" ValidMin="3.9" />
-                </QCParams>
-                <ENVParams>
-                    <ENVParam Param="油温温度" ValidAvg="" ValidMax="100" ValidMin="0" />
-                </ENVParams>
+        <!--getDBParam（paramName）获取paramName在数据库的最新一条数据-->
+        <!--getRealParam(paramName) 获取paramName的实时参数数值-->
+        <!--getPicTime(paramName)获取paramName在数据库的图片保存日期-->
+        <!--getCurrentParam(paramName)获取当前调试项目参数paramName的值-->
+        <!--getMouthTemperature() 根据当前月份获取温度标准-->
+        <!--expPower(paramName) 从dsitem内获取名称为paramName的数据集合-->
 
-                <RealTimeParams>
-                    <RealTimeParam Name="先导压力" />
-                    <RealTimeParam Name="油温温度" />
-                </RealTimeParams>
-            </QCItem>
-            <QCItem Id="1" Name="主系统压力" QCTimeout="20" QCTimes="3" ReadyTimeout="1" Require="true">
-                <Function Alter="true" Dialogue="true" AutoQualify="true">
-                    <DataCollectParam Name=""/>
-                    <AlterDatas Name="先导压力最高转速">
-                        <AlterData XValue="1" YValue="45"/>
-                        <AlterData XValue="2" YValue="90"/>
-                    </AlterDatas>
-                </Function>
-                <!-- 检测项目使用的提示信息
-                    ReadyMsg    - 检测准备就绪提示,在发出“准备检测”命令并收到“准备就绪”应答后显示
-                    NotReadyMsg - 检测准备未就绪（未达检测条件）提示，在发出“准备检测”命令并收到“传感器故障”应答时显示
-                    AbortMsg    - 检测中止提示，在检测过程中选择“中止检测”发出中止命令且收到“本次测量中止”时显示
-                    OkMsg       - 检测完成提示，在收到“检测完成”应答时显示
-                 -->
-                <Msgs AbortMsg="fmi19" NotReadyMsg="fmi1" OkMsg="fmi31" ReadyMsg="fmi50">
-                    <QCProgressMsg>
-                        <!-- 当收到“正在检测”应答时显示的提示信息，具体内容根据应答帧中的“检测指示码”而定 -->
-                        <QCProgress Code="1" Msg="fmi20" />
-                        <QCProgress Code="2" Msg="fmi20" />
-                        <QCProgress Code="4" Msg="fmi20" />
-                    </QCProgressMsg>
-                    <QCErrMsg>
-                        <!-- 当收到“检测失败”应答时显示的提示信息，具体内容根据应答帧中的“检测指示码”而定 -->
-                        <QCErr Code="1" Msg="fmi1" />
-                        <QCErr Code="2" Msg="fmi2" />
-                    </QCErrMsg>
-                </Msgs>
-                <QCParams>
-                    <!-- 检测主参数 在发出准备检测命令前需要判定主参数所连接传感器（LinkTo属性所指传感器）的故障状态，
-                        只要有一个传感器故障就不能发出命令 -->
-                    <QCParam Param="主系统压力" ValidAvg="55" ValidMax="35.5" ValidMin="34.3" />
-                </QCParams>
-                <ENVParams>
-                    <!-- 检测环境参数 在发出准备检测命令前环境参数必须无故障且在指定范围内
-                        只要有一个环境参数不满足条件就不能发出命令 -->
-                    <ENVParam Param="油温温度" ValidAvg="0" ValidMax="100" ValidMin="0" />
-                </ENVParams>
+        <!--ValueReq: 检测参数项是否有值-->
+            <!--true 	 ; ; 有值（默认）-->
+            <!--false 	 ; ; 无值，比如外观检测项-->
 
-                <RealTimeParams>
-                    <RealTimeParam Name="左泵压力" />
-                    <RealTimeParam Name="右泵压力" />
-                    <RealTimeParam Name="油温温度" />
-                </RealTimeParams>
-            </QCItem>
-            <QCItem Id="3" Name="主系统压力(增压)" QCTimeout="20" QCTimes="3" ReadyTimeout="1" Require="true">
-                <Function Alter="true" Dialogue="true" AutoQualify="true">
-                    <DataCollectParam Name=""/>
-                    <AlterDatas Name="先导压力最高转速">
-                        <AlterData XValue="1" YValue="45"/>
-                        <AlterData XValue="2" YValue="90"/>
-                    </AlterDatas>
-                </Function>
-                <Msgs AbortMsg="" NotReadyMsg="fmi1" OkMsg="fmi31" ReadyMsg="fmi50">
-                    <QCProgressMsg>
-                        <QCProgress Code="4" Msg="fmi20" />
-                        <QCProgress Code="" Msg="" />
-                    </QCProgressMsg>
-                    <QCErrMsg>
-                        <QCErr Code="1" Msg="fmi1" />
-                        <QCErr Code="2" Msg="fmi2" />
-                    </QCErrMsg>
-                </Msgs>
-                <QCParams>
-                    <QCParam Param="主系统压力(增压)" ValidAvg="" ValidMax="38.4" ValidMin="37.2" />
-                </QCParams>
-                <ENVParams>
-                    <ENVParam Param="油温温度" ValidAvg="" ValidMax="100" ValidMin="0" />
-                </ENVParams>
+        <!--PicReq: 检测参数项是否要拍照留存-->
+            <!--true      ; ; 要拍照留存-->
+            <!--false       ; ; 不需要拍照留存（默认）-->
 
-                <RealTimeParams>
-                    <RealTimeParam Name="左泵压力" />
-                    <RealTimeParam Name="右泵压力" />
-                    <RealTimeParam Name="油温温度" />
-                </RealTimeParams>
-            </QCItem>
-            <QCItem Id="5" Name="左回转压力" QCTimeout="20" QCTimes="3" ReadyTimeout="1" Require="true">
-                <Function Alter="true" Dialogue="true" AutoQualify="true">
-                    <DataCollectParam Name=""/>
-                    <AlterDatas Name="先导压力最高转速">
-                        <AlterData XValue="1" YValue="45"/>
-                        <AlterData XValue="2" YValue="90"/>
-                    </AlterDatas>
-                </Function>
-                <Msgs AbortMsg="" NotReadyMsg="fmi1" OkMsg="fmi31" ReadyMsg="fmi50">
-                    <QCProgressMsg>
-                        <QCProgress Code="4" Msg="fmi20" />
-                        <QCProgress Code="" Msg="" />
-                    </QCProgressMsg>
-                    <QCErrMsg>
-                        <QCErr Code="1" Msg="fmi1" />
-                        <QCErr Code="2" Msg="fmi2" />
-                    </QCErrMsg>
-                </Msgs>
-                <QCParams>
-                    <QCParam Param="左回转压力" ValidAvg="" ValidMax="28.5" ValidMin="26.5" />
-                </QCParams>
-                <ENVParams>
-                    <ENVParam Param="油温温度" ValidAvg="" ValidMax="100" ValidMin="0" />
-                </ENVParams>
+        <!--ValMode: 检测参数值的获取方式,只当ValReq="Yes"时有意义-->
+            <!--Auto      ;  ; 通过向测量终端发送检测命令得到数据 作为结果（默认）-->
+            <!--Mann      ;  ; 人工在输入框中输入检测参数值作为结果-->
+            <!--RealParam   ;  ; 获取当前参数的实时数值作为结果-->
+            <!--Express   ;  ; 根据表达式获取数据，描述规则在ValidAvg中-->
 
-                <RealTimeParams>
-                    <RealTimeParam Name="左泵压力" />
-                    <RealTimeParam Name="右泵压力" />
-                    <RealTimeParam Name="油温温度" />
-                </RealTimeParams>
-            </QCItem>
-            <QCItem Id="6" Name="右回转压力" QCTimeout="20" QCTimes="3" ReadyTimeout="1" Require="true">
-                <Function Alter="true" Dialogue="true" AutoQualify="true">
-                    <DataCollectParam Name=""/>
-                    <AlterDatas Name="先导压力最高转速">
-                        <AlterData XValue="1" YValue="45"/>
-                        <AlterData XValue="2" YValue="90"/>
-                    </AlterDatas>
-                </Function>
-                <Msgs AbortMsg="" NotReadyMsg="fmi1" OkMsg="fmi31" ReadyMsg="fmi50">
-                    <QCProgressMsg>
-                        <QCProgress Code="4" Msg="fmi20" />
-                        <QCProgress Code="" Msg="" />
-                    </QCProgressMsg>
-                    <QCErrMsg>
-                        <QCErr Code="1" Msg="fmi1" />
-                        <QCErr Code="2" Msg="fmi2" />
-                    </QCErrMsg>
-                </Msgs>
-                <QCParams>
-                    <QCParam Param="右回转压力" ValidAvg="" ValidMax="28.5" ValidMin="26.5" />
-                </QCParams>
-                <ENVParams>
-                    <ENVParam Param="油温温度" ValidAvg="" ValidMax="100" ValidMin="0" />
-                </ENVParams>
+        <!--QCMode: 检测参数是否合格的判定方式-->
+            <!--Auto   ;  ; 得到参数值(自动得到或手式输入）后通过所配置的合格范围属性值来自动判定是否合格，只适用于ValueReq="Yes"且配置了有效的合格范围时（默认）-->
+            <!--Mann   ;  ; 通过人工点选复选框来判定是否合格，适用于：ValueReq="No"或未配置有效的合格值范围时-->
+            <!--None   ;  ; 只记录，无需判定是否合格-->
 
-                <RealTimeParams>
-                    <RealTimeParam Name="左泵压力" />
-                    <RealTimeParam Name="右泵压力" />
-                    <RealTimeParam Name="油温温度" />
-                </RealTimeParams>
-            </QCItem>
-            <QCItem Id="9" Name="行走压力" QCTimeout="20" QCTimes="3" ReadyTimeout="1" Require="true">
-                <Function Alter="true" Dialogue="true" AutoQualify="true">
-                    <DataCollectParam Name=""/>
-                    <AlterDatas Name="先导压力最高转速">
-                        <AlterData XValue="1" YValue="45"/>
-                        <AlterData XValue="2" YValue="90"/>
-                    </AlterDatas>
-                </Function>
-                <Msgs AbortMsg="" NotReadyMsg="fmi1" OkMsg="fmi31" ReadyMsg="fmi50">
-                    <QCProgressMsg>
-                        <QCProgress Code="4" Msg="fmi20" />
-                        <QCProgress Code="" Msg="" />
-                    </QCProgressMsg>
-                    <QCErrMsg>
-                        <QCErr Code="1" Msg="fmi1" />
-                        <QCErr Code="2" Msg="fmi2" />
-                    </QCErrMsg>
-                </Msgs>
-                <QCParams>
-                    <QCParam Param="左行走压力" ValidAvg="" ValidMax="35.5" ValidMin="34.3" />
-                    <QCParam Param="右行走压力" ValidAvg="" ValidMax="35.5" ValidMin="34.3" />
-                </QCParams>
-                <ENVParams>
-                    <ENVParam Param="油温温度" ValidAvg="" ValidMax="100" ValidMin="0" />
-                </ENVParams>
-
-                <RealTimeParams>
-                    <RealTimeParam Name="左泵压力" />
-                    <RealTimeParam Name="右泵压力" />
-                    <RealTimeParam Name="油温温度" />
-                </RealTimeParams>
-            </QCItem>
-        </QCType>
-        <QCType Name="速度">
-            <QCItem Id="12" Name="动臂油缸伸出速度" QCTimeout="20" QCTimes="3" ReadyTimeout="1" Require="true">
-                <Function Alter="true" Dialogue="true" AutoQualify="true">
-                    <DataCollectParam Name=""/>
-                    <AlterDatas Name="先导压力最高转速">
-                        <AlterData XValue="1" YValue="45"/>
-                        <AlterData XValue="2" YValue="90"/>
-                    </AlterDatas>
-                </Function>
-                <Msgs AbortMsg="" NotReadyMsg="fmi1" OkMsg="fmi31" ReadyMsg="fmi50">
-                    <QCProgressMsg>
-                        <QCProgress Code="4" Msg="fmi20" />
-                        <QCProgress Code="" Msg="" />
-                    </QCProgressMsg>
-                    <QCErrMsg>
-                        <QCErr Code="1" Msg="fmi1" />
-                        <QCErr Code="2" Msg="fmi2" />
-                    </QCErrMsg>
-                </Msgs>
-                <QCParams>
-                    <QCParam Param="动臂油缸伸出速度" ValidAvg="" ValidMax="4" ValidMin="3" />
-                </QCParams>
-                <ENVParams>
-                    <ENVParam Param="油温温度" ValidAvg="" ValidMax="100" ValidMin="0" />
-                </ENVParams>
-
-                <RealTimeParams>
-                    <RealTimeParam Name="右泵压力" />
-                    <RealTimeParam Name="油温温度" />
-                </RealTimeParams>
-            </QCItem>
-            <QCItem Id="14" Name="斗杆油缸收缩速度" QCTimeout="20" QCTimes="3" ReadyTimeout="1" Require="true">
-                <Function Alter="true" Dialogue="true" AutoQualify="true">
-                    <DataCollectParam Name=""/>
-                    <AlterDatas Name="先导压力最高转速">
-                        <AlterData XValue="1" YValue="45"/>
-                        <AlterData XValue="2" YValue="90"/>
-                    </AlterDatas>
-                </Function>
-                <Msgs AbortMsg="" NotReadyMsg="fmi1" OkMsg="fmi31" ReadyMsg="fmi50">
-                    <QCProgressMsg>
-                        <QCProgress Code="4" Msg="fmi20" />
-                        <QCProgress Code="" Msg="" />
-                    </QCProgressMsg>
-                    <QCErrMsg>
-                        <QCErr Code="1" Msg="fmi1" />
-                        <QCErr Code="2" Msg="fmi2" />
-                    </QCErrMsg>
-                </Msgs>
-                <QCParams>
-                    <QCParam Param="斗杆油缸收缩速度" ValidAvg="" ValidMax="3.1" ValidMin="2.1" />
-                </QCParams>
-                <ENVParams>
-                    <ENVParam Param="油温温度" ValidAvg="" ValidMax="100" ValidMin="0" />
-                </ENVParams>
-
-                <RealTimeParams>
-                    <RealTimeParam Name="右泵压力" />
-                    <RealTimeParam Name="油温温度" />
-                </RealTimeParams>
-            </QCItem>
-            <QCItem Id="15" Name="斗杆油缸伸出速度" QCTimeout="20" QCTimes="3" ReadyTimeout="1" Require="true">
-                <Function Alter="true" Dialogue="true" AutoQualify="true">
-                    <DataCollectParam Name=""/>
-                    <AlterDatas Name="先导压力最高转速">
-                        <AlterData XValue="1" YValue="45"/>
-                        <AlterData XValue="2" YValue="90"/>
-                    </AlterDatas>
-                </Function>
-                <Msgs AbortMsg="" NotReadyMsg="fmi1" OkMsg="fmi31" ReadyMsg="fmi50">
-                    <QCProgressMsg>
-                        <QCProgress Code="4" Msg="fmi20" />
-                        <QCProgress Code="" Msg="" />
-                    </QCProgressMsg>
-                    <QCErrMsg>
-                        <QCErr Code="1" Msg="fmi1" />
-                        <QCErr Code="2" Msg="fmi2" />
-                    </QCErrMsg>
-                </Msgs>
-                <QCParams>
-                    <QCParam Param="斗杆油缸伸出速度" ValidAvg="" ValidMax="3.5" ValidMin="2.5" />
-                </QCParams>
-                <ENVParams>
-                    <ENVParam Param="油温温度" ValidAvg="" ValidMax="100" ValidMin="0" />
-                </ENVParams>
-
-                <RealTimeParams>
-                    <RealTimeParam Name="右泵压力" />
-                    <RealTimeParam Name="油温温度" />
-                </RealTimeParams>
-            </QCItem>
-            <QCItem Id="18" Name="铲斗油缸收缩速度" QCTimeout="20" QCTimes="3" ReadyTimeout="1" Require="true">
-                <Function Alter="true" Dialogue="true" AutoQualify="true">
-                    <DataCollectParam Name=""/>
-                    <AlterDatas Name="先导压力最高转速">
-                        <AlterData XValue="1" YValue="45"/>
-                        <AlterData XValue="2" YValue="90"/>
-                    </AlterDatas>
-                </Function>
-                <Msgs AbortMsg="" NotReadyMsg="fmi1" OkMsg="fmi31" ReadyMsg="fmi50">
-                    <QCProgressMsg>
-                        <QCProgress Code="4" Msg="fmi20" />
-                        <QCProgress Code="" Msg="" />
-                    </QCProgressMsg>
-                    <QCErrMsg>
-                        <QCErr Code="1" Msg="fmi1" />
-                        <QCErr Code="2" Msg="fmi2" />
-                    </QCErrMsg>
-                </Msgs>
-                <QCParams>
-                    <QCParam Param="铲斗油缸收缩速度" ValidAvg="" ValidMax="2.4" ValidMin="1.4" />
-                </QCParams>
-                <ENVParams>
-                    <ENVParam Param="油温温度" ValidAvg="" ValidMax="100" ValidMin="0" />
-                </ENVParams>
-
-                <RealTimeParams>
-                    <RealTimeParam Name="右泵压力" />
-                    <RealTimeParam Name="油温温度" />
-                </RealTimeParams>
-            </QCItem>
-            <QCItem Id="19" Name="铲斗油缸伸出速度" QCTimeout="20" QCTimes="3" ReadyTimeout="1" Require="true">
-                <Function Alter="true" Dialogue="true" AutoQualify="true">
-                    <DataCollectParam Name=""/>
-                    <AlterDatas Name="先导压力最高转速">
-                        <AlterData XValue="1" YValue="45"/>
-                        <AlterData XValue="2" YValue="90"/>
-                    </AlterDatas>
-                </Function>
-                <Msgs AbortMsg="" NotReadyMsg="fmi1" OkMsg="fmi31" ReadyMsg="fmi50">
-                    <QCProgressMsg>
-                        <QCProgress Code="4" Msg="fmi20" />
-                        <QCProgress Code="" Msg="" />
-                    </QCProgressMsg>
-                    <QCErrMsg>
-                        <QCErr Code="1" Msg="fmi1" />
-                        <QCErr Code="2" Msg="fmi2" />
-                    </QCErrMsg>
-                </Msgs>
-                <QCParams>
-                    <QCParam Param="铲斗油缸伸出速度" ValidAvg="" ValidMax="2.9" ValidMin="1.9" />
-                </QCParams>
-                <ENVParams>
-                    <ENVParam Param="油温温度" ValidAvg="" ValidMax="100" ValidMin="0" />
-                </ENVParams>
-
-                <RealTimeParams>
-                    <RealTimeParam Name="右泵压力" />
-                    <RealTimeParam Name="油温温度" />
-                </RealTimeParams>
-            </QCItem>
-            <QCItem Id="22" Name="左履带前进慢档空行走速度" QCTimeout="65" QCTimes="3" ReadyTimeout="1"
+        <!--XParam: 对以折线形式给出的最大最小值配置，以此值为横坐标，按插值方式计算出最大、最小折线对应的点作为检测参数的合格值范围-->
+        <!--当自动得到或手输检测参数值后依据插值计算出的合格值范围判定是否合格-->
+        <QCType Name="支腿">
+            <QCItem Id="1" Name="支腿溢流压力" QCTimeout="20" QCTimes="1" ReadyTimeout="10"
                 Require="true">
-                <Function Alter="true" Dialogue="true" AutoQualify="true">
-                    <DataCollectParam Name=""/>
-                    <AlterDatas Name="先导压力最高转速">
-                        <AlterData XValue="1" YValue="45"/>
-                        <AlterData XValue="2" YValue="90"/>
-                    </AlterDatas>
-                </Function>
-                <Msgs AbortMsg="" NotReadyMsg="fmi1" OkMsg="fmi31" ReadyMsg="fmi50">
+                <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
                     <QCProgressMsg>
-                        <QCProgress Code="1" Msg="fmi41" />
-                        <QCProgress Code="2" Msg="fmi42" />
-                        <QCProgress Code="3" Msg="fmi43" />
-                        <QCProgress Code="4" Msg="fmi20" />
+                        <QCProgress Code="" Msg="" />
                     </QCProgressMsg>
                     <QCErrMsg>
-                        <QCErr Code="1" Msg="fmi1" />
-                        <QCErr Code="2" Msg="fmi2" />
+                        <QCErr Code="" Msg="" />
                     </QCErrMsg>
                 </Msgs>
                 <QCParams>
-                    <QCParam Param="左履带前进慢档空行走速度" ValidAvg="50" ValidMax="32.5" ValidMin="27.5" />
-                </QCParams>
-                <ENVParams>
-                    <ENVParam Param="油温温度" ValidAvg="50" ValidMax="100" ValidMin="0" />
-                </ENVParams>
-
-                <RealTimeParams>
-                    <RealTimeParam Name="空行走速度" />
-                    <RealTimeParam Name="油温温度" />
-                </RealTimeParams>
-            </QCItem>
-            <QCItem Id="23" Name="左履带后退慢档空行走速度" QCTimeout="65" QCTimes="3" ReadyTimeout="1"
-                Require="true">
-                <Function Alter="true" Dialogue="true" AutoQualify="true">
-                    <DataCollectParam Name=""/>
-                    <AlterDatas Name="先导压力最高转速">
-                        <AlterData XValue="1" YValue="45"/>
-                        <AlterData XValue="2" YValue="90"/>
-                    </AlterDatas>
-                </Function>
-                <Msgs AbortMsg="" NotReadyMsg="fmi1" OkMsg="fmi31" ReadyMsg="fmi50">
-                    <QCProgressMsg>
-                        <QCProgress Code="1" Msg="fmi41" />
-                        <QCProgress Code="2" Msg="fmi42" />
-                        <QCProgress Code="3" Msg="fmi43" />
-                        <QCProgress Code="4" Msg="fmi20" />
-                    </QCProgressMsg>
-                    <QCErrMsg>
-                        <QCErr Code="1" Msg="fmi1" />
-                        <QCErr Code="2" Msg="fmi2" />
-                    </QCErrMsg>
-                </Msgs>
-                <QCParams>
-                    <QCParam Param="左履带后退慢档空行走速度" ValidAvg="50" ValidMax="32.5" ValidMin="27.5" />
-                </QCParams>
-                <ENVParams>
-                    <ENVParam Param="油温温度" ValidAvg="50" ValidMax="100" ValidMin="0" />
-                </ENVParams>
-
-                <RealTimeParams>
-                    <RealTimeParam Name="空行走速度" />
-                </RealTimeParams>
-            </QCItem>
-            <QCItem Id="24" Name="左履带前进快档空行走速度" QCTimeout="65" QCTimes="3" ReadyTimeout="1"
-                Require="true">
-                <Function Alter="true" Dialogue="true" AutoQualify="true">
-                    <DataCollectParam Name=""/>
-                    <AlterDatas Name="先导压力最高转速">
-                        <AlterData XValue="1" YValue="45"/>
-                        <AlterData XValue="2" YValue="90"/>
-                    </AlterDatas>
-                </Function>
-                <Msgs AbortMsg="" NotReadyMsg="fmi1" OkMsg="fmi31" ReadyMsg="fmi50">
-                    <QCProgressMsg>
-                        <QCProgress Code="1" Msg="fmi41" />
-                        <QCProgress Code="2" Msg="fmi42" />
-                        <QCProgress Code="3" Msg="fmi43" />
-                        <QCProgress Code="4" Msg="fmi20" />
-                    </QCProgressMsg>
-                    <QCErrMsg>
-                        <QCErr Code="1" Msg="fmi1" />
-                        <QCErr Code="2" Msg="fmi2" />
-                    </QCErrMsg>
-                </Msgs>
-                <QCParams>
-                    <QCParam Param="左履带前进快档空行走速度" ValidAvg="50" ValidMax="19" ValidMin="16" />
-                </QCParams>
-                <ENVParams>
-                    <ENVParam Param="油温温度" ValidAvg="50" ValidMax="100" ValidMin="0" />
-                </ENVParams>
-
-                <RealTimeParams>
-                    <RealTimeParam Name="空行走速度" />
-                </RealTimeParams>
-            </QCItem>
-            <QCItem Id="25" Name="左履带后退快档空行走速度" QCTimeout="65" QCTimes="3" ReadyTimeout="1"
-                Require="true">
-                <Function Alter="true" Dialogue="true" AutoQualify="true">
-                    <DataCollectParam Name=""/>
-                    <AlterDatas Name="先导压力最高转速">
-                        <AlterData XValue="1" YValue="45"/>
-                        <AlterData XValue="2" YValue="90"/>
-                    </AlterDatas>
-                </Function>
-                <Msgs AbortMsg="" NotReadyMsg="fmi1" OkMsg="fmi31" ReadyMsg="fmi50">
-                    <QCProgressMsg>
-                        <QCProgress Code="1" Msg="fmi41" />
-                        <QCProgress Code="2" Msg="fmi42" />
-                        <QCProgress Code="3" Msg="fmi43" />
-                        <QCProgress Code="4" Msg="fmi20" />
-                    </QCProgressMsg>
-                    <QCErrMsg>
-                        <QCErr Code="1" Msg="fmi1" />
-                        <QCErr Code="2" Msg="fmi2" />
-                    </QCErrMsg>
-                </Msgs>
-                <QCParams>
-                    <QCParam Param="左履带后退快档空行走速度" ValidAvg="50" ValidMax="19" ValidMin="16" />
-                </QCParams>
-                <ENVParams>
-                    <ENVParam Param="油温温度" ValidAvg="50" ValidMax="100" ValidMin="0" />
-                </ENVParams>
-
-                <RealTimeParams>
-                    <RealTimeParam Name="空行走速度" />
-                </RealTimeParams>
-            </QCItem>
-            <QCItem Id="26" Name="右履带前进慢档空行走速度" QCTimeout="65" QCTimes="3" ReadyTimeout="1"
-                Require="true">
-                <Function Alter="true" Dialogue="true" AutoQualify="true">
-                    <DataCollectParam Name=""/>
-                    <AlterDatas Name="先导压力最高转速">
-                        <AlterData XValue="1" YValue="45"/>
-                        <AlterData XValue="2" YValue="90"/>
-                    </AlterDatas>
-                </Function>
-                <Msgs AbortMsg="" NotReadyMsg="fmi1" OkMsg="fmi31" ReadyMsg="fmi50">
-                    <QCProgressMsg>
-                        <QCProgress Code="1" Msg="fmi41" />
-                        <QCProgress Code="2" Msg="fmi42" />
-                        <QCProgress Code="3" Msg="fmi43" />
-                        <QCProgress Code="4" Msg="fmi20" />
-                    </QCProgressMsg>
-                    <QCErrMsg>
-                        <QCErr Code="1" Msg="fmi1" />
-                        <QCErr Code="2" Msg="fmi2" />
-                    </QCErrMsg>
-                </Msgs>
-                <QCParams>
-                    <QCParam Param="右履带前进慢档空行走速度" ValidAvg="50" ValidMax="32.5" ValidMin="27.5" />
-                </QCParams>
-                <ENVParams>
-                    <ENVParam Param="油温温度" ValidAvg="50" ValidMax="100" ValidMin="0" />
-                </ENVParams>
-
-                <RealTimeParams>
-                    <RealTimeParam Name="空行走速度" />
-                </RealTimeParams>
-            </QCItem>
-            <QCItem Id="27" Name="右履带后退慢档空行走速度" QCTimeout="65" QCTimes="3" ReadyTimeout="1"
-                Require="true">
-                <Function Alter="true" Dialogue="true" AutoQualify="true">
-                    <DataCollectParam Name=""/>
-                    <AlterDatas Name="先导压力最高转速">
-                        <AlterData XValue="1" YValue="45"/>
-                        <AlterData XValue="2" YValue="90"/>
-                    </AlterDatas>
-                </Function>
-                <Msgs AbortMsg="" NotReadyMsg="fmi1" OkMsg="fmi31" ReadyMsg="fmi50">
-                    <QCProgressMsg>
-                        <QCProgress Code="1" Msg="fmi41" />
-                        <QCProgress Code="2" Msg="fmi42" />
-                        <QCProgress Code="3" Msg="fmi43" />
-                        <QCProgress Code="4" Msg="fmi20" />
-                    </QCProgressMsg>
-                    <QCErrMsg>
-                        <QCErr Code="1" Msg="fmi1" />
-                        <QCErr Code="2" Msg="fmi2" />
-                    </QCErrMsg>
-                </Msgs>
-                <QCParams>
-                    <QCParam Param="右履带后退慢档空行走速度" ValidAvg="50" ValidMax="32.5" ValidMin="27.5" />
-                </QCParams>
-                <ENVParams>
-                    <ENVParam Param="油温温度" ValidAvg="50" ValidMax="100" ValidMin="0" />
-                </ENVParams>
-
-                <RealTimeParams>
-                    <RealTimeParam Name="空行走速度" />
-                </RealTimeParams>
-            </QCItem>
-            <QCItem Id="28" Name="右履带前进快档空行走速度" QCTimeout="65" QCTimes="3" ReadyTimeout="1"
-                Require="true">
-                <Function Alter="true" Dialogue="true" AutoQualify="true">
-                    <DataCollectParam Name=""/>
-                    <AlterDatas Name="先导压力最高转速">
-                        <AlterData XValue="1" YValue="45"/>
-                        <AlterData XValue="2" YValue="90"/>
-                    </AlterDatas>
-                </Function>
-                <Msgs AbortMsg="" NotReadyMsg="fmi1" OkMsg="fmi31" ReadyMsg="fmi50">
-                    <QCProgressMsg>
-                        <QCProgress Code="1" Msg="fmi41" />
-                        <QCProgress Code="2" Msg="fmi42" />
-                        <QCProgress Code="3" Msg="fmi43" />
-                        <QCProgress Code="4" Msg="fmi20" />
-                    </QCProgressMsg>
-                    <QCErrMsg>
-                        <QCErr Code="1" Msg="fmi1" />
-                        <QCErr Code="2" Msg="fmi2" />
-                    </QCErrMsg>
-                </Msgs>
-                <QCParams>
-                    <QCParam Param="右履带前进快档空行走速度" ValidAvg="50" ValidMax="19" ValidMin="16" />
-                </QCParams>
-                <ENVParams>
-                    <ENVParam Param="油温温度" ValidAvg="50" ValidMax="100" ValidMin="0" />
-                </ENVParams>
-
-                <RealTimeParams>
-                    <RealTimeParam Name="空行走速度" />
-                </RealTimeParams>
-            </QCItem>
-            <QCItem Id="29" Name="右履带后退快档空行走速度" QCTimeout="65" QCTimes="3" ReadyTimeout="1"
-                Require="true">
-                <Function Alter="true" Dialogue="true" AutoQualify="true">
-                    <DataCollectParam Name=""/>
-                    <AlterDatas Name="先导压力最高转速">
-                        <AlterData XValue="1" YValue="45"/>
-                        <AlterData XValue="2" YValue="90"/>
-                    </AlterDatas>
-                </Function>
-                <Msgs AbortMsg="" NotReadyMsg="fmi1" OkMsg="fmi31" ReadyMsg="fmi50">
-                    <QCProgressMsg>
-                        <QCProgress Code="1" Msg="fmi41" />
-                        <QCProgress Code="2" Msg="fmi42" />
-                        <QCProgress Code="3" Msg="fmi43" />
-                        <QCProgress Code="4" Msg="fmi20" />
-                    </QCProgressMsg>
-                    <QCErrMsg>
-                        <QCErr Code="1" Msg="fmi1" />
-                        <QCErr Code="2" Msg="fmi2" />
-                    </QCErrMsg>
-                </Msgs>
-                <QCParams>
-                    <QCParam Param="右履带后退快档空行走速度" ValidAvg="50" ValidMax="19" ValidMin="16" />
-                </QCParams>
-                <ENVParams>
-                    <ENVParam Param="油温温度" ValidAvg="50" ValidMax="100" ValidMin="0" />
-                </ENVParams>
-
-                <RealTimeParams>
-                    <RealTimeParam Name="空行走速度" />
-                </RealTimeParams>
-            </QCItem>
-        </QCType>
-        <QCType Name="位移">
-            <QCItem Id="31" Name="油缸沉降量(斗杆伸出)" QCTimeout="720" QCTimes="1" ReadyTimeout="1"
-                Require="true">
-                <Function Alter="true" Dialogue="true" AutoQualify="true">
-                    <DataCollectParam Name=""/>
-                    <AlterDatas Name="先导压力最高转速">
-                        <AlterData XValue="1" YValue="45"/>
-                        <AlterData XValue="2" YValue="90"/>
-                    </AlterDatas>
-                </Function>
-                <Msgs AbortMsg="" NotReadyMsg="fmi1" OkMsg="fmi31" ReadyMsg="fmi50">
-                    <QCProgressMsg>
-                        <QCProgress Code="1" Msg="fmi41" />
-                        <QCProgress Code="2" Msg="fmi42" />
-                        <QCProgress Code="3" Msg="fmi43" />
-                        <QCProgress Code="4" Msg="fmi20" />
-                    </QCProgressMsg>
-                    <QCErrMsg>
-                        <QCErr Code="1" Msg="fmi1" />
-                        <QCErr Code="2" Msg="fmi2" />
-                    </QCErrMsg>
-                </Msgs>
-                <QCParams>
-                    <QCParam Param="斗杆油缸沉降量(斗杆伸出)" ValidAvg="5" ValidMax="50" ValidMin="0" />
-                    <QCParam Param="铲斗油缸沉降量(斗杆伸出)" ValidAvg="5" ValidMax="50" ValidMin="0" />
+                    <QCParam Param="支腿溢流压力" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
                 </QCParams>
                 <ENVParams></ENVParams>
-
                 <RealTimeParams>
-                    <RealTimeParam Name="斗杆激光位移" />
-                    <RealTimeParam Name="铲斗激光位移" />
+                    <RealTimeParam Name="臂架泵压力" />
+                    <RealTimeParam Name="发动机转速" />
+                    <RealTimeParam Name="液压油温温度" />
                 </RealTimeParams>
             </QCItem>
-            <QCItem Id="30" Name="油缸沉降量(斗杆缩回)" QCTimeout="720" QCTimes="1" ReadyTimeout="1"
+
+            <!--需要下发数据 调试项目ID，不检测时间（秒），终止斜率阀值-->
+            <QCItem AttachPGN="0xFFE1" Id="2" Name="左前支腿水平伸出" QCTimeout="" QCTimes="5" ReadyTimeout=""
                 Require="true">
-                <Function Alter="true" Dialogue="true" AutoQualify="true">
-                    <DataCollectParam Name=""/>
-                    <AlterDatas Name="先导压力最高转速">
-                        <AlterData XValue="1" YValue="45"/>
-                        <AlterData XValue="2" YValue="90"/>
-                    </AlterDatas>
-                </Function>
-                <Msgs AbortMsg="" NotReadyMsg="fmi1" OkMsg="fmi31" ReadyMsg="fmi50">
+
+                <!--StartMode   谱图开始记录的方式-->
+                <!--Auto  ; ; 当发出开始检测命令时开始记录-->
+                <!--Mann  ; ; 人工按“开始记录”按钮开始记录-->
+
+                <!--EndMode  ; ; 谱图结束记录的方式-->
+                <!--Auto  ; ; 当收到检测完成应答时结束记录-->
+                <!--Mann  ; ; 人工按“结束记录”按钮结束记录-->
+
+                <!--Interval  ; ; 谱图记录时间间隔，单位为ms-->
+                <Spectrum EndMode="Auto" Interval="50" StartMode="Auto">
+                    <SpecParam Param="臂架泵压力" />
+                </Spectrum>
+                <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
                     <QCProgressMsg>
-                        <QCProgress Code="1" Msg="fmi41" />
-                        <QCProgress Code="2" Msg="fmi42" />
-                        <QCProgress Code="3" Msg="fmi43" />
-                        <QCProgress Code="4" Msg="fmi20" />
+                        <QCProgress Code="" Msg="" />
                     </QCProgressMsg>
                     <QCErrMsg>
-                        <QCErr Code="1" Msg="fmi1" />
-                        <QCErr Code="2" Msg="fmi2" />
+                        <QCErr Code="" Msg="" />
                     </QCErrMsg>
                 </Msgs>
                 <QCParams>
-                    <QCParam Param="动臂油缸沉降量(斗杆缩回)" ValidAvg="0" ValidMax="5" ValidMin="0" />
-                    <QCParam Param="斗杆油缸沉降量(斗杆缩回)" ValidAvg="0" ValidMax="50" ValidMin="0" />
-                    <QCParam Param="铲斗油缸沉降量(斗杆缩回)" ValidAvg="0" ValidMax="50" ValidMin="0" />
+                    <QCParam Param="左前支腿水平伸出时间" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="液压油温温度" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
                 </QCParams>
-                <ENVParams></ENVParams>
-
+                <ENVParams>
+                    <ENVParam Param="液压油温温度" ValidAvg="" ValidMax="" ValidMin="" />
+                </ENVParams>
                 <RealTimeParams>
-                    <RealTimeParam Name="铲斗激光位移" />
-                    <RealTimeParam Name="斗杆激光位移" />
-                    <RealTimeParam Name="动臂激光位移" />
+                    <RealTimeParam Name="液压油温温度" />
+                    <RealTimeParam Name="发动机转速" />
+                    <RealTimeParam Name="臂架泵压力" />
                 </RealTimeParams>
             </QCItem>
+
+            <QCItem Id="3" Name="左前支腿水平回收" QCTimeout="20" QCTimes="5" ReadyTimeout="10"
+                Require="true">
+                <!--StartMode   谱图开始记录的方式-->
+                <!--Auto  ; ; 当发出开始检测命令时开始记录-->
+                <!--Mann  ; ; 人工按“开始记录”按钮开始记录-->
+
+                <!--EndMode  ; ; 谱图结束记录的方式-->
+                <!--Auto  ; ; 当收到检测完成应答时结束记录-->
+                <!--Mann  ; ; 人工按“结束记录”按钮结束记录-->
+
+                <!--Interval  ; ; 谱图记录时间间隔，单位为ms-->
+                <Spectrum EndMode="Auto" Interval="50" StartMode="Auto">
+                    <SpecParam Param="臂架泵压力" />
+                </Spectrum>
+                <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
+                    <QCProgressMsg>
+                        <QCProgress Code="" Msg="" />
+                    </QCProgressMsg>
+                    <QCErrMsg>
+                        <QCErr Code="" Msg="" />
+                    </QCErrMsg>
+                </Msgs>
+                <QCParams>
+                    <QCParam Param="左前支腿水平回收时间" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                </QCParams>
+                <ENVParams>
+                    <ENVParam Param="液压油温温度" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                </ENVParams>
+                <RealTimeParams>
+                    <RealTimeParam Name="发动机转速" />
+                    <RealTimeParam Name="液压油温温度" />
+                    <RealTimeParam Name="臂架泵压力" />
+                </RealTimeParams>
+            </QCItem>
+
+            <QCItem Id="4" Name="左前支腿垂直伸出" QCTimeout="20" QCTimes="5" ReadyTimeout="10"
+                Require="true">
+                <!--StartMode   谱图开始记录的方式-->
+                <!--Auto  ; ; 当发出开始检测命令时开始记录-->
+                <!--Mann  ; ; 人工按“开始记录”按钮开始记录-->
+
+                <!--EndMode  ; ; 谱图结束记录的方式-->
+                <!--Auto  ; ; 当收到检测完成应答时结束记录-->
+                <!--Mann  ; ; 人工按“结束记录”按钮结束记录-->
+
+                <!--Interval  ; ; 谱图记录时间间隔，单位为ms-->
+                <Spectrum EndMode="Auto" Interval="50" StartMode="Auto">
+                    <SpecParam Param="臂架泵压力" />
+                </Spectrum>
+                <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
+                    <QCProgressMsg>
+                        <QCProgress Code="" Msg="" />
+                    </QCProgressMsg>
+                    <QCErrMsg>
+                        <QCErr Code="" Msg="" />
+                    </QCErrMsg>
+                </Msgs>
+                <QCParams>
+                    <QCParam Param="左前支腿垂直伸出时间" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                </QCParams>
+                <ENVParams>
+                    <ENVParam Param="液压油温温度" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                </ENVParams>
+                <RealTimeParams>
+                    <RealTimeParam Name="发动机转速" />
+                    <RealTimeParam Name="液压油温温度" />
+                    <RealTimeParam Name="臂架泵压力" />
+                </RealTimeParams>
+            </QCItem>
+
+            <QCItem Id="5" Name="左前支腿垂直回收" QCTimeout="20" QCTimes="5" ReadyTimeout="10"
+                Require="true">
+                <!--StartMode   谱图开始记录的方式-->
+                <!--Auto  ; ; 当发出开始检测命令时开始记录-->
+                <!--Mann  ; ; 人工按“开始记录”按钮开始记录-->
+
+                <!--EndMode  ; ; 谱图结束记录的方式-->
+                <!--Auto  ; ; 当收到检测完成应答时结束记录-->
+                <!--Mann  ; ; 人工按“结束记录”按钮结束记录-->
+
+                <!--Interval  ; ; 谱图记录时间间隔，单位为ms-->
+                <Spectrum EndMode="Auto" Interval="50" StartMode="Auto">
+                    <SpecParam Param="臂架泵压力" />
+                </Spectrum>
+                <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
+                    <QCProgressMsg>
+                        <QCProgress Code="" Msg="" />
+                    </QCProgressMsg>
+                    <QCErrMsg>
+                        <QCErr Code="" Msg="" />
+                    </QCErrMsg>
+                </Msgs>
+                <QCParams>
+                    <QCParam Param="左前支腿垂直回收时间" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                </QCParams>
+                <ENVParams>
+                    <ENVParam Param="液压油温温度" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                </ENVParams>
+                <RealTimeParams>
+                    <RealTimeParam Name="发动机转速" />
+                    <RealTimeParam Name="液压油温温度" />
+                    <RealTimeParam Name="臂架泵压力" />
+                </RealTimeParams>
+            </QCItem>
+
+            <QCItem Id="18" Name="支腿跨距" QCTimeout="" QCTimes="1" ReadyTimeout="" Require="true">
+                <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
+                    <QCProgressMsg>
+                        <QCProgress Code="" Msg="" />
+                    </QCProgressMsg>
+                    <QCErrMsg>
+                        <QCErr Code="" Msg="" />
+                    </QCErrMsg>
+                </Msgs>
+                <QCParams>
+                    <QCParam Param="前支腿跨距" PicReq="false" QCMode="Auto" ValMode="Mann"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="后支腿跨距" PicReq="false" QCMode="Auto" ValMode="Mann"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="左支腿跨距" PicReq="false" QCMode="Auto" ValMode="Mann"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="右支腿跨距" PicReq="false" QCMode="Auto" ValMode="Mann"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                </QCParams>
+                <ENVParams></ENVParams>
+                <RealTimeParams></RealTimeParams>
+            </QCItem>
+
         </QCType>
+
+        <QCType Name="臂架">
+
+            <!--需要下发数据 调试项目ID，不检测时间（秒），终止斜率阀值，K标定，一臂慢档展开时间最大最小值-->
+            <QCItem AttachPGN="0xFFE1" Id="19" Name="一臂慢档展开" QCTimeout="20" QCTimes="5"
+                ReadyTimeout="10" Require="true">
+                <Spectrum EndMode="Auto" Interval="50" StartMode="Auto">
+                    <SpecParam Param="臂架泵压力" />
+                </Spectrum>
+                <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
+                    <QCProgressMsg>
+                        <QCProgress Code="" Msg="" />
+                    </QCProgressMsg>
+                    <QCErrMsg>
+                        <QCErr Code="" Msg="" />
+                    </QCErrMsg>
+                </Msgs>
+                <QCParams>
+                    <QCParam Param="一臂慢档展开时间" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="一臂慢档展开电流" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                </QCParams>
+                <ENVParams></ENVParams>
+                <RealTimeParams>
+                    <RealTimeParam Name="发动机转速" />
+                    <RealTimeParam Name="液压油温温度" />
+                    <RealTimeParam Name="主油泵压力" />
+                    <RealTimeParam Name="高低压" />
+                    <RealTimeParam Name="正反泵" />
+                    <RealTimeParam Name="臂架泵压力" />
+                </RealTimeParams>
+            </QCItem>
+
+            <QCItem Id="47" Name="臂架油泵压力切断值" QCTimeout="20" QCTimes="1" ReadyTimeout="10"
+                Require="true">
+                <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
+                    <QCProgressMsg>
+                        <QCProgress Code="" Msg="" />
+                    </QCProgressMsg>
+                    <QCErrMsg>
+                        <QCErr Code="" Msg="" />
+                    </QCErrMsg>
+                </Msgs>
+                <QCParams>
+                    <QCParam Param="臂架油泵压力切断值" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                </QCParams>
+                <ENVParams></ENVParams>
+                <RealTimeParams>
+                    <RealTimeParam Name="发动机转速" />
+                    <RealTimeParam Name="液压油温温度" />
+                    <RealTimeParam Name="主油泵压力" />
+                    <RealTimeParam Name="高低压" />
+                    <RealTimeParam Name="正反泵" />
+                    <RealTimeParam Name="臂架泵压力" />
+                </RealTimeParams>
+            </QCItem>
+
+            <QCItem Id="48" Name="大臂在位限位" QCTimeout="20" QCTimes="1" ReadyTimeout="10"
+                Require="true">
+                <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
+                    <QCProgressMsg>
+                        <QCProgress Code="" Msg="" />
+                    </QCProgressMsg>
+                    <QCErrMsg>
+                        <QCErr Code="" Msg="" />
+                    </QCErrMsg>
+                </Msgs>
+                <QCParams>
+                    <QCParam Param="大臂在位限位开关值" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                </QCParams>
+                <ENVParams></ENVParams>
+                <RealTimeParams>
+                    <RealTimeParam Name="发动机转速" />
+                    <RealTimeParam Name="液压油温温度" />
+                    <RealTimeParam Name="主油泵压力" />
+                    <RealTimeParam Name="高低压" />
+                    <RealTimeParam Name="正反泵" />
+                    <RealTimeParam Name="臂架泵压力" />
+                </RealTimeParams>
+            </QCItem>
+
+            <QCItem Id="49" Name="臂架回转限位" QCTimeout="20" QCTimes="1" ReadyTimeout="10"
+                Require="true">
+                <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
+                    <QCProgressMsg>
+                        <QCProgress Code="" Msg="" />
+                    </QCProgressMsg>
+                    <QCErrMsg>
+                        <QCErr Code="" Msg="" />
+                    </QCErrMsg>
+                </Msgs>
+                <QCParams>
+                    <QCParam Param="臂架回转限位开关值" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                </QCParams>
+                <ENVParams></ENVParams>
+                <RealTimeParams>
+                    <RealTimeParam Name="发动机转速" />
+                    <RealTimeParam Name="液压油温温度" />
+                    <RealTimeParam Name="主油泵压力" />
+                    <RealTimeParam Name="高低压" />
+                    <RealTimeParam Name="正反泵" />
+                </RealTimeParams>
+            </QCItem>
+
+        </QCType>
+
+        <QCType Name="泵压力">
+
+            <QCItem Id="50" Name="主油泵压力切断值" QCTimeout="20" QCTimes="1" ReadyTimeout="10"
+                Require="true">
+                <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
+                    <QCProgressMsg>
+                        <QCProgress Code="" Msg="" />
+                    </QCProgressMsg>
+                    <QCErrMsg>
+                        <QCErr Code="" Msg="" />
+                    </QCErrMsg>
+                </Msgs>
+                <QCParams>
+                    <QCParam Param="主油泵压力切断值" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                </QCParams>
+                <ENVParams></ENVParams>
+                <RealTimeParams>
+                    <RealTimeParam Name="发动机转速" />
+                    <RealTimeParam Name="液压油温温度" />
+                    <RealTimeParam Name="主油泵压力" />
+                    <RealTimeParam Name="高低压" />
+                    <RealTimeParam Name="正反泵" />
+                </RealTimeParams>
+            </QCItem>
+
+            <QCItem Id="51" Name="主油泵溢流压力值" QCTimeout="20" QCTimes="1" ReadyTimeout="10"
+                Require="true">
+                <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
+                    <QCProgressMsg>
+                        <QCProgress Code="" Msg="" />
+                    </QCProgressMsg>
+                    <QCErrMsg>
+                        <QCErr Code="" Msg="" />
+                    </QCErrMsg>
+                </Msgs>
+                <QCParams>
+                    <QCParam Param="主油泵溢流压力值" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                </QCParams>
+                <ENVParams></ENVParams>
+                <RealTimeParams>
+                    <RealTimeParam Name="发动机转速" />
+                    <RealTimeParam Name="液压油温温度" />
+                    <RealTimeParam Name="主油泵压力" />
+                    <RealTimeParam Name="高低压" />
+                    <RealTimeParam Name="正反泵" />
+                </RealTimeParams>
+            </QCItem>
+
+            <QCItem Id="52" Name="空泵压力值、偏缸误差值" QCTimeout="20" QCTimes="1" ReadyTimeout="10"
+                Require="true">
+                <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
+                    <QCProgressMsg>
+                        <QCProgress Code="" Msg="" />
+                    </QCProgressMsg>
+                    <QCErrMsg>
+                        <QCErr Code="" Msg="" />
+                    </QCErrMsg>
+                </Msgs>
+                <QCParams>
+                    <QCParam Param="空泵压力值" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="偏缸误差值" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                </QCParams>
+                <ENVParams></ENVParams>
+                <RealTimeParams>
+                    <RealTimeParam Name="发动机转速" />
+                    <RealTimeParam Name="液压油温温度" />
+                    <RealTimeParam Name="主油泵压力" />
+                    <RealTimeParam Name="高低压" />
+                    <RealTimeParam Name="正反泵" />
+                    <RealTimeParam Name="档位（10）" />
+                </RealTimeParams>
+            </QCItem>
+
+            <QCItem Id="53" Name="恒压泵压力切断值" QCTimeout="20" QCTimes="1" ReadyTimeout="10"
+                Require="true">
+                <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
+                    <QCProgressMsg>
+                        <QCProgress Code="" Msg="" />
+                    </QCProgressMsg>
+                    <QCErrMsg>
+                        <QCErr Code="" Msg="" />
+                    </QCErrMsg>
+                </Msgs>
+                <QCParams>
+                    <QCParam Param="恒压泵压力切断值" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                </QCParams>
+                <ENVParams></ENVParams>
+                <RealTimeParams>
+                    <RealTimeParam Name="摆阀压力" />
+                </RealTimeParams>
+            </QCItem>
+
+            <QCItem Id="54" Name="恒压泵溢流压力值" QCTimeout="20" QCTimes="1" ReadyTimeout="10"
+                Require="true">
+                <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
+                    <QCProgressMsg>
+                        <QCProgress Code="" Msg="" />
+                    </QCProgressMsg>
+                    <QCErrMsg>
+                        <QCErr Code="" Msg="" />
+                    </QCErrMsg>
+                </Msgs>
+                <QCParams>
+                    <QCParam Param="恒压泵溢流压力值" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                </QCParams>
+                <ENVParams></ENVParams>
+                <RealTimeParams>
+                    <RealTimeParam Name="摆阀压力" />
+                </RealTimeParams>
+            </QCItem>
+
+            <QCItem Id="55" Name="分配压降和摆动到位时间" QCTimeout="20" QCTimes="1" ReadyTimeout="10"
+                Require="true">
+                <Spectrum EndMode="Auto" Interval="50" StartMode="Auto">
+                    <SpecParam Param="摆阀压力" />
+                </Spectrum>
+                <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
+                    <QCProgressMsg>
+                        <QCProgress Code="" Msg="" />
+                    </QCProgressMsg>
+                    <QCErrMsg>
+                        <QCErr Code="" Msg="" />
+                    </QCErrMsg>
+                </Msgs>
+                <QCParams>
+                    <QCParam Param="分配压降" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="摆动到位时间" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                </QCParams>
+                <ENVParams></ENVParams>
+                <RealTimeParams>
+                    <RealTimeParam Name="摆阀压力" />
+                </RealTimeParams>
+            </QCItem>
+
+        </QCType>
+
+        <QCType Name="无通讯">
+
+            <QCItem Id="56" Name="缓冲螺钉位置" QCTimeout="20" QCTimes="1" ReadyTimeout="10"
+                Require="true">
+                <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
+                    <QCProgressMsg>
+                        <QCProgress Code="" Msg="" />
+                    </QCProgressMsg>
+                    <QCErrMsg>
+                        <QCErr Code="" Msg="" />
+                    </QCErrMsg>
+                </Msgs>
+                <QCParams>
+                    <QCParam Param="缓冲螺钉位置" PicReq="true" QCMode="None" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="false" />
+                </QCParams>
+                <ENVParams></ENVParams>
+                <RealTimeParams></RealTimeParams>
+            </QCItem>
+
+            <QCItem Id="60" Name="补油泵压力" QCTimeout="20" QCTimes="1" ReadyTimeout="10"
+                Require="true">
+                <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
+                    <QCProgressMsg>
+                        <QCProgress Code="" Msg="" />
+                    </QCProgressMsg>
+                    <QCErrMsg>
+                        <QCErr Code="" Msg="" />
+                    </QCErrMsg>
+                </Msgs>
+                <QCParams>
+                    <QCParam Param="补油泵压力" PicReq="true" QCMode="None" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="false" />
+                </QCParams>
+                <ENVParams></ENVParams>
+                <RealTimeParams></RealTimeParams>
+            </QCItem>
+
+            <QCItem Id="61" Name="冲洗阀压力" QCTimeout="20" QCTimes="1" ReadyTimeout="10"
+                Require="true">
+                <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
+                    <QCProgressMsg>
+                        <QCProgress Code="" Msg="" />
+                    </QCProgressMsg>
+                    <QCErrMsg>
+                        <QCErr Code="" Msg="" />
+                    </QCErrMsg>
+                </Msgs>
+                <QCParams>
+                    <QCParam Param="冲洗阀压力" PicReq="true" QCMode="None" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="false" />
+                </QCParams>
+                <ENVParams></ENVParams>
+                <RealTimeParams></RealTimeParams>
+            </QCItem>
+
+            <QCItem Id="66" Name="节能功能" QCTimeout="20" QCTimes="1" ReadyTimeout="10" Require="true">
+                <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
+                    <QCProgressMsg>
+                        <QCProgress Code="" Msg="" />
+                    </QCProgressMsg>
+                    <QCErrMsg>
+                        <QCErr Code="" Msg="" />
+                    </QCErrMsg>
+                </Msgs>
+                <QCParams>
+                    <QCParam Param="节能功能" PicReq="false" QCMode="Mann" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="false" />
+                </QCParams>
+                <ENVParams></ENVParams>
+                <RealTimeParams></RealTimeParams>
+            </QCItem>
+
+            <QCItem Id="67" Name="分配软启动" QCTimeout="20" QCTimes="1" ReadyTimeout="10"
+                Require="true">
+                <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
+                    <QCProgressMsg>
+                        <QCProgress Code="" Msg="" />
+                    </QCProgressMsg>
+                    <QCErrMsg>
+                        <QCErr Code="" Msg="" />
+                    </QCErrMsg>
+                </Msgs>
+                <QCParams>
+                    <QCParam Param="分配软启动" PicReq="false" QCMode="Mann" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="false" />
+                </QCParams>
+                <ENVParams></ENVParams>
+                <RealTimeParams></RealTimeParams>
+            </QCItem>
+
+            <QCItem Id="68" Name="分配自适应" QCTimeout="20" QCTimes="1" ReadyTimeout="10"
+                Require="true">
+                <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
+                    <QCProgressMsg>
+                        <QCProgress Code="" Msg="" />
+                    </QCProgressMsg>
+                    <QCErrMsg>
+                        <QCErr Code="" Msg="" />
+                    </QCErrMsg>
+                </Msgs>
+                <QCParams>
+                    <QCParam Param="分配自适应" PicReq="false" QCMode="Mann" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="false" />
+                </QCParams>
+                <ENVParams></ENVParams>
+                <RealTimeParams></RealTimeParams>
+            </QCItem>
+
+            <QCItem Id="69" Name="高低压切换" QCTimeout="20" QCTimes="1" ReadyTimeout="10"
+                Require="true">
+                <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
+                    <QCProgressMsg>
+                        <QCProgress Code="" Msg="" />
+                    </QCProgressMsg>
+                    <QCErrMsg>
+                        <QCErr Code="" Msg="" />
+                    </QCErrMsg>
+                </Msgs>
+                <QCParams>
+                    <QCParam Param="高低压切换" PicReq="false" QCMode="Mann" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="false" />
+                </QCParams>
+                <ENVParams></ENVParams>
+                <RealTimeParams></RealTimeParams>
+            </QCItem>
+
+            <QCItem Id="70" Name="减震功能" QCTimeout="20" QCTimes="1" ReadyTimeout="10" Require="true">
+                <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
+                    <QCProgressMsg>
+                        <QCProgress Code="" Msg="" />
+                    </QCProgressMsg>
+                    <QCErrMsg>
+                        <QCErr Code="" Msg="" />
+                    </QCErrMsg>
+                </Msgs>
+                <QCParams>
+                    <QCParam Param="减震功能" PicReq="false" QCMode="Mann" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="false" />
+                </QCParams>
+                <ENVParams></ENVParams>
+                <RealTimeParams></RealTimeParams>
+            </QCItem>
+
+            <QCItem Id="71" Name="复杂料况" QCTimeout="20" QCTimes="1" ReadyTimeout="10" Require="true">
+                <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
+                    <QCProgressMsg>
+                        <QCProgress Code="" Msg="" />
+                    </QCProgressMsg>
+                    <QCErrMsg>
+                        <QCErr Code="" Msg="" />
+                    </QCErrMsg>
+                </Msgs>
+                <QCParams>
+                    <QCParam Param="复杂料况" PicReq="false" QCMode="Mann" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="false" />
+                </QCParams>
+                <ENVParams></ENVParams>
+                <RealTimeParams></RealTimeParams>
+            </QCItem>
+
+
+        </QCType>
+
+        <QCType Name="电流">
+
+            <!--需要下发数据 调试项目ID，最大排量电流，10档泵送标准次数的最大值和最小值-->
+            <QCItem AttachPGN="0xFFE1" Id="57" Name="最大排量电流标定" QCTimeout="20" QCTimes="1"
+                ReadyTimeout="10" Require="true">
+                <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
+                    <QCProgressMsg>
+                        <QCProgress Code="" Msg="" />
+                    </QCProgressMsg>
+                    <QCErrMsg>
+                        <QCErr Code="" Msg="" />
+                    </QCErrMsg>
+                </Msgs>
+                <QCParams>
+                    <QCParam Param="10档泵送次数" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="最大排量电流" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                </QCParams>
+                <ENVParams></ENVParams>
+                <RealTimeParams>
+                    <RealTimeParam Name="档位（10）" />
+                    <RealTimeParam Name="发动机转速" />
+                    <RealTimeParam Name="液压油温温度" />
+                    <RealTimeParam Name="主油泵压力" />
+                    <RealTimeParam Name="高低压" />
+                    <RealTimeParam Name="正反泵" />
+                </RealTimeParams>
+            </QCItem>
+
+            <!--此项是命令控制器模拟电流 不需要下发额外数据-->
+            <QCItem Id="58" Name="最小排量电流标定" QCTimeout="20" QCTimes="1" ReadyTimeout="10"
+                Require="true">
+                <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
+                    <QCProgressMsg>
+                        <QCProgress Code="" Msg="" />
+                    </QCProgressMsg>
+                    <QCErrMsg>
+                        <QCErr Code="" Msg="" />
+                    </QCErrMsg>
+                </Msgs>
+                <QCParams>
+                    <QCParam Param="0.6档泵送次数" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="最小排量电流" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                </QCParams>
+                <ENVParams></ENVParams>
+                <RealTimeParams>
+                    <RealTimeParam Name="档位0.6" />
+                    <RealTimeParam Name="发动机转速" />
+                    <RealTimeParam Name="液压油温温度" />
+                    <RealTimeParam Name="主油泵压力" />
+                    <RealTimeParam Name="高低压" />
+                    <RealTimeParam Name="正反泵" />
+                </RealTimeParams>
+            </QCItem>
+
+            <QCItem Id="59" Name="5档排量电流验证" QCTimeout="20" QCTimes="1" ReadyTimeout="10"
+                Require="true">
+                <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
+                    <QCProgressMsg>
+                        <QCProgress Code="" Msg="" />
+                    </QCProgressMsg>
+                    <QCErrMsg>
+                        <QCErr Code="" Msg="" />
+                    </QCErrMsg>
+                </Msgs>
+                <QCParams>
+                    <QCParam Param="5档泵送次数" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="${getDBParam('10档泵送次数')}" ValidMin="${getDBParam('0.6档泵送次数')}"
+                        ValueReq="true" />
+                </QCParams>
+                <ENVParams></ENVParams>
+                <RealTimeParams>
+                    <RealTimeParam Name="档位5" />
+                    <RealTimeParam Name="发动机转速" />
+                    <RealTimeParam Name="液压油温温度" />
+                    <RealTimeParam Name="主油泵压力" />
+                    <RealTimeParam Name="高低压" />
+                    <RealTimeParam Name="正反泵" />
+                </RealTimeParams>
+            </QCItem>
+
+        </QCType>
+
+        <QCType Name="恒功率">
+
+            <QCItem AttachPGN="0xFFE1" Id="62" Name="第一压力段恒功率标定" QCTimeout="20" QCTimes="1"
+                ReadyTimeout="10" Require="true">
+                <Spectrum EndMode="Auto" Interval="50" StartMode="Auto">
+                    <SpecParam Param="主油泵压力" />
+                    <SpecParam Param="泵送次数" />
+                    <SpecParam Param="比例阀电流" />
+                </Spectrum>
+                <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
+                    <QCProgressMsg>
+                        <QCProgress Code="" Msg="" />
+                    </QCProgressMsg>
+                    <QCErrMsg>
+                        <QCErr Code="" Msg="" />
+                    </QCErrMsg>
+                </Msgs>
+                <QCParams>
+                    <QCParam Param="泵送压力" PicReq="false" QCMode="None" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="第一压力段恒功率标定系数" PicReq="false" QCMode="None" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="第一压力段泵送次数" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="${expPower('第一压力段恒功能标定最高泵送次数')}"
+                        ValidMin="${expPower('第一压力段恒功能标定最低泵送次数')}" ValueReq="true"
+                        XParam="${getCurrentParam('泵送压力')}"
+                        XRange="${expPower('第一压力段范围')}" />
+                </QCParams>
+                <ENVParams></ENVParams>
+                <RealTimeParams>
+                    <RealTimeParam Name="发动机转速" />
+                    <RealTimeParam Name="液压油温温度" />
+                    <RealTimeParam Name="主油泵压力" />
+                    <RealTimeParam Name="高低压" />
+                    <RealTimeParam Name="正反泵" />
+                    <RealTimeParam Name="处理后的泵送压力" />
+                    <RealTimeParam Name="泵送次数" />
+                </RealTimeParams>
+            </QCItem>
+
+        </QCType>
+
+        <QCType Name="搅拌压力">
+
+            <QCItem Id="72" Name="空载搅伴压力值" QCTimeout="20" QCTimes="1" ReadyTimeout="10"
+                Require="true">
+                <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
+                    <QCProgressMsg>
+                        <QCProgress Code="" Msg="" />
+                    </QCProgressMsg>
+                    <QCErrMsg>
+                        <QCErr Code="" Msg="" />
+                    </QCErrMsg>
+                </Msgs>
+                <QCParams>
+                    <QCParam Param="空载搅伴压力值" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                </QCParams>
+                <ENVParams></ENVParams>
+                <RealTimeParams>
+                    <RealTimeParam Name="搅伴压力" />
+                </RealTimeParams>
+            </QCItem>
+
+            <QCItem Id="73" Name="搅伴反转的起始压力" QCTimeout="20" QCTimes="1" ReadyTimeout="10"
+                Require="true">
+                <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
+                    <QCProgressMsg>
+                        <QCProgress Code="" Msg="" />
+                    </QCProgressMsg>
+                    <QCErrMsg>
+                        <QCErr Code="" Msg="" />
+                    </QCErrMsg>
+                </Msgs>
+                <QCParams>
+                    <QCParam Param="搅伴反转起始压力" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                </QCParams>
+                <ENVParams></ENVParams>
+                <RealTimeParams>
+                    <RealTimeParam Name="搅伴压力" />
+                    <RealTimeParam Name="搅伴压力开关（指示灯）" />
+                </RealTimeParams>
+            </QCItem>
+
+            <QCItem Id="74" Name="搅伴溢流压力值" QCTimeout="20" QCTimes="1" ReadyTimeout="10"
+                Require="true">
+                <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
+                    <QCProgressMsg>
+                        <QCProgress Code="" Msg="" />
+                    </QCProgressMsg>
+                    <QCErrMsg>
+                        <QCErr Code="" Msg="" />
+                    </QCErrMsg>
+                </Msgs>
+                <QCParams>
+                    <QCParam Param="搅伴溢流压力值" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                </QCParams>
+                <ENVParams></ENVParams>
+                <RealTimeParams>
+                    <RealTimeParam Name="搅伴压力" />
+                </RealTimeParams>
+            </QCItem>
+
+            <QCItem Id="75" Name="清洗系统水泵压力值" QCTimeout="20" QCTimes="1" ReadyTimeout="10"
+                Require="true">
+                <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
+                    <QCProgressMsg>
+                        <QCProgress Code="" Msg="" />
+                    </QCProgressMsg>
+                    <QCErrMsg>
+                        <QCErr Code="" Msg="" />
+                    </QCErrMsg>
+                </Msgs>
+                <QCParams>
+                    <QCParam Param="清洗系统水泵压力值" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                </QCParams>
+                <ENVParams></ENVParams>
+                <RealTimeParams>
+                    <RealTimeParam Name="搅伴压力" />
+                </RealTimeParams>
+            </QCItem>
+
+            <QCItem Id="76" Name="润滑系统气压" QCTimeout="20" QCTimes="1" ReadyTimeout="10"
+                Require="true">
+                <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
+                    <QCProgressMsg>
+                        <QCProgress Code="" Msg="" />
+                    </QCProgressMsg>
+                    <QCErrMsg>
+                        <QCErr Code="" Msg="" />
+                    </QCErrMsg>
+                </Msgs>
+                <QCParams>
+                    <QCParam Param="润滑系统气压" PicReq="true" QCMode="None" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="false" />
+                </QCParams>
+                <ENVParams></ENVParams>
+                <RealTimeParams></RealTimeParams>
+            </QCItem>
+
+            <QCItem Id="77" Name="油脂加注位置" QCTimeout="20" QCTimes="1" ReadyTimeout="10"
+                Require="true">
+                <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
+                    <QCProgressMsg>
+                        <QCProgress Code="" Msg="" />
+                    </QCProgressMsg>
+                    <QCErrMsg>
+                        <QCErr Code="" Msg="" />
+                    </QCErrMsg>
+                </Msgs>
+                <QCParams>
+                    <QCParam Param="油脂加注位置" PicReq="true" QCMode="None" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="false" />
+                </QCParams>
+                <ENVParams></ENVParams>
+                <RealTimeParams></RealTimeParams>
+            </QCItem>
+
+        </QCType>
+
+        <QCType Name="润滑时间">
+
+            <QCItem Id="78" Name="开机润滑时间" QCTimeout="20" QCTimes="1" ReadyTimeout="10"
+                Require="true">
+                <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
+                    <QCProgressMsg>
+                        <QCProgress Code="" Msg="" />
+                    </QCProgressMsg>
+                    <QCErrMsg>
+                        <QCErr Code="" Msg="" />
+                    </QCErrMsg>
+                </Msgs>
+                <QCParams>
+                    <QCParam Param="开机润滑时间" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                </QCParams>
+                <ENVParams></ENVParams>
+                <RealTimeParams>
+                    <RealTimeParam Name="润滑开启开关" />
+                    <RealTimeParam Name="气动润滑开启开关" />
+                </RealTimeParams>
+            </QCItem>
+
+            <QCItem Id="79" Name="关机润滑时间" QCTimeout="20" QCTimes="1" ReadyTimeout="10"
+                Require="true">
+                <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
+                    <QCProgressMsg>
+                        <QCProgress Code="" Msg="" />
+                    </QCProgressMsg>
+                    <QCErrMsg>
+                        <QCErr Code="" Msg="" />
+                    </QCErrMsg>
+                </Msgs>
+                <QCParams>
+                    <QCParam Param="关机润滑时间" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                </QCParams>
+                <ENVParams></ENVParams>
+                <RealTimeParams>
+                    <RealTimeParam Name="润滑开启开关" />
+                    <RealTimeParam Name="气动润滑开启开关" />
+                </RealTimeParams>
+            </QCItem>
+
+            <QCItem Id="80" Name="气动润滑时间" QCTimeout="20" QCTimes="1" ReadyTimeout="10"
+                Require="true">
+                <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
+                    <QCProgressMsg>
+                        <QCProgress Code="" Msg="" />
+                    </QCProgressMsg>
+                    <QCErrMsg>
+                        <QCErr Code="" Msg="" />
+                    </QCErrMsg>
+                </Msgs>
+                <QCParams>
+                    <QCParam Param="气动润滑时间" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                </QCParams>
+                <ENVParams></ENVParams>
+                <RealTimeParams>
+                    <RealTimeParam Name="润滑开启开关" />
+                    <RealTimeParam Name="气动润滑开启开关" />
+                </RealTimeParams>
+            </QCItem>
+
+            <QCItem Id="81" Name="润滑间歇时间" QCTimeout="20" QCTimes="1" ReadyTimeout="10"
+                Require="true">
+                <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
+                    <QCProgressMsg>
+                        <QCProgress Code="" Msg="" />
+                    </QCProgressMsg>
+                    <QCErrMsg>
+                        <QCErr Code="" Msg="" />
+                    </QCErrMsg>
+                </Msgs>
+                <QCParams>
+                    <QCParam Param="润滑间歇时间" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                </QCParams>
+                <ENVParams></ENVParams>
+                <RealTimeParams>
+                    <RealTimeParam Name="润滑开启开关" />
+                    <RealTimeParam Name="气动润滑开启开关" />
+                </RealTimeParams>
+            </QCItem>
+
+        </QCType>
+
+        <QCType Name="风扇">
+
+            <QCItem Id="82" Name="风扇开启情况" QCTimeout="20" QCTimes="1" ReadyTimeout="10"
+                Require="true">
+                <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
+                    <QCProgressMsg>
+                        <QCProgress Code="" Msg="" />
+                    </QCProgressMsg>
+                    <QCErrMsg>
+                        <QCErr Code="" Msg="" />
+                    </QCErrMsg>
+                </Msgs>
+                <QCParams>
+                    <QCParam Param="风扇启动测试" PicReq="false" QCMode="None" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="风扇开启情况" PicReq="false" QCMode="Mann" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="false" />
+                </QCParams>
+                <ENVParams></ENVParams>
+                <RealTimeParams>
+                    <RealTimeParam Name="液压油温温度" />
+                    <RealTimeParam Name="风扇开启开关" />
+                </RealTimeParams>
+            </QCItem>
+
+
+        </QCType>
+
+        <QCType Name="GPS特殊处理">
+
+            <QCItem Id="83" Name="GPS系统验证" QCTimeout="20" QCTimes="2" ReadyTimeout="10"
+                Require="true">
+                <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
+                    <QCProgressMsg>
+                        <QCProgress Code="" Msg="" />
+                    </QCProgressMsg>
+                    <QCErrMsg>
+                        <QCErr Code="" Msg="" />
+                    </QCErrMsg>
+                </Msgs>
+                <QCParams>
+                    <QCParam Param="GPS系统验证" ValidAvg="" ValidMax="" ValidMin="" />
+                </QCParams>
+                <ENVParams></ENVParams>
+                <RealTimeParams>
+                    <RealTimeParam Name="开机时间" />
+                </RealTimeParams>
+            </QCItem>
+
+        </QCType>
+
+        <QCType Name="砼管、水阀加载">
+
+            <QCItem Id="84" Name="砼管水压试验" QCTimeout="20" QCTimes="1" ReadyTimeout="10"
+                Require="true">
+                <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
+                    <QCProgressMsg>
+                        <QCProgress Code="" Msg="" />
+                    </QCProgressMsg>
+                    <QCErrMsg>
+                        <QCErr Code="" Msg="" />
+                    </QCErrMsg>
+                </Msgs>
+                <QCParams>
+                    <QCParam Param="主油泵压力" PicReq="true" QCMode="None" ValMode="RealParam"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                </QCParams>
+                <ENVParams></ENVParams>
+                <RealTimeParams>
+                    <RealTimeParam Name="主油泵压力" />
+                </RealTimeParams>
+            </QCItem>
+
+            <QCItem Id="85" Name="水阀加载试验统计" QCTimeout="20" QCTimes="1" ReadyTimeout="10"
+                Require="true">
+                <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
+                    <QCProgressMsg>
+                        <QCProgress Code="" Msg="" />
+                    </QCProgressMsg>
+                    <QCErrMsg>
+                        <QCErr Code="" Msg="" />
+                    </QCErrMsg>
+                </Msgs>
+                <QCParams>
+                    <QCParam Param="压力段1累计时间" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="压力段2累计时间" PicReq="true" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="压力段3累计时间" PicReq="true" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="压力段4累计时间" PicReq="true" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                </QCParams>
+                <ENVParams></ENVParams>
+                <RealTimeParams>
+                    <RealTimeParam Name="" />
+                </RealTimeParams>
+            </QCItem>
+
+        </QCType>
+
+        <QCType Name="温度">
+
+            <QCItem Id="86" Name="液压油温度" QCTimeout="20" QCTimes="1" ReadyTimeout="10"
+                Require="true">
+                <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
+                    <QCProgressMsg>
+                        <QCProgress Code="" Msg="" />
+                    </QCProgressMsg>
+                    <QCErrMsg>
+                        <QCErr Code="" Msg="" />
+                    </QCErrMsg>
+                </Msgs>
+                <QCParams>
+                    <QCParam Param="液压油温度" PicReq="false" QCMode="None" ValMode="Auto"
+                        ValidAvg="" ValidMax="${getMouthTemperature()}" ValidMin="" ValueReq="true" />
+                </QCParams>
+                <ENVParams></ENVParams>
+                <RealTimeParams>
+                    <RealTimeParam Name="液压油温度" />
+                </RealTimeParams>
+            </QCItem>
+
+            <QCItem Id="87" Name="分动箱温度" QCTimeout="20" QCTimes="1" ReadyTimeout="10"
+                Require="true">
+                <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
+                    <QCProgressMsg>
+                        <QCProgress Code="" Msg="" />
+                    </QCProgressMsg>
+                    <QCErrMsg>
+                        <QCErr Code="" Msg="" />
+                    </QCErrMsg>
+                </Msgs>
+                <QCParams>
+                    <QCParam Param="环境温度" PicReq="false" QCMode="None" ValMode="Mann"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="分动箱温度" PicReq="false" QCMode="Auto" ValMode="Mann"
+                        ValidAvg="" ValidMax="${getCurrentParam('环境温度')+70}" ValidMin=""
+                        ValueReq="true" />
+                </QCParams>
+                <ENVParams></ENVParams>
+                <RealTimeParams></RealTimeParams>
+            </QCItem>
+
+            <QCItem Id="88" Name="主油泵温度（外壳）" QCTimeout="20" QCTimes="1" ReadyTimeout="10"
+                Require="true">
+                <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
+                    <QCProgressMsg>
+                        <QCProgress Code="" Msg="" />
+                    </QCProgressMsg>
+                    <QCErrMsg>
+                        <QCErr Code="" Msg="" />
+                    </QCErrMsg>
+                </Msgs>
+                <QCParams>
+                    <QCParam Param="主油泵温度" PicReq="false" QCMode="Auto" ValMode="Mann"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                </QCParams>
+                <ENVParams></ENVParams>
+                <RealTimeParams></RealTimeParams>
+            </QCItem>
+
+            <QCItem Id="89" Name="恒压泵温度（外壳）" QCTimeout="20" QCTimes="1" ReadyTimeout="10"
+                Require="true">
+                <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
+                    <QCProgressMsg>
+                        <QCProgress Code="" Msg="" />
+                    </QCProgressMsg>
+                    <QCErrMsg>
+                        <QCErr Code="" Msg="" />
+                    </QCErrMsg>
+                </Msgs>
+                <QCParams>
+                    <QCParam Param="恒压泵温度" PicReq="false" QCMode="Auto" ValMode="Mann"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                </QCParams>
+                <ENVParams></ENVParams>
+                <RealTimeParams></RealTimeParams>
+            </QCItem>
+
+            <QCItem Id="90" Name="主油缸壳体温度" QCTimeout="20" QCTimes="1" ReadyTimeout="10"
+                Require="true">
+                <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
+                    <QCProgressMsg>
+                        <QCProgress Code="" Msg="" />
+                    </QCProgressMsg>
+                    <QCErrMsg>
+                        <QCErr Code="" Msg="" />
+                    </QCErrMsg>
+                </Msgs>
+                <QCParams>
+                    <QCParam Param="主油缸壳体温度" PicReq="false" QCMode="Auto" ValMode="Mann"
+                        ValidAvg="" ValidMax="${getRealParam('液压油温度')}+30" ValidMin=""
+                        ValueReq="true" />
+                </QCParams>
+                <ENVParams></ENVParams>
+                <RealTimeParams></RealTimeParams>
+            </QCItem>
+
+        </QCType>
+
+        <QCType Name="转速">
+
+            <QCItem Id="91" Name="发动机转速/油泵转速" QCTimeout="20" QCTimes="1" ReadyTimeout="10"
+                Require="true">
+                <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
+                    <QCProgressMsg>
+                        <QCProgress Code="" Msg="" />
+                    </QCProgressMsg>
+                    <QCErrMsg>
+                        <QCErr Code="" Msg="" />
+                    </QCErrMsg>
+                </Msgs>
+                <QCParams>
+                    <QCParam Param="超速报警次数" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="超档位报警次数" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                </QCParams>
+                <ENVParams></ENVParams>
+                <RealTimeParams>
+                    <RealTimeParam Name="发动机转速" />
+                    <RealTimeParam Name="油泵转速" />
+                    <RealTimeParam Name="报警次数" />
+                </RealTimeParams>
+            </QCItem>
+
+        </QCType>
+
+        <QCType Name="过滤器">
+
+            <QCItem Id="92" Name="液压油过滤工作时间" QCTimeout="20" QCTimes="1" ReadyTimeout="10"
+                Require="true">
+                <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
+                    <QCProgressMsg>
+                        <QCProgress Code="" Msg="" />
+                    </QCProgressMsg>
+                    <QCErrMsg>
+                        <QCErr Code="" Msg="" />
+                    </QCErrMsg>
+                </Msgs>
+                <QCParams>
+                    <QCParam Param="液压油过滤开始" PicReq="true" QCMode="None" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="false" />
+                    <QCParam Param="液压油过滤结束" PicReq="true" QCMode="None" ValMode="Express"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="false" />
+                    <QCParam Param="液压油过滤时间" PicReq="true" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="${getPicTime('液压油过滤结束')}-${getPicTime('液压油过滤开始')}" ValidMax=""
+                        ValidMin="" ValueReq="true" />
+                </QCParams>
+                <ENVParams></ENVParams>
+                <RealTimeParams></RealTimeParams>
+            </QCItem>
+
+            <QCItem Id="93" Name="吸油过滤器真空度" QCTimeout="20" QCTimes="1" ReadyTimeout="10"
+                Require="true">
+                <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
+                    <QCProgressMsg>
+                        <QCProgress Code="" Msg="" />
+                    </QCProgressMsg>
+                    <QCErrMsg>
+                        <QCErr Code="" Msg="" />
+                    </QCErrMsg>
+                </Msgs>
+                <QCParams>
+                    <QCParam Param="吸油过滤器真空度" PicReq="true" QCMode="None" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="false" />
+                </QCParams>
+                <ENVParams></ENVParams>
+                <RealTimeParams></RealTimeParams>
+            </QCItem>
+
+            <QCItem Id="94" Name="回油过滤器真空度" QCTimeout="20" QCTimes="1" ReadyTimeout="10"
+                Require="true">
+                <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
+                    <QCProgressMsg>
+                        <QCProgress Code="" Msg="" />
+                    </QCProgressMsg>
+                    <QCErrMsg>
+                        <QCErr Code="" Msg="" />
+                    </QCErrMsg>
+                </Msgs>
+                <QCParams>
+                    <QCParam Param="回油过滤器真空度" PicReq="true" QCMode="None" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="false" />
+                </QCParams>
+                <ENVParams></ENVParams>
+                <RealTimeParams></RealTimeParams>
+            </QCItem>
+
+            <QCItem Id="95" Name="液压油位" QCTimeout="20" QCTimes="1" ReadyTimeout="10" Require="true">
+                <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
+                    <QCProgressMsg>
+                        <QCProgress Code="" Msg="" />
+                    </QCProgressMsg>
+                    <QCErrMsg>
+                        <QCErr Code="" Msg="" />
+                    </QCErrMsg>
+                </Msgs>
+                <QCParams>
+                    <QCParam Param="液压油位" PicReq="true" QCMode="None" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="false" />
+                </QCParams>
+                <ENVParams></ENVParams>
+                <RealTimeParams></RealTimeParams>
+            </QCItem>
+
+            <QCItem Id="96" Name="液压油清洁度" QCTimeout="20" QCTimes="1" ReadyTimeout="10"
+                Require="true">
+                <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
+                    <QCProgressMsg>
+                        <QCProgress Code="" Msg="" />
+                    </QCProgressMsg>
+                    <QCErrMsg>
+                        <QCErr Code="" Msg="" />
+                    </QCErrMsg>
+                </Msgs>
+                <QCParams>
+                    <QCParam Param="液压油清洁度" PicReq="true" QCMode="None" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="false" />
+                </QCParams>
+                <ENVParams></ENVParams>
+                <RealTimeParams></RealTimeParams>
+            </QCItem>
+
+            <QCItem Id="97" Name="主油缸到位率、泵送油缸动作逻辑" QCTimeout="20" QCTimes="1" ReadyTimeout="10"
+                Require="true">
+                <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
+                    <QCProgressMsg>
+                        <QCProgress Code="" Msg="" />
+                    </QCProgressMsg>
+                    <QCErrMsg>
+                        <QCErr Code="" Msg="" />
+                    </QCErrMsg>
+                </Msgs>
+                <QCParams>
+                    <QCParam Param="主油缸到位率" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="换向次数" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="行程过长" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="行程过短" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="行程优化开启" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="泵送油缸动作逻辑" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                </QCParams>
+                <ENVParams></ENVParams>
+                <RealTimeParams></RealTimeParams>
+            </QCItem>
+
+
+        </QCType>
+
     </QCSet>
 
     <!--

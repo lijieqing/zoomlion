@@ -100,51 +100,17 @@
                                                 <attribute name="QCTimes" type="int" use="required"/>
                                                 <attribute name="ReadyTimeout" type="int" use="required"/>
                                                 <attribute name="Require" type="boolean" use="required" default="true"/>
+                                                <attribute name="AttachPGN" type="string" use="optional"/>
                                                 <sequence>
-                                                    <element maxOccurs="1" name="Function">
+                                                    <element maxOccurs="1" name="Spectrum">
                                                         <complexType>
-                                                            <attribute name="Alter" type="boolean" use="required" />
-                                                            <attribute name="Dialogue" type="boolean" use="required" />
-                                                            <attribute name="AutoQualify" type="boolean" use="required"/>
+                                                            <attribute name="StartMode" type="string" use="required" />
+                                                            <attribute name="Interval" type="int" use="required" />
+                                                            <attribute name="EndMode" type="string" use="required"/>
                                                             <sequence>
-                                                                <element name="DataCollectParam" maxOccurs="unbounded">
+                                                                <element name="SpecParam" maxOccurs="unbounded">
                                                                     <complexType>
-                                                                        <attribute name="Name" type="string" use="required"/>
-                                                                        <attribute name="Period" type="int" use="required"/>
-                                                                    </complexType>
-                                                                </element>
-                                                                <element name="DialogParam" maxOccurs="unbounded">
-                                                                    <complexType>
-                                                                        <attribute name="Name" type="string" use="required"/>
-                                                                    </complexType>
-                                                                </element>
-                                                                <element name="Handwrite" maxOccurs="unbounded">
-                                                                    <complexType>
-                                                                        <attribute name="Name" type="string" use="required"/>
-                                                                        <attribute name="Unit" type="string" use="required"/>
-                                                                    </complexType>
-                                                                </element>
-                                                                <element name="NoValueParam" maxOccurs="unbounded">
-                                                                    <complexType>
-                                                                        <attribute name="Name" type="string" use="required"/>
-                                                                    </complexType>
-                                                                </element>
-                                                                <element name="PICParam" maxOccurs="unbounded">
-                                                                    <complexType>
-                                                                        <attribute name="Name" type="string" use="required"/>
-                                                                    </complexType>
-                                                                </element>
-                                                                <element name="AlterDatas" maxOccurs="unbounded">
-                                                                    <complexType>
-                                                                        <attribute name="Name" type="string" use="required"/>
-                                                                        <sequence>
-                                                                            <element name="AlterData" maxOccurs="unbounded">
-                                                                                <complexType>
-                                                                                    <attribute name="XValue" type="string" use="required" />
-                                                                                    <attribute name="YValue" type="string" use="required" />
-                                                                                </complexType>
-                                                                            </element>
-                                                                        </sequence>
+                                                                        <attribute name="Param" type="string" use="required"/>
                                                                     </complexType>
                                                                 </element>
                                                             </sequence>
@@ -191,9 +157,15 @@
                                                                 <element name="QCParam" maxOccurs="unbounded">
                                                                     <complexType>
                                                                         <attribute name="Param" type="string" use="required"/>
+                                                                        <attribute name="ValueReq" type="boolean" use="required"/>
+                                                                        <attribute name="PicReq" type="boolean" use="required"/>
+                                                                        <attribute name="ValMode" type="string" use="required"/>
+                                                                        <attribute name="QCMode" type="string" use="required"/>
                                                                         <attribute name="ValidAvg" type="float" use="required"/>
                                                                         <attribute name="ValidMax" type="float" use="required"/>
                                                                         <attribute name="ValidMin" type="float" use="required"/>
+                                                                        <attribute name="XParam" type="float" use="optional"/>
+                                                                        <attribute name="XRange" type="float" use="optional"/>
                                                                     </complexType>
                                                                 </element>
                                                             </sequence>

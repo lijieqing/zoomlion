@@ -2,7 +2,7 @@ package com.kstech.zoomlion.model.vo;
 
 
 import com.kstech.zoomlion.ExcException;
-import com.kstech.zoomlion.model.xmlbean.Function;
+import com.kstech.zoomlion.model.xmlbean.Spectrum;
 import com.kstech.zoomlion.utils.JsonUtils;
 
 import java.io.Serializable;
@@ -42,7 +42,8 @@ public class CheckItemVO implements Serializable {
 	 */
 	private int qcTimeout;
 
-	private Function function;
+	private Spectrum spectrum;
+
 
 	private Msgs msgs = new Msgs();
 
@@ -68,11 +69,22 @@ public class CheckItemVO implements Serializable {
 		return rtParamList;
 	}
 
-	public void addQcParam(String param, String validMin, String validMax,
-                           String validAvg) throws ExcException {
+	public void addQcParam(String param,
+						   Boolean valueReq, Boolean picReq, String valMode, String qcMode,
+						   String xParam, String xRange,
+						   String validMin, String validMax, String validAvg) throws ExcException {
 		CheckItemParamValueVO vo = new CheckItemParamValueVO();
 		vo.setItemName(name);
 		vo.setParamName(param);
+
+		vo.setValueReq(valueReq);
+		vo.setPicReq(picReq);
+		vo.setValMode(valMode);
+		vo.setQCMode(qcMode);
+
+		vo.setXParam(xParam);
+		vo.setXRange(xRange);
+
 		vo.setValidAvg(validAvg);
 		vo.setValidMax(validMax);
 		vo.setValidMin(validMin);
@@ -188,12 +200,12 @@ public class CheckItemVO implements Serializable {
 		return msgs.errMap.get(code);
 	}
 
-	public Function getFunction() {
-		return function;
+	public Spectrum getSpectrum() {
+		return spectrum;
 	}
 
-	public void setFunction(Function function) {
-		this.function = function;
+	public void setSpectrum(Spectrum spectrum) {
+		this.spectrum = spectrum;
 	}
 
 	private static class Msgs {

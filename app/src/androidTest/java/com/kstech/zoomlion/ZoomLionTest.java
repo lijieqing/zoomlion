@@ -38,8 +38,8 @@ public class ZoomLionTest {
         Context appContext = InstrumentationRegistry.getTargetContext();
         String id = DeviceUtil.getMacid(appContext);
         HashMap<String, String> maps = new HashMap<>();
-        maps.put("username","test");
-        maps.put("password","123");
+        maps.put("username","admin");
+        maps.put("password","123456");
         maps.put("mac_addr",id);
         new MyHttpUtils().xutilsPost(null, URLCollections.REGISTER_PAD, maps, new MyHttpUtils.MyHttpCallback() {
             @Override

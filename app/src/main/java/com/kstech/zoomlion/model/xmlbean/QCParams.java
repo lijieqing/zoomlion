@@ -21,4 +21,17 @@ public class QCParams {
             this.qcParams.add((QCParam) qcParam);
         }
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (QCParam qcParam : qcParams) {
+            sb.append(qcParam.toString());
+            sb.append("\n");
+        }
+
+        return "QCParams{" +
+                sb.toString()+
+                '}';
+    }
 }
