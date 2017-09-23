@@ -6,9 +6,13 @@ import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Property;
 import org.greenrobot.greendao.annotation.ToOne;
+import org.greenrobot.greendao.annotation.Unique;
+
 import com.kstech.zoomlion.model.db.greendao.DaoSession;
 import com.kstech.zoomlion.model.db.greendao.CheckItemDetailDataDao;
 import com.kstech.zoomlion.model.db.greendao.CheckImageDataDao;
+
+import java.util.Date;
 
 /**
  * Created by lijie on 2017/7/11.
@@ -17,6 +21,9 @@ import com.kstech.zoomlion.model.db.greendao.CheckImageDataDao;
 public class CheckImageData {
     @Id(autoincrement = true)
     private Long imgId;// id
+
+    @Unique
+    private Date createTime;//图片创建时间
 
     private Long itemDetailId; //关联的检测项目详情ID
 
@@ -37,10 +44,11 @@ public class CheckImageData {
     @Generated(hash = 1944620709)
     private transient CheckImageDataDao myDao;
 
-    @Generated(hash = 852817714)
-    public CheckImageData(Long imgId, Long itemDetailId, String paramName,
+    @Generated(hash = 1086740537)
+    public CheckImageData(Long imgId, Date createTime, Long itemDetailId, String paramName,
             String imgPath) {
         this.imgId = imgId;
+        this.createTime = createTime;
         this.itemDetailId = itemDetailId;
         this.paramName = paramName;
         this.imgPath = imgPath;
@@ -158,6 +166,14 @@ public class CheckImageData {
     public void __setDaoSession(DaoSession daoSession) {
         this.daoSession = daoSession;
         myDao = daoSession != null ? daoSession.getCheckImageDataDao() : null;
+    }
+
+    public Date getCreateTime() {
+        return this.createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
 }

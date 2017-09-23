@@ -61,7 +61,7 @@ public class CheckItemDataDao extends AbstractDao<CheckItemData, Long> {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"CHECK_ITEM_DATA\" (" + //
                 "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: checkItemId
-                "\"QC_ID\" INTEGER UNIQUE ," + // 1: qcId
+                "\"QC_ID\" INTEGER," + // 1: qcId
                 "\"ITEM_NAME\" TEXT," + // 2: itemName
                 "\"CHECK_RESULT\" INTEGER," + // 3: checkResult
                 "\"SUM_COUNTS\" INTEGER," + // 4: sumCounts

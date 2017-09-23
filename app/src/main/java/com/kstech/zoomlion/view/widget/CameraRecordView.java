@@ -180,7 +180,7 @@ public class CameraRecordView extends RelativeLayout implements View.OnClickList
         String fname = Environment.getExternalStorageDirectory() + "/photograph/test/" + date + "-" + userID + "-" + itemDetailID + "-" + paramName + ".jpg";
         FileUtil.copy(Environment.getExternalStorageDirectory() + "/workupload.jpg", fname);
         CheckImageDataDao imgDao = MyApplication.getApplication().getDaoSession().getCheckImageDataDao();
-        imgDao.insert(new CheckImageData(null, itemDetailID, paramName, fname));
+        imgDao.insert(new CheckImageData(null, new Date(),itemDetailID, paramName, fname));
         Toast.makeText(activity, "已保存", Toast.LENGTH_SHORT).show();
     }
 

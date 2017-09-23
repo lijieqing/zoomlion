@@ -32,9 +32,10 @@ public class CheckImageDataDao extends AbstractDao<CheckImageData, Long> {
      */
     public static class Properties {
         public final static Property ImgId = new Property(0, Long.class, "imgId", true, "_id");
-        public final static Property ItemDetailId = new Property(1, Long.class, "itemDetailId", false, "ITEM_DETAIL_ID");
-        public final static Property ParamName = new Property(2, String.class, "paramName", false, "PARAM_NAME");
-        public final static Property ImgPath = new Property(3, String.class, "imgPath", false, "IMG_PATH");
+        public final static Property CreateTime = new Property(1, java.util.Date.class, "createTime", false, "CREATE_TIME");
+        public final static Property ItemDetailId = new Property(2, Long.class, "itemDetailId", false, "ITEM_DETAIL_ID");
+        public final static Property ParamName = new Property(3, String.class, "paramName", false, "PARAM_NAME");
+        public final static Property ImgPath = new Property(4, String.class, "imgPath", false, "IMG_PATH");
     }
 
     private DaoSession daoSession;
@@ -55,9 +56,10 @@ public class CheckImageDataDao extends AbstractDao<CheckImageData, Long> {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"CHECK_IMAGE_DATA\" (" + //
                 "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: imgId
-                "\"ITEM_DETAIL_ID\" INTEGER," + // 1: itemDetailId
-                "\"PARAM_NAME\" TEXT," + // 2: paramName
-                "\"IMG_PATH\" TEXT);"); // 3: imgPath
+                "\"CREATE_TIME\" INTEGER UNIQUE ," + // 1: createTime
+                "\"ITEM_DETAIL_ID\" INTEGER," + // 2: itemDetailId
+                "\"PARAM_NAME\" TEXT," + // 3: paramName
+                "\"IMG_PATH\" TEXT);"); // 4: imgPath
     }
 
     /** Drops the underlying database table. */
@@ -75,19 +77,24 @@ public class CheckImageDataDao extends AbstractDao<CheckImageData, Long> {
             stmt.bindLong(1, imgId);
         }
  
+        java.util.Date createTime = entity.getCreateTime();
+        if (createTime != null) {
+            stmt.bindLong(2, createTime.getTime());
+        }
+ 
         Long itemDetailId = entity.getItemDetailId();
         if (itemDetailId != null) {
-            stmt.bindLong(2, itemDetailId);
+            stmt.bindLong(3, itemDetailId);
         }
  
         String paramName = entity.getParamName();
         if (paramName != null) {
-            stmt.bindString(3, paramName);
+            stmt.bindString(4, paramName);
         }
  
         String imgPath = entity.getImgPath();
         if (imgPath != null) {
-            stmt.bindString(4, imgPath);
+            stmt.bindString(5, imgPath);
         }
     }
 
@@ -100,19 +107,24 @@ public class CheckImageDataDao extends AbstractDao<CheckImageData, Long> {
             stmt.bindLong(1, imgId);
         }
  
+        java.util.Date createTime = entity.getCreateTime();
+        if (createTime != null) {
+            stmt.bindLong(2, createTime.getTime());
+        }
+ 
         Long itemDetailId = entity.getItemDetailId();
         if (itemDetailId != null) {
-            stmt.bindLong(2, itemDetailId);
+            stmt.bindLong(3, itemDetailId);
         }
  
         String paramName = entity.getParamName();
         if (paramName != null) {
-            stmt.bindString(3, paramName);
+            stmt.bindString(4, paramName);
         }
  
         String imgPath = entity.getImgPath();
         if (imgPath != null) {
-            stmt.bindString(4, imgPath);
+            stmt.bindString(5, imgPath);
         }
     }
 
@@ -131,9 +143,10 @@ public class CheckImageDataDao extends AbstractDao<CheckImageData, Long> {
     public CheckImageData readEntity(Cursor cursor, int offset) {
         CheckImageData entity = new CheckImageData( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // imgId
-            cursor.isNull(offset + 1) ? null : cursor.getLong(offset + 1), // itemDetailId
-            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // paramName
-            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3) // imgPath
+            cursor.isNull(offset + 1) ? null : new java.util.Date(cursor.getLong(offset + 1)), // createTime
+            cursor.isNull(offset + 2) ? null : cursor.getLong(offset + 2), // itemDetailId
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // paramName
+            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4) // imgPath
         );
         return entity;
     }
@@ -141,9 +154,10 @@ public class CheckImageDataDao extends AbstractDao<CheckImageData, Long> {
     @Override
     public void readEntity(Cursor cursor, CheckImageData entity, int offset) {
         entity.setImgId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setItemDetailId(cursor.isNull(offset + 1) ? null : cursor.getLong(offset + 1));
-        entity.setParamName(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
-        entity.setImgPath(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
+        entity.setCreateTime(cursor.isNull(offset + 1) ? null : new java.util.Date(cursor.getLong(offset + 1)));
+        entity.setItemDetailId(cursor.isNull(offset + 2) ? null : cursor.getLong(offset + 2));
+        entity.setParamName(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
+        entity.setImgPath(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
      }
     
     @Override

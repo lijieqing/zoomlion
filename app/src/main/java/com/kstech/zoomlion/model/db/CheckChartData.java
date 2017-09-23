@@ -6,9 +6,13 @@ import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Property;
 import org.greenrobot.greendao.annotation.ToOne;
+import org.greenrobot.greendao.annotation.Unique;
+
 import com.kstech.zoomlion.model.db.greendao.DaoSession;
 import com.kstech.zoomlion.model.db.greendao.CheckItemDetailDataDao;
 import com.kstech.zoomlion.model.db.greendao.CheckChartDataDao;
+
+import java.util.Date;
 
 /**
  * Created by lijie on 2017/7/11.
@@ -18,6 +22,9 @@ import com.kstech.zoomlion.model.db.greendao.CheckChartDataDao;
 public class CheckChartData {
     @Id(autoincrement = true)
     private Long chartId;
+
+    @Unique
+    private Date createTime;//谱图创建时间
 
     private Long itemDetailId;//调试项目细节表ID
 
@@ -44,10 +51,11 @@ public class CheckChartData {
     @Generated(hash = 1959493665)
     private transient CheckChartDataDao myDao;
 
-    @Generated(hash = 1451250714)
-    public CheckChartData(Long chartId, Long itemDetailId, String paramName, String unit,
-            String chartData, String imgPath) {
+    @Generated(hash = 1460536721)
+    public CheckChartData(Long chartId, Date createTime, Long itemDetailId, String paramName,
+            String unit, String chartData, String imgPath) {
         this.chartId = chartId;
+        this.createTime = createTime;
         this.itemDetailId = itemDetailId;
         this.paramName = paramName;
         this.unit = unit;
@@ -183,6 +191,14 @@ public class CheckChartData {
 
     public void setUnit(String unit) {
         this.unit = unit;
+    }
+
+    public Date getCreateTime() {
+        return this.createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
 }

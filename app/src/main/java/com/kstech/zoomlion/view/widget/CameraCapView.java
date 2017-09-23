@@ -138,7 +138,7 @@ public class CameraCapView extends RelativeLayout implements View.OnClickListene
         String fname = Environment.getExternalStorageDirectory() + "/photograph/test/" + date + "-" + userID + "-" + detailID + "-" + paramName + ".jpg";
         FileUtil.copy(Environment.getExternalStorageDirectory() + "/workupload.jpg", fname);
         CheckImageDataDao imgDao = MyApplication.getApplication().getDaoSession().getCheckImageDataDao();
-        imgDao.insert(new CheckImageData(null, detailID, paramName, fname));
+        imgDao.insert(new CheckImageData(null, new Date(),detailID, paramName, fname));
         Toast.makeText(activity, "已保存", Toast.LENGTH_SHORT).show();
     }
 

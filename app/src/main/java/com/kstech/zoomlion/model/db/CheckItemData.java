@@ -25,9 +25,8 @@ public class CheckItemData {
     @Id(autoincrement = true)
     private Long checkItemId;// id
 
-    @Unique
     @Property
-    private Integer qcId;//通讯时用到的检测项目ID
+    private Integer qcId;//通讯时用到的检测项目ID,可能存在多个机型记录，所以不设置为unique，但是在一个泵车调试记录中qcID应该是唯一的
 
     @Property
     private String itemName;//检测项目名称
