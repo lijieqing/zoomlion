@@ -1263,13 +1263,13 @@
                         ValueReq="true" PicReq="false" ValMode="Auto" QCMode="Auto"
                         ValidAvg="" ValidMax="" ValidMin="" />
                     <QCParam Param="压力段2累计时间"
-                        ValueReq="true" PicReq="true" ValMode="Auto" QCMode="Auto"
+                        ValueReq="true" PicReq="false" ValMode="Auto" QCMode="Auto"
                         ValidAvg="" ValidMax="" ValidMin="" />
                     <QCParam Param="压力段3累计时间"
-                        ValueReq="true" PicReq="true" ValMode="Auto" QCMode="Auto"
+                        ValueReq="true" PicReq="false" ValMode="Auto" QCMode="Auto"
                         ValidAvg="" ValidMax="" ValidMin="" />
                     <QCParam Param="压力段4累计时间"
-                        ValueReq="true" PicReq="true" ValMode="Auto" QCMode="Auto"
+                        ValueReq="true" PicReq="false" ValMode="Auto" QCMode="Auto"
                         ValidAvg="" ValidMax="" ValidMin="" />
                 </QCParams>
                 <ENVParams>
@@ -1439,10 +1439,10 @@
                         ValueReq="false" PicReq="true" ValMode="Auto" QCMode="None"
                         ValidAvg="" ValidMax="" ValidMin="" />
                     <QCParam Param="液压油过滤结束"
-                        ValueReq="false" PicReq="true" ValMode="Express" QCMode="None"
+                        ValueReq="false" PicReq="true" ValMode="Auto" QCMode="None"
                         ValidAvg="" ValidMax="" ValidMin="" />
                     <QCParam Param="液压油过滤时间"
-                        ValueReq="true" PicReq="true" ValMode="Auto" QCMode="Auto"
+                        ValueReq="true" PicReq="false" ValMode="Express" QCMode="Auto"
                         ValidAvg="${getPicTime('液压油过滤结束')}-${getPicTime('液压油过滤开始')}" ValidMax="" ValidMin="" />
                 </QCParams>
                 <ENVParams>

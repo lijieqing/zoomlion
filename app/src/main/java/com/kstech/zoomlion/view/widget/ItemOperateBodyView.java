@@ -22,8 +22,10 @@ import com.kstech.zoomlion.view.activity.BaseFunActivity;
 
 /**
  * Created by lijie on 2017/9/4.
+ *
+ * 参数操作布局
+ *
  */
-
 public class ItemOperateBodyView extends RelativeLayout {
     private BaseFunActivity baseFunActivity;
     private TextView tvParamName;//参数名称
@@ -34,18 +36,40 @@ public class ItemOperateBodyView extends RelativeLayout {
     private ImageView ivCamera;//拍照图片按钮
     private ImageView ivHandWriting;//手写图片按钮
     private RadioGroup radioGroup;//合格不合格操作按钮
-    private CheckItemParamValueVO checkItemParamValueVO;
-    private String qcID;
-    boolean isDialog = false;//是否与测量终端通讯
-    boolean isHandwriting = false;//是否手动输入参数值
-    boolean isnovalue = false;//是否为无数值参数
-
-    boolean valueReq = true;//是否需要值
-    boolean picReq = false;//是否需要拍照
-
-    private AlertDialog handwritingDialog;
+    private CheckItemParamValueVO checkItemParamValueVO;//调试项目参数vo描述类
+    private String qcID;//调试项目用于通讯的ID
+    private AlertDialog handwritingDialog;//手写
     EditText et;
 
+    /**
+     * The Is dialog.
+     */
+    boolean isDialog = false;//是否与测量终端通讯
+    /**
+     * The Is handwriting.
+     */
+    boolean isHandwriting = false;//是否手动输入参数值
+    /**
+     * The Isnovalue.
+     */
+    boolean isnovalue = false;//是否为无数值参数
+
+    /**
+     * The Value req.
+     */
+    boolean valueReq = true;//是否需要值
+    /**
+     * The Pic req.
+     */
+    boolean picReq = false;//是否需要拍照
+
+    /**
+     * Instantiates a new Item operate body view.
+     *
+     * @param context               the context
+     * @param checkItemParamValueVO the check item param value vo
+     * @param qcID                  the qc id
+     */
     public ItemOperateBodyView(BaseFunActivity context, CheckItemParamValueVO checkItemParamValueVO, String qcID) {
         super(context);
         this.baseFunActivity = context;
@@ -55,18 +79,35 @@ public class ItemOperateBodyView extends RelativeLayout {
         this.addView(initView());
     }
 
+    /**
+     * Instantiates a new Item operate body view.
+     *
+     * @param context the context
+     * @param attrs   the attrs
+     */
     public ItemOperateBodyView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
         this.addView(initView());
     }
 
+    /**
+     * Instantiates a new Item operate body view.
+     *
+     * @param context      the context
+     * @param attrs        the attrs
+     * @param defStyleAttr the def style attr
+     */
     public ItemOperateBodyView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
         this.addView(initView());
     }
 
+    /**
+     * 初始化布局 初始化参数功能信息
+     * @return
+     */
     private View initView() {
         View v = View.inflate(baseFunActivity, R.layout.check_item_operate_body, null);
         tvParamName = v.findViewById(R.id.tv_name);
@@ -85,6 +126,9 @@ public class ItemOperateBodyView extends RelativeLayout {
     }
 
 
+    /**
+     * 根据测量终端状态调整布局
+     */
     private void paramFunInit() {
         tvParamName.setText(checkItemParamValueVO.getParamName());
 
@@ -177,6 +221,9 @@ public class ItemOperateBodyView extends RelativeLayout {
         });
     }
 
+    /**
+     * 点击保存时 调用更新展示布局
+     */
     public void updateCameraInfo() {
 
     }
