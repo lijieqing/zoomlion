@@ -98,7 +98,7 @@ public class ItemShowViewInCheck extends RelativeLayout {
         Globals.headerListener.clear();
         for (CheckItemDetailData paramValue : paramValues) {
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, DeviceUtil.deviceHeight(context) / 15);
-            ItemBodyShowView ibs = new ItemBodyShowView(context, paramValue);
+            ItemBodyShowViewInCheck ibs = new ItemBodyShowViewInCheck(context, paramValue);
             bodyContains.addView(ibs, params);
             Globals.addHeadScrollListener(ibs);
         }

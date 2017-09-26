@@ -9,6 +9,7 @@ import android.widget.Chronometer;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.kstech.zoomlion.R;
 import com.kstech.zoomlion.model.vo.CheckItemParamValueVO;
@@ -31,7 +32,7 @@ public class ItemOperateView extends RelativeLayout implements View.OnClickListe
 
     private ImageView ivSave;//保存
     private ImageView ivStart;//开始
-    private ImageView ivStop;//停止
+    private ImageView ivForward;//上一项目
     private ImageView ivNext;//下一项目
 
     private LinearLayout llCheckStatus;//当前调试项目状态，当准备就绪时变为绿色提示用户
@@ -82,6 +83,7 @@ public class ItemOperateView extends RelativeLayout implements View.OnClickListe
 
     /**
      * 初始化布局 注册监听事件
+     *
      * @return
      */
     private View initView() {
@@ -93,13 +95,13 @@ public class ItemOperateView extends RelativeLayout implements View.OnClickListe
 
         ivSave = v.findViewById(R.id.iv_save);
         ivStart = v.findViewById(R.id.iv_start);
-        ivStop = v.findViewById(R.id.iv_stop);
+        ivForward = v.findViewById(R.id.iv_forward);
         ivNext = v.findViewById(R.id.iv_next);
         chronometer = v.findViewById(R.id.chronometer_operate);
 
         ivSave.setOnClickListener(this);
         ivStart.setOnClickListener(this);
-        ivStop.setOnClickListener(this);
+        ivForward.setOnClickListener(this);
         ivNext.setOnClickListener(this);
 
         return v;
@@ -126,10 +128,11 @@ public class ItemOperateView extends RelativeLayout implements View.OnClickListe
             bodyViews.add(bodyView);
 
 
-            if (!checkItemParamValueVO.getValueReq() || !"Auto".equals(checkItemParamValueVO.getValMode())){
-                ivStart.setEnabled(false);
-            }else {
-                ivStart.setEnabled(true);
+            if (!checkItemParamValueVO.getValueReq() || !"Auto".equals(checkItemParamValueVO.getValMode())) {
+                ivStart.setEnabled(false);//无需通讯条件下开始按钮不可点击
+            } else {
+                ivStart.setEnabled(true);//通讯条件下开始按钮可点击
+                ivSave.setEnabled(false);//通讯条件下保存按钮不可点击
             }
 
         }
@@ -137,15 +140,20 @@ public class ItemOperateView extends RelativeLayout implements View.OnClickListe
 
     /**
      * 更新调试状态
+     *
      * @param isRunning
      */
-    private void updateCheckStatus(boolean isRunning){
-        if (isRunning){
+    private void updateCheckStatus(boolean isRunning) {
+        if (isRunning) {
             ivStart.setBackgroundResource(R.drawable.stop);
+            ivSave.setBackgroundResource(R.drawable.save_disable);
             isChecking = true;
+        } else {
+            ivStart.setBackgroundResource(R.drawable.start);
+            ivSave.setBackgroundResource(R.drawable.save);
+            isChecking = false;
         }
     }
-
 
 
     /**
@@ -161,13 +169,67 @@ public class ItemOperateView extends RelativeLayout implements View.OnClickListe
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.iv_save:
+                saveRecord(isChecking);
                 break;
             case R.id.iv_start:
+                if (isChecking) {
+                    stopCheck();
+                } else {
+                    startCheck();
+                }
                 break;
-            case R.id.iv_stop:
+            case R.id.iv_forward:
+                toForward();
                 break;
             case R.id.iv_next:
+                toNext();
                 break;
         }
+    }
+
+    /**
+     * 跳转到下一项目
+     */
+    private void toNext() {
+
+    }
+
+    /**
+     * 跳转到前一个项目
+     */
+    private void toForward() {
+
+    }
+
+    /**
+     * 根据是否正在调试对保存按钮事件进行处理
+     *
+     * @param isChecking
+     */
+    private void saveRecord(boolean isChecking) {
+        if (isChecking) {
+            Toast.makeText(context, "", Toast.LENGTH_SHORT).show();
+        } else {
+
+            //// TODO: 2017/9/26 保存调试记录
+
+        }
+
+    }
+
+    /**
+     * 开始调试
+     */
+    private void startCheck() {
+        //更新调试状态为正在调试
+        updateCheckStatus(true);
+    }
+
+    /**
+     * 停止调试
+     */
+    private void stopCheck() {
+        //更新调试状态为未在调试
+        updateCheckStatus(false);
     }
 }

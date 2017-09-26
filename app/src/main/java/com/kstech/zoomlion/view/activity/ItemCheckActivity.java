@@ -27,17 +27,17 @@ import com.kstech.zoomlion.view.widget.ItemShowViewInCheck;
 import java.util.List;
 
 public class ItemCheckActivity extends BaseFunActivity {
+    private ItemOperateView iov;// 项目调试操作view
+    private ItemShowViewInCheck isv;//项目调试记录展示view
+    CameraCapView cameraCapView;//照片捕获view，包含拍照、保存、重新开始
+    AlertDialog picCatchDialog;//照片捕获对话窗
+    Bitmap bitmap;//当前图片的位图
+    long detailID;//调试项目细节记录ID
+    String itemID;//调试项目记录ID
 
-    private ItemOperateView iov;
-    private ItemShowViewInCheck isv;
-    CameraCapView cameraCapView;
-    AlertDialog picCatchDialog;
-    Bitmap bitmap;
-    long detailID;
-    String itemID;
-    CheckItemDataDao itemDao;
-    CheckItemDetailDataDao itemDetailDao;
-    CheckItemVO itemvo;
+    CheckItemDataDao itemDao;//调试项目记录操作类
+    CheckItemDetailDataDao itemDetailDao;//调试项目细节操作类
+    CheckItemVO itemvo;//调试项目vo类
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +46,7 @@ public class ItemCheckActivity extends BaseFunActivity {
         itemDao = MyApplication.getApplication().getDaoSession().getCheckItemDataDao();
         itemDetailDao = MyApplication.getApplication().getDaoSession().getCheckItemDetailDataDao();
 
+        //根据ID，获取调试项目vo类
         Intent intent = getIntent();
         itemID = intent.getStringExtra("itemID");
         itemvo = Globals.modelFile.getCheckItemVO(itemID);
@@ -54,11 +55,13 @@ public class ItemCheckActivity extends BaseFunActivity {
         isv = (ItemShowViewInCheck) findViewById(R.id.isv_check);
         iov.setCameraActivity(this);
 
+        //更新调试项目参数操作区信息
         iov.update(itemvo);
 
         CheckItemData itemData = itemDao.queryBuilder().where(CheckItemDataDao.Properties.QcId.eq(Integer.parseInt(itemvo.getId()))).build().unique();
         List<CheckItemDetailData> itemdetails = itemData.getCheckItemDetailDatas();
 
+        //更新调试项目界面展示信息，包括调试记录、当前项目名称、机型编号等
         isv.updateHead(itemvo);
         isv.updateBody(itemdetails);
     }
@@ -88,9 +91,11 @@ public class ItemCheckActivity extends BaseFunActivity {
 
     @Override
     public void camera(CheckItemParamValueVO checkItemParamValueVO, ItemOperateBodyView iobv) {
+        //初始化图片捕捉view
         cameraCapView = new CameraCapView(this, this);
         cameraCapView.itemParamInit(checkItemParamValueVO, detailID, iobv);
 
+        //将图片捕捉view放到dialog中展示
         picCatchDialog = new AlertDialog.Builder(this)
                 .setTitle("拍照")
                 .setNegativeButton("结束", null)
