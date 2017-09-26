@@ -39,6 +39,8 @@ public class ItemOperateView extends RelativeLayout implements View.OnClickListe
 
     private List<ItemOperateBodyView> bodyViews;//参数描述体 集合
 
+    private boolean isChecking = false;//是否正在调试
+
     /**
      * Instantiates a new Item operate view.
      *
@@ -130,6 +132,17 @@ public class ItemOperateView extends RelativeLayout implements View.OnClickListe
                 ivStart.setEnabled(true);
             }
 
+        }
+    }
+
+    /**
+     * 更新调试状态
+     * @param isRunning
+     */
+    private void updateCheckStatus(boolean isRunning){
+        if (isRunning){
+            ivStart.setBackgroundResource(R.drawable.stop);
+            isChecking = true;
         }
     }
 
