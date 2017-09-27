@@ -5,12 +5,16 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.SystemClock;
 import android.view.View;
 
 import com.kstech.zoomlion.MyApplication;
 import com.kstech.zoomlion.R;
+import com.kstech.zoomlion.engine.ItemCheckCallBack;
+import com.kstech.zoomlion.engine.ItemCheckTask;
 import com.kstech.zoomlion.model.db.CheckItemData;
 import com.kstech.zoomlion.model.db.CheckItemDetailData;
 import com.kstech.zoomlion.model.db.greendao.CheckItemDataDao;
@@ -19,6 +23,7 @@ import com.kstech.zoomlion.model.vo.CheckItemParamValueVO;
 import com.kstech.zoomlion.model.vo.CheckItemVO;
 import com.kstech.zoomlion.utils.BitmapUtils;
 import com.kstech.zoomlion.utils.Globals;
+import com.kstech.zoomlion.utils.LogUtils;
 import com.kstech.zoomlion.view.widget.CameraCapView;
 import com.kstech.zoomlion.view.widget.ItemOperateBodyView;
 import com.kstech.zoomlion.view.widget.ItemOperateView;
@@ -26,7 +31,7 @@ import com.kstech.zoomlion.view.widget.ItemShowViewInCheck;
 
 import java.util.List;
 
-public class ItemCheckActivity extends BaseFunActivity {
+public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallBack{
     private ItemOperateView iov;// 项目调试操作view
     private ItemShowViewInCheck isv;//项目调试记录展示view
     CameraCapView cameraCapView;//照片捕获view，包含拍照、保存、重新开始
@@ -38,6 +43,8 @@ public class ItemCheckActivity extends BaseFunActivity {
     CheckItemDataDao itemDao;//调试项目记录操作类
     CheckItemDetailDataDao itemDetailDao;//调试项目细节操作类
     CheckItemVO itemvo;//调试项目vo类
+
+    ItemCheckTask itemCheckTask;//调试项目异步任务
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,4 +111,87 @@ public class ItemCheckActivity extends BaseFunActivity {
         picCatchDialog.setView(cameraCapView);
         picCatchDialog.show();
     }
+
+    /************
+     * BaseFunActivity 回调
+     */
+    @Override
+    public void startCheck() {
+        //项目调试任务初始化和启动
+        itemCheckTask = new ItemCheckTask(this);
+        itemCheckTask.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
+    }
+
+    @Override
+    public void stopCheck() {
+        if (itemCheckTask != null){
+            //项目调试任务人工停止
+            itemCheckTask.stopCheck();
+            itemCheckTask.cancel(true);
+        }
+    }
+    /**
+     * BaseFunActivity 回调
+     ****************
+     */
+
+
+    /**
+     * ItemCheckCallBack回调 开始
+     */
+    @Override
+    public void onStart(ItemCheckTask task) {
+        task.qcID = Integer.parseInt(itemID);
+        task.times = 1;
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                iov.chronometer.setBase(SystemClock.elapsedRealtime());//设置计时器起点，00：00
+                iov.chronometer.setBackgroundResource(R.color.zoomLionColor);//设置背景色
+                iov.chronometer.start();//启动计时器
+            }
+        });
+    }
+
+    @Override
+    public void onStartError(String msg) {
+        LogUtils.e("ItemCheckActivity",msg);
+    }
+
+    @Override
+    public void onProgress(String progress) {
+        LogUtils.e("ItemCheckActivity",progress);
+    }
+
+    @Override
+    public void onSuccess(List<CheckItemParamValueVO> headers, String msg) {
+
+    }
+
+    @Override
+    public void onResultError(List<CheckItemParamValueVO> headers, String msg) {
+
+    }
+
+    @Override
+    public void onTimeOut(List<CheckItemParamValueVO> headers, String msg) {
+
+    }
+
+    @Override
+    public void onTaskStop(final boolean canSave) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                iov.updateCheckStatus(false,canSave);
+                iov.chronometer.stop();
+            }
+        });
+    }
+
+
+    /**
+     * ItemCheckCallBack回调 开始
+     */
+
 }

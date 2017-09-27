@@ -9,9 +9,11 @@ import android.widget.Chronometer;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kstech.zoomlion.R;
+import com.kstech.zoomlion.engine.ItemCheckCallBack;
 import com.kstech.zoomlion.model.vo.CheckItemParamValueVO;
 import com.kstech.zoomlion.model.vo.CheckItemVO;
 import com.kstech.zoomlion.utils.DeviceUtil;
@@ -27,16 +29,17 @@ import java.util.List;
  */
 public class ItemOperateView extends RelativeLayout implements View.OnClickListener {
     private Context context;
-    private LinearLayout ll_body;
+    private LinearLayout ll_body;//调试项目参数操作显示区域
     private BaseFunActivity baseFunActivity;
 
     private ImageView ivSave;//保存
     private ImageView ivStart;//开始
+    private TextView tvStart;//
     private ImageView ivForward;//上一项目
     private ImageView ivNext;//下一项目
 
-    private LinearLayout llCheckStatus;//当前调试项目状态，当准备就绪时变为绿色提示用户
-    private Chronometer chronometer;//计时器显示
+    public LinearLayout llCheckStatus;//当前调试项目状态，当准备就绪时变为绿色提示用户
+    public Chronometer chronometer;//计时器显示
 
     private List<ItemOperateBodyView> bodyViews;//参数描述体 集合
 
@@ -95,6 +98,7 @@ public class ItemOperateView extends RelativeLayout implements View.OnClickListe
 
         ivSave = v.findViewById(R.id.iv_save);
         ivStart = v.findViewById(R.id.iv_start);
+        tvStart = v.findViewById(R.id.tv_start);
         ivForward = v.findViewById(R.id.iv_forward);
         ivNext = v.findViewById(R.id.iv_next);
         chronometer = v.findViewById(R.id.chronometer_operate);
@@ -138,19 +142,25 @@ public class ItemOperateView extends RelativeLayout implements View.OnClickListe
         }
     }
 
+
     /**
-     * 更新调试状态
+     * Update check status.
      *
-     * @param isRunning
+     * @param isRunning 是否正在运行
+     * @param canSave   是否是强制行为
      */
-    private void updateCheckStatus(boolean isRunning) {
+    public void updateCheckStatus(boolean isRunning,boolean canSave) {
         if (isRunning) {
             ivStart.setBackgroundResource(R.drawable.stop);
+            tvStart.setText("停止");
             ivSave.setBackgroundResource(R.drawable.save_disable);
             isChecking = true;
         } else {
             ivStart.setBackgroundResource(R.drawable.start);
-            ivSave.setBackgroundResource(R.drawable.save);
+            tvStart.setText("开始");
+            if (canSave){
+                ivSave.setBackgroundResource(R.drawable.save);
+            }
             isChecking = false;
         }
     }
@@ -208,7 +218,7 @@ public class ItemOperateView extends RelativeLayout implements View.OnClickListe
      */
     private void saveRecord(boolean isChecking) {
         if (isChecking) {
-            Toast.makeText(context, "", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "调试未完成，无法保存！", Toast.LENGTH_SHORT).show();
         } else {
 
             //// TODO: 2017/9/26 保存调试记录
@@ -222,7 +232,9 @@ public class ItemOperateView extends RelativeLayout implements View.OnClickListe
      */
     private void startCheck() {
         //更新调试状态为正在调试
-        updateCheckStatus(true);
+        updateCheckStatus(true,false);
+        //回调baseFunActivity开始调试
+        baseFunActivity.startCheck();
     }
 
     /**
@@ -230,6 +242,8 @@ public class ItemOperateView extends RelativeLayout implements View.OnClickListe
      */
     private void stopCheck() {
         //更新调试状态为未在调试
-        updateCheckStatus(false);
+        updateCheckStatus(false,false);
+        //回调baseFunActivity停止调试
+        baseFunActivity.stopCheck();
     }
 }

@@ -15,4 +15,8 @@ public abstract class BaseFunActivity extends BaseActivity {
      * @param iobv                  参数操作描述view
      */
     public abstract void camera(CheckItemParamValueVO checkItemParamValueVO, ItemOperateBodyView iobv);
+
+    public abstract void startCheck();
+
+    public abstract void stopCheck();
 }
