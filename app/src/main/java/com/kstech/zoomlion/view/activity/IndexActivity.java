@@ -11,6 +11,8 @@ import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
+import java.util.Date;
+
 @ContentView(R.layout.activity_index)
 public class IndexActivity extends BaseActivity {
 
@@ -34,7 +36,8 @@ public class IndexActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         x.view().inject(this);
-        String data = String.format(getString(R.string.index_welcome_user),Globals.currentUser.getName(),Globals.currentUser.getLast_login_time());
+        //String data = String.format(getString(R.string.index_welcome_user),Globals.currentUser.getName(),Globals.currentUser.getLast_login_time());
+        String data = String.format(getString(R.string.index_welcome_user),"测试",new Date());
         tvUserWelcome.setText(data);
     }
 }
