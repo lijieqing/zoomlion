@@ -31,6 +31,9 @@ public class IndexActivity extends BaseActivity {
     @ViewInject(R.id.index_tv_welcome)
     private TextView tvUserWelcome;//用户欢迎语展示
 
+    @ViewInject(R.id.iv_index_user)
+    private ImageView ivUser;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
