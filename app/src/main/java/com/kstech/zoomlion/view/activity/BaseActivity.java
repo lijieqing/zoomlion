@@ -17,7 +17,6 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //StatusBarUtil.setColor(this, Color.argb(255, 140, 140, 145), 32);
         //沉浸式状态栏 sdk 21以上
         if (Build.VERSION.SDK_INT >= 21) {
             View decorView = getWindow().getDecorView();

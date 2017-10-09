@@ -4,97 +4,107 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="#fff"
+    android:orientation="vertical"
     tools:context="com.kstech.zoomlion.view.activity.IndexActivity">
 
     <LinearLayout
         android:id="@+id/index_ll_head"
-        android:background="@drawable/ll_change_check_title_bg"
         android:layout_width="match_parent"
         android:layout_height="85dp"
+        android:background="@drawable/ll_change_check_title_bg"
         android:orientation="horizontal">
+
         <RelativeLayout
-            android:layout_weight="1"
             android:layout_width="0dp"
-            android:orientation="vertical"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
             <ImageView
-                android:layout_marginLeft="5dp"
-                android:src="@drawable/zoomlion_logo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_centerInParent="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_marginLeft="5dp"
+                android:src="@drawable/zoomlion_logo" />
+
             <TextView
                 android:id="@+id/index_tv_welcome"
-                android:layout_alignParentBottom="true"
-                android:layout_centerInParent="true"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerInParent="true" />
         </RelativeLayout>
+
         <android.support.constraint.ConstraintLayout
             android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
             <LinearLayout
-                android:orientation="vertical"
+                android:id="@+id/linearLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="8dp"
-                android:layout_marginRight="8dp"
-                app:layout_constraintRight_toRightOf="parent"
-                android:layout_marginLeft="8dp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_marginBottom="8dp"
-                android:id="@+id/linearLayout"
-                app:layout_constraintHorizontal_bias="0.498"
-                app:layout_constraintVertical_bias="1.0"
+                android:layout_marginEnd="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp">
+                android:layout_marginTop="8dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0">
+
                 <ImageView
                     android:id="@+id/index_iv_server_status"
-                    android:layout_gravity="center"
-                    android:layout_centerInParent="true"
-                    android:src="@drawable/server_connect"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_gravity="center"
+                    android:src="@drawable/server_connect" />
+
                 <TextView
                     android:id="@+id/index_tv_server_status"
-                    android:text="服务器连接正常"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:text="服务器连接正常" />
             </LinearLayout>
+
             <LinearLayout
-                android:orientation="vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="8dp"
-                android:layout_marginRight="8dp"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintLeft_toRightOf="@+id/linearLayout"
-                android:layout_marginLeft="8dp"
-                app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_marginBottom="8dp"
-                app:layout_constraintHorizontal_bias="0.528"
-                app:layout_constraintVertical_bias="1.0"
+                android:layout_marginEnd="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp">
+                android:layout_marginTop="8dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_bias="0.528"
+                app:layout_constraintLeft_toRightOf="@+id/linearLayout"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0">
+
                 <ImageView
                     android:id="@+id/index_iv_terminal_status"
-                    android:layout_gravity="center"
-                    android:layout_centerInParent="true"
-                    android:src="@drawable/terminal_connect"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_gravity="center"
+                    android:src="@drawable/terminal_connect" />
+
                 <TextView
                     android:id="@+id/index_tv_terminal_status"
-                    android:text="终端连接正常"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:text="终端连接正常" />
             </LinearLayout>
 
         </android.support.constraint.ConstraintLayout>
@@ -105,62 +115,169 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
         <LinearLayout
-            android:layout_marginTop="5dp"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:orientation="horizontal"
-            android:layout_weight="1">
+            android:layout_marginTop="5dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
             <LinearLayout
-                android:layout_weight="0.05"
                 android:layout_width="0dp"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_weight="0.05">
 
             </LinearLayout>
+
             <RelativeLayout
-                android:background="@drawable/ll_index_module_bg"
-                android:layout_weight="0.96"
                 android:layout_width="0dp"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_weight="0.96"
+                android:background="@drawable/ll_index_module_bg">
 
                 <ImageView
-                    android:clickable="true"
-                    android:background="@drawable/bg_btn_user"
+                    android:id="@+id/index_iv_user"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/iv_index_user"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
                     android:layout_marginLeft="15dp"
                     android:layout_marginStart="15dp"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true" />
+                    android:background="@drawable/bg_btn_user"
+                    android:clickable="true" />
 
                 <TextView
                     android:id="@+id/textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="29dp"
+                    android:layout_marginStart="29dp"
+                    android:layout_toEndOf="@+id/index_iv_user"
+                    android:layout_toRightOf="@+id/index_iv_user"
                     android:layout_weight="1"
                     android:maxEms="1"
                     android:text="个人信息"
-                    android:textSize="18sp"
-                    android:layout_centerVertical="true"
-                    android:layout_toRightOf="@+id/iv_index_user"
-                    android:layout_toEndOf="@+id/iv_index_user"
-                    android:layout_marginLeft="29dp"
-                    android:layout_marginStart="29dp" />
+                    android:textSize="18sp" />
 
             </RelativeLayout>
-            <LinearLayout
-                android:layout_weight="4"
-                android:layout_width="0dp"
-                android:layout_height="match_parent">
 
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="4"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:background="@drawable/ll_index_module_bg"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxEms="1"
+                        android:text="调试终端"
+                        android:textSize="18sp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/index_terminal" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4"
+                    android:background="@drawable/ll_index_module_bg"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/IndexTerminalNameStyle"
+                            android:text="终端名称：" />
+
+                        <TextView
+                            android:id="@+id/index_tv_terminal_name"
+                            style="@style/IndexTerminalContentStyle"
+                            android:text="测试终端01" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/IndexTerminalNameStyle"
+                            android:text="终端IP：" />
+
+                        <TextView
+                            android:id="@+id/index_tv_terminal_ip"
+                            style="@style/IndexTerminalContentStyle"
+                            android:text="192.168.1.101" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/IndexTerminalNameStyle"
+                            android:text="待调车辆编码：" />
+
+                        <TextView
+                            android:id="@+id/index_tv_device_identity"
+                            style="@style/IndexTerminalContentStyle"
+                            android:text="GBK-KSTECH-TEST" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="2dp"
+                    android:layout_weight="4"
+                    android:background="@drawable/ll_index_module_bg">
+                    <Button
+                        android:id="@+id/index_btn_auto_download"
+                        android:text="自动获取编码和机型"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"/>
+                    <Button
+                        android:id="@+id/index_btn_choose_from_server"
+                        android:text="从服务器列表选择机型"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"/>
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="3">
+            android:layout_weight="3.1">
 
         </LinearLayout>
 
