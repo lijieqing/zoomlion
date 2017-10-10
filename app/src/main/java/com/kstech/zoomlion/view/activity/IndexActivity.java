@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.kstech.zoomlion.R;
@@ -14,6 +15,9 @@ import org.xutils.x;
 
 import java.util.Date;
 
+/**
+ * 应用引导界面，包含了个人信息修改入口，调试终端的信息展示，参数初始化模块
+ */
 @ContentView(R.layout.activity_index)
 public class IndexActivity extends BaseActivity {
 
@@ -49,6 +53,36 @@ public class IndexActivity extends BaseActivity {
 
     @ViewInject(R.id.index_btn_choose_from_server)
     private Button btnChooseDeviceFromServer;//自动获取编码和机型按钮
+
+    @ViewInject(R.id.index_tv_device_born)
+    private TextView tvDeviceBornDate;//设备出厂日期
+
+    @ViewInject(R.id.index_tv_device_secondcheck)
+    private TextView tvDevSecondCheck;//设备是否第二次调试
+
+    @ViewInject(R.id.index_tv_device_itemcounts)
+    private TextView tvItemCounts;//总调试项目数量
+
+    @ViewInject(R.id.index_tv_item_checkedcounts)
+    private TextView tvItemCheckedCounts;//已调试项目数量
+
+    @ViewInject(R.id.index_tv_item_uncheckedcounts)
+    private TextView tvItemUncheckedCounts;//未调试项目数量
+
+    @ViewInject(R.id.index_tv_item_lastcheck)
+    private TextView tvItemLastChecked;//上次调试项目
+
+    @ViewInject(R.id.index_tv_record_result)
+    private TextView tvRecordResult;//整机调试结论
+
+    @ViewInject(R.id.index_btn_exit)
+    private Button btnExit;//退出按钮
+
+    @ViewInject(R.id.index_btn_goto)
+    private Button btnGotoCheck;//进入调试界面
+
+    @ViewInject(R.id.index_lv_initparams)
+    private ListView lvInitParams;//初始化参数列表
 
 
     @Override

@@ -123,16 +123,10 @@
             android:layout_weight="1"
             android:orientation="horizontal">
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.05">
-
-            </LinearLayout>
-
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
                 android:layout_weight="0.96"
                 android:background="@drawable/ll_index_module_bg">
 
@@ -252,24 +246,26 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:orientation="vertical"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="2dp"
                     android:layout_weight="4"
-                    android:background="@drawable/ll_index_module_bg">
+                    android:background="@drawable/ll_index_module_bg"
+                    android:orientation="vertical">
+
                     <Button
                         android:id="@+id/index_btn_auto_download"
-                        android:text="自动获取编码和机型"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="1"/>
+                        android:layout_weight="1"
+                        android:text="自动获取编码和机型" />
+
                     <Button
                         android:id="@+id/index_btn_choose_from_server"
-                        android:text="从服务器列表选择机型"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="1"/>
+                        android:layout_weight="1"
+                        android:text="从服务器列表选择机型" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
@@ -277,8 +273,202 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="3.1">
+            android:layout_weight="3.1"
+            android:orientation="horizontal">
 
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="8dp"
+                android:layout_weight="2"
+                android:background="#209ece78"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.4"
+                    android:gravity="center"
+                    android:background="@color/zoomLionColor">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="机型信息初始化"
+                        android:maxEms="1"
+                        android:textColor="#fff"
+                        android:textSize="20dp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2">
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:orientation="vertical"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2.1">
+                    <TextView
+                        android:text="初始化参数列表"
+                        android:textSize="16sp"
+                        android:padding="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                    <ListView
+                        android:id="@+id/index_lv_initparams"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginRight="7dp"
+                        android:background="#fff">
+
+                    </ListView>
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1.6"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_weight="0.8"
+                    android:background="@color/zoomLionColor"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="当前车辆信息"
+                        android:textColor="#fff"
+                        android:textSize="20dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="3"
+                    android:orientation="vertical">
+
+                    <LinearLayout style="@style/IndexDeviceInfoStyle">
+
+                        <TextView
+                            style="@style/IndexDeviceNameStyle"
+                            android:text="出厂日期" />
+
+                        <TextView
+                            android:id="@+id/index_tv_device_born"
+                            style="@style/IndexDeviceContentStyle"
+                            android:text="2017-10-01" />
+
+                        <TextView
+                            style="@style/IndexDeviceNameStyle"
+                            android:text="二次调试" />
+
+                        <TextView
+                            android:id="@+id/index_tv_device_secondcheck"
+                            style="@style/IndexDeviceContentStyle"
+                            android:text="否" />
+                    </LinearLayout>
+
+                    <LinearLayout style="@style/IndexDeviceInfoStyle">
+
+                        <TextView
+                            style="@style/IndexDeviceNameStyle"
+                            android:text="总调试项目数" />
+
+                        <TextView
+                            android:id="@+id/index_tv_device_itemcounts"
+                            style="@style/IndexDeviceContentStyle"
+                            android:text="96" />
+
+                        <TextView
+                            style="@style/IndexDeviceNameStyle"
+                            android:text="已调项目数" />
+
+                        <TextView
+                            android:id="@+id/index_tv_item_checkedcounts"
+                            style="@style/IndexDeviceContentStyle"
+                            android:text="0" />
+                    </LinearLayout>
+
+                    <LinearLayout style="@style/IndexDeviceInfoStyle">
+
+                        <TextView
+                            style="@style/IndexDeviceNameStyle"
+                            android:text="上次调试项目" />
+
+                        <TextView
+                            android:id="@+id/index_tv_item_lastcheck"
+                            style="@style/IndexDeviceContentStyle"
+                            android:text="无" />
+
+                        <TextView
+                            style="@style/IndexDeviceNameStyle"
+                            android:text="未调项目数" />
+
+                        <TextView
+                            android:id="@+id/index_tv_item_uncheckedcounts"
+                            style="@style/IndexDeviceContentStyle"
+                            android:text="96" />
+                    </LinearLayout>
+
+                    <LinearLayout style="@style/IndexDeviceInfoStyle">
+
+                        <TextView
+                            style="@style/IndexDeviceNameStyle"
+                            android:text="调试结论" />
+
+                        <TextView
+                            android:id="@+id/index_tv_record_result"
+                            style="@style/IndexDeviceContentStyle"
+                            android:text="未调试" />
+
+                        <TextView
+                            style="@style/IndexDeviceNameStyle"
+                            android:background="#fff"
+                            android:text="" />
+
+                        <TextView
+                            style="@style/IndexDeviceContentStyle"
+                            android:background="#fff"
+                            android:text="" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1.1"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/index_btn_exit"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="退出"
+                        android:textSize="20sp" />
+
+                    <Button
+                        android:id="@+id/index_btn_goto"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="开始调试"
+                        android:textSize="20sp" />
+                </LinearLayout>
+
+            </LinearLayout>
         </LinearLayout>
 
     </LinearLayout>
