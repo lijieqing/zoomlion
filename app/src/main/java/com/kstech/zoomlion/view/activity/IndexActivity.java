@@ -1,22 +1,40 @@
 package com.kstech.zoomlion.view.activity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.kstech.zoomlion.R;
+import com.kstech.zoomlion.manager.DeviceModelFile;
+import com.kstech.zoomlion.manager.XMLAPI;
+import com.kstech.zoomlion.model.xmlbean.Device;
+import com.kstech.zoomlion.utils.Globals;
 
 import org.xutils.view.annotation.ContentView;
+import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
+import java.io.IOException;
+import java.lang.ref.WeakReference;
 import java.util.Date;
 
 /**
- * 应用引导界面，包含了个人信息修改入口，调试终端的信息展示，参数初始化模块
+ * 应用引导界面，包含了个人信息编辑入口，调试终端的信息展示，参数初始化模块
+ * <p>
+ * 在此界面1939通讯线程、协议线程和其他通讯线程都应启动完成
+ * <p>
+ * 未加载调试机型时使用软件内置的机型文件进行启动通讯线程，加载机型后重新启动线程
+ *
+ * @author lijie
  */
 @ContentView(R.layout.activity_index)
 public class IndexActivity extends BaseActivity {
@@ -95,5 +113,57 @@ public class IndexActivity extends BaseActivity {
         tvTerminalName.setTextColor(Color.DKGRAY);
         tvDeviceIdentity.setTextColor(Color.RED);
         tvDeviceIdentity.setText("当前未检测到整机编号");
+
+        // TODO: 2017/10/11 加载默认机型信息，配置并启动通讯线程
+        new Thread() {
+            @Override
+            public void run() {
+                try {
+                    Globals.modelFile = DeviceModelFile.readFromFile((Device) XMLAPI.readXML(getAssets().open("new.xml")));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                handler.sendEmptyMessage(0);
+            }
+        }.start();
+    }
+
+    @Event(value = {R.id.index_btn_goto, R.id.index_btn_exit})
+    private void click(View view) {
+        switch (view.getId()) {
+            case R.id.index_btn_goto:
+                if (isAvalid()) {
+                    Intent intent = new Intent(this, CheckHomeActivity.class);
+                    startActivity(intent);
+                }
+                break;
+            case R.id.index_btn_exit:
+                finish();
+                break;
+        }
+    }
+
+    private boolean isAvalid() {
+        // TODO: 2017/10/11 此处机型逻辑判断
+        //判断当前页面是否符合条件跳入调试界面
+        return true;
+    }
+
+    private InnerHandler handler = new InnerHandler(this);
+
+    private static class InnerHandler extends Handler {
+        private final WeakReference<IndexActivity> activityReference;
+
+        private InnerHandler(IndexActivity activity) {
+            this.activityReference = new WeakReference<>(activity);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            IndexActivity mActivity = activityReference.get();
+            if (mActivity != null) {
+                Toast.makeText(mActivity, "机型读取完成", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 }
