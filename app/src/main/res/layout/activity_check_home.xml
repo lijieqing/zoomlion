@@ -33,8 +33,16 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_weight="1.6"
             android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="85dp"
+                android:background="@drawable/ll_check_home_tagbg">
+
+            </LinearLayout>
+
             <ExpandableListView
                 android:id="@+id/ch_elv_item"
                 android:layout_width="match_parent"
@@ -44,13 +52,18 @@
             </ExpandableListView>
             <TextView
                 android:clickable="true"
-                android:background="@color/zoomLionColor"
+                android:background="@drawable/btn_ch_start_check"
                 android:gravity="center"
                 android:text="开始调试"
                 android:layout_width="match_parent"
                 android:layout_height="45dp" />
         </LinearLayout>
+        <TextView
+            android:background="#ffffff"
+            android:layout_width="3dp"
+            android:layout_height="match_parent" />
         <LinearLayout
+            android:layout_marginLeft="3dp"
             android:orientation="vertical"
             android:layout_width="0dp"
             android:layout_weight="6"
@@ -58,9 +71,13 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1">
+                android:layout_weight="1.6">
 
             </LinearLayout>
+            <TextView
+                android:background="#fff"
+                android:layout_width="match_parent"
+                android:layout_height="2dp" />
             <com.kstech.zoomlion.view.widget.ItemShowView
                 android:id="@+id/ch_isv"
                 android:layout_width="match_parent"
@@ -68,11 +85,14 @@
                 android:layout_height="0dp">
 
             </com.kstech.zoomlion.view.widget.ItemShowView>
-
+            <TextView
+                android:background="#fff"
+                android:layout_width="match_parent"
+                android:layout_height="2dp" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1">
+                android:layout_weight="1.4">
 
             </LinearLayout>
         </LinearLayout>
