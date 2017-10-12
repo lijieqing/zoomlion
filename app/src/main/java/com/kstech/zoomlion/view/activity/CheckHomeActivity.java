@@ -1,8 +1,13 @@
 package com.kstech.zoomlion.view.activity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.kstech.zoomlion.MyApplication;
 import com.kstech.zoomlion.R;
@@ -11,7 +16,6 @@ import com.kstech.zoomlion.model.db.CheckItemDetailData;
 import com.kstech.zoomlion.model.db.greendao.CheckItemDataDao;
 import com.kstech.zoomlion.model.vo.CheckItemVO;
 import com.kstech.zoomlion.utils.Globals;
-import com.kstech.zoomlion.view.adapter.ExpandItemAdapter;
 import com.kstech.zoomlion.view.widget.ItemShowView;
 
 import org.xutils.view.annotation.ContentView;
@@ -20,6 +24,7 @@ import org.xutils.x;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @ContentView(R.layout.activity_check_home)
 public class CheckHomeActivity extends BaseActivity {
@@ -36,6 +41,9 @@ public class CheckHomeActivity extends BaseActivity {
 
     private CheckItemVO checkItemVO;
 
+    private int gPosition = -1;
+    private int cPosition = -1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +55,10 @@ public class CheckHomeActivity extends BaseActivity {
         itemsList.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView expandableListView, View view, int i, int i1, long l) {
+                gPosition = i;
+                cPosition = i1;
+                expandItemAdapter.notifyDataSetChanged();
+
                 String key = groups.get(i);
                 CheckItemVO item = Globals.modelFile.checkItemMap.get(key).get(i1);
                 itemShowView.updateHead(item);
@@ -64,5 +76,107 @@ public class CheckHomeActivity extends BaseActivity {
             }
         });
 
+    }
+
+    /**
+     * Created by lijie on 2017/8/2.
+     */
+
+    private class ExpandItemAdapter extends BaseExpandableListAdapter {
+        Map<String, List<CheckItemVO>> checkItemMap;
+        Context context;
+        List<String> groups;
+
+        public ExpandItemAdapter(Context context, List<String> groups, Map<String, List<CheckItemVO>> checkItemMap) {
+            this.context = context;
+            this.checkItemMap = checkItemMap;
+            this.groups = groups;
+        }
+
+        @Override
+        public int getGroupCount() {
+            return groups.size();
+        }
+
+        @Override
+        public int getChildrenCount(int groupPosition) {
+            String key = groups.get(groupPosition);
+            return checkItemMap.get(key).size();
+        }
+
+        @Override
+        public Object getGroup(int groupPosition) {
+            return groups.get(groupPosition);
+        }
+
+        @Override
+        public Object getChild(int groupPosition, int childPosition) {
+            String key = groups.get(groupPosition);
+            return checkItemMap.get(key).get(childPosition);
+        }
+
+        @Override
+        public long getGroupId(int groupPosition) {
+            return groupPosition;
+        }
+
+        @Override
+        public long getChildId(int groupPosition, int childPosition) {
+            return childPosition;
+        }
+
+        @Override
+        public boolean hasStableIds() {
+            return false;
+        }
+
+        @Override
+        public View getGroupView(int groupPosition, boolean b, View view, ViewGroup viewGroup) {
+            ViewHolder holder;
+            if (view == null) {
+                holder = new ViewHolder();
+                view = View.inflate(context, R.layout.checktem_list_group_item, null);
+                holder.tv = view.findViewById(R.id.ch_tv_list_item_parent);
+                view.setTag(holder);
+            } else {
+                holder = (ViewHolder) view.getTag();
+            }
+            holder.tv.setText(groups.get(groupPosition));
+            return view;
+        }
+
+        @Override
+        public View getChildView(int groupPosition, int childPosition, boolean b, View view, ViewGroup viewGroup) {
+            ViewHolder holder;
+            if (view == null) {
+                holder = new ViewHolder();
+                view = View.inflate(context, R.layout.checktem_list_child_item, null);
+                holder.tv = view.findViewById(R.id.ch_tv_list_item_child);
+                holder.ll = view.findViewById(R.id.ch_ll_list_item_child);
+                view.setTag(holder);
+            } else {
+                holder = (ViewHolder) view.getTag();
+            }
+            String key = groups.get(groupPosition);
+            holder.tv.setText(checkItemMap.get(key).get(childPosition).getName());
+
+            if (gPosition == groupPosition && cPosition ==childPosition){
+                holder.ll.setBackgroundResource(R.color.zoomLionColor);
+            }else {
+                holder.ll.setBackgroundResource(R.color.itemNoSelect);
+            }
+
+            return view;
+        }
+
+        @Override
+        public boolean isChildSelectable(int groupPosition, int childPosition) {
+            return true;
+        }
+
+        class ViewHolder {
+            TextView tv;
+            LinearLayout ll;
+        }
     }
 }

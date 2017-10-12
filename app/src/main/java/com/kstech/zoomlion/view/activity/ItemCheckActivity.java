@@ -29,10 +29,17 @@ import com.kstech.zoomlion.view.widget.ItemOperateBodyView;
 import com.kstech.zoomlion.view.widget.ItemOperateView;
 import com.kstech.zoomlion.view.widget.ItemShowViewInCheck;
 
+import org.xutils.view.annotation.ContentView;
+import org.xutils.view.annotation.ViewInject;
+import org.xutils.x;
+
 import java.util.List;
 
+@ContentView(R.layout.activity_item_check)
 public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallBack{
+    @ViewInject(R.id.iov_test)
     private ItemOperateView iov;// 项目调试操作view
+    @ViewInject(R.id.isv_check)
     private ItemShowViewInCheck isv;//项目调试记录展示view
     CameraCapView cameraCapView;//照片捕获view，包含拍照、保存、重新开始
     AlertDialog picCatchDialog;//照片捕获对话窗
@@ -49,7 +56,7 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_item_check);
+        x.view().inject(this);
         itemDao = MyApplication.getApplication().getDaoSession().getCheckItemDataDao();
         itemDetailDao = MyApplication.getApplication().getDaoSession().getCheckItemDetailDataDao();
 
@@ -58,8 +65,6 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
         itemID = intent.getStringExtra("itemID");
         itemvo = Globals.modelFile.getCheckItemVO(itemID);
 
-        iov = (ItemOperateView) findViewById(R.id.iov_test);
-        isv = (ItemShowViewInCheck) findViewById(R.id.isv_check);
         iov.setCameraActivity(this);
 
         //更新调试项目参数操作区信息
