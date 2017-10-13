@@ -7,7 +7,7 @@ import java.util.concurrent.ThreadPoolExecutor.AbortPolicy;
 import java.util.concurrent.TimeUnit;
 
 /**
- * 线程管理器  Thread Pool
+ * 线程管理器  Thread Pool 实现线程池原理
  * 
  * @author lijie
  */
