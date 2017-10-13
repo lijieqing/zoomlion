@@ -2,6 +2,8 @@ package com.kstech.zoomlion.view.activity;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
@@ -16,12 +18,14 @@ import com.kstech.zoomlion.model.db.CheckItemDetailData;
 import com.kstech.zoomlion.model.db.greendao.CheckItemDataDao;
 import com.kstech.zoomlion.model.vo.CheckItemVO;
 import com.kstech.zoomlion.utils.Globals;
+import com.kstech.zoomlion.utils.ThreadManager;
 import com.kstech.zoomlion.view.widget.ItemShowView;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -40,6 +44,8 @@ public class CheckHomeActivity extends BaseActivity {
     private ExpandItemAdapter expandItemAdapter;//expand list view 适配器
 
     private CheckItemVO checkItemVO;
+
+    private List<CheckItemDetailData> ls;
 
     private int gPosition = -1;
     private int cPosition = -1;
@@ -63,19 +69,48 @@ public class CheckHomeActivity extends BaseActivity {
                 CheckItemVO item = Globals.modelFile.checkItemMap.get(key).get(i1);
                 itemShowView.updateHead(item);
                 checkItemVO = item;
-                CheckItemDataDao itemDao = MyApplication.getApplication().getDaoSession().getCheckItemDataDao();
-                CheckItemData itemdb = itemDao.queryBuilder()
-                        .where(CheckItemDataDao.Properties.QcId.eq(Integer.parseInt(item.getId())))
-                        .build().unique();
-                List<CheckItemDetailData> ls = new ArrayList<>();
-                if (itemdb != null) {
-                    ls = itemdb.getCheckItemDetailDatas();
-                }
-                itemShowView.updateBody(ls);
+                ThreadManager.getThreadPool().execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        CheckItemDataDao itemDao = MyApplication.getApplication().getDaoSession().getCheckItemDataDao();
+                        CheckItemData itemdb = itemDao.queryBuilder()
+                                .where(CheckItemDataDao.Properties.QcId.eq(Integer.parseInt(checkItemVO.getId())))
+                                .build().unique();
+                        if (itemdb != null) {
+                            ls = itemdb.getCheckItemDetailDatas();
+                        }
+                        handler.sendEmptyMessage(0);
+                    }
+                });
                 return false;
             }
         });
 
+    }
+
+
+    private InnerHandler handler = new InnerHandler(this);
+
+    private static class InnerHandler extends Handler {
+        final WeakReference<CheckHomeActivity> reference;
+
+        InnerHandler(CheckHomeActivity activity) {
+            reference = new WeakReference<>(activity);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            CheckHomeActivity activity = reference.get();
+            if (activity != null) {
+                switch (msg.what) {
+                    case 0:
+                        activity.itemShowView.updateBody(activity.ls);
+                        break;
+                }
+            }
+
+        }
     }
 
     /**
@@ -87,7 +122,7 @@ public class CheckHomeActivity extends BaseActivity {
         Context context;
         List<String> groups;
 
-        public ExpandItemAdapter(Context context, List<String> groups, Map<String, List<CheckItemVO>> checkItemMap) {
+        ExpandItemAdapter(Context context, List<String> groups, Map<String, List<CheckItemVO>> checkItemMap) {
             this.context = context;
             this.checkItemMap = checkItemMap;
             this.groups = groups;
@@ -160,9 +195,9 @@ public class CheckHomeActivity extends BaseActivity {
             String key = groups.get(groupPosition);
             holder.tv.setText(checkItemMap.get(key).get(childPosition).getName());
 
-            if (gPosition == groupPosition && cPosition ==childPosition){
+            if (gPosition == groupPosition && cPosition == childPosition) {
                 holder.ll.setBackgroundResource(R.color.zoomLionColor);
-            }else {
+            } else {
                 holder.ll.setBackgroundResource(R.color.itemNoSelect);
             }
 
