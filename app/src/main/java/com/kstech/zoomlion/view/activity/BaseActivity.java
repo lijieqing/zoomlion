@@ -10,6 +10,7 @@ import android.view.View;
 
 /**
  * Created by lijie on 2017/9/7.
+ * 基础activity，统一实现沉浸式状态栏
  */
 
 public class BaseActivity extends AppCompatActivity {
