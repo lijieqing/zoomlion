@@ -3,7 +3,7 @@ package J1939;
 import java.util.LinkedList;
 
 enum VARTYPE {
-	BYTE, WORD, DWORD, SHORT, INT, FLOAT
+	BYTE, WORD, DWORD, SHORT, INT, FLOAT, BOOL
 }
 
 /**
@@ -11,13 +11,6 @@ enum VARTYPE {
  */
 interface RealtimeChangeListener{
 	void onDataChanged(float value);
-}
-
-/**
- * 实时参数数据采集接收器
- */
-interface RealtimeDataCollectListener{
-	void onDataRecieved(float value);
 }
 
 /**
@@ -30,6 +23,11 @@ public class J1939_DataVar_ts {
 	 * <DSItem>标记的"DataType"属性值（BYTE、WORD、DWORD、CHAR、SHORT、INT、FLOAT）
 	 */
 	public VARTYPE bDataType;
+
+	/**
+	 * 数据变量类型描述字符串
+	 */
+	public String dataType;
 
 	/**
 	 * 简单类型（非向量）的数据变量的值，对应配置文件中 <DSItem>标记的"Value"属性值
@@ -91,17 +89,6 @@ public class J1939_DataVar_ts {
 	//public RealtimeChangeListener listener;
 
 	private LinkedList<RealtimeChangeListener> listenerLinkedList = new LinkedList<>();
-	private LinkedList<RealtimeDataCollectListener> collectListeners = new LinkedList<>();
-
-	public void addCollectListener(RealtimeDataCollectListener listener){
-		if (listener != null && !collectListeners.contains(listener))
-			collectListeners.add(listener);
-	}
-
-	public void removeCollectListener(RealtimeDataCollectListener listener){
-		if (listener != null && collectListeners.contains(listener))
-			collectListeners.remove(listener);
-	}
 
 	public void addListener(RealtimeChangeListener listener){
 		if (listener != null && !listenerLinkedList.contains(listener))
@@ -174,6 +161,7 @@ public class J1939_DataVar_ts {
 	 *            : 变量值
 	 */
 	public J1939_DataVar_ts(String dataType, String value) {
+		this.dataType = dataType;
 		VARTYPE bDataType = VARTYPE.valueOf(dataType);
 		this.bDataType = bDataType; //
 		if (value == null || value.trim().length() == 0) {
@@ -461,6 +449,13 @@ public class J1939_DataVar_ts {
 		}
 
 		return (fRet);
+	}
+
+	/**
+	 * 实施参数变化监听器
+	 */
+	public interface RealtimeChangeListener{
+		void onDataChanged(float value);
 	}
 
 }

@@ -250,7 +250,7 @@ public class DeviceModelFile {
 	/**
 	 * Read from file device model file.
 	 *
-	 * @param filePath the file path of 机型文件
+	 * @param device 成功读取后的机型文件
 	 * @return the device model file
 	 * @throws ExcException the exc exception
 	 */
@@ -293,6 +293,7 @@ public class DeviceModelFile {
 			RealTimeParamVO realTimeParam = new RealTimeParamVO();
 			realTimeParam.setName(real.getName());
 			realTimeParam.setUnit(result.getDataSetVO().getDSItem(real.getName()).sUnit);
+			realTimeParam.setDataType(result.getDataSetVO().getDSItem(real.getName()).dataType);
 			result.addRealTimeParam(realTimeParam);
 		}
 	}
@@ -484,6 +485,7 @@ public class DeviceModelFile {
 					RealTimeParamVO rtp = new RealTimeParamVO();
 					rtp.setName(real.getName());
 					rtp.setUnit(result.getDataSetVO().getDSItem(real.getName()).sUnit);
+					rtp.setDataType(result.getDataSetVO().getDSItem(real.getName()).dataType);
 					checkItem.addRtParam(rtp);
 				}
 				checkItem.sortParamList();

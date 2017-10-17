@@ -1,10 +1,9 @@
 <Device xmlns="http://www.kaishang.com" DevBornDate="" DevDieDate="" DevStatus="" Id="" Name=""
     subDevId="" subDevName="">
     <DataSet>
-        <DSItem Name="" DataType="FLOAT" DecLen="0" Unit="a"/>
         <DSItem Name="超档位报警次数" DataType="FLOAT" DecLen="0" Unit="a"/>
         <DSItem Name="吸油过滤器真空度" DataType="FLOAT" DecLen="0" Unit="a"/>
-        <DSItem Name="风扇开启开关" DataType="FLOAT" DecLen="0" Unit="a"/>
+        <DSItem Name="风扇开启开关" DataType="BOOL" DecLen="0" Unit="开/关"/>
         <DSItem Name="左前支腿水平回收时间" DataType="FLOAT" DecLen="0" Unit="a"/>
         <DSItem Name="分配压降" DataType="FLOAT" DecLen="0" Unit="a"/>
         <DSItem Name="分动箱温度" DataType="FLOAT" DecLen="0" Unit="a"/>
@@ -22,7 +21,7 @@
         <DSItem Name="风扇开启情况" DataType="FLOAT" DecLen="0" Unit="a"/>
         <DSItem Name="臂架泵压力" DataType="FLOAT" DecLen="0" Unit="a"/>
         <DSItem Name="后支腿跨距" DataType="FLOAT" DecLen="0" Unit="a"/>
-        <DSItem Name="气动润滑开启开关" DataType="FLOAT" DecLen="0" Unit="a"/>
+        <DSItem Name="气动润滑开启开关" DataType="BOOL" DecLen="0" Unit="开/关"/>
         <DSItem Name="前支腿跨距" DataType="FLOAT" DecLen="0" Unit="a"/>
         <DSItem Name="处理后的泵送压力" DataType="FLOAT" DecLen="0" Unit="a"/>
         <DSItem Name="偏缸误差值" DataType="FLOAT" DecLen="0" Unit="a"/>
@@ -1275,7 +1274,7 @@
                 <ENVParams>
                 </ENVParams>
                 <RealTimeParams>
-                    <RealTimeParam Name="" />
+                    <RealTimeParam Name="液压油温度" />
                 </RealTimeParams>
             </QCItem>
 
@@ -1576,6 +1575,17 @@
 
     </QCSet>
     <RealTimeSet>
-        <RealTimeParam Name="" />
+        <RealTimeParam Name="液压油温度" />
+        <RealTimeParam Name="风扇开启开关" />
+        <RealTimeParam Name="气动润滑开启开关" />
+        <RealTimeParam Name="液压油温度" />
+        <RealTimeParam Name="风扇开启开关" />
+        <RealTimeParam Name="气动润滑开启开关" />
+        <RealTimeParam Name="液压油温度" />
+        <RealTimeParam Name="风扇开启开关" />
+        <RealTimeParam Name="气动润滑开启开关" />
+        <RealTimeParam Name="液压油温度" />
+        <RealTimeParam Name="风扇开启开关" />
+        <RealTimeParam Name="气动润滑开启开关" />
     </RealTimeSet>
 </Device>
