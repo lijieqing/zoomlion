@@ -51,6 +51,7 @@
 
             </ExpandableListView>
             <TextView
+                android:id="@+id/ch_tv_start_check"
                 android:clickable="true"
                 android:background="@drawable/btn_ch_start_check"
                 android:gravity="center"

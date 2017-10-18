@@ -66,7 +66,7 @@ public class RealTimeView extends RelativeLayout implements J1939_DataVar_ts.Rea
             tvName.setText(realTimeParamVO.getName());
             tvValue.setTextColor(Color.BLACK);
             if ("BOOL".equals(realTimeParamVO.getDataType())){
-                tvUnit.setText("");
+                tvUnit.setText(realTimeParamVO.getUnit());
                 tvValue.setVisibility(INVISIBLE);
                 ivSwitch.setVisibility(VISIBLE);
             }else {
