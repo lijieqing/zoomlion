@@ -43,7 +43,12 @@ public class CameraCapView extends RelativeLayout implements View.OnClickListene
     public ItemOperateBodyView iobv;
 
     public String paramName;
+
+    private static final String PICPATH = "/zoomlion/pic/";
+
     private long detailID;
+
+    private CheckImageDataDao imageDataDao;
 
     public CameraCapView(Context context) {
         super(context);
@@ -71,6 +76,7 @@ public class CameraCapView extends RelativeLayout implements View.OnClickListene
     }
 
     private void initView() {
+        imageDataDao = MyApplication.getApplication().getDaoSession().getCheckImageDataDao();
 
         View view = View.inflate(activity, R.layout.camera_cap_view, null);
         photoshow = view.findViewById(R.id.photoshow);
@@ -116,30 +122,31 @@ public class CameraCapView extends RelativeLayout implements View.OnClickListene
                 imageshowlayout.setVisibility(View.GONE);
                 break;
             case R.id.btn_save:
-                copyPic();
+                long imgDBId = copyPic();
                 takephoto.setVisibility(View.VISIBLE);
                 imageshowlayout.setVisibility(View.GONE);
 
-                iobv.updateCameraInfo();
+                iobv.updateCameraInfo(imageDataDao.load(imgDBId));
                 break;
         }
     }
 
 
-    public void copyPic() {
+    public long copyPic() {
         long userID = 12;
         String Status = Environment.getExternalStorageState();
         if (!Status.equals(Environment.MEDIA_MOUNTED)) { // 检测sd是否可用
             Log.v("TestFile",
                     "SD card is not avaiable/writeable right now.");
-            return;
+            return -1;
         }
         String date = DateUtil.getDateTimeFormat14(new Date());
-        String fname = Environment.getExternalStorageDirectory() + "/photograph/test/" + date + "-" + userID + "-" + detailID + "-" + paramName + ".jpg";
+        String fname = Environment.getExternalStorageDirectory() + PICPATH + date + "-" + userID + "-" + detailID + "-" + paramName + ".jpg";
         FileUtil.copy(Environment.getExternalStorageDirectory() + "/workupload.jpg", fname);
-        CheckImageDataDao imgDao = MyApplication.getApplication().getDaoSession().getCheckImageDataDao();
-        imgDao.insert(new CheckImageData(null, new Date(),detailID, paramName, fname));
+        CheckImageData imgdata = new CheckImageData(null, new Date(), detailID, paramName, fname);
+        long imgDBId = imageDataDao.insert(imgdata);
         Toast.makeText(activity, "已保存", Toast.LENGTH_SHORT).show();
+        return imgDBId;
     }
 
 }

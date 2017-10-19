@@ -13,10 +13,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kstech.zoomlion.R;
-import com.kstech.zoomlion.engine.ItemCheckCallBack;
 import com.kstech.zoomlion.model.vo.CheckItemParamValueVO;
 import com.kstech.zoomlion.model.vo.CheckItemVO;
 import com.kstech.zoomlion.utils.DeviceUtil;
+import com.kstech.zoomlion.utils.JsonUtils;
 import com.kstech.zoomlion.view.activity.BaseFunActivity;
 
 import java.util.ArrayList;
@@ -24,7 +24,7 @@ import java.util.List;
 
 /**
  * 调试项目界面调试操作和参数相关操作提示组件
- *
+ * <p>
  * Created by lijie on 2017/9/4.
  */
 public class ItemOperateView extends RelativeLayout implements View.OnClickListener {
@@ -42,6 +42,7 @@ public class ItemOperateView extends RelativeLayout implements View.OnClickListe
     public Chronometer chronometer;//计时器显示
 
     private List<ItemOperateBodyView> bodyViews;//参数描述体 集合
+    private List<CheckItemParamValueVO> paramValueVOList = new ArrayList<>();//调试项目参数获取数据后的集合
 
     private boolean isChecking = false;//是否正在调试
 
@@ -149,7 +150,7 @@ public class ItemOperateView extends RelativeLayout implements View.OnClickListe
      * @param isRunning 是否正在运行
      * @param canSave   是否是强制行为
      */
-    public void updateCheckStatus(boolean isRunning,boolean canSave) {
+    public void updateCheckStatus(boolean isRunning, boolean canSave) {
         if (isRunning) {
             ivStart.setBackgroundResource(R.drawable.stop);
             tvStart.setText("停止");
@@ -158,7 +159,7 @@ public class ItemOperateView extends RelativeLayout implements View.OnClickListe
         } else {
             ivStart.setBackgroundResource(R.drawable.start);
             tvStart.setText("开始");
-            if (canSave){
+            if (canSave) {
                 ivSave.setBackgroundResource(R.drawable.save);
             }
             isChecking = false;
@@ -220,9 +221,23 @@ public class ItemOperateView extends RelativeLayout implements View.OnClickListe
         if (isChecking) {
             Toast.makeText(context, "调试未完成，无法保存！", Toast.LENGTH_SHORT).show();
         } else {
-
             //// TODO: 2017/9/26 保存调试记录
+            paramValueVOList.clear();
+            for (ItemOperateBodyView bodyView : bodyViews) {
+                if (!bodyView.isFinished()) {
+                    Toast.makeText(baseFunActivity, bodyView.getInfo().getParamName() + "为检测到数据", Toast.LENGTH_SHORT).show();
+                    return;
+                } else {
+                    paramValueVOList.add(bodyView.getInfo());
+                }
+            }
+            String paramValues = JsonUtils.toJson(paramValueVOList);
 
+            baseFunActivity.saveRecord(paramValues);
+
+            for (ItemOperateBodyView bodyView : bodyViews) {
+                bodyView.reset();
+            }
         }
 
     }
@@ -232,7 +247,7 @@ public class ItemOperateView extends RelativeLayout implements View.OnClickListe
      */
     private void startCheck() {
         //更新调试状态为正在调试
-        updateCheckStatus(true,false);
+        updateCheckStatus(true, false);
         //回调baseFunActivity开始调试
         baseFunActivity.startCheck();
     }
@@ -242,7 +257,7 @@ public class ItemOperateView extends RelativeLayout implements View.OnClickListe
      */
     private void stopCheck() {
         //更新调试状态为未在调试
-        updateCheckStatus(false,false);
+        updateCheckStatus(false, false);
         //回调baseFunActivity停止调试
         baseFunActivity.stopCheck();
     }

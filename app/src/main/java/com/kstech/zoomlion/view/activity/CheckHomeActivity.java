@@ -44,6 +44,7 @@ import java.util.Map;
 
 /**
  * 调试项目引导界面
+ *
  * @author lijie
  */
 @ContentView(R.layout.activity_check_home)
@@ -66,7 +67,7 @@ public class CheckHomeActivity extends BaseActivity {
     private TextView tvStartCheck;
 
     private List<String> groups = new ArrayList<>();//调试项目类型集合
-    
+
     private List<RealTimeView> inHomeRealTimeViews = new ArrayList<>();//实时参数集合
 
     private GridLayoutManager gridLayoutManager;//recycler view layout管理器
@@ -75,7 +76,7 @@ public class CheckHomeActivity extends BaseActivity {
 
     private CheckItemVO checkItemVO;
 
-    private List<CheckItemDetailData> ls;
+    private List<CheckItemDetailData> ls = new ArrayList<>();
     private int gPosition = -1;
     private int cPosition = -1;
     private MyAdapter rvAdapter;
@@ -91,6 +92,7 @@ public class CheckHomeActivity extends BaseActivity {
         itemsList.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView expandableListView, View view, int i, int i1, long l) {
+                ls.clear();
                 gPosition = i;
                 cPosition = i1;
                 expandItemAdapter.notifyDataSetChanged();
@@ -107,7 +109,7 @@ public class CheckHomeActivity extends BaseActivity {
                                 .where(CheckItemDataDao.Properties.QcId.eq(Integer.parseInt(checkItemVO.getId())))
                                 .build().unique();
                         if (itemdb != null) {
-                            ls = itemdb.getCheckItemDetailDatas();
+                            ls.addAll(itemdb.getCheckItemDetailDatas());
                         }
                         handler.sendEmptyMessage(0);
                     }
@@ -117,30 +119,30 @@ public class CheckHomeActivity extends BaseActivity {
         });
 
         for (RealTimeParamVO realTimeParamVO : Globals.modelFile.getRealTimeParamList()) {
-            inHomeRealTimeViews.add(new RealTimeView(this,realTimeParamVO));
+            inHomeRealTimeViews.add(new RealTimeView(this, realTimeParamVO));
         }
         rvAdapter = new MyAdapter();
 
-        if (inHomeRealTimeViews.size()>9){
-            gridLayoutManager = new GridLayoutManager(this,2, LinearLayoutManager.HORIZONTAL,false);
-        }else {
-            gridLayoutManager = new GridLayoutManager(this,5, LinearLayoutManager.VERTICAL,false);
+        if (inHomeRealTimeViews.size() > 9) {
+            gridLayoutManager = new GridLayoutManager(this, 2, LinearLayoutManager.HORIZONTAL, false);
+        } else {
+            gridLayoutManager = new GridLayoutManager(this, 5, LinearLayoutManager.VERTICAL, false);
         }
         realTimes.setAdapter(rvAdapter);
         realTimes.setLayoutManager(gridLayoutManager);
-        realTimes.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.HORIZONTAL_LIST));
-        realTimes.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL_LIST));
+        realTimes.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.HORIZONTAL_LIST));
+        realTimes.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));
     }
 
     @Event(value = {R.id.ch_tv_start_check})
-    private void click(View view){
-        switch (view.getId()){
+    private void click(View view) {
+        switch (view.getId()) {
             case R.id.ch_tv_start_check:
-                if (checkItemVO == null){
-                    Toast.makeText(CheckHomeActivity.this,"未选择调试项目",Toast.LENGTH_SHORT).show();
-                }else {
-                    Intent intent = new Intent(CheckHomeActivity.this,ItemCheckActivity.class);
-                    intent.putExtra("itemID",checkItemVO.getId());
+                if (checkItemVO == null) {
+                    Toast.makeText(CheckHomeActivity.this, "未选择调试项目", Toast.LENGTH_SHORT).show();
+                } else {
+                    Intent intent = new Intent(CheckHomeActivity.this, ItemCheckActivity.class);
+                    intent.putExtra("itemID", checkItemVO.getId());
                     startActivity(intent);
                 }
                 break;
@@ -348,14 +350,14 @@ public class CheckHomeActivity extends BaseActivity {
         public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
             ViewHolder vh = (ViewHolder) holder;
             FrameLayout parent = (FrameLayout) inHomeRealTimeViews.get(position).getParent();
-            if (parent != null){
+            if (parent != null) {
                 parent.removeView(inHomeRealTimeViews.get(position));
             }
             vh.fl.removeAllViews();
             LinearLayoutCompat.LayoutParams params = new LinearLayoutCompat.LayoutParams(
-                    DeviceUtil.deviceWidth(CheckHomeActivity.this)/6,
-                    DeviceUtil.deviceWidth(CheckHomeActivity.this)/17);
-            vh.fl.addView(inHomeRealTimeViews.get(position),params);
+                    DeviceUtil.deviceWidth(CheckHomeActivity.this) / 6,
+                    DeviceUtil.deviceWidth(CheckHomeActivity.this) / 17);
+            vh.fl.addView(inHomeRealTimeViews.get(position), params);
         }
 
         @Override

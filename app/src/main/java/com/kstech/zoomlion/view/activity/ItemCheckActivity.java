@@ -8,6 +8,8 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
 import android.os.SystemClock;
 import android.view.View;
 
@@ -19,11 +21,13 @@ import com.kstech.zoomlion.model.db.CheckItemData;
 import com.kstech.zoomlion.model.db.CheckItemDetailData;
 import com.kstech.zoomlion.model.db.greendao.CheckItemDataDao;
 import com.kstech.zoomlion.model.db.greendao.CheckItemDetailDataDao;
+import com.kstech.zoomlion.model.enums.CheckItemDetailResultEnum;
 import com.kstech.zoomlion.model.vo.CheckItemParamValueVO;
 import com.kstech.zoomlion.model.vo.CheckItemVO;
 import com.kstech.zoomlion.utils.BitmapUtils;
 import com.kstech.zoomlion.utils.Globals;
 import com.kstech.zoomlion.utils.LogUtils;
+import com.kstech.zoomlion.utils.ThreadManager;
 import com.kstech.zoomlion.view.widget.CameraCapView;
 import com.kstech.zoomlion.view.widget.ItemOperateBodyView;
 import com.kstech.zoomlion.view.widget.ItemOperateView;
@@ -33,23 +37,31 @@ import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
+import java.lang.ref.WeakReference;
+import java.util.Date;
 import java.util.List;
 
 @ContentView(R.layout.activity_item_check)
-public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallBack{
+public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallBack {
     @ViewInject(R.id.iov_test)
     private ItemOperateView iov;// 项目调试操作view
+
     @ViewInject(R.id.isv_check)
     private ItemShowViewInCheck isv;//项目调试记录展示view
+
     CameraCapView cameraCapView;//照片捕获view，包含拍照、保存、重新开始
     AlertDialog picCatchDialog;//照片捕获对话窗
     Bitmap bitmap;//当前图片的位图
     long detailID;//调试项目细节记录ID
     String itemID;//调试项目记录ID
+    long itemDBID;//调试记录数据库ID
+    int checkStatus;//0 未开始，刚刚进入页面,1 未完成,存在参数未调试或者存在参数未保存，2，已保存成功，生成记录
 
     CheckItemDataDao itemDao;//调试项目记录操作类
     CheckItemDetailDataDao itemDetailDao;//调试项目细节操作类
     CheckItemVO itemvo;//调试项目vo类
+    CheckItemData itemData;//调试项目数据类
+    CheckItemDetailData detailData;//调试项目细节数据类
 
     ItemCheckTask itemCheckTask;//调试项目异步任务
 
@@ -63,19 +75,30 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
         //根据ID，获取调试项目vo类
         Intent intent = getIntent();
         itemID = intent.getStringExtra("itemID");
-        itemvo = Globals.modelFile.getCheckItemVO(itemID);
 
         iov.setCameraActivity(this);
 
-        //更新调试项目参数操作区信息
-        iov.update(itemvo);
+        checkStatus = 0;
 
-        CheckItemData itemData = itemDao.queryBuilder().where(CheckItemDataDao.Properties.QcId.eq(Integer.parseInt(itemvo.getId()))).build().unique();
-        List<CheckItemDetailData> itemdetails = itemData.getCheckItemDetailDatas();
+        ThreadManager.getThreadPool().execute(new Runnable() {
+            @Override
+            public void run() {
+                itemvo = Globals.modelFile.getCheckItemVO(itemID);
+                itemData = itemDao.queryBuilder().where(CheckItemDataDao.Properties.QcId.eq(Integer.parseInt(itemvo.getId()))).build().unique();
+                itemDBID = itemData.getCheckItemId();
+                itemData.resetCheckItemDetailDatas();
 
-        //更新调试项目界面展示信息，包括调试记录、当前项目名称、机型编号等
-        isv.updateHead(itemvo);
-        isv.updateBody(itemdetails);
+                handler.sendEmptyMessage(0);
+            }
+        });
+    }
+
+    /**
+     * 初始化调试项目细节记录表，并获取数据库索引ID，用于后来更新数据
+     */
+    private void initNewDetailRecord() {
+        detailData = new CheckItemDetailData(null, itemDBID, 12l, "admin", 1l, "measure", itemvo.getJsonParams(), CheckItemDetailResultEnum.UNFINISH.getCode(), new Date(), null, null, false);
+        detailID = itemDetailDao.insert(detailData);
     }
 
     @Override
@@ -129,11 +152,21 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
 
     @Override
     public void stopCheck() {
-        if (itemCheckTask != null){
+        if (itemCheckTask != null) {
             //项目调试任务人工停止
             itemCheckTask.stopCheck();
             itemCheckTask.cancel(true);
         }
+    }
+
+    @Override
+    public void saveRecord(String paramValues) {
+        detailData.setParamsValues(paramValues);
+        itemDetailDao.update(detailData);
+        itemData.resetCheckItemDetailDatas();
+        isv.updateBody(itemData.getCheckItemDetailDatas());
+
+        initNewDetailRecord();
     }
     /**
      * BaseFunActivity 回调
@@ -160,12 +193,12 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
 
     @Override
     public void onStartError(String msg) {
-        LogUtils.e("ItemCheckActivity",msg);
+        LogUtils.e("ItemCheckActivity", msg);
     }
 
     @Override
     public void onProgress(String progress) {
-        LogUtils.e("ItemCheckActivity",progress);
+        LogUtils.e("ItemCheckActivity", progress);
     }
 
     @Override
@@ -188,15 +221,58 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                iov.updateCheckStatus(false,canSave);
+                iov.updateCheckStatus(false, canSave);
                 iov.chronometer.stop();
             }
         });
     }
 
-
     /**
-     * ItemCheckCallBack回调 开始
+     * ItemCheckCallBack回调 结束
      */
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        itemDetailDao.deleteByKey(detailID);
+    }
+
+    private InnerHandler handler = new InnerHandler(this);
+
+    private static class InnerHandler extends Handler {
+        WeakReference<ItemCheckActivity> reference;
+        ItemCheckActivity activity;
+
+        public InnerHandler(ItemCheckActivity activity) {
+            this.reference = new WeakReference<>(activity);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            activity = reference.get();
+            if (activity != null) {
+                switch (msg.what) {
+                    case 0:
+                        //更新调试项目参数操作区信息
+                        activity.iov.update(activity.itemvo);
+                        //更新调试项目界面展示信息，包括调试记录、当前项目名称、机型编号等
+                        activity.isv.updateHead(activity.itemvo);
+                        activity.isv.updateBody(activity.itemData.getCheckItemDetailDatas());
+
+                        //初始化记录表
+                        activity.initNewDetailRecord();
+                        break;
+                }
+
+
+            }
+        }
+    }
 }

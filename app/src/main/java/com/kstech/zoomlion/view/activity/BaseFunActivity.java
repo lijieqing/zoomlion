@@ -19,4 +19,6 @@ public abstract class BaseFunActivity extends BaseActivity {
     public abstract void startCheck();
 
     public abstract void stopCheck();
+
+    public abstract void saveRecord(String paramValues);
 }

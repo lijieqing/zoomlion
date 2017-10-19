@@ -16,15 +16,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kstech.zoomlion.R;
+import com.kstech.zoomlion.model.db.CheckImageData;
 import com.kstech.zoomlion.model.vo.CheckItemParamValueVO;
 import com.kstech.zoomlion.utils.ItemFunctionUtils;
 import com.kstech.zoomlion.view.activity.BaseFunActivity;
 
 /**
  * Created by lijie on 2017/9/4.
- *
+ * <p>
  * 参数操作布局
- *
  */
 public class ItemOperateBodyView extends RelativeLayout {
     private BaseFunActivity baseFunActivity;
@@ -39,29 +39,9 @@ public class ItemOperateBodyView extends RelativeLayout {
     private CheckItemParamValueVO checkItemParamValueVO;//调试项目参数vo描述类
     private String qcID;//调试项目用于通讯的ID
     private AlertDialog handwritingDialog;//手写
+    private boolean picSaved = false;
     EditText et;
 
-    /**
-     * The Is dialog.
-     */
-    boolean isDialog = false;//是否与测量终端通讯
-    /**
-     * The Is handwriting.
-     */
-    boolean isHandwriting = false;//是否手动输入参数值
-    /**
-     * The Isnovalue.
-     */
-    boolean isnovalue = false;//是否为无数值参数
-
-    /**
-     * The Value req.
-     */
-    boolean valueReq = true;//是否需要值
-    /**
-     * The Pic req.
-     */
-    boolean picReq = false;//是否需要拍照
 
     /**
      * Instantiates a new Item operate body view.
@@ -73,7 +53,7 @@ public class ItemOperateBodyView extends RelativeLayout {
     public ItemOperateBodyView(BaseFunActivity context, CheckItemParamValueVO checkItemParamValueVO, String qcID) {
         super(context);
         this.baseFunActivity = context;
-        this.checkItemParamValueVO = checkItemParamValueVO;
+        this.checkItemParamValueVO = new CheckItemParamValueVO(checkItemParamValueVO);
         this.qcID = qcID;
 
         this.addView(initView());
@@ -106,6 +86,7 @@ public class ItemOperateBodyView extends RelativeLayout {
 
     /**
      * 初始化布局 初始化参数功能信息
+     *
      * @return
      */
     private View initView() {
@@ -132,9 +113,9 @@ public class ItemOperateBodyView extends RelativeLayout {
     private void paramFunInit() {
         tvParamName.setText(checkItemParamValueVO.getParamName());
 
-        if (checkItemParamValueVO.getValueReq()){//判断是否需要数值
+        if (checkItemParamValueVO.getValueReq()) {//判断是否需要数值
             String valMode = checkItemParamValueVO.getValMode();
-            switch (valMode){
+            switch (valMode) {
                 case "Auto":
                     tvValue.setText("测量终端获取");
                     tvOperate.setText("测量终端获取数值");
@@ -158,12 +139,12 @@ public class ItemOperateBodyView extends RelativeLayout {
 
             }
 
-            if (ItemFunctionUtils.isSpectrumParam(checkItemParamValueVO.getParamName(),Integer.parseInt(qcID))){
+            if (ItemFunctionUtils.isSpectrumParam(checkItemParamValueVO.getParamName(), Integer.parseInt(qcID))) {
                 tvChart.setText("需要谱图");
-            }else {
+            } else {
                 tvChart.setText("无需谱图");
             }
-        } else{
+        } else {
             tvValue.setText("无需数值");
             radioGroup.setVisibility(VISIBLE);
             tvOperate.setVisibility(GONE);
@@ -174,20 +155,31 @@ public class ItemOperateBodyView extends RelativeLayout {
                 public void onCheckedChanged(RadioGroup radioGroup, @IdRes int i) {
                     switch (i) {
                         case R.id.rb_pass:
-                            Toast.makeText(baseFunActivity, "合格", Toast.LENGTH_SHORT).show();
+                            // TODO: 2017/10/18 判断是否需要图片，需要图片时，在给出合格不合格时，应该判断是否已保存图片
+                            if (checkItemParamValueVO.getPicReq() && !picSaved) {
+                                Toast.makeText(baseFunActivity, "请先保存图片数据", Toast.LENGTH_SHORT).show();
+                                radioGroup.clearCheck();
+                            } else {
+                                checkItemParamValueVO.setValue("合格");
+                            }
                             break;
                         case R.id.rb_unpass:
-                            Toast.makeText(baseFunActivity, "不合格", Toast.LENGTH_SHORT).show();
+                            if (checkItemParamValueVO.getPicReq() && !picSaved) {
+                                Toast.makeText(baseFunActivity, "请先保存图片数据", Toast.LENGTH_SHORT).show();
+                                radioGroup.clearCheck();
+                            } else {
+                                checkItemParamValueVO.setValue("不合格");
+                            }
                             break;
                     }
                 }
             });
         }
 
-        if (checkItemParamValueVO.getPicReq()){//是否需要图片
+        if (checkItemParamValueVO.getPicReq()) {//是否需要图片
             tvCamera.setText("拍照采集");
             ivCamera.setVisibility(VISIBLE);
-        }else {
+        } else {
             tvCamera.setText("无需");
         }
         ivCamera.setOnClickListener(new OnClickListener() {
@@ -211,6 +203,7 @@ public class ItemOperateBodyView extends RelativeLayout {
                                 String value = et.getText().toString();
                                 if (!TextUtils.isEmpty(value) && !value.trim().equals("")) {
                                     Toast.makeText(baseFunActivity, value, Toast.LENGTH_SHORT).show();
+                                    checkItemParamValueVO.setValue(value);
                                 }
                             }
                         })
@@ -224,8 +217,26 @@ public class ItemOperateBodyView extends RelativeLayout {
     /**
      * 点击保存时 调用更新展示布局
      */
-    public void updateCameraInfo() {
+    public void updateCameraInfo(CheckImageData imgData) {
+        if (imgData != null) {
+            picSaved = true;
+            tvCamera.setText(imgData.getImgPath());
+            Toast.makeText(baseFunActivity, imgData.getImgPath(), Toast.LENGTH_SHORT).show();
+        }
+    }
 
+    public boolean isFinished() {
+        return !checkItemParamValueVO.getValue().equals("");
+    }
+
+    public CheckItemParamValueVO getInfo() {
+        return checkItemParamValueVO;
+    }
+
+    public void reset() {
+        checkItemParamValueVO.setValue("");
+        paramFunInit();
+        radioGroup.clearCheck();
     }
 
 }
