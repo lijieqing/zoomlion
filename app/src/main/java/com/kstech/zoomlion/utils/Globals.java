@@ -29,8 +29,6 @@ public class Globals {
     //com.lee.xml 标签 对应实体类的存放路径 后边加  .
     public static String CLASSNAME = "com.kstech.zoomlion.model.xmlbean.";
 
-    public static List<CheckImageData> values = new ArrayList<>();
-
     /**
      * ItemShowView、ItemBodyShowView相关变量
      */
