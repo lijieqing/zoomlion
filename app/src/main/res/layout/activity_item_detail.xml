@@ -4,20 +4,135 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     tools:context="com.kstech.zoomlion.view.activity.ItemDetailActivity">
-    <ListView
-        android:id="@+id/detail_lv_param_img"
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="match_parent">
 
-    </ListView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.2"
+        android:background="@drawable/ll_change_check_title_bg"
+        android:orientation="horizontal">
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/detail_tv_name"
+                android:text="@string/item_detail_tv_name"
+                android:textSize="16sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"/>
+            <TextView
+                android:id="@+id/detail_tv_name_value"
+                android:textSize="16sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_toRightOf="@id/detail_tv_name"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
 
-    <ListView
-        android:layout_weight="1"
-        android:layout_width="0dp"
-        android:layout_height="match_parent">
+            <TextView
+                android:text="@string/detail_tv_header"
+                android:textSize="20sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"/>
 
-    </ListView>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/detail_tv_date_value"
+                android:textSize="16sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentBottom="true"/>
+            <TextView
+                android:text="@string/detail_tv_create_date"
+                android:textSize="16sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@id/detail_tv_date_value"
+                android:layout_alignParentBottom="true"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#74c8d2"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="9"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+            <TextView
+                android:text="@string/detail_tv_header_pic"
+                style="@style/DetailItemHeaderStyle"/>
+            <ListView
+                android:id="@+id/detail_lv_param_img"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </ListView>
+        </LinearLayout>
+        <TextView
+            android:layout_width="1dp"
+            android:background="#74c8d2"
+            android:layout_height="match_parent" />
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="0.7"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+            <TextView
+                android:text="@string/detail_tv_header_result"
+                style="@style/DetailItemHeaderStyle"/>
+            <ListView
+                android:id="@+id/detail_lv_param_result"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </ListView>
+        </LinearLayout>
+        <TextView
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="#74c8d2"/>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_height="match_parent">
+            <TextView
+                android:text="@string/detail_tv_header_chart"
+                style="@style/DetailItemHeaderStyle"/>
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/detail_chart_line"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </com.github.mikephil.charting.charts.LineChart>
+        </LinearLayout>
+
+    </LinearLayout>
+
 </LinearLayout>

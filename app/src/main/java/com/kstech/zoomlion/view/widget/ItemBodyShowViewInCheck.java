@@ -73,6 +73,7 @@ public class ItemBodyShowViewInCheck extends RelativeLayout implements IRecycler
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, ItemDetailActivity.class);
+                intent.putExtra("detailID",paramValue.getCheckItemDetailId());
                 context.startActivity(intent);
                 Toast.makeText(context, "展示细节", Toast.LENGTH_SHORT).show();
             }

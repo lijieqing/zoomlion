@@ -16,10 +16,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.github.mikephil.charting.charts.LineChart;
 import com.kstech.zoomlion.MyApplication;
 import com.kstech.zoomlion.R;
 import com.kstech.zoomlion.model.db.CheckImageData;
+import com.kstech.zoomlion.model.db.CheckItemDetailData;
 import com.kstech.zoomlion.model.db.greendao.CheckItemDetailDataDao;
+import com.kstech.zoomlion.utils.DateUtil;
 import com.kstech.zoomlion.utils.DeviceUtil;
 
 import org.xutils.view.annotation.ContentView;
@@ -36,10 +39,23 @@ public class ItemDetailActivity extends BaseActivity {
     @ViewInject(R.id.detail_lv_param_img)
     private ListView imgListView;
 
+    @ViewInject(R.id.detail_lv_param_result)
+    private ListView resultListView;
+
+    @ViewInject(R.id.detail_tv_name_value)
+    private TextView tvItemName;
+
+    @ViewInject(R.id.detail_tv_date_value)
+    private TextView tvItemCreateTime;
+
+    @ViewInject(R.id.detail_chart_line)
+    private LineChart lineChart;
+
     private CheckItemDetailDataDao detailDataDao;
     private AlertDialog picShowDialog;
     private ImgDataListAdapter imgDataListAdapter;
     private List<CheckImageData> imgList = new ArrayList<>();
+    private CheckItemDetailData detailData;
 
     Bitmap bp;
     long detailID;
@@ -54,8 +70,13 @@ public class ItemDetailActivity extends BaseActivity {
 
         //先查询已存在的记录项目集合
         if (detailID != -1) {
-            imgList.addAll(detailDataDao.load(detailID).getCheckImageDatas());
+            detailData = detailDataDao.load(detailID);
+            imgList.addAll(detailData.getCheckImageDatas());
         }
+
+        tvItemName.setText(detailData.getItemData().getItemName());
+
+        tvItemCreateTime.setText(DateUtil.getDateTimeFormat(detailData.getStartTime()));
 
 
         picShowDialog = new AlertDialog.Builder(this, android.R.style.Theme_DeviceDefault_Dialog_MinWidth)
@@ -120,6 +141,9 @@ public class ItemDetailActivity extends BaseActivity {
         }
     }
 
+    /**
+     * 图片列表适配器，实现图片数据的详细展示
+     */
     class ImgDataListAdapter extends BaseAdapter {
 
         public ImgDataListAdapter() {
