@@ -22,8 +22,10 @@ import com.kstech.zoomlion.R;
 import com.kstech.zoomlion.model.db.CheckImageData;
 import com.kstech.zoomlion.model.db.CheckItemDetailData;
 import com.kstech.zoomlion.model.db.greendao.CheckItemDetailDataDao;
+import com.kstech.zoomlion.model.vo.CheckItemParamValueVO;
 import com.kstech.zoomlion.utils.DateUtil;
 import com.kstech.zoomlion.utils.DeviceUtil;
+import com.kstech.zoomlion.utils.ItemFunctionUtils;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
@@ -33,31 +35,56 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 调试项目记录细节展示界面
+ */
 @ContentView(R.layout.activity_item_detail)
 public class ItemDetailActivity extends BaseActivity {
 
+    //图片数据列表
     @ViewInject(R.id.detail_lv_param_img)
     private ListView imgListView;
 
+    //无图片提示view
+    @ViewInject(R.id.detail_tv_nopic)
+    private TextView tvNoPIC;
+
+    //值数据列表
     @ViewInject(R.id.detail_lv_param_result)
     private ListView resultListView;
 
+    //无值数据提示view
+    @ViewInject(R.id.detail_tv_novalue)
+    private TextView tvNoValue;
+
+    //当前项目名称
     @ViewInject(R.id.detail_tv_name_value)
     private TextView tvItemName;
 
+    //当前记录创建时间
     @ViewInject(R.id.detail_tv_date_value)
     private TextView tvItemCreateTime;
 
+    //谱图展示组件
     @ViewInject(R.id.detail_chart_line)
     private LineChart lineChart;
 
+    //调试记录细节表 数据库操作类
     private CheckItemDetailDataDao detailDataDao;
+    //图片展示弹窗组件
     private AlertDialog picShowDialog;
+    //图片数据列表适配器
     private ImgDataListAdapter imgDataListAdapter;
+    //图片数据集合
     private List<CheckImageData> imgList = new ArrayList<>();
+    //值数据集合
+    private List<CheckItemParamValueVO> params;
+    //当前调试记录细节 实体类
     private CheckItemDetailData detailData;
 
+    //用来展示的位图
     Bitmap bp;
+    //当前调试记录细节 数据库ID
     long detailID;
 
     @Override
@@ -71,36 +98,58 @@ public class ItemDetailActivity extends BaseActivity {
         //先查询已存在的记录项目集合
         if (detailID != -1) {
             detailData = detailDataDao.load(detailID);
-            imgList.addAll(detailData.getCheckImageDatas());
         }
-
+        //更新项目名称和时间
         tvItemName.setText(detailData.getItemData().getItemName());
-
         tvItemCreateTime.setText(DateUtil.getDateTimeFormat(detailData.getStartTime()));
 
+        int qcID = detailData.getItemData().getQcId();
+        //判断是否是需要数值的项目，并做出相应布局调整
+        if (ItemFunctionUtils.isNoValueItem(qcID)) {
+            resultListView.setVisibility(View.GONE);
+            tvNoValue.setVisibility(View.VISIBLE);
+        } else {
+            resultListView.setVisibility(View.VISIBLE);
+            tvNoValue.setVisibility(View.GONE);
+            String values = detailData.getParamsValues();
+            params = ItemFunctionUtils.getValueReqParam(values);
 
-        picShowDialog = new AlertDialog.Builder(this, android.R.style.Theme_DeviceDefault_Dialog_MinWidth)
-                .create();
-        imgDataListAdapter = new ImgDataListAdapter();
+            ResultAdapter resultAdapter = new ResultAdapter();
+            resultListView.setAdapter(resultAdapter);
 
-        imgListView.setAdapter(imgDataListAdapter);
+        }
+        //判断是否是需要图片的项目，并做出相应布局调整
+        if (ItemFunctionUtils.isNoPICItem(qcID)) {
+            imgListView.setVisibility(View.GONE);
+            tvNoPIC.setVisibility(View.VISIBLE);
+        } else {
+            imgListView.setVisibility(View.VISIBLE);
+            tvNoPIC.setVisibility(View.GONE);
 
+            //初始化图片列表相关参数
+            imgList.addAll(detailData.getCheckImageDatas());
+            picShowDialog = new AlertDialog.Builder(this, android.R.style.Theme_DeviceDefault_Dialog_MinWidth)
+                    .create();
+            imgDataListAdapter = new ImgDataListAdapter();
+            imgListView.setAdapter(imgDataListAdapter);
+            //实现item点击事件
+            imgListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, final int i, long l) {
+                    new Thread() {
+                        @Override
+                        public void run() {
+                            if (bp != null)
+                                bp.recycle();
+                            bp = BitmapFactory.decodeFile(imgList.get(i).getImgPath());
+                            handler.sendEmptyMessage(0);
+                        }
+                    }.start();
+                }
+            });
 
-        //实现item点击事件
-        imgListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, final int i, long l) {
-                new Thread() {
-                    @Override
-                    public void run() {
-                        if (bp != null)
-                            bp.recycle();
-                        bp = BitmapFactory.decodeFile(imgList.get(i).getImgPath());
-                        handler.sendEmptyMessage(0);
-                    }
-                }.start();
-            }
-        });
+        }
+
     }
 
     //更新图片展示界面
@@ -190,6 +239,58 @@ public class ItemDetailActivity extends BaseActivity {
             TextView tvParamName;
             TextView tvDesc;
             ImageView imageView;
+        }
+    }
+
+    /**
+     * 值列表适配器，实现项目细节记录中含值参数的展示
+     */
+    class ResultAdapter extends BaseAdapter {
+
+        @Override
+        public int getCount() {
+            return params.size();
+        }
+
+        @Override
+        public CheckItemParamValueVO getItem(int position) {
+            return params.get(position);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            ViewHolder holder;
+            if (convertView == null) {
+                convertView = View.inflate(ItemDetailActivity.this, R.layout.list_result_data_item, null);
+                holder = new ViewHolder();
+                holder.tvName = convertView.findViewById(R.id.detail_item_tv_param_name);
+                holder.tvValue = convertView.findViewById(R.id.detail_item_tv_param_value);
+                holder.tvMax = convertView.findViewById(R.id.detail_item_tv_param_max);
+                holder.tvMin = convertView.findViewById(R.id.detail_item_tv_param_min);
+                convertView.setTag(holder);
+            } else {
+                holder = (ViewHolder) convertView.getTag();
+            }
+
+            String name = getItem(position).getParamName();
+            holder.tvName.setText(name);
+            holder.tvValue.setText(getItem(position).getValue() + " " + getItem(position).getUnit());
+            holder.tvMax.setText("最大值：" + getItem(position).getValidMax());
+            holder.tvMin.setText("最小值：" + getItem(position).getValidMin());
+
+            return convertView;
+        }
+
+        class ViewHolder {
+            TextView tvName;
+            TextView tvValue;
+            TextView tvMax;
+            TextView tvMin;
         }
     }
 }

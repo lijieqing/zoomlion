@@ -30,8 +30,10 @@
     <string name="detail_tv_header">记录详情展示</string>
     <string name="detail_tv_create_date">时间：</string>
     <string name="detail_tv_header_pic">图片数据</string>
-    <string name="detail_tv_header_result">逻辑结论</string>
+    <string name="detail_tv_header_result">值数据</string>
     <string name="detail_tv_header_chart">谱图数据</string>
+    <string name="detail_tv_item_novalue">该项目无数值参数</string>
+    <string name="detail_tv_item_nopic">该项目无图片参数</string>
 
 
 </resources>

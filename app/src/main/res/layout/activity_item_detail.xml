@@ -91,6 +91,12 @@
                 android:layout_height="match_parent">
 
             </ListView>
+            <TextView
+                android:id="@+id/detail_tv_nopic"
+                android:gravity="center"
+                android:text="@string/detail_tv_item_nopic"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
         </LinearLayout>
         <TextView
             android:layout_width="1dp"
@@ -110,6 +116,12 @@
                 android:layout_height="match_parent">
 
             </ListView>
+            <TextView
+                android:id="@+id/detail_tv_novalue"
+                android:gravity="center"
+                android:text="@string/detail_tv_item_novalue"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
         </LinearLayout>
         <TextView
             android:layout_width="1dp"
