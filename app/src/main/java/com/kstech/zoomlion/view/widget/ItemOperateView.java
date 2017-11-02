@@ -46,6 +46,8 @@ public class ItemOperateView extends RelativeLayout implements View.OnClickListe
 
     private boolean isChecking = false;//是否正在调试
 
+    private boolean needCommunicate = false;//是否需要与测量终端通讯
+
     /**
      * Instantiates a new Item operate view.
      *
@@ -134,12 +136,21 @@ public class ItemOperateView extends RelativeLayout implements View.OnClickListe
 
 
             if (!checkItemParamValueVO.getValueReq() || !"Auto".equals(checkItemParamValueVO.getValMode())) {
-                ivStart.setEnabled(false);//无需通讯条件下开始按钮不可点击
+                //无需数值，或者不是自动获取数值的参数 不做处理
             } else {
-                ivStart.setEnabled(true);//通讯条件下开始按钮可点击
-                ivSave.setEnabled(false);//通讯条件下保存按钮不可点击
+                //改变参数状态
+                needCommunicate = true;
             }
 
+        }
+
+        //根据是否与测量终端通讯调整组件状态
+        if (needCommunicate) {
+            ivStart.setEnabled(true);
+            updateCheckStatus(false, false);
+        } else {
+            //无需通讯条件下开始按钮不可点击
+            ivStart.setEnabled(false);
         }
     }
 
@@ -163,6 +174,20 @@ public class ItemOperateView extends RelativeLayout implements View.OnClickListe
                 ivSave.setBackgroundResource(R.drawable.save);
             }
             isChecking = false;
+        }
+    }
+
+    /**
+     * 更新各个参数操作组件
+     * @param values
+     */
+    public void updateBodyAutoView(List<CheckItemParamValueVO> values){
+        for (ItemOperateBodyView bodyView : bodyViews) {
+            for (CheckItemParamValueVO value : values) {
+                if (bodyView.getInfo().getParamName().equals(value.getParamName())){
+                    bodyView.updateValueInfo(value.getValue());
+                }
+            }
         }
     }
 

@@ -26,6 +26,7 @@ import com.kstech.zoomlion.model.vo.CheckItemParamValueVO;
 import com.kstech.zoomlion.model.vo.CheckItemVO;
 import com.kstech.zoomlion.utils.BitmapUtils;
 import com.kstech.zoomlion.utils.Globals;
+import com.kstech.zoomlion.utils.JsonUtils;
 import com.kstech.zoomlion.utils.LogUtils;
 import com.kstech.zoomlion.utils.ThreadManager;
 import com.kstech.zoomlion.view.widget.CameraCapView;
@@ -38,9 +39,13 @@ import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * 项目调试界面，对单个项目调试的操作界面，主要包含两个大的组件ItemOperateView和ItemShowViewInCheck
+ */
 @ContentView(R.layout.activity_item_check)
 public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallBack {
     @ViewInject(R.id.iov_test)
@@ -64,6 +69,8 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
     CheckItemDetailData detailData;//调试项目细节数据类
 
     ItemCheckTask itemCheckTask;//调试项目异步任务
+
+    List<CheckItemParamValueVO> valueVOList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -213,7 +220,19 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
 
     @Override
     public void onTimeOut(List<CheckItemParamValueVO> headers, String msg) {
+        //利用超时 模拟接收数据
+        for (CheckItemParamValueVO header : headers) {
+            if(header.getValueReq() && "Auto".equals(header.getValMode())){
+                double val = Math.random() * 100;
+                CheckItemParamValueVO vo = new CheckItemParamValueVO(header);
 
+                vo.setValue(val+"");
+                valueVOList.add(vo);
+            }
+        }
+
+
+        handler.sendEmptyMessage(1);
     }
 
     @Override
@@ -268,6 +287,12 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
 
                         //初始化记录表
                         activity.initNewDetailRecord();
+                        break;
+                    case 1:
+                        //此处更新iov组件 并传入detailData中
+                        activity.iov.updateBodyAutoView(activity.valueVOList);
+                        activity.detailData.setParamsValues(JsonUtils.toJson(activity.valueVOList));
+                        activity.valueVOList.clear();
                         break;
                 }
 

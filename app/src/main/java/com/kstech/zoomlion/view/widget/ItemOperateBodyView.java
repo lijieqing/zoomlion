@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.support.annotation.IdRes;
+import android.support.annotation.NonNull;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.util.AttributeSet;
@@ -202,7 +203,7 @@ public class ItemOperateBodyView extends RelativeLayout {
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 String value = et.getText().toString();
                                 if (!TextUtils.isEmpty(value) && !value.trim().equals("")) {
-                                    Toast.makeText(baseFunActivity, value, Toast.LENGTH_SHORT).show();
+                                    tvValue.setText(value);
                                     checkItemParamValueVO.setValue(value);
                                 }
                             }
@@ -223,6 +224,15 @@ public class ItemOperateBodyView extends RelativeLayout {
             tvCamera.setText(imgData.getImgPath());
             Toast.makeText(baseFunActivity, imgData.getImgPath(), Toast.LENGTH_SHORT).show();
         }
+    }
+
+    /**
+     * 更新数值展示布局，并存入checkItemParamValueVO
+     * @param value
+     */
+    public void updateValueInfo(@NonNull String value){
+        tvValue.setText(value);
+        checkItemParamValueVO.setValue(value);
     }
 
     public boolean isFinished() {
