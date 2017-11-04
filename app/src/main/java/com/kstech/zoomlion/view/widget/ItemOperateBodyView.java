@@ -20,6 +20,7 @@ import com.kstech.zoomlion.R;
 import com.kstech.zoomlion.model.db.CheckImageData;
 import com.kstech.zoomlion.model.vo.CheckItemParamValueVO;
 import com.kstech.zoomlion.utils.ItemFunctionUtils;
+import com.kstech.zoomlion.utils.LogUtils;
 import com.kstech.zoomlion.view.activity.BaseFunActivity;
 
 /**
@@ -156,20 +157,26 @@ public class ItemOperateBodyView extends RelativeLayout {
                 public void onCheckedChanged(RadioGroup radioGroup, @IdRes int i) {
                     switch (i) {
                         case R.id.rb_pass:
+                            LogUtils.e("ItemOperateView", "in listener pass:" + checkItemParamValueVO.getValue() + " id:" + i);
                             // TODO: 2017/10/18 判断是否需要图片，需要图片时，在给出合格不合格时，应该判断是否已保存图片
                             if (checkItemParamValueVO.getPicReq() && !picSaved) {
                                 Toast.makeText(baseFunActivity, "请先保存图片数据", Toast.LENGTH_SHORT).show();
                                 radioGroup.clearCheck();
                             } else {
-                                checkItemParamValueVO.setValue("合格");
+                                if (radioGroup.getCheckedRadioButtonId() == i) {
+                                    checkItemParamValueVO.setValue("合格");
+                                }
                             }
                             break;
                         case R.id.rb_unpass:
+                            LogUtils.e("ItemOperateView", "in listener unpass:" + checkItemParamValueVO.getValue() + " id:" + i);
                             if (checkItemParamValueVO.getPicReq() && !picSaved) {
                                 Toast.makeText(baseFunActivity, "请先保存图片数据", Toast.LENGTH_SHORT).show();
                                 radioGroup.clearCheck();
                             } else {
-                                checkItemParamValueVO.setValue("不合格");
+                                if (radioGroup.getCheckedRadioButtonId() == i) {
+                                    checkItemParamValueVO.setValue("不合格");
+                                }
                             }
                             break;
                     }
@@ -228,15 +235,16 @@ public class ItemOperateBodyView extends RelativeLayout {
 
     /**
      * 更新数值展示布局，并存入checkItemParamValueVO
+     *
      * @param value
      */
-    public void updateValueInfo(@NonNull String value){
+    public void updateValueInfo(@NonNull String value) {
         tvValue.setText(value);
         checkItemParamValueVO.setValue(value);
     }
 
-    public boolean isFinished() {
-        return !checkItemParamValueVO.getValue().equals("");
+    public boolean isValueEmpty() {
+        return checkItemParamValueVO.getValue().equals("");
     }
 
     public CheckItemParamValueVO getInfo() {
@@ -244,9 +252,10 @@ public class ItemOperateBodyView extends RelativeLayout {
     }
 
     public void reset() {
-        checkItemParamValueVO.setValue("");
-        paramFunInit();
+        //此方法每次会调用被选中按钮的OnCheckedChangeListener方法，因此会给checkItemParamValueVO设置数据
         radioGroup.clearCheck();
+        paramFunInit();
+        checkItemParamValueVO.setValue("");
     }
 
 }

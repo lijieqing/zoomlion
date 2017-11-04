@@ -48,6 +48,8 @@ public class ItemOperateView extends RelativeLayout implements View.OnClickListe
 
     private boolean needCommunicate = false;//是否需要与测量终端通讯
 
+    private static final String TAG = "ItemOperateView";
+
     /**
      * Instantiates a new Item operate view.
      *
@@ -179,12 +181,13 @@ public class ItemOperateView extends RelativeLayout implements View.OnClickListe
 
     /**
      * 更新各个参数操作组件
+     *
      * @param values
      */
-    public void updateBodyAutoView(List<CheckItemParamValueVO> values){
+    public void updateBodyAutoView(List<CheckItemParamValueVO> values) {
         for (ItemOperateBodyView bodyView : bodyViews) {
             for (CheckItemParamValueVO value : values) {
-                if (bodyView.getInfo().getParamName().equals(value.getParamName())){
+                if (bodyView.getInfo().getParamName().equals(value.getParamName())) {
                     bodyView.updateValueInfo(value.getValue());
                 }
             }
@@ -249,8 +252,8 @@ public class ItemOperateView extends RelativeLayout implements View.OnClickListe
             //// TODO: 2017/9/26 保存调试记录
             paramValueVOList.clear();
             for (ItemOperateBodyView bodyView : bodyViews) {
-                if (!bodyView.isFinished()) {
-                    Toast.makeText(baseFunActivity, bodyView.getInfo().getParamName() + "为检测到数据", Toast.LENGTH_SHORT).show();
+                if (bodyView.isValueEmpty()) {
+                    Toast.makeText(baseFunActivity, bodyView.getInfo().getParamName() + "未检测到数据", Toast.LENGTH_SHORT).show();
                     return;
                 } else {
                     paramValueVOList.add(bodyView.getInfo());
