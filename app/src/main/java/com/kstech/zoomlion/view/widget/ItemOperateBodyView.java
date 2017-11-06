@@ -255,7 +255,10 @@ public class ItemOperateBodyView extends RelativeLayout {
         //此方法每次会调用被选中按钮的OnCheckedChangeListener方法，因此会给checkItemParamValueVO设置数据
         radioGroup.clearCheck();
         paramFunInit();
+        //将vo类的value值
         checkItemParamValueVO.setValue("");
+        //将图片保存状态设置为未保存
+        picSaved = false;
     }
 
 }

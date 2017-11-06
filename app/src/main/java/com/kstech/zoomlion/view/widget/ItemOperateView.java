@@ -134,6 +134,7 @@ public class ItemOperateView extends RelativeLayout implements View.OnClickListe
     public void update(CheckItemVO itemVO) {
 
         //清空参数布局集合
+        needCommunicate = false;
         bodyViews.clear();
         ll_body.removeAllViews();
 
@@ -166,19 +167,20 @@ public class ItemOperateView extends RelativeLayout implements View.OnClickListe
             //无需通讯条件下开始按钮不可点击
             llStart.setEnabled(false);
             ivStart.setEnabled(false);
+            ivStart.setBackgroundResource(R.drawable.start_disable);
         }
         CheckItemVO temp = Globals.forwardCheckItem();
-        if (temp == null){
+        if (temp == null) {
             tvForward.setText("无");
-        }else {
+        } else {
             tvForward.setText(temp.getName());
             //还原回当前项目
             Globals.nextCheckItem();
         }
         temp = Globals.nextCheckItem();
-        if (temp == null){
+        if (temp == null) {
             tvNext.setText("无");
-        }else {
+        } else {
             tvNext.setText(temp.getName());
             //还原回当前项目
             Globals.forwardCheckItem();

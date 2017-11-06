@@ -71,7 +71,13 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
 
     ItemCheckTask itemCheckTask;//调试项目异步任务
 
+    /**
+     * 调试项目 参数集合
+     */
     List<CheckItemParamValueVO> valueVOList = new ArrayList<>();
+
+    private static final int NEW_CHECKITEM_REFRESH = 0;
+    private static final int NEW_DATA_REFRESH = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,10 +90,12 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
         Intent intent = getIntent();
         itemID = intent.getStringExtra("itemID");
 
+        //设置回调
         iov.setCameraActivity(this);
 
         checkStatus = 0;
 
+        //查询数据库
         ThreadManager.getThreadPool().execute(new Runnable() {
             @Override
             public void run() {
@@ -96,7 +104,7 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
                 itemDBID = itemData.getCheckItemId();
                 itemData.resetCheckItemDetailDatas();
 
-                handler.sendEmptyMessage(0);
+                handler.sendEmptyMessage(NEW_CHECKITEM_REFRESH);
             }
         });
     }
@@ -169,9 +177,13 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
 
     @Override
     public void saveRecord(String paramValues) {
+        //将数值存入detail data对象
         detailData.setParamsValues(paramValues);
+        //更新
         itemDetailDao.update(detailData);
+        //重置 调试细节记录表 为的是保持与数据库同步
         itemData.resetCheckItemDetailDatas();
+        //更新调试项目展示内容
         isv.updateBody(itemData.getCheckItemDetailDatas());
 
         initNewDetailRecord();
@@ -180,7 +192,7 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
     @Override
     public void toForward() {
         CheckItemVO temp = Globals.forwardCheckItem();
-        if (temp != null){
+        if (temp != null) {
             itemvo = temp;
             ThreadManager.getThreadPool().execute(new Runnable() {
                 @Override
@@ -189,18 +201,18 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
                     itemDBID = itemData.getCheckItemId();
                     itemData.resetCheckItemDetailDatas();
 
-                    handler.sendEmptyMessage(0);
+                    handler.sendEmptyMessage(NEW_CHECKITEM_REFRESH);
                 }
             });
-        }else {
-            Toast.makeText(this,"当前已是第一项",Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "当前已是第一项", Toast.LENGTH_SHORT).show();
         }
     }
 
     @Override
     public void toNext() {
         CheckItemVO temp = Globals.nextCheckItem();
-        if (temp != null){
+        if (temp != null) {
             itemvo = temp;
             ThreadManager.getThreadPool().execute(new Runnable() {
                 @Override
@@ -209,11 +221,11 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
                     itemDBID = itemData.getCheckItemId();
                     itemData.resetCheckItemDetailDatas();
 
-                    handler.sendEmptyMessage(0);
+                    handler.sendEmptyMessage(NEW_CHECKITEM_REFRESH);
                 }
             });
-        }else {
-            Toast.makeText(this,"当前已是最后一项",Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "当前已是最后一项", Toast.LENGTH_SHORT).show();
         }
     }
     /**
@@ -227,6 +239,9 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
      */
     @Override
     public void onStart(ItemCheckTask task) {
+        //在每次切换调试项目时，要给itemID重新赋值
+        itemID = Globals.currentCheckItem.getId();
+
         task.qcID = Integer.parseInt(itemID);
         task.times = 1;
         runOnUiThread(new Runnable() {
@@ -263,17 +278,17 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
     public void onTimeOut(List<CheckItemParamValueVO> headers, String msg) {
         //利用超时 模拟接收数据
         for (CheckItemParamValueVO header : headers) {
-            if(header.getValueReq() && "Auto".equals(header.getValMode())){
+            if (header.getValueReq() && "Auto".equals(header.getValMode())) {
                 double val = Math.random() * 100;
                 CheckItemParamValueVO vo = new CheckItemParamValueVO(header);
 
-                vo.setValue(val+"");
+                vo.setValue(val + "");
                 valueVOList.add(vo);
             }
         }
 
 
-        handler.sendEmptyMessage(1);
+        handler.sendEmptyMessage(NEW_DATA_REFRESH);
     }
 
     @Override
@@ -319,8 +334,8 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
             activity = reference.get();
             if (activity != null) {
                 switch (msg.what) {
-                    case 0:
-                        if (activity.detailID != -1){
+                    case NEW_CHECKITEM_REFRESH:
+                        if (activity.detailID != -1) {
                             activity.itemDetailDao.deleteByKey(activity.detailID);
                         }
                         //更新调试项目参数操作区信息
@@ -332,7 +347,7 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
                         //初始化记录表
                         activity.initNewDetailRecord();
                         break;
-                    case 1:
+                    case NEW_DATA_REFRESH:
                         //此处更新iov组件 并传入detailData中
                         activity.iov.updateBodyAutoView(activity.valueVOList);
                         activity.detailData.setParamsValues(JsonUtils.toJson(activity.valueVOList));

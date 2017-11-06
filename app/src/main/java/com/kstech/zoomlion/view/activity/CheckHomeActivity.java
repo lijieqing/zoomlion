@@ -72,8 +72,7 @@ public class CheckHomeActivity extends BaseActivity {
 
     private ExpandItemAdapter expandItemAdapter;//expand list view 适配器
 
-    private CheckItemVO checkItemVO;
-
+    //当前调试项目所包含的 调试细节记录表集合
     private List<CheckItemDetailData> ls = new ArrayList<>();
 
     private MyAdapter rvAdapter;
@@ -86,24 +85,33 @@ public class CheckHomeActivity extends BaseActivity {
         expandItemAdapter = new ExpandItemAdapter(this, Globals.modelFile.checkItemMap);
 
         itemsList.setAdapter(expandItemAdapter);
+        //设置调试项目列表的点击事件
         itemsList.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView expandableListView, View view, int i, int i1, long l) {
+                //清空调试细节记录表
                 ls.clear();
+                //赋值坐标
                 Globals.groupPosition = i;
                 Globals.childPosition = i1;
+
+                //刷新调试项目列表
                 expandItemAdapter.notifyDataSetChanged();
 
+                //获取当前调试项目的 group 和 value
                 String key = Globals.groups.get(i);
                 CheckItemVO item = Globals.modelFile.checkItemMap.get(key).get(i1);
+
+                //更新 调试项目展示组件信息
                 itemShowView.updateHead(item);
-                checkItemVO = item;
+                Globals.currentCheckItem = item;
+                //查询数据库，获取调试项目细节记录 数据
                 ThreadManager.getThreadPool().execute(new Runnable() {
                     @Override
                     public void run() {
                         CheckItemDataDao itemDao = MyApplication.getApplication().getDaoSession().getCheckItemDataDao();
                         CheckItemData itemdb = itemDao.queryBuilder()
-                                .where(CheckItemDataDao.Properties.QcId.eq(Integer.parseInt(checkItemVO.getId())))
+                                .where(CheckItemDataDao.Properties.QcId.eq(Integer.parseInt(Globals.currentCheckItem.getId())))
                                 .build().unique();
                         if (itemdb != null) {
                             ls.addAll(itemdb.getCheckItemDetailDatas());
@@ -115,6 +123,7 @@ public class CheckHomeActivity extends BaseActivity {
             }
         });
 
+        //实例化实时展示参数组件
         for (RealTimeParamVO realTimeParamVO : Globals.modelFile.getRealTimeParamList()) {
             inHomeRealTimeViews.add(new RealTimeView(this, realTimeParamVO));
         }
@@ -131,15 +140,19 @@ public class CheckHomeActivity extends BaseActivity {
         realTimes.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));
     }
 
+    /**
+     * 点击事件 处理
+     * @param view
+     */
     @Event(value = {R.id.ch_tv_start_check})
     private void click(View view) {
         switch (view.getId()) {
             case R.id.ch_tv_start_check:
-                if (checkItemVO == null) {
+                if (Globals.currentCheckItem == null) {
                     Toast.makeText(CheckHomeActivity.this, "未选择调试项目", Toast.LENGTH_SHORT).show();
                 } else {
                     Intent intent = new Intent(CheckHomeActivity.this, ItemCheckActivity.class);
-                    intent.putExtra("itemID", checkItemVO.getId());
+                    intent.putExtra("itemID", Globals.currentCheckItem.getId());
                     startActivity(intent);
                 }
                 break;
@@ -285,17 +298,8 @@ public class CheckHomeActivity extends BaseActivity {
             return true;
         }
 
-        /**
-         * The type View holder.
-         */
         class ViewHolder {
-            /**
-             * The Tv.
-             */
             TextView tv;
-            /**
-             * The Ll.
-             */
             LinearLayout ll;
         }
     }
@@ -305,26 +309,12 @@ public class CheckHomeActivity extends BaseActivity {
      */
     class MyAdapter extends RecyclerView.Adapter {
 
-        /**
-         * Instantiates a new My adapter.
-         */
         public MyAdapter() {
         }
 
-        /**
-         * The type View holder.
-         */
         class ViewHolder extends RecyclerView.ViewHolder {
-            /**
-             * The Fl.
-             */
             FrameLayout fl;
 
-            /**
-             * Instantiates a new View holder.
-             *
-             * @param root the root
-             */
             public ViewHolder(View root) {
                 super(root);
                 fl = (FrameLayout) root.findViewById(R.id.fl_gv_item);
