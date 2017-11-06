@@ -193,7 +193,6 @@
                         ValidAvg="" ValidMax="" ValidMin=""/>
                 </QCParams>
                 <ENVParams>
-                    <ENVParam Param="液压油温温度" ValidAvg="" ValidMax="" ValidMin=""/>
                 </ENVParams>
                 <RealTimeParams>
                     <RealTimeParam Name="液压油温温度"/>
@@ -229,8 +228,6 @@
                         ValidAvg="" ValidMax="" ValidMin=""/>
                 </QCParams>
                 <ENVParams>
-                    <ENVParam Param="液压油温温度"
-                        ValidAvg="" ValidMax="" ValidMin=""/>
                 </ENVParams>
                 <RealTimeParams>
                     <RealTimeParam Name="发动机转速"/>
@@ -267,8 +264,6 @@
                         ValidAvg="" ValidMax="" ValidMin=""/>
                 </QCParams>
                 <ENVParams>
-                    <ENVParam Param="液压油温温度"
-                        ValidAvg="" ValidMax="" ValidMin=""/>
                 </ENVParams>
                 <RealTimeParams>
                     <RealTimeParam Name="发动机转速"/>
@@ -305,8 +300,6 @@
                         ValidAvg="" ValidMax="" ValidMin="" />
                 </QCParams>
                 <ENVParams>
-                    <ENVParam Param="液压油温温度"
-                        ValidAvg="" ValidMax="" ValidMin=""/>
                 </ENVParams>
                 <RealTimeParams>
                     <RealTimeParam Name="发动机转速" />
@@ -629,7 +622,7 @@
                 </Msgs>
                 <QCParams>
                     <QCParam Param="缓冲螺钉位置"
-                        ValueReq="false" PicReq="true" ValMode="Auto" QCMode="None"
+                        ValueReq="false" PicReq="true" ValMode="Auto" QCMode="Mann"
                         ValidAvg="" ValidMax="" ValidMin="" />
                 </QCParams>
                 <ENVParams>
@@ -649,7 +642,7 @@
                 </Msgs>
                 <QCParams>
                     <QCParam Param="补油泵压力"
-                        ValueReq="false" PicReq="true" ValMode="Auto" QCMode="None"
+                        ValueReq="false" PicReq="true" ValMode="Auto" QCMode="Mann"
                         ValidAvg="" ValidMax="" ValidMin="" />
                 </QCParams>
                 <ENVParams>
@@ -669,7 +662,7 @@
                 </Msgs>
                 <QCParams>
                     <QCParam Param="冲洗阀压力"
-                        ValueReq="false" PicReq="true" ValMode="Auto" QCMode="None"
+                        ValueReq="false" PicReq="true" ValMode="Auto" QCMode="Mann"
                         ValidAvg="" ValidMax="" ValidMin="" />
                 </QCParams>
                 <ENVParams>
@@ -1039,7 +1032,7 @@
                 </Msgs>
                 <QCParams>
                     <QCParam Param="润滑系统气压"
-                        ValueReq="false" PicReq="true" ValMode="Auto" QCMode="None"
+                        ValueReq="false" PicReq="true" ValMode="Auto" QCMode="Mann"
                         ValidAvg="" ValidMax="" ValidMin="" />
                 </QCParams>
                 <ENVParams>
@@ -1059,7 +1052,7 @@
                 </Msgs>
                 <QCParams>
                     <QCParam Param="油脂加注位置"
-                        ValueReq="false" PicReq="true" ValMode="Auto" QCMode="None"
+                        ValueReq="false" PicReq="true" ValMode="Auto" QCMode="Mann"
                         ValidAvg="" ValidMax="" ValidMin="" />
                 </QCParams>
                 <ENVParams>
@@ -1237,7 +1230,7 @@
                 </Msgs>
                 <QCParams>
                     <QCParam Param="主油泵压力"
-                        ValueReq="true" PicReq="true" ValMode="RealParam" QCMode="None"
+                        ValueReq="true" PicReq="true" ValMode="RealParam" QCMode="Auto"
                         ValidAvg="" ValidMax="" ValidMin="" />
                 </QCParams>
                 <ENVParams>
@@ -1294,7 +1287,7 @@
                 </Msgs>
                 <QCParams>
                     <QCParam Param="液压油温度"
-                        ValueReq="true" PicReq="false" ValMode="Auto" QCMode="None"
+                        ValueReq="true" PicReq="false" ValMode="Auto" QCMode="Auto"
                         ValidAvg="" ValidMax="${getMouthTemperature()}" ValidMin="" />
                 </QCParams>
                 <ENVParams>
@@ -1462,7 +1455,7 @@
                 </Msgs>
                 <QCParams>
                     <QCParam Param="吸油过滤器真空度"
-                        ValueReq="false" PicReq="true" ValMode="Auto" QCMode="None"
+                        ValueReq="false" PicReq="true" ValMode="Auto" QCMode="Mann"
                         ValidAvg="" ValidMax="" ValidMin="" />
                 </QCParams>
                 <ENVParams>
@@ -1483,7 +1476,7 @@
                 </Msgs>
                 <QCParams>
                     <QCParam Param="回油过滤器真空度"
-                        ValueReq="false" PicReq="true" ValMode="Auto" QCMode="None"
+                        ValueReq="false" PicReq="true" ValMode="Auto" QCMode="Mann"
                         ValidAvg="" ValidMax="" ValidMin="" />
                 </QCParams>
                 <ENVParams>
@@ -1504,7 +1497,7 @@
                 </Msgs>
                 <QCParams>
                     <QCParam Param="液压油位"
-                        ValueReq="false" PicReq="true" ValMode="Auto" QCMode="None"
+                        ValueReq="false" PicReq="true" ValMode="Auto" QCMode="Mann"
                         ValidAvg="" ValidMax="" ValidMin="" />
                 </QCParams>
                 <ENVParams>
@@ -1525,7 +1518,7 @@
                 </Msgs>
                 <QCParams>
                     <QCParam Param="液压油清洁度"
-                        ValueReq="false" PicReq="true" ValMode="Auto" QCMode="None"
+                        ValueReq="false" PicReq="true" ValMode="Auto" QCMode="Mann"
                         ValidAvg="" ValidMax="" ValidMin="" />
                 </QCParams>
                 <ENVParams>

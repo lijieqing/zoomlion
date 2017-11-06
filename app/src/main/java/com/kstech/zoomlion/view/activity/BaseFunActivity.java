@@ -16,9 +16,29 @@ public abstract class BaseFunActivity extends BaseActivity {
      */
     public abstract void camera(CheckItemParamValueVO checkItemParamValueVO, ItemOperateBodyView iobv);
 
+    /**
+     * 点击开始调试时 回调此方法
+     */
     public abstract void startCheck();
 
+    /**
+     * 点击中止调试时 回调此方法
+     */
     public abstract void stopCheck();
 
+    /**
+     * 点击保存记录时，回调此方法
+     * @param paramValues 已经赋值过的数据
+     */
     public abstract void saveRecord(String paramValues);
+
+    /**
+     * 跳到上一调试项目
+     */
+    public abstract void toForward();
+
+    /**
+     * 跳到下一调试项目
+     */
+    public abstract void toNext();
 }

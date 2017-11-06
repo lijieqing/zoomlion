@@ -16,6 +16,7 @@ import com.kstech.zoomlion.R;
 import com.kstech.zoomlion.model.vo.CheckItemParamValueVO;
 import com.kstech.zoomlion.model.vo.CheckItemVO;
 import com.kstech.zoomlion.utils.DeviceUtil;
+import com.kstech.zoomlion.utils.Globals;
 import com.kstech.zoomlion.utils.JsonUtils;
 import com.kstech.zoomlion.view.activity.BaseFunActivity;
 
@@ -35,10 +36,14 @@ public class ItemOperateView extends RelativeLayout implements View.OnClickListe
     private ImageView ivSave;//保存
     private ImageView ivStart;//开始
     private TextView tvStart;//
-    private ImageView ivForward;//上一项目
-    private ImageView ivNext;//下一项目
+    private TextView tvForward;//上一项目
+    private TextView tvNext;//下一项目
 
     public LinearLayout llCheckStatus;//当前调试项目状态，当准备就绪时变为绿色提示用户
+    private LinearLayout llStart;
+    private LinearLayout llSave;
+    private LinearLayout llForward;
+    private LinearLayout llNext;
     public Chronometer chronometer;//计时器显示
 
     private List<ItemOperateBodyView> bodyViews;//参数描述体 集合
@@ -99,19 +104,24 @@ public class ItemOperateView extends RelativeLayout implements View.OnClickListe
 
         View v = View.inflate(context, R.layout.check_item_operate, null);
         ll_body = v.findViewById(R.id.ll_operate_body);
+
         llCheckStatus = v.findViewById(R.id.ll_check_status);
+        llStart = v.findViewById(R.id.item_check_ll_start);
+        llSave = v.findViewById(R.id.item_check_ll_save);
+        llForward = v.findViewById(R.id.item_check_ll_forward);
+        llNext = v.findViewById(R.id.item_check_ll_next);
 
         ivSave = v.findViewById(R.id.iv_save);
         ivStart = v.findViewById(R.id.iv_start);
         tvStart = v.findViewById(R.id.tv_start);
-        ivForward = v.findViewById(R.id.iv_forward);
-        ivNext = v.findViewById(R.id.iv_next);
+        tvForward = v.findViewById(R.id.tv_forward);
+        tvNext = v.findViewById(R.id.tv_next);
         chronometer = v.findViewById(R.id.chronometer_operate);
 
-        ivSave.setOnClickListener(this);
-        ivStart.setOnClickListener(this);
-        ivForward.setOnClickListener(this);
-        ivNext.setOnClickListener(this);
+        llSave.setOnClickListener(this);
+        llStart.setOnClickListener(this);
+        llForward.setOnClickListener(this);
+        llNext.setOnClickListener(this);
 
         return v;
     }
@@ -125,6 +135,7 @@ public class ItemOperateView extends RelativeLayout implements View.OnClickListe
 
         //清空参数布局集合
         bodyViews.clear();
+        ll_body.removeAllViews();
 
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, DeviceUtil.deviceHeight(context) / 11);
         //参数操作布局view
@@ -148,11 +159,29 @@ public class ItemOperateView extends RelativeLayout implements View.OnClickListe
 
         //根据是否与测量终端通讯调整组件状态
         if (needCommunicate) {
+            llStart.setEnabled(true);
             ivStart.setEnabled(true);
             updateCheckStatus(false, false);
         } else {
             //无需通讯条件下开始按钮不可点击
+            llStart.setEnabled(false);
             ivStart.setEnabled(false);
+        }
+        CheckItemVO temp = Globals.forwardCheckItem();
+        if (temp == null){
+            tvForward.setText("无");
+        }else {
+            tvForward.setText(temp.getName());
+            //还原回当前项目
+            Globals.nextCheckItem();
+        }
+        temp = Globals.nextCheckItem();
+        if (temp == null){
+            tvNext.setText("无");
+        }else {
+            tvNext.setText(temp.getName());
+            //还原回当前项目
+            Globals.forwardCheckItem();
         }
     }
 
@@ -207,20 +236,20 @@ public class ItemOperateView extends RelativeLayout implements View.OnClickListe
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.iv_save:
+            case R.id.item_check_ll_save:
                 saveRecord(isChecking);
                 break;
-            case R.id.iv_start:
+            case R.id.item_check_ll_start:
                 if (isChecking) {
                     stopCheck();
                 } else {
                     startCheck();
                 }
                 break;
-            case R.id.iv_forward:
+            case R.id.item_check_ll_forward:
                 toForward();
                 break;
-            case R.id.iv_next:
+            case R.id.item_check_ll_next:
                 toNext();
                 break;
         }
@@ -230,14 +259,14 @@ public class ItemOperateView extends RelativeLayout implements View.OnClickListe
      * 跳转到下一项目
      */
     private void toNext() {
-
+        baseFunActivity.toNext();
     }
 
     /**
      * 跳转到前一个项目
      */
     private void toForward() {
-
+        baseFunActivity.toForward();
     }
 
     /**

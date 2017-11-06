@@ -66,8 +66,6 @@ public class CheckHomeActivity extends BaseActivity {
     @ViewInject(R.id.ch_tv_start_check)
     private TextView tvStartCheck;
 
-    private List<String> groups = new ArrayList<>();//调试项目类型集合
-
     private List<RealTimeView> inHomeRealTimeViews = new ArrayList<>();//实时参数集合
 
     private GridLayoutManager gridLayoutManager;//recycler view layout管理器
@@ -77,27 +75,26 @@ public class CheckHomeActivity extends BaseActivity {
     private CheckItemVO checkItemVO;
 
     private List<CheckItemDetailData> ls = new ArrayList<>();
-    private int gPosition = -1;
-    private int cPosition = -1;
+
     private MyAdapter rvAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         x.view().inject(this);
-        groups.addAll(Globals.modelFile.checkItemMap.keySet());
-        expandItemAdapter = new ExpandItemAdapter(this, groups, Globals.modelFile.checkItemMap);
+
+        expandItemAdapter = new ExpandItemAdapter(this, Globals.modelFile.checkItemMap);
 
         itemsList.setAdapter(expandItemAdapter);
         itemsList.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView expandableListView, View view, int i, int i1, long l) {
                 ls.clear();
-                gPosition = i;
-                cPosition = i1;
+                Globals.groupPosition = i;
+                Globals.childPosition = i1;
                 expandItemAdapter.notifyDataSetChanged();
 
-                String key = groups.get(i);
+                String key = Globals.groups.get(i);
                 CheckItemVO item = Globals.modelFile.checkItemMap.get(key).get(i1);
                 itemShowView.updateHead(item);
                 checkItemVO = item;
@@ -195,43 +192,37 @@ public class CheckHomeActivity extends BaseActivity {
          * The Context.
          */
         Context context;
-        /**
-         * The Groups.
-         */
-        List<String> groups;
 
         /**
          * Instantiates a new Expand item adapter.
          *
          * @param context      the context
-         * @param groups       the groups
          * @param checkItemMap the check item map
          */
-        ExpandItemAdapter(Context context, List<String> groups, Map<String, List<CheckItemVO>> checkItemMap) {
+        ExpandItemAdapter(Context context, Map<String, List<CheckItemVO>> checkItemMap) {
             this.context = context;
             this.checkItemMap = checkItemMap;
-            this.groups = groups;
         }
 
         @Override
         public int getGroupCount() {
-            return groups.size();
+            return Globals.groups.size();
         }
 
         @Override
         public int getChildrenCount(int groupPosition) {
-            String key = groups.get(groupPosition);
+            String key = Globals.groups.get(groupPosition);
             return checkItemMap.get(key).size();
         }
 
         @Override
         public Object getGroup(int groupPosition) {
-            return groups.get(groupPosition);
+            return Globals.groups.get(groupPosition);
         }
 
         @Override
         public Object getChild(int groupPosition, int childPosition) {
-            String key = groups.get(groupPosition);
+            String key = Globals.groups.get(groupPosition);
             return checkItemMap.get(key).get(childPosition);
         }
 
@@ -261,7 +252,7 @@ public class CheckHomeActivity extends BaseActivity {
             } else {
                 holder = (ViewHolder) view.getTag();
             }
-            holder.tv.setText(groups.get(groupPosition));
+            holder.tv.setText(Globals.groups.get(groupPosition));
             return view;
         }
 
@@ -277,10 +268,10 @@ public class CheckHomeActivity extends BaseActivity {
             } else {
                 holder = (ViewHolder) view.getTag();
             }
-            String key = groups.get(groupPosition);
+            String key = Globals.groups.get(groupPosition);
             holder.tv.setText(checkItemMap.get(key).get(childPosition).getName());
 
-            if (gPosition == groupPosition && cPosition == childPosition) {
+            if (Globals.groupPosition == groupPosition && Globals.childPosition == childPosition) {
                 holder.ll.setBackgroundResource(R.color.zoomLionColor);
             } else {
                 holder.ll.setBackgroundResource(R.color.itemNoSelect);

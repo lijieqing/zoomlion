@@ -12,6 +12,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
 import android.view.View;
+import android.widget.Toast;
 
 import com.kstech.zoomlion.MyApplication;
 import com.kstech.zoomlion.R;
@@ -57,7 +58,7 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
     CameraCapView cameraCapView;//照片捕获view，包含拍照、保存、重新开始
     AlertDialog picCatchDialog;//照片捕获对话窗
     Bitmap bitmap;//当前图片的位图
-    long detailID;//调试项目细节记录ID
+    long detailID = -1;//调试项目细节记录ID
     String itemID;//调试项目记录ID
     long itemDBID;//调试记录数据库ID
     int checkStatus;//0 未开始，刚刚进入页面,1 未完成,存在参数未调试或者存在参数未保存，2，已保存成功，生成记录
@@ -175,6 +176,46 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
 
         initNewDetailRecord();
     }
+
+    @Override
+    public void toForward() {
+        CheckItemVO temp = Globals.forwardCheckItem();
+        if (temp != null){
+            itemvo = temp;
+            ThreadManager.getThreadPool().execute(new Runnable() {
+                @Override
+                public void run() {
+                    itemData = itemDao.queryBuilder().where(CheckItemDataDao.Properties.QcId.eq(Integer.parseInt(itemvo.getId()))).build().unique();
+                    itemDBID = itemData.getCheckItemId();
+                    itemData.resetCheckItemDetailDatas();
+
+                    handler.sendEmptyMessage(0);
+                }
+            });
+        }else {
+            Toast.makeText(this,"当前已是第一项",Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void toNext() {
+        CheckItemVO temp = Globals.nextCheckItem();
+        if (temp != null){
+            itemvo = temp;
+            ThreadManager.getThreadPool().execute(new Runnable() {
+                @Override
+                public void run() {
+                    itemData = itemDao.queryBuilder().where(CheckItemDataDao.Properties.QcId.eq(Integer.parseInt(itemvo.getId()))).build().unique();
+                    itemDBID = itemData.getCheckItemId();
+                    itemData.resetCheckItemDetailDatas();
+
+                    handler.sendEmptyMessage(0);
+                }
+            });
+        }else {
+            Toast.makeText(this,"当前已是最后一项",Toast.LENGTH_SHORT).show();
+        }
+    }
     /**
      * BaseFunActivity 回调
      ****************
@@ -279,6 +320,9 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
             if (activity != null) {
                 switch (msg.what) {
                     case 0:
+                        if (activity.detailID != -1){
+                            activity.itemDetailDao.deleteByKey(activity.detailID);
+                        }
                         //更新调试项目参数操作区信息
                         activity.iov.update(activity.itemvo);
                         //更新调试项目界面展示信息，包括调试记录、当前项目名称、机型编号等

@@ -20,6 +20,7 @@ import com.kstech.zoomlion.model.xmlbean.QCType;
 import com.kstech.zoomlion.model.xmlbean.RealTimeParam;
 import com.kstech.zoomlion.model.xmlbean.RealTimeSet;
 import com.kstech.zoomlion.model.xmlbean.SP;
+import com.kstech.zoomlion.utils.Globals;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -464,6 +465,7 @@ public class DeviceModelFile {
     private static void parseQCSet(DeviceModelFile result, Device device) throws ExcException {
         List<QCType> qcTypes = device.getQcSet().getQcTypes();
         for (QCType qcType : qcTypes) {
+            Globals.groups.add(qcType.getName());
             List<CheckItemVO> values = new ArrayList<>();
             List<QCItem> qcitemxmls = qcType.getQcItems();
             // 遍历xml 检测项目 标签类 生成到vo中
