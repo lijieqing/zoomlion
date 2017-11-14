@@ -26,6 +26,15 @@
             </intent-filter>
         </activity>
         <activity android:name=".view.activity.CheckHomeActivity"></activity>
+
+        <service
+            android:name=".engine.comm.J1939TaskService"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.kstech.engine.comm.J1939" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

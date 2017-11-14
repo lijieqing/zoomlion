@@ -1,10 +1,14 @@
 package com.kstech.zoomlion.view.activity;
 
 import android.app.AlertDialog;
+import android.content.ComponentName;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.IBinder;
 import android.os.Message;
 import android.os.SystemClock;
 import android.view.View;
@@ -15,15 +19,14 @@ import android.widget.TextView;
 
 import com.kstech.zoomlion.MyApplication;
 import com.kstech.zoomlion.R;
-import com.kstech.zoomlion.manager.DeviceModelFile;
-import com.kstech.zoomlion.manager.XMLAPI;
+import com.kstech.zoomlion.engine.DeviceLoadTask;
+import com.kstech.zoomlion.engine.comm.J1939TaskService;
 import com.kstech.zoomlion.model.db.CheckItemData;
 import com.kstech.zoomlion.model.db.CheckRecord;
 import com.kstech.zoomlion.model.db.greendao.CheckItemDataDao;
 import com.kstech.zoomlion.model.db.greendao.CheckRecordDao;
 import com.kstech.zoomlion.model.enums.CheckRecordResultEnum;
 import com.kstech.zoomlion.model.vo.CheckItemVO;
-import com.kstech.zoomlion.model.xmlbean.Device;
 import com.kstech.zoomlion.utils.Globals;
 import com.kstech.zoomlion.utils.LogUtils;
 import com.kstech.zoomlion.utils.ThreadManager;
@@ -34,7 +37,6 @@ import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
-import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.Date;
 
@@ -127,14 +129,20 @@ public class IndexActivity extends BaseActivity {
 
     private String deviceIdentity = "test_machine_id";
 
-    private static final int DEVICE_PARSE_START = 0;
-    private static final int DEVICE_PARSE_ING = 1;
-    private static final int DEVICE_PARSE_FINISH = 2;
-    private static final int DEVICE_RECORD_INIT = 3;
-    private static final int RECORD_INIT_FINISH = 4;
-    private static final int SKIP_TO_CHECK = 5;
-    private static final int RECORD_INIT_ERROR = 6;
-    private static final String TAG = "IndexActivity";
+    public static final int DEVICE_PARSE_START = 0;
+    public static final int DEVICE_PARSE_ING = 1;
+    public static final int DEVICE_PARSE_FINISH = 2;
+    public static final int DEVICE_RECORD_INIT = 3;
+    public static final int RECORD_INIT_FINISH = 4;
+    public static final int SKIP_TO_CHECK = 5;
+    public static final int RECORD_INIT_ERROR = 6;
+    public static final int J1939_COMM_INIT = 7;
+    public static final int J1939_COMM_INITED = 8;
+    public static final int DEVICE_LOAD_FINISH= 9;
+    public static final String TAG = "IndexActivity";
+
+    private DeviceLoadTask deviceLoadTask;
+    private J1939TaskService j1939TaskService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -157,22 +165,8 @@ public class IndexActivity extends BaseActivity {
         dialog.setView(progressView);
 
         // TODO: 2017/10/11 加载默认机型信息，配置并启动通讯线程
-        ThreadManager.getThreadPool().execute(new Runnable() {
-            @Override
-            public void run() {
-                handler.sendEmptyMessage(DEVICE_PARSE_START);
-                SystemClock.sleep(1000);
-                try {
-                    Globals.modelFile = DeviceModelFile.readFromFile((Device) XMLAPI
-                            .readXML(getAssets().open("new.xml")));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                handler.sendEmptyMessage(DEVICE_PARSE_ING);
-                SystemClock.sleep(2000);
-                handler.sendEmptyMessage(DEVICE_PARSE_FINISH);
-            }
-        });
+        deviceLoadTask = new DeviceLoadTask(this,"",handler);
+        deviceLoadTask.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
     }
 
     @Event(value = {R.id.index_btn_goto, R.id.index_btn_exit})
@@ -188,60 +182,8 @@ public class IndexActivity extends BaseActivity {
                     if (cr == null) {
                         //弹出对话框，更新数据库
                         dialog.show();
-                        //点击进入调试页后，进行数据库更新，生成基本的数据库结构
-                        ThreadManager.getThreadPool().execute(new Runnable() {
-                            @Override
-                            public void run() {
-                                CheckRecord record = new CheckRecord(null, deviceIdentity,
-                                        "test_record_name", 123l,
-                                        CheckRecordResultEnum.UNFINISH.getCode(), new Date(),
-                                        null, 0, 0
-                                        , "test_desc", 0, false);
-
-                                //定义调试项目数据实体类
-                                CheckItemData itemData;
-                                Message message;
-                                try {
-                                    //插入
-                                    recordID = recordDao.insert(record);
-
-                                    //遍历配置信息中的调试项目，并依次存入数据库
-                                    int p = 8;
-                                    for (CheckItemVO checkItemVO : Globals.modelFile.allCheckItemList) {
-                                        itemData = new CheckItemData(null, Integer.parseInt(checkItemVO.getId()),
-                                                checkItemVO.getName(), 0, 0, 0,
-                                                recordID, false, false, null);
-                                        itemDataDao.insert(itemData);
-                                        //handler 信息封装
-                                        message = Message.obtain();
-                                        p += 1;
-                                        message.what = DEVICE_RECORD_INIT;
-                                        message.obj = p;
-                                        Bundle b = new Bundle();
-                                        b.putCharSequence("name", checkItemVO.getName());
-                                        message.setData(b);
-                                        //发送msg 更新UI
-                                        handler.sendMessage(message);
-                                        SystemClock.sleep(200);
-                                    }
-
-                                    //发送成功状态 更新UI
-                                    handler.sendEmptyMessage(RECORD_INIT_FINISH);
-
-                                    SystemClock.sleep(2000);
-                                    handler.sendEmptyMessage(SKIP_TO_CHECK);
-                                } catch (Exception e) {
-                                    //异常 进行提示
-                                    message = Message.obtain();
-                                    message.what = RECORD_INIT_ERROR;
-                                    message.obj = e.getMessage();
-                                    handler.sendMessage(message);
-
-                                    LogUtils.e(TAG, e.getMessage());
-                                }
-
-                            }
-                        });
+                        //数据初始化
+                        initRecord();
                     } else {
                         LogUtils.e(TAG, "已存在");
                         handler.sendEmptyMessage(SKIP_TO_CHECK);
@@ -253,6 +195,66 @@ public class IndexActivity extends BaseActivity {
                 finish();
                 break;
         }
+    }
+
+    /**
+     * 初始化当前机型调试记录数据
+     */
+    private void initRecord(){
+        //点击进入调试页后，进行数据库更新，生成基本的数据库结构
+        ThreadManager.getThreadPool().execute(new Runnable() {
+            @Override
+            public void run() {
+                CheckRecord record = new CheckRecord(null, deviceIdentity,
+                        "test_record_name", 123l,
+                        CheckRecordResultEnum.UNFINISH.getCode(), new Date(),
+                        null, 0, 0
+                        , "test_desc", 0, false);
+
+                //定义调试项目数据实体类
+                CheckItemData itemData;
+                Message message;
+                try {
+                    //插入
+                    recordID = recordDao.insert(record);
+
+                    //遍历配置信息中的调试项目，并依次存入数据库
+                    int p = 8;
+                    for (CheckItemVO checkItemVO : Globals.modelFile.allCheckItemList) {
+                        itemData = new CheckItemData(null, Integer.parseInt(checkItemVO.getId()),
+                                checkItemVO.getName(), 0, 0, 0,
+                                recordID, false, false, null);
+                        itemDataDao.insert(itemData);
+                        //handler 信息封装
+                        message = Message.obtain();
+                        p += 1;
+                        message.what = DEVICE_RECORD_INIT;
+                        message.obj = p;
+                        Bundle b = new Bundle();
+                        b.putCharSequence("name", checkItemVO.getName());
+                        message.setData(b);
+                        //发送msg 更新UI
+                        handler.sendMessage(message);
+                        SystemClock.sleep(200);
+                    }
+
+                    //发送成功状态 更新UI
+                    handler.sendEmptyMessage(RECORD_INIT_FINISH);
+
+                    SystemClock.sleep(2000);
+                    handler.sendEmptyMessage(SKIP_TO_CHECK);
+                } catch (Exception e) {
+                    //异常 进行提示
+                    message = Message.obtain();
+                    message.what = RECORD_INIT_ERROR;
+                    message.obj = e.getMessage();
+                    handler.sendMessage(message);
+
+                    LogUtils.e(TAG, e.getMessage());
+                }
+
+            }
+        });
     }
 
     /**
@@ -277,19 +279,36 @@ public class IndexActivity extends BaseActivity {
 
         @Override
         public void handleMessage(Message msg) {
-            IndexActivity mActivity = activityReference.get();
+            final IndexActivity mActivity = activityReference.get();
             if (mActivity != null) {
                 switch (msg.what) {
                     case DEVICE_PARSE_START:
                         mActivity.progressView.reset();
                         mActivity.dialog.show();
-                        mActivity.progressView.updateProgress("机型解析中", 50);
+                        mActivity.progressView.updateProgress((String) msg.obj, msg.arg1);
                         break;
                     case DEVICE_PARSE_ING:
-                        mActivity.progressView.updateProgress("机型解析完成", 100);
+                        mActivity.progressView.updateProgress((String) msg.obj, msg.arg1);
                         break;
                     case DEVICE_PARSE_FINISH:
-                        mActivity.dialog.cancel();
+                        Intent j1939Intent = new Intent(J1939TaskService.ACTION);
+                        j1939Intent.setPackage(mActivity.getPackageName());
+                        j1939Intent.putExtra("reload",true);
+                        mActivity.bindService(j1939Intent, new ServiceConnection() {
+                            @Override
+                            public void onServiceConnected(ComponentName name, IBinder service) {
+                                LogUtils.e(TAG,"service connect");
+                                J1939TaskService.MyBinder binder = (J1939TaskService.MyBinder) service;
+                                mActivity.j1939TaskService = binder.task;
+                                mActivity.deviceLoadTask.isWaitting = false;
+                            }
+
+                            @Override
+                            public void onServiceDisconnected(ComponentName name) {
+
+                            }
+                        },BIND_AUTO_CREATE);
+                        mActivity.startService(j1939Intent);
                         break;
                     case DEVICE_RECORD_INIT:
                         String name = (String) msg.getData().getCharSequence("name");
@@ -308,8 +327,18 @@ public class IndexActivity extends BaseActivity {
                         SystemClock.sleep(1000);
                         mActivity.dialog.cancel();
                         break;
+                    case J1939_COMM_INIT:
+                        mActivity.progressView.updateProgress((String) msg.obj, msg.arg1);
+                        break;
+                    case J1939_COMM_INITED:
+                        mActivity.progressView.updateProgress((String) msg.obj, msg.arg1);
+                        break;
+                    case DEVICE_LOAD_FINISH:
+                        mActivity.dialog.cancel();
+                        break;
                 }
             }
         }
     }
+
 }

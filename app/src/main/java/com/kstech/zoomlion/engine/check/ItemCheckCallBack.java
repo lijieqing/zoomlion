@@ -1,4 +1,4 @@
-package com.kstech.zoomlion.engine;
+package com.kstech.zoomlion.engine.check;
 
 import com.kstech.zoomlion.model.vo.CheckItemParamValueVO;
 
@@ -12,7 +12,7 @@ public interface ItemCheckCallBack {
      * 项目调试开始回调，需要在方法中赋值项目ID和调试次数
      * 以及界面显示信息操作
      *
-     * @param task  调试项目任务
+     * @param task 调试项目任务
      */
     void onStart(ItemCheckTask task);
 

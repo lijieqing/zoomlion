@@ -1,12 +1,10 @@
-package com.kstech.zoomlion.engine;
+package com.kstech.zoomlion.engine.check;
 
 import android.os.AsyncTask;
 import android.os.SystemClock;
 
 import com.kstech.zoomlion.model.vo.CheckItemParamValueVO;
 import com.kstech.zoomlion.model.vo.CheckItemVO;
-import com.kstech.zoomlion.manager.CommandResp;
-import com.kstech.zoomlion.manager.CommandSender;
 import com.kstech.zoomlion.utils.Globals;
 
 import java.util.List;
@@ -40,7 +38,7 @@ public class ItemCheckTask extends AsyncTask<Void, String, Void> {
         //开始调试启动回调
         callBack.onStart(this);
 
-        if (qcID == -1 || times == -1){
+        if (qcID == -1 || times == -1) {
             callBack.onStartError("QCId或times未设置");
             callBack.onTaskStop(false);
             return null;
@@ -83,9 +81,9 @@ public class ItemCheckTask extends AsyncTask<Void, String, Void> {
             }
         }
 
-        if (!isRunning){
+        if (!isRunning) {
             callBack.onTaskStop(false);
-        }else {
+        } else {
             // 通讯超时回调
             callBack.onTimeOut(headers, "通讯超时");
             callBack.onTaskStop(true);
@@ -94,7 +92,7 @@ public class ItemCheckTask extends AsyncTask<Void, String, Void> {
         return null;
     }
 
-    public void stopCheck(){
+    public void stopCheck() {
         isRunning = false;
     }
 

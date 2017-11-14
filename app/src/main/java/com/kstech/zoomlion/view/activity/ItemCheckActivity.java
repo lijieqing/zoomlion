@@ -16,8 +16,8 @@ import android.widget.Toast;
 
 import com.kstech.zoomlion.MyApplication;
 import com.kstech.zoomlion.R;
-import com.kstech.zoomlion.engine.ItemCheckCallBack;
-import com.kstech.zoomlion.engine.ItemCheckTask;
+import com.kstech.zoomlion.engine.check.ItemCheckCallBack;
+import com.kstech.zoomlion.engine.check.ItemCheckTask;
 import com.kstech.zoomlion.model.db.CheckItemData;
 import com.kstech.zoomlion.model.db.CheckItemDetailData;
 import com.kstech.zoomlion.model.db.greendao.CheckItemDataDao;
