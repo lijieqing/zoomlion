@@ -38,10 +38,17 @@
                 android:id="@+id/rv_body"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="6">
+                android:layout_weight="5">
 
             </android.support.v7.widget.RecyclerView>
-
+            <LinearLayout
+                style="@style/ItemHead">
+                <ImageView
+                    android:id="@+id/iv_upload_status"
+                    android:background="@drawable/pic_upload_fail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
             <TextView
                 android:id="@+id/tv_item_result"
                 style="@style/ItemHead"

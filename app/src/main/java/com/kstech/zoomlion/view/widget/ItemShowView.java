@@ -31,12 +31,17 @@ import java.util.List;
  * 首先说明一个item 指的是一个检测项目记录，即db中的@{@link com.kstech.zoomlion.model.db.CheckItemDetailData}类，
  * 其中的paramsValues储存的就是该检测记录的数据，对应多个@{@link CheckItemParamValueVO}
  */
-
-
 public class ItemShowView extends RelativeLayout {
     private Context context;
+    /**
+     * 调试项目展示view的 参数头部集合 用来展示当前项目的参数名称
+     */
     private RecyclerView rvHeader;
+    /**
+     * 是否需要跳过调试按钮
+     */
     private CheckBox cbIgnore;
+
     private HeaderAdapter headerAdapter;
     GridLayoutManager gridLayoutManager;
     LinearLayout bodyContains;
