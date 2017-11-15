@@ -11,8 +11,10 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.kstech.zoomlion.MyApplication;
 import com.kstech.zoomlion.R;
 import com.kstech.zoomlion.model.db.CheckItemDetailData;
+import com.kstech.zoomlion.model.db.greendao.CheckItemDetailDataDao;
 import com.kstech.zoomlion.model.vo.CheckItemParamValueVO;
 import com.kstech.zoomlion.model.vo.CheckItemVO;
 import com.kstech.zoomlion.utils.DeviceUtil;
@@ -90,13 +92,20 @@ public class ItemShowViewInCheck extends RelativeLayout {
     /**
      * Update body.
      *
-     * @param paramValues 从数据库里面查出的@{@link CheckItemDetailData} 将里面的paramValue的json值读取出来，
-     *                    转换为@{@link CheckItemParamValueVO}集合
+     * @param itemDBID 调试项目数据库ID
      */
-    public void updateBody(@NonNull List<CheckItemDetailData> paramValues) {
+    public void updateBody(long itemDBID) {
+        //按时间降序获取调试项目细节数据集合
+        List<CheckItemDetailData> temp = MyApplication.getApplication().getDaoSession().getCheckItemDetailDataDao()
+                .queryBuilder()
+                .where(CheckItemDetailDataDao.Properties.ItemId.eq(itemDBID))
+                .orderDesc(CheckItemDetailDataDao.Properties.StartTime)
+                .build().list();
+
         bodyContains.removeAllViews();
         Globals.headerListener.clear();
-        for (CheckItemDetailData paramValue : paramValues) {
+
+        for (CheckItemDetailData paramValue : temp) {
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, DeviceUtil.deviceHeight(context) / 15);
             ItemBodyShowViewInCheck ibs = new ItemBodyShowViewInCheck(context, paramValue);
             bodyContains.addView(ibs, params);

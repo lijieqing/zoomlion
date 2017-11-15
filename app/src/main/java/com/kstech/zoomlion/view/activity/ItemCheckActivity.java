@@ -183,8 +183,9 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
         itemDetailDao.update(detailData);
         //重置 调试细节记录表 为的是保持与数据库同步
         itemData.resetCheckItemDetailDatas();
+
         //更新调试项目展示内容
-        isv.updateBody(itemData.getCheckItemDetailDatas());
+        isv.updateBody(itemDBID);
 
         initNewDetailRecord();
     }
@@ -342,7 +343,7 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
                         activity.iov.update(activity.itemvo);
                         //更新调试项目界面展示信息，包括调试记录、当前项目名称、机型编号等
                         activity.isv.updateHead(activity.itemvo);
-                        activity.isv.updateBody(activity.itemData.getCheckItemDetailDatas());
+                        activity.isv.updateBody(activity.itemDBID);
 
                         //初始化记录表
                         activity.initNewDetailRecord();

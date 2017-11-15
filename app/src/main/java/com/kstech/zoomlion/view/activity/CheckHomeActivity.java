@@ -23,6 +23,7 @@ import com.kstech.zoomlion.R;
 import com.kstech.zoomlion.model.db.CheckItemData;
 import com.kstech.zoomlion.model.db.CheckItemDetailData;
 import com.kstech.zoomlion.model.db.greendao.CheckItemDataDao;
+import com.kstech.zoomlion.model.db.greendao.CheckItemDetailDataDao;
 import com.kstech.zoomlion.model.vo.CheckItemVO;
 import com.kstech.zoomlion.model.vo.RealTimeParamVO;
 import com.kstech.zoomlion.utils.DeviceUtil;
@@ -110,11 +111,18 @@ public class CheckHomeActivity extends BaseActivity {
                     @Override
                     public void run() {
                         CheckItemDataDao itemDao = MyApplication.getApplication().getDaoSession().getCheckItemDataDao();
+                        //获取当前的调试项目记录数据
                         CheckItemData itemdb = itemDao.queryBuilder()
                                 .where(CheckItemDataDao.Properties.QcId.eq(Integer.parseInt(Globals.currentCheckItem.getId())))
                                 .build().unique();
                         if (itemdb != null) {
-                            ls.addAll(itemdb.getCheckItemDetailDatas());
+                            CheckItemDetailDataDao detail = MyApplication.getApplication().getDaoSession().getCheckItemDetailDataDao();
+                            //根据数据库ID 获取调试项目细节数据
+                            List<CheckItemDetailData> temp = detail.queryBuilder()
+                                    .where(CheckItemDetailDataDao.Properties.ItemId.eq(itemdb.getCheckItemId()))
+                                    .orderDesc(CheckItemDetailDataDao.Properties.StartTime)
+                                    .build().list();
+                            ls.addAll(temp);
                         }
                         handler.sendEmptyMessage(0);
                     }
