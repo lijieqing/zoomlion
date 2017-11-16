@@ -78,6 +78,8 @@ public class CheckHomeActivity extends BaseActivity {
 
     private MyAdapter rvAdapter;
 
+    int lastGroup = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,37 +98,19 @@ public class CheckHomeActivity extends BaseActivity {
                 Globals.groupPosition = i;
                 Globals.childPosition = i1;
 
-                //刷新调试项目列表
-                expandItemAdapter.notifyDataSetChanged();
-
                 //获取当前调试项目的 group 和 value
                 String key = Globals.groups.get(i);
                 CheckItemVO item = Globals.modelFile.checkItemMap.get(key).get(i1);
-
-                //更新 调试项目展示组件信息
-                itemShowView.updateHead(item);
                 Globals.currentCheckItem = item;
-                //查询数据库，获取调试项目细节记录 数据
-                ThreadManager.getThreadPool().execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        CheckItemDataDao itemDao = MyApplication.getApplication().getDaoSession().getCheckItemDataDao();
-                        //获取当前的调试项目记录数据
-                        CheckItemData itemdb = itemDao.queryBuilder()
-                                .where(CheckItemDataDao.Properties.QcId.eq(Integer.parseInt(Globals.currentCheckItem.getId())))
-                                .build().unique();
-                        if (itemdb != null) {
-                            CheckItemDetailDataDao detail = MyApplication.getApplication().getDaoSession().getCheckItemDetailDataDao();
-                            //根据数据库ID 获取调试项目细节数据
-                            List<CheckItemDetailData> temp = detail.queryBuilder()
-                                    .where(CheckItemDetailDataDao.Properties.ItemId.eq(itemdb.getCheckItemId()))
-                                    .orderDesc(CheckItemDetailDataDao.Properties.StartTime)
-                                    .build().list();
-                            ls.addAll(temp);
-                        }
-                        handler.sendEmptyMessage(0);
-                    }
-                });
+                //更新 调试项目展示组件信息
+                updateView(item);
+                //刷新调试项目列表
+                expandItemAdapter.notifyDataSetChanged();
+
+                if (lastGroup != i) {
+                    Globals.setSelectedItem(expandableListView);
+                    lastGroup = i;
+                }
                 return false;
             }
         });
@@ -148,8 +132,48 @@ public class CheckHomeActivity extends BaseActivity {
         realTimes.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));
     }
 
+    private void updateView(CheckItemVO item) {
+        itemShowView.updateHead(item);
+        //查询数据库，获取调试项目细节记录 数据
+        ThreadManager.getThreadPool().execute(new Runnable() {
+            @Override
+            public void run() {
+                CheckItemDataDao itemDao = MyApplication.getApplication().getDaoSession().getCheckItemDataDao();
+                //获取当前的调试项目记录数据
+                CheckItemData itemdb = itemDao.queryBuilder()
+                        .where(CheckItemDataDao.Properties.QcId.eq(Integer.parseInt(Globals.currentCheckItem.getId())))
+                        .build().unique();
+                if (itemdb != null) {
+                    CheckItemDetailDataDao detail = MyApplication.getApplication().getDaoSession().getCheckItemDetailDataDao();
+                    //根据数据库ID 获取调试项目细节数据
+                    List<CheckItemDetailData> temp = detail.queryBuilder()
+                            .where(CheckItemDetailDataDao.Properties.ItemId.eq(itemdb.getCheckItemId()))
+                            .orderDesc(CheckItemDetailDataDao.Properties.StartTime)
+                            .build().list();
+                    ls.addAll(temp);
+                }
+                handler.sendEmptyMessage(0);
+            }
+        });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        String key = Globals.groups.get(Globals.groupPosition);
+        CheckItemVO item = Globals.modelFile.checkItemMap.get(key).get(Globals.childPosition);
+        Globals.currentCheckItem = item;
+
+        updateView(item);
+        //重新进入页面时刷新列表
+        expandItemAdapter.notifyDataSetChanged();
+
+        Globals.setSelectedItem(itemsList);
+    }
+
     /**
      * 点击事件 处理
+     *
      * @param view
      */
     @Event(value = {R.id.ch_tv_start_check})

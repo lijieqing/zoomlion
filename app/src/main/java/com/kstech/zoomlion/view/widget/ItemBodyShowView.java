@@ -124,15 +124,15 @@ public class ItemBodyShowView extends RelativeLayout implements IRecyclerScrollL
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, ItemDetailActivity.class);
-                intent.putExtra("detailID",paramValue.getCheckItemDetailId());
+                intent.putExtra("detailID", paramValue.getCheckItemDetailId());
                 context.startActivity(intent);
                 Toast.makeText(context, "展示细节", Toast.LENGTH_SHORT).show();
             }
         });
         //设置记录上传状态
-        if (paramValue.getUploaded()){
+        if (paramValue.getUploaded()) {
             imgUpload.setBackgroundResource(R.drawable.pic_upload_success);
-        }else {
+        } else {
             imgUpload.setBackgroundResource(R.drawable.pic_upload_fail);
         }
         imgUpload.setOnClickListener(new OnClickListener() {
@@ -149,6 +149,13 @@ public class ItemBodyShowView extends RelativeLayout implements IRecyclerScrollL
         rvBody.setAdapter(bodyAdapter);
         rvBody.addItemDecoration(new DividerItemDecoration(context, DividerItemDecoration.HORIZONTAL_LIST));
 
+        //此处主要是为了让recycler view 无法正常相应监听事件
+        rvBody.setOnTouchListener(new OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                return true;
+            }
+        });
         return view;
     }
 
