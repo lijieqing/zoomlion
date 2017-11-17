@@ -2,131 +2,168 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
         <LinearLayout
-            android:layout_weight="0.6"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_weight="0.6"
             android:orientation="horizontal">
-            <TextView
-                style="@style/ItemOperateHead"
-                android:text="参数名称"/>
-            <TextView
-                style="@style/ItemOperateHead"
-                android:text="拍照"/>
-            <TextView
-                style="@style/ItemOperateHead"
-                android:text="谱图"/>
-            <TextView
-                style="@style/ItemOperateHead"
-                android:text="数值"/>
-            <TextView
-                style="@style/ItemOperateHead"
-                android:text="操作"/>
-        </LinearLayout>
-        <ScrollView
-            android:background="#fff"
-            android:layout_weight="3"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="0dp">
-            <LinearLayout
-                android:id="@+id/ll_operate_body"
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
 
+            <TextView
+                style="@style/ItemOperateHead"
+                android:text="参数名称" />
+
+            <TextView
+                style="@style/ItemOperateHead"
+                android:text="拍照" />
+
+            <TextView
+                style="@style/ItemOperateHead"
+                android:text="谱图" />
+
+            <TextView
+                style="@style/ItemOperateHead"
+                android:text="数值" />
+
+            <TextView
+                style="@style/ItemOperateHead"
+                android:text="操作" />
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#fff"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/ll_operate_body"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                </LinearLayout>
+            </ScrollView>
+
+            <LinearLayout
+                android:id="@+id/rl_blur"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/btn_clear_blur"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_rg"
+                    android:text="点击任意位置开始操作" />
             </LinearLayout>
-        </ScrollView>
+        </FrameLayout>
 
         <LinearLayout
-            android:layout_weight="1.4"
-            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="0dp">
+            android:layout_height="0dp"
+            android:layout_weight="1.4"
+            android:orientation="horizontal">
 
             <LinearLayout
                 android:id="@+id/item_check_ll_save"
                 style="@style/ItemOperateButton">
+
                 <ImageView
                     android:id="@+id/iv_save"
-                    android:clickable="false"
                     android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:background="@drawable/bg_btn_save"
-                    android:layout_height="wrap_content" />
+                    android:clickable="false" />
+
                 <TextView
-                    android:text="保存"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:text="保存" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/item_check_ll_start"
                 style="@style/ItemOperateButton">
+
                 <ImageView
-                    android:clickable="false"
                     android:id="@+id/iv_start"
                     android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:background="@drawable/bg_btn_start"
-                    android:layout_height="wrap_content" />
+                    android:clickable="false" />
+
                 <TextView
                     android:id="@+id/tv_start"
-                    android:text="开始"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:text="开始" />
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/ll_check_status"
-                android:orientation="vertical"
                 android:layout_width="0dp"
-                android:gravity="center"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:layout_margin="5dp"
-                android:background="#fff">
+                android:layout_weight="1"
+                android:background="#fff"
+                android:gravity="center"
+                android:orientation="vertical">
+
                 <Chronometer
                     android:id="@+id/chronometer_operate"
-                    android:gravity="center"
-                    android:textSize="30sp"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textSize="30sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/item_check_ll_forward"
                 style="@style/ItemOperateButton">
+
                 <ImageView
-                    android:clickable="false"
                     android:layout_width="wrap_content"
-                    android:src="@drawable/forward"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:clickable="false"
+                    android:src="@drawable/forward" />
+
                 <TextView
-                    android:singleLine="true"
-                    android:ellipsize="marquee"
-                    android:text="上一项：某某调试项目"
                     android:id="@+id/tv_forward"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:ellipsize="marquee"
+                    android:singleLine="true"
+                    android:text="上一项：某某调试项目" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/item_check_ll_next"
                 style="@style/ItemOperateButton">
+
                 <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:clickable="false"
-                    android:layout_width="wrap_content"
-                    android:src="@drawable/next"
-                    android:layout_height="wrap_content" />
+                    android:src="@drawable/next" />
+
                 <TextView
-                    android:singleLine="true"
-                    android:ellipsize="marquee"
                     android:id="@+id/tv_next"
-                    android:text="下一项：某某调试项目"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:ellipsize="marquee"
+                    android:singleLine="true"
+                    android:text="下一项：某某调试项目" />
             </LinearLayout>
         </LinearLayout>
 

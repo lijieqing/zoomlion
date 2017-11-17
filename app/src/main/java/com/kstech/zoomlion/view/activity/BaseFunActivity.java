@@ -28,6 +28,7 @@ public abstract class BaseFunActivity extends BaseActivity {
 
     /**
      * 点击保存记录时，回调此方法
+     *
      * @param paramValues 已经赋值过的数据
      */
     public abstract void saveRecord(String paramValues);
@@ -41,4 +42,14 @@ public abstract class BaseFunActivity extends BaseActivity {
      * 跳到下一调试项目
      */
     public abstract void toNext();
+
+    /**
+     * 模糊块消失回调
+     */
+    public abstract void initDetailData();
+
+    /**
+     * 模糊块复原回调
+     */
+    public abstract void removeDetailData();
 }

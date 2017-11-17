@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
@@ -109,14 +110,6 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
         });
     }
 
-    /**
-     * 初始化调试项目细节记录表，并获取数据库索引ID，用于后来更新数据
-     */
-    private void initNewDetailRecord() {
-        detailData = new CheckItemDetailData(null, itemDBID, 12l, "admin", 1l, "measure", itemvo.getJsonParams(), CheckItemDetailResultEnum.UNFINISH.getCode(), new Date(), null, null, false);
-        detailID = itemDetailDao.insert(detailData);
-    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == Activity.RESULT_OK) {
@@ -187,7 +180,10 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
         //更新调试项目展示内容
         isv.updateBody(itemDBID);
 
-        initNewDetailRecord();
+        //计时器复位
+        iov.chronometer.setBase(SystemClock.elapsedRealtime());
+        iov.chronometer.setBackgroundColor(Color.WHITE);
+
     }
 
     @Override
@@ -229,11 +225,28 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
             Toast.makeText(this, "当前已是最后一项", Toast.LENGTH_SHORT).show();
         }
     }
+
+    @Override
+    public void initDetailData() {
+        initNewDetailRecord();
+    }
+
+    @Override
+    public void removeDetailData() {
+        itemDetailDao.deleteByKey(detailID);
+    }
     /**
      * BaseFunActivity 回调
      ****************
      */
 
+    /**
+     * 初始化调试项目细节记录表，并获取数据库索引ID，用于后来更新数据
+     */
+    private void initNewDetailRecord() {
+        detailData = new CheckItemDetailData(null, itemDBID, 12l, "admin", 1l, "measure", itemvo.getJsonParams(), CheckItemDetailResultEnum.UNFINISH.getCode(), new Date(), null, null, false);
+        detailID = itemDetailDao.insert(detailData);
+    }
 
     /**
      * ItemCheckCallBack回调 开始
@@ -309,15 +322,15 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-
+        if (!iov.inBlur) {
+            iov.changeBlur();
+            iov.resetBodyViews();
+            itemDetailDao.deleteByKey(detailID);
+        } else {
+            super.onBackPressed();
+        }
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        itemDetailDao.deleteByKey(detailID);
-    }
 
     private InnerHandler handler = new InnerHandler(this);
 
@@ -336,17 +349,11 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
             if (activity != null) {
                 switch (msg.what) {
                     case NEW_CHECKITEM_REFRESH:
-                        if (activity.detailID != -1) {
-                            activity.itemDetailDao.deleteByKey(activity.detailID);
-                        }
                         //更新调试项目参数操作区信息
                         activity.iov.update(activity.itemvo);
                         //更新调试项目界面展示信息，包括调试记录、当前项目名称、机型编号等
                         activity.isv.updateHead(activity.itemvo);
                         activity.isv.updateBody(activity.itemDBID);
-
-                        //初始化记录表
-                        activity.initNewDetailRecord();
                         break;
                     case NEW_DATA_REFRESH:
                         //此处更新iov组件 并传入detailData中

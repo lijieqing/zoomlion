@@ -92,8 +92,7 @@ public class CheckHomeActivity extends BaseActivity {
         itemsList.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView expandableListView, View view, int i, int i1, long l) {
-                //清空调试细节记录表
-                ls.clear();
+
                 //赋值坐标
                 Globals.groupPosition = i;
                 Globals.childPosition = i1;
@@ -134,6 +133,8 @@ public class CheckHomeActivity extends BaseActivity {
 
     private void updateView(CheckItemVO item) {
         itemShowView.updateHead(item);
+        //清空调试细节记录表
+        ls.clear();
         //查询数据库，获取调试项目细节记录 数据
         ThreadManager.getThreadPool().execute(new Runnable() {
             @Override

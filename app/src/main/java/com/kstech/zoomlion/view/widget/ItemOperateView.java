@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -49,9 +50,15 @@ public class ItemOperateView extends RelativeLayout implements View.OnClickListe
     private List<ItemOperateBodyView> bodyViews;//参数描述体 集合
     private List<CheckItemParamValueVO> paramValueVOList = new ArrayList<>();//调试项目参数获取数据后的集合
 
-    private boolean isChecking = false;//是否正在调试
+    private boolean isChecking = false;//是否正在调试,用于点击开始、保存按钮时的状态判断
 
     private boolean needCommunicate = false;//是否需要与测量终端通讯
+
+    private LinearLayout rlBlur;
+
+    private Button btnBlur;
+
+    public boolean inBlur = true;
 
     private static final String TAG = "ItemOperateView";
 
@@ -118,10 +125,14 @@ public class ItemOperateView extends RelativeLayout implements View.OnClickListe
         tvNext = v.findViewById(R.id.tv_next);
         chronometer = v.findViewById(R.id.chronometer_operate);
 
+        rlBlur = v.findViewById(R.id.rl_blur);
+        btnBlur = v.findViewById(R.id.btn_clear_blur);
+
         llSave.setOnClickListener(this);
         llStart.setOnClickListener(this);
         llForward.setOnClickListener(this);
         llNext.setOnClickListener(this);
+        btnBlur.setOnClickListener(this);
 
         return v;
     }
@@ -239,14 +250,23 @@ public class ItemOperateView extends RelativeLayout implements View.OnClickListe
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.item_check_ll_save:
-                saveRecord(isChecking);
+                if (inBlur) {
+                    Toast.makeText(context, "当前为处于调试模式，无法操作", Toast.LENGTH_SHORT).show();
+                } else {
+                    saveRecord(isChecking);
+                }
                 break;
             case R.id.item_check_ll_start:
-                if (isChecking) {
-                    stopCheck();
+                if (inBlur) {
+                    Toast.makeText(context, "当前为处于调试模式，无法操作", Toast.LENGTH_SHORT).show();
                 } else {
-                    startCheck();
+                    if (isChecking) {
+                        stopCheck();
+                    } else {
+                        startCheck();
+                    }
                 }
+
                 break;
             case R.id.item_check_ll_forward:
                 toForward();
@@ -254,6 +274,25 @@ public class ItemOperateView extends RelativeLayout implements View.OnClickListe
             case R.id.item_check_ll_next:
                 toNext();
                 break;
+            case R.id.btn_clear_blur:
+                changeBlur();
+                baseFunActivity.initDetailData();
+                break;
+
+        }
+    }
+
+
+    /**
+     * 改变blur区域
+     */
+    public void changeBlur() {
+        if (inBlur) {
+            rlBlur.setVisibility(GONE);
+            inBlur = false;
+        } else {
+            rlBlur.setVisibility(VISIBLE);
+            inBlur = true;
         }
     }
 
@@ -261,14 +300,22 @@ public class ItemOperateView extends RelativeLayout implements View.OnClickListe
      * 跳转到下一项目
      */
     private void toNext() {
-        baseFunActivity.toNext();
+        if (inBlur) {
+            baseFunActivity.toNext();
+        } else {
+            Toast.makeText(context, "当前正处于调试状态，无法进入下一项目", Toast.LENGTH_SHORT).show();
+        }
     }
 
     /**
      * 跳转到前一个项目
      */
     private void toForward() {
-        baseFunActivity.toForward();
+        if (inBlur) {
+            baseFunActivity.toForward();
+        } else {
+            Toast.makeText(context, "当前正处于调试状态，无法进入上一项目", Toast.LENGTH_SHORT).show();
+        }
     }
 
     /**
@@ -294,12 +341,26 @@ public class ItemOperateView extends RelativeLayout implements View.OnClickListe
 
             baseFunActivity.saveRecord(paramValues);
 
-            for (ItemOperateBodyView bodyView : bodyViews) {
-                bodyView.reset();
-            }
+            //改变模糊状态
+            rlBlur.setVisibility(VISIBLE);
+            inBlur = true;
+
+            //重置每个参数操作体ItemOperateBodyView
+            resetBodyViews();
+
         }
 
     }
+
+    /**
+     * 重置参数操作体ItemOperateBodyView
+     */
+    public void resetBodyViews() {
+        for (ItemOperateBodyView bodyView : bodyViews) {
+            bodyView.reset();
+        }
+    }
+
 
     /**
      * 开始调试
