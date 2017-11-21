@@ -17,7 +17,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".view.activity.ItemDetailActivity" />
         <activity android:name=".view.activity.ItemCheckActivity" />
-        <activity android:name=".view.activity.LoginActivity"></activity>
+        <activity android:name=".view.activity.LoginActivity" />
         <activity android:name=".view.activity.IndexActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,7 +25,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.activity.CheckHomeActivity"></activity>
+        <activity android:name=".view.activity.CheckHomeActivity" />
 
         <service
             android:name=".engine.comm.J1939TaskService"
@@ -35,6 +35,8 @@
                 <action android:name="com.kstech.engine.comm.J1939" />
             </intent-filter>
         </service>
+
+        <activity android:name=".view.activity.UserDetailActivity"></activity>
     </application>
 
 </manifest>

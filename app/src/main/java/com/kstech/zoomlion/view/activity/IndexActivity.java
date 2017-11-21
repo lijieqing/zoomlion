@@ -2,6 +2,7 @@ package com.kstech.zoomlion.view.activity;
 
 import android.app.AlertDialog;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.graphics.Color;
@@ -11,6 +12,7 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.os.SystemClock;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -26,6 +28,9 @@ import com.kstech.zoomlion.model.db.CheckRecord;
 import com.kstech.zoomlion.model.db.greendao.CheckItemDataDao;
 import com.kstech.zoomlion.model.db.greendao.CheckRecordDao;
 import com.kstech.zoomlion.model.enums.CheckRecordResultEnum;
+import com.kstech.zoomlion.model.treelist.Element;
+import com.kstech.zoomlion.model.treelist.TreeViewAdapter;
+import com.kstech.zoomlion.model.treelist.TreeViewItemClickListener;
 import com.kstech.zoomlion.model.vo.CheckItemVO;
 import com.kstech.zoomlion.utils.Globals;
 import com.kstech.zoomlion.utils.LogUtils;
@@ -38,6 +43,7 @@ import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -139,10 +145,20 @@ public class IndexActivity extends BaseActivity {
     public static final int J1939_COMM_INIT = 7;
     public static final int J1939_COMM_INITED = 8;
     public static final int DEVICE_LOAD_FINISH= 9;
+    public static final int DEV_LIST_INIT = 10;
+    public static final int DEV_LIST_LOADED = 11;
     public static final String TAG = "IndexActivity";
 
+    //通讯线程相关变量
     private DeviceLoadTask deviceLoadTask;
     private J1939TaskService j1939TaskService;
+
+    //机型分类列表相关变量
+    private ArrayList<Element> rootElements;
+    private ArrayList<Element> allElements;
+    private ListView devListView;
+    private AlertDialog devListDialog;
+    private TreeViewAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -167,11 +183,33 @@ public class IndexActivity extends BaseActivity {
         // TODO: 2017/10/11 加载默认机型信息，配置并启动通讯线程
         deviceLoadTask = new DeviceLoadTask(this,"",handler);
         deviceLoadTask.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
+
+        //初始化机型选择列表 相关数据
+        devListView = new ListView(this);
+        rootElements = new ArrayList<>();
+        allElements = new ArrayList<>();
+        LayoutInflater inflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        adapter = new TreeViewAdapter(rootElements,allElements,inflater);
+        devListView.setAdapter(adapter);
+        devListView.setOnItemClickListener(new TreeViewItemClickListener(adapter,this));
+        devListDialog = new AlertDialog.Builder(this)
+                .setCancelable(true)
+                .setView(devListView)
+                .create();
     }
 
-    @Event(value = {R.id.index_btn_goto, R.id.index_btn_exit})
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        j1939TaskService.stopJ1939Service();
+    }
+
+    @Event(value = {R.id.index_iv_user, R.id.index_btn_choose_from_server, R.id.index_btn_goto, R.id.index_btn_exit})
     private void click(View view) {
         switch (view.getId()) {
+            case R.id.index_iv_user:
+                startActivity(new Intent(this,UserDetailActivity.class));
+                break;
             case R.id.index_btn_goto:
                 if (isAvalid()) {
                     //查询本地是否存在记录
@@ -193,6 +231,49 @@ public class IndexActivity extends BaseActivity {
                 break;
             case R.id.index_btn_exit:
                 finish();
+                break;
+            case R.id.index_btn_choose_from_server:
+                handler.sendEmptyMessage(DEV_LIST_INIT);
+                rootElements.clear();
+                allElements.clear();
+                ThreadManager.getThreadPool().execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        //去服务器获取列表信息，此处模拟数据
+                        //添加最外层节点
+                        Element e1 = new Element("山东省", Element.TOP_LEVEL, 0, Element.NO_PARENT, true, false);
+                        //添加第一层节点
+                        Element e2 = new Element("青岛市", Element.TOP_LEVEL + 1, 1, e1.getId(), true, false);
+                        //添加第二层节点
+                        Element e3 = new Element("市南区", Element.TOP_LEVEL + 2, 2, e2.getId(), true, false);
+                        //添加第三层节点
+                        Element e4 = new Element("香港中路", Element.TOP_LEVEL + 3, 3, e3.getId(), false, false);
+                        //添加第一层节点
+                        Element e5 = new Element("烟台市", Element.TOP_LEVEL + 1, 4, e1.getId(), true, false);
+                        //添加第二层节点
+                        Element e6 = new Element("芝罘区", Element.TOP_LEVEL + 2, 5, e5.getId(), true, false);
+                        //添加第三层节点
+                        Element e7 = new Element("凤凰台街道", Element.TOP_LEVEL + 3, 6, e6.getId(), false, false);
+                        //添加第一层节点
+                        Element e8 = new Element("威海市", Element.TOP_LEVEL + 1, 7, e1.getId(), false, false);
+                        //添加最外层节点
+                        Element e9 = new Element("广东省", Element.TOP_LEVEL, 8, Element.NO_PARENT, true, false);
+                        //添加第一层节点
+                        Element e10 = new Element("深圳市", Element.TOP_LEVEL + 1, 9, e9.getId(), true, false);
+                        //添加第二层节点
+                        Element e11 = new Element("南山区", Element.TOP_LEVEL + 2, 10, e10.getId(), true, false);
+                        //添加第三层节点
+                        Element e12 = new Element("深南大道", Element.TOP_LEVEL + 3, 11, e11.getId(), true, false);
+                        //添加第四层节点
+                        Element e13 = new Element("10000号", Element.TOP_LEVEL + 4, 12, e12.getId(), false, false);
+                        rootElements.add(e1);rootElements.add(e9);
+                        allElements.add(e1);allElements.add(e2);allElements.add(e3);allElements.add(e4);allElements.add(e5);
+                        allElements.add(e6);allElements.add(e7);allElements.add(e8);allElements.add(e9);allElements.add(e10);
+                        allElements.add(e11);allElements.add(e12);allElements.add(e13);
+
+                        handler.sendEmptyMessage(DEV_LIST_LOADED);
+                    }
+                });
                 break;
         }
     }
@@ -335,6 +416,13 @@ public class IndexActivity extends BaseActivity {
                         break;
                     case DEVICE_LOAD_FINISH:
                         mActivity.dialog.cancel();
+                        break;
+                    case DEV_LIST_INIT:
+
+                        mActivity.devListDialog.show();
+                        break;
+                    case DEV_LIST_LOADED:
+                        mActivity.adapter.notifyDataSetChanged();
                         break;
                 }
             }
