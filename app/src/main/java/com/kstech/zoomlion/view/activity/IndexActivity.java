@@ -135,17 +135,53 @@ public class IndexActivity extends BaseActivity {
 
     private String deviceIdentity = "test_machine_id";
 
+    /**
+     * 机型配置开始解析
+     */
     public static final int DEVICE_PARSE_START = 0;
+    /**
+     * 机型配置解析中
+     */
     public static final int DEVICE_PARSE_ING = 1;
+    /**
+     * 机型配置完成解析
+     */
     public static final int DEVICE_PARSE_FINISH = 2;
+    /**
+     * 机型调试记录数据初始化
+     */
     public static final int DEVICE_RECORD_INIT = 3;
+    /**
+     * 机型调试记录数据初始化完成
+     */
     public static final int RECORD_INIT_FINISH = 4;
+    /**
+     * 进入调试主界面
+     */
     public static final int SKIP_TO_CHECK = 5;
+    /**
+     * 机型调试记录数据初始化错误
+     */
     public static final int RECORD_INIT_ERROR = 6;
+    /**
+     * J1939通讯线程 初始化
+     */
     public static final int J1939_COMM_INIT = 7;
+    /**
+     * J1939通讯线程 初始化完成
+     */
     public static final int J1939_COMM_INITED = 8;
+    /**
+     * 机型加载完成
+     */
     public static final int DEVICE_LOAD_FINISH= 9;
+    /**
+     * 服务器机型列表初始化
+     */
     public static final int DEV_LIST_INIT = 10;
+    /**
+     * 服务器机型列表初始化 完成
+     */
     public static final int DEV_LIST_LOADED = 11;
     public static final String TAG = "IndexActivity";
 
