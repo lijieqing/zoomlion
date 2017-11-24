@@ -122,4 +122,11 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">60dp</item>
     </style>
+    <!--用户详情页密码修改主题-->
+    <style name="UserDetailEditPassStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_margin">3dp</item>
+        <item name="android:inputType">textPassword</item>
+    </style>
 </resources>
