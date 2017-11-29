@@ -34,6 +34,7 @@
     <string name="detail_tv_header_chart">谱图数据</string>
     <string name="detail_tv_item_novalue">该项目无数值参数</string>
     <string name="detail_tv_item_nopic">该项目无图片参数</string>
+    <string name="check_home_admin_desc">管理员在提交整机调试记录时需要在此添加说明</string>
 
 
 </resources>

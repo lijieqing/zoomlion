@@ -5,21 +5,23 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.kstech.zoomlion.view.activity.ItemCheckActivity">
+
     <RelativeLayout
-        android:background="#ffffff"
         android:layout_width="match_parent"
-        android:layout_weight="0.6"
-        android:layout_height="0dp">
+        android:layout_height="85dp"
+        android:background="#ffffff">
+
         <ImageView
-            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginBottom="2dp"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="2dp"
-            android:layout_marginBottom="2dp"
-            android:src="@drawable/header_logo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:src="@drawable/header_logo" />
     </RelativeLayout>
+
     <com.kstech.zoomlion.view.widget.ItemShowViewInCheck
         android:id="@+id/isv_check"
         android:layout_width="match_parent"

@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -67,6 +68,22 @@ public class CheckHomeActivity extends BaseActivity {
     @ViewInject(R.id.ch_tv_start_check)
     private TextView tvStartCheck;
 
+    //调试设备类型
+    @ViewInject(R.id.check_home_tv_device_type)
+    private TextView tvDeviceType;
+
+    //调试设备编号
+    @ViewInject(R.id.check_home_tv_device_identity)
+    private TextView tvDeviceIdentity;
+
+    //根布局
+    @ViewInject(R.id.ll_check_home)
+    private LinearLayout llRoot;
+
+    //整机调试记录描述
+    @ViewInject(R.id.check_home_et_admin_desc)
+    private EditText etDesc;
+
     private List<RealTimeView> inHomeRealTimeViews = new ArrayList<>();//实时参数集合
 
     private GridLayoutManager gridLayoutManager;//recycler view layout管理器
@@ -84,6 +101,8 @@ public class CheckHomeActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         x.view().inject(this);
+
+        editTextInit(etDesc, this);
 
         expandItemAdapter = new ExpandItemAdapter(this, Globals.modelFile.checkItemMap);
 

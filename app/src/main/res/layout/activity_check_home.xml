@@ -2,46 +2,81 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="#fff"
+    android:id="@+id/ll_check_home"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#fff"
     android:orientation="vertical"
     tools:context="com.kstech.zoomlion.view.activity.CheckHomeActivity">
 
     <RelativeLayout
-        android:background="#ffffff"
         android:layout_width="match_parent"
-        android:layout_height="85dp">
+        android:layout_height="85dp"
+        android:background="#ffffff">
+
         <ImageView
-            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginBottom="2dp"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="2dp"
-            android:layout_marginBottom="2dp"
-            android:src="@drawable/header_logo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:src="@drawable/header_logo" />
     </RelativeLayout>
 
     <LinearLayout
-        android:layout_margin="5dp"
-        android:background="@drawable/ll_index_module_bg"
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="0dp"
-            android:layout_weight="1.6"
-            android:layout_height="match_parent">
+        android:layout_margin="5dp"
+        android:layout_weight="1"
+        android:background="@drawable/ll_index_module_bg"
+        android:orientation="horizontal">
 
-            <LinearLayout
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.6"
+            android:orientation="vertical">
+
+            <TableLayout
                 android:layout_width="match_parent"
                 android:layout_height="85dp"
-                android:background="@drawable/ll_check_home_tagbg">
+                android:layout_marginBottom="2dp"
+                android:background="@drawable/ll_check_home_tagbg"
+                android:orientation="vertical">
 
-            </LinearLayout>
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
+
+                    <TextView
+                        style="@style/CheckHomeDeviceInfoNameStyle"
+                        android:text="设备编号：" />
+
+                    <TextView
+                        android:id="@+id/check_home_tv_device_identity"
+                        style="@style/CheckHomeDeviceInfoValueStyle"
+                        android:text="测试GKLOP369pPP" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
+
+                    <TextView
+                        style="@style/CheckHomeDeviceInfoNameStyle"
+                        android:text="设备类别：" />
+
+                    <TextView
+                        android:id="@+id/check_home_tv_device_type"
+                        style="@style/CheckHomeDeviceInfoValueStyle"
+                        android:text="测试未知未知未知" />
+                </TableRow>
+
+            </TableLayout>
 
             <ExpandableListView
                 android:id="@+id/ch_elv_item"
@@ -50,51 +85,139 @@
                 android:layout_weight="1">
 
             </ExpandableListView>
+
             <TextView
                 android:id="@+id/ch_tv_start_check"
-                android:clickable="true"
-                android:background="@drawable/btn_ch_start_check"
-                android:gravity="center"
-                android:text="开始调试"
                 android:layout_width="match_parent"
-                android:layout_height="45dp" />
+                android:layout_height="45dp"
+                android:layout_marginTop="3dp"
+                android:background="@drawable/btn_ch_start_check"
+                android:clickable="true"
+                android:gravity="center"
+                android:text="开始调试" />
         </LinearLayout>
+
         <TextView
-            android:background="#ffffff"
             android:layout_width="3dp"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:background="#ffffff" />
+
         <LinearLayout
-            android:layout_marginLeft="3dp"
-            android:orientation="vertical"
             android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="3dp"
             android:layout_weight="6"
-            android:layout_height="match_parent">
+            android:orientation="vertical">
+
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/ch_rv_realtimes"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1.6">
+
             </android.support.v7.widget.RecyclerView>
+
             <TextView
-                android:background="#fff"
                 android:layout_width="match_parent"
-                android:layout_height="2dp" />
+                android:layout_height="2dp"
+                android:background="#fff" />
+
             <com.kstech.zoomlion.view.widget.ItemShowView
                 android:id="@+id/ch_isv"
                 android:layout_width="match_parent"
-                android:layout_weight="4"
-                android:layout_height="0dp">
+                android:layout_height="0dp"
+                android:layout_weight="4">
 
             </com.kstech.zoomlion.view.widget.ItemShowView>
-            <TextView
-                android:background="#fff"
-                android:layout_width="match_parent"
-                android:layout_height="2dp" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1.4">
+                android:layout_marginBottom="3dp"
+                android:layout_marginRight="3dp"
+                android:layout_weight="1.4"
+                android:background="@drawable/ll_check_home_admin_operate"
+                android:orientation="horizontal">
 
+                <TableLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="8">
+
+                    <TableRow
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1">
+
+                        <TextView
+                            style="@style/CheckHomeAdminOperateNameStyle"
+                            android:text="整机调试结论：" />
+
+                        <TextView
+                            style="@style/CheckHomeAdminOperateValueStyle"
+                            android:text="合格" />
+
+                        <TextView
+                            style="@style/CheckHomeAdminOperateNameStyle"
+                            android:text="已调试次数：" />
+
+                        <TextView
+                            style="@style/CheckHomeAdminOperateValueStyle"
+                            android:text="111次" />
+
+                        <TextView
+                            style="@style/CheckHomeAdminOperateNameStyle"
+                            android:text="调试员：" />
+
+                        <TextView
+                            style="@style/CheckHomeAdminOperateValueStyle"
+                            android:text="测试人员" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1">
+
+                        <TextView
+                            style="@style/CheckHomeAdminOperateNameStyle"
+                            android:text="整机调试说明：" />
+
+                        <EditText
+                            android:id="@+id/check_home_et_admin_desc"
+                            style="@style/CheckHomeAdminOperateValueStyle"
+                            android:layout_weight="4"
+                            android:hint="@string/check_home_admin_desc"
+                            android:imeActionId="666"
+                            android:imeOptions="actionDone"
+                            android:inputType="text" />
+
+                        <TextView
+                            style="@style/CheckHomeAdminOperateValueStyle"
+                            android:layout_weight="1" />
+
+                    </TableRow>
+                </TableLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:text="合格" />
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:text="不合格" />
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

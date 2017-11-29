@@ -1,12 +1,21 @@
 package com.kstech.zoomlion.view.activity;
 
+import android.app.Activity;
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
+import android.widget.TextView;
 
 /**
  * Created by lijie on 2017/9/7.
@@ -28,7 +37,30 @@ public class BaseActivity extends AppCompatActivity {
         }
         ActionBar actionbar = getSupportActionBar();
         if (actionbar != null) actionbar.hide();
-        //getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
     }
+
+    /**
+     * edit text 监听事件设置 点击完成后回收键盘并且取消焦点
+     *
+     * @param et
+     * @param activity
+     */
+    protected void editTextInit(@NonNull final EditText et, @NonNull final Activity activity) {
+        et.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    if (inputMethodManager.isActive()) {
+                        inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
+                    }
+                    et.clearFocus();
+                }
+                return false;
+            }
+        });
+    }
+
 
 }
