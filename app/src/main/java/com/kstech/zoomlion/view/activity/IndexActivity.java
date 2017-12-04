@@ -32,6 +32,7 @@ import com.kstech.zoomlion.model.treelist.Element;
 import com.kstech.zoomlion.model.treelist.TreeViewAdapter;
 import com.kstech.zoomlion.model.treelist.TreeViewItemClickListener;
 import com.kstech.zoomlion.model.vo.CheckItemVO;
+import com.kstech.zoomlion.utils.DeviceUtil;
 import com.kstech.zoomlion.utils.Globals;
 import com.kstech.zoomlion.utils.LogUtils;
 import com.kstech.zoomlion.utils.ThreadManager;
@@ -174,7 +175,7 @@ public class IndexActivity extends BaseActivity {
     /**
      * 机型加载完成
      */
-    public static final int DEVICE_LOAD_FINISH= 9;
+    public static final int DEVICE_LOAD_FINISH = 9;
     /**
      * 服务器机型列表初始化
      */
@@ -195,6 +196,20 @@ public class IndexActivity extends BaseActivity {
     private ListView devListView;
     private AlertDialog devListDialog;
     private TreeViewAdapter adapter;
+    private ServiceConnection conn = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            LogUtils.e(TAG, "service connect");
+            J1939TaskService.MyBinder binder = (J1939TaskService.MyBinder) service;
+            j1939TaskService = binder.task;
+            deviceLoadTask.isWaitting = false;
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -217,17 +232,19 @@ public class IndexActivity extends BaseActivity {
         dialog.setView(progressView);
 
         // TODO: 2017/10/11 加载默认机型信息，配置并启动通讯线程
-        deviceLoadTask = new DeviceLoadTask(this,"",handler);
+        deviceLoadTask = new DeviceLoadTask(this, "", handler);
         deviceLoadTask.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
 
         //初始化机型选择列表 相关数据
         devListView = new ListView(this);
         rootElements = new ArrayList<>();
         allElements = new ArrayList<>();
-        LayoutInflater inflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        adapter = new TreeViewAdapter(rootElements,allElements,inflater);
+        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        adapter = new TreeViewAdapter(rootElements, allElements, inflater);
+        adapter.setContentSize(16);
+        adapter.setDefaultHeight(DeviceUtil.deviceHeight(this) / 9);
         devListView.setAdapter(adapter);
-        devListView.setOnItemClickListener(new TreeViewItemClickListener(adapter,this));
+        devListView.setOnItemClickListener(new TreeViewItemClickListener(adapter, this));
         devListDialog = new AlertDialog.Builder(this)
                 .setCancelable(true)
                 .setView(devListView)
@@ -244,7 +261,7 @@ public class IndexActivity extends BaseActivity {
     private void click(View view) {
         switch (view.getId()) {
             case R.id.index_iv_user:
-                startActivity(new Intent(this,UserDetailActivity.class));
+                startActivity(new Intent(this, UserDetailActivity.class));
                 break;
             case R.id.index_btn_goto:
                 if (isAvalid()) {
@@ -302,10 +319,21 @@ public class IndexActivity extends BaseActivity {
                         Element e12 = new Element("深南大道", Element.TOP_LEVEL + 3, 11, e11.getId(), true, false);
                         //添加第四层节点
                         Element e13 = new Element("10000号", Element.TOP_LEVEL + 4, 12, e12.getId(), false, false);
-                        rootElements.add(e1);rootElements.add(e9);
-                        allElements.add(e1);allElements.add(e2);allElements.add(e3);allElements.add(e4);allElements.add(e5);
-                        allElements.add(e6);allElements.add(e7);allElements.add(e8);allElements.add(e9);allElements.add(e10);
-                        allElements.add(e11);allElements.add(e12);allElements.add(e13);
+                        rootElements.add(e1);
+                        rootElements.add(e9);
+                        allElements.add(e1);
+                        allElements.add(e2);
+                        allElements.add(e3);
+                        allElements.add(e4);
+                        allElements.add(e5);
+                        allElements.add(e6);
+                        allElements.add(e7);
+                        allElements.add(e8);
+                        allElements.add(e9);
+                        allElements.add(e10);
+                        allElements.add(e11);
+                        allElements.add(e12);
+                        allElements.add(e13);
 
                         handler.sendEmptyMessage(DEV_LIST_LOADED);
                     }
@@ -317,7 +345,7 @@ public class IndexActivity extends BaseActivity {
     /**
      * 初始化当前机型调试记录数据
      */
-    private void initRecord(){
+    private void initRecord() {
         //点击进入调试页后，进行数据库更新，生成基本的数据库结构
         ThreadManager.getThreadPool().execute(new Runnable() {
             @Override
@@ -410,21 +438,8 @@ public class IndexActivity extends BaseActivity {
                     case DEVICE_PARSE_FINISH:
                         Intent j1939Intent = new Intent(J1939TaskService.ACTION);
                         j1939Intent.setPackage(mActivity.getPackageName());
-                        j1939Intent.putExtra("reload",true);
-                        mActivity.bindService(j1939Intent, new ServiceConnection() {
-                            @Override
-                            public void onServiceConnected(ComponentName name, IBinder service) {
-                                LogUtils.e(TAG,"service connect");
-                                J1939TaskService.MyBinder binder = (J1939TaskService.MyBinder) service;
-                                mActivity.j1939TaskService = binder.task;
-                                mActivity.deviceLoadTask.isWaitting = false;
-                            }
-
-                            @Override
-                            public void onServiceDisconnected(ComponentName name) {
-
-                            }
-                        },BIND_AUTO_CREATE);
+                        j1939Intent.putExtra("reload", true);
+                        mActivity.bindService(j1939Intent, mActivity.conn, BIND_AUTO_CREATE);
                         mActivity.startService(j1939Intent);
                         break;
                     case DEVICE_RECORD_INIT:

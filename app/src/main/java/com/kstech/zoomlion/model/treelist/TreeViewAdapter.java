@@ -33,12 +33,46 @@ public class TreeViewAdapter extends BaseAdapter {
      * item的行首缩进基数
      */
     private int indentionBase;
+    /**
+     * 文字大小000
+     */
+    private int contentSize = 16;
+    /**
+     * item默认高度
+     */
+    private int defaultHeight;
 
     public TreeViewAdapter(ArrayList<Element> elements, ArrayList<Element> elementsData, LayoutInflater inflater) {
         this.elements = elements;
         this.elementsData = elementsData;
         this.inflater = inflater;
         indentionBase = 50;
+    }
+
+    public int getContentSize() {
+        return contentSize;
+    }
+
+    /**
+     * 设置文字的大小
+     *
+     * @param textSize 文字大小
+     */
+    public void setContentSize(int textSize) {
+        this.contentSize = textSize;
+    }
+
+    public int getDefaultHeight() {
+        return defaultHeight;
+    }
+
+    /**
+     * 设置item的高度
+     *
+     * @param defaultHeight 高度值
+     */
+    public void setDefaultHeight(int defaultHeight) {
+        this.defaultHeight = defaultHeight;
     }
 
     public ArrayList<Element> getElements() {
@@ -95,6 +129,11 @@ public class TreeViewAdapter extends BaseAdapter {
             holder.disclosureImg.setImageResource(R.drawable.close);
             holder.disclosureImg.setVisibility(View.INVISIBLE);
         }
+        holder.contentText.setTextSize(contentSize);
+        if (defaultHeight != 0) {
+            convertView.setMinimumHeight(defaultHeight);
+        }
+
         return convertView;
     }
 
