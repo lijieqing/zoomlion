@@ -7,6 +7,10 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+    <style name="zoomlionTheme" parent="AppTheme">
+        <item name="android:windowBackground">@drawable/zoomlion_background</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
     <!--登陆相关-->
     <style name="LoginText">
         <item name="android:textSize">16sp</item>

@@ -18,7 +18,9 @@
         <activity android:name=".view.activity.ItemDetailActivity" />
         <activity android:name=".view.activity.ItemCheckActivity" />
         <activity android:name=".view.activity.LoginActivity" />
-        <activity android:name=".view.activity.IndexActivity">
+        <activity
+            android:name=".view.activity.IndexActivity"
+            android:theme="@style/zoomlionTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
