@@ -52,7 +52,7 @@ public class DeviceLoadTask extends AsyncTask<Void, String, Void> {
         try {
             handler.sendMessage(message);
             Globals.modelFile = DeviceModelFile.readFromFile((Device) XMLAPI
-                    .readXML(context.getAssets().open("new.xml")));
+                    .readXML(context.getAssets().open("zoomlion.xml")));
         } catch (IOException e) {
             e.printStackTrace();
         }

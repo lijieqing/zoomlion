@@ -1,20 +1,21 @@
-package com.kstech.zoomlion.base;
+package com.kstech.zoomlion.engine.server;
 
 import com.kstech.zoomlion.model.db.CheckItemData;
 import com.kstech.zoomlion.model.db.CheckItemDetailData;
 import com.kstech.zoomlion.model.db.CheckRecord;
+import com.kstech.zoomlion.model.treelist.TreeViewAdapter;
 
 /**
  * 设备调试记录相关操作
  */
-public interface IDeviceCheckSession {
+public interface IDeviceCheckEngine {
     /**
      * 获取调试设备列表
      *
      * @param userID     the user id
      * @param terminalID the terminal id
      */
-    void getDeviceModelList(int userID, int terminalID);
+    TreeViewAdapter getDeviceModelList(int userID, int terminalID);
 
     /**
      * 通过出厂编号获取设备配置信息
@@ -56,21 +57,21 @@ public interface IDeviceCheckSession {
      * @param record the record
      * @param url    the url
      */
-    void uploadCheckRecord(CheckRecord record,String url);
+    void uploadCheckRecord(CheckRecord record, String url);
 
     /**
      * 获取指定调试项目的服务器调试项目细节表
      *
      * @param deviceIdentity 调试机型的出厂编号
-     * @param itemId        the item id
+     * @param itemId         the item id
      */
-    void getCheckItemDetailList(String deviceIdentity, int itemId,String url);
+    void getCheckItemDetailList(String deviceIdentity, int itemId, String url);
 
     /**
      * 获取指定一条调试项目细节记录
      *
-     * @param itemDetailId   the item id
-     * @param url            the url
+     * @param itemDetailId the item id
+     * @param url          the url
      */
-    void getCheckItemDetailRecord(int itemDetailId,String url);
+    void getCheckItemDetailRecord(int itemDetailId, String url);
 }

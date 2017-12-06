@@ -28,12 +28,14 @@ import com.kstech.zoomlion.model.db.CheckRecord;
 import com.kstech.zoomlion.model.db.greendao.CheckItemDataDao;
 import com.kstech.zoomlion.model.db.greendao.CheckRecordDao;
 import com.kstech.zoomlion.model.enums.CheckRecordResultEnum;
+import com.kstech.zoomlion.model.session.DeviceCatSession;
 import com.kstech.zoomlion.model.treelist.Element;
 import com.kstech.zoomlion.model.treelist.TreeViewAdapter;
 import com.kstech.zoomlion.model.treelist.TreeViewItemClickListener;
 import com.kstech.zoomlion.model.vo.CheckItemVO;
 import com.kstech.zoomlion.utils.DeviceUtil;
 import com.kstech.zoomlion.utils.Globals;
+import com.kstech.zoomlion.utils.JsonUtils;
 import com.kstech.zoomlion.utils.LogUtils;
 import com.kstech.zoomlion.utils.ThreadManager;
 import com.kstech.zoomlion.view.widget.TextProgressView;
@@ -46,6 +48,7 @@ import org.xutils.x;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 应用引导界面，包含了个人信息编辑入口，调试终端的信息展示，参数初始化模块
@@ -292,48 +295,46 @@ public class IndexActivity extends BaseActivity {
                 ThreadManager.getThreadPool().execute(new Runnable() {
                     @Override
                     public void run() {
+                        String s = "{\"data\":[{\"id\":1,\"parent_id\":0,\"level\":1,\"sub_nums\":1,\"name\":\"root1\",\"remark\":\"remark_content\",\"full_code\":\"GSFUTYOPP\"}," +
+                                "{\"id\":2,\"parent_id\":0,\"level\":1,\"sub_nums\":1,\"name\":\"root2\",\"remark\":\"remark_content\",\"full_code\":\"GSFUTYOPP\"},\n" +
+                                "{\"id\":3,\"parent_id\":1,\"level\":2,\"sub_nums\":1,\"name\":\"second1\",\"remark\":\"remark_content\",\"full_code\":\"GSFUTYOPP\"},\n" +
+                                "{\"id\":4,\"parent_id\":2,\"level\":2,\"sub_nums\":1,\"name\":\"second2\",\"remark\":\"remark_content\",\"full_code\":\"GSFUTYOPP\"},\n" +
+                                "{\"id\":5,\"parent_id\":3,\"level\":3,\"sub_nums\":1,\"name\":\"third1\",\"remark\":\"remark_content\",\"full_code\":\"GSFUTYOPP\"},\n" +
+                                "{\"id\":6,\"parent_id\":4,\"level\":3,\"sub_nums\":1,\"name\":\"third2\",\"remark\":\"remark_content\",\"full_code\":\"GSFUTYOPP\"},\n" +
+                                "{\"id\":7,\"parent_id\":6,\"level\":4,\"sub_nums\":0,\"name\":\"fourth1\",\"remark\":\"remark_content\",\"full_code\":\"GSFUTYOPP\"}]}";
                         //去服务器获取列表信息，此处模拟数据
-                        //添加最外层节点
-                        Element e1 = new Element("山东省", Element.TOP_LEVEL, 0, Element.NO_PARENT, true, false);
-                        //添加第一层节点
-                        Element e2 = new Element("青岛市", Element.TOP_LEVEL + 1, 1, e1.getId(), true, false);
-                        //添加第二层节点
-                        Element e3 = new Element("市南区", Element.TOP_LEVEL + 2, 2, e2.getId(), true, false);
-                        //添加第三层节点
-                        Element e4 = new Element("香港中路", Element.TOP_LEVEL + 3, 3, e3.getId(), false, false);
-                        //添加第一层节点
-                        Element e5 = new Element("烟台市", Element.TOP_LEVEL + 1, 4, e1.getId(), true, false);
-                        //添加第二层节点
-                        Element e6 = new Element("芝罘区", Element.TOP_LEVEL + 2, 5, e5.getId(), true, false);
-                        //添加第三层节点
-                        Element e7 = new Element("凤凰台街道", Element.TOP_LEVEL + 3, 6, e6.getId(), false, false);
-                        //添加第一层节点
-                        Element e8 = new Element("威海市", Element.TOP_LEVEL + 1, 7, e1.getId(), false, false);
-                        //添加最外层节点
-                        Element e9 = new Element("广东省", Element.TOP_LEVEL, 8, Element.NO_PARENT, true, false);
-                        //添加第一层节点
-                        Element e10 = new Element("深圳市", Element.TOP_LEVEL + 1, 9, e9.getId(), true, false);
-                        //添加第二层节点
-                        Element e11 = new Element("南山区", Element.TOP_LEVEL + 2, 10, e10.getId(), true, false);
-                        //添加第三层节点
-                        Element e12 = new Element("深南大道", Element.TOP_LEVEL + 3, 11, e11.getId(), true, false);
-                        //添加第四层节点
-                        Element e13 = new Element("10000号", Element.TOP_LEVEL + 4, 12, e12.getId(), false, false);
-                        rootElements.add(e1);
-                        rootElements.add(e9);
-                        allElements.add(e1);
-                        allElements.add(e2);
-                        allElements.add(e3);
-                        allElements.add(e4);
-                        allElements.add(e5);
-                        allElements.add(e6);
-                        allElements.add(e7);
-                        allElements.add(e8);
-                        allElements.add(e9);
-                        allElements.add(e10);
-                        allElements.add(e11);
-                        allElements.add(e12);
-                        allElements.add(e13);
+                        DeviceCatSession devCat = JsonUtils.fromJson(s, DeviceCatSession.class);
+                        List<DeviceCatSession> devs = devCat.getData();
+                        int parentID;
+                        int id;
+                        int level;
+                        String content;
+                        String fullCode;
+                        String desc;
+                        boolean hasChildren = true;
+
+                        Element element;
+                        for (DeviceCatSession dev : devs) {
+                            parentID = dev.getParent_id();
+                            id = dev.getId();
+                            level = dev.getLevel();
+                            content = dev.getName();
+                            fullCode = dev.getFull_code();
+                            desc = dev.getRemark();
+
+                            if (dev.getSub_nums() == Element.NO_PARENT) {
+                                hasChildren = false;
+                            }
+
+                            element = new Element(content, level, id, parentID, hasChildren, false);
+                            element.setFull_code(fullCode);
+                            element.setDesc(desc);
+
+                            if (level == Element.TOP_LEVEL) {
+                                rootElements.add(element);
+                            }
+                            allElements.add(element);
+                        }
 
                         handler.sendEmptyMessage(DEV_LIST_LOADED);
                     }

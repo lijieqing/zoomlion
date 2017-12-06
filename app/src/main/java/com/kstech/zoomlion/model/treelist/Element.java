@@ -31,14 +31,18 @@ public class Element {
      */
     private boolean isExpanded;
 
+    private String desc;
+
+    private String full_code;
+
     /**
      * 表示该节点没有父元素，也就是level为0的节点
      */
-    public static final int NO_PARENT = -1;
+    public static final int NO_PARENT = 0;
     /**
      * 表示该元素位于最顶层的层级
      */
-    public static final int TOP_LEVEL = 0;
+    public static final int TOP_LEVEL = 1;
 
     public Element(String contentText, int level, int id, int parendId,
                    boolean hasChildren, boolean isExpanded) {
@@ -98,4 +102,20 @@ public class Element {
     public void setHasChildren(boolean hasChildren) {
         this.hasChildren = hasChildren;
     }
-}  
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
+    public String getFull_code() {
+        return full_code;
+    }
+
+    public void setFull_code(String full_code) {
+        this.full_code = full_code;
+    }
+}
