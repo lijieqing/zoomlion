@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<Device DevBornDate="" DevDieDate="" DevStatus="" Id="" Name="" subDevId=""
-    subDevName="" xmlns="http://www.kaishang.com">
+<Device DevBornDate="" DevDieDate="" DevStatus="" Id="" Name="" subDevId="" subDevName=""
+    xmlns="http://www.kaishang.com">
     <DataSet>
         <DSItem DataType="FLOAT" DecLen="0" Name="超档位报警次数" Unit="a" />
         <DSItem DataType="FLOAT" DecLen="0" Name="吸油过滤器真空度" Unit="a" />
@@ -44,7 +44,7 @@
         <DSItem DataType="FLOAT" DecLen="0" Name="压力段3累计时间" Unit="a" />
         <DSItem DataType="FLOAT" DecLen="0" Name="节能功能" Unit="a" />
         <DSItem DataType="FLOAT" DecLen="0" Name="泵送油缸动作逻辑" Unit="a" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="最大排量电流" Unit="a" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="标定后最大排量电流" Unit="a" />
         <DSItem DataType="FLOAT" DecLen="0" Name="一臂慢档展开电流" Unit="a" />
         <DSItem DataType="FLOAT" DecLen="0" Name="缓冲螺钉位置" Unit="a" />
         <DSItem DataType="FLOAT" DecLen="0" Name="空泵压力值" Unit="a" />
@@ -56,7 +56,7 @@
         <DSItem DataType="FLOAT" DecLen="0" Name="液压油过滤开始" Unit="a" />
         <DSItem DataType="FLOAT" DecLen="0" Name="油泵转速" Unit="a" />
         <DSItem DataType="FLOAT" DecLen="0" Name="高低压" Unit="a" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="最小排量电流" Unit="a" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="标定后最小排量电流" Unit="a" />
         <DSItem DataType="FLOAT" DecLen="0" Name="液压油清洁度" Unit="a" />
         <DSItem DataType="FLOAT" DecLen="0" Name="环境温度" Unit="a" />
         <DSItem DataType="FLOAT" DecLen="0" Name="行程优化开启" Unit="a" />
@@ -97,8 +97,28 @@
         <DSItem DataType="FLOAT" DecLen="0" Name="超速报警次数" Unit="a" />
         <DSItem DataType="FLOAT" DecLen="0" Name="一臂慢档展开时间" Unit="a" />
         <DSItem DataType="FLOAT" DecLen="0" Name="主油泵压力切断值" Unit="a" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="正反泵" Unit="a" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="主油泵压力" Unit="a" />
+        <DSItem DataType="BOOL" DecLen="0" Name="正反泵" Unit="a" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="主油泵压力" Unit="MPa" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="预热时间" Unit="s" />
+
+        <!--AttachPGN相关-->
+        <DSItem DataType="BYTE" Name="不检测时间（秒）" Value="15" />
+        <DSItem DataType="BYTE" Name="终止斜率阀值" Value="5" />
+        <DSItem DataType="BYTE" Name="K标定" Value="5" />
+        <DSItem DataType="BYTE" Name="最大排量电流" Value="50" />
+        <DSItem DataType="BYTE" Name="最小排量电流" Value="1" />
+        <DSItem DataType="BYTE" Name="一臂慢档展开时间最大值" Value="100" />
+        <DSItem DataType="BYTE" Name="一臂慢档展开时间最小值" Value="0" />
+        <DSItem DataType="BYTE" Name="10档泵送标准次数的最小值" Value="30" />
+        <DSItem DataType="BYTE" Name="10档泵送标准次数的最大值" Value="50" />
+        <DSItem DataType="BYTE" Name="0.6档泵送标准次数的最小值" Value="10" />
+        <DSItem DataType="BYTE" Name="0.6档泵送标准次数的最大值" Value="20" />
+        <DSItem DataType="BYTE" Name="第一压力段最小压力" Value="0" />
+        <DSItem DataType="BYTE" Name="第一压力段最大压力" Value="100" />
+        <DSItem DataType="BYTE" Name="第一压力段最小压力泵送次数的最小值" Value="10" />
+        <DSItem DataType="BYTE" Name="第一压力段最小压力泵送次数的最大值" Value="60" />
+        <DSItem DataType="BYTE" Name="第一压力段最大压力泵送次数的最小值" Value="20" />
+        <DSItem DataType="BYTE" Name="第一压力段最大压力泵送次数的最大值" Value="70" />
 
         <!-- 命令与应答变量 -->
         <DSItem DataType="BYTE" Name="当前检测项目" />
@@ -255,13 +275,13 @@
         <PG Dir="Rx" Len="8" PGN="0xFF21" Prio="3" Rate="100" Req="0" ReqCyc="0" SA="0x01" Type="2">
             <SP Bits="0" Bytes="4" Off="0" Ref="10档泵送次数" Res="0.001" SBit="1" SByte="1" SPN="0"
                 Type="1" />
-            <SP Bits="0" Bytes="4" Off="0" Ref="最大排量电流" Res="0.001" SBit="1" SByte="5" SPN="0"
+            <SP Bits="0" Bytes="4" Off="0" Ref="标定后最大排量电流" Res="0.001" SBit="1" SByte="5" SPN="0"
                 Type="1" />
         </PG>
         <PG Dir="Rx" Len="8" PGN="0xFF22" Prio="3" Rate="100" Req="0" ReqCyc="0" SA="0x01" Type="2">
             <SP Bits="0" Bytes="4" Off="0" Ref="0.6档泵送次数" Res="0.001" SBit="1" SByte="1" SPN="0"
                 Type="1" />
-            <SP Bits="0" Bytes="4" Off="0" Ref="最小排量电流" Res="0.001" SBit="1" SByte="5" SPN="0"
+            <SP Bits="0" Bytes="4" Off="0" Ref="标定后最小排量电流" Res="0.001" SBit="1" SByte="5" SPN="0"
                 Type="1" />
         </PG>
         <PG Dir="Rx" Len="8" PGN="0xFF23" Prio="3" Rate="100" Req="0" ReqCyc="0" SA="0x01" Type="2">
@@ -357,6 +377,82 @@
             <SP Bits="0" Bytes="4" Off="0" Ref="一臂慢档展开时间" Res="0.001" SBit="1" SByte="1" SPN="0"
                 Type="1" />
             <SP Bits="0" Bytes="4" Off="0" Ref="一臂慢档展开电流" Res="0.001" SBit="1" SByte="5" SPN="0"
+                Type="1" />
+        </PG>
+        <PG Dir="Rx" Len="8" PGN="0xFF35" Prio="3" Rate="100" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="0" Bytes="4" Off="0" Ref="预热时间" Res="1" SBit="1" SByte="1" SPN="0" Type="1" />
+        </PG>
+
+        <!--AttachPGN 在调试项目时需要一并下发的PGN 下发顺序不清楚-->
+
+        <!--左前支腿水平伸出-->
+        <PG Dir="Tx" Len="8" PGN="0xFFE1" Prio="3" Rate="100" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="0" Bytes="2" Off="0" Ref="当前检测项目" Res="1" SBit="1" SByte="1" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="不检测时间（秒）" Res="1" SBit="1" SByte="3" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="终止斜率阀值" Res="1" SBit="1" SByte="5" SPN="0"
+                Type="1" />
+        </PG>
+
+        <!--一臂慢档展开-->
+        <PG Dir="Tx" Len="16" PGN="0xFFE2" Prio="3" Rate="100" Req="0" ReqCyc="0" SA="0x00"
+            Type="2">
+            <SP Bits="0" Bytes="2" Off="0" Ref="当前检测项目" Res="1" SBit="1" SByte="1" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="不检测时间（秒）" Res="1" SBit="1" SByte="3" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="终止斜率阀值" Res="1" SBit="1" SByte="5" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="K标定" Res="1" SBit="1" SByte="7" SPN="0" Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="一臂慢档展开时间最大值" Res="1" SBit="1" SByte="9" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="一臂慢档展开时间最小值" Res="1" SBit="1" SByte="11" SPN="0"
+                Type="1" />
+        </PG>
+
+        <!--最大排量电流标定-->
+        <PG Dir="Tx" Len="16" PGN="0xFFE3" Prio="3" Rate="100" Req="0" ReqCyc="0" SA="0x00"
+            Type="2">
+            <SP Bits="0" Bytes="2" Off="0" Ref="当前检测项目" Res="1" SBit="1" SByte="1" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="最大排量电流" Res="1" SBit="1" SByte="3" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="10档泵送标准次数的最小值" Res="1" SBit="1" SByte="5" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="10档泵送标准次数的最大值" Res="1" SBit="1" SByte="7" SPN="0"
+                Type="1" />
+        </PG>
+
+        <!--第一压力段恒功率标定-->
+        <PG Dir="Tx" Len="16" PGN="0xFFE4" Prio="3" Rate="100" Req="0" ReqCyc="0" SA="0x00"
+            Type="2">
+            <SP Bits="0" Bytes="2" Off="0" Ref="当前检测项目" Res="1" SBit="1" SByte="1" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="第一压力段最小压力" Res="1" SBit="1" SByte="3" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="第一压力段最大压力" Res="1" SBit="1" SByte="5" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="第一压力段最小压力泵送次数的最小值" Res="1" SBit="1" SByte="7"
+                SPN="0" Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="第一压力段最小压力泵送次数的最大值" Res="1" SBit="1" SByte="9"
+                SPN="0" Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="第一压力段最大压力泵送次数的最小值" Res="1" SBit="1" SByte="11"
+                SPN="0" Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="第一压力段最大压力泵送次数的最大值" Res="1" SBit="1" SByte="13"
+                SPN="0" Type="1" />
+        </PG>
+
+        <!--最小排量电流标定-->
+        <PG Dir="Tx" Len="16" PGN="0xFFE5" Prio="3" Rate="100" Req="0" ReqCyc="0" SA="0x00"
+            Type="2">
+            <SP Bits="0" Bytes="2" Off="0" Ref="当前检测项目" Res="1" SBit="1" SByte="1" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="最小排量电流" Res="1" SBit="1" SByte="3" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="0.6档泵送标准次数的最小值" Res="1" SBit="1" SByte="5" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="0.6档泵送标准次数的最大值" Res="1" SBit="1" SByte="7" SPN="0"
                 Type="1" />
         </PG>
 
@@ -561,7 +657,7 @@
             </QCItem>
         </QCType>
         <QCType Name="臂架">
-            <QCItem AttachPGN="0xFFE1" Id="19" Name="一臂慢档展开" QCTimeout="20" QCTimes="5"
+            <QCItem AttachPGN="0xFFE2" Id="19" Name="一臂慢档展开" QCTimeout="20" QCTimes="5"
                 ReadyTimeout="10" Require="true">
                 <Spectrum EndMode="Auto" Interval="50" StartMode="Auto">
                     <SpecParam Param="臂架泵压力" />
@@ -951,7 +1047,7 @@
             </QCItem>
         </QCType>
         <QCType Name="电流">
-            <QCItem AttachPGN="0xFFE1" Id="57" Name="最大排量电流标定" QCTimeout="20" QCTimes="1"
+            <QCItem AttachPGN="0xFFE3" Id="57" Name="最大排量电流标定" QCTimeout="20" QCTimes="1"
                 ReadyTimeout="10" Require="true">
                 <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
                     <QCProgressMsg>
@@ -964,8 +1060,8 @@
                 <QCParams>
                     <QCParam Param="10档泵送次数" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="最大排量电流" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
-                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="标定后最大排量电流" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
                 </QCParams>
                 <ENVParams />
                 <RealTimeParams>
@@ -977,8 +1073,8 @@
                     <RealTimeParam Name="正反泵" />
                 </RealTimeParams>
             </QCItem>
-            <QCItem Id="58" Name="最小排量电流标定" QCTimeout="20" QCTimes="1" ReadyTimeout="10"
-                Require="true">
+            <QCItem AttachPGN="0xFFE5" Id="58" Name="最小排量电流标定" QCTimeout="20" QCTimes="1"
+                ReadyTimeout="10" Require="true">
                 <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
                     <QCProgressMsg>
                         <QCProgress Code="" Msg="" />
@@ -990,8 +1086,8 @@
                 <QCParams>
                     <QCParam Param="0.6档泵送次数" PicReq="false" QCMode="Auto" ValMode="Auto"
                         ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="最小排量电流" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
-                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="标定后最小排量电流" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
                 </QCParams>
                 <ENVParams />
                 <RealTimeParams>
@@ -1030,7 +1126,7 @@
             </QCItem>
         </QCType>
         <QCType Name="恒功率">
-            <QCItem AttachPGN="0xFFE1" Id="62" Name="第一压力段恒功率标定" QCTimeout="20" QCTimes="1"
+            <QCItem AttachPGN="0xFFE4" Id="62" Name="第一压力段恒功率标定" QCTimeout="20" QCTimes="1"
                 ReadyTimeout="10" Require="true">
                 <Spectrum EndMode="Auto" Interval="50" StartMode="Auto">
                     <SpecParam Param="主油泵压力" />

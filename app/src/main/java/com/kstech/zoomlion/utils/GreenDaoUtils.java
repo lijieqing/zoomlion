@@ -3,7 +3,7 @@ package com.kstech.zoomlion.utils;
 import android.support.annotation.NonNull;
 
 import com.kstech.zoomlion.MyApplication;
-import com.kstech.zoomlion.manager.DeviceModelFile;
+import com.kstech.zoomlion.engine.device.DeviceModelFile;
 import com.kstech.zoomlion.model.db.CheckItemData;
 import com.kstech.zoomlion.model.db.CheckItemDetailData;
 import com.kstech.zoomlion.model.db.CheckRecord;
@@ -23,7 +23,7 @@ import java.util.Date;
  */
 
 public final class GreenDaoUtils {
-    public static void InitDBByXML(DeviceModelFile modelFile){
+    public static void InitDBByXML(DeviceModelFile modelFile) {
         CheckItemDataDao itemDao = MyApplication.getApplication().getDaoSession().getCheckItemDataDao();
         CheckItemDetailDataDao detailDataDao = MyApplication.getApplication().getDaoSession().getCheckItemDetailDataDao();
         for (CheckItemVO checkItemVO : modelFile.getCheckItemList()) {
@@ -40,7 +40,8 @@ public final class GreenDaoUtils {
             }
         }
     }
-    public static void initCheckRecord(@NonNull DeviceModelFile modelFile){
+
+    public static void initCheckRecord(@NonNull DeviceModelFile modelFile) {
         CheckRecordDao recordDao = MyApplication.getApplication().getDaoSession().getCheckRecordDao();
         CheckItemDataDao itemDao = MyApplication.getApplication().getDaoSession().getCheckItemDataDao();
         CheckItemDetailDataDao itemDetailDao = MyApplication.getApplication().getDaoSession().getCheckItemDetailDataDao();
@@ -113,7 +114,7 @@ public final class GreenDaoUtils {
             itemDetailData.setMeasureDeviceName("测量终端-测试机");
             //模拟参数数据赋值
             for (CheckItemParamValueVO checkItemParamValueVO : checkItemVO.getParamNameList()) {
-                if(checkItemParamValueVO.getType().contains("参数")){
+                if (checkItemParamValueVO.getType().contains("参数")) {
                     checkItemParamValueVO.setValue("11");
                 }
             }
@@ -125,7 +126,7 @@ public final class GreenDaoUtils {
             //记录开始时间
             itemDetailData.setStartTime(new Date());
             //模拟结束时间
-            long endtimes = System.currentTimeMillis()+1000l;
+            long endtimes = System.currentTimeMillis() + 1000l;
             //存入结束时间
             itemDetailData.setEndTime(new Date(endtimes));
             //默认检测记录未上传

@@ -1,13 +1,12 @@
 package com.kstech.zoomlion;
 
 import android.content.Context;
-import android.os.Environment;
 import android.os.SystemClock;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
-import com.kstech.zoomlion.manager.DeviceModelFile;
-import com.kstech.zoomlion.manager.XMLAPI;
+import com.kstech.zoomlion.engine.device.DeviceModelFile;
+import com.kstech.zoomlion.engine.device.XMLAPI;
 import com.kstech.zoomlion.model.db.MsgSetDB;
 import com.kstech.zoomlion.model.db.greendao.MsgSetDBDao;
 import com.kstech.zoomlion.model.vo.CheckItemVO;
@@ -26,10 +25,7 @@ import org.dom4j.io.SAXReader;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 

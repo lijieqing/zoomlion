@@ -5,12 +5,11 @@ import android.os.Environment;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
-import com.kstech.zoomlion.manager.DeviceModelFile;
-import com.kstech.zoomlion.manager.XMLAPI;
+import com.kstech.zoomlion.engine.device.DeviceModelFile;
+import com.kstech.zoomlion.engine.device.XMLAPI;
 import com.kstech.zoomlion.model.db.CheckImageData;
 import com.kstech.zoomlion.model.db.CheckItemDetailData;
 import com.kstech.zoomlion.model.db.greendao.CheckImageDataDao;
-import com.kstech.zoomlion.model.vo.CheckItemVO;
 import com.kstech.zoomlion.model.xmlbean.Device;
 import com.kstech.zoomlion.utils.LogUtils;
 

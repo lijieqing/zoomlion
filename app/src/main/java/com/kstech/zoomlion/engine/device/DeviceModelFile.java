@@ -1,4 +1,4 @@
-package com.kstech.zoomlion.manager;
+package com.kstech.zoomlion.engine.device;
 
 
 import com.kstech.zoomlion.ExcException;

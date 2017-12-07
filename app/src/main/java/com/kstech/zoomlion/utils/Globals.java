@@ -3,7 +3,7 @@ package com.kstech.zoomlion.utils;
 import android.support.annotation.NonNull;
 import android.widget.ExpandableListView;
 
-import com.kstech.zoomlion.manager.DeviceModelFile;
+import com.kstech.zoomlion.engine.device.DeviceModelFile;
 import com.kstech.zoomlion.model.session.MeasureTerminal;
 import com.kstech.zoomlion.model.session.UserSession;
 import com.kstech.zoomlion.model.vo.CheckItemParamValueVO;

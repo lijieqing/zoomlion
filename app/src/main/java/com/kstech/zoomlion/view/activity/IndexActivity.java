@@ -21,8 +21,8 @@ import android.widget.TextView;
 
 import com.kstech.zoomlion.MyApplication;
 import com.kstech.zoomlion.R;
-import com.kstech.zoomlion.engine.DeviceLoadTask;
 import com.kstech.zoomlion.engine.comm.J1939TaskService;
+import com.kstech.zoomlion.engine.device.DeviceLoadTask;
 import com.kstech.zoomlion.model.db.CheckItemData;
 import com.kstech.zoomlion.model.db.CheckRecord;
 import com.kstech.zoomlion.model.db.greendao.CheckItemDataDao;

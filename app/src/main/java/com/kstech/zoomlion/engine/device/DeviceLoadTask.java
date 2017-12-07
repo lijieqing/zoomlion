@@ -1,4 +1,4 @@
-package com.kstech.zoomlion.engine;
+package com.kstech.zoomlion.engine.device;
 
 import android.content.Context;
 import android.os.AsyncTask;
@@ -6,8 +6,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
 
-import com.kstech.zoomlion.manager.DeviceModelFile;
-import com.kstech.zoomlion.manager.XMLAPI;
 import com.kstech.zoomlion.model.xmlbean.Device;
 import com.kstech.zoomlion.utils.Globals;
 import com.kstech.zoomlion.view.activity.IndexActivity;
