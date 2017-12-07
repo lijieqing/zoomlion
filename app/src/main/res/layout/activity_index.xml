@@ -434,13 +434,12 @@
 
                         <TextView
                             style="@style/IndexDeviceNameStyle"
-                            android:background="#fff"
-                            android:text="" />
+                            android:text="已预热时间" />
 
                         <TextView
+                            android:id="@+id/index_tv_preheat"
                             style="@style/IndexDeviceContentStyle"
-                            android:background="#fff"
-                            android:text="" />
+                            android:text="00：00" />
                     </LinearLayout>
 
                 </LinearLayout>

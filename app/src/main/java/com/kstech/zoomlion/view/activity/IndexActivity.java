@@ -50,6 +50,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import J1939.J1939_DataVar_ts;
+
 /**
  * 应用引导界面，包含了个人信息编辑入口，调试终端的信息展示，参数初始化模块
  * <p>
@@ -60,7 +62,7 @@ import java.util.List;
  * @author lijie
  */
 @ContentView(R.layout.activity_index)
-public class IndexActivity extends BaseActivity {
+public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.RealtimeChangeListener {
 
     @ViewInject(R.id.index_iv_server_status)
     private ImageView ivServerStatus;//服务器状态图
@@ -115,6 +117,9 @@ public class IndexActivity extends BaseActivity {
 
     @ViewInject(R.id.index_tv_record_result)
     private TextView tvRecordResult;//整机调试结论
+
+    @ViewInject(R.id.index_tv_preheat)
+    private TextView tvPreHeat;//整机预热时间
 
     @ViewInject(R.id.index_btn_exit)
     private Button btnExit;//退出按钮
@@ -252,6 +257,20 @@ public class IndexActivity extends BaseActivity {
                 .setCancelable(true)
                 .setView(devListView)
                 .create();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        //取消 预热时间 数据监听器
+        Globals.modelFile.getDataSetVO().getDSItem("预热时间").removeListener(this);
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        //恢复 预热时间 数据监听器
+        Globals.modelFile.getDataSetVO().getDSItem("预热时间").addListener(this);
     }
 
     @Override
@@ -416,6 +435,11 @@ public class IndexActivity extends BaseActivity {
 
     private InnerHandler handler = new InnerHandler(this);
 
+    @Override
+    public void onDataChanged(float value) {
+        // TODO: 2017/12/7 此处处理value 转换为时间格式并显示到 tvPreHeat组件
+    }
+
     private static class InnerHandler extends Handler {
         private final WeakReference<IndexActivity> activityReference;
 
@@ -442,6 +466,8 @@ public class IndexActivity extends BaseActivity {
                         j1939Intent.putExtra("reload", true);
                         mActivity.bindService(j1939Intent, mActivity.conn, BIND_AUTO_CREATE);
                         mActivity.startService(j1939Intent);
+                        //注册预热时间 数据监听器
+                        Globals.modelFile.getDataSetVO().getDSItem("预热时间").addListener(mActivity);
                         break;
                     case DEVICE_RECORD_INIT:
                         String name = (String) msg.getData().getCharSequence("name");

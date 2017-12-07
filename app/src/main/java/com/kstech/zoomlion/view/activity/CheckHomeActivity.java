@@ -31,6 +31,7 @@ import com.kstech.zoomlion.utils.DeviceUtil;
 import com.kstech.zoomlion.utils.Globals;
 import com.kstech.zoomlion.utils.ThreadManager;
 import com.kstech.zoomlion.view.adapter.DividerItemDecoration;
+import com.kstech.zoomlion.view.widget.ClearFocusByDownEditView;
 import com.kstech.zoomlion.view.widget.ItemShowView;
 import com.kstech.zoomlion.view.widget.RealTimeView;
 
@@ -82,7 +83,7 @@ public class CheckHomeActivity extends BaseActivity {
 
     //整机调试记录描述
     @ViewInject(R.id.check_home_et_admin_desc)
-    private EditText etDesc;
+    private ClearFocusByDownEditView etDesc;
 
     private List<RealTimeView> inHomeRealTimeViews = new ArrayList<>();//实时参数集合
 

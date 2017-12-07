@@ -8,8 +8,10 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
     <style name="zoomlionTheme" parent="AppTheme">
+        <item name="colorPrimary">@color/DKGray</item>
+        <item name="colorPrimaryDark">@color/DKGray</item>
         <item name="android:windowBackground">@drawable/zoomlion_background</item>
-        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowFullscreen">false</item>
     </style>
     <!--登陆相关-->
     <style name="LoginText">

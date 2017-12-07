@@ -183,7 +183,7 @@
                             style="@style/CheckHomeAdminOperateNameStyle"
                             android:text="整机调试说明：" />
 
-                        <EditText
+                        <com.kstech.zoomlion.view.widget.ClearFocusByDownEditView
                             android:id="@+id/check_home_et_admin_desc"
                             style="@style/CheckHomeAdminOperateValueStyle"
                             android:layout_weight="4"
