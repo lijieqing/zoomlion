@@ -12,7 +12,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.kstech.zoomlion.R;
 import com.kstech.zoomlion.model.db.CheckItemDetailData;
@@ -126,7 +125,6 @@ public class ItemBodyShowView extends RelativeLayout implements IRecyclerScrollL
                 Intent intent = new Intent(context, ItemDetailActivity.class);
                 intent.putExtra("detailID", paramValue.getCheckItemDetailId());
                 context.startActivity(intent);
-                Toast.makeText(context, "展示细节", Toast.LENGTH_SHORT).show();
             }
         });
         //设置记录上传状态
