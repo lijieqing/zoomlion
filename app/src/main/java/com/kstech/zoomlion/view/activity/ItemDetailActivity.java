@@ -26,6 +26,8 @@ import com.kstech.zoomlion.model.vo.CheckItemParamValueVO;
 import com.kstech.zoomlion.utils.DateUtil;
 import com.kstech.zoomlion.utils.DeviceUtil;
 import com.kstech.zoomlion.utils.ItemFunctionUtils;
+import com.kstech.zoomlion.utils.ThreadManager;
+import com.kstech.zoomlion.view.adapter.LineChartAdapter;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
@@ -33,7 +35,9 @@ import org.xutils.x;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 调试项目记录细节展示界面
@@ -86,6 +90,8 @@ public class ItemDetailActivity extends BaseActivity {
     Bitmap bp;
     //当前调试记录细节 数据库ID
     long detailID;
+    //图表布局适配器
+    LineChartAdapter lineChartAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -150,6 +156,37 @@ public class ItemDetailActivity extends BaseActivity {
 
         }
 
+        if (ItemFunctionUtils.isSpectrumItem(qcID)) {
+            chartDataInit();
+        } else {
+            lineChart.setNoDataText("项目:" + detailData.getItemData().getItemName() + ", 无参数采集");
+        }
+    }
+
+    /**
+     * 谱图数据初始化，目前并未查询数据库，随机生成了一些数据
+     */
+    private void chartDataInit() {
+        ThreadManager.getThreadPool().execute(new Runnable() {
+            @Override
+            public void run() {
+                List<Integer> list1 = new ArrayList<>();
+                List<Integer> list2 = new ArrayList<>();
+                List<Integer> list3 = new ArrayList<>();
+                for (int i = 0; i < 1000; i++) {
+                    list1.add((int) (Math.random() * 50) + 10);
+                    list2.add((int) (Math.random() * 80) + 10);
+                    list3.add((int) (Math.random() * 100));
+                }
+                Map<String, List<Integer>> listMap = new HashMap<>();
+                listMap.put("canshu1", list1);
+                listMap.put("canshu2", list2);
+                listMap.put("canshu3", list3);
+
+                lineChartAdapter = new LineChartAdapter(lineChart, listMap);
+                lineChartAdapter.setYAxis(300, 0, 15);
+            }
+        });
     }
 
     //更新图片展示界面

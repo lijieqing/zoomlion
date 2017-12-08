@@ -16,6 +16,8 @@ import android.widget.Toast;
 import com.kstech.zoomlion.R;
 import com.kstech.zoomlion.model.vo.CheckItemParamValueVO;
 import com.kstech.zoomlion.model.vo.CheckItemVO;
+import com.kstech.zoomlion.model.xmlbean.SpecParam;
+import com.kstech.zoomlion.model.xmlbean.Spectrum;
 import com.kstech.zoomlion.utils.DeviceUtil;
 import com.kstech.zoomlion.utils.Globals;
 import com.kstech.zoomlion.utils.JsonUtils;
@@ -54,11 +56,11 @@ public class ItemOperateView extends RelativeLayout implements View.OnClickListe
 
     private boolean needCommunicate = false;//是否需要与测量终端通讯
 
-    private LinearLayout rlBlur;
+    private LinearLayout rlBlur;//模糊布局
 
-    private Button btnBlur;
+    private Button btnBlur;//模糊布局按钮
 
-    public boolean inBlur = true;
+    public boolean inBlur = true;//当前界面是否处在模糊状态，默认进入时为模糊状态
 
     private static final String TAG = "ItemOperateView";
 
@@ -150,6 +152,24 @@ public class ItemOperateView extends RelativeLayout implements View.OnClickListe
         ll_body.removeAllViews();
 
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, DeviceUtil.deviceHeight(context) / 11);
+        //谱图收集参数集合
+        Spectrum spec = itemVO.getSpectrum();
+        if (spec != null) {
+            LinearLayout.LayoutParams tvparams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            StringBuffer sb = new StringBuffer();
+            sb.append("谱图收集参数：");
+            for (SpecParam specParam : spec.getSpecParams()) {
+                sb.append(specParam.getParam()).append(" ");
+            }
+            sb.append(" 采集间隔：").append(spec.getInterval());
+
+            TextView tv = new TextView(context);
+            tv.setTextSize(15);
+            tv.setText(sb);
+            tv.setPadding(5, 5, 5, 5);
+
+            ll_body.addView(tv, tvparams);
+        }
         //参数操作布局view
         ItemOperateBodyView bodyView;
         for (CheckItemParamValueVO checkItemParamValueVO : itemVO.getParamNameList()) {

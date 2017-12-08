@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import com.kstech.zoomlion.model.vo.CheckItemParamValueVO;
 import com.kstech.zoomlion.model.vo.CheckItemVO;
 import com.kstech.zoomlion.model.xmlbean.SpecParam;
+import com.kstech.zoomlion.model.xmlbean.Spectrum;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +39,23 @@ public final class ItemFunctionUtils {
         }
 
         return isSpectrumParam;
+    }
+
+    /**
+     * 判断项目是否是谱图采集项目
+     *
+     * @param qcID
+     * @return
+     */
+    public static boolean isSpectrumItem(int qcID) {
+        boolean isSpectrum = false;
+        Spectrum spec = Globals.modelFile.getCheckItemVO(qcID).getSpectrum();
+        if (spec != null) {
+            if (spec.getSpecParams().size() > 0) {
+                isSpectrum = true;
+            }
+        }
+        return isSpectrum;
     }
 
     /**
