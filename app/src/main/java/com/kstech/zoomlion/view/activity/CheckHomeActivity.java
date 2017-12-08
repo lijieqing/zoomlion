@@ -12,7 +12,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
-import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -97,6 +96,7 @@ public class CheckHomeActivity extends BaseActivity {
     private MyAdapter rvAdapter;
 
     int lastGroup = 0;
+    private static final int ITEM_RECORD_LOADED = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -173,7 +173,7 @@ public class CheckHomeActivity extends BaseActivity {
                             .build().list();
                     ls.addAll(temp);
                 }
-                handler.sendEmptyMessage(0);
+                handler.sendEmptyMessage(ITEM_RECORD_LOADED);
             }
         });
     }
@@ -236,7 +236,7 @@ public class CheckHomeActivity extends BaseActivity {
             CheckHomeActivity activity = reference.get();
             if (activity != null) {
                 switch (msg.what) {
-                    case 0:
+                    case ITEM_RECORD_LOADED:
                         activity.itemShowView.updateBody(activity.ls);
                         break;
                 }

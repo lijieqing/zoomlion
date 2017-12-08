@@ -12,6 +12,7 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.os.SystemClock;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -192,6 +193,23 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
      * 服务器机型列表初始化 完成
      */
     public static final int DEV_LIST_LOADED = 11;
+    /**
+     * 存在新的调试项目 需要初始化记录
+     */
+    public static final int NEW_ITEM_RECORD_INIT = 12;
+    /**
+     * 数据校验开始
+     */
+    public static final int VERIFY_RECORD_START = 13;
+    /**
+     * 数据校验进行中
+     */
+    public static final int VERIFY_RECORD_ING = 14;
+    /**
+     * 数据校验结束
+     */
+    public static final int VERIFY_RECORD_END = 15;
+
     public static final String TAG = "IndexActivity";
 
     //通讯线程相关变量
@@ -204,6 +222,8 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
     private ListView devListView;
     private AlertDialog devListDialog;
     private TreeViewAdapter adapter;
+
+    private List<CheckItemVO> newItemList;
     private ServiceConnection conn = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
@@ -298,8 +318,10 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
                         //数据初始化
                         initRecord();
                     } else {
-                        LogUtils.e(TAG, "已存在");
-                        handler.sendEmptyMessage(SKIP_TO_CHECK);
+                        //弹出对话框
+                        dialog.show();
+                        //如果不为空，进行机型文件和数据库的校验
+                        verifyCheckRecord(cr);
                     }
 
                 }
@@ -360,6 +382,93 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
                 });
                 break;
         }
+    }
+
+    /**
+     * 校验机型文件中的调试项目与数据库中的调试项目是否一致
+     *
+     * @param cr 整机调试记录实体类
+     */
+    private void verifyCheckRecord(@NonNull final CheckRecord cr) {
+        if (newItemList == null) {
+            newItemList = new ArrayList<>();
+        } else {
+            newItemList.clear();
+        }
+        ThreadManager.getThreadPool().execute(new Runnable() {
+            @Override
+            public void run() {
+                handler.sendEmptyMessage(VERIFY_RECORD_START);
+                Message message;
+                int p = 20;
+
+                //对当前的调试项目遍历，与数据库比对
+                for (CheckItemVO checkItemVO : Globals.modelFile.allCheckItemList) {
+                    //在数据库已存在，默认false
+                    boolean inDB = false;
+                    //获取机型文件中的调试项目ID
+                    String qcID = checkItemVO.getId();
+                    //遍历数据库中的调试项目记录
+                    for (CheckItemData checkItemData : cr.getCheckItemDatas()) {
+                        //比较数据库记录中的调试项目ID和机型文件中的调试项目ID
+                        String qcIDInDB = String.valueOf(checkItemData.getQcId());
+                        //ID相同，则更改inDB状态为true
+                        if (qcID.equals(qcIDInDB)) {
+                            inDB = true;
+                        }
+                    }
+                    //如果当前的CheckItemVO找不到数据库记录，将其加入新调试项目集合
+                    if (!inDB) {
+                        newItemList.add(checkItemVO);
+                    }
+                    message = Message.obtain();
+                    message.what = VERIFY_RECORD_ING;
+                    message.arg1 = p;
+                    Bundle b = new Bundle();
+                    b.putCharSequence("name", checkItemVO.getName());
+                    message.setData(b);
+                    handler.sendMessage(message);
+                    p += 1;
+                    SystemClock.sleep(100);
+                }
+                //发送校验完成状态
+                message = Message.obtain();
+                message.what = VERIFY_RECORD_END;
+                message.obj = p;
+                handler.sendMessage(message);
+
+                //最后判断 新调试项目集合是否为空
+                if (newItemList.size() == 0) {
+                    //数据库中的数据是完整的,直接进入主调试界面
+                    LogUtils.e(TAG, "已存在");
+                    handler.sendEmptyMessage(SKIP_TO_CHECK);
+                } else {
+                    //发送 更新数据 状态
+                    message = Message.obtain();
+                    message.what = NEW_ITEM_RECORD_INIT;
+                    message.obj = p + 10;
+                    handler.sendMessage(message);
+                    //初始化新的调试项目记录
+                    CheckItemData itemData;
+                    try {
+                        for (CheckItemVO checkItemVO : newItemList) {
+                            itemData = new CheckItemData(null, Integer.parseInt(checkItemVO.getId()),
+                                    checkItemVO.getName(), 0, 0, 0,
+                                    recordID, false, false, null);
+                            itemDataDao.insert(itemData);
+                        }
+                    } catch (Exception e) {
+                        //异常 进行提示
+                        message = Message.obtain();
+                        message.what = RECORD_INIT_ERROR;
+                        message.obj = e.getMessage();
+                        handler.sendMessage(message);
+                    }
+
+                    handler.sendEmptyMessage(SKIP_TO_CHECK);
+                }
+            }
+        });
     }
 
     /**
@@ -450,6 +559,7 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
         @Override
         public void handleMessage(Message msg) {
             final IndexActivity mActivity = activityReference.get();
+            String name;
             if (mActivity != null) {
                 switch (msg.what) {
                     case DEVICE_PARSE_START:
@@ -470,7 +580,7 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
                         Globals.modelFile.getDataSetVO().getDSItem("预热时间").addListener(mActivity);
                         break;
                     case DEVICE_RECORD_INIT:
-                        String name = (String) msg.getData().getCharSequence("name");
+                        name = (String) msg.getData().getCharSequence("name");
                         mActivity.progressView.updateProgress("初始化配置：" + name + " 数据信息", (Integer) msg.obj);
                         break;
                     case RECORD_INIT_FINISH:
@@ -496,11 +606,23 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
                         mActivity.dialog.cancel();
                         break;
                     case DEV_LIST_INIT:
-
                         mActivity.devListDialog.show();
                         break;
                     case DEV_LIST_LOADED:
                         mActivity.adapter.notifyDataSetChanged();
+                        break;
+                    case VERIFY_RECORD_START:
+                        mActivity.progressView.updateProgress("数据校验中", 15);
+                        break;
+                    case VERIFY_RECORD_ING:
+                        name = (String) msg.getData().getCharSequence("name");
+                        mActivity.progressView.updateProgress("数据校验：" + name, msg.arg1);
+                        break;
+                    case VERIFY_RECORD_END:
+                        mActivity.progressView.updateProgress("数据校验完成", msg.arg1);
+                        break;
+                    case NEW_ITEM_RECORD_INIT:
+                        mActivity.progressView.updateProgress("数据库更新中", msg.arg1);
                         break;
                 }
             }

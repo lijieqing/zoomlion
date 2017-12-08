@@ -40,7 +40,7 @@ public class DeviceLoadTask extends AsyncTask<Void, String, Void> {
         message.arg1 = 10;
         handler.sendMessage(message);
 
-        SystemClock.sleep(1000);
+        SystemClock.sleep(300);
 
         message = Message.obtain();
         message.what = IndexActivity.DEVICE_PARSE_ING;
@@ -69,7 +69,7 @@ public class DeviceLoadTask extends AsyncTask<Void, String, Void> {
             message.arg1 = 40 + p;
             handler.sendMessage(message);
             publishProgress("waiting");
-            SystemClock.sleep(1000);
+            SystemClock.sleep(200);
             p += 10;
         }
 
@@ -79,7 +79,7 @@ public class DeviceLoadTask extends AsyncTask<Void, String, Void> {
         message.arg1 = 98;
         handler.sendMessage(message);
 
-        SystemClock.sleep(1000);
+        SystemClock.sleep(300);
         handler.sendEmptyMessage(IndexActivity.DEVICE_LOAD_FINISH);
 
         return null;
