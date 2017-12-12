@@ -1,9 +1,11 @@
 package com.kstech.zoomlion.model.xmlbean;
 
+import com.kstech.zoomlion.model.ServerData;
+
 /**
  * Created by lijie on 2017/6/13.
  */
-public class QCItem {
+public class QCItem extends ServerData{
     private String Id;
     private String Name;
     private String QCTimeout;

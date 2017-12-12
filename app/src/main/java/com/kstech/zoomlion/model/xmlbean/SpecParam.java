@@ -1,6 +1,8 @@
 package com.kstech.zoomlion.model.xmlbean;
 
-public class SpecParam {
+import com.kstech.zoomlion.model.ServerData;
+
+public class SpecParam extends ServerData{
     private String Param;
 
     public String getParam() {

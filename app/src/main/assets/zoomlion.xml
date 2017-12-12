@@ -390,8 +390,54 @@
         <DSItem DataType="DWORD" Name="最新接收的测量值PGN" />
 
         <DSItem DataType="DWORD" Name="测试帧序号" />
+        <!-- 谱图变量 -->
+        <DSItem DataType="WORD" DecLen="0" Name="谱图_顺序号" Unit="" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="谱图_臂架泵压力" Unit="a" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="谱图_主油泵压力" Unit="a" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="谱图_泵送次数" Unit="a" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="谱图_比例阀电流" Unit="a" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="谱图_摆阀压力" Unit="a" />
+        <DSItem DataType="WORD" DecLen="0" Name="谱图_补传顺序号" Unit="a" />
+
+        <!-- 用于指示谱图总点数据的变量 -->
+        <DSItem DataType="WORD" Name="附加码" />
+
     </DataSet>
     <J1939 Cycle="1" NodeAddr="0x35" TaskPrio="1">
+        <!-- 检测项目谱图 PGN -->
+        <!-- 如果多个检测项目的谱图相同，则共用同一个谱图数据上传PGN -->
+        <PG Dir="Rx" Len="8" PGN="0xFFB0" Prio="3" Rate="100" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="0" Bytes="2" Off="0" Ref="谱图_顺序号" Res="0.001" SBit="1" SByte="1" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="谱图_臂架泵压力" Res="0.001" SBit="1" SByte="3" SPN="0"
+                Type="1" />
+        </PG>
+
+        <!-- 如果检测项目的谱图与其它项目均不同，则定义独立的上传PGN -->
+        <PG Dir="Rx" Len="8" PGN="0xFFB1" Prio="3" Rate="100" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="0" Bytes="2" Off="0" Ref="谱图_顺序号" Res="0.001" SBit="1" SByte="1" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="谱图_主油泵压力" Res="0.001" SBit="1" SByte="3" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="谱图_泵送次数" Res="0.001" SBit="1" SByte="3" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="谱图_比例阀电流" Res="0.001" SBit="1" SByte="3" SPN="0"
+                Type="1" />
+        </PG>
+
+        <!--
+                对有谱图的检测项目，当APP接收到测量终端的检测项目状态应答帧：检测指示码=0x41 时，其“附加码”
+            域中为谱图数据总点数。此时要检查之前接收的上传谱图数据是否已完整接收，如果接收丢帧则要按丢失顺序号
+            从小到大逐次发送如下谱图数据补传PGN，想邻两次补传请求间隔30ms。检测终端收到此补传请求帧后上传与补传
+            顺序号对应的谱图数据帧。
+                当App检测到谱图数据已上传或补传完整时，发送谱图_补传顺序号为0xFFFF的补传请求帧。检测终端收到此帧后
+            继续处理过程（发送检测完成指示帧，或其它）
+        -->
+        <PG Dir="Rx" Len="8" PGN="0xFFB2" Prio="3" Rate="100" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="0" Bytes="2" Off="0" Ref="谱图_补传顺序号" Res="0.001" SBit="1" SByte="1" SPN="0"
+                Type="1" />
+        </PG>
+
         <PG Dir="Rx" Len="8" PGN="0xFF00" Prio="3" Rate="100" Req="0" ReqCyc="0" SA="0x01" Type="2">
             <SP Bits="0" Bytes="8" Off="0" Ref="档位0.6" Res="0.001" SBit="1" SByte="1" SPN="0"
                 Type="1" />

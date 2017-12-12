@@ -1,9 +1,11 @@
 package com.kstech.zoomlion.model.xmlbean;
 
+import com.kstech.zoomlion.model.ServerData;
+
 /**
  * Created by lijie on 2017/6/13.
  */
-public class QCParam {
+public class QCParam extends ServerData{
 //    ValueReq: 检测参数项是否有值
 //          true 	-- 有值（默认）
 //          false 	-- 无值，比如外观检测项
