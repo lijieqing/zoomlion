@@ -8,11 +8,15 @@ import com.kstech.zoomlion.model.vo.CheckItemVO;
 import com.kstech.zoomlion.utils.Globals;
 
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import J1939.J1939_DataVar_ts;
 
 /**
  * 项目调试任务
  */
-public class ItemCheckTask extends AsyncTask<Void, String, Void> {
+public class ItemCheckTask extends AsyncTask<Void, String, Void> implements J1939_DataVar_ts.RealtimeChangeListener{
 
     private int remainSeconds = 0;
     private CheckItemVO checkItemVO;
@@ -21,6 +25,8 @@ public class ItemCheckTask extends AsyncTask<Void, String, Void> {
     public int qcID = -1;
     public int times = -1;
     private ItemCheckCallBack callBack;
+
+    private Timer timer;
 
     /**
      * 设置项目调试回调
@@ -50,6 +56,14 @@ public class ItemCheckTask extends AsyncTask<Void, String, Void> {
         //获取调试参数集合
         headers = checkItemVO.getParamNameList();
 
+        timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                remainSeconds++;
+            }
+        },1000,1000);
+
         //规定时间内循环接受数据
         while (remainSeconds < 10 && isRunning) {
 //            String startCheckCommandResp = CommandResp.getStartCheckCommandResp(qcID + "", times);
@@ -57,15 +71,12 @@ public class ItemCheckTask extends AsyncTask<Void, String, Void> {
             if ("".equals(startCheckCommandResp)) {
                 //调试过程回调
                 callBack.onProgress("等待测量终端信息");
-                // 还没有响应，继续轮循
-                SystemClock.sleep(1000);
-                remainSeconds++;
+
             } else if ("正在检测".equals(startCheckCommandResp)) {
                 String content = "正在检测 - - - ";
                 //调试过程回调
                 callBack.onProgress(content);
-                SystemClock.sleep(1000);
-                remainSeconds++;
+
             } else if ("检测完成".equals(startCheckCommandResp)) {
                 String content = "";
                 // 检测完成回调
@@ -78,8 +89,12 @@ public class ItemCheckTask extends AsyncTask<Void, String, Void> {
                 callBack.onResultError(headers, content);
                 callBack.onTaskStop(true);
                 return null;
+            } else if ("谱图上传完成".equals(startCheckCommandResp)){
+
             }
         }
+
+        timer.cancel();
 
         if (!isRunning) {
             callBack.onTaskStop(false);
@@ -96,4 +111,8 @@ public class ItemCheckTask extends AsyncTask<Void, String, Void> {
         isRunning = false;
     }
 
+    @Override
+    public void onDataChanged(short dsItemPosition, float value) {
+        // TODO: 2017/12/13 在此处监听谱图数据和谱图序号数据 通过dsItemPosition来区分
+    }
 }

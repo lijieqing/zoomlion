@@ -545,7 +545,7 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
     private InnerHandler handler = new InnerHandler(this);
 
     @Override
-    public void onDataChanged(float value) {
+    public void onDataChanged(short dsItemPosition, float value) {
         // TODO: 2017/12/7 此处处理value 转换为时间格式并显示到 tvPreHeat组件
     }
 

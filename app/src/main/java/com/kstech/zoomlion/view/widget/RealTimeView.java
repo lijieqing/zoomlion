@@ -85,7 +85,7 @@ public class RealTimeView extends RelativeLayout implements J1939_DataVar_ts.Rea
     }
 
     @Override
-    public void onDataChanged(final float value) {
+    public void onDataChanged(final short dsItemPosition, final float value) {
         J1939_DataVar_ts dataVar = Globals.modelFile.getDataSetVO().getDSItem(tvName.getText().toString());
         formatValue(dataVar);
         if (checkDTC(dataVar)) {

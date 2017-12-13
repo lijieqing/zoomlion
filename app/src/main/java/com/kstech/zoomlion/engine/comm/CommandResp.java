@@ -55,6 +55,10 @@ public class CommandResp {
      * 本次测量中止
      */
     private static final long CHECK_STOP = 0x31;
+    /**
+     * 谱图上传完成
+     */
+    private static final long SPEC_UPLOAD_FINISH = 0x41;
 
     /**
      * 轮训“准备检测命令”应答
@@ -148,6 +152,8 @@ public class CommandResp {
             } else if (checkStatusDSItemResp.getValue() == CHECK_STOP ){
                 // 本次测量中止
                 resultStr = "本次测量中止 ";
+            } else if (checkStatusDSItemResp.getValue() == SPEC_UPLOAD_FINISH) {
+                resultStr = "谱图上传完成";
             }
             // 清除<当前检测项目>、<当前检测次序>、<检测命令> （0x00)
             clearLastSend();

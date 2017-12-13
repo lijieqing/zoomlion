@@ -100,9 +100,9 @@ public class J1939_DataVar_ts {
 			listenerLinkedList.remove(listener);
 	}
 
-	public void notifyListener(float value) {
+	public void notifyListener(short dsItemPosition,float value) {
 		for (RealtimeChangeListener listener : listenerLinkedList) {
-			listener.onDataChanged(value);
+			listener.onDataChanged(dsItemPosition,value);
 		}
 	}
 
@@ -220,7 +220,7 @@ public class J1939_DataVar_ts {
 	/**
 	 * 向量类型变量构造函数
 	 *
-	 * @param bDataType
+	 * @param dataType
 	 *            : 向量元素的数据类型
 	 * @param wRows
 	 *            : 向量长度
@@ -278,7 +278,6 @@ public class J1939_DataVar_ts {
 	/**
 	 * 获取浮点类型的变量值
 	 *
-	 * @param 无
 	 * @return 浮点类型的变量值
 	 */
 	public float getFloatValue() {
@@ -411,7 +410,7 @@ public class J1939_DataVar_ts {
 	/**
 	 * 获取变量指定位置元素的值（将整数类型转换为对应的浮点类型数）
 	 *
-	 * @param wIdx
+	 * @param wRowIdx
 	 * @return
 	 */
 	public float getFloatValueByRow(short wRowIdx) {
@@ -455,7 +454,7 @@ public class J1939_DataVar_ts {
 	 * 实施参数变化监听器
 	 */
 	public interface RealtimeChangeListener{
-		void onDataChanged(float value);
+		void onDataChanged(short dsItemPosition,float value);
 	}
 
 }

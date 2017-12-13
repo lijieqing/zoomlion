@@ -47,8 +47,14 @@ public class J1939Test {
         InputStream is = appContext.getAssets().open("zoomlion.xml");
         Device device = (Device) XMLAPI.readXML(is);
         DeviceModelFile model = DeviceModelFile.readFromFile(device);
-        J1939_DataVar_ts data = model.getDataSetVO().getDSItem("预热时间");
-        LogUtils.e(TAG,data.sName+"-"+data.dataType+"-"+data.sUnit);
+        for (J1939_DataVar_ts j1939_dataVar_ts : model.getDataSetVO().getJ1939_DataVarCfg()) {
+            LogUtils.e(TAG,j1939_dataVar_ts.sName);
+        }
+        String specParam = model.getCheckItemList().get(1).getSpectrum().getSpecParams().get(0).getParam();
+        short d = model.getDataSetVO().getItemIndex("谱图_" + specParam);
+        short x = model.getDataSetVO().getItemIndex("谱图_顺序号");
+        LogUtils.e(TAG,x+"-->x");
+        LogUtils.e(TAG,d+"-->y");
     }
 
 }
