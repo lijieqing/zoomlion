@@ -1,7 +1,9 @@
 package com.kstech.zoomlion.view.widget;
 
 import android.content.Context;
+import android.os.SystemClock;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,7 +49,7 @@ public class ItemOperateView extends RelativeLayout implements View.OnClickListe
     private LinearLayout llSave;
     private LinearLayout llForward;
     private LinearLayout llNext;
-    public Chronometer chronometer;//计时器显示
+    private Chronometer chronometer;//计时器显示
 
     private List<ItemOperateBodyView> bodyViews;//参数描述体 集合
     private List<CheckItemParamValueVO> paramValueVOList = new ArrayList<>();//调试项目参数获取数据后的集合
@@ -137,6 +139,39 @@ public class ItemOperateView extends RelativeLayout implements View.OnClickListe
         btnBlur.setOnClickListener(this);
 
         return v;
+    }
+
+    /**
+     * 重置计时器显示
+     *
+     * @param resid 背景色,为Null时，为占时保存状态不重置计时器
+     * @param start 是否启动计时
+     */
+    public void chronometerReset(@Nullable Integer resid, Boolean start) {
+        if (chronometer != null) {
+            //背景色ID不为空时
+            if (resid != null) {
+                //此处重新获取颜色ID，否则会导致颜色偏差
+                int colorId = getResources().getColor(resid);
+                //将计时器设置 00：00
+                chronometer.setBase(SystemClock.elapsedRealtime());
+                //设置解释器的背景色
+                chronometer.setBackgroundColor(colorId);
+                //根据是否开始计时操作计时器
+                if (start) {
+                    chronometer.start();
+                } else {
+                    chronometer.stop();
+                }
+            } else {
+                if (start) {
+                    chronometer.start();
+                } else {
+                    chronometer.stop();
+                }
+            }
+
+        }
     }
 
     /**

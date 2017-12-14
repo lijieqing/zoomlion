@@ -5,13 +5,11 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
-import android.os.SystemClock;
 import android.view.View;
 import android.widget.Toast;
 
@@ -221,8 +219,7 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
         isv.updateBody(itemDBID);
 
         //计时器复位
-        iov.chronometer.setBase(SystemClock.elapsedRealtime());
-        iov.chronometer.setBackgroundColor(Color.WHITE);
+        iov.chronometerReset(R.color.whiteColor, false);
 
     }
 
@@ -301,9 +298,7 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                iov.chronometer.setBase(SystemClock.elapsedRealtime());//设置计时器起点，00：00
-                iov.chronometer.setBackgroundResource(R.color.zoomLionColor);//设置背景色
-                iov.chronometer.start();//启动计时器
+                iov.chronometerReset(R.color.zoomLionColor, true);
             }
         });
     }
@@ -351,7 +346,7 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
             @Override
             public void run() {
                 iov.updateCheckStatus(false, canSave);
-                iov.chronometer.stop();
+                iov.chronometerReset(null, false);
             }
         });
     }
