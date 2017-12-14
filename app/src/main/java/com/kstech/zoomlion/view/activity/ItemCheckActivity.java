@@ -50,34 +50,76 @@ import java.util.List;
  */
 @ContentView(R.layout.activity_item_check)
 public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallBack {
+    /**
+     * 项目调试操作view
+     */
     @ViewInject(R.id.iov_test)
-    private ItemOperateView iov;// 项目调试操作view
-
+    private ItemOperateView iov;
+    /**
+     * 项目调试记录展示view
+     */
     @ViewInject(R.id.isv_check)
-    private ItemShowViewInCheck isv;//项目调试记录展示view
-
-    CameraCapView cameraCapView;//照片捕获view，包含拍照、保存、重新开始
-    AlertDialog picCatchDialog;//照片捕获对话窗
-    Bitmap bitmap;//当前图片的位图
-    long detailID = -1;//调试项目细节记录ID
-    String itemID;//调试项目记录ID
-    long itemDBID;//调试记录数据库ID
-    int checkStatus;//0 未开始，刚刚进入页面,1 未完成,存在参数未调试或者存在参数未保存，2，已保存成功，生成记录
-
-    CheckItemDataDao itemDao;//调试项目记录操作类
-    CheckItemDetailDataDao itemDetailDao;//调试项目细节操作类
-    CheckItemVO itemvo;//调试项目vo类
-    CheckItemData itemData;//调试项目数据类
-    CheckItemDetailData detailData;//调试项目细节数据类
-
-    ItemCheckTask itemCheckTask;//调试项目异步任务
+    private ItemShowViewInCheck isv;
+    /**
+     * 照片捕获view，包含拍照、保存、重新开始
+     */
+    CameraCapView cameraCapView;
+    /**
+     * 照片捕获对话窗
+     */
+    AlertDialog picCatchDialog;
+    /**
+     * 当前图片的位图
+     */
+    Bitmap bitmap;
+    /**
+     * 调试项目细节记录ID
+     */
+    long detailID = -1;
+    /**
+     * 调试项目记录ID
+     */
+    String itemID;
+    /**
+     * 调试记录数据库ID
+     */
+    long itemDBID;
+    /**
+     * 调试项目记录操作类
+     */
+    CheckItemDataDao itemDao;
+    /**
+     * 调试项目细节操作类
+     */
+    CheckItemDetailDataDao itemDetailDao;
+    /**
+     * 调试项目vo类
+     */
+    CheckItemVO itemvo;
+    /**
+     * 调试项目数据类
+     */
+    CheckItemData itemData;
+    /**
+     * 调试项目细节数据类
+     */
+    CheckItemDetailData detailData;
+    /**
+     * 调试项目异步任务
+     */
+    ItemCheckTask itemCheckTask;
 
     /**
      * 调试项目 参数集合
      */
     List<CheckItemParamValueVO> valueVOList = new ArrayList<>();
-
+    /**
+     * 更新调试项目
+     */
     private static final int NEW_CHECKITEM_REFRESH = 0;
+    /**
+     * 更新调试项目记录数据
+     */
     private static final int NEW_DATA_REFRESH = 1;
 
     @Override
@@ -93,8 +135,6 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
 
         //设置回调
         iov.setCameraActivity(this);
-
-        checkStatus = 0;
 
         //查询数据库
         ThreadManager.getThreadPool().execute(new Runnable() {
