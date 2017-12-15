@@ -1,6 +1,5 @@
 package com.kstech.zoomlion.utils;
 
-import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.Application;
 import android.content.Context;
@@ -14,10 +13,12 @@ import android.net.Uri;
 import android.net.wifi.WifiManager;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.telephony.TelephonyManager;
 import android.util.Log;
 
 import java.io.File;
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
 
@@ -133,30 +134,49 @@ public class DeviceUtil {
     }
 
     /**
-     * 获取设备的唯一标识，deviceId
+     * 获取设备的唯一标识，mac地址
      *
-     * @param context
      * @return
      */
-    public static String getDeviceId(Context context) {
-        TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-        String deviceId = tm.getDeviceId();
-        if (deviceId == null) {
-            return null;
-        } else {
-            return deviceId;
+    public static String macAddress() throws SocketException {
+        String address = null;
+        // 把当前机器上的访问网络接口的存入 Enumeration集合中
+        Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces();
+        while (interfaces.hasMoreElements()) {
+            NetworkInterface netWork = interfaces.nextElement();
+            // 如果存在硬件地址并可以使用给定的当前权限访问，则返回该硬件地址（通常是 MAC）。
+            byte[] by = netWork.getHardwareAddress();
+            if (by == null || by.length == 0) {
+                continue;
+            }
+            StringBuilder builder = new StringBuilder();
+            for (byte b : by) {
+                builder.append(String.format("%02X:", b));
+            }
+            if (builder.length() > 0) {
+                builder.deleteCharAt(builder.length() - 1);
+            }
+            String mac = builder.toString();
+            Log.d("mac", "interfaceName=" + netWork.getName() + ", mac=" + mac);
+            // 从路由器上在线设备的MAC地址列表，可以印证设备Wifi的 name 是 wlan0
+            if (netWork.getName().equals("wlan0")) {
+                Log.d("mac", " interfaceName =" + netWork.getName() + ", mac=" + mac);
+                address = mac;
+            }
         }
+        return address;
     }
+
     /**
-     * 获取设备的唯一标识，mac地址
+     * 获取设备的唯一标识，mac地址适用于，Android6.0之前的版本
      *
      * @param context
      * @return
      */
     public synchronized static String getMacid(Context context) {
-        WifiManager wm = (WifiManager)context.getSystemService(Context.WIFI_SERVICE);
+        WifiManager wm = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
         String WLANMAC = wm.getConnectionInfo().getMacAddress();
-        return WLANMAC ;
+        return WLANMAC;
     }
 
 

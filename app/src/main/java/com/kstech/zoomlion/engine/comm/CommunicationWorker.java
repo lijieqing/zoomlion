@@ -398,7 +398,9 @@ public class CommunicationWorker extends Thread {
         // 线程终止，关闭套接口
         // conn.close();
         try {
-            sockTcp.close();
+            if (sockTcp != null) {
+                sockTcp.close();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -39,6 +39,7 @@ import com.kstech.zoomlion.utils.LogUtils;
 import com.kstech.zoomlion.utils.MyHttpUtils;
 import com.kstech.zoomlion.utils.SharedPreferencesUtils;
 
+import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -80,13 +81,13 @@ public class LoginActivity extends BaseActivity {
         setContentView(R.layout.activity_login);
 
         //初始化view
-        mNameView = (AutoCompleteTextView) findViewById(R.id.tv_name);
-        mPasswordView = (EditText) findViewById(R.id.password);
-        mTerminalView = (TextView) findViewById(R.id.terminal);
-        mPadInfoView = (TextView) findViewById(R.id.tv_pad_id);
+        mNameView = findViewById(R.id.tv_name);
+        mPasswordView = findViewById(R.id.password);
+        mTerminalView = findViewById(R.id.terminal);
+        mPadInfoView = findViewById(R.id.tv_pad_id);
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
-        mSignInButton = (Button) findViewById(R.id.email_sign_in_button);
+        mSignInButton = findViewById(R.id.email_sign_in_button);
 
         //点击空白收回键盘
         findViewById(R.id.ll_root).setOnClickListener(new OnClickListener() {
@@ -94,7 +95,8 @@ public class LoginActivity extends BaseActivity {
             public void onClick(View view) {
                 InputMethodManager imm = (InputMethodManager)
                         getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                if (imm != null)
+                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
             }
         });
 
@@ -109,13 +111,18 @@ public class LoginActivity extends BaseActivity {
         mNameView.setAdapter(adapter);
         mNameView.setThreshold(0);
         mNameView.setText(s);
-
+        //登录按钮
         mSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                attemptLogin();
+                Intent intent = new Intent(LoginActivity.this, IndexActivity.class);
+                startActivity(intent);
+                finish();
+                // TODO: 2017/12/15 此处测试使用，正式版需要改回attemptLogin。还包括平板注册处
+                //attemptLogin();
             }
         });
+        //获取测量终端
         mTerminalView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -125,11 +132,15 @@ public class LoginActivity extends BaseActivity {
 
         //平板mac地址显示
         isRegister = isPadRegister();
-        changeRegisterStatus(isRegister);
+        changeRegisterStatus(true);
+
+        //获取文件读写权限
+        initExternalPermission();
     }
 
     /**
      * 判断平板是否已注册
+     *
      * @return
      */
     private boolean isPadRegister() {
@@ -175,10 +186,17 @@ public class LoginActivity extends BaseActivity {
 
     /**
      * 根据是否已注册 改变相关控件的状态
+     *
      * @param isRegister
      */
     private void changeRegisterStatus(boolean isRegister) {
-        String id = DeviceUtil.getMacid(this);
+        String id;
+        try {
+            id = DeviceUtil.macAddress();
+        } catch (SocketException e) {
+            e.printStackTrace();
+            id = "未能查询到Mac地址";
+        }
         StringBuilder sb = new StringBuilder("平板MAC：");
         sb.append(id);
         if (isRegister) {
@@ -342,7 +360,7 @@ public class LoginActivity extends BaseActivity {
         @Override
         protected Integer doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
-            String macid = DeviceUtil.getMacid(LoginActivity.this);
+
             HashMap<String, String> maps = new HashMap<>();
             maps.put("username", mName);
             maps.put("password", mPassword);
@@ -402,11 +420,11 @@ public class LoginActivity extends BaseActivity {
                     Globals.currentTerminal = mMT;
                     Toast.makeText(LoginActivity.this, "登陆成功，准备跳转", Toast.LENGTH_SHORT).show();
                     //保存用户到记录
-                    SharedPreferencesUtils.setParam(LoginActivity.this,Globals.LAST_USER,mName);
+                    SharedPreferencesUtils.setParam(LoginActivity.this, Globals.LAST_USER, mName);
                     user_record.add(mName);
                     String sp = JsonUtils.toJson(user_record);
                     //添加到缓存列表
-                    SharedPreferencesUtils.setParam(LoginActivity.this,Globals.USER_LOGIN_RECORD,sp);
+                    SharedPreferencesUtils.setParam(LoginActivity.this, Globals.USER_LOGIN_RECORD, sp);
                     Intent intent = new Intent(LoginActivity.this, IndexActivity.class);
                     startActivity(intent);
                     finish();
@@ -566,7 +584,12 @@ public class LoginActivity extends BaseActivity {
         @Override
         protected Void doInBackground(Void... voids) {
             SystemClock.sleep(2000);
-            String id = DeviceUtil.getMacid(LoginActivity.this);
+            String id = null;
+            try {
+                id = DeviceUtil.macAddress();
+            } catch (SocketException e) {
+                e.printStackTrace();
+            }
             HashMap<String, String> maps = new HashMap<>();
             maps.put("username", name);
             maps.put("password", pass);

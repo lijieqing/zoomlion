@@ -2,7 +2,6 @@ package com.kstech.zoomlion.view.widget;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -39,7 +38,6 @@ public class CameraCapView extends RelativeLayout implements View.OnClickListene
     public ImageView photoshow;
     public Button Camerabtn, agin, finish, save;
     public TextView tvName;
-    public Bitmap bitmap;
     public ItemOperateBodyView iobv;
 
     public String paramName;

@@ -1,8 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
+<?xml version="1.0" encoding="UTF-8"?><!-- 机型信息
+    DevId  :     机型Id, 格式？？？
+    DevName：    机型名称，字符串
+    DevBornDate: 机型启用日期，格式为"yyyy-mm"
+    DevDieDate:  机型停产日期，格式为"yyyy-mm"
+    DevStatus:   机型当前状态，格式？？？
+    subDevId:    子机型ID
+	subDevName： 子机型名字
+-->
 <Device DevBornDate="" DevDieDate="" DevStatus="" Id="" Name="" subDevId="" subDevName=""
     xmlns="http://www.kaishang.com">
     <DataSet>
+        <!-- 定义检测系统涉及的所有数据集合 -->
         <DSItem DataType="FLOAT" DecLen="0" Name="超档位报警次数" Unit="a" />
         <DSItem DataType="FLOAT" DecLen="0" Name="吸油过滤器真空度" Unit="a" />
         <DSItem DataType="FLOAT" DecLen="0" Name="前支腿跨距" Unit="a" />
@@ -111,6 +119,7 @@
         <DSItem DataType="BOOL" DecLen="0" Name="正反泵" Unit="a" />
         <DSItem DataType="FLOAT" DecLen="0" Name="主油泵压力" Unit="MPa" />
         <DSItem DataType="FLOAT" DecLen="0" Name="预热时间" Unit="s" />
+
         <DSItem DataType="FLOAT" DecLen="0" Name="一臂快档展开时间" Unit="a" />
         <DSItem DataType="FLOAT" DecLen="0" Name="一臂快档展开电流" Unit="a" />
         <DSItem DataType="FLOAT" DecLen="0" Name="一臂快档回收时间" Unit="a" />
@@ -327,6 +336,7 @@
         <DSItem DataType="BYTE" Name="左前支腿水平回收不检测时间" Unit="s" Value="15" />
         <DSItem DataType="BYTE" Name="左前支腿垂直伸出不检测时间" Unit="s" Value="15" />
         <DSItem DataType="BYTE" Name="左前支腿垂直回收不检测时间" Unit="s" Value="15" />
+
         <DSItem DataType="BYTE" Name="一臂慢档展开终止斜率阀值" Unit="s" Value="15" />
         <DSItem DataType="BYTE" Name="一臂慢档回收终止斜率阀值" Unit="s" Value="15" />
         <DSItem DataType="BYTE" Name="左前支腿水平伸出终止斜率阀值" Value="5" />
@@ -401,9 +411,36 @@
 
         <!-- 用于指示谱图总点数据的变量 -->
         <DSItem DataType="WORD" Name="附加码" />
+        <DSItem DataType="WORD" Name="当前检测项目附加参数的PGN" />
 
     </DataSet>
     <J1939 Cycle="1" NodeAddr="0x35" TaskPrio="1">
+        <!-- 根据需要接收来自于发动机ECU的J1939数据帧
+
+            “PG”为参数组标记，其属性表为：
+                Type:   保留
+                Dir:    参数组传送方向，“Rx”为接收，“Tx”为发送
+                Prio:   参数组传送优先级，只对发送参数组有意义
+                Len:    参数组长度，有效范围 1 - 196
+                Rate：  参数组传送频率（以ms为单位的时长），只对发送参数组有意义
+                PGN:    参数组编号。 0xF0**以上的值表示该参数组以广播方式发送，其中0FF**为可自定义使用（共255个PGN）
+                        0xEF**以下的值表示该参数组可指定目的节点，其中**为目的地点地址。只有0xEF**为可自定义使用（1个PGN)
+                SA:     对接收PGN，为发送参数组节点地址；对发送PGN,为接收参数组的目的节点地址
+                Req:    对接收PGN,为是否可主动请求参数组的发送节点发送，0（不主动请求） - 1（主动请求）
+                ReqCyc: 当Req为1时，主动请求的时间间隔（单位为ms)
+
+            “SP”为参数组中的参数标记，每个标记表示一个或一组参数。其属性表为：
+                Type:   参数值类型。0 - 离散值（开关状态） 1 - 连续值
+                SPN:    参数编号，一个二进制19位的值，大于520192的SPN值为自定义参数（J1939协议中未使用）
+                SByte:  参数在PGN数据区中的起始字节编号。PGN数据区首字节的编号为1
+                SBit:   参数在起始字节中的起始位编号。字节中最低位的编号为1，最高位为8。在指定了Bytes时，SBit无效，因为按字节时总是占用整个字节
+                Bytes:  参数在PGN数据区中占据的字节数。在同时指定了Bytes和Bits时，Bytes有效。
+                Bits:   参数总位数。按小端序分布在1个或连续的多个字节
+                Res:    参数精度，表示每1个单位的参数值对应的真实的参数值
+                Off:    参数偏移量，参数区按二进制的原始值*Res + Off = 最终得到的参数值
+                Ref:    参数关联的变量名。当从接收PGN中解析出参数值后赋值给该变量，
+                        或要发送PGN时根据该变量值得到参数发送的原始值填入PGN数据区相应位置
+        -->
         <!-- 检测项目谱图 PGN -->
         <!-- 如果多个检测项目的谱图相同，则共用同一个谱图数据上传PGN -->
         <PG Dir="Rx" Len="8" PGN="0xFFB0" Prio="3" Rate="100" Req="0" ReqCyc="0" SA="0x01" Type="2">
@@ -426,18 +463,19 @@
         </PG>
 
         <!--
-                对有谱图的检测项目，当APP接收到测量终端的检测项目状态应答帧：检测指示码=0x41 时，其“附加码”
+                对有谱图的检测项目，当APP接收到测量终端的检测项目状态应答帧：检测应答状态=0x41 时，其“附加码”
             域中为谱图数据总点数。此时要检查之前接收的上传谱图数据是否已完整接收，如果接收丢帧则要按丢失顺序号
             从小到大逐次发送如下谱图数据补传PGN，想邻两次补传请求间隔30ms。检测终端收到此补传请求帧后上传与补传
             顺序号对应的谱图数据帧。
                 当App检测到谱图数据已上传或补传完整时，发送谱图_补传顺序号为0xFFFF的补传请求帧。检测终端收到此帧后
             继续处理过程（发送检测完成指示帧，或其它）
         -->
-        <PG Dir="Rx" Len="8" PGN="0xFFB2" Prio="3" Rate="100" Req="0" ReqCyc="0" SA="0x01" Type="2">
+        <PG Dir="Tx" Len="8" PGN="0xFFB2" Prio="3" Rate="100" Req="0" ReqCyc="0" SA="0x01" Type="2">
             <SP Bits="0" Bytes="2" Off="0" Ref="谱图_补传顺序号" Res="0.001" SBit="1" SByte="1" SPN="0"
                 Type="1" />
         </PG>
 
+        <!--调试项目相关pgn-->
         <PG Dir="Rx" Len="8" PGN="0xFF00" Prio="3" Rate="100" Req="0" ReqCyc="0" SA="0x01" Type="2">
             <SP Bits="0" Bytes="8" Off="0" Ref="档位0.6" Res="0.001" SBit="1" SByte="1" SPN="0"
                 Type="1" />
@@ -1428,6 +1466,13 @@
             <SP Bits="8" Bytes="1" Off="0" Ref="当前检测项目" Res="1" SBit="1" SByte="1" Type="1" />
             <SP Bits="8" Bytes="1" Off="0" Ref="当前检测次序" Res="1" SBit="1" SByte="2" Type="1" />
             <SP Bits="8" Bytes="1" Off="0" Ref="检测命令" Res="1" SBit="1" SByte="3" Type="1" />
+            <!--
+                中联检测项目新增加的命令域，需要增加1个名为“当前检测项目附加参数的PGN”的 DSITEM项。 在发出开始检测命令时，
+                如果检测项配置的AttachPGN属性值非0，则将此属性值赋值给“当前检测项目附加参数的PGN”变量，然后发出检测命令PGN
+                和附加参数PGN。检测终端只有在收到了附加参数PGN后才能开始检测
+            -->
+            <SP Bits="16" Bytes="2" Off="0" Ref="当前检测项目附加参数的PGN" Res="1" SBit="1" SByte="4"
+                Type="1" />
         </PG>
         <PG Dir="Rx" Len="8" PGN="0xFF81" Prio="3" Rate="100" Req="0" ReqCyc="0" SA="0x01" Type="2">
             <SP Bits="8" Bytes="1" Off="0" Ref="应答的当前检测项目" Res="1" SBit="1" SByte="1" Type="1" />
@@ -1459,6 +1504,39 @@
             <SP Bits="0" Bytes="4" Off="0" Ref="最新接收的测量值PGN" Res="1" SBit="1" SByte="1" Type="1" />
         </PG>
     </J1939>
+
+
+    <!-- QCParam
+                 ValueReq: 检测参数项是否有值
+                        Yes 	- 有值（默认）
+                        No 	- 无值，比如外观检测项
+
+                 PicReq: 检测参数项是否要拍照留存
+                        Yes     - 要拍照留存
+                        No      - 不需要拍照留存（默认）
+
+                 ValMode: 检测参数值的获取方式,只当ValReq="Yes"时有意义
+                        Auto    - 通过向测量终端发送检测命令得到数据 作为结果（默认）
+
+                        Mann    - 人工在输入框中输入检测参数值作为结果
+
+                        RealParam - 获取当前参数的实时数值作为结果
+
+                        Express - 根据表达式获取数据，描述规则在ValidAvg中
+
+                 QCMode: 检测参数是否合格的判定方式
+                        Auto - 得到参数值(自动得到或手式输入）后通过所配置的合格范围属性值来自动判定是否合格，
+                                只适用于ValueReq="Yes"且配置了有效的合格范围时（默认）
+
+                        Mann - 通过人工点选复选框来判定是否合格，适用于：
+                                ValueReq="No"或未配置有效的合格值范围时
+
+                        None - 只记录，无需判定是否合格
+
+                 XParam: 对以折线形式给出的最大最小值配置，以此值为横坐标，按插值方式计算出最大、最小折线对应的点作为检测参数的合格值范围
+                         当自动得到或手输检测参数值后依据插值计算出的合格值范围判定是否合格
+
+           -->
     <QCSet>
         <QCType Name="支腿">
             <QCItem Id="1" Name="支腿溢流压力" QCTimeout="20" QCTimes="1" ReadyTimeout="10"

@@ -6,6 +6,9 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CAMERA"/>
 
     <application
         android:name=".MyApplication"
@@ -15,11 +18,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.activity.ItemDetailActivity" />
-        <activity android:name=".view.activity.ItemCheckActivity" />
-        <activity android:name=".view.activity.LoginActivity" />
-        <activity
-            android:name=".view.activity.IndexActivity"
+
+        <activity android:name=".view.activity.LoginActivity"
             android:theme="@style/zoomlionTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,7 +27,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".view.activity.ItemCheckActivity" />
+        <activity android:name=".view.activity.ItemDetailActivity" />
+        <activity android:name=".view.activity.IndexActivity"/>
         <activity android:name=".view.activity.CheckHomeActivity" />
+        <activity android:name=".view.activity.UserDetailActivity" />
 
         <service
             android:name=".engine.comm.J1939TaskService"
@@ -37,8 +41,6 @@
                 <action android:name="com.kstech.engine.comm.J1939" />
             </intent-filter>
         </service>
-
-        <activity android:name=".view.activity.UserDetailActivity" />
 
     </application>
 

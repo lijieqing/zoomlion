@@ -3,8 +3,6 @@ package com.kstech.zoomlion.view.activity;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
@@ -13,6 +11,7 @@ import android.os.Message;
 import android.view.View;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.kstech.zoomlion.MyApplication;
 import com.kstech.zoomlion.R;
 import com.kstech.zoomlion.engine.check.ItemCheckCallBack;
@@ -24,7 +23,6 @@ import com.kstech.zoomlion.model.db.greendao.CheckItemDetailDataDao;
 import com.kstech.zoomlion.model.enums.CheckItemDetailResultEnum;
 import com.kstech.zoomlion.model.vo.CheckItemParamValueVO;
 import com.kstech.zoomlion.model.vo.CheckItemVO;
-import com.kstech.zoomlion.utils.BitmapUtils;
 import com.kstech.zoomlion.utils.Globals;
 import com.kstech.zoomlion.utils.JsonUtils;
 import com.kstech.zoomlion.utils.LogUtils;
@@ -38,6 +36,7 @@ import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
+import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Date;
@@ -66,10 +65,6 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
      * 照片捕获对话窗
      */
     AlertDialog picCatchDialog;
-    /**
-     * 当前图片的位图
-     */
-    Bitmap bitmap;
     /**
      * 调试项目细节记录ID
      */
@@ -119,6 +114,7 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
      * 更新调试项目记录数据
      */
     private static final int NEW_DATA_REFRESH = 1;
+    private static final String TAG = "ItemCheckActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -153,20 +149,11 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
         if (resultCode == Activity.RESULT_OK) {
             cameraCapView.takephoto.setVisibility(View.GONE);
             cameraCapView.imageshowlayout.setVisibility(View.VISIBLE);
-            Bitmap camorabitmap = BitmapFactory.decodeFile(Environment.getExternalStorageDirectory() + "/workupload.jpg");
-            if (null != camorabitmap) {
-
-                // 下面这两句是对图片按照一定的比例缩放，这样就可以完美地显示出来。
-                bitmap = BitmapUtils.getInstance(this).getZoomBitmap(camorabitmap, 500, 600);
-
-                //由于Bitmap内存占用较大，这里需要回收内存，否则会报out of memory异常
-                camorabitmap.recycle();
-                //将处理过的图片显示在界面上
-                cameraCapView.photoshow.setImageBitmap(bitmap);
-                if (null != cameraCapView.bitmap)
-                    cameraCapView.bitmap.recycle();
-                cameraCapView.bitmap = bitmap;
-                bitmap = null;
+            File tempF = new File(Environment.getExternalStorageDirectory() + "/workupload.jpg");
+            LogUtils.e(TAG, Environment.getExternalStorageDirectory() + "/workupload.jpg");
+            if (tempF.exists()) {
+                LogUtils.e(TAG, Environment.getExternalStorageDirectory() + "-");
+                Glide.with(this).load(tempF).thumbnail(0.5f).into(cameraCapView.photoshow);
             }
         }
     }
@@ -305,12 +292,12 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
 
     @Override
     public void onStartError(String msg) {
-        LogUtils.e("ItemCheckActivity", msg);
+        LogUtils.e(TAG, msg);
     }
 
     @Override
     public void onProgress(String progress) {
-        LogUtils.e("ItemCheckActivity", progress);
+        LogUtils.e(TAG, progress);
     }
 
     @Override
