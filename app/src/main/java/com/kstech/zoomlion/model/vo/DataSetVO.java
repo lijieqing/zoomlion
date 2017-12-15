@@ -79,5 +79,8 @@ public class DataSetVO {
 	public J1939_DataVar_ts getLastCheckValueDSItem() {
 		return j1939_DataVarCfg[itemIntexMap.get("最新接收的测量值PGN")];
 	}
+	public J1939_DataVar_ts getSpecRepairDSItem() {
+		return j1939_DataVarCfg[itemIntexMap.get("谱图_补传顺序号")];
+	}
 
 }

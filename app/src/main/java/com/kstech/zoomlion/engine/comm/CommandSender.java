@@ -30,9 +30,13 @@ public class CommandSender {
     private static final long STOP_CHECK = 0x03;
 
     /**
-     *
+     * 数据发送PGN
      */
     private static final int SEND_PGN = 0xFF80;
+    /**
+     * 谱图参数补传PGN
+     */
+    private static final int SPEC_REPAIR_PGN = 0xFFB2;
 
 
     /**
@@ -65,6 +69,19 @@ public class CommandSender {
      */
     public static void sendStopCheckCommand(String qcItemId, int times) {
         sendCommand(qcItemId, times, STOP_CHECK);
+    }
+
+    /**
+     * 发送谱图数据补传命令
+     *
+     * @param specOrder 待补传谱图顺序号
+     */
+    public static void sendSpecRepairCommand(long specOrder) {
+        J1939_DataVar_ts specDSItem = Globals.modelFile.getDataSetVO().getSpecRepairDSItem();
+        specDSItem.setValue(specOrder);
+        J1939_PGCfg_ts repairPGN = Globals.modelFile.j1939PgSetVO
+                .getPg(SPEC_REPAIR_PGN);
+        J1939_Context.j1939_API.j1939_sendDatabox((short) repairPGN.wDBNumber);
     }
 
     /*
@@ -124,7 +141,7 @@ public class CommandSender {
 
          清除<当前检测项目>、<当前检测次序>、<检测命令> （0x00)
      }*/
-    public static void clearLastResp() {
+    private static void clearLastResp() {
         // 当前检测项目
         J1939_DataVar_ts checkItemDSItemResp = Globals.modelFile
                 .getDataSetVO().getCheckItemDSItemResp();

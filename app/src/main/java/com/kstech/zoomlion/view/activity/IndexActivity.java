@@ -429,7 +429,7 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
                     message.setData(b);
                     handler.sendMessage(message);
                     p += 1;
-                    SystemClock.sleep(100);
+                    SystemClock.sleep(50);
                 }
                 //发送校验完成状态
                 message = Message.obtain();
