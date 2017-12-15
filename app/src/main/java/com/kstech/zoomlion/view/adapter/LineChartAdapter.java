@@ -46,10 +46,10 @@ public class LineChartAdapter {
     /**
      * 传入的谱图数据，需要转变为lineDataSets
      */
-    private Map<String, List<Integer>> listMap;
+    private Map<String, List<Float>> listMap;
 
     //多条曲线
-    public LineChartAdapter(LineChart mLineChart, Map<String, List<Integer>> dataMap, String... unit) {
+    public LineChartAdapter(LineChart mLineChart, Map<String, List<Float>> dataMap, String... unit) {
         this.lineChart = mLineChart;
         listMap = dataMap;
 

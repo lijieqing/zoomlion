@@ -19,6 +19,7 @@ import com.bumptech.glide.Glide;
 import com.github.mikephil.charting.charts.LineChart;
 import com.kstech.zoomlion.MyApplication;
 import com.kstech.zoomlion.R;
+import com.kstech.zoomlion.model.db.CheckChartData;
 import com.kstech.zoomlion.model.db.CheckImageData;
 import com.kstech.zoomlion.model.db.CheckItemDetailData;
 import com.kstech.zoomlion.model.db.greendao.CheckItemDetailDataDao;
@@ -26,6 +27,7 @@ import com.kstech.zoomlion.model.vo.CheckItemParamValueVO;
 import com.kstech.zoomlion.utils.DateUtil;
 import com.kstech.zoomlion.utils.DeviceUtil;
 import com.kstech.zoomlion.utils.ItemFunctionUtils;
+import com.kstech.zoomlion.utils.JsonUtils;
 import com.kstech.zoomlion.utils.ThreadManager;
 import com.kstech.zoomlion.view.adapter.LineChartAdapter;
 
@@ -81,10 +83,20 @@ public class ItemDetailActivity extends BaseActivity {
     private ImgDataListAdapter imgDataListAdapter;
     //图片数据集合
     private List<CheckImageData> imgList = new ArrayList<>();
+    //谱图数据集合
+    private Map<String,List<Float>> listMap = new HashMap<>();
     //值数据集合
     private List<CheckItemParamValueVO> params;
     //当前调试记录细节 实体类
     private CheckItemDetailData detailData;
+    /**
+     * 图片列表点击
+     */
+    private static final int IMG_ITEM_CLICK = 0;
+    /**
+     * 谱图数据加载完毕
+     */
+    private static final int CHART_DATA_LOADED = 1;
 
     //用来展示的位图
     Bitmap bp;
@@ -148,7 +160,7 @@ public class ItemDetailActivity extends BaseActivity {
                             if (bp != null)
                                 bp.recycle();
                             bp = BitmapFactory.decodeFile(imgList.get(i).getImgPath());
-                            handler.sendEmptyMessage(0);
+                            handler.sendEmptyMessage(IMG_ITEM_CLICK);
                         }
                     }.start();
                 }
@@ -170,21 +182,14 @@ public class ItemDetailActivity extends BaseActivity {
         ThreadManager.getThreadPool().execute(new Runnable() {
             @Override
             public void run() {
-                List<Integer> list1 = new ArrayList<>();
-                List<Integer> list2 = new ArrayList<>();
-                List<Integer> list3 = new ArrayList<>();
-                for (int i = 0; i < 1000; i++) {
-                    list1.add((int) (Math.random() * 50) + 10);
-                    list2.add((int) (Math.random() * 80) + 10);
-                    list3.add((int) (Math.random() * 100));
+                listMap = new HashMap<>();
+                for (CheckChartData chartData : detailData.getCheckChartDatas()) {
+                    String name = chartData.getParamName();
+                    String str = chartData.getChartData();
+                    List<Float> listValue = JsonUtils.fromArrayJson(str, Float.class);
+                    listMap.put(name,listValue);
                 }
-                Map<String, List<Integer>> listMap = new HashMap<>();
-                listMap.put("canshu1", list1);
-                listMap.put("canshu2", list2);
-                listMap.put("canshu3", list3);
-
-                lineChartAdapter = new LineChartAdapter(lineChart, listMap);
-                lineChartAdapter.setYAxis(300, 0, 15);
+                handler.sendEmptyMessage(CHART_DATA_LOADED);
             }
         });
     }
@@ -222,7 +227,16 @@ public class ItemDetailActivity extends BaseActivity {
         public void handleMessage(Message msg) {
             ItemDetailActivity mActivity = reference.get();
             if (mActivity != null) {
-                mActivity.updateDialog();
+
+                switch (msg.what){
+                    case IMG_ITEM_CLICK:
+                        mActivity.updateDialog();
+                        break;
+                    case CHART_DATA_LOADED:
+                        mActivity.lineChartAdapter = new LineChartAdapter(mActivity.lineChart, mActivity.listMap);
+                        mActivity.lineChartAdapter.setYAxis(300, 0, 15);
+                        break;
+                }
             }
         }
     }

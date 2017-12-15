@@ -141,7 +141,7 @@ public class ItemCheckTask extends AsyncTask<Void, String, Void> implements J193
 
         //规定时间内循环接受数据
         while (remainSeconds < 10 && isRunning) {
-//            String startCheckCommandResp = CommandResp.getStartCheckCommandResp(qcID + "", times);
+            //String startCheckCommandResp = CommandResp.getStartCheckCommandResp(qcID + "", times);
             String startCheckCommandResp = "";
             if ("".equals(startCheckCommandResp)) {
                 //调试过程回调
@@ -155,7 +155,7 @@ public class ItemCheckTask extends AsyncTask<Void, String, Void> implements J193
             } else if ("检测完成".equals(startCheckCommandResp)) {
                 String content = "";
                 // 检测完成回调
-                callBack.onSuccess(headers, content);
+                callBack.onSuccess(headers,specMap,content);
                 callBack.onTaskStop(true);
                 //移除监听
                 removeListener();
@@ -190,12 +190,20 @@ public class ItemCheckTask extends AsyncTask<Void, String, Void> implements J193
         }
 
         timer.cancel();
+        //模拟数据
+        if (spectrum != null){
+            for (SpecParam specParam : spectrum.getSpecParams()) {
+                for (int i = 0; i < 1000; i++) {
+                    specMap.get(specParam.getParam()).add((float) (Math.random()*100));
+                }
+            }
+        }
 
         if (!isRunning) {
             callBack.onTaskStop(false);
         } else {
             // 通讯超时回调
-            callBack.onTimeOut(headers, "通讯超时");
+            callBack.onTimeOut(headers, "通讯超时",specMap);
             callBack.onTaskStop(true);
         }
 

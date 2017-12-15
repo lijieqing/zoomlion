@@ -2,7 +2,9 @@ package com.kstech.zoomlion.engine.check;
 
 import com.kstech.zoomlion.model.vo.CheckItemParamValueVO;
 
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 项目调试过程信息回调接口
@@ -35,8 +37,9 @@ public interface ItemCheckCallBack {
      *
      * @param headers 参数实体集合
      * @param msg     调试结果信息
+     * @param specMap 谱图参数数据集合
      */
-    void onSuccess(List<CheckItemParamValueVO> headers, String msg);
+    void onSuccess(List<CheckItemParamValueVO> headers, Map<String, LinkedList<Float>> specMap, String msg);
 
     /**
      * 调试过程故障回调
@@ -52,7 +55,7 @@ public interface ItemCheckCallBack {
      * @param headers 参数实体集合
      * @param msg     调试结果信息
      */
-    void onTimeOut(List<CheckItemParamValueVO> headers, String msg);
+    void onTimeOut(List<CheckItemParamValueVO> headers, String msg, Map<String, LinkedList<Float>> specMap);
 
     void onTaskStop(boolean canSave);
 }

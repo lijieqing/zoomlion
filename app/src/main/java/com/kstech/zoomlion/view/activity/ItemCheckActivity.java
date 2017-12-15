@@ -16,8 +16,10 @@ import com.kstech.zoomlion.MyApplication;
 import com.kstech.zoomlion.R;
 import com.kstech.zoomlion.engine.check.ItemCheckCallBack;
 import com.kstech.zoomlion.engine.check.ItemCheckTask;
+import com.kstech.zoomlion.model.db.CheckChartData;
 import com.kstech.zoomlion.model.db.CheckItemData;
 import com.kstech.zoomlion.model.db.CheckItemDetailData;
+import com.kstech.zoomlion.model.db.greendao.CheckChartDataDao;
 import com.kstech.zoomlion.model.db.greendao.CheckItemDataDao;
 import com.kstech.zoomlion.model.db.greendao.CheckItemDetailDataDao;
 import com.kstech.zoomlion.model.enums.CheckItemDetailResultEnum;
@@ -40,7 +42,9 @@ import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 项目调试界面，对单个项目调试的操作界面，主要包含两个大的组件ItemOperateView和ItemShowViewInCheck
@@ -86,6 +90,10 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
      */
     CheckItemDetailDataDao itemDetailDao;
     /**
+     * 调试项目谱图数据操作类
+     */
+    CheckChartDataDao chartDataDao;
+    /**
      * 调试项目vo类
      */
     CheckItemVO itemvo;
@@ -97,6 +105,10 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
      * 调试项目细节数据类
      */
     CheckItemDetailData detailData;
+    /**
+     * 调试项目谱图数据类集合
+     */
+    List<CheckChartData> chartDataList = new ArrayList<>();
     /**
      * 调试项目异步任务
      */
@@ -122,6 +134,7 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
         x.view().inject(this);
         itemDao = MyApplication.getApplication().getDaoSession().getCheckItemDataDao();
         itemDetailDao = MyApplication.getApplication().getDaoSession().getCheckItemDetailDataDao();
+        chartDataDao = MyApplication.getApplication().getDaoSession().getCheckChartDataDao();
 
         //根据ID，获取调试项目vo类
         Intent intent = getIntent();
@@ -197,6 +210,21 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
     public void saveRecord(String paramValues) {
         //将数值存入detail data对象
         detailData.setParamsValues(paramValues);
+
+        //谱图数据保存
+        if (itemvo.getSpectrum() != null){
+            for (CheckChartData chartData : chartDataList) {
+                //设置detailID和创建时间
+                chartData.setItemDetailId(detailID);
+                chartData.setCreateTime(new Date());
+                chartDataDao.insert(chartData);
+            }
+            //清空谱图数据集合
+            chartDataList.clear();
+        }
+        //重置itemDetailData的谱图数据
+        detailData.resetCheckChartDatas();
+
         //更新
         itemDetailDao.update(detailData);
         //重置 调试细节记录表 为的是保持与数据库同步
@@ -301,7 +329,7 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
     }
 
     @Override
-    public void onSuccess(List<CheckItemParamValueVO> headers, String msg) {
+    public void onSuccess(List<CheckItemParamValueVO> headers, Map<String, LinkedList<Float>> specMap, String msg) {
 
     }
 
@@ -311,7 +339,7 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
     }
 
     @Override
-    public void onTimeOut(List<CheckItemParamValueVO> headers, String msg) {
+    public void onTimeOut(List<CheckItemParamValueVO> headers, String msg, Map<String, LinkedList<Float>> specMap) {
         //利用超时 模拟接收数据
         for (CheckItemParamValueVO header : headers) {
             if (header.getValueReq() && "Auto".equals(header.getValMode())) {
@@ -322,7 +350,23 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
                 valueVOList.add(vo);
             }
         }
+        if (specMap != null){
+            //谱图处理
+            for (Map.Entry<String, LinkedList<Float>> sle : specMap.entrySet()) {
+                CheckChartData chartData = new CheckChartData();
 
+                String specName = sle.getKey();
+                LinkedList<Float> specValue = sle.getValue();
+                String unit = Globals.modelFile.dataSetVO.getDSItem(specName).sUnit;
+                String data = JsonUtils.toJson(specValue);
+
+                chartData.setParamName(specName);
+                chartData.setUnit(unit);
+                chartData.setChartData(data);
+
+                chartDataList.add(chartData);
+            }
+        }
 
         handler.sendEmptyMessage(NEW_DATA_REFRESH);
     }

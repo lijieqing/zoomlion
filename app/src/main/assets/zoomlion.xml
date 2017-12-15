@@ -74,6 +74,7 @@
         <DSItem DataType="FLOAT" DecLen="0" Name="液压油位" Unit="a" />
         <DSItem DataType="FLOAT" DecLen="0" Name="补油泵压力" Unit="a" />
         <DSItem DataType="FLOAT" DecLen="0" Name="泵送次数" Unit="a" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="比例阀电流" Unit="a" />
         <DSItem DataType="FLOAT" DecLen="0" Name="分配软启动" Unit="a" />
         <DSItem DataType="FLOAT" DecLen="0" Name="开机润滑时间" Unit="a" />
         <DSItem DataType="FLOAT" DecLen="0" Name="臂架油泵压力切断值" Unit="a" />
