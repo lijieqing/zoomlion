@@ -24,6 +24,11 @@ public class CheckItemVO implements Serializable {
     private String id;
 
     /**
+     * 调试项目对应的服务器字典ID
+     */
+    private String dictId;
+
+    /**
      * 项目名称
      */
     private String name;
@@ -88,11 +93,28 @@ public class CheckItemVO implements Serializable {
         return rtParamList;
     }
 
-    public void addQcParam(String param,
+    /**
+     * 添加调试参数
+     * @param dictID 字典ID
+     * @param param 参数名
+     * @param valueReq 是否需要值
+     * @param picReq 是否需要图片
+     * @param valMode 值获取方式
+     * @param qcMode 判定方式
+     * @param xParam 横坐标范围
+     * @param xRange 纵坐标范围
+     * @param validMin 最小值
+     * @param validMax 最大值
+     * @param validAvg 平均值
+     * @param unit 单位
+     * @throws ExcException
+     */
+    public void addQcParam(String dictID, String param,
                            Boolean valueReq, Boolean picReq, String valMode, String qcMode,
                            String xParam, String xRange,
                            String validMin, String validMax, String validAvg, String unit) throws ExcException {
         CheckItemParamValueVO vo = new CheckItemParamValueVO();
+        vo.setDictID(dictID);
         vo.setItemName(name);
         vo.setParamName(param);
 
@@ -226,6 +248,14 @@ public class CheckItemVO implements Serializable {
 
     public void setSpectrum(Spectrum spectrum) {
         this.spectrum = spectrum;
+    }
+
+    public String getDictId() {
+        return dictId;
+    }
+
+    public void setDictId(String dictId) {
+        this.dictId = dictId;
     }
 
     private static class Msgs {

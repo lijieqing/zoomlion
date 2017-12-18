@@ -33,14 +33,15 @@ public class CheckItemDataDao extends AbstractDao<CheckItemData, Long> {
     public static class Properties {
         public final static Property CheckItemId = new Property(0, Long.class, "checkItemId", true, "_id");
         public final static Property QcId = new Property(1, Integer.class, "qcId", false, "QC_ID");
-        public final static Property ItemName = new Property(2, String.class, "itemName", false, "ITEM_NAME");
-        public final static Property CheckResult = new Property(3, Integer.class, "checkResult", false, "CHECK_RESULT");
-        public final static Property SumCounts = new Property(4, Integer.class, "sumCounts", false, "SUM_COUNTS");
-        public final static Property UnpassCounts = new Property(5, Integer.class, "unpassCounts", false, "UNPASS_COUNTS");
-        public final static Property RecordId = new Property(6, Long.class, "recordId", false, "RECORD_ID");
-        public final static Property SkipCheck = new Property(7, Boolean.class, "skipCheck", false, "SKIP_CHECK");
-        public final static Property Uploaded = new Property(8, Boolean.class, "uploaded", false, "UPLOADED");
-        public final static Property ItemDesc = new Property(9, String.class, "itemDesc", false, "ITEM_DESC");
+        public final static Property DictId = new Property(2, String.class, "dictId", false, "DICT_ID");
+        public final static Property ItemName = new Property(3, String.class, "itemName", false, "ITEM_NAME");
+        public final static Property CheckResult = new Property(4, Integer.class, "checkResult", false, "CHECK_RESULT");
+        public final static Property SumCounts = new Property(5, Integer.class, "sumCounts", false, "SUM_COUNTS");
+        public final static Property UnpassCounts = new Property(6, Integer.class, "unpassCounts", false, "UNPASS_COUNTS");
+        public final static Property RecordId = new Property(7, Long.class, "recordId", false, "RECORD_ID");
+        public final static Property SkipCheck = new Property(8, Boolean.class, "skipCheck", false, "SKIP_CHECK");
+        public final static Property Uploaded = new Property(9, Boolean.class, "uploaded", false, "UPLOADED");
+        public final static Property ItemDesc = new Property(10, String.class, "itemDesc", false, "ITEM_DESC");
     }
 
     private DaoSession daoSession;
@@ -62,14 +63,15 @@ public class CheckItemDataDao extends AbstractDao<CheckItemData, Long> {
         db.execSQL("CREATE TABLE " + constraint + "\"CHECK_ITEM_DATA\" (" + //
                 "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: checkItemId
                 "\"QC_ID\" INTEGER," + // 1: qcId
-                "\"ITEM_NAME\" TEXT," + // 2: itemName
-                "\"CHECK_RESULT\" INTEGER," + // 3: checkResult
-                "\"SUM_COUNTS\" INTEGER," + // 4: sumCounts
-                "\"UNPASS_COUNTS\" INTEGER," + // 5: unpassCounts
-                "\"RECORD_ID\" INTEGER," + // 6: recordId
-                "\"SKIP_CHECK\" INTEGER," + // 7: skipCheck
-                "\"UPLOADED\" INTEGER," + // 8: uploaded
-                "\"ITEM_DESC\" TEXT);"); // 9: itemDesc
+                "\"DICT_ID\" TEXT," + // 2: dictId
+                "\"ITEM_NAME\" TEXT," + // 3: itemName
+                "\"CHECK_RESULT\" INTEGER," + // 4: checkResult
+                "\"SUM_COUNTS\" INTEGER," + // 5: sumCounts
+                "\"UNPASS_COUNTS\" INTEGER," + // 6: unpassCounts
+                "\"RECORD_ID\" INTEGER," + // 7: recordId
+                "\"SKIP_CHECK\" INTEGER," + // 8: skipCheck
+                "\"UPLOADED\" INTEGER," + // 9: uploaded
+                "\"ITEM_DESC\" TEXT);"); // 10: itemDesc
     }
 
     /** Drops the underlying database table. */
@@ -92,44 +94,49 @@ public class CheckItemDataDao extends AbstractDao<CheckItemData, Long> {
             stmt.bindLong(2, qcId);
         }
  
+        String dictId = entity.getDictId();
+        if (dictId != null) {
+            stmt.bindString(3, dictId);
+        }
+ 
         String itemName = entity.getItemName();
         if (itemName != null) {
-            stmt.bindString(3, itemName);
+            stmt.bindString(4, itemName);
         }
  
         Integer checkResult = entity.getCheckResult();
         if (checkResult != null) {
-            stmt.bindLong(4, checkResult);
+            stmt.bindLong(5, checkResult);
         }
  
         Integer sumCounts = entity.getSumCounts();
         if (sumCounts != null) {
-            stmt.bindLong(5, sumCounts);
+            stmt.bindLong(6, sumCounts);
         }
  
         Integer unpassCounts = entity.getUnpassCounts();
         if (unpassCounts != null) {
-            stmt.bindLong(6, unpassCounts);
+            stmt.bindLong(7, unpassCounts);
         }
  
         Long recordId = entity.getRecordId();
         if (recordId != null) {
-            stmt.bindLong(7, recordId);
+            stmt.bindLong(8, recordId);
         }
  
         Boolean skipCheck = entity.getSkipCheck();
         if (skipCheck != null) {
-            stmt.bindLong(8, skipCheck ? 1L: 0L);
+            stmt.bindLong(9, skipCheck ? 1L: 0L);
         }
  
         Boolean uploaded = entity.getUploaded();
         if (uploaded != null) {
-            stmt.bindLong(9, uploaded ? 1L: 0L);
+            stmt.bindLong(10, uploaded ? 1L: 0L);
         }
  
         String itemDesc = entity.getItemDesc();
         if (itemDesc != null) {
-            stmt.bindString(10, itemDesc);
+            stmt.bindString(11, itemDesc);
         }
     }
 
@@ -147,44 +154,49 @@ public class CheckItemDataDao extends AbstractDao<CheckItemData, Long> {
             stmt.bindLong(2, qcId);
         }
  
+        String dictId = entity.getDictId();
+        if (dictId != null) {
+            stmt.bindString(3, dictId);
+        }
+ 
         String itemName = entity.getItemName();
         if (itemName != null) {
-            stmt.bindString(3, itemName);
+            stmt.bindString(4, itemName);
         }
  
         Integer checkResult = entity.getCheckResult();
         if (checkResult != null) {
-            stmt.bindLong(4, checkResult);
+            stmt.bindLong(5, checkResult);
         }
  
         Integer sumCounts = entity.getSumCounts();
         if (sumCounts != null) {
-            stmt.bindLong(5, sumCounts);
+            stmt.bindLong(6, sumCounts);
         }
  
         Integer unpassCounts = entity.getUnpassCounts();
         if (unpassCounts != null) {
-            stmt.bindLong(6, unpassCounts);
+            stmt.bindLong(7, unpassCounts);
         }
  
         Long recordId = entity.getRecordId();
         if (recordId != null) {
-            stmt.bindLong(7, recordId);
+            stmt.bindLong(8, recordId);
         }
  
         Boolean skipCheck = entity.getSkipCheck();
         if (skipCheck != null) {
-            stmt.bindLong(8, skipCheck ? 1L: 0L);
+            stmt.bindLong(9, skipCheck ? 1L: 0L);
         }
  
         Boolean uploaded = entity.getUploaded();
         if (uploaded != null) {
-            stmt.bindLong(9, uploaded ? 1L: 0L);
+            stmt.bindLong(10, uploaded ? 1L: 0L);
         }
  
         String itemDesc = entity.getItemDesc();
         if (itemDesc != null) {
-            stmt.bindString(10, itemDesc);
+            stmt.bindString(11, itemDesc);
         }
     }
 
@@ -204,14 +216,15 @@ public class CheckItemDataDao extends AbstractDao<CheckItemData, Long> {
         CheckItemData entity = new CheckItemData( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // checkItemId
             cursor.isNull(offset + 1) ? null : cursor.getInt(offset + 1), // qcId
-            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // itemName
-            cursor.isNull(offset + 3) ? null : cursor.getInt(offset + 3), // checkResult
-            cursor.isNull(offset + 4) ? null : cursor.getInt(offset + 4), // sumCounts
-            cursor.isNull(offset + 5) ? null : cursor.getInt(offset + 5), // unpassCounts
-            cursor.isNull(offset + 6) ? null : cursor.getLong(offset + 6), // recordId
-            cursor.isNull(offset + 7) ? null : cursor.getShort(offset + 7) != 0, // skipCheck
-            cursor.isNull(offset + 8) ? null : cursor.getShort(offset + 8) != 0, // uploaded
-            cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9) // itemDesc
+            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // dictId
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // itemName
+            cursor.isNull(offset + 4) ? null : cursor.getInt(offset + 4), // checkResult
+            cursor.isNull(offset + 5) ? null : cursor.getInt(offset + 5), // sumCounts
+            cursor.isNull(offset + 6) ? null : cursor.getInt(offset + 6), // unpassCounts
+            cursor.isNull(offset + 7) ? null : cursor.getLong(offset + 7), // recordId
+            cursor.isNull(offset + 8) ? null : cursor.getShort(offset + 8) != 0, // skipCheck
+            cursor.isNull(offset + 9) ? null : cursor.getShort(offset + 9) != 0, // uploaded
+            cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10) // itemDesc
         );
         return entity;
     }
@@ -220,14 +233,15 @@ public class CheckItemDataDao extends AbstractDao<CheckItemData, Long> {
     public void readEntity(Cursor cursor, CheckItemData entity, int offset) {
         entity.setCheckItemId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setQcId(cursor.isNull(offset + 1) ? null : cursor.getInt(offset + 1));
-        entity.setItemName(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
-        entity.setCheckResult(cursor.isNull(offset + 3) ? null : cursor.getInt(offset + 3));
-        entity.setSumCounts(cursor.isNull(offset + 4) ? null : cursor.getInt(offset + 4));
-        entity.setUnpassCounts(cursor.isNull(offset + 5) ? null : cursor.getInt(offset + 5));
-        entity.setRecordId(cursor.isNull(offset + 6) ? null : cursor.getLong(offset + 6));
-        entity.setSkipCheck(cursor.isNull(offset + 7) ? null : cursor.getShort(offset + 7) != 0);
-        entity.setUploaded(cursor.isNull(offset + 8) ? null : cursor.getShort(offset + 8) != 0);
-        entity.setItemDesc(cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9));
+        entity.setDictId(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
+        entity.setItemName(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
+        entity.setCheckResult(cursor.isNull(offset + 4) ? null : cursor.getInt(offset + 4));
+        entity.setSumCounts(cursor.isNull(offset + 5) ? null : cursor.getInt(offset + 5));
+        entity.setUnpassCounts(cursor.isNull(offset + 6) ? null : cursor.getInt(offset + 6));
+        entity.setRecordId(cursor.isNull(offset + 7) ? null : cursor.getLong(offset + 7));
+        entity.setSkipCheck(cursor.isNull(offset + 8) ? null : cursor.getShort(offset + 8) != 0);
+        entity.setUploaded(cursor.isNull(offset + 9) ? null : cursor.getShort(offset + 9) != 0);
+        entity.setItemDesc(cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10));
      }
     
     @Override

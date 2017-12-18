@@ -33,19 +33,49 @@ import java.util.Date;
  */
 
 public class CameraCapView extends RelativeLayout implements View.OnClickListener {
+    /**
+     * 基础功能activity
+     */
     private BaseFunActivity activity;
+    /**
+     * 图片捕获布局
+     */
     public RelativeLayout takephoto, imageshowlayout;
+    /**
+     * 图片展示view
+     */
     public ImageView photoshow;
+    /**
+     * 图片捕获操作view
+     */
     public Button Camerabtn, agin, finish, save;
+    /**
+     * 图片参数名
+     */
     public TextView tvName;
+    /**
+     * 调试项目操作view
+     */
     public ItemOperateBodyView iobv;
-
+    /**
+     * 参数名称
+     */
     public String paramName;
-
+    /**
+     * 参数对应的服务器字典ID
+     */
+    private String paramDictId;
+    /**
+     * 图片储存路径基本路径
+     */
     private static final String PICPATH = "/zoomlion/pic/";
-
+    /**
+     * 图片数据关联的调试项目细节记录ID
+     */
     private long detailID;
-
+    /**
+     * 图片数据操作类
+     */
     private CheckImageDataDao imageDataDao;
 
     public CameraCapView(Context context) {
@@ -66,8 +96,16 @@ public class CameraCapView extends RelativeLayout implements View.OnClickListene
         initView();
     }
 
+    /**
+     * 图片操作view初始化
+     *
+     * @param checkItemParamValueVO 需要图片捕获参数信息
+     * @param detailID              需要绑定的调试项目细节记录ID
+     * @param iobv                  需要更新的调试项目操作view
+     */
     public void itemParamInit(@NonNull CheckItemParamValueVO checkItemParamValueVO, long detailID, ItemOperateBodyView iobv) {
         paramName = checkItemParamValueVO.getParamName();
+        paramDictId = checkItemParamValueVO.getDictID();
         this.detailID = detailID;
         this.iobv = iobv;
         tvName.setText(paramName);
@@ -129,7 +167,11 @@ public class CameraCapView extends RelativeLayout implements View.OnClickListene
         }
     }
 
-
+    /**
+     * 图片拷贝，将临时图片拷贝到指定路径下，并将路径信息保存到数据库中
+     *
+     * @return 调试图片数据记录的ID
+     */
     public long copyPic() {
         long userID = 12;
         String Status = Environment.getExternalStorageState();
@@ -141,7 +183,7 @@ public class CameraCapView extends RelativeLayout implements View.OnClickListene
         String date = DateUtil.getDateTimeFormat14(new Date());
         String fname = Environment.getExternalStorageDirectory() + PICPATH + date + "-" + userID + "-" + detailID + "-" + paramName + ".jpg";
         FileUtil.copy(Environment.getExternalStorageDirectory() + "/workupload.jpg", fname);
-        CheckImageData imgdata = new CheckImageData(null, new Date(), detailID, paramName, fname);
+        CheckImageData imgdata = new CheckImageData(null, paramDictId, new Date(), detailID, paramName, fname);
         long imgDBId = imageDataDao.insert(imgdata);
         Toast.makeText(activity, "已保存", Toast.LENGTH_SHORT).show();
         return imgDBId;

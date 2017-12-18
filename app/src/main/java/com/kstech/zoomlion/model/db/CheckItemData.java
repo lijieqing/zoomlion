@@ -29,6 +29,9 @@ public class CheckItemData {
     private Integer qcId;//通讯时用到的检测项目ID,可能存在多个机型记录，所以不设置为unique，但是在一个泵车调试记录中qcID应该是唯一的
 
     @Property
+    private String dictId;//调试项目对应的服务器字典ID
+
+    @Property
     private String itemName;//检测项目名称
 
     @Property
@@ -68,12 +71,13 @@ public class CheckItemData {
     @Generated(hash = 224233260)
     private transient CheckItemDataDao myDao;
 
-    @Generated(hash = 1928710603)
-    public CheckItemData(Long checkItemId, Integer qcId, String itemName,
-            Integer checkResult, Integer sumCounts, Integer unpassCounts,
-            Long recordId, Boolean skipCheck, Boolean uploaded, String itemDesc) {
+    @Generated(hash = 1823803508)
+    public CheckItemData(Long checkItemId, Integer qcId, String dictId, String itemName,
+            Integer checkResult, Integer sumCounts, Integer unpassCounts, Long recordId,
+            Boolean skipCheck, Boolean uploaded, String itemDesc) {
         this.checkItemId = checkItemId;
         this.qcId = qcId;
+        this.dictId = dictId;
         this.itemName = itemName;
         this.checkResult = checkResult;
         this.sumCounts = sumCounts;
@@ -301,6 +305,14 @@ public class CheckItemData {
     public void __setDaoSession(DaoSession daoSession) {
         this.daoSession = daoSession;
         myDao = daoSession != null ? daoSession.getCheckItemDataDao() : null;
+    }
+
+    public String getDictId() {
+        return this.dictId;
+    }
+
+    public void setDictId(String dictId) {
+        this.dictId = dictId;
     }
 
 }

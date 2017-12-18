@@ -278,7 +278,6 @@ public class ItemCheckTask extends AsyncTask<Void, String, Void> implements J193
      * @param lostSpecOrderList 丢失数据集合
      * @return 是否连续
      */
-    // TODO: 2017/12/15 需要进行总数判断
     private boolean verifySpecOrder(int total, @NonNull LinkedList<Float> specOrderlist, @NonNull List<Float> lostSpecOrderList) {
         //是否存在漏传数据，TRUE为存在漏传
         boolean result = false;

@@ -25,17 +25,18 @@ public class CheckRecordDao extends AbstractDao<CheckRecord, Long> {
      */
     public static class Properties {
         public final static Property CheckRecordId = new Property(0, Long.class, "checkRecordId", true, "_id");
-        public final static Property DeviceIdentity = new Property(1, String.class, "deviceIdentity", false, "DEVICE_IDENTITY");
-        public final static Property CheckRecordName = new Property(2, String.class, "checkRecordName", false, "CHECK_RECORD_NAME");
-        public final static Property CheckerId = new Property(3, Long.class, "checkerId", false, "CHECKER_ID");
-        public final static Property CurrentStatus = new Property(4, Integer.class, "currentStatus", false, "CURRENT_STATUS");
-        public final static Property CreateTime = new Property(5, java.util.Date.class, "createTime", false, "CREATE_TIME");
-        public final static Property FinishTime = new Property(6, java.util.Date.class, "finishTime", false, "FINISH_TIME");
-        public final static Property SumCounts = new Property(7, Integer.class, "sumCounts", false, "SUM_COUNTS");
-        public final static Property UnpassCounts = new Property(8, Integer.class, "unpassCounts", false, "UNPASS_COUNTS");
-        public final static Property CheckRecordDesc = new Property(9, String.class, "checkRecordDesc", false, "CHECK_RECORD_DESC");
-        public final static Property CheckTimes = new Property(10, Integer.class, "checkTimes", false, "CHECK_TIMES");
-        public final static Property Uploaded = new Property(11, Boolean.class, "uploaded", false, "UPLOADED");
+        public final static Property DeviceRecordServerId = new Property(1, String.class, "deviceRecordServerId", false, "DEVICE_RECORD_SERVER_ID");
+        public final static Property DeviceIdentity = new Property(2, String.class, "deviceIdentity", false, "DEVICE_IDENTITY");
+        public final static Property CheckRecordName = new Property(3, String.class, "checkRecordName", false, "CHECK_RECORD_NAME");
+        public final static Property CheckerId = new Property(4, Long.class, "checkerId", false, "CHECKER_ID");
+        public final static Property CurrentStatus = new Property(5, Integer.class, "currentStatus", false, "CURRENT_STATUS");
+        public final static Property CreateTime = new Property(6, java.util.Date.class, "createTime", false, "CREATE_TIME");
+        public final static Property FinishTime = new Property(7, java.util.Date.class, "finishTime", false, "FINISH_TIME");
+        public final static Property SumCounts = new Property(8, Integer.class, "sumCounts", false, "SUM_COUNTS");
+        public final static Property UnpassCounts = new Property(9, Integer.class, "unpassCounts", false, "UNPASS_COUNTS");
+        public final static Property CheckRecordDesc = new Property(10, String.class, "checkRecordDesc", false, "CHECK_RECORD_DESC");
+        public final static Property CheckTimes = new Property(11, Integer.class, "checkTimes", false, "CHECK_TIMES");
+        public final static Property Uploaded = new Property(12, Boolean.class, "uploaded", false, "UPLOADED");
     }
 
     private DaoSession daoSession;
@@ -55,17 +56,18 @@ public class CheckRecordDao extends AbstractDao<CheckRecord, Long> {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"CHECK_RECORD\" (" + //
                 "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: checkRecordId
-                "\"DEVICE_IDENTITY\" TEXT UNIQUE ," + // 1: deviceIdentity
-                "\"CHECK_RECORD_NAME\" TEXT," + // 2: checkRecordName
-                "\"CHECKER_ID\" INTEGER," + // 3: checkerId
-                "\"CURRENT_STATUS\" INTEGER," + // 4: currentStatus
-                "\"CREATE_TIME\" INTEGER UNIQUE ," + // 5: createTime
-                "\"FINISH_TIME\" INTEGER UNIQUE ," + // 6: finishTime
-                "\"SUM_COUNTS\" INTEGER," + // 7: sumCounts
-                "\"UNPASS_COUNTS\" INTEGER," + // 8: unpassCounts
-                "\"CHECK_RECORD_DESC\" TEXT," + // 9: checkRecordDesc
-                "\"CHECK_TIMES\" INTEGER," + // 10: checkTimes
-                "\"UPLOADED\" INTEGER);"); // 11: uploaded
+                "\"DEVICE_RECORD_SERVER_ID\" TEXT," + // 1: deviceRecordServerId
+                "\"DEVICE_IDENTITY\" TEXT UNIQUE ," + // 2: deviceIdentity
+                "\"CHECK_RECORD_NAME\" TEXT," + // 3: checkRecordName
+                "\"CHECKER_ID\" INTEGER," + // 4: checkerId
+                "\"CURRENT_STATUS\" INTEGER," + // 5: currentStatus
+                "\"CREATE_TIME\" INTEGER UNIQUE ," + // 6: createTime
+                "\"FINISH_TIME\" INTEGER UNIQUE ," + // 7: finishTime
+                "\"SUM_COUNTS\" INTEGER," + // 8: sumCounts
+                "\"UNPASS_COUNTS\" INTEGER," + // 9: unpassCounts
+                "\"CHECK_RECORD_DESC\" TEXT," + // 10: checkRecordDesc
+                "\"CHECK_TIMES\" INTEGER," + // 11: checkTimes
+                "\"UPLOADED\" INTEGER);"); // 12: uploaded
     }
 
     /** Drops the underlying database table. */
@@ -83,59 +85,64 @@ public class CheckRecordDao extends AbstractDao<CheckRecord, Long> {
             stmt.bindLong(1, checkRecordId);
         }
  
+        String deviceRecordServerId = entity.getDeviceRecordServerId();
+        if (deviceRecordServerId != null) {
+            stmt.bindString(2, deviceRecordServerId);
+        }
+ 
         String deviceIdentity = entity.getDeviceIdentity();
         if (deviceIdentity != null) {
-            stmt.bindString(2, deviceIdentity);
+            stmt.bindString(3, deviceIdentity);
         }
  
         String checkRecordName = entity.getCheckRecordName();
         if (checkRecordName != null) {
-            stmt.bindString(3, checkRecordName);
+            stmt.bindString(4, checkRecordName);
         }
  
         Long checkerId = entity.getCheckerId();
         if (checkerId != null) {
-            stmt.bindLong(4, checkerId);
+            stmt.bindLong(5, checkerId);
         }
  
         Integer currentStatus = entity.getCurrentStatus();
         if (currentStatus != null) {
-            stmt.bindLong(5, currentStatus);
+            stmt.bindLong(6, currentStatus);
         }
  
         java.util.Date createTime = entity.getCreateTime();
         if (createTime != null) {
-            stmt.bindLong(6, createTime.getTime());
+            stmt.bindLong(7, createTime.getTime());
         }
  
         java.util.Date finishTime = entity.getFinishTime();
         if (finishTime != null) {
-            stmt.bindLong(7, finishTime.getTime());
+            stmt.bindLong(8, finishTime.getTime());
         }
  
         Integer sumCounts = entity.getSumCounts();
         if (sumCounts != null) {
-            stmt.bindLong(8, sumCounts);
+            stmt.bindLong(9, sumCounts);
         }
  
         Integer unpassCounts = entity.getUnpassCounts();
         if (unpassCounts != null) {
-            stmt.bindLong(9, unpassCounts);
+            stmt.bindLong(10, unpassCounts);
         }
  
         String checkRecordDesc = entity.getCheckRecordDesc();
         if (checkRecordDesc != null) {
-            stmt.bindString(10, checkRecordDesc);
+            stmt.bindString(11, checkRecordDesc);
         }
  
         Integer checkTimes = entity.getCheckTimes();
         if (checkTimes != null) {
-            stmt.bindLong(11, checkTimes);
+            stmt.bindLong(12, checkTimes);
         }
  
         Boolean uploaded = entity.getUploaded();
         if (uploaded != null) {
-            stmt.bindLong(12, uploaded ? 1L: 0L);
+            stmt.bindLong(13, uploaded ? 1L: 0L);
         }
     }
 
@@ -148,59 +155,64 @@ public class CheckRecordDao extends AbstractDao<CheckRecord, Long> {
             stmt.bindLong(1, checkRecordId);
         }
  
+        String deviceRecordServerId = entity.getDeviceRecordServerId();
+        if (deviceRecordServerId != null) {
+            stmt.bindString(2, deviceRecordServerId);
+        }
+ 
         String deviceIdentity = entity.getDeviceIdentity();
         if (deviceIdentity != null) {
-            stmt.bindString(2, deviceIdentity);
+            stmt.bindString(3, deviceIdentity);
         }
  
         String checkRecordName = entity.getCheckRecordName();
         if (checkRecordName != null) {
-            stmt.bindString(3, checkRecordName);
+            stmt.bindString(4, checkRecordName);
         }
  
         Long checkerId = entity.getCheckerId();
         if (checkerId != null) {
-            stmt.bindLong(4, checkerId);
+            stmt.bindLong(5, checkerId);
         }
  
         Integer currentStatus = entity.getCurrentStatus();
         if (currentStatus != null) {
-            stmt.bindLong(5, currentStatus);
+            stmt.bindLong(6, currentStatus);
         }
  
         java.util.Date createTime = entity.getCreateTime();
         if (createTime != null) {
-            stmt.bindLong(6, createTime.getTime());
+            stmt.bindLong(7, createTime.getTime());
         }
  
         java.util.Date finishTime = entity.getFinishTime();
         if (finishTime != null) {
-            stmt.bindLong(7, finishTime.getTime());
+            stmt.bindLong(8, finishTime.getTime());
         }
  
         Integer sumCounts = entity.getSumCounts();
         if (sumCounts != null) {
-            stmt.bindLong(8, sumCounts);
+            stmt.bindLong(9, sumCounts);
         }
  
         Integer unpassCounts = entity.getUnpassCounts();
         if (unpassCounts != null) {
-            stmt.bindLong(9, unpassCounts);
+            stmt.bindLong(10, unpassCounts);
         }
  
         String checkRecordDesc = entity.getCheckRecordDesc();
         if (checkRecordDesc != null) {
-            stmt.bindString(10, checkRecordDesc);
+            stmt.bindString(11, checkRecordDesc);
         }
  
         Integer checkTimes = entity.getCheckTimes();
         if (checkTimes != null) {
-            stmt.bindLong(11, checkTimes);
+            stmt.bindLong(12, checkTimes);
         }
  
         Boolean uploaded = entity.getUploaded();
         if (uploaded != null) {
-            stmt.bindLong(12, uploaded ? 1L: 0L);
+            stmt.bindLong(13, uploaded ? 1L: 0L);
         }
     }
 
@@ -219,17 +231,18 @@ public class CheckRecordDao extends AbstractDao<CheckRecord, Long> {
     public CheckRecord readEntity(Cursor cursor, int offset) {
         CheckRecord entity = new CheckRecord( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // checkRecordId
-            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // deviceIdentity
-            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // checkRecordName
-            cursor.isNull(offset + 3) ? null : cursor.getLong(offset + 3), // checkerId
-            cursor.isNull(offset + 4) ? null : cursor.getInt(offset + 4), // currentStatus
-            cursor.isNull(offset + 5) ? null : new java.util.Date(cursor.getLong(offset + 5)), // createTime
-            cursor.isNull(offset + 6) ? null : new java.util.Date(cursor.getLong(offset + 6)), // finishTime
-            cursor.isNull(offset + 7) ? null : cursor.getInt(offset + 7), // sumCounts
-            cursor.isNull(offset + 8) ? null : cursor.getInt(offset + 8), // unpassCounts
-            cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9), // checkRecordDesc
-            cursor.isNull(offset + 10) ? null : cursor.getInt(offset + 10), // checkTimes
-            cursor.isNull(offset + 11) ? null : cursor.getShort(offset + 11) != 0 // uploaded
+            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // deviceRecordServerId
+            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // deviceIdentity
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // checkRecordName
+            cursor.isNull(offset + 4) ? null : cursor.getLong(offset + 4), // checkerId
+            cursor.isNull(offset + 5) ? null : cursor.getInt(offset + 5), // currentStatus
+            cursor.isNull(offset + 6) ? null : new java.util.Date(cursor.getLong(offset + 6)), // createTime
+            cursor.isNull(offset + 7) ? null : new java.util.Date(cursor.getLong(offset + 7)), // finishTime
+            cursor.isNull(offset + 8) ? null : cursor.getInt(offset + 8), // sumCounts
+            cursor.isNull(offset + 9) ? null : cursor.getInt(offset + 9), // unpassCounts
+            cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10), // checkRecordDesc
+            cursor.isNull(offset + 11) ? null : cursor.getInt(offset + 11), // checkTimes
+            cursor.isNull(offset + 12) ? null : cursor.getShort(offset + 12) != 0 // uploaded
         );
         return entity;
     }
@@ -237,17 +250,18 @@ public class CheckRecordDao extends AbstractDao<CheckRecord, Long> {
     @Override
     public void readEntity(Cursor cursor, CheckRecord entity, int offset) {
         entity.setCheckRecordId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setDeviceIdentity(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
-        entity.setCheckRecordName(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
-        entity.setCheckerId(cursor.isNull(offset + 3) ? null : cursor.getLong(offset + 3));
-        entity.setCurrentStatus(cursor.isNull(offset + 4) ? null : cursor.getInt(offset + 4));
-        entity.setCreateTime(cursor.isNull(offset + 5) ? null : new java.util.Date(cursor.getLong(offset + 5)));
-        entity.setFinishTime(cursor.isNull(offset + 6) ? null : new java.util.Date(cursor.getLong(offset + 6)));
-        entity.setSumCounts(cursor.isNull(offset + 7) ? null : cursor.getInt(offset + 7));
-        entity.setUnpassCounts(cursor.isNull(offset + 8) ? null : cursor.getInt(offset + 8));
-        entity.setCheckRecordDesc(cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9));
-        entity.setCheckTimes(cursor.isNull(offset + 10) ? null : cursor.getInt(offset + 10));
-        entity.setUploaded(cursor.isNull(offset + 11) ? null : cursor.getShort(offset + 11) != 0);
+        entity.setDeviceRecordServerId(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
+        entity.setDeviceIdentity(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
+        entity.setCheckRecordName(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
+        entity.setCheckerId(cursor.isNull(offset + 4) ? null : cursor.getLong(offset + 4));
+        entity.setCurrentStatus(cursor.isNull(offset + 5) ? null : cursor.getInt(offset + 5));
+        entity.setCreateTime(cursor.isNull(offset + 6) ? null : new java.util.Date(cursor.getLong(offset + 6)));
+        entity.setFinishTime(cursor.isNull(offset + 7) ? null : new java.util.Date(cursor.getLong(offset + 7)));
+        entity.setSumCounts(cursor.isNull(offset + 8) ? null : cursor.getInt(offset + 8));
+        entity.setUnpassCounts(cursor.isNull(offset + 9) ? null : cursor.getInt(offset + 9));
+        entity.setCheckRecordDesc(cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10));
+        entity.setCheckTimes(cursor.isNull(offset + 11) ? null : cursor.getInt(offset + 11));
+        entity.setUploaded(cursor.isNull(offset + 12) ? null : cursor.getShort(offset + 12) != 0);
      }
     
     @Override

@@ -22,6 +22,9 @@ public class CheckRecord {
     @Id(autoincrement = true)
     private Long checkRecordId;// id
 
+    @Property
+    private String deviceRecordServerId;//整机调试记录服务器ID
+
     @Unique
     @Property
     private String deviceIdentity;//出厂编号
@@ -69,13 +72,13 @@ public class CheckRecord {
     @Generated(hash = 597129236)
     private transient CheckRecordDao myDao;
 
-    @Generated(hash = 531370660)
-    public CheckRecord(Long checkRecordId, String deviceIdentity,
-            String checkRecordName, Long checkerId, Integer currentStatus,
-            Date createTime, Date finishTime, Integer sumCounts,
-            Integer unpassCounts, String checkRecordDesc, Integer checkTimes,
-            Boolean uploaded) {
+    @Generated(hash = 867397948)
+    public CheckRecord(Long checkRecordId, String deviceRecordServerId, String deviceIdentity,
+            String checkRecordName, Long checkerId, Integer currentStatus, Date createTime,
+            Date finishTime, Integer sumCounts, Integer unpassCounts, String checkRecordDesc,
+            Integer checkTimes, Boolean uploaded) {
         this.checkRecordId = checkRecordId;
+        this.deviceRecordServerId = deviceRecordServerId;
         this.deviceIdentity = deviceIdentity;
         this.checkRecordName = checkRecordName;
         this.checkerId = checkerId;
@@ -259,6 +262,14 @@ public class CheckRecord {
     public void __setDaoSession(DaoSession daoSession) {
         this.daoSession = daoSession;
         myDao = daoSession != null ? daoSession.getCheckRecordDao() : null;
+    }
+
+    public String getDeviceRecordServerId() {
+        return this.deviceRecordServerId;
+    }
+
+    public void setDeviceRecordServerId(String deviceRecordServerId) {
+        this.deviceRecordServerId = deviceRecordServerId;
     }
 
 }

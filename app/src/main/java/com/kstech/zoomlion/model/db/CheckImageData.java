@@ -22,6 +22,9 @@ public class CheckImageData {
     @Id(autoincrement = true)
     private Long imgId;// id
 
+    @Property
+    private String dictId;//该参数对应的服务器字典ID
+
     @Unique
     private Date createTime;//图片创建时间
 
@@ -44,10 +47,11 @@ public class CheckImageData {
     @Generated(hash = 1944620709)
     private transient CheckImageDataDao myDao;
 
-    @Generated(hash = 1086740537)
-    public CheckImageData(Long imgId, Date createTime, Long itemDetailId, String paramName,
-            String imgPath) {
+    @Generated(hash = 784945247)
+    public CheckImageData(Long imgId, String dictId, Date createTime, Long itemDetailId,
+            String paramName, String imgPath) {
         this.imgId = imgId;
+        this.dictId = dictId;
         this.createTime = createTime;
         this.itemDetailId = itemDetailId;
         this.paramName = paramName;
@@ -174,6 +178,14 @@ public class CheckImageData {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public String getDictId() {
+        return this.dictId;
+    }
+
+    public void setDictId(String dictId) {
+        this.dictId = dictId;
     }
 
 }

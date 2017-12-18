@@ -34,7 +34,7 @@ import J1939.J1939_PGCfg_ts;
 import J1939.J1939_SPCfg_ts;
 
 /**
- * 挖掘机机型文件对应的值对象，封装了一个机型文件的完整数据
+ * 机型文件对应的值对象，封装了一个机型文件的完整数据
  */
 public class DeviceModelFile {
     /**
@@ -119,7 +119,7 @@ public class DeviceModelFile {
     }
 
     /**
-     * Gets check item vo.
+     * 根据调试项目的qcId获取调试项目
      *
      * @param checkItemId the check item id
      * @return the check item vo
@@ -312,7 +312,12 @@ public class DeviceModelFile {
 //		return is ;
 //	}
 
-    @SuppressWarnings({"unchecked"})
+    /**
+     * 解析实时参数结合
+     *
+     * @param result 解析结果对象
+     * @param device 待解析机型对象
+     */
     private static void parseRealTimeSet(DeviceModelFile result, Device device) {
         RealTimeSet realTimeSet = device.getRealTimeSet();
         List<RealTimeParam> reals = realTimeSet.getRealTimeParams();
@@ -325,7 +330,12 @@ public class DeviceModelFile {
         }
     }
 
-    @SuppressWarnings("unchecked")
+    /**
+     * 解析J939集合
+     *
+     * @param result 解析结果对象
+     * @param device 待解析机型对象
+     */
     private static void parseJ1939(DeviceModelFile result, Device device) {
         J1939PgSetVO j1939Cfg = new J1939PgSetVO();
         // 赋值给父类对象 whb
@@ -410,6 +420,12 @@ public class DeviceModelFile {
         result.j1939PgSetVO = j1939Cfg;
     }
 
+    /**
+     * 解析DataSet集合
+     *
+     * @param result 解析结果对象
+     * @param device 待解析机型对象
+     */
     private static void parseDataSet(DeviceModelFile result, Device device) {
         DataSetVO dataSetVO = new DataSetVO();
         List<DSItem> dsitemxmls = device.getDataSet().getDsItems();
@@ -461,7 +477,13 @@ public class DeviceModelFile {
         result.dataSetVO = dataSetVO;
     }
 
-    @SuppressWarnings("unchecked")
+    /**
+     * 解析QCSet集合
+     *
+     * @param result 解析结果对象
+     * @param device 待解析机型对象
+     * @throws ExcException
+     */
     private static void parseQCSet(DeviceModelFile result, Device device) throws ExcException {
         List<QCType> qcTypes = device.getQcSet().getQcTypes();
         for (QCType qcType : qcTypes) {
@@ -471,6 +493,7 @@ public class DeviceModelFile {
             // 遍历xml 检测项目 标签类 生成到vo中
             for (QCItem qcitemxml : qcitemxmls) {
                 CheckItemVO checkItem = new CheckItemVO();
+                checkItem.setDictId(qcitemxml.getDictID());
                 checkItem.setId(qcitemxml.getId());
                 checkItem.setName(qcitemxml.getName());
                 checkItem.setRequire(qcitemxml.getRequire());
@@ -496,7 +519,7 @@ public class DeviceModelFile {
                 List<ENVParam> qcenvs = qcitemxml.getEnvParams().getEnvParams();
                 List<RealTimeParam> qcrealtimes = qcitemxml.getRealTimeParams().getRealTimeParams();
                 for (QCParam qcparam : qcparams) {
-                    checkItem.addQcParam(qcparam.getParam(),
+                    checkItem.addQcParam(qcparam.getDictID(), qcparam.getParam(),
                             qcparam.getValueReq(), qcparam.getPicReq(), qcparam.getValMode(), qcparam.getQCMode(),
                             qcparam.getXParam(), qcparam.getXRange(),
                             qcparam.getValidMin(),
@@ -524,6 +547,13 @@ public class DeviceModelFile {
         }
     }
 
+    /**
+     * 根据数据类型进行数值转换
+     *
+     * @param dataType  数据类型
+     * @param dataValue 数据值
+     * @return 转换后的数据对象
+     */
     private static Object convertValue(String dataType, String dataValue) {
         if (dataType.equals("BYTE")) {
             return Byte.valueOf(dataValue);
@@ -538,7 +568,12 @@ public class DeviceModelFile {
         return null;
     }
 
-
+    /**
+     * 十六进制转十进制
+     *
+     * @param hex 十六进制字符串
+     * @return 十进制字符串
+     */
     private static String hexToInteger(String hex) {
         if (hex.startsWith("0x") || hex.startsWith("0X")) {
             hex = hex.substring(2);

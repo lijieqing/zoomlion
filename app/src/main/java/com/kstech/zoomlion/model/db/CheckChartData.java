@@ -23,6 +23,8 @@ public class CheckChartData {
     @Id(autoincrement = true)
     private Long chartId;
 
+    private String dictId;//该谱图参数对应的服务器字典ID
+
     @Unique
     private Date createTime;//谱图创建时间
 
@@ -51,10 +53,11 @@ public class CheckChartData {
     @Generated(hash = 1959493665)
     private transient CheckChartDataDao myDao;
 
-    @Generated(hash = 1460536721)
-    public CheckChartData(Long chartId, Date createTime, Long itemDetailId, String paramName,
-            String unit, String chartData, String imgPath) {
+    @Generated(hash = 1280726563)
+    public CheckChartData(Long chartId, String dictId, Date createTime, Long itemDetailId,
+            String paramName, String unit, String chartData, String imgPath) {
         this.chartId = chartId;
+        this.dictId = dictId;
         this.createTime = createTime;
         this.itemDetailId = itemDetailId;
         this.paramName = paramName;
@@ -199,6 +202,14 @@ public class CheckChartData {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public String getDictId() {
+        return this.dictId;
+    }
+
+    public void setDictId(String dictId) {
+        this.dictId = dictId;
     }
 
 }
