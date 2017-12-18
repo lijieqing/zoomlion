@@ -62,7 +62,7 @@ public class ItemOperateView extends RelativeLayout implements View.OnClickListe
 
     private Button btnBlur;//模糊布局按钮
 
-    public boolean inBlur = true;//当前界面是否处在模糊状态，默认进入时为模糊状态
+    private boolean inBlur = true;//当前界面是否处在模糊状态，默认进入时为模糊状态
 
     private static final String TAG = "ItemOperateView";
 
@@ -349,6 +349,15 @@ public class ItemOperateView extends RelativeLayout implements View.OnClickListe
             rlBlur.setVisibility(VISIBLE);
             inBlur = true;
         }
+    }
+
+    /**
+     * 是否处于模糊模式
+     *
+     * @return inBlur
+     */
+    public boolean isInBlur() {
+        return inBlur;
     }
 
     /**

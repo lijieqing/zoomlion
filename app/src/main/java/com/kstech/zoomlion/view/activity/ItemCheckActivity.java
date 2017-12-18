@@ -321,7 +321,14 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
     }
 
     @Override
-    public void onStartError(String msg) {
+    public void onStartError(final String msg) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(ItemCheckActivity.this, msg, Toast.LENGTH_SHORT).show();
+                iov.chronometerReset(null, false);
+            }
+        });
         LogUtils.e(TAG, msg);
     }
 
@@ -332,12 +339,36 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
 
     @Override
     public void onSuccess(List<CheckItemParamValueVO> headers, Map<String, LinkedList<Float>> specMap, String msg) {
+        //将获得的参数数据添加到集合
+        valueVOList.addAll(headers);
+        //处理谱图
+        if (specMap != null) {
+            //谱图数据不为空时，生成谱图数据，并添加到集合中
+            for (Map.Entry<String, LinkedList<Float>> sle : specMap.entrySet()) {
+                CheckChartData chartData = new CheckChartData();
 
+                String specName = sle.getKey();
+                LinkedList<Float> specValue = sle.getValue();
+                String unit = Globals.modelFile.dataSetVO.getDSItem(specName).sUnit;
+                String data = JsonUtils.toJson(specValue);
+
+                chartData.setParamName(specName);
+                chartData.setUnit(unit);
+                chartData.setChartData(data);
+
+                chartDataList.add(chartData);
+            }
+        }
+
+        handler.sendEmptyMessage(NEW_DATA_REFRESH);
     }
 
     @Override
     public void onResultError(List<CheckItemParamValueVO> headers, String msg) {
+        //将获得的参数数据添加到集合
+        valueVOList.addAll(headers);
 
+        handler.sendEmptyMessage(NEW_DATA_REFRESH);
     }
 
     @Override
@@ -390,8 +421,9 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
 
     @Override
     public void onBackPressed() {
-        if (!iov.inBlur) {
+        if (!iov.isInBlur()) {
             iov.changeBlur();
+            iov.chronometerReset(R.color.whiteColor, false);
             iov.resetBodyViews();
             itemDetailDao.deleteByKey(detailID);
         } else {
@@ -406,7 +438,7 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
         WeakReference<ItemCheckActivity> reference;
         ItemCheckActivity activity;
 
-        public InnerHandler(ItemCheckActivity activity) {
+        private InnerHandler(ItemCheckActivity activity) {
             this.reference = new WeakReference<>(activity);
         }
 
