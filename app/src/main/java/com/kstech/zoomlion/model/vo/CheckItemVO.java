@@ -95,18 +95,19 @@ public class CheckItemVO implements Serializable {
 
     /**
      * 添加调试参数
-     * @param dictID 字典ID
-     * @param param 参数名
+     *
+     * @param dictID   字典ID
+     * @param param    参数名
      * @param valueReq 是否需要值
-     * @param picReq 是否需要图片
-     * @param valMode 值获取方式
-     * @param qcMode 判定方式
-     * @param xParam 横坐标范围
-     * @param xRange 纵坐标范围
+     * @param picReq   是否需要图片
+     * @param valMode  值获取方式
+     * @param qcMode   判定方式
+     * @param xParam   折线图横坐标参数
+     * @param xRange   xParam参数范围
      * @param validMin 最小值
      * @param validMax 最大值
      * @param validAvg 平均值
-     * @param unit 单位
+     * @param unit     单位
      * @throws ExcException
      */
     public void addQcParam(String dictID, String param,
@@ -123,7 +124,7 @@ public class CheckItemVO implements Serializable {
         vo.setValMode(valMode);
         vo.setQCMode(qcMode);
 
-        vo.setXParam(xParam);
+        vo.setXParamName(xParam);
         vo.setXRange(xRange);
 
         vo.setValidAvg(validAvg);

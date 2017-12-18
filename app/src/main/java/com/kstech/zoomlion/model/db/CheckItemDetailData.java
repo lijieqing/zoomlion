@@ -43,6 +43,9 @@ public class CheckItemDetailData {
     private String measureDeviceName;//测量终端名称
 
     @Property
+    private Integer checkTimes;//第几次调试
+
+    @Property
     private String paramsValues;//检测参数集合
 
     @Property
@@ -76,16 +79,17 @@ public class CheckItemDetailData {
     @Generated(hash = 823363946)
     private transient CheckItemDetailDataDao myDao;
 
-    @Generated(hash = 1235684807)
+    @Generated(hash = 1468533916)
     public CheckItemDetailData(Long checkItemDetailId, Long itemId, Long checkerId, String checkerName,
-            Long measureDeviceId, String measureDeviceName, String paramsValues, Integer checkResult,
-            Date startTime, Date endTime, String DESC, Boolean uploaded) {
+            Long measureDeviceId, String measureDeviceName, Integer checkTimes, String paramsValues,
+            Integer checkResult, Date startTime, Date endTime, String DESC, Boolean uploaded) {
         this.checkItemDetailId = checkItemDetailId;
         this.itemId = itemId;
         this.checkerId = checkerId;
         this.checkerName = checkerName;
         this.measureDeviceId = measureDeviceId;
         this.measureDeviceName = measureDeviceName;
+        this.checkTimes = checkTimes;
         this.paramsValues = paramsValues;
         this.checkResult = checkResult;
         this.startTime = startTime;
@@ -325,6 +329,14 @@ public class CheckItemDetailData {
 
     public void setDESC(String DESC) {
         this.DESC = DESC;
+    }
+
+    public Integer getCheckTimes() {
+        return this.checkTimes;
+    }
+
+    public void setCheckTimes(Integer checkTimes) {
+        this.checkTimes = checkTimes;
     }
 
 }

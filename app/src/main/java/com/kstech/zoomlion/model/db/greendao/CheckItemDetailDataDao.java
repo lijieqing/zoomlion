@@ -37,12 +37,13 @@ public class CheckItemDetailDataDao extends AbstractDao<CheckItemDetailData, Lon
         public final static Property CheckerName = new Property(3, String.class, "checkerName", false, "CHECKER_NAME");
         public final static Property MeasureDeviceId = new Property(4, Long.class, "measureDeviceId", false, "MEASURE_DEVICE_ID");
         public final static Property MeasureDeviceName = new Property(5, String.class, "measureDeviceName", false, "MEASURE_DEVICE_NAME");
-        public final static Property ParamsValues = new Property(6, String.class, "paramsValues", false, "PARAMS_VALUES");
-        public final static Property CheckResult = new Property(7, Integer.class, "checkResult", false, "CHECK_RESULT");
-        public final static Property StartTime = new Property(8, java.util.Date.class, "startTime", false, "START_TIME");
-        public final static Property EndTime = new Property(9, java.util.Date.class, "endTime", false, "END_TIME");
-        public final static Property DESC = new Property(10, String.class, "DESC", false, "DESC");
-        public final static Property Uploaded = new Property(11, Boolean.class, "uploaded", false, "UPLOADED");
+        public final static Property CheckTimes = new Property(6, Integer.class, "checkTimes", false, "CHECK_TIMES");
+        public final static Property ParamsValues = new Property(7, String.class, "paramsValues", false, "PARAMS_VALUES");
+        public final static Property CheckResult = new Property(8, Integer.class, "checkResult", false, "CHECK_RESULT");
+        public final static Property StartTime = new Property(9, java.util.Date.class, "startTime", false, "START_TIME");
+        public final static Property EndTime = new Property(10, java.util.Date.class, "endTime", false, "END_TIME");
+        public final static Property DESC = new Property(11, String.class, "DESC", false, "DESC");
+        public final static Property Uploaded = new Property(12, Boolean.class, "uploaded", false, "UPLOADED");
     }
 
     private DaoSession daoSession;
@@ -68,12 +69,13 @@ public class CheckItemDetailDataDao extends AbstractDao<CheckItemDetailData, Lon
                 "\"CHECKER_NAME\" TEXT," + // 3: checkerName
                 "\"MEASURE_DEVICE_ID\" INTEGER," + // 4: measureDeviceId
                 "\"MEASURE_DEVICE_NAME\" TEXT," + // 5: measureDeviceName
-                "\"PARAMS_VALUES\" TEXT," + // 6: paramsValues
-                "\"CHECK_RESULT\" INTEGER," + // 7: checkResult
-                "\"START_TIME\" INTEGER UNIQUE ," + // 8: startTime
-                "\"END_TIME\" INTEGER UNIQUE ," + // 9: endTime
-                "\"DESC\" TEXT," + // 10: DESC
-                "\"UPLOADED\" INTEGER);"); // 11: uploaded
+                "\"CHECK_TIMES\" INTEGER," + // 6: checkTimes
+                "\"PARAMS_VALUES\" TEXT," + // 7: paramsValues
+                "\"CHECK_RESULT\" INTEGER," + // 8: checkResult
+                "\"START_TIME\" INTEGER UNIQUE ," + // 9: startTime
+                "\"END_TIME\" INTEGER UNIQUE ," + // 10: endTime
+                "\"DESC\" TEXT," + // 11: DESC
+                "\"UPLOADED\" INTEGER);"); // 12: uploaded
     }
 
     /** Drops the underlying database table. */
@@ -116,34 +118,39 @@ public class CheckItemDetailDataDao extends AbstractDao<CheckItemDetailData, Lon
             stmt.bindString(6, measureDeviceName);
         }
  
+        Integer checkTimes = entity.getCheckTimes();
+        if (checkTimes != null) {
+            stmt.bindLong(7, checkTimes);
+        }
+ 
         String paramsValues = entity.getParamsValues();
         if (paramsValues != null) {
-            stmt.bindString(7, paramsValues);
+            stmt.bindString(8, paramsValues);
         }
  
         Integer checkResult = entity.getCheckResult();
         if (checkResult != null) {
-            stmt.bindLong(8, checkResult);
+            stmt.bindLong(9, checkResult);
         }
  
         java.util.Date startTime = entity.getStartTime();
         if (startTime != null) {
-            stmt.bindLong(9, startTime.getTime());
+            stmt.bindLong(10, startTime.getTime());
         }
  
         java.util.Date endTime = entity.getEndTime();
         if (endTime != null) {
-            stmt.bindLong(10, endTime.getTime());
+            stmt.bindLong(11, endTime.getTime());
         }
  
         String DESC = entity.getDESC();
         if (DESC != null) {
-            stmt.bindString(11, DESC);
+            stmt.bindString(12, DESC);
         }
  
         Boolean uploaded = entity.getUploaded();
         if (uploaded != null) {
-            stmt.bindLong(12, uploaded ? 1L: 0L);
+            stmt.bindLong(13, uploaded ? 1L: 0L);
         }
     }
 
@@ -181,34 +188,39 @@ public class CheckItemDetailDataDao extends AbstractDao<CheckItemDetailData, Lon
             stmt.bindString(6, measureDeviceName);
         }
  
+        Integer checkTimes = entity.getCheckTimes();
+        if (checkTimes != null) {
+            stmt.bindLong(7, checkTimes);
+        }
+ 
         String paramsValues = entity.getParamsValues();
         if (paramsValues != null) {
-            stmt.bindString(7, paramsValues);
+            stmt.bindString(8, paramsValues);
         }
  
         Integer checkResult = entity.getCheckResult();
         if (checkResult != null) {
-            stmt.bindLong(8, checkResult);
+            stmt.bindLong(9, checkResult);
         }
  
         java.util.Date startTime = entity.getStartTime();
         if (startTime != null) {
-            stmt.bindLong(9, startTime.getTime());
+            stmt.bindLong(10, startTime.getTime());
         }
  
         java.util.Date endTime = entity.getEndTime();
         if (endTime != null) {
-            stmt.bindLong(10, endTime.getTime());
+            stmt.bindLong(11, endTime.getTime());
         }
  
         String DESC = entity.getDESC();
         if (DESC != null) {
-            stmt.bindString(11, DESC);
+            stmt.bindString(12, DESC);
         }
  
         Boolean uploaded = entity.getUploaded();
         if (uploaded != null) {
-            stmt.bindLong(12, uploaded ? 1L: 0L);
+            stmt.bindLong(13, uploaded ? 1L: 0L);
         }
     }
 
@@ -232,12 +244,13 @@ public class CheckItemDetailDataDao extends AbstractDao<CheckItemDetailData, Lon
             cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // checkerName
             cursor.isNull(offset + 4) ? null : cursor.getLong(offset + 4), // measureDeviceId
             cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // measureDeviceName
-            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // paramsValues
-            cursor.isNull(offset + 7) ? null : cursor.getInt(offset + 7), // checkResult
-            cursor.isNull(offset + 8) ? null : new java.util.Date(cursor.getLong(offset + 8)), // startTime
-            cursor.isNull(offset + 9) ? null : new java.util.Date(cursor.getLong(offset + 9)), // endTime
-            cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10), // DESC
-            cursor.isNull(offset + 11) ? null : cursor.getShort(offset + 11) != 0 // uploaded
+            cursor.isNull(offset + 6) ? null : cursor.getInt(offset + 6), // checkTimes
+            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // paramsValues
+            cursor.isNull(offset + 8) ? null : cursor.getInt(offset + 8), // checkResult
+            cursor.isNull(offset + 9) ? null : new java.util.Date(cursor.getLong(offset + 9)), // startTime
+            cursor.isNull(offset + 10) ? null : new java.util.Date(cursor.getLong(offset + 10)), // endTime
+            cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11), // DESC
+            cursor.isNull(offset + 12) ? null : cursor.getShort(offset + 12) != 0 // uploaded
         );
         return entity;
     }
@@ -250,12 +263,13 @@ public class CheckItemDetailDataDao extends AbstractDao<CheckItemDetailData, Lon
         entity.setCheckerName(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
         entity.setMeasureDeviceId(cursor.isNull(offset + 4) ? null : cursor.getLong(offset + 4));
         entity.setMeasureDeviceName(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
-        entity.setParamsValues(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
-        entity.setCheckResult(cursor.isNull(offset + 7) ? null : cursor.getInt(offset + 7));
-        entity.setStartTime(cursor.isNull(offset + 8) ? null : new java.util.Date(cursor.getLong(offset + 8)));
-        entity.setEndTime(cursor.isNull(offset + 9) ? null : new java.util.Date(cursor.getLong(offset + 9)));
-        entity.setDESC(cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10));
-        entity.setUploaded(cursor.isNull(offset + 11) ? null : cursor.getShort(offset + 11) != 0);
+        entity.setCheckTimes(cursor.isNull(offset + 6) ? null : cursor.getInt(offset + 6));
+        entity.setParamsValues(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
+        entity.setCheckResult(cursor.isNull(offset + 8) ? null : cursor.getInt(offset + 8));
+        entity.setStartTime(cursor.isNull(offset + 9) ? null : new java.util.Date(cursor.getLong(offset + 9)));
+        entity.setEndTime(cursor.isNull(offset + 10) ? null : new java.util.Date(cursor.getLong(offset + 10)));
+        entity.setDESC(cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11));
+        entity.setUploaded(cursor.isNull(offset + 12) ? null : cursor.getShort(offset + 12) != 0);
      }
     
     @Override

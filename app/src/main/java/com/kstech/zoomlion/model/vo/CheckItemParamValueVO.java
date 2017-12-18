@@ -1,13 +1,7 @@
 package com.kstech.zoomlion.model.vo;
 
 
-import android.support.annotation.NonNull;
-
-import com.kstech.zoomlion.utils.JsonUtils;
-
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 检查项目参数值对象
@@ -58,9 +52,9 @@ public class CheckItemParamValueVO implements Comparable<CheckItemParamValueVO>,
     private Boolean PicReq;
     /**
      * 当前参数，值的获取方式
-     * AUTO（测量终端获取）
-     * MANN（人工输入）
-     * REALParam（通过实时参数获取）
+     * Auto（测量终端获取）
+     * Mann（人工输入）
+     * RealParam（通过实时参数获取）
      * Express（根据表达式获取）
      */
     private String ValMode;
@@ -72,11 +66,19 @@ public class CheckItemParamValueVO implements Comparable<CheckItemParamValueVO>,
      */
     private String QCMode;
     /**
-     * 一段折线的横坐标，通过XParam可以找到对应的DSItem中的Data集合
+     * XParam变量参数的名称
      */
-    private String XParam;
+    private String XParamName;
     /**
-     * 一段折线的纵坐标，通过XRange可以找到对应的DSItem中的Data集合
+     * XParam变量参数取到的数值
+     */
+    private String XParamValue;
+    /**
+     * XParam对应服务器的数据库字典ID
+     */
+    private String XParamDictId;
+    /**
+     * 当前参数的一段标准范围，通过XRange可以找到对应的DSItem中的Data集合
      */
     private String XRange;
     /**
@@ -91,7 +93,6 @@ public class CheckItemParamValueVO implements Comparable<CheckItemParamValueVO>,
      * 该参数平均值，某些参数的平均值。当ValModel=Express时内容描述的是表达式
      */
     private String validAvg;
-    private String imgIds;
 
     public CheckItemParamValueVO() {
     }
@@ -107,66 +108,17 @@ public class CheckItemParamValueVO implements Comparable<CheckItemParamValueVO>,
         this.PicReq = paramValue.getPicReq();
         this.ValMode = paramValue.getValMode();
         this.QCMode = paramValue.getQCMode();
-        this.XParam = paramValue.getXParam();
+        this.XParamName = paramValue.getXParamName();
+        this.XParamValue = paramValue.getXParamValue();
         this.XRange = paramValue.getXRange();
         this.validMin = paramValue.getValidMin();
         this.validMax = paramValue.getValidMax();
         this.validAvg = paramValue.getValidAvg();
-        this.imgIds = paramValue.getImgIds();
-        this.chartIds = paramValue.getChartIds();
     }
 
     public String getItemName() {
         return itemName;
     }
-
-    public String getImgIds() {
-        return imgIds;
-    }
-
-    public List<Long> getIMGs() {
-        if (imgIds != null) {
-            if (imgIds.trim().equals("")) {
-                return new ArrayList<>();
-            }
-            return JsonUtils.fromArrayJson(imgIds, Long.class);
-        } else {
-            return new ArrayList<>();
-        }
-    }
-
-    public List<Long> getCharts() {
-        if (chartIds != null) {
-            if (chartIds.trim().equals("")) {
-                return new ArrayList<>();
-            }
-            return JsonUtils.fromArrayJson(chartIds, Long.class);
-        } else {
-            return new ArrayList<>();
-        }
-    }
-
-    public void setImgIds(String imgIds) {
-        this.imgIds = imgIds;
-    }
-
-    public void setImgIds(@NonNull List<Long> imgIds) {
-        this.imgIds = JsonUtils.toJson(imgIds);
-    }
-
-    public String getChartIds() {
-        return chartIds;
-    }
-
-    public void setChartIds(String chartIds) {
-        this.chartIds = chartIds;
-    }
-
-    public void setChartIds(@NonNull List<Long> chartIds) {
-        this.chartIds = JsonUtils.toJson(chartIds);
-    }
-
-    private String chartIds;
 
     public void setItemName(String itemname) {
         this.itemName = itemname;
@@ -210,11 +162,6 @@ public class CheckItemParamValueVO implements Comparable<CheckItemParamValueVO>,
 
     public void setValidMin(String validMin) {
         this.validMin = validMin;
-//		try {
-//			Float.valueOf(validMin);
-//		}catch (NumberFormatException e){
-//			throw new ExcException(e,"配置信息异常！\n检测项目:"+ itemName +"\n 参数"+ paramName +"最小值 "+validMin+" 为非数字");
-//		}
     }
 
     public String getValidMax() {
@@ -223,11 +170,6 @@ public class CheckItemParamValueVO implements Comparable<CheckItemParamValueVO>,
 
     public void setValidMax(String validMax) {
         this.validMax = validMax;
-//		try {
-//			Float.valueOf(validMax);
-//		}catch (NumberFormatException e){
-//			throw new ExcException(e,"配置信息异常！\n检测项目:"+ itemName +"\n 参数"+ paramName +"最大值 "+validMax+" 为非数字");
-//		}
     }
 
     public String getValidAvg() {
@@ -282,12 +224,20 @@ public class CheckItemParamValueVO implements Comparable<CheckItemParamValueVO>,
         this.QCMode = QCMode;
     }
 
-    public String getXParam() {
-        return XParam;
+    public String getXParamName() {
+        return XParamName;
     }
 
-    public void setXParam(String XParam) {
-        this.XParam = XParam;
+    public void setXParamName(String XParamName) {
+        this.XParamName = XParamName;
+    }
+
+    public String getXParamValue() {
+        return XParamValue;
+    }
+
+    public void setXParamValue(String XParamValue) {
+        this.XParamValue = XParamValue;
     }
 
     public String getXRange() {
@@ -304,5 +254,13 @@ public class CheckItemParamValueVO implements Comparable<CheckItemParamValueVO>,
 
     public void setDictID(String dictID) {
         this.dictID = dictID;
+    }
+
+    public String getXParamDictId() {
+        return XParamDictId;
+    }
+
+    public void setXParamDictId(String XParamDictId) {
+        this.XParamDictId = XParamDictId;
     }
 }

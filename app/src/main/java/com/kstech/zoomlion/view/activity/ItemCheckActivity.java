@@ -212,7 +212,7 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
         detailData.setParamsValues(paramValues);
 
         //谱图数据保存
-        if (itemvo.getSpectrum() != null){
+        if (itemvo.getSpectrum() != null) {
             for (CheckChartData chartData : chartDataList) {
                 //设置detailID和创建时间
                 chartData.setItemDetailId(detailID);
@@ -296,7 +296,9 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
      * 初始化调试项目细节记录表，并获取数据库索引ID，用于后来更新数据
      */
     private void initNewDetailRecord() {
-        detailData = new CheckItemDetailData(null, itemDBID, 12l, "admin", 1l, "measure", itemvo.getJsonParams(), CheckItemDetailResultEnum.UNFINISH.getCode(), new Date(), null, null, false);
+        detailData = new CheckItemDetailData(null, itemDBID, 12l, "admin", 1l, "measure",
+                1, itemvo.getJsonParams(), CheckItemDetailResultEnum.UNFINISH.getCode(),
+                new Date(), null, null, false);
         detailID = itemDetailDao.insert(detailData);
     }
 
@@ -350,7 +352,7 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
                 valueVOList.add(vo);
             }
         }
-        if (specMap != null){
+        if (specMap != null) {
             //谱图处理
             for (Map.Entry<String, LinkedList<Float>> sle : specMap.entrySet()) {
                 CheckChartData chartData = new CheckChartData();
