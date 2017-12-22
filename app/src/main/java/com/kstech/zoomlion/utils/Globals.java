@@ -26,8 +26,14 @@ public class Globals {
 
     public static String PAD_HAS_REGISTER = "pad_has_register";//平板是否已注服务器注册
 
+    /**
+     * 调试记录相关变量
+     */
+    public static long recordID = -1;//当前机型本地调试记录ID
 
-    //com.lee.xml 标签 对应实体类的存放路径 后边加  .
+    /**
+     * com.lee.xml 标签 对应实体类的存放路径 后边加  .
+     */
     public static String CLASSNAME = "com.kstech.zoomlion.model.xmlbean.";
 
     /**

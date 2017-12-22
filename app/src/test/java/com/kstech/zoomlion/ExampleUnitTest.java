@@ -5,8 +5,6 @@ import com.kstech.zoomlion.utils.JsonUtils;
 
 import org.junit.Test;
 
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -51,12 +49,12 @@ public class ExampleUnitTest {
 
     @Test
     public void strTest() {
-        Calendar cal = Calendar.getInstance();
-        Date curDate = cal.getTime();
-        int m = curDate.getMonth();
-        System.out.println("m"+m);
-        long l = curDate.getTime();
-        System.out.println(curDate);
-        System.out.println(l);
+        String s = "${getPicTime('液压油过滤结束')}-${getPicTime('液压油过滤开始')}";
+        boolean b = s.startsWith("${");
+        System.out.println(b);
+        s = s.replace("${", "").replace("}", "");
+        System.out.println(s);
+        b = s.contains("-");
+        System.out.println(b);
     }
 }

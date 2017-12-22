@@ -1,7 +1,5 @@
 package J1939;
 
-import com.kstech.zoomlion.utils.LogUtils;
-
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -228,7 +226,7 @@ public class J1939 implements IJ1939_API {
      */
     private byte SendFrame(can_Message_ts pCanMsg, short slotIdx_u16) {
         /*
-		short	txUsedSlot_u16 = slotIdx_u16;
+        short	txUsedSlot_u16 = slotIdx_u16;
 		int		i;
 		*/
 
@@ -251,7 +249,7 @@ public class J1939 implements IJ1939_API {
             // System.out.println(" ");
             return (1);
         } else {
-            LogUtils.e("J1939LOG", "CAN zhen fa she qu man ！");
+            //LogUtils.e("J1939LOG", "CAN zhen fa she qu man ！");
             return (0);
         }
 
@@ -517,10 +515,10 @@ public class J1939 implements IJ1939_API {
      * <p>
      * 向CAN发送FIFO缓冲区连续写入指定发送数据箱的多个TP.DT直到FIFO满或该数据箱的TP.DT帧已全部发送完成
      *
-     * @param    pTxMsg *pTxMsg:	指向发送数据箱
-     * @param    frameNo_u8 frameNo_u8		:	数据帧顺序号
-     * @param    frameNums_u8 frameNums_u8		:	最多发送帧数
-     * @param    slotIdx_u16 slotIdx_u16		:	发送数据帧时使用的Slot编号
+     * @param pTxMsg       *pTxMsg:	指向发送数据箱
+     * @param frameNo_u8   frameNo_u8		:	数据帧顺序号
+     * @param frameNums_u8 frameNums_u8		:	最多发送帧数
+     * @param slotIdx_u16  slotIdx_u16		:	发送数据帧时使用的Slot编号
      * @return: 发送的帧数
      */
     private int SendDTFrames(J1939_txMsg_ts pTxMsg, short frameNo_u8, short frameNums_u8, short slotIdx_u16) {
@@ -1460,11 +1458,11 @@ public class J1939 implements IJ1939_API {
      *
      * @param mem_pas: 保留参数，用来与32位控制器J1939 API兼容
      *                 (j1939_rxMsg_ts	*mem_pas ：指向J1939消息接收数据箱数组)
+     * @param num_u16： J1939消息接收数据箱数组大小（数据箱个数）
      * @return ：
      * J1939_RC_NO_ERRORS_DU16 :		无错误
      * J1939_RC_INVALID_ADDR_DU16：		无效地址
      * J1939_RC_CFG_NOTALLOWED_DU16:	必须在j1939_initComm()之前调用本函数
-     * @param    num_u16：	J1939消息接收数据箱数组大小（数据箱个数）
      */
     @Override
     public int j1939_registerRxDataboxes(J1939_rxMsg_ts[] mem_pas, short num_u16) {

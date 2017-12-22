@@ -14,8 +14,11 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.kstech.zoomlion.MyApplication;
 import com.kstech.zoomlion.R;
+import com.kstech.zoomlion.engine.check.CheckResultVerify;
 import com.kstech.zoomlion.engine.check.ItemCheckCallBack;
 import com.kstech.zoomlion.engine.check.ItemCheckTask;
+import com.kstech.zoomlion.engine.check.XmlExpressionImpl;
+import com.kstech.zoomlion.exception.MultiArithmeticException;
 import com.kstech.zoomlion.model.db.CheckChartData;
 import com.kstech.zoomlion.model.db.CheckItemData;
 import com.kstech.zoomlion.model.db.CheckItemDetailData;
@@ -33,6 +36,7 @@ import com.kstech.zoomlion.view.widget.CameraCapView;
 import com.kstech.zoomlion.view.widget.ItemOperateBodyView;
 import com.kstech.zoomlion.view.widget.ItemOperateView;
 import com.kstech.zoomlion.view.widget.ItemShowViewInCheck;
+import com.kstech.zoomlion.view.widget.TextProgressView;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
@@ -115,9 +119,26 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
     ItemCheckTask itemCheckTask;
 
     /**
+     * 表达式对象，用于参数对象的合格不合格判断
+     */
+    XmlExpressionImpl xmlExpression;
+
+    /**
      * 调试项目 参数集合
      */
     List<CheckItemParamValueVO> valueVOList = new ArrayList<>();
+    /**
+     * 调试项目细节记录是否合格
+     */
+    boolean pass = false;
+    /**
+     * 信息提示弹窗
+     */
+    private AlertDialog dialog;
+    /**
+     * 带提示信息的进度条
+     */
+    private TextProgressView progressView;
     /**
      * 更新调试项目
      */
@@ -126,6 +147,22 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
      * 更新调试项目记录数据
      */
     private static final int NEW_DATA_REFRESH = 1;
+    /**
+     * 开始保存调试记录数据
+     */
+    private static final int START_SAVE_RECORD = 2;
+    /**
+     * 项目数据校验失败
+     */
+    private static final int RECORD_VERIFY_ERROR = 3;
+    /**
+     * 项目记录数据初始化
+     */
+    private static final int RECORD_DATA_INIT = 4;
+    /**
+     * 调试项目数据保存完成
+     */
+    private static final int RECORD_DATA_SAVED = 5;
     private static final String TAG = "ItemCheckActivity";
 
     @Override
@@ -142,6 +179,10 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
 
         //设置回调
         iov.setCameraActivity(this);
+
+        //初始化信息提示弹窗
+        progressView = new TextProgressView(this);
+        dialog = new AlertDialog.Builder(this).setView(progressView).create();
 
         //查询数据库
         ThreadManager.getThreadPool().execute(new Runnable() {
@@ -207,34 +248,53 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
     }
 
     @Override
-    public void saveRecord(String paramValues) {
-        //将数值存入detail data对象
-        detailData.setParamsValues(paramValues);
+    public void saveRecord(final String paramValues) {
+        ThreadManager.getThreadPool().execute(new Runnable() {
+            @Override
+            public void run() {
+                xmlExpression = new XmlExpressionImpl(detailData, paramValues);
+                handler.sendEmptyMessage(START_SAVE_RECORD);
+                String pValues;
+                try {
+                    pass = CheckResultVerify.itemVerify(paramValues, xmlExpression);
+                    pValues = CheckResultVerify.upDateParamValues();
 
-        //谱图数据保存
-        if (itemvo.getSpectrum() != null) {
-            for (CheckChartData chartData : chartDataList) {
-                //设置detailID和创建时间
-                chartData.setItemDetailId(detailID);
-                chartData.setCreateTime(new Date());
-                chartDataDao.insert(chartData);
+                    if (pass) {
+                        detailData.setCheckResult(CheckItemDetailResultEnum.PASS.getCode());
+                    } else {
+                        detailData.setCheckResult(CheckItemDetailResultEnum.UNPASS.getCode());
+                    }
+
+                    handler.sendEmptyMessage(RECORD_DATA_INIT);
+                    //将数值存入detail data对象
+                    detailData.setParamsValues(pValues);
+
+                    //谱图数据保存
+                    if (itemvo.getSpectrum() != null) {
+                        for (CheckChartData chartData : chartDataList) {
+                            //设置detailID和创建时间
+                            chartData.setItemDetailId(detailID);
+                            chartData.setCreateTime(new Date());
+                            chartDataDao.insert(chartData);
+                        }
+                        //清空谱图数据集合
+                        chartDataList.clear();
+                    }
+                    //重置itemDetailData的谱图数据
+                    detailData.resetCheckChartDatas();
+
+                    //更新
+                    itemDetailDao.update(detailData);
+                    //重置 调试细节记录表 为的是保持与数据库同步
+                    itemData.resetCheckItemDetailDatas();
+
+                    handler.sendEmptyMessage(RECORD_DATA_SAVED);
+                } catch (MultiArithmeticException e) {
+                    e.printStackTrace();
+                    handler.sendEmptyMessage(RECORD_VERIFY_ERROR);
+                }
             }
-            //清空谱图数据集合
-            chartDataList.clear();
-        }
-        //重置itemDetailData的谱图数据
-        detailData.resetCheckChartDatas();
-
-        //更新
-        itemDetailDao.update(detailData);
-        //重置 调试细节记录表 为的是保持与数据库同步
-        itemData.resetCheckItemDetailDatas();
-
-        //更新调试项目展示内容
-        isv.updateBody(itemDBID);
-
-        //计时器复位
-        iov.chronometerReset(R.color.whiteColor, false);
+        });
 
     }
 
@@ -460,6 +520,25 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
                         activity.iov.updateBodyAutoView(activity.valueVOList);
                         activity.detailData.setParamsValues(JsonUtils.toJson(activity.valueVOList));
                         activity.valueVOList.clear();
+                        break;
+                    case START_SAVE_RECORD:
+                        activity.dialog.show();
+                        activity.progressView.updateProgress("校验数据是否合格", 20);
+                        break;
+                    case RECORD_DATA_INIT:
+                        activity.progressView.updateProgress("校验数据完成，调试数据保存中", 45);
+                        break;
+                    case RECORD_DATA_SAVED:
+                        activity.progressView.updateProgress("数据保存成功！", 90);
+                        //更新调试项目展示内容
+                        activity.isv.updateBody(activity.itemDBID);
+                        //计时器复位
+                        activity.iov.chronometerReset(R.color.whiteColor, false);
+                        activity.dialog.cancel();
+                        break;
+                    case RECORD_VERIFY_ERROR:
+                        activity.progressView.updateProgress("校验数据失败，请确保机型配置正确", 100);
+                        activity.dialog.cancel();
                         break;
                 }
 

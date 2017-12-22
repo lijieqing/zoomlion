@@ -12,19 +12,22 @@ import java.util.List;
  */
 
 public class CheckResultVerify {
+    private static List<CheckItemParamValueVO> paramValueVOList;
+
     private CheckResultVerify() {
     }
 
     /**
      * 调试项目数据合格判定
+     *
      * @param paramValues 待判断的调试参数数据集合
-     * @param expression 判断所用到的表达式
+     * @param expression  判断所用到的表达式
      * @return 是否合格
      * @throws MultiArithmeticException 多次运算异常
      */
     public static boolean itemVerify(String paramValues, BaseXmlExpression expression) throws MultiArithmeticException {
         //将调试参数数据集合转换为JAVA对象
-        List<CheckItemParamValueVO> paramValueVOList = JsonUtils.fromArrayJson(paramValues, CheckItemParamValueVO.class);
+        paramValueVOList = JsonUtils.fromArrayJson(paramValues, CheckItemParamValueVO.class);
         //是否合格
         boolean pass = true;
         //最大值标准值
@@ -60,11 +63,24 @@ public class CheckResultVerify {
                     minV = parseValue(minValue, checkItemParamValueVO, expression);
                 }
 
-                paramV = Float.valueOf(value);
+                //如果参数值的取值模式为Express执行参数数值解析 获取数值
+                if ("Express".equals(checkItemParamValueVO.getValMode())) {
+                    paramV = parseValue(checkItemParamValueVO.getValidAvg(), checkItemParamValueVO, expression);
+                    checkItemParamValueVO.setValue(String.valueOf(paramV));
+                } else if ("RealParam".equals(checkItemParamValueVO.getValMode())) {
+                    //如果参数值的取值模式为REalParam执行表达式对象的getRealParam获取数值
+                    paramV = Float.parseFloat(expression.getRealParam(checkItemParamValueVO.getParamName()));
+                    checkItemParamValueVO.setValue(String.valueOf(paramV));
+                } else {
+                    paramV = Float.valueOf(value);
+                }
 
                 if (paramV < minV || paramV > maxV) {
                     pass = false;
                 }
+                //更新调试项目参数标准
+                checkItemParamValueVO.setValidMax(String.valueOf(maxV));
+                checkItemParamValueVO.setValidMin(String.valueOf(minV));
 
             } else {
                 if ("不合格".equals(value)) {
@@ -77,9 +93,22 @@ public class CheckResultVerify {
     }
 
     /**
+     * 更新调试项目参数数据集合，此方法应在调用itemVerify方法后使用
+     *
+     * @return 更新后的参数集合
+     */
+    public static String upDateParamValues() {
+        if (paramValueVOList == null) {
+            return null;
+        }
+        return JsonUtils.toJson(paramValueVOList);
+    }
+
+    /**
      * 从字符串中取出参数名称
+     *
      * @param str 待处理字符串 例：str = getRealParam('paramName')
-     * @return  参数名称 例：paramName
+     * @return 参数名称 例：paramName
      */
     public static String getParamName(String str) {
         int start = str.indexOf("'");
@@ -89,9 +118,10 @@ public class CheckResultVerify {
 
     /**
      * 数值解析，对于${} 描述的value字符串进行解析，返回计算后的数值
-     * @param value 待解析字符串
+     *
+     * @param value        待解析字符串
      * @param paramValueVO 调试项目参数对象
-     * @param expression 字符串解析表达式
+     * @param expression   字符串解析表达式
      * @return 解析后的数据
      * @throws MultiArithmeticException 多次运算异常
      */
@@ -106,10 +136,7 @@ public class CheckResultVerify {
                 //当前只能进行一次运算
                 if (strs.length > 2) throw new MultiArithmeticException("目前只能解析一次加减运算，😭");
                 result = valueArithmeticInit(strs, true, expression);
-            } else {
-                result = Float.valueOf(valueInit(value, expression));
-            }
-            if (value.contains("-")) {
+            } else if (value.contains("-")) {
                 String[] strs = value.split("-");
                 if (strs.length > 2) throw new MultiArithmeticException("目前只能解析一次加减运算，😭");
                 result = valueArithmeticInit(strs, false, expression);
@@ -129,8 +156,9 @@ public class CheckResultVerify {
 
     /**
      * 根据字符串集合进行数学运算，并返回结果
-     * @param strs 字符串集合
-     * @param add 是否进行加法运算，否则进行减法
+     *
+     * @param strs       字符串集合
+     * @param add        是否进行加法运算，否则进行减法
      * @param expression 表达式对象
      * @return 运算结果
      */
@@ -157,7 +185,8 @@ public class CheckResultVerify {
 
     /**
      * 非数字字符串，根据表达式转换为数值
-     * @param str 非数字字符串
+     *
+     * @param str        非数字字符串
      * @param expression 表达式对象
      * @return 数字字符串
      */

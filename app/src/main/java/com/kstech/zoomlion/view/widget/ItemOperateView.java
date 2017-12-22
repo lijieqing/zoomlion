@@ -391,12 +391,18 @@ public class ItemOperateView extends RelativeLayout implements View.OnClickListe
         if (isChecking) {
             Toast.makeText(context, "调试未完成，无法保存！", Toast.LENGTH_SHORT).show();
         } else {
-            //// TODO: 2017/9/26 保存调试记录
+            //非调试状态下，点击保存，进行空值判断
             paramValueVOList.clear();
             for (ItemOperateBodyView bodyView : bodyViews) {
                 if (bodyView.isValueEmpty()) {
-                    Toast.makeText(baseFunActivity, bodyView.getInfo().getParamName() + "未检测到数据", Toast.LENGTH_SHORT).show();
-                    return;
+                    //参数值获取方式 RealParam和Express 允许空值
+                    //在判断合格时再赋值
+                    if ("RealParam".equals(bodyView.getInfo().getValMode()) || "Express".equals(bodyView.getInfo().getValMode())) {
+                        paramValueVOList.add(bodyView.getInfo());
+                    } else {
+                        Toast.makeText(baseFunActivity, bodyView.getInfo().getParamName() + "未检测到数据", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
                 } else {
                     paramValueVOList.add(bodyView.getInfo());
                 }

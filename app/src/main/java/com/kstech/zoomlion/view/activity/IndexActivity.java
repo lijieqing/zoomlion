@@ -141,8 +141,6 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
 
     private long checkerID;//调试员ID
 
-    private long recordID = -1;//整机调试记录ID
-
     private String deviceIdentity = "test_machine_id";//调试机型编码
 
     /**
@@ -453,8 +451,8 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
                     try {
                         for (CheckItemVO checkItemVO : newItemList) {
                             itemData = new CheckItemData(null, Integer.parseInt(checkItemVO.getId()),
-                                    checkItemVO.getDictId(),checkItemVO.getName(), 0, 0, 0,
-                                    recordID, false, false, null);
+                                    checkItemVO.getDictId(), checkItemVO.getName(), 0, 0, 0,
+                                    Globals.recordID, false, false, null);
                             itemDataDao.insert(itemData);
                         }
                     } catch (Exception e) {
@@ -479,7 +477,7 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
         ThreadManager.getThreadPool().execute(new Runnable() {
             @Override
             public void run() {
-                CheckRecord record = new CheckRecord(null, "",deviceIdentity,
+                CheckRecord record = new CheckRecord(null, "", deviceIdentity,
                         "test_record_name", 123l,
                         CheckRecordResultEnum.UNFINISH.getCode(), new Date(),
                         null, 0, 0
@@ -490,14 +488,14 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
                 Message message;
                 try {
                     //插入
-                    recordID = recordDao.insert(record);
+                    Globals.recordID = recordDao.insert(record);
 
                     //遍历配置信息中的调试项目，并依次存入数据库
                     int p = 8;
                     for (CheckItemVO checkItemVO : Globals.modelFile.allCheckItemList) {
                         itemData = new CheckItemData(null, Integer.parseInt(checkItemVO.getId()),
-                                checkItemVO.getDictId(),checkItemVO.getName(), 0, 0, 0,
-                                recordID, false, false, null);
+                                checkItemVO.getDictId(), checkItemVO.getName(), 0, 0, 0,
+                                Globals.recordID, false, false, null);
                         itemDataDao.insert(itemData);
                         //handler 信息封装
                         message = Message.obtain();
