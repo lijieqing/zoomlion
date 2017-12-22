@@ -35,12 +35,8 @@ import java.util.List;
  */
 
 
-public class ItemShowViewInCheck extends RelativeLayout implements IRecyclerScrollListener {
+public class ItemShowViewInCheck extends RelativeLayout{
     private Context context;
-    private RecyclerView rvHeader;
-    private HeaderAdapter headerAdapter;
-    private SeekBar seekBar;
-    GridLayoutManager gridLayoutManager;
     LinearLayout bodyContains;
     TextView itemTitle;
 
@@ -64,42 +60,8 @@ public class ItemShowViewInCheck extends RelativeLayout implements IRecyclerScro
 
     private View initView() {
         View v = View.inflate(context, R.layout.check_item_show_in_check, null);
-        rvHeader = v.findViewById(R.id.rv_head);
         bodyContains = v.findViewById(R.id.ll_body);
         itemTitle = v.findViewById(R.id.tv_title);
-        seekBar = v.findViewById(R.id.sb_check);
-        gridLayoutManager = new GridLayoutManager(context, 1, GridLayoutManager.HORIZONTAL, false);
-        headerAdapter = new HeaderAdapter(context);
-        rvHeader.setLayoutManager(gridLayoutManager);
-        rvHeader.setAdapter(headerAdapter);
-        rvHeader.addItemDecoration(new DividerItemDecoration(context, DividerItemDecoration.HORIZONTAL_LIST));
-
-        //对seek bar设置滑动监听，监测到后更新记录体内的布局
-        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                int move;
-                if (i > 50) {
-                    move = -20;
-                } else if (i < 50) {
-                    move = 20;
-                } else {
-                    move = 0;
-                }
-                Globals.onSeekBarScroll(move, 0);
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-                seekBar.setProgress(50);
-            }
-        });
-
         return v;
     }
 
@@ -118,15 +80,11 @@ public class ItemShowViewInCheck extends RelativeLayout implements IRecyclerScro
                 .build().list();
 
         bodyContains.removeAllViews();
-        Globals.seekBarListener.clear();
-
-        Globals.addSeekBarScrollListener(this);
 
         for (CheckItemDetailData paramValue : temp) {
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, DeviceUtil.deviceHeight(context) / 15);
             ItemBodyShowViewInCheck ibs = new ItemBodyShowViewInCheck(context, paramValue);
             bodyContains.addView(ibs, params);
-            Globals.addSeekBarScrollListener(ibs);
         }
     }
 
@@ -134,11 +92,5 @@ public class ItemShowViewInCheck extends RelativeLayout implements IRecyclerScro
         itemTitle.setText(item.getName());
         Globals.paramHeadVOs.clear();
         Globals.paramHeadVOs.addAll(item.getParamNameList());
-        headerAdapter.notifyDataSetChanged();
-    }
-
-    @Override
-    public void onScroll(int x, int y) {
-        rvHeader.scrollBy(x, y);
     }
 }

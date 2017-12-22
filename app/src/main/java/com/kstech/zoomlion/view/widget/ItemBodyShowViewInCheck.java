@@ -26,14 +26,13 @@ import com.kstech.zoomlion.view.adapter.DividerItemDecoration;
  * Created by lijie on 2017/7/28.
  */
 
-public class ItemBodyShowViewInCheck extends RelativeLayout implements IRecyclerScrollListener {
+public class ItemBodyShowViewInCheck extends RelativeLayout{
     TextView tvStartTime;
+    TextView tvEndTime;
+    TextView tvUpload;
     TextView tvResult;
     TextView tvChecker;
     ImageView imgDetail;
-    RecyclerView rvBody;
-    BodyAdapter bodyAdapter;
-    GridLayoutManager gridLayoutManager;
     CheckItemDetailData paramValue;
 
     LinearLayout llScroll;
@@ -57,13 +56,18 @@ public class ItemBodyShowViewInCheck extends RelativeLayout implements IRecycler
     private View initView(final Context context) {
         View view = View.inflate(context, R.layout.check_item_body_show_in_check, null);
         tvStartTime = view.findViewById(R.id.tv_time_start);
+        tvEndTime = view.findViewById(R.id.tv_time_end);
+        tvUpload = view.findViewById(R.id.tv_item_upload);
         tvResult = view.findViewById(R.id.tv_item_result);
         tvChecker = view.findViewById(R.id.tv_item_checker);
-        rvBody = view.findViewById(R.id.rv_body);
         llScroll = view.findViewById(R.id.ll_body_scroll);
         imgDetail = view.findViewById(R.id.iv_detail);
 
         tvStartTime.setText(DateUtil.getDateTimeFormat(paramValue.getStartTime()));
+
+        tvEndTime.setText(DateUtil.getDateTimeFormat(paramValue.getEndTime()));
+
+        tvUpload.setText(paramValue.getUploaded()?"已同步":"未同步");
 
         tvResult.setText(CheckItemDetailResultEnum.getDescByCode(paramValue.getCheckResult()));
 
@@ -79,24 +83,7 @@ public class ItemBodyShowViewInCheck extends RelativeLayout implements IRecycler
             }
         });
 
-        bodyAdapter = new BodyAdapter(context, paramValue);
-        gridLayoutManager = new GridLayoutManager(context, 1, LinearLayoutManager.HORIZONTAL, false);
-
-        rvBody.setLayoutManager(gridLayoutManager);
-        rvBody.setAdapter(bodyAdapter);
-        rvBody.addItemDecoration(new DividerItemDecoration(context, DividerItemDecoration.HORIZONTAL_LIST));
-        rvBody.setOnTouchListener(new OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                return true;
-            }
-        });
-
         return view;
     }
 
-    @Override
-    public void onScroll(int x, int y) {
-        rvBody.scrollBy(x, y);
-    }
 }

@@ -269,6 +269,8 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
                     //将数值存入detail data对象
                     detailData.setParamsValues(pValues);
 
+                    detailData.setEndTime(new Date());
+
                     //谱图数据保存
                     if (itemvo.getSpectrum() != null) {
                         for (CheckChartData chartData : chartDataList) {
