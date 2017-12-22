@@ -10,6 +10,46 @@
 <Device DevBornDate="" DevDieDate="" DevStatus="" Id="" Name="" subDevId="" subDevName=""
     xmlns="http://www.kaishang.com">
     <DataSet>
+        <DSItem DataType="FLOAT" DecLen="1" Name="月温度标准" Rows="24" Unit="℃">
+            <!--一月最大最小-->
+            <Data Value="2" />
+            <Data Value="9" />
+            <!--二月最大最小-->
+            <Data Value="3" />
+            <Data Value="10" />
+            <!--三月最大最小-->
+            <Data Value="8" />
+            <Data Value="15" />
+            <!--四月最大最小-->
+            <Data Value="14" />
+            <Data Value="21" />
+            <!--五月最大最小-->
+            <Data Value="19" />
+            <Data Value="26" />
+            <!--六月最大最小-->
+            <Data Value="23" />
+            <Data Value="30" />
+            <!--七月最大最小-->
+            <Data Value="26" />
+            <Data Value="34" />
+            <!--八月最大最小-->
+            <Data Value="25" />
+            <Data Value="34" />
+            <!--九月最大最小-->
+            <Data Value="21" />
+            <Data Value="29" />
+            <!--十月最大最小-->
+            <Data Value="15" />
+            <Data Value="23" />
+            <!--十一月最大最小-->
+            <Data Value="9" />
+            <Data Value="17" />
+            <!--十二月最大最小-->
+            <Data Value="4" />
+            <Data Value="11" />
+        </DSItem>
+
+
         <!-- 定义检测系统涉及的所有数据集合 -->
         <DSItem DataType="FLOAT" DecLen="0" Name="超档位报警次数" Unit="a" />
         <DSItem DataType="FLOAT" DecLen="0" Name="吸油过滤器真空度" Unit="a" />
@@ -3380,7 +3420,8 @@
                 </Msgs>
                 <QCParams>
                     <QCParam Param="液压油温温度" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
-                        ValidMax="${getMouthTemperature()}" ValidMin="" ValueReq="true" />
+                        ValidMax="${getMaxMouthTemperature()}"
+                        ValidMin="${getMinMouthTemperature()}" ValueReq="true" />
                 </QCParams>
                 <ENVParams />
                 <RealTimeParams>

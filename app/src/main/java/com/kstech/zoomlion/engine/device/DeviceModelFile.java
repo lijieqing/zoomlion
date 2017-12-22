@@ -2,6 +2,7 @@ package com.kstech.zoomlion.engine.device;
 
 
 import com.kstech.zoomlion.ExcException;
+import com.kstech.zoomlion.model.vo.CheckItemParamValueVO;
 import com.kstech.zoomlion.model.vo.CheckItemVO;
 import com.kstech.zoomlion.model.vo.DataSetVO;
 import com.kstech.zoomlion.model.vo.J1939PgSetVO;
@@ -85,6 +86,12 @@ public class DeviceModelFile {
      */
     private List<RealTimeParamVO> realTimeParamList = new ArrayList<>();
 
+
+    /**
+     * XML文件标签类对象
+     */
+    public Device device;
+
     /**
      * Gets j 1939 pg set vo.
      *
@@ -101,6 +108,24 @@ public class DeviceModelFile {
      */
     public List<CheckItemVO> getCheckItemList() {
         return allCheckItemList;
+    }
+
+    /**
+     * 根据某个调试参数名获取对应的调试项目对象。
+     * 注意，此方法仅对于 在机型中是唯一的调试参数 有效
+     *
+     * @param param 调试参数名称
+     * @return 调试项目对象
+     */
+    public CheckItemVO getCheckItemVOByParam(String param) {
+        for (CheckItemVO checkItemVO : allCheckItemList) {
+            for (CheckItemParamValueVO checkItemParamValueVO : checkItemVO.getParamNameList()) {
+                if (param.equals(checkItemParamValueVO.getParamName())) {
+                    return checkItemVO;
+                }
+            }
+        }
+        return null;
     }
 
     /**
@@ -279,6 +304,7 @@ public class DeviceModelFile {
     public static DeviceModelFile readFromFile(Device device) throws ExcException {
         DeviceModelFile result = new DeviceModelFile();
 
+        result.device = device;
         // 解析device的基本属性
         result.setDeviceId(device.getId());
         result.setDeviceName(device.getName());

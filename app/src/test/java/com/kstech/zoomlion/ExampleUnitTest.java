@@ -1,11 +1,12 @@
 package com.kstech.zoomlion;
 
 import com.kstech.zoomlion.model.session.DeviceCatSession;
-import com.kstech.zoomlion.model.vo.CheckItemParamValueVO;
 import com.kstech.zoomlion.utils.JsonUtils;
 
 import org.junit.Test;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -46,5 +47,16 @@ public class ExampleUnitTest {
         for (DeviceCatSession deviceCatSession : list) {
             System.out.println(deviceCatSession.toString());
         }
+    }
+
+    @Test
+    public void strTest() {
+        Calendar cal = Calendar.getInstance();
+        Date curDate = cal.getTime();
+        int m = curDate.getMonth();
+        System.out.println("m"+m);
+        long l = curDate.getTime();
+        System.out.println(curDate);
+        System.out.println(l);
     }
 }

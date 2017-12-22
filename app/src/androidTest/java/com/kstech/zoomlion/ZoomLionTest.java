@@ -1,10 +1,10 @@
 package com.kstech.zoomlion;
 
 import android.content.Context;
+import android.os.SystemClock;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
-import com.kstech.zoomlion.model.session.BaseSession;
 import com.kstech.zoomlion.model.session.URLCollections;
 import com.kstech.zoomlion.model.session.UserSession;
 import com.kstech.zoomlion.utils.DeviceUtil;
@@ -14,7 +14,9 @@ import com.kstech.zoomlion.utils.MyHttpUtils;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.xutils.http.cookie.DbCookieStore;
 
+import java.net.HttpCookie;
 import java.util.HashMap;
 
 import static org.junit.Assert.assertEquals;
@@ -33,28 +35,29 @@ public class ZoomLionTest {
 
         assertEquals("com.kstech.zoomlion", appContext.getPackageName());
     }
+
     @Test
     public void RegisterTest() throws Exception {
         Context appContext = InstrumentationRegistry.getTargetContext();
         String id = DeviceUtil.getMacid(appContext);
         HashMap<String, String> maps = new HashMap<>();
-        maps.put("username","admin");
-        maps.put("password","123456");
-        maps.put("mac_addr",id);
+        maps.put("username", "admin");
+        maps.put("password", "123456");
+        maps.put("mac_addr", id);
         new MyHttpUtils().xutilsPost(null, URLCollections.REGISTER_PAD, maps, new MyHttpUtils.MyHttpCallback() {
             @Override
             public void onSuccess(Object result, String whereRequest) {
-                LogUtils.e("ServerTest","onSuccess  " +result);
+                LogUtils.e("ServerTest", "onSuccess  " + result);
             }
 
             @Override
             public void onError(Object errorMsg, String whereRequest) {
-                LogUtils.e("ServerTest","onError  "+ errorMsg);
+                LogUtils.e("ServerTest", "onError  " + errorMsg);
             }
 
             @Override
             public void onLoading(long total, long current, boolean isDownloading) {
-                LogUtils.e("ServerTest","onLoading");
+                LogUtils.e("ServerTest", "onLoading");
             }
         });
     }
@@ -64,51 +67,68 @@ public class ZoomLionTest {
         Context appContext = InstrumentationRegistry.getTargetContext();
         String macid = DeviceUtil.getMacid(appContext);
         HashMap<String, String> maps = new HashMap<>();
-        maps.put("username","ZhangSan");
-        maps.put("password","666666");
-        maps.put("portable_dev_id","3");
-        maps.put("measure_dev_id","2");
+        maps.put("username", "admin");
+        maps.put("password", "123");
+//        maps.put("portable_dev_id","3");
+//        maps.put("measure_dev_id","2");
         new MyHttpUtils().xutilsPost(null, URLCollections.USER_LOGIN, maps, new MyHttpUtils.MyHttpCallback() {
             @Override
-            public void onSuccess(Object result, String whereRequest){
-                LogUtils.e("ServerTest","onSuccess  " +result);
+            public void onSuccess(Object result, String whereRequest) {
+                DbCookieStore cookie = DbCookieStore.INSTANCE;
+                LogUtils.e("ServerTest", "cookie: " + cookie);
+                for (HttpCookie httpCookie : cookie.getCookies()) {
+                    String name = httpCookie.getName();
+                    String value = httpCookie.getValue();
+                    LogUtils.e("ServerTest", "name: " + name);
+                    LogUtils.e("ServerTest", "value: " + value);
+                }
+                LogUtils.e("ServerTest", "onSuccess  " + result);
                 boolean error;
                 UserSession session = JsonUtils.fromJson((String) result, UserSession.class);
                 error = session.isError();
-                LogUtils.e("ServerTest","onSuccess  " +error);
+                LogUtils.e("ServerTest", "onSuccess  " + error);
             }
 
             @Override
             public void onError(Object errorMsg, String whereRequest) {
-                LogUtils.e("ServerTest","onError  "+ errorMsg);
+                LogUtils.e("ServerTest", "onError  " + errorMsg);
+                DbCookieStore cookie = DbCookieStore.INSTANCE;
+                for (HttpCookie httpCookie : cookie.getCookies()) {
+                    String name = httpCookie.getName();
+                    String value = httpCookie.getValue();
+                    LogUtils.e("ServerTest", "name: " + name);
+                    LogUtils.e("ServerTest", "value: " + value);
+                }
             }
 
             @Override
             public void onLoading(long total, long current, boolean isDownloading) {
-                LogUtils.e("ServerTest","onLoading");
+                LogUtils.e("ServerTest", "onLoading");
             }
         });
+        SystemClock.sleep(5000);
     }
+
     @Test
     public void DeviceListTest() throws Exception {
         HashMap<String, String> maps = new HashMap<>();
-        maps.put("user_id","1");
-        maps.put("measure_dev_id","1");
-        maps.put("version","8");
+        maps.put("user_id", "1");
+        maps.put("measure_dev_id", "1");
+        maps.put("version", "8");
         new MyHttpUtils().xutilsGet(null, URLCollections.DEVICE_LIST_GET, null, new MyHttpUtils.MyHttpCallback() {
             @Override
-            public void onSuccess(Object result, String whereRequest){
-                LogUtils.e("ServerTest","onSuccess  " +result);
+            public void onSuccess(Object result, String whereRequest) {
+                LogUtils.e("ServerTest", "onSuccess  " + result);
             }
 
             @Override
             public void onError(Object errorMsg, String whereRequest) {
-                LogUtils.e("ServerTest","onError  "+ errorMsg);
+                LogUtils.e("ServerTest", "onError  " + errorMsg);
             }
 
             @Override
             public void onLoading(long total, long current, boolean isDownloading) {
-                LogUtils.e("ServerTest","onLoading");
+                LogUtils.e("ServerTest", "onLoading");
             }
         });
     }
@@ -117,59 +137,59 @@ public class ZoomLionTest {
     public void MeasureDevListTest() throws Exception {
         new MyHttpUtils().xutilsGet(null, URLCollections.TERMINAL_LIST_GET, null, new MyHttpUtils.MyHttpCallback() {
             @Override
-            public void onSuccess(Object result, String whereRequest){
-                LogUtils.e("ServerTest","onSuccess  " +result);
+            public void onSuccess(Object result, String whereRequest) {
+                LogUtils.e("ServerTest", "onSuccess  " + result);
             }
 
             @Override
             public void onError(Object errorMsg, String whereRequest) {
-                LogUtils.e("ServerTest","onError  "+ errorMsg);
+                LogUtils.e("ServerTest", "onError  " + errorMsg);
             }
 
             @Override
             public void onLoading(long total, long current, boolean isDownloading) {
-                LogUtils.e("ServerTest","onLoading");
+                LogUtils.e("ServerTest", "onLoading");
             }
         });
     }
 
     @Test
-    public void Cancel(){
+    public void Cancel() {
         HashMap<String, String> maps = new HashMap<>();
-        maps.put("user_id","2");
+        maps.put("user_id", "2");
         new MyHttpUtils().xutilsPost(null, URLCollections.USER_CANCEL, maps, new MyHttpUtils.MyHttpCallback() {
             @Override
-            public void onSuccess(Object result, String whereRequest){
-                LogUtils.e("ServerTest","onSuccess  " +result);
+            public void onSuccess(Object result, String whereRequest) {
+                LogUtils.e("ServerTest", "onSuccess  " + result);
             }
 
             @Override
             public void onError(Object errorMsg, String whereRequest) {
-                LogUtils.e("ServerTest","onError  "+ errorMsg);
+                LogUtils.e("ServerTest", "onError  " + errorMsg);
             }
 
             @Override
             public void onLoading(long total, long current, boolean isDownloading) {
-                LogUtils.e("ServerTest","onLoading");
+                LogUtils.e("ServerTest", "onLoading");
             }
         });
 
         maps.clear();
-        maps.put("user_id","1");
+        maps.put("user_id", "1");
         new MyHttpUtils().xutilsPost(null, URLCollections.USER_CANCEL, maps, new MyHttpUtils.MyHttpCallback() {
             @Override
-            public void onSuccess(Object result, String whereRequest){
-                LogUtils.e("ServerTest","onSuccess  " +result);
+            public void onSuccess(Object result, String whereRequest) {
+                LogUtils.e("ServerTest", "onSuccess  " + result);
             }
 
             @Override
             public void onError(Object errorMsg, String whereRequest) {
-                LogUtils.e("ServerTest","onError  "+ errorMsg);
+                LogUtils.e("ServerTest", "onError  " + errorMsg);
             }
 
             @Override
             public void onLoading(long total, long current, boolean isDownloading) {
-                LogUtils.e("ServerTest","onLoading");
+                LogUtils.e("ServerTest", "onLoading");
             }
         });
     }

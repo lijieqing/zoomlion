@@ -6,9 +6,15 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
 
+import com.kstech.zoomlion.model.session.URLCollections;
 import com.kstech.zoomlion.model.xmlbean.Device;
 import com.kstech.zoomlion.utils.Globals;
+import com.kstech.zoomlion.utils.JsonUtils;
 import com.kstech.zoomlion.view.activity.IndexActivity;
+
+import org.xutils.common.Callback;
+import org.xutils.http.RequestParams;
+import org.xutils.x;
 
 import java.io.IOException;
 
@@ -17,6 +23,7 @@ public class DeviceLoadTask extends AsyncTask<Void, String, Void> {
     private Handler handler;
     private String InExc;
     private Context context;
+    private Device device;
     public boolean isWaitting = true;
 
 
@@ -49,8 +56,38 @@ public class DeviceLoadTask extends AsyncTask<Void, String, Void> {
 
         try {
             handler.sendMessage(message);
-            Globals.modelFile = DeviceModelFile.readFromFile((Device) XMLAPI
-                    .readXML(context.getAssets().open("zoomlion.xml")));
+            RequestParams p = new RequestParams(URLCollections.GET_DEVICE_BY_CAT_ID);
+            p.addQueryStringParameter("category_id","1");
+            x.http().get(p, new Callback.CommonCallback<String>() {
+                @Override
+                public void onSuccess(String result) {
+                    device = JsonUtils.fromJson(result,Device.class);
+                }
+
+                @Override
+                public void onError(Throwable ex, boolean isOnCallback) {
+
+                }
+
+                @Override
+                public void onCancelled(CancelledException cex) {
+
+                }
+
+                @Override
+                public void onFinished() {
+
+                }
+            });
+            if (device == null){
+                device = (Device) XMLAPI.readXML(context.getAssets().open("zoomlion.xml"));
+                Globals.modelFile = DeviceModelFile.readFromFile(device);
+            }else {
+                Globals.modelFile = DeviceModelFile.readFromFile(device);
+            }
+
+            device = null;
+
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -13,12 +13,18 @@ public interface BaseXmlExpression {
     /**
      * 获取本地数据库中该参数的最新一条数据
      *
-     * @param qcID     qc ID 调试项目ID
-     * @param param    the param 所查参数名称
-     * @param dataType 数据类型
+     * @param param the param 所查参数名称
      * @return 数据库数值
      */
-    String getDBParam(int qcID, String param, Class dataType);
+    String getDBParam(String param);
+
+    /**
+     * 获取图片数据创建时间
+     *
+     * @param param 参数名
+     * @return 创建时间 new Date() 的toString
+     */
+    String getPicTime(String param);
 
     /**
      * 获取实时参数的数值
@@ -37,11 +43,18 @@ public interface BaseXmlExpression {
     String getCurrentParam(String param);
 
     /**
-     * 获取当前月份的标准温度
+     * 获取当前月份的标准温度最大值
      *
      * @return the mouth temperature
      */
-    String getMouthTemperature();
+    String getMaxMouthTemperature();
+
+    /**
+     * 获取当前月份的标准温度最小值
+     *
+     * @return the mouth temperature
+     */
+    String getMinMouthTemperature();
 
     /**
      * 获取某个参数对应的标准值数据集合

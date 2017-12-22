@@ -1,12 +1,14 @@
 package com.kstech.zoomlion.model.xmlbean;
 
+import com.kstech.zoomlion.model.ServerData;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by lijie on 2017/6/13.
  */
-public class DSItem {
+public class DSItem extends ServerData {
     private String DataType;
     private String DecLen;
     private String LinkTo;

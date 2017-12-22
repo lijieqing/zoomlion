@@ -23,9 +23,9 @@ public class MyHttpUtils {
      */
     public void xutilsGet(final String whereRequest, String url, HashMap<String, String> maps, final MyHttpCallback callback) {
         RequestParams params = new RequestParams(url);
-        if (null != maps && !maps.isEmpty()){
-            for (Map.Entry<String,String> entry : maps.entrySet()){
-                params.addQueryStringParameter(entry.getKey(),entry.getValue());
+        if (null != maps && !maps.isEmpty()) {
+            for (Map.Entry<String, String> entry : maps.entrySet()) {
+                params.addQueryStringParameter(entry.getKey(), entry.getValue());
             }
         }
         x.http().get(params, new Callback.CommonCallback<String>() {
@@ -62,9 +62,9 @@ public class MyHttpUtils {
      */
     public void xutilsPost(final String whereRequest, String url, HashMap<String, String> maps, final MyHttpCallback callback) {
         RequestParams params = new RequestParams(url);
-        if (null != maps && !maps.isEmpty()){
-            for (Map.Entry<String,String> entry : maps.entrySet()){
-                params.addQueryStringParameter(entry.getKey(),entry.getValue());
+        if (null != maps && !maps.isEmpty()) {
+            for (Map.Entry<String, String> entry : maps.entrySet()) {
+                params.addBodyParameter(entry.getKey(), entry.getValue());
             }
         }
         x.http().post(params, new Callback.CommonCallback<String>() {
@@ -109,32 +109,38 @@ public class MyHttpUtils {
         x.http().post(params, new Callback.ProgressCallback<File>() {
             @Override
             public void onSuccess(File result) {
-                callback.onSuccess(result,null);
+                callback.onSuccess(result, null);
             }
+
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
-                callback.onError(ex.toString(),null);
+                callback.onError(ex.toString(), null);
             }
+
             @Override
             public void onCancelled(CancelledException cex) {
             }
+
             @Override
             public void onFinished() {
             }
+
             //网络请求之前回调
             @Override
             public void onWaiting() {
             }
+
             //网络请求开始的时候回调
             @Override
             public void onStarted() {
             }
+
             //下载的时候不断回调的方法
             @Override
             public void onLoading(long total, long current, boolean isDownloading) {
-                callback.onLoading(total,current,isDownloading);
+                callback.onLoading(total, current, isDownloading);
                 //当前进度和文件总大小
-                Log.i("JAVA","current："+ current +"，total："+total);
+                Log.i("JAVA", "current：" + current + "，total：" + total);
             }
         });
     }
@@ -143,32 +149,31 @@ public class MyHttpUtils {
     /**
      * 文件上传
      */
-   public void xutilsUpload(RequestParams params){
-       x.http().post(params, new Callback.CommonCallback<String>(){
+    public void xutilsUpload(RequestParams params) {
+        x.http().post(params, new Callback.CommonCallback<String>() {
 
-           @Override
-           public void onSuccess(String result) {
-               Log.e("upload",result);
-           }
+            @Override
+            public void onSuccess(String result) {
+                Log.e("upload", result);
+            }
 
-           @Override
-           public void onError(Throwable ex, boolean isOnCallback) {
-               Log.e("upload",ex.toString());
-           }
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+                Log.e("upload", ex.toString());
+            }
 
-           @Override
-           public void onCancelled(CancelledException cex) {
+            @Override
+            public void onCancelled(CancelledException cex) {
 
-           }
+            }
 
-           @Override
-           public void onFinished() {
-               Log.e("upload","onFinished");
-           }
+            @Override
+            public void onFinished() {
+                Log.e("upload", "onFinished");
+            }
 
-       });
-   }
-
+        });
+    }
 
 
     public interface MyHttpCallback {

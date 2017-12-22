@@ -320,7 +320,7 @@ public class ItemCheckTask extends AsyncTask<Void, String, Void> implements J193
      * @param dataVar J939DataVar对象
      * @return 数据值
      */
-    private String getDataVarValue(J1939_DataVar_ts dataVar) {
+    public static String getDataVarValue(J1939_DataVar_ts dataVar) {
         String checkvalue;
         //小数点后位数
         byte bDataDec = dataVar.bDataDec;
