@@ -9,6 +9,7 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -26,6 +27,7 @@ import com.kstech.zoomlion.model.db.greendao.CheckChartDataDao;
 import com.kstech.zoomlion.model.db.greendao.CheckItemDataDao;
 import com.kstech.zoomlion.model.db.greendao.CheckItemDetailDataDao;
 import com.kstech.zoomlion.model.enums.CheckItemDetailResultEnum;
+import com.kstech.zoomlion.model.enums.CheckItemResultEnum;
 import com.kstech.zoomlion.model.vo.CheckItemParamValueVO;
 import com.kstech.zoomlion.model.vo.CheckItemVO;
 import com.kstech.zoomlion.utils.Globals;
@@ -65,6 +67,12 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
      */
     @ViewInject(R.id.isv_check)
     private ItemShowViewInCheck isv;
+
+    @ViewInject(R.id.item_check_ll_realtime)
+    private LinearLayout llRealTime;
+
+    @ViewInject(R.id.item_check_ll_checkinfo)
+    private LinearLayout llCheckInfo;
     /**
      * 照片捕获view，包含拍照、保存、重新开始
      */
@@ -252,16 +260,23 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
         ThreadManager.getThreadPool().execute(new Runnable() {
             @Override
             public void run() {
+                //创建表达式处理对象
                 xmlExpression = new XmlExpressionImpl(detailData, paramValues);
                 handler.sendEmptyMessage(START_SAVE_RECORD);
                 String pValues;
                 try {
+                    //判断是否合格
                     pass = CheckResultVerify.itemVerify(paramValues, xmlExpression);
+                    //获取判定后的参数数据集合
                     pValues = CheckResultVerify.upDateParamValues();
-
+                    //根据是否合格，更新itemData和detailData
                     if (pass) {
+                        int passCount = itemData.getPassCounts()+1;
+                        //当前调试合格，更新连续通过次数
+                        itemData.setPassCounts(passCount);
                         detailData.setCheckResult(CheckItemDetailResultEnum.PASS.getCode());
                     } else {
+                        itemData.setPassCounts(0);
                         detailData.setCheckResult(CheckItemDetailResultEnum.UNPASS.getCode());
                     }
 
@@ -287,8 +302,25 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
 
                     //更新
                     itemDetailDao.update(detailData);
+
                     //重置 调试细节记录表 为的是保持与数据库同步
                     itemData.resetCheckItemDetailDatas();
+
+                    //对itemData判定是否合格
+                    int sumCount = itemData.getCheckItemDetailDatas().size();
+                    if (sumCount >= itemvo.getTimes()){
+                        //连续通过次数达到标准次数，合格，否则不合格
+                        if (itemData.getPassCounts() >= itemvo.getTimes()) {
+                            itemData.setCheckResult(CheckItemResultEnum.PASS.getCode());
+                        }else {
+                            itemData.setCheckResult(CheckItemResultEnum.UNPASS.getCode());
+                        }
+                    }else {
+                        itemData.setCheckResult(CheckItemResultEnum.UNFINISH.getCode());
+                    }
+                    // TODO: 2017/12/26 此处需要将数据提交服务器，根据返回结果更新upload字段
+                    //更新数据库
+                    itemDao.update(itemData);
 
                     handler.sendEmptyMessage(RECORD_DATA_SAVED);
                 } catch (MultiArithmeticException e) {

@@ -37,7 +37,7 @@ public class CheckItemDataDao extends AbstractDao<CheckItemData, Long> {
         public final static Property ItemName = new Property(3, String.class, "itemName", false, "ITEM_NAME");
         public final static Property CheckResult = new Property(4, Integer.class, "checkResult", false, "CHECK_RESULT");
         public final static Property SumCounts = new Property(5, Integer.class, "sumCounts", false, "SUM_COUNTS");
-        public final static Property UnpassCounts = new Property(6, Integer.class, "unpassCounts", false, "UNPASS_COUNTS");
+        public final static Property PassCounts = new Property(6, Integer.class, "passCounts", false, "PASS_COUNTS");
         public final static Property RecordId = new Property(7, Long.class, "recordId", false, "RECORD_ID");
         public final static Property SkipCheck = new Property(8, Boolean.class, "skipCheck", false, "SKIP_CHECK");
         public final static Property Uploaded = new Property(9, Boolean.class, "uploaded", false, "UPLOADED");
@@ -67,7 +67,7 @@ public class CheckItemDataDao extends AbstractDao<CheckItemData, Long> {
                 "\"ITEM_NAME\" TEXT," + // 3: itemName
                 "\"CHECK_RESULT\" INTEGER," + // 4: checkResult
                 "\"SUM_COUNTS\" INTEGER," + // 5: sumCounts
-                "\"UNPASS_COUNTS\" INTEGER," + // 6: unpassCounts
+                "\"PASS_COUNTS\" INTEGER," + // 6: passCounts
                 "\"RECORD_ID\" INTEGER," + // 7: recordId
                 "\"SKIP_CHECK\" INTEGER," + // 8: skipCheck
                 "\"UPLOADED\" INTEGER," + // 9: uploaded
@@ -114,9 +114,9 @@ public class CheckItemDataDao extends AbstractDao<CheckItemData, Long> {
             stmt.bindLong(6, sumCounts);
         }
  
-        Integer unpassCounts = entity.getUnpassCounts();
-        if (unpassCounts != null) {
-            stmt.bindLong(7, unpassCounts);
+        Integer passCounts = entity.getPassCounts();
+        if (passCounts != null) {
+            stmt.bindLong(7, passCounts);
         }
  
         Long recordId = entity.getRecordId();
@@ -174,9 +174,9 @@ public class CheckItemDataDao extends AbstractDao<CheckItemData, Long> {
             stmt.bindLong(6, sumCounts);
         }
  
-        Integer unpassCounts = entity.getUnpassCounts();
-        if (unpassCounts != null) {
-            stmt.bindLong(7, unpassCounts);
+        Integer passCounts = entity.getPassCounts();
+        if (passCounts != null) {
+            stmt.bindLong(7, passCounts);
         }
  
         Long recordId = entity.getRecordId();
@@ -220,7 +220,7 @@ public class CheckItemDataDao extends AbstractDao<CheckItemData, Long> {
             cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // itemName
             cursor.isNull(offset + 4) ? null : cursor.getInt(offset + 4), // checkResult
             cursor.isNull(offset + 5) ? null : cursor.getInt(offset + 5), // sumCounts
-            cursor.isNull(offset + 6) ? null : cursor.getInt(offset + 6), // unpassCounts
+            cursor.isNull(offset + 6) ? null : cursor.getInt(offset + 6), // passCounts
             cursor.isNull(offset + 7) ? null : cursor.getLong(offset + 7), // recordId
             cursor.isNull(offset + 8) ? null : cursor.getShort(offset + 8) != 0, // skipCheck
             cursor.isNull(offset + 9) ? null : cursor.getShort(offset + 9) != 0, // uploaded
@@ -237,7 +237,7 @@ public class CheckItemDataDao extends AbstractDao<CheckItemData, Long> {
         entity.setItemName(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
         entity.setCheckResult(cursor.isNull(offset + 4) ? null : cursor.getInt(offset + 4));
         entity.setSumCounts(cursor.isNull(offset + 5) ? null : cursor.getInt(offset + 5));
-        entity.setUnpassCounts(cursor.isNull(offset + 6) ? null : cursor.getInt(offset + 6));
+        entity.setPassCounts(cursor.isNull(offset + 6) ? null : cursor.getInt(offset + 6));
         entity.setRecordId(cursor.isNull(offset + 7) ? null : cursor.getLong(offset + 7));
         entity.setSkipCheck(cursor.isNull(offset + 8) ? null : cursor.getShort(offset + 8) != 0);
         entity.setUploaded(cursor.isNull(offset + 9) ? null : cursor.getShort(offset + 9) != 0);

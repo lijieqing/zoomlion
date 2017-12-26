@@ -91,7 +91,7 @@ public final class GreenDaoUtils {
             //初始化总检测次数
             itemData.setSumCounts(0);
             //初始化未合格次数
-            itemData.setUnpassCounts(0);
+            itemData.setPassCounts(0);
             //默认不跳过检测
             itemData.setSkipCheck(!checkItemVO.isRequire());
             //默认未上传

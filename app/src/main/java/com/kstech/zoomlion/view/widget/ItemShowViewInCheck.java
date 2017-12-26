@@ -44,19 +44,54 @@ import java.util.List;
 
 
 public class ItemShowViewInCheck extends RelativeLayout {
+    /**
+     * 上下文对象
+     */
     private Context context;
+    /**
+     * recycler view
+     */
     private RecyclerView rvDetailDatas;
+    /**
+     * 自定义adapter 处理detail data数据集合
+     */
     private DetailDataAdapter detailDataAdapter;
-    TextView itemTitle;
-    TextView tvDeviceNum;
-    TextView tvItemResult;
-    RefreshLayout refreshLayout;
-    LinearLayoutManager linearLayoutManager;
+    /**
+     * 当前调试项目名称
+     */
+    private TextView itemTitle;
+    /**
+     * 当前调试机型编号
+     */
+    private TextView tvDeviceNum;
+    /**
+     * 当前调试项目结论
+     */
+    private TextView tvItemResult;
+    /**
+     * 支持上拉加载布局
+     */
+    private RefreshLayout refreshLayout;
+    /**
+     * recycler 线性布局管理器
+     */
+    private LinearLayoutManager linearLayoutManager;
+    /**
+     * 调试项目细节数据集合
+     */
     private List<CheckItemDetailData> detailDatas = new ArrayList<>();
-
-    long itemDBId = -1;
-    int pageItems = 7;
-    int offset = 7;
+    /**
+     * 调试项目数据ID
+     */
+    private long itemDBId = -1;
+    /**
+     *当前调试项目细节数据每次展示的数量
+     */
+    private int pageItems = 7;
+    /**
+     * 数据库查询时的偏移量 与limit结合使用，分页效果
+     */
+    private int offset = 7;
 
     public ItemShowViewInCheck(Context context) {
         super(context);
@@ -76,6 +111,10 @@ public class ItemShowViewInCheck extends RelativeLayout {
         this.addView(initView());
     }
 
+    /**
+     * 初始化布局
+     * @return view
+     */
     private View initView() {
         View v = View.inflate(context, R.layout.check_item_show_in_check, null);
         rvDetailDatas = v.findViewById(R.id.rv_detail_datas);
@@ -158,6 +197,9 @@ public class ItemShowViewInCheck extends RelativeLayout {
         Globals.paramHeadVOs.addAll(item.getParamNameList());
     }
 
+    /**
+     * 继承AbstractRecyclerAdapter 实现可以添加Header和Footer功能
+     */
     class DetailDataAdapter extends AbstractRecyclerAdapter<CheckItemDetailData> {
         Context mContext;
 

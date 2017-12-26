@@ -22,13 +22,60 @@
             android:src="@drawable/header_logo" />
     </RelativeLayout>
 
-    <com.kstech.zoomlion.view.widget.ItemShowViewInCheck
-        android:id="@+id/isv_check"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="3">
+        android:layout_weight="3"
+        android:orientation="horizontal">
 
-    </com.kstech.zoomlion.view.widget.ItemShowViewInCheck>
+        <com.kstech.zoomlion.view.widget.ItemShowViewInCheck
+            android:id="@+id/isv_check"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </com.kstech.zoomlion.view.widget.ItemShowViewInCheck>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="8"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5.3"/>
+
+                <LinearLayout
+                    android:id="@+id/item_check_ll_realtime"
+                    android:orientation="horizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4"
+                    android:background="#ccc">
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/item_check_ll_checkinfo"
+                    android:orientation="horizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:background="#aaa">
+
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
 
     <com.kstech.zoomlion.view.widget.ItemOperateView
         android:id="@+id/iov_test"

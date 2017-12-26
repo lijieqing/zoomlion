@@ -41,7 +41,7 @@ public class CheckItemData {
     private Integer sumCounts;//多有检测次数统计值
 
     @Property
-    private Integer unpassCounts;//不合格检测次数统计值
+    private Integer passCounts;//连续合格检测次数统计值
 
     private Long recordId;
 
@@ -71,9 +71,9 @@ public class CheckItemData {
     @Generated(hash = 224233260)
     private transient CheckItemDataDao myDao;
 
-    @Generated(hash = 1823803508)
+    @Generated(hash = 548454720)
     public CheckItemData(Long checkItemId, Integer qcId, String dictId, String itemName,
-            Integer checkResult, Integer sumCounts, Integer unpassCounts, Long recordId,
+            Integer checkResult, Integer sumCounts, Integer passCounts, Long recordId,
             Boolean skipCheck, Boolean uploaded, String itemDesc) {
         this.checkItemId = checkItemId;
         this.qcId = qcId;
@@ -81,7 +81,7 @@ public class CheckItemData {
         this.itemName = itemName;
         this.checkResult = checkResult;
         this.sumCounts = sumCounts;
-        this.unpassCounts = unpassCounts;
+        this.passCounts = passCounts;
         this.recordId = recordId;
         this.skipCheck = skipCheck;
         this.uploaded = uploaded;
@@ -130,14 +130,6 @@ public class CheckItemData {
 
     public void setSumCounts(Integer sumCounts) {
         this.sumCounts = sumCounts;
-    }
-
-    public Integer getUnpassCounts() {
-        return this.unpassCounts;
-    }
-
-    public void setUnpassCounts(Integer unpassCounts) {
-        this.unpassCounts = unpassCounts;
     }
 
     public Long getRecordId() {
@@ -313,6 +305,14 @@ public class CheckItemData {
 
     public void setDictId(String dictId) {
         this.dictId = dictId;
+    }
+
+    public Integer getPassCounts() {
+        return this.passCounts;
+    }
+
+    public void setPassCounts(Integer passCounts) {
+        this.passCounts = passCounts;
     }
 
 }
