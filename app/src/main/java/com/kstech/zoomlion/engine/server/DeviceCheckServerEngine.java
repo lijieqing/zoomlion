@@ -70,10 +70,11 @@ public class DeviceCheckServerEngine implements IDeviceCheckEngine {
 
         //RequestParams params = new RequestParams(URLCollections.UPLOAD_ITEM_DETAIL_DATA);
         RequestParams params = new RequestParams(url);
+        params.addHeader("Cookie", "sid=1111111");
         //基本ID信息
         params.addBodyParameter("device_id", itemDetailData.getItemData().getCheckRecord().getDeviceRecordServerId());
         params.addBodyParameter("device_qcitem_id", itemDetailData.getItemData().getDictId());
-        params.addBodyParameter("checkline_id", "");
+        params.addBodyParameter("checkitem_status", itemDetailData.getItemData().getCheckResult() + "");
         //基本调试项目信息
         params.addBodyParameter("check_times", itemDetailData.getCheckTimes() + "");
         params.addBodyParameter("param_values", itemDetailData.getParamsValues());

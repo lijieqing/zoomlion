@@ -16,11 +16,28 @@ public enum CheckItemResultEnum {
         this.desc = desc;
         this.code = code;
     }
+
     public String getDesc() {
         return desc;
     }
 
     public int getCode() {
         return code;
+    }
+
+    public static String getDescByCode(int code) {
+        String desc = UNFINISH.desc;
+        switch (code) {
+            case 0:
+                desc = UNFINISH.desc;
+                break;
+            case 1:
+                desc = PASS.desc;
+                break;
+            case 2:
+                desc = UNPASS.desc;
+                break;
+        }
+        return desc;
     }
 }

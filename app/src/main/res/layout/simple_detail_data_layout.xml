@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/iv_detail"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.6"
+            android:gravity="center"
+            android:src="@drawable/show_detail"
+            android:textSize="15sp" />
+
+        <TextView
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="@color/zoomLionColor" />
+
+        <TextView
+            android:id="@+id/tv_time_start"
+            style="@style/ItemHead"
+            android:text="开始时间" />
+
+        <TextView
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="@color/zoomLionColor" />
+
+        <TextView
+            android:id="@+id/tv_time_end"
+            style="@style/ItemHead"
+            android:text="结束时间" />
+
+        <TextView
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="@color/zoomLionColor" />
+
+        <TextView
+            android:id="@+id/tv_item_upload"
+            style="@style/ItemHead"
+            android:text="同步" />
+
+        <TextView
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="@color/zoomLionColor" />
+
+        <TextView
+            android:id="@+id/tv_item_result"
+            style="@style/ItemHead"
+            android:text="结论" />
+
+        <TextView
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="@color/zoomLionColor" />
+
+        <TextView
+            android:id="@+id/tv_item_checker"
+            style="@style/ItemHead"
+            android:text="检验员" />
+    </LinearLayout>
+
+</RelativeLayout>

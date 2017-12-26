@@ -126,38 +126,48 @@
                         android:gravity="center"
                         android:text="详情"
                         android:textSize="15sp" />
+
                     <TextView
-                        android:background="@color/zoomLionColor"
                         android:layout_width="1px"
-                        android:layout_height="match_parent" />
+                        android:layout_height="match_parent"
+                        android:background="@color/zoomLionColor" />
+
                     <TextView
                         style="@style/ItemHead"
                         android:text="开始时间" />
+
                     <TextView
-                        android:background="@color/zoomLionColor"
                         android:layout_width="1px"
-                        android:layout_height="match_parent" />
+                        android:layout_height="match_parent"
+                        android:background="@color/zoomLionColor" />
+
                     <TextView
                         style="@style/ItemHead"
                         android:text="结束时间" />
+
                     <TextView
-                        android:background="@color/zoomLionColor"
                         android:layout_width="1px"
-                        android:layout_height="match_parent" />
+                        android:layout_height="match_parent"
+                        android:background="@color/zoomLionColor" />
+
                     <TextView
                         style="@style/ItemHead"
                         android:text="同步" />
+
                     <TextView
-                        android:background="@color/zoomLionColor"
                         android:layout_width="1px"
-                        android:layout_height="match_parent" />
+                        android:layout_height="match_parent"
+                        android:background="@color/zoomLionColor" />
+
                     <TextView
                         style="@style/ItemHead"
                         android:text="结论" />
+
                     <TextView
-                        android:background="@color/zoomLionColor"
                         android:layout_width="1px"
-                        android:layout_height="match_parent" />
+                        android:layout_height="match_parent"
+                        android:background="@color/zoomLionColor" />
+
                     <TextView
                         style="@style/ItemHead"
                         android:text="检验员" />
@@ -168,20 +178,20 @@
                     android:layout_height="1dp"
                     android:background="@color/zoomLionColor" />
 
-                <ScrollView
+                <com.kstech.zoomlion.view.widget.RefreshLayout
+                    android:id="@+id/detail_fresh_load"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="6"
-                    android:scrollbars="vertical">
+                    android:layout_weight="6">
 
-                    <LinearLayout
-                        android:id="@+id/ll_body"
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rv_detail_datas"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:layout_height="match_parent"
+                        android:scrollbars="vertical">
 
-                    </LinearLayout>
-                </ScrollView>
+                    </android.support.v7.widget.RecyclerView>
+                </com.kstech.zoomlion.view.widget.RefreshLayout>
 
             </LinearLayout>
 
