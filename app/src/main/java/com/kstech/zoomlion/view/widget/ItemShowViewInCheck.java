@@ -11,7 +11,6 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -85,7 +84,7 @@ public class ItemShowViewInCheck extends RelativeLayout {
      */
     private long itemDBId = -1;
     /**
-     *当前调试项目细节数据每次展示的数量
+     * 当前调试项目细节数据每次展示的数量
      */
     private int pageItems = 7;
     /**
@@ -113,6 +112,7 @@ public class ItemShowViewInCheck extends RelativeLayout {
 
     /**
      * 初始化布局
+     *
      * @return view
      */
     private View initView() {
@@ -210,13 +210,7 @@ public class ItemShowViewInCheck extends RelativeLayout {
 
         @Override
         protected MyHolder onCreateNormalViewHolder(ViewGroup parent) {
-            View v = getLayout(R.layout.simple_detail_data_layout);
-            if (v.getParent() != null) {
-                ViewGroup vg = (ViewGroup) v.getParent();
-                vg.removeView(v);
-                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-                parent.addView(v, params);
-            }
+            View v = getLayout(parent, R.layout.simple_detail_data_layout);
             return new MyHolder(v);
         }
 

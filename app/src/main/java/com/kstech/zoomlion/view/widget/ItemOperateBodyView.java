@@ -19,9 +19,12 @@ import android.widget.Toast;
 import com.kstech.zoomlion.R;
 import com.kstech.zoomlion.model.db.CheckImageData;
 import com.kstech.zoomlion.model.vo.CheckItemParamValueVO;
+import com.kstech.zoomlion.utils.DateUtil;
 import com.kstech.zoomlion.utils.ItemFunctionUtils;
 import com.kstech.zoomlion.utils.LogUtils;
 import com.kstech.zoomlion.view.activity.BaseFunActivity;
+
+import java.util.Date;
 
 /**
  * Created by lijie on 2017/9/4.
@@ -228,8 +231,9 @@ public class ItemOperateBodyView extends RelativeLayout {
     public void updateCameraInfo(CheckImageData imgData) {
         if (imgData != null) {
             picSaved = true;
-            tvCamera.setText(imgData.getImgPath());
-            Toast.makeText(baseFunActivity, imgData.getImgPath(), Toast.LENGTH_SHORT).show();
+            String date = DateUtil.getDateTimeFormat14(new Date());
+            tvCamera.setText(date);
+            baseFunActivity.cameraCancel();
         }
     }
 

@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -141,8 +142,15 @@ public abstract class AbstractRecyclerAdapter<T> extends RecyclerView.Adapter<Ab
      * @param layoutId 布局文件ID
      * @return 生成好的view
      */
-    protected View getLayout(int layoutId) {
-        return LayoutInflater.from(mContext).inflate(layoutId, null);
+    protected View getLayout(ViewGroup parent, int layoutId) {
+        View v = LayoutInflater.from(mContext).inflate(layoutId, null);
+        if (v.getParent() != null) {
+            ViewGroup vg = (ViewGroup) v.getParent();
+            vg.removeView(v);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+            parent.addView(v, params);
+        }
+        return v;
     }
 
     /**

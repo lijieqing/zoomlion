@@ -388,6 +388,7 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
      * @param cr 整机调试记录实体类
      */
     private void verifyCheckRecord(@NonNull final CheckRecord cr) {
+        Globals.recordID = cr.getCheckRecordId();
         if (newItemList == null) {
             newItemList = new ArrayList<>();
         } else {

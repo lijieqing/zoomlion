@@ -17,6 +17,11 @@ public abstract class BaseFunActivity extends BaseActivity {
     public abstract void camera(CheckItemParamValueVO checkItemParamValueVO, ItemOperateBodyView iobv);
 
     /**
+     * 图片捕获弹窗取消 回调此方法
+     */
+    public abstract void cameraCancel();
+
+    /**
      * 点击开始调试时 回调此方法
      */
     public abstract void startCheck();

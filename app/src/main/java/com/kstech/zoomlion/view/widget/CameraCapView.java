@@ -137,18 +137,22 @@ public class CameraCapView extends RelativeLayout implements View.OnClickListene
     public void onClick(View v) {
         Intent cameraIntent = null;
         Uri imageUri = null;
-
+        File temp;
         switch (v.getId()) {
             case R.id.Camerabtn:
                 cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                imageUri = Uri.fromFile(new File(Environment.getExternalStorageDirectory(), "workupload.jpg"));
+                temp = new File(Environment.getExternalStorageDirectory() + "/workupload.jpg");
+                temp.deleteOnExit();
+                imageUri = Uri.fromFile(temp);
                 //指定照片保存路径（SD卡），workupload.jpg为一个临时文件，每次拍照后这个图片都会被替换
                 cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
                 activity.startActivityForResult(cameraIntent, 1);
                 break;
             case R.id.agin:
                 cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                imageUri = Uri.fromFile(new File(Environment.getExternalStorageDirectory(), "workupload.jpg"));
+                temp = new File(Environment.getExternalStorageDirectory() + "/workupload.jpg");
+                temp.deleteOnExit();
+                imageUri = Uri.fromFile(temp);
                 //指定照片保存路径（SD卡），workupload.jpg为一个临时文件，每次拍照后这个图片都会被替换
                 cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
                 activity.startActivityForResult(cameraIntent, 1);
@@ -185,7 +189,7 @@ public class CameraCapView extends RelativeLayout implements View.OnClickListene
         FileUtil.copy(Environment.getExternalStorageDirectory() + "/workupload.jpg", fname);
         CheckImageData imgdata = new CheckImageData(null, paramDictId, new Date(), detailID, paramName, fname);
         long imgDBId = imageDataDao.insert(imgdata);
-        Toast.makeText(activity, "已保存", Toast.LENGTH_SHORT).show();
+        Toast.makeText(activity, "保存成功", Toast.LENGTH_SHORT).show();
         return imgDBId;
     }
 

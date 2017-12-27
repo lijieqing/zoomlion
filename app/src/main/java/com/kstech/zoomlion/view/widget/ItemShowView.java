@@ -19,10 +19,15 @@ import com.kstech.zoomlion.model.vo.CheckItemParamValueVO;
 import com.kstech.zoomlion.model.vo.CheckItemVO;
 import com.kstech.zoomlion.utils.DeviceUtil;
 import com.kstech.zoomlion.utils.Globals;
+import com.kstech.zoomlion.utils.JsonUtils;
 import com.kstech.zoomlion.view.adapter.DividerItemDecoration;
 import com.kstech.zoomlion.view.adapter.HeaderAdapter;
+import com.kstech.zoomlion.view.adapter.ResultAdapter;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by lijie on 2017/7/27.
@@ -39,6 +44,10 @@ public class ItemShowView extends RelativeLayout implements IRecyclerScrollListe
      */
     private RecyclerView rvHeader;
     /**
+     * 调试项目记录统计展示
+     */
+    private RecyclerView rvResult;
+    /**
      * 是否需要跳过调试按钮
      */
     private CheckBox cbIgnore;
@@ -46,9 +55,12 @@ public class ItemShowView extends RelativeLayout implements IRecyclerScrollListe
     private SeekBar seekBar;
 
     private HeaderAdapter headerAdapter;
-    GridLayoutManager gridLayoutManager;
+    private ResultAdapter resultAdapter;
     LinearLayout bodyContains;
     TextView itemTitle;
+    Map<String, List<Float>> avgMap;
+    List<Float> avgDatas;
+    private static String TAG = "ItemShowView";
 
     public ItemShowView(Context context) {
         super(context);
@@ -69,17 +81,24 @@ public class ItemShowView extends RelativeLayout implements IRecyclerScrollListe
     }
 
     private View initView() {
+        avgMap = new HashMap<>();
+        avgDatas = new ArrayList<>();
         View v = View.inflate(context, R.layout.check_item_show, null);
         rvHeader = v.findViewById(R.id.rv_head);
+        rvResult = v.findViewById(R.id.rv_result);
         cbIgnore = v.findViewById(R.id.ck_ignore);
         bodyContains = v.findViewById(R.id.ll_body);
         itemTitle = v.findViewById(R.id.tv_title);
         seekBar = v.findViewById(R.id.sb);
-        gridLayoutManager = new GridLayoutManager(context, 1, GridLayoutManager.HORIZONTAL, false);
+
         headerAdapter = new HeaderAdapter(context);
-        rvHeader.setLayoutManager(gridLayoutManager);
+        resultAdapter = new ResultAdapter(avgDatas, context);
+        rvHeader.setLayoutManager(new GridLayoutManager(context, 1, GridLayoutManager.HORIZONTAL, false));
         rvHeader.setAdapter(headerAdapter);
         rvHeader.addItemDecoration(new DividerItemDecoration(context, DividerItemDecoration.HORIZONTAL_LIST));
+        rvResult.setLayoutManager(new GridLayoutManager(context, 1, GridLayoutManager.HORIZONTAL, false));
+        rvResult.setAdapter(resultAdapter);
+        rvResult.addItemDecoration(new DividerItemDecoration(context, DividerItemDecoration.HORIZONTAL_LIST));
 
         //对seek bar设置滑动监听，监测到后更新记录体内的布局
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -127,10 +146,24 @@ public class ItemShowView extends RelativeLayout implements IRecyclerScrollListe
             ItemBodyShowView ibs = new ItemBodyShowView(context, paramValue);
             bodyContains.addView(ibs, params);
             Globals.addSeekBarScrollListener(ibs);
+
+            //数据处理，用于调试结果统计
+            String paramDatas = paramValue.getParamsValues();
+            List<CheckItemParamValueVO> paramVos = JsonUtils.fromArrayJson(paramDatas, CheckItemParamValueVO.class);
+            for (CheckItemParamValueVO paramVo : paramVos) {
+
+                if (paramVo.getValueReq()) {
+                    float v = Float.valueOf(paramVo.getValue());
+                    avgMap.get(paramVo.getParamName()).add(v);
+                }
+            }
         }
+        updateResult(avgMap);
     }
 
     public void updateHead(@NonNull CheckItemVO item) {
+        avgMap.clear();
+        avgDatas.clear();
         itemTitle.setText(item.getName());
         if (!item.isRequire()) {
             cbIgnore.setChecked(true);
@@ -140,6 +173,36 @@ public class ItemShowView extends RelativeLayout implements IRecyclerScrollListe
         Globals.paramHeadVOs.clear();
         Globals.paramHeadVOs.addAll(item.getParamNameList());
         headerAdapter.notifyDataSetChanged();
+
+        for (CheckItemParamValueVO checkItemParamValueVO : item.getParamNameList()) {
+            avgMap.put(checkItemParamValueVO.getParamName(), new ArrayList<Float>());
+        }
+    }
+
+    private void updateResult(Map<String, List<Float>> resultMap) {
+        float sum = 0;
+        int index = 0;
+        for (Map.Entry<String, List<Float>> stringListEntry : resultMap.entrySet()) {
+            String name = stringListEntry.getKey();
+            List<Float> values = stringListEntry.getValue();
+            for (Float value : values) {
+                sum += value;
+            }
+            float avg = sum / values.size();
+            for (int i = 0; i < Globals.paramHeadVOs.size(); i++) {
+                if (Globals.paramHeadVOs.get(i).getParamName().equals(name)) {
+                    index = i;
+                }
+            }
+            if (index <= avgDatas.size()) {
+                avgDatas.add(index, avg);
+            } else {
+                avgDatas.add(avg);
+            }
+            index = 0;
+            sum = 0;
+        }
+        resultAdapter.notifyDataSetChanged();
     }
 
     @Override

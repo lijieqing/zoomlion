@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,6 +25,7 @@ import com.kstech.zoomlion.model.db.CheckItemData;
 import com.kstech.zoomlion.model.db.CheckItemDetailData;
 import com.kstech.zoomlion.model.db.greendao.CheckItemDataDao;
 import com.kstech.zoomlion.model.db.greendao.CheckItemDetailDataDao;
+import com.kstech.zoomlion.model.enums.CheckItemDetailResultEnum;
 import com.kstech.zoomlion.model.vo.CheckItemVO;
 import com.kstech.zoomlion.model.vo.RealTimeParamVO;
 import com.kstech.zoomlion.utils.DeviceUtil;
@@ -329,13 +331,44 @@ public class CheckHomeActivity extends BaseActivity {
                 holder = new ViewHolder();
                 view = View.inflate(context, R.layout.checktem_list_child_item, null);
                 holder.tv = view.findViewById(R.id.ch_tv_list_item_child);
+                holder.tvSum = view.findViewById(R.id.ch_tv_list_item_sum);
+                holder.tvPass = view.findViewById(R.id.ch_tv_list_item_passnum);
                 holder.ll = view.findViewById(R.id.ch_ll_list_item_child);
+                holder.iv = view.findViewById(R.id.ch_iv_list_item_status);
                 view.setTag(holder);
             } else {
                 holder = (ViewHolder) view.getTag();
             }
             String key = Globals.groups.get(groupPosition);
-            holder.tv.setText(checkItemMap.get(key).get(childPosition).getName());
+            CheckItemVO item = checkItemMap.get(key).get(childPosition);
+            holder.tv.setText(item.getName());
+
+            CheckItemData itemData = MyApplication.getApplication().getDaoSession().getCheckItemDataDao().queryBuilder()
+                    .where(CheckItemDataDao.Properties.QcId.eq(item.getId()),
+                            CheckItemDataDao.Properties.RecordId.eq(Globals.recordID))
+                    .build().unique();
+
+            int result = itemData.getCheckResult();
+            switch (result) {
+                case 0:
+                    holder.iv.setBackgroundResource(R.drawable.circle_item_status_unstart);
+                    break;
+                case 1:
+                    holder.iv.setBackgroundResource(R.drawable.circle_item_status_pass);
+                    break;
+                case 2:
+                    holder.iv.setBackgroundResource(R.drawable.circle_item_status_unpass);
+                    break;
+            }
+            int sum = itemData.getCheckItemDetailDatas().size();
+            int pass = 0;
+            for (CheckItemDetailData checkItemDetailData : itemData.getCheckItemDetailDatas()) {
+                if (checkItemDetailData.getCheckResult().equals(CheckItemDetailResultEnum.PASS.getCode())) {
+                    pass++;
+                }
+            }
+            holder.tvSum.setText(String.valueOf(sum));
+            holder.tvPass.setText(String.valueOf(pass));
 
             if (Globals.groupPosition == groupPosition && Globals.childPosition == childPosition) {
                 holder.ll.setBackgroundResource(R.color.zoomLionColor);
@@ -352,7 +385,10 @@ public class CheckHomeActivity extends BaseActivity {
         }
 
         class ViewHolder {
+            ImageView iv;
             TextView tv;
+            TextView tvSum;
+            TextView tvPass;
             LinearLayout ll;
         }
     }

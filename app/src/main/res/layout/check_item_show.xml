@@ -109,7 +109,7 @@
                 android:id="@+id/ll_body"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"></LinearLayout>
+                android:orientation="vertical" />
         </ScrollView>
 
         <SeekBar
@@ -146,6 +146,7 @@
 
             <TextView
                 style="@style/ItemResult"
+                android:layout_weight="3"
                 android:text="项目结论" />
 
         </LinearLayout>

@@ -13,6 +13,8 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.signature.ObjectKey;
 import com.kstech.zoomlion.MyApplication;
 import com.kstech.zoomlion.R;
 import com.kstech.zoomlion.engine.check.CheckResultVerify;
@@ -44,7 +46,6 @@ import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
-import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Date;
@@ -211,12 +212,22 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
         if (resultCode == Activity.RESULT_OK) {
             cameraCapView.takephoto.setVisibility(View.GONE);
             cameraCapView.imageshowlayout.setVisibility(View.VISIBLE);
-            File tempF = new File(Environment.getExternalStorageDirectory() + "/workupload.jpg");
+            String temPath = Environment.getExternalStorageDirectory() + "/workupload.jpg";
             LogUtils.e(TAG, Environment.getExternalStorageDirectory() + "/workupload.jpg");
-            if (tempF.exists()) {
-                LogUtils.e(TAG, Environment.getExternalStorageDirectory() + "-");
-                Glide.with(this).load(tempF).thumbnail(0.5f).into(cameraCapView.photoshow);
-            }
+            //glide在此处需要加上时间标记
+            // 因为当更新文件而不改变路径时Glide不会及时刷新图片内容
+            Glide.with(this)
+                    .applyDefaultRequestOptions(new RequestOptions()
+                            .signature(new ObjectKey(System.currentTimeMillis())))
+                    .load(temPath).thumbnail(0.4f).into(cameraCapView.photoshow);
+
+        }
+    }
+
+    @Override
+    public void cameraCancel() {
+        if (picCatchDialog != null) {
+            picCatchDialog.cancel();
         }
     }
 
@@ -271,7 +282,7 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
                     pValues = CheckResultVerify.upDateParamValues();
                     //根据是否合格，更新itemData和detailData
                     if (pass) {
-                        int passCount = itemData.getPassCounts()+1;
+                        int passCount = itemData.getPassCounts() + 1;
                         //当前调试合格，更新连续通过次数
                         itemData.setPassCounts(passCount);
                         detailData.setCheckResult(CheckItemDetailResultEnum.PASS.getCode());
@@ -308,14 +319,14 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
 
                     //对itemData判定是否合格
                     int sumCount = itemData.getCheckItemDetailDatas().size();
-                    if (sumCount >= itemvo.getTimes()){
+                    if (sumCount >= itemvo.getTimes()) {
                         //连续通过次数达到标准次数，合格，否则不合格
                         if (itemData.getPassCounts() >= itemvo.getTimes()) {
                             itemData.setCheckResult(CheckItemResultEnum.PASS.getCode());
-                        }else {
+                        } else {
                             itemData.setCheckResult(CheckItemResultEnum.UNPASS.getCode());
                         }
-                    }else {
+                    } else {
                         itemData.setCheckResult(CheckItemResultEnum.UNFINISH.getCode());
                     }
                     // TODO: 2017/12/26 此处需要将数据提交服务器，根据返回结果更新upload字段
