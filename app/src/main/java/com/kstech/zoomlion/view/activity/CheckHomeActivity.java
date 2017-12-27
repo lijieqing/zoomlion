@@ -95,7 +95,7 @@ public class CheckHomeActivity extends BaseActivity {
     //当前调试项目所包含的 调试细节记录表集合
     private List<CheckItemDetailData> ls = new ArrayList<>();
 
-    private MyAdapter rvAdapter;
+    private RealTimeAdapter rvAdapter;
 
     int lastGroup = 0;
     private static final int ITEM_RECORD_LOADED = 0;
@@ -140,7 +140,7 @@ public class CheckHomeActivity extends BaseActivity {
         for (RealTimeParamVO realTimeParamVO : Globals.modelFile.getRealTimeParamList()) {
             inHomeRealTimeViews.add(new RealTimeView(this, realTimeParamVO));
         }
-        rvAdapter = new MyAdapter();
+        rvAdapter = new RealTimeAdapter();
 
         if (inHomeRealTimeViews.size() > 9) {
             gridLayoutManager = new GridLayoutManager(this, 2, LinearLayoutManager.HORIZONTAL, false);
@@ -396,9 +396,9 @@ public class CheckHomeActivity extends BaseActivity {
     /**
      * RecyclerView适配器
      */
-    class MyAdapter extends RecyclerView.Adapter {
+    class RealTimeAdapter extends RecyclerView.Adapter {
 
-        public MyAdapter() {
+        public RealTimeAdapter() {
         }
 
         class ViewHolder extends RecyclerView.ViewHolder {
@@ -406,7 +406,7 @@ public class CheckHomeActivity extends BaseActivity {
 
             public ViewHolder(View root) {
                 super(root);
-                fl = (FrameLayout) root.findViewById(R.id.fl_gv_item);
+                fl = root.findViewById(R.id.fl_gv_item);
             }
 
         }

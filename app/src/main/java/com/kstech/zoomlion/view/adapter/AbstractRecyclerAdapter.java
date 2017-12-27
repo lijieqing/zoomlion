@@ -47,6 +47,10 @@ public abstract class AbstractRecyclerAdapter<T> extends RecyclerView.Adapter<Ab
      * 底部Item Type
      */
     private static int TYPE_FOOTER = 1002;
+    /**
+     * recycler item点击监听器
+     */
+    private OnItemClickListener itemClickListener;
 
     public AbstractRecyclerAdapter(List<T> data, Context mContext) {
         this.data = data;
@@ -88,7 +92,16 @@ public abstract class AbstractRecyclerAdapter<T> extends RecyclerView.Adapter<Ab
     protected abstract void onBindNormalViewHolder(List<T> datas, MyHolder holder, int position);
 
     @Override
-    public void onBindViewHolder(MyHolder holder, int position) {
+    public void onBindViewHolder(MyHolder holder,int position) {
+        if (itemClickListener != null){
+            holder.itemView.setTag(position);
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    itemClickListener.onItemClick((Integer) v.getTag());
+                }
+            });
+        }
         //不是头部和底部类型的item进行赋值
         if (!isHeaderView(position) && !isFooterView(position)) {
             //如果当前item集合存在header 所有元素的position 减一
@@ -151,6 +164,10 @@ public abstract class AbstractRecyclerAdapter<T> extends RecyclerView.Adapter<Ab
             parent.addView(v, params);
         }
         return v;
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener){
+        itemClickListener = listener;
     }
 
     /**
@@ -266,4 +283,7 @@ public abstract class AbstractRecyclerAdapter<T> extends RecyclerView.Adapter<Ab
         }
     }
 
+    public interface OnItemClickListener{
+        void onItemClick(int position);
+    }
 }
