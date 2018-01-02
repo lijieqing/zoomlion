@@ -49,6 +49,25 @@
             <Data Value="11" />
         </DSItem>
 
+        <!--实时显示参数-->
+        <DSItem DataType="FLOAT" DecLen="0" Name="工作档位" Unit="D"/>
+        <DSItem DataType="FLOAT" DecLen="0" Name="发动机转速" Unit="rpm" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="油泵转速" Unit="rpm" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="液压油温温度" Unit="℃" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="主油泵压力" Unit="MPa" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="泵送压力" Unit="MPa" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="泵送次数" Unit="T" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="比例阀电流" Unit="mA" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="左直线位移" Unit="mA" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="右直线位移" Unit="mA" />
+        <DSItem DataType="BOOL" DecLen="0" Name="左接近开关" Unit="开/关" />
+        <DSItem DataType="BOOL" DecLen="0" Name="右接近开关" Unit="开/关" />
+        <DSItem DataType="BOOL" DecLen="0" Name="高低压" Unit="开/关" />
+        <DSItem DataType="BOOL" DecLen="0" Name="正反泵" Unit="开/关" />
+        <DSItem DataType="BOOL" DecLen="0" Name="电液控" Unit="开/关" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="臂架泵压力" Unit="MPa" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="恒压泵压力" Unit="MPa" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="搅伴压力" Unit="MPa" />
 
         <!-- 定义检测系统涉及的所有数据集合 -->
         <DSItem DataType="FLOAT" DecLen="0" Name="超档位报警次数" Unit="a" />
@@ -71,7 +90,6 @@
         <DSItem DataType="FLOAT" DecLen="0" Name="分配自适应" Unit="a" />
         <DSItem DataType="FLOAT" DecLen="0" Name="左前支腿水平伸出时间" Unit="a" />
         <DSItem DataType="FLOAT" DecLen="0" Name="风扇开启情况" Unit="a" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="臂架泵压力" Unit="a" />
         <DSItem DataType="BOOL" DecLen="0" Name="气动润滑开启开关" Unit="开/关" />
         <DSItem DataType="FLOAT" DecLen="0" Name="处理后的泵送压力" Unit="a" />
         <DSItem DataType="FLOAT" DecLen="0" Name="偏缸误差值" Unit="a" />
@@ -101,20 +119,15 @@
         <DSItem DataType="FLOAT" DecLen="0" Name="空泵压力值" Unit="a" />
         <DSItem DataType="FLOAT" DecLen="0" Name="高低压切换" Unit="a" />
         <DSItem DataType="FLOAT" DecLen="0" Name="液压油过滤结束" Unit="a" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="液压油温温度" Unit="a" />
         <DSItem DataType="FLOAT" DecLen="0" Name="搅伴压力开关（指示灯）" Unit="a" />
         <DSItem DataType="FLOAT" DecLen="0" Name="10档泵送次数" Unit="a" />
         <DSItem DataType="FLOAT" DecLen="0" Name="液压油过滤开始" Unit="a" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="油泵转速" Unit="a" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="高低压" Unit="a" />
         <DSItem DataType="FLOAT" DecLen="0" Name="标定后最小排量电流" Unit="a" />
         <DSItem DataType="FLOAT" DecLen="0" Name="液压油清洁度" Unit="a" />
         <DSItem DataType="FLOAT" DecLen="0" Name="环境温度" Unit="a" />
         <DSItem DataType="FLOAT" DecLen="0" Name="行程优化开启" Unit="a" />
         <DSItem DataType="FLOAT" DecLen="0" Name="液压油位" Unit="a" />
         <DSItem DataType="FLOAT" DecLen="0" Name="补油泵压力" Unit="a" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="泵送次数" Unit="a" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="比例阀电流" Unit="a" />
         <DSItem DataType="FLOAT" DecLen="0" Name="分配软启动" Unit="a" />
         <DSItem DataType="FLOAT" DecLen="0" Name="开机润滑时间" Unit="a" />
         <DSItem DataType="FLOAT" DecLen="0" Name="臂架油泵压力切断值" Unit="a" />
@@ -141,12 +154,10 @@
         <DSItem DataType="FLOAT" DecLen="0" Name="恒压泵温度" Unit="a" />
         <DSItem DataType="FLOAT" DecLen="0" Name="主油泵温度" Unit="a" />
         <DSItem DataType="FLOAT" DecLen="0" Name="支腿溢流压力" Unit="a" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="搅伴压力" Unit="a" />
         <DSItem DataType="FLOAT" DecLen="0" Name="摆动到位时间" Unit="a" />
         <DSItem DataType="FLOAT" DecLen="0" Name="润滑间歇时间" Unit="a" />
         <DSItem DataType="FLOAT" DecLen="0" Name="复杂料况" Unit="a" />
         <DSItem DataType="FLOAT" DecLen="0" Name="润滑开启开关" Unit="a" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="发动机转速" Unit="a" />
         <DSItem DataType="FLOAT" DecLen="0" Name="主油缸壳体温度" Unit="a" />
         <DSItem DataType="FLOAT" DecLen="0" Name="液压油过滤时间" Unit="a" />
         <DSItem DataType="FLOAT" DecLen="0" Name="恒压泵溢流压力值" Unit="a" />
@@ -157,8 +168,6 @@
         <DSItem DataType="FLOAT" DecLen="0" Name="一臂慢档回收时间" Unit="a" />
         <DSItem DataType="FLOAT" DecLen="0" Name="一臂慢档回收电流" Unit="a" />
         <DSItem DataType="FLOAT" DecLen="0" Name="主油泵压力切断值" Unit="a" />
-        <DSItem DataType="BOOL" DecLen="0" Name="正反泵" Unit="a" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="主油泵压力" Unit="MPa" />
         <DSItem DataType="FLOAT" DecLen="0" Name="预热时间" Unit="s" />
 
         <DSItem DataType="FLOAT" DecLen="0" Name="一臂快档展开时间" Unit="a" />
@@ -945,6 +954,42 @@
             <SP Bits="0" Bytes="4" Off="0" Ref="一臂慢档回收时间" Res="0.001" SBit="1" SByte="1" SPN="0"
                 Type="1" />
             <SP Bits="0" Bytes="4" Off="0" Ref="一臂慢档回收电流" Res="0.001" SBit="1" SByte="5" SPN="0"
+                Type="1" />
+        </PG>
+        <PG Dir="Rx" Len="8" PGN="0xFF53" Prio="3" Rate="100" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="0" Bytes="4" Off="0" Ref="比例阀电流" Res="0.001" SBit="1" SByte="1" SPN="0"
+                Type="1" />
+        </PG>
+        <PG Dir="Rx" Len="8" PGN="0xFF54" Prio="3" Rate="100" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="0" Bytes="4" Off="0" Ref="工作档位" Res="0.001" SBit="1" SByte="1" SPN="0"
+                Type="1" />
+        </PG>
+        <PG Dir="Rx" Len="8" PGN="0xFF55" Prio="3" Rate="100" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="0" Bytes="4" Off="0" Ref="泵送压力" Res="0.001" SBit="1" SByte="1" SPN="0"
+                Type="1" />
+        </PG>
+        <PG Dir="Rx" Len="8" PGN="0xFF56" Prio="3" Rate="100" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="0" Bytes="4" Off="0" Ref="左直线位移" Res="0.001" SBit="1" SByte="1" SPN="0"
+                Type="1" />
+        </PG>
+        <PG Dir="Rx" Len="8" PGN="0xFF57" Prio="3" Rate="100" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="0" Bytes="4" Off="0" Ref="右直线位移" Res="0.001" SBit="1" SByte="1" SPN="0"
+                Type="1" />
+        </PG>
+        <PG Dir="Rx" Len="8" PGN="0xFF58" Prio="3" Rate="100" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="0" Bytes="4" Off="0" Ref="左接近开关" Res="0.001" SBit="1" SByte="1" SPN="0"
+                Type="1" />
+        </PG>
+        <PG Dir="Rx" Len="8" PGN="0xFF59" Prio="3" Rate="100" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="0" Bytes="4" Off="0" Ref="右接近开关" Res="0.001" SBit="1" SByte="1" SPN="0"
+                Type="1" />
+        </PG>
+        <PG Dir="Rx" Len="8" PGN="0xFF5A" Prio="3" Rate="100" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="0" Bytes="4" Off="0" Ref="电液控" Res="0.001" SBit="1" SByte="1" SPN="0"
+                Type="1" />
+        </PG>
+        <PG Dir="Rx" Len="8" PGN="0xFF5B" Prio="3" Rate="100" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="0" Bytes="4" Off="0" Ref="恒压泵压力" Res="0.001" SBit="1" SByte="1" SPN="0"
                 Type="1" />
         </PG>
 
@@ -3644,17 +3689,23 @@
         </QCType>
     </QCSet>
     <RealTimeSet>
+        <RealTimeParam Name="工作档位" />
+        <RealTimeParam Name="发动机转速" />
+        <RealTimeParam Name="油泵转速" />
         <RealTimeParam Name="液压油温温度" />
-        <RealTimeParam Name="风扇开启开关" />
-        <RealTimeParam Name="气动润滑开启开关" />
-        <RealTimeParam Name="液压油温温度" />
-        <RealTimeParam Name="风扇开启开关" />
-        <RealTimeParam Name="气动润滑开启开关" />
-        <RealTimeParam Name="液压油温温度" />
-        <RealTimeParam Name="风扇开启开关" />
-        <RealTimeParam Name="气动润滑开启开关" />
-        <RealTimeParam Name="液压油温温度" />
-        <RealTimeParam Name="风扇开启开关" />
-        <RealTimeParam Name="气动润滑开启开关" />
+        <RealTimeParam Name="主油泵压力" />
+        <RealTimeParam Name="泵送压力" />
+        <RealTimeParam Name="泵送次数" />
+        <RealTimeParam Name="比例阀电流" />
+        <RealTimeParam Name="左直线位移" />
+        <RealTimeParam Name="右直线位移" />
+        <RealTimeParam Name="左接近开关" />
+        <RealTimeParam Name="右接近开关" />
+        <RealTimeParam Name="高低压" />
+        <RealTimeParam Name="正反泵" />
+        <RealTimeParam Name="电液控" />
+        <RealTimeParam Name="臂架泵压力" />
+        <RealTimeParam Name="恒压泵压力" />
+        <RealTimeParam Name="搅伴压力" />
     </RealTimeSet>
 </Device>
