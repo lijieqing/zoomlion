@@ -16,6 +16,7 @@ public enum CheckRecordResultEnum {
         this.desc = desc;
         this.code = code;
     }
+
     public String getDesc() {
         return desc;
     }
@@ -24,4 +25,19 @@ public enum CheckRecordResultEnum {
         return code;
     }
 
+    public static String getDescByCode(int code) {
+        String desc = "";
+        switch (code) {
+            case 0:
+                desc = UNFINISH.getDesc();
+                break;
+            case 1:
+                desc = PASS.getDesc();
+                break;
+            case 2:
+                desc = UNPASS.getDesc();
+                break;
+        }
+        return desc;
+    }
 }

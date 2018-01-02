@@ -274,6 +274,9 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
                 //创建表达式处理对象
                 xmlExpression = new XmlExpressionImpl(detailData, paramValues);
                 handler.sendEmptyMessage(START_SAVE_RECORD);
+                //获取车辆总调试次数和未通过次数
+                int recordCount = itemData.getCheckRecord().getSumCounts() + 1;
+                int recordUnPassCount = itemData.getCheckRecord().getUnpassCounts();
                 String pValues;
                 try {
                     //判断是否合格
@@ -289,6 +292,7 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
                     } else {
                         itemData.setPassCounts(0);
                         detailData.setCheckResult(CheckItemDetailResultEnum.UNPASS.getCode());
+                        recordUnPassCount++;
                     }
 
                     handler.sendEmptyMessage(RECORD_DATA_INIT);
@@ -332,6 +336,9 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
                     // TODO: 2017/12/26 此处需要将数据提交服务器，根据返回结果更新upload字段
                     //更新数据库
                     itemDao.update(itemData);
+
+                    itemData.getCheckRecord().setSumCounts(recordCount);
+                    itemData.getCheckRecord().setUnpassCounts(recordUnPassCount);
 
                     handler.sendEmptyMessage(RECORD_DATA_SAVED);
                 } catch (MultiArithmeticException e) {

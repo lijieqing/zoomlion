@@ -23,9 +23,12 @@ import com.kstech.zoomlion.MyApplication;
 import com.kstech.zoomlion.R;
 import com.kstech.zoomlion.model.db.CheckItemData;
 import com.kstech.zoomlion.model.db.CheckItemDetailData;
+import com.kstech.zoomlion.model.db.CheckRecord;
 import com.kstech.zoomlion.model.db.greendao.CheckItemDataDao;
 import com.kstech.zoomlion.model.db.greendao.CheckItemDetailDataDao;
+import com.kstech.zoomlion.model.db.greendao.CheckRecordDao;
 import com.kstech.zoomlion.model.enums.CheckItemDetailResultEnum;
+import com.kstech.zoomlion.model.enums.CheckRecordResultEnum;
 import com.kstech.zoomlion.model.vo.CheckItemVO;
 import com.kstech.zoomlion.model.vo.RealTimeParamVO;
 import com.kstech.zoomlion.utils.DeviceUtil;
@@ -85,6 +88,18 @@ public class CheckHomeActivity extends BaseActivity {
     //整机调试记录描述
     @ViewInject(R.id.check_home_et_admin_desc)
     private ClearFocusByDownEditView etDesc;
+
+    //整机调试结论
+    @ViewInject(R.id.ch_tv_check_result)
+    private TextView tvCheckResult;
+
+    //整机调试次数
+    @ViewInject(R.id.ch_tv_check_count)
+    private TextView tvCheckCount;
+
+    //调试员
+    @ViewInject(R.id.ch_tv_check_user)
+    private TextView tvCheckUser;
 
     private List<RealTimeView> inHomeRealTimeViews = new ArrayList<>();//实时参数集合
 
@@ -153,6 +168,11 @@ public class CheckHomeActivity extends BaseActivity {
         realTimes.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));
     }
 
+    /**
+     * 更新调试项目相关布局
+     *
+     * @param item 当前选中调试项目
+     */
     private void updateView(CheckItemVO item) {
         itemShowView.updateHead(item);
         //清空调试细节记录表
@@ -180,6 +200,35 @@ public class CheckHomeActivity extends BaseActivity {
         });
     }
 
+    /**
+     * 更新整机调试记录相关信息
+     */
+    private void updateRecordInfo() {
+        CheckRecordDao recordDao = MyApplication.getApplication().getDaoSession().getCheckRecordDao();
+        CheckRecord record = recordDao.load(Globals.recordID);
+        if (record != null) {
+            record.resetCheckItemDatas();
+            //整机调试状态
+            int status = record.getCurrentStatus();
+            String result = CheckRecordResultEnum.getDescByCode(status);
+            tvCheckResult.setText(result);
+            //整机调试次数
+            int count = record.getSumCounts();
+            tvCheckCount.setText(String.valueOf(count));
+            //车辆调试记录创建者
+            Long user = record.getCheckerId();
+            tvCheckUser.setText(String.valueOf(user));
+            //整机描述信息
+            String desc = record.getCheckRecordDesc();
+            if (desc != null) {
+                etDesc.setText(desc);
+            }
+
+            tvDeviceIdentity.setText(record.getDeviceIdentity());
+            tvDeviceType.setText("未知类型");
+        }
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -188,6 +237,8 @@ public class CheckHomeActivity extends BaseActivity {
         Globals.currentCheckItem = item;
 
         updateView(item);
+
+        updateRecordInfo();
         //重新进入页面时刷新列表
         expandItemAdapter.notifyDataSetChanged();
 

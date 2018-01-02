@@ -482,7 +482,7 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
                         "test_record_name", 123l,
                         CheckRecordResultEnum.UNFINISH.getCode(), new Date(),
                         null, 0, 0
-                        , "test_desc", 0, false);
+                        , null, 0, false);
 
                 //定义调试项目数据实体类
                 CheckItemData itemData;
