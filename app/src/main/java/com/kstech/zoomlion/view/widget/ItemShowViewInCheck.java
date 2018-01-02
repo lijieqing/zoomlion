@@ -47,6 +47,7 @@ public class ItemShowViewInCheck extends RelativeLayout {
      * 上下文对象
      */
     private Context context;
+    private ItemOperateView iov;
     /**
      * recycler view
      */
@@ -166,7 +167,7 @@ public class ItemShowViewInCheck extends RelativeLayout {
 
 
     /**
-     * Update body.
+     * 更新调试项目展示组件详细信息
      *
      * @param itemDBID 调试项目数据库ID
      */
@@ -191,10 +192,22 @@ public class ItemShowViewInCheck extends RelativeLayout {
         detailDataAdapter.notifyDataSetChanged();
     }
 
+    /**
+     * 更新调试项目展示组件头部信息
+     * @param item
+     */
     public void updateHead(@NonNull CheckItemVO item) {
         itemTitle.setText(item.getName());
         Globals.paramHeadVOs.clear();
         Globals.paramHeadVOs.addAll(item.getParamNameList());
+    }
+
+    /**
+     * 绑定对应的iov操作组件
+     * @param iov ItemOperateView
+     */
+    public void bindIOV(ItemOperateView iov){
+        this.iov = iov;
     }
 
     /**
@@ -237,10 +250,14 @@ public class ItemShowViewInCheck extends RelativeLayout {
             imgDetail.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(context, ItemDetailActivity.class);
-                    intent.putExtra("detailID", detailData.getCheckItemDetailId());
-                    context.startActivity(intent);
-                    Toast.makeText(context, "展示细节", Toast.LENGTH_SHORT).show();
+                    if (iov.isInBlur()){
+                        Intent intent = new Intent(context, ItemDetailActivity.class);
+                        intent.putExtra("detailID", detailData.getCheckItemDetailId());
+                        context.startActivity(intent);
+                        Toast.makeText(context, "展示细节", Toast.LENGTH_SHORT).show();
+                    }else {
+                        Toast.makeText(context,"调试中，无法访问记录",Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
         }

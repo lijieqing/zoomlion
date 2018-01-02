@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
@@ -51,14 +52,33 @@ public class ItemShowView extends RelativeLayout implements IRecyclerScrollListe
      * 是否需要跳过调试按钮
      */
     private CheckBox cbIgnore;
-
+    /**
+     * 用来横向调整调试记录的seek bar
+     */
     private SeekBar seekBar;
-
+    /**
+     * 调试项目头部RecyclerView adapter对象
+     */
     private HeaderAdapter headerAdapter;
+    /**
+     * 调试项目结论统计RecyclerView adapter对象
+     */
     private ResultAdapter resultAdapter;
+    /**
+     * 调试细节记录展示布局
+     */
     LinearLayout bodyContains;
+    /**
+     * 调试项目名称
+     */
     TextView itemTitle;
+    /**
+     * 调试项目数据统计集合
+     */
     Map<String, List<Float>> avgMap;
+    /**
+     * 调试项目统计结果集合
+     */
     List<Float> avgDatas;
     private static String TAG = "ItemShowView";
 
@@ -100,6 +120,19 @@ public class ItemShowView extends RelativeLayout implements IRecyclerScrollListe
         rvResult.setAdapter(resultAdapter);
         rvResult.addItemDecoration(new DividerItemDecoration(context, DividerItemDecoration.HORIZONTAL_LIST));
 
+        //返回true 直接消费掉touch事件，可以实现禁止RecyclerView滑动
+        rvHeader.setOnTouchListener(new OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                return true;
+            }
+        });
+        rvResult.setOnTouchListener(new OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                return true;
+            }
+        });
         //对seek bar设置滑动监听，监测到后更新记录体内的布局
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -208,5 +241,6 @@ public class ItemShowView extends RelativeLayout implements IRecyclerScrollListe
     @Override
     public void onScroll(int x, int y) {
         rvHeader.scrollBy(x, y);
+        rvResult.scrollBy(x, y);
     }
 }

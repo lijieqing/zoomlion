@@ -2,6 +2,7 @@ package com.kstech.zoomlion.view.activity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -188,6 +189,8 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
 
         //设置回调
         iov.setCameraActivity(this);
+        //展示组件与操作组件绑定
+        isv.bindIOV(iov);
 
         //初始化信息提示弹窗
         progressView = new TextProgressView(this);
@@ -534,13 +537,29 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
     @Override
     public void onBackPressed() {
         if (!iov.isInBlur()) {
-            iov.changeBlur();
-            iov.chronometerReset(R.color.whiteColor, false);
-            iov.resetBodyViews();
-            itemDetailDao.deleteByKey(detailID);
+            if (iov.isBodyViewHasValue()) {
+                iov.alertDataAbandon("放弃当前数据", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        backInBlur();
+                    }
+                });
+            } else {
+                backInBlur();
+            }
         } else {
             super.onBackPressed();
         }
+    }
+
+    /**
+     * 退回到模糊状态，并刷新布局
+     */
+    private void backInBlur() {
+        iov.changeBlur();
+        iov.chronometerReset(R.color.whiteColor, false);
+        iov.resetBodyViews();
+        itemDetailDao.deleteByKey(detailID);
     }
 
 

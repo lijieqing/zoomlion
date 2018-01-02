@@ -1,6 +1,8 @@
 package com.kstech.zoomlion.view.widget;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -64,6 +66,8 @@ public class ItemOperateView extends RelativeLayout implements View.OnClickListe
 
     private boolean inBlur = true;//当前界面是否处在模糊状态，默认进入时为模糊状态
 
+    private AlertDialog dataAbandonDialog;//放弃数据确认弹窗
+
     private static final String TAG = "ItemOperateView";
 
     /**
@@ -75,7 +79,7 @@ public class ItemOperateView extends RelativeLayout implements View.OnClickListe
         super(context);
         this.context = context;
 
-        this.addView(initView());
+        this.addView(initView(context));
     }
 
     /**
@@ -88,7 +92,7 @@ public class ItemOperateView extends RelativeLayout implements View.OnClickListe
         super(context, attrs);
         this.context = context;
 
-        this.addView(initView());
+        this.addView(initView(context));
     }
 
     /**
@@ -102,7 +106,7 @@ public class ItemOperateView extends RelativeLayout implements View.OnClickListe
         super(context, attrs, defStyleAttr);
         this.context = context;
 
-        this.addView(initView());
+        this.addView(initView(context));
     }
 
     /**
@@ -110,7 +114,7 @@ public class ItemOperateView extends RelativeLayout implements View.OnClickListe
      *
      * @return
      */
-    private View initView() {
+    private View initView(Context context) {
         bodyViews = new ArrayList<>();
 
         View v = View.inflate(context, R.layout.check_item_operate, null);
@@ -137,6 +141,18 @@ public class ItemOperateView extends RelativeLayout implements View.OnClickListe
         llForward.setOnClickListener(this);
         llNext.setOnClickListener(this);
         btnBlur.setOnClickListener(this);
+
+        dataAbandonDialog = new AlertDialog.Builder(context)
+                .setTitle("确认")
+                .setMessage("当前存在未保存数据，确定放弃当前数据？")
+                .setNegativeButton("再看看", null)
+                .setPositiveButton("放弃当前数据", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        startCheck();
+                    }
+                })
+                .create();
 
         return v;
     }
@@ -318,7 +334,11 @@ public class ItemOperateView extends RelativeLayout implements View.OnClickListe
                     if (isChecking) {
                         stopCheck();
                     } else {
-                        startCheck();
+                        if (isBodyViewHasValue()) {
+                            dataAbandonDialog.show();
+                        } else {
+                            startCheck();
+                        }
                     }
                 }
 
@@ -441,6 +461,27 @@ public class ItemOperateView extends RelativeLayout implements View.OnClickListe
         //回调baseFunActivity开始调试
         baseFunActivity.startCheck();
     }
+
+    /**
+     * 当前调试项目是否存在数值，若存在提示是否保存
+     *
+     * @return
+     */
+    public boolean isBodyViewHasValue() {
+        boolean hasValue = false;
+        for (ItemOperateBodyView bodyView : bodyViews) {
+            if (!bodyView.isValueEmpty()) {
+                hasValue = true;
+            }
+        }
+        return hasValue;
+    }
+
+    public void alertDataAbandon(String postiveMsg, DialogInterface.OnClickListener listener) {
+        dataAbandonDialog.setButton(DialogInterface.BUTTON_POSITIVE, postiveMsg, listener);
+        dataAbandonDialog.show();
+    }
+
 
     /**
      * 停止调试
