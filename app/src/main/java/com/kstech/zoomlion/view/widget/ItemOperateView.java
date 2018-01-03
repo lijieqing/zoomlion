@@ -369,6 +369,8 @@ public class ItemOperateView extends RelativeLayout implements View.OnClickListe
             rlBlur.setVisibility(VISIBLE);
             inBlur = true;
         }
+
+        baseFunActivity.onBlurChange(inBlur);
     }
 
     /**
@@ -432,8 +434,7 @@ public class ItemOperateView extends RelativeLayout implements View.OnClickListe
             baseFunActivity.saveRecord(paramValues);
 
             //改变模糊状态
-            rlBlur.setVisibility(VISIBLE);
-            inBlur = true;
+            changeBlur();
 
             //重置每个参数操作体ItemOperateBodyView
             resetBodyViews();

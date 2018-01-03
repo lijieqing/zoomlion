@@ -2,6 +2,7 @@ package com.kstech.zoomlion.view.activity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.FragmentManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -37,6 +38,7 @@ import com.kstech.zoomlion.utils.Globals;
 import com.kstech.zoomlion.utils.JsonUtils;
 import com.kstech.zoomlion.utils.LogUtils;
 import com.kstech.zoomlion.utils.ThreadManager;
+import com.kstech.zoomlion.view.fragment.RealTimeViewsFragment;
 import com.kstech.zoomlion.view.widget.CameraCapView;
 import com.kstech.zoomlion.view.widget.ItemOperateBodyView;
 import com.kstech.zoomlion.view.widget.ItemOperateView;
@@ -149,6 +151,11 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
      * 带提示信息的进度条
      */
     private TextProgressView progressView;
+
+    private RealTimeViewsFragment realTimeViewsFragment;
+
+    private FragmentManager fragmentManager;
+
     /**
      * 更新调试项目
      */
@@ -195,6 +202,12 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
         //初始化信息提示弹窗
         progressView = new TextProgressView(this);
         dialog = new AlertDialog.Builder(this).setView(progressView).create();
+
+        //实时参数 展示fragment
+        realTimeViewsFragment = new RealTimeViewsFragment();
+        realTimeViewsFragment.init(this);
+        fragmentManager = getFragmentManager();
+        llRealTime.setVisibility(View.INVISIBLE);
 
         //查询数据库
         ThreadManager.getThreadPool().execute(new Runnable() {
@@ -402,6 +415,21 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
     public void removeDetailData() {
         itemDetailDao.deleteByKey(detailID);
     }
+
+    @Override
+    public void onBlurChange(boolean inBlur) {
+        super.onBlurChange(inBlur);
+        if (inBlur) {
+            if (realTimeViewsFragment.isAdded())
+                fragmentManager.beginTransaction().remove(realTimeViewsFragment).commit();
+            llRealTime.setVisibility(View.INVISIBLE);
+        } else {
+            llRealTime.setVisibility(View.VISIBLE);
+            if (!realTimeViewsFragment.isAdded())
+                fragmentManager.beginTransaction().add(R.id.item_check_ll_realtime, realTimeViewsFragment).commit();
+        }
+    }
+
     /**
      * BaseFunActivity 回调
      ****************

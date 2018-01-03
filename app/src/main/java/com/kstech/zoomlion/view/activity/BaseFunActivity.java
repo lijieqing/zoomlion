@@ -57,4 +57,12 @@ public abstract class BaseFunActivity extends BaseActivity {
      * 模糊块复原回调
      */
     public abstract void removeDetailData();
+
+    /**
+     * 模糊状态改变回调
+     *
+     * @param inBlur 是否
+     */
+    public void onBlurChange(boolean inBlur) {
+    }
 }

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -186,7 +187,11 @@ public class ItemShowView extends RelativeLayout implements IRecyclerScrollListe
             for (CheckItemParamValueVO paramVo : paramVos) {
 
                 if (paramVo.getValueReq()) {
-                    float v = Float.valueOf(paramVo.getValue());
+                    String val = paramVo.getValue();
+                    if (TextUtils.isEmpty(val)) {
+                        val = "0";
+                    }
+                    float v = Float.valueOf(val);
                     avgMap.get(paramVo.getParamName()).add(v);
                 }
             }
