@@ -29,6 +29,7 @@
                 android:text="GSQWER" />
 
             <LinearLayout
+                android:layout_alignParentTop="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
@@ -38,6 +39,7 @@
                 <TextView
                     android:id="@+id/tv_item"
                     style="@style/ItemTitle"
+                    android:textSize="26sp"
                     android:layout_alignParentLeft="true"
                     android:layout_marginLeft="5dp"
                     android:text="当前调试项目：" />
@@ -45,6 +47,7 @@
                 <TextView
                     android:id="@+id/tv_title"
                     style="@style/ItemTitle"
+                    android:textSize="26sp"
                     android:layout_toRightOf="@id/tv_item"
                     android:text="某某检测项目" />
             </LinearLayout>

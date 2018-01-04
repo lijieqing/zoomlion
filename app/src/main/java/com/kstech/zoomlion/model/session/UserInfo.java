@@ -57,6 +57,11 @@ public class UserInfo {
      * 毕业学校
      */
     private String graduatedFrom;
+    /**
+     * 最后登录时间
+     */
+    private String lastLoginTime;
+
 
     public UserInfo() {
     }
@@ -181,5 +186,13 @@ public class UserInfo {
 
     public void setGraduatedFrom(String graduatedFrom) {
         this.graduatedFrom = graduatedFrom;
+    }
+
+    public String getLastLoginTime() {
+        return lastLoginTime;
+    }
+
+    public void setLastLoginTime(String lastLoginTime) {
+        this.lastLoginTime = lastLoginTime;
     }
 }
