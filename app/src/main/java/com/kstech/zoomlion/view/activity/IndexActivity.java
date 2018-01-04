@@ -294,7 +294,12 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        Intent j1939Intent = new Intent(J1939TaskService.ACTION);
+        j1939Intent.setPackage(getPackageName());
+
         j1939TaskService.stopJ1939Service();
+        unbindService(conn);
+        stopService(j1939Intent);
     }
 
     @Event(value = {R.id.index_iv_user, R.id.index_btn_choose_from_server, R.id.index_btn_goto, R.id.index_btn_exit})

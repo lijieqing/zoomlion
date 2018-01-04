@@ -15,6 +15,7 @@ public class Device {
     private J1939 j1939;
     private QCSet qcSet;
     private RealTimeSet realTimeSet;
+    private MsgSet msgSet;
 
     public Device() {
     }
@@ -105,6 +106,14 @@ public class Device {
 
     public void setRealTimeSet(Object realTimeSet) {
         this.realTimeSet = (RealTimeSet) realTimeSet;
+    }
+
+    public MsgSet getMsgSet() {
+        return msgSet;
+    }
+
+    public void setMsgSet(MsgSet msgSet) {
+        this.msgSet = msgSet;
     }
 
     @Override

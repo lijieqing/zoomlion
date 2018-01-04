@@ -162,20 +162,33 @@ public class XmlExpressionImpl implements BaseXmlExpression {
         //根据X坐标变量名称获取到x坐标值
         String xParamValue = getCurrentParam(xParam);
         float xValue = Float.valueOf(xParamValue);
+
+        return getYValue(xValue, xRange, param);
+    }
+
+    /**
+     * 获取指定x坐标对应的y值
+     *
+     * @param xValue     x值
+     * @param xRangeName x值的范围的索引名称，类型为String，可根据xRangeName在DSItem中找到对应的数据集合
+     * @param yRangeName y值的范围的索引名称，类型为String，可根据yRangeName在DSItem中找到对应的数据集合
+     * @return xValue对应的y值
+     */
+    public static String getYValue(float xValue, String xRangeName, String yRangeName) {
         //根据X坐标参数集合变量名称获取X坐标集合数据
         LinkedList<Float> xRangeValues = new LinkedList<>();
         //根据param获取Y值集合
         LinkedList<Float> paramValues = new LinkedList<>();
         for (DSItem dsItem : Globals.modelFile.device.getDataSet().getDsItems()) {
             //获取X坐标集合数据
-            if (xRange.equals(dsItem.getName())) {
+            if (xRangeName.equals(dsItem.getName())) {
                 for (Data data : dsItem.getDatas()) {
                     float v = Float.valueOf(data.getValue());
                     xRangeValues.add(v);
                 }
             }
             //获取Y坐标集合数据
-            if (param.equals(dsItem.getName())) {
+            if (yRangeName.equals(dsItem.getName())) {
                 for (Data data : dsItem.getDatas()) {
                     float v = Float.valueOf(data.getValue());
                     paramValues.add(v);
@@ -192,7 +205,7 @@ public class XmlExpressionImpl implements BaseXmlExpression {
             if (xValue >= v) {
                 startPosition = i;
             }
-            if (xValue <= v) {
+            if (xValue < v) {
                 endPosition = i;
                 break;
             }
@@ -209,17 +222,18 @@ public class XmlExpressionImpl implements BaseXmlExpression {
             if (endPosition == -1) {
                 //比最大值大
                 x1 = xRangeValues.get(startPosition);
-                y1 = xRangeValues.get(startPosition);
+                y1 = paramValues.get(startPosition);
                 x2 = xRangeValues.get(startPosition - 1);
-                y2 = xRangeValues.get(startPosition - 1);
+                y2 = paramValues.get(startPosition - 1);
             } else {
                 //位于两者之间
                 x1 = xRangeValues.get(startPosition);
-                y1 = xRangeValues.get(startPosition);
+                y1 = paramValues.get(startPosition);
                 x2 = xRangeValues.get(endPosition);
-                y2 = xRangeValues.get(endPosition);
+                y2 = paramValues.get(endPosition);
             }
         }
+
         //二元一次方程求系数
         float a = (y1 - y2) / (x1 - x2);
         float b = (y1 * x2 - y2 * x1) / (x2 - x1);

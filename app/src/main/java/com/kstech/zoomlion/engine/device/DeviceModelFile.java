@@ -419,6 +419,7 @@ public class DeviceModelFile {
                 for (DTC dtcxml : dtcxmls) {
                     J1939_DTCfg_ts dtc = new J1939_DTCfg_ts();
                     dtc.bFMI = Byte.valueOf(dtcxml.getFMI());
+                    dtc.wDescId = Short.valueOf(dtcxml.getMsgId());
                     dtcList.add(dtc);
                 }
                 sp.pDTCfg = dtcList.toArray(new J1939_DTCfg_ts[dtcList.size()]);

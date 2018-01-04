@@ -10,6 +10,31 @@
 <Device DevBornDate="" DevDieDate="" DevStatus="" Id="" Name="" subDevId="" subDevName=""
     xmlns="http://www.kaishang.com">
     <DataSet>
+        <!--月份与分钟一一对应，两组数据数量相同，且月份不能出现重复-->
+        <DSItem DataType="FLOAT" DecLen="1" Name="预热时间标准-月份" Rows="10" Unit="月">
+            <Data Value="1" />
+            <Data Value="2" />
+            <Data Value="3" />
+            <Data Value="5" />
+            <Data Value="6" />
+            <Data Value="7" />
+            <Data Value="8" />
+            <Data Value="9" />
+            <Data Value="11" />
+            <Data Value="12" />
+        </DSItem>
+        <DSItem DataType="FLOAT" DecLen="1" Name="预热时间标准-分钟" Rows="10" Unit="Min">
+            <Data Value="10" />
+            <Data Value="10" />
+            <Data Value="10" />
+            <Data Value="5" />
+            <Data Value="5" />
+            <Data Value="5" />
+            <Data Value="5" />
+            <Data Value="5" />
+            <Data Value="10" />
+            <Data Value="10" />
+        </DSItem>
         <DSItem DataType="FLOAT" DecLen="1" Name="月温度标准" Rows="24" Unit="℃">
             <!--一月最大最小-->
             <Data Value="2" />
@@ -50,7 +75,7 @@
         </DSItem>
 
         <!--实时显示参数-->
-        <DSItem DataType="FLOAT" DecLen="0" Name="工作档位" Unit="D"/>
+        <DSItem DataType="FLOAT" DecLen="0" Name="工作档位" Unit="D" />
         <DSItem DataType="FLOAT" DecLen="0" Name="发动机转速" Unit="rpm" />
         <DSItem DataType="FLOAT" DecLen="0" Name="油泵转速" Unit="rpm" />
         <DSItem DataType="FLOAT" DecLen="0" Name="液压油温温度" Unit="℃" />
@@ -1590,7 +1615,6 @@
             <SP Bits="0" Bytes="4" Off="0" Ref="最新接收的测量值PGN" Res="1" SBit="1" SByte="1" Type="1" />
         </PG>
     </J1939>
-
 
     <!-- QCParam
                  ValueReq: 检测参数项是否有值
@@ -3708,4 +3732,40 @@
         <RealTimeParam Name="恒压泵压力" />
         <RealTimeParam Name="搅伴压力" />
     </RealTimeSet>
+
+    <!--故障提示信息，包含J1939与自定义故障信息,注意RefName仅仅具有描述作用，不具备索引能力-->
+    <MsgSet>
+        <!-- J1939规定的故障代码（FMI)
+                    0 – 数据有效但超出了正常操作范围
+                    1 – 数据有效但低于正常操作范围
+                    2 – 数据不稳定，断断续续或不正确
+                    3 – 电压高于正常值，或与高端短路
+                    4 – 电压低于正常值，或与低端 短路
+                    5 – 电流低于正常值或断路
+                    6 – 电流高于正常值或电路接地
+                    7 – 机械系统不响应或无法调节
+                    8 – 非正常的频率或脉冲宽度或周期
+                    9 – 非正常的更新速度
+                    10 – 非正常的速度或变化
+                    11 – 引起故障的原因未知
+                    12 – 坏的智能装置或部件
+                    13 – 超出标定范围
+                    14 – 特殊指令
+                    15 – 数据有效但高于正常工作范围（上限）
+                    16 – 数据有效但高于正常工作范围（上上限）
+                    17 – 有效数据但低于正常工作范围（下限）
+                    18 – 有效数据但低于正常工作范围（下下限）
+                    19 – 错误地接收到的网络数据
+                    31 – 未知或条件存在
+                    当从DM1帧中收到SPN的故障代码匹配某DTC配置时，应显示的错误信息为MsgId所指的信息串
+                    FMI声明在<DTC/>标签中，通过DTC中的MsgId匹配Msg中的id
+                    -->
+        <Msg Content="数据有效但超出了正常操作范围" Id="1" RefName="fmi0" />
+        <Msg Content="数据有效但低于正常操作范围" Id="2" RefName="fmi1" />
+        <Msg Content="数据不稳定，断断续续或不正确" Id="3" RefName="fmi2" />
+        <Msg Content="电压高于正常值，或与高端短路" Id="4" RefName="fmi3" />
+        <Msg Content="电压低于正常值，或与低端短路" Id="5" RefName="fmi4" />
+        <Msg Content="电流低于正常值或断路" Id="6" RefName="fmi5" />
+        <Msg Content="电流高于正常值或电路接地" Id="7" RefName="fmi6" />
+    </MsgSet>
 </Device>
