@@ -4,8 +4,8 @@ import android.support.annotation.NonNull;
 import android.widget.ExpandableListView;
 
 import com.kstech.zoomlion.engine.device.DeviceModelFile;
-import com.kstech.zoomlion.model.session.MeasureTerminal;
-import com.kstech.zoomlion.model.session.UserSession;
+import com.kstech.zoomlion.model.session.MeasureDev;
+import com.kstech.zoomlion.model.session.UserInfo;
 import com.kstech.zoomlion.model.vo.CheckItemParamValueVO;
 import com.kstech.zoomlion.model.vo.CheckItemVO;
 import com.kstech.zoomlion.view.widget.IRecyclerScrollListener;
@@ -172,10 +172,10 @@ public class Globals {
     /**
      * 当前登陆用户
      */
-    public static UserSession currentUser;
+    public static UserInfo currentUser;
 
     /**
      * 当前测量终端
      */
-    public static MeasureTerminal currentTerminal;
+    public static MeasureDev currentTerminal;
 }

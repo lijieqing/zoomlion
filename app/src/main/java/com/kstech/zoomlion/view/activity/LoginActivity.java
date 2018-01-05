@@ -28,16 +28,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kstech.zoomlion.R;
-import com.kstech.zoomlion.model.session.MeasureTerminal;
+import com.kstech.zoomlion.model.session.MeasureDev;
 import com.kstech.zoomlion.model.session.RegisterSession;
 import com.kstech.zoomlion.model.session.URLCollections;
-import com.kstech.zoomlion.model.session.UserSession;
+import com.kstech.zoomlion.model.session.UserInfo;
 import com.kstech.zoomlion.utils.DeviceUtil;
 import com.kstech.zoomlion.utils.Globals;
 import com.kstech.zoomlion.utils.JsonUtils;
 import com.kstech.zoomlion.utils.LogUtils;
 import com.kstech.zoomlion.utils.MyHttpUtils;
 import com.kstech.zoomlion.utils.SharedPreferencesUtils;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.net.SocketException;
 import java.util.ArrayList;
@@ -62,15 +65,12 @@ public class LoginActivity extends BaseActivity {
     private TextView mPadInfoView;
     private Button mSignInButton;
 
-
     private AlertDialog terminalDialog;
-    private MeasureTerminal mMT = null;
-
+    private MeasureDev mMT = null;
     private AlertDialog registerDialog;
-    private boolean isRegister = false;
 
     //Login Data
-    private List<MeasureTerminal> terminalList = new ArrayList<>();
+    private List<MeasureDev> terminalList = new ArrayList<>();
     private List<String> user_record;
     private int registerID;
 
@@ -115,11 +115,7 @@ public class LoginActivity extends BaseActivity {
         mSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this, IndexActivity.class);
-                startActivity(intent);
-                finish();
-                // TODO: 2017/12/15 此处测试使用，正式版需要改回attemptLogin。还包括平板注册处
-                //attemptLogin();
+                attemptLogin();
             }
         });
         //获取测量终端
@@ -131,7 +127,7 @@ public class LoginActivity extends BaseActivity {
         });
 
         //平板mac地址显示
-        isRegister = isPadRegister();
+        //isRegister = isPadRegister();
         changeRegisterStatus(true);
 
         //获取文件读写权限
@@ -296,7 +292,7 @@ public class LoginActivity extends BaseActivity {
 
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
-        return password.length() > 4;
+        return password.length() > 0;
     }
 
     /**
@@ -360,26 +356,41 @@ public class LoginActivity extends BaseActivity {
         @Override
         protected Integer doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
+            String mac = "";
+            try {
+                mac = DeviceUtil.macAddress();
+            } catch (SocketException e) {
+                e.printStackTrace();
+            }
 
             HashMap<String, String> maps = new HashMap<>();
             maps.put("username", mName);
             maps.put("password", mPassword);
-            maps.put("portable_dev_id", registerID + "");
+            maps.put("mac", mac);
             maps.put("measure_dev_id", mMT.getId() + "");
+
             new MyHttpUtils().xutilsPost(null, URLCollections.USER_LOGIN, maps, new MyHttpUtils.MyHttpCallback() {
                 @Override
                 public void onSuccess(Object result, String whereRequest) {
                     LogUtils.e("LoginActivity", "onSuccess  " + result);
-                    UserSession session = JsonUtils.fromJson((String) result, UserSession.class);
-                    if (session.isError()) {
-                        mError = session.getError();
-                        //// TODO: 2017/9/11 登录失败时间 status ID为1
-                        status = 2;
-                        onProgressUpdate();
-                    } else {
-                        status = 2;
-                        //用户信息赋值给全局变量
-                        Globals.currentUser = session.getData();
+                    try {
+                        JSONObject object = new JSONObject((String) result);
+                        if (URLCollections.isRequestSuccess(object)) {
+                            status = 2;
+                            String userInfo = object.getString("user");
+
+                            //用户信息赋值给全局变量
+                            Globals.currentUser = JsonUtils.fromJson(userInfo, UserInfo.class);
+                            onProgressUpdate();
+                        } else {
+                            mError = "用户名或密码错误";
+                            status = 1;
+                            onProgressUpdate();
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        mError = "数据格式错误";
+                        status = 1;
                         onProgressUpdate();
                     }
                 }
@@ -418,7 +429,7 @@ public class LoginActivity extends BaseActivity {
                 case 2://登陆成功
                     //测量终端信息赋值给全局变量
                     Globals.currentTerminal = mMT;
-                    Toast.makeText(LoginActivity.this, "登陆成功，准备跳转", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "登陆成功", Toast.LENGTH_SHORT).show();
                     //保存用户到记录
                     SharedPreferencesUtils.setParam(LoginActivity.this, Globals.LAST_USER, mName);
                     user_record.add(mName);
@@ -446,11 +457,11 @@ public class LoginActivity extends BaseActivity {
     /**
      * 测量终端获取线程
      */
-    private class TerminalLoadTask extends AsyncTask<Void, Integer, List<MeasureTerminal>> {
+    private class TerminalLoadTask extends AsyncTask<Void, Integer, List<MeasureDev>> {
         /**
          * The Adapter.
          */
-        ArrayAdapter<MeasureTerminal> adapter;
+        ArrayAdapter<MeasureDev> adapter;
 
         @Override
         protected void onPreExecute() {
@@ -480,14 +491,16 @@ public class LoginActivity extends BaseActivity {
         }
 
         @Override
-        protected List<MeasureTerminal> doInBackground(Void... voids) {
-            new MyHttpUtils().xutilsGet(null, URLCollections.TERMINAL_LIST_GET, null, new MyHttpUtils.MyHttpCallback() {
+        protected List<MeasureDev> doInBackground(Void... voids) {
+            HashMap<String, String> maps = new HashMap<>();
+            maps.put("status", "0");
+            new MyHttpUtils().xutilsGet(null, URLCollections.TERMINAL_LIST_GET, maps, new MyHttpUtils.MyHttpCallback() {
                 @Override
                 public void onSuccess(Object result, String whereRequest) {
                     terminalList.clear();
+                    List<MeasureDev> temp;
                     LogUtils.e("ServerTest", "onSuccess  " + result);
-                    MeasureTerminal session = JsonUtils.fromJson((String) result, MeasureTerminal.class);
-                    List<MeasureTerminal> temp = session.getData();
+                    temp = JsonUtils.fromArrayJson((String) result, MeasureDev.class);
                     if (temp.size() == 0) {
                         onProgressUpdate(3);
                         Toast.makeText(LoginActivity.this, "可用测量终端数为0  ！！", Toast.LENGTH_SHORT).show();
@@ -514,7 +527,7 @@ public class LoginActivity extends BaseActivity {
         }
 
         @Override
-        protected void onPostExecute(List<MeasureTerminal> measureTerminals) {
+        protected void onPostExecute(List<MeasureDev> measureTerminals) {
             super.onPostExecute(measureTerminals);
 
         }
@@ -537,7 +550,7 @@ public class LoginActivity extends BaseActivity {
         }
 
         @Override
-        protected void onCancelled(List<MeasureTerminal> measureTerminals) {
+        protected void onCancelled(List<MeasureDev> measureTerminals) {
             super.onCancelled(measureTerminals);
             mTermTask = null;
         }

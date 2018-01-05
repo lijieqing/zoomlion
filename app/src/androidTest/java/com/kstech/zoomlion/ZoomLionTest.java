@@ -6,9 +6,7 @@ import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
 import com.kstech.zoomlion.model.session.URLCollections;
-import com.kstech.zoomlion.model.session.UserSession;
 import com.kstech.zoomlion.utils.DeviceUtil;
-import com.kstech.zoomlion.utils.JsonUtils;
 import com.kstech.zoomlion.utils.LogUtils;
 import com.kstech.zoomlion.utils.MyHttpUtils;
 
@@ -83,10 +81,6 @@ public class ZoomLionTest {
                     LogUtils.e("ServerTest", "value: " + value);
                 }
                 LogUtils.e("ServerTest", "onSuccess  " + result);
-                boolean error;
-                UserSession session = JsonUtils.fromJson((String) result, UserSession.class);
-                error = session.isError();
-                LogUtils.e("ServerTest", "onSuccess  " + error);
             }
 
             @Override

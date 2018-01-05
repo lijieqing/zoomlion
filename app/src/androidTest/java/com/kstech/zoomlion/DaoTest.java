@@ -1,13 +1,11 @@
 package com.kstech.zoomlion;
 
 import android.content.Context;
-import android.os.Environment;
 import android.os.SystemClock;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
-import com.kstech.zoomlion.engine.check.BaseXmlExpression;
-import com.kstech.zoomlion.engine.check.CheckResultVerify;
+import com.kstech.zoomlion.engine.check.XmlExpressionImpl;
 import com.kstech.zoomlion.engine.device.DeviceModelFile;
 import com.kstech.zoomlion.engine.device.XMLAPI;
 import com.kstech.zoomlion.model.db.CheckImageData;
@@ -23,14 +21,15 @@ import com.kstech.zoomlion.model.vo.CheckItemParamValueVO;
 import com.kstech.zoomlion.model.vo.CheckItemVO;
 import com.kstech.zoomlion.model.xmlbean.DSItem;
 import com.kstech.zoomlion.model.xmlbean.Device;
+import com.kstech.zoomlion.model.xmlbean.Msg;
 import com.kstech.zoomlion.utils.FileUtils;
+import com.kstech.zoomlion.utils.Globals;
 import com.kstech.zoomlion.utils.JsonUtils;
 import com.kstech.zoomlion.utils.LogUtils;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.xutils.common.Callback;
-import org.xutils.common.util.FileUtil;
 import org.xutils.http.RequestParams;
 import org.xutils.http.cookie.DbCookieStore;
 import org.xutils.x;
@@ -50,8 +49,9 @@ import static org.junit.Assert.assertEquals;
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 @RunWith(AndroidJUnit4.class)
-public class DaoTest{
+public class DaoTest {
     public static final String TAG = "DaoTest";
+
     @Test
     public void useAppContext() throws Exception {
         // Context of the app under test.
@@ -59,6 +59,7 @@ public class DaoTest{
 
         assertEquals("com.kstech.zoomlion", appContext.getPackageName());
     }
+
     @Test
     public void ImgTest() throws Exception {
         CheckImageDataDao imgDao = MyApplication.getApplication().getDaoSession().getCheckImageDataDao();
@@ -66,16 +67,16 @@ public class DaoTest{
         for (CheckImageData checkImageData : list) {
             CheckItemDetailData data = checkImageData.getCheckItemDetailData();
             if (data == null)
-                LogUtils.e("ImgTest","null");
-            LogUtils.e("ImgTest",checkImageData.getParamName()+" : "+checkImageData.getImgPath());
+                LogUtils.e("ImgTest", "null");
+            LogUtils.e("ImgTest", checkImageData.getParamName() + " : " + checkImageData.getImgPath());
         }
     }
 
     @Test
-    public void CopyDB(){
+    public void CopyDB() {
         RequestParams p = new RequestParams(URLCollections.GET_DEVICE_BY_CAT_ID);
-        p.addQueryStringParameter("categoryId","1");
-        p.addHeader("Cookie","sid=4ee83ce8-38d8-4df5-a277-711e9337262c");
+        p.addQueryStringParameter("categoryId", "1");
+        p.addHeader("Cookie", "sid=4ee83ce8-38d8-4df5-a277-711e9337262c");
         x.http().get(p, new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String result) {
@@ -83,10 +84,10 @@ public class DaoTest{
                 for (HttpCookie httpCookie : cookie.getCookies()) {
                     String name = httpCookie.getName();
                     String value = httpCookie.getValue();
-                    LogUtils.e(TAG,"name: "+name);
-                    LogUtils.e(TAG,"value: "+value);
+                    LogUtils.e(TAG, "name: " + name);
+                    LogUtils.e(TAG, "value: " + value);
                 }
-                Device device = JsonUtils.fromJson(result,Device.class);
+                Device device = JsonUtils.fromJson(result, Device.class);
                 for (DSItem dsItem : device.getDataSet().getDsItems()) {
                     //LogUtils.e(TAG,dsItem.getDictID());
                 }
@@ -94,17 +95,17 @@ public class DaoTest{
 
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
-                LogUtils.e(TAG,ex.toString());
+                LogUtils.e(TAG, ex.toString());
             }
 
             @Override
             public void onCancelled(CancelledException cex) {
-                LogUtils.e(TAG,cex.toString());
+                LogUtils.e(TAG, cex.toString());
             }
 
             @Override
             public void onFinished() {
-                LogUtils.e(TAG,"onFinished");
+                LogUtils.e(TAG, "onFinished");
             }
         });
         SystemClock.sleep(10000);
@@ -115,21 +116,16 @@ public class DaoTest{
         Context appContext = InstrumentationRegistry.getTargetContext();
         InputStream is = appContext.getAssets().open("zoomlion.xml");
         Device device = (Device) XMLAPI.readXML(is);
-        DSItem tempar = null;
-        for (DSItem dsItem : device.getDataSet().getDsItems()) {
-            if (dsItem.getName().equals("月温度标准")){
-                tempar = dsItem;
-                break;
-            }
-        }
 
-        for (int mouth = 1; mouth <= 12; mouth++) {
-            int minValuePosition = 2*(mouth-1);
-            int maxValuePosition = minValuePosition+1;
-            float minVal = Float.parseFloat(tempar.getDatas().get(minValuePosition).getValue());
-            float maxVal = Float.parseFloat(tempar.getDatas().get(maxValuePosition).getValue());
-            LogUtils.e(TAG,mouth+"月：最低温度-"+minVal+"|最高温度-"+maxVal);
+        List<Msg> msgs = device.getMsgSet().getMsgs();
+        for (Msg msg : msgs) {
+            LogUtils.e(TAG, msg.toString());
         }
+        Globals.modelFile = DeviceModelFile.readFromFile(device);
+        Date date = new Date();
+        float m = date.getMonth() + 1;
+        String min = XmlExpressionImpl.getYValue(4, "预热时间标准-月份", "预热时间标准-分钟");
+        LogUtils.e(TAG, "预热时间" + min);
         SystemClock.sleep(1000);
 
     }
@@ -143,7 +139,7 @@ public class DaoTest{
         Device device = (Device) XMLAPI.readXML(is);
         DeviceModelFile model = DeviceModelFile.readFromFile(device);
         for (CheckItemVO checkItemVO : model.getCheckItemList()) {
-            if ("液压油过滤工作时间".equals(checkItemVO.getName())){
+            if ("液压油过滤工作时间".equals(checkItemVO.getName())) {
                 int qcId = Integer.parseInt(checkItemVO.getId());
                 List<CheckItemData> list = itemDao.queryBuilder().where(CheckItemDataDao.Properties.QcId.eq(qcId),
                         CheckItemDataDao.Properties.ItemName.eq(checkItemVO.getName()))
@@ -172,11 +168,11 @@ public class DaoTest{
                     qcData.setDeviceQcitemId(2L);
                     qcData.setDevQcitemNo(i);
                     qcData.setQcitemDataId(dictId);
-                    if (value.getPicReq()){
+                    if (value.getPicReq()) {
                         SessionBlob sb = new SessionBlob();
                         sb.setType(0);
                         for (CheckImageData checkImageData : detailData.getCheckImageDatas()) {
-                            if (checkImageData.getParamName().equals(value.getParamName())){
+                            if (checkImageData.getParamName().equals(value.getParamName())) {
                                 String s = FileUtils.getImageStr(checkImageData.getImgPath());
                                 sb.setData(s);
                                 blobs.add(sb);
@@ -188,11 +184,11 @@ public class DaoTest{
                     try {
                         float v = Float.valueOf(value.getValue());
                         qcData.setData(v);
-                    }catch (NumberFormatException e){
+                    } catch (NumberFormatException e) {
                         String v = value.getValue();
-                        if ("合格".equals(v)){
+                        if ("合格".equals(v)) {
                             qcData.setStatus(3);
-                        }else {
+                        } else {
                             qcData.setStatus(4);
                         }
                     }
@@ -213,9 +209,9 @@ public class DaoTest{
                 String strQCData = JsonUtils.toJson(qcDataList);
                 String strBlob = JsonUtils.toJson(blobs);
 
-                LogUtils.e(TAG,"items:"+strItem);
-                LogUtils.e(TAG,"strQCData:"+strQCData);
-                LogUtils.e(TAG,"strBlob:"+strBlob);
+                LogUtils.e(TAG, "items:" + strItem);
+                LogUtils.e(TAG, "strQCData:" + strQCData);
+                LogUtils.e(TAG, "strBlob:" + strBlob);
 
             }
         }
