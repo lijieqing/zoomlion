@@ -10,9 +10,11 @@ import com.kstech.zoomlion.model.session.URLCollections;
 import com.kstech.zoomlion.model.xmlbean.Device;
 import com.kstech.zoomlion.utils.Globals;
 import com.kstech.zoomlion.utils.JsonUtils;
+import com.kstech.zoomlion.utils.LogUtils;
 import com.kstech.zoomlion.view.activity.IndexActivity;
 
-import org.xutils.common.Callback;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.xutils.http.RequestParams;
 import org.xutils.x;
 
@@ -20,10 +22,25 @@ import java.io.IOException;
 
 public class DeviceLoadTask extends AsyncTask<Void, String, Void> {
 
+    /**
+     * 消息处理对象
+     */
     private Handler handler;
+    /**
+     * 整机编码
+     */
     private String InExc;
+    /**
+     * 上下文对象
+     */
     private Context context;
+    /**
+     * 机型文件对象
+     */
     private Device device;
+    /**
+     * 是否正在等待，当通讯线程启动完成后，置为false
+     */
     public boolean isWaitting = true;
 
 
@@ -42,47 +59,94 @@ public class DeviceLoadTask extends AsyncTask<Void, String, Void> {
     protected Void doInBackground(Void... params) {
 
         Message message = Message.obtain();
+        message.what = IndexActivity.J1939_SERVICE_RESET;
+        message.obj = "通讯线程重置";
+        message.arg1 = 2;
+        handler.sendMessage(message);
+
+        SystemClock.sleep(1000);
+
+        message = Message.obtain();
         message.what = IndexActivity.DEVICE_PARSE_START;
         message.obj = "开始解析机型";
         message.arg1 = 10;
         handler.sendMessage(message);
 
-        SystemClock.sleep(300);
-
-        message = Message.obtain();
-        message.what = IndexActivity.DEVICE_PARSE_ING;
-        message.obj = "机型解析中";
-        message.arg1 = 20;
-
         try {
+            //整机编码不为空，向服务器请求机型数据
+            if (InExc != null) {
+                message = Message.obtain();
+                message.what = IndexActivity.SERVER_DEVICE_REQUEST;
+                message.obj = "向服务器请求机型数据";
+                message.arg1 = 20;
+                handler.sendMessage(message);
+
+                SystemClock.sleep(300);
+
+                RequestParams p = new RequestParams(URLCollections.GET_DEVICE_BY_SN);
+                p.addHeader("Cookie", Globals.SID);
+                p.addQueryStringParameter("sn", InExc);
+
+                //此处为同步请求数据操作
+                String result = "";
+                try {
+                    message = Message.obtain();
+                    result = x.http().getSync(p, String.class);
+
+                    LogUtils.e("DeviceLoadTask", result);
+                    JSONObject object = new JSONObject(result);
+                    if (URLCollections.isRequestSuccess(object)) {
+                        String deviceInfo = object.getString("device");
+                        String processId = object.getString("processId");
+                        device = JsonUtils.fromJson(deviceInfo, Device.class);
+
+                        message.what = IndexActivity.SERVER_DEVICE_REQUEST_SUCCESS;
+                        message.obj = "服务器机型数据加载完成";
+                        message.arg1 = 28;
+                        handler.sendMessage(message);
+                        SystemClock.sleep(1000);
+                    } else {
+                        message.what = IndexActivity.SERVER_DEVICE_REQUEST_ERROR;
+                        message.obj = "数据解析错误";
+                        message.arg1 = 28;
+                        handler.sendMessage(message);
+                        SystemClock.sleep(1000);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    if (URLCollections.isReLogin(result)) {
+                        message.what = IndexActivity.USER_RELOGIN;
+                        message.obj = "用户身份异常，重新登录";
+                        message.arg1 = 28;
+                        handler.sendEmptyMessage(IndexActivity.PROGRESS_DIALOG_CANCEL);
+                    } else {
+                        message.what = IndexActivity.SERVER_DEVICE_REQUEST_ERROR;
+                        message.obj = "数据格式错误";
+                        message.arg1 = 28;
+                    }
+                    handler.sendMessage(message);
+
+                    SystemClock.sleep(1000);
+                } catch (Throwable throwable) {
+                    throwable.printStackTrace();
+                    message.what = IndexActivity.SERVER_DEVICE_REQUEST_ERROR;
+                    message.obj = throwable.getMessage();
+                    message.arg1 = 28;
+                    handler.sendMessage(message);
+                    SystemClock.sleep(1000);
+                }
+            }
+
+            message = Message.obtain();
+            message.what = IndexActivity.DEVICE_PARSE_ING;
+            message.obj = "进行机型数据解析";
+            message.arg1 = 35;
             handler.sendMessage(message);
-            RequestParams p = new RequestParams(URLCollections.GET_DEVICE_BY_CAT_ID);
-            p.addQueryStringParameter("category_id","1");
-            x.http().get(p, new Callback.CommonCallback<String>() {
-                @Override
-                public void onSuccess(String result) {
-                    device = JsonUtils.fromJson(result,Device.class);
-                }
 
-                @Override
-                public void onError(Throwable ex, boolean isOnCallback) {
-
-                }
-
-                @Override
-                public void onCancelled(CancelledException cex) {
-
-                }
-
-                @Override
-                public void onFinished() {
-
-                }
-            });
-            if (device == null){
+            if (device == null) {
                 device = (Device) XMLAPI.readXML(context.getAssets().open("zoomlion.xml"));
                 Globals.modelFile = DeviceModelFile.readFromFile(device);
-            }else {
+            } else {
                 Globals.modelFile = DeviceModelFile.readFromFile(device);
             }
 
@@ -117,7 +181,7 @@ public class DeviceLoadTask extends AsyncTask<Void, String, Void> {
         handler.sendMessage(message);
 
         SystemClock.sleep(300);
-        handler.sendEmptyMessage(IndexActivity.DEVICE_LOAD_FINISH);
+        handler.sendEmptyMessage(IndexActivity.PROGRESS_DIALOG_CANCEL);
 
         return null;
     }

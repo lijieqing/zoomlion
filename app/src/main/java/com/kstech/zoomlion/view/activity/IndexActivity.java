@@ -3,6 +3,7 @@ package com.kstech.zoomlion.view.activity;
 import android.app.AlertDialog;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.graphics.Color;
@@ -180,9 +181,9 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
      */
     public static final int J1939_COMM_INITED = 8;
     /**
-     * 机型加载完成
+     * 进度条取消显示
      */
-    public static final int DEVICE_LOAD_FINISH = 9;
+    public static final int PROGRESS_DIALOG_CANCEL = 9;
     /**
      * 服务器机型列表初始化
      */
@@ -207,6 +208,26 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
      * 数据校验结束
      */
     public static final int VERIFY_RECORD_END = 15;
+    /**
+     * 开始服务器机型数据请求
+     */
+    public static final int SERVER_DEVICE_REQUEST = 16;
+    /**
+     * 服务器机型数据请求成功
+     */
+    public static final int SERVER_DEVICE_REQUEST_SUCCESS = 17;
+    /**
+     * 服务器机型数据请求失败
+     */
+    public static final int SERVER_DEVICE_REQUEST_ERROR = 18;
+    /**
+     * 1939通讯线程重置
+     */
+    public static final int J1939_SERVICE_RESET = 20;
+    /**
+     * 重新登录
+     */
+    public static final int USER_RELOGIN = 21;
 
     public static final String TAG = "IndexActivity";
 
@@ -258,7 +279,7 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
         dialog.setView(progressView);
 
         // TODO: 2017/10/11 加载默认机型信息，配置并启动通讯线程
-        deviceLoadTask = new DeviceLoadTask(this, "", handler);
+        deviceLoadTask = new DeviceLoadTask(this, null, handler);
         deviceLoadTask.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
 
         //初始化机型选择列表 相关数据
@@ -297,14 +318,15 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
         Intent j1939Intent = new Intent(J1939TaskService.ACTION);
         j1939Intent.setPackage(getPackageName());
 
-        if (j1939TaskService != null){
+        if (j1939TaskService != null) {
             j1939TaskService.stopJ1939Service();
             unbindService(conn);
             stopService(j1939Intent);
         }
     }
 
-    @Event(value = {R.id.index_iv_user, R.id.index_btn_choose_from_server, R.id.index_btn_goto, R.id.index_btn_exit})
+    @Event(value = {R.id.index_iv_user, R.id.index_btn_choose_from_server,
+            R.id.index_btn_goto, R.id.index_btn_exit, R.id.index_btn_auto_download})
     private void click(View view) {
         switch (view.getId()) {
             case R.id.index_iv_user:
@@ -333,6 +355,11 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
                 break;
             case R.id.index_btn_exit:
                 finish();
+                break;
+            case R.id.index_btn_auto_download:
+                // TODO: 2018/1/5 根据整机编码获取机型信息，此处模拟已经获取到整机编码
+                deviceLoadTask = new DeviceLoadTask(this, "016302A0112", handler);
+                deviceLoadTask.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
                 break;
             case R.id.index_btn_choose_from_server:
                 handler.sendEmptyMessage(DEV_LIST_INIT);
@@ -548,6 +575,24 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
         return true;
     }
 
+    /**
+     * 重新登录
+     */
+    private void relogDialog() {
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setTitle("重新登录")
+                .setCancelable(false)
+                .setMessage("用户凭证已过时，请重新登录")
+                .setPositiveButton("重新登录", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        startActivity(new Intent(IndexActivity.this, LoginActivity.class));
+                        finish();
+                    }
+                }).create();
+        dialog.show();
+    }
+
     private InnerHandler handler = new InnerHandler(this);
 
     @Override
@@ -568,9 +613,19 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
             String name;
             if (mActivity != null) {
                 switch (msg.what) {
-                    case DEVICE_PARSE_START:
+                    case J1939_SERVICE_RESET:
                         mActivity.progressView.reset();
                         mActivity.dialog.show();
+                        mActivity.progressView.updateProgress((String) msg.obj, msg.arg1);
+                        //J1939通讯线程复位
+                        if (mActivity.j1939TaskService != null) {
+                            mActivity.j1939TaskService.stopJ1939Service();
+                            mActivity.unbindService(mActivity.conn);
+                            mActivity.j1939TaskService.stopSelf();
+                            mActivity.j1939TaskService = null;
+                        }
+                        break;
+                    case DEVICE_PARSE_START:
                         mActivity.progressView.updateProgress((String) msg.obj, msg.arg1);
                         break;
                     case DEVICE_PARSE_ING:
@@ -608,7 +663,7 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
                     case J1939_COMM_INITED:
                         mActivity.progressView.updateProgress((String) msg.obj, msg.arg1);
                         break;
-                    case DEVICE_LOAD_FINISH:
+                    case PROGRESS_DIALOG_CANCEL:
                         mActivity.dialog.cancel();
                         break;
                     case DEV_LIST_INIT:
@@ -629,6 +684,18 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
                         break;
                     case NEW_ITEM_RECORD_INIT:
                         mActivity.progressView.updateProgress("数据库更新中", msg.arg1);
+                        break;
+                    case SERVER_DEVICE_REQUEST:
+                        mActivity.progressView.updateProgress((String) msg.obj, msg.arg1);
+                        break;
+                    case SERVER_DEVICE_REQUEST_SUCCESS:
+                        mActivity.progressView.updateProgress((String) msg.obj, msg.arg1);
+                        break;
+                    case SERVER_DEVICE_REQUEST_ERROR:
+                        mActivity.progressView.updateProgress(msg.obj + ",正在还原设置", msg.arg1);
+                        break;
+                    case USER_RELOGIN:
+                        mActivity.relogDialog();
                         break;
                 }
             }
