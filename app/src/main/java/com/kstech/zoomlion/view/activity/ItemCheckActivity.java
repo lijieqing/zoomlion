@@ -43,7 +43,6 @@ import com.kstech.zoomlion.view.widget.CameraCapView;
 import com.kstech.zoomlion.view.widget.ItemOperateBodyView;
 import com.kstech.zoomlion.view.widget.ItemOperateView;
 import com.kstech.zoomlion.view.widget.ItemShowViewInCheck;
-import com.kstech.zoomlion.view.widget.TextProgressView;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
@@ -143,14 +142,6 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
      * 调试项目细节记录是否合格
      */
     boolean pass = false;
-    /**
-     * 信息提示弹窗
-     */
-    private AlertDialog dialog;
-    /**
-     * 带提示信息的进度条
-     */
-    private TextProgressView progressView;
 
     private RealTimeViewsFragment realTimeViewsFragment;
 
@@ -198,10 +189,6 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
         iov.setCameraActivity(this);
         //展示组件与操作组件绑定
         isv.bindIOV(iov);
-
-        //初始化信息提示弹窗
-        progressView = new TextProgressView(this);
-        dialog = new AlertDialog.Builder(this).setView(progressView).create();
 
         //实时参数 展示fragment
         realTimeViewsFragment = new RealTimeViewsFragment();

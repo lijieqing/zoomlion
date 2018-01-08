@@ -1,6 +1,7 @@
 package com.kstech.zoomlion.view.activity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
@@ -19,6 +20,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.kstech.zoomlion.utils.PermissionUtils;
+import com.kstech.zoomlion.view.widget.TextProgressView;
 
 /**
  * Created by lijie on 2017/9/7.
@@ -26,6 +28,15 @@ import com.kstech.zoomlion.utils.PermissionUtils;
  */
 
 public class BaseActivity extends AppCompatActivity {
+
+    /**
+     * 开始调试弹窗
+     */
+    protected AlertDialog dialog;
+    /**
+     * 进度展示组件，与dialog结合使用
+     */
+    protected TextProgressView progressView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,6 +54,11 @@ public class BaseActivity extends AppCompatActivity {
         ActionBar actionbar = getSupportActionBar();
         if (actionbar != null) actionbar.hide();
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+
+        //初始化文字显示进度窗口
+        dialog = new AlertDialog.Builder(this).setCancelable(false).create();
+        progressView = new TextProgressView(this);
+        dialog.setView(progressView);
     }
 
     /**

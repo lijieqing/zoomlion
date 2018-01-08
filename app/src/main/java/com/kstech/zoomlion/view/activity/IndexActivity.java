@@ -42,7 +42,6 @@ import com.kstech.zoomlion.utils.Globals;
 import com.kstech.zoomlion.utils.JsonUtils;
 import com.kstech.zoomlion.utils.LogUtils;
 import com.kstech.zoomlion.utils.ThreadManager;
-import com.kstech.zoomlion.view.widget.TextProgressView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -140,10 +139,6 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
     private CheckRecordDao recordDao;
 
     private CheckItemDataDao itemDataDao;
-
-    private AlertDialog dialog;//任务进度条弹窗
-
-    private TextProgressView progressView;//带信息提示的进度条
 
     private long checkerID;//调试员ID
 
@@ -291,11 +286,6 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
         //获取数据库操作对象
         recordDao = MyApplication.getApplication().getDaoSession().getCheckRecordDao();
         itemDataDao = MyApplication.getApplication().getDaoSession().getCheckItemDataDao();
-
-        //初始化文字显示进度窗口
-        dialog = new AlertDialog.Builder(this).setCancelable(false).create();
-        progressView = new TextProgressView(this);
-        dialog.setView(progressView);
 
         // TODO: 2017/10/11 加载默认机型信息，配置并启动通讯线程
         deviceLoadTask = new DeviceLoadTask(this, null, handler);

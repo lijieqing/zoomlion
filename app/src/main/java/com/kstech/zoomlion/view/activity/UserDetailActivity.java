@@ -29,7 +29,7 @@ public class UserDetailActivity extends BaseActivity {
     /**
      * 编辑密码时弹出的对话框
      */
-    private AlertDialog dialog;
+    private AlertDialog editPassDialog;
     /**
      * 密码编辑view
      */
@@ -103,7 +103,7 @@ public class UserDetailActivity extends BaseActivity {
 
         passwordView = new EditPasswordView(this, handler);
 
-        dialog = new AlertDialog.Builder(UserDetailActivity.this)
+        editPassDialog = new AlertDialog.Builder(UserDetailActivity.this)
                 .setView(passwordView)
                 .setCancelable(false)
                 .create();
@@ -111,7 +111,7 @@ public class UserDetailActivity extends BaseActivity {
         binding.userDetailLlPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialog.show();
+                editPassDialog.show();
             }
         });
     }
@@ -137,11 +137,11 @@ public class UserDetailActivity extends BaseActivity {
                     activity.passwordView.updateView(true);
                     break;
                 case PASS_EDIT_CANCEL:
-                    activity.dialog.cancel();
+                    activity.editPassDialog.cancel();
                     activity.passwordView.resetView();
                     break;
                 case PASS_EDIT_RELOGIN:
-                    activity.dialog.cancel();
+                    activity.editPassDialog.cancel();
                     activity.passwordView.resetView();
                     break;
             }
