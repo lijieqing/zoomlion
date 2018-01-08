@@ -5,7 +5,6 @@ import android.databinding.DataBindingUtil;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 
@@ -19,8 +18,6 @@ import com.kstech.zoomlion.model.session.UserInfo;
 import com.kstech.zoomlion.utils.DateUtil;
 import com.kstech.zoomlion.utils.DeviceUtil;
 import com.kstech.zoomlion.view.widget.EditPasswordView;
-
-import java.lang.ref.WeakReference;
 
 import jp.wasabeef.glide.transformations.BlurTransformation;
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
@@ -118,17 +115,15 @@ public class UserDetailActivity extends BaseActivity {
 
     final MyHandler handler = new MyHandler(this);
 
-    private static class MyHandler extends Handler {
-        WeakReference<UserDetailActivity> reference;
-
-        public MyHandler(UserDetailActivity activity) {
-            this.reference = new WeakReference<>(activity);
+    private static class MyHandler extends BaseInnerHandler {
+        MyHandler(UserDetailActivity activity) {
+            super(activity);
         }
 
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            UserDetailActivity activity = reference.get();
+            UserDetailActivity activity = (UserDetailActivity) reference.get();
             switch (msg.what) {
                 case PASS_EDIT_START:
                     activity.passwordView.showProgress();

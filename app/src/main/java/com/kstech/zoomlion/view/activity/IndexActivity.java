@@ -3,13 +3,11 @@ package com.kstech.zoomlion.view.activity;
 import android.app.AlertDialog;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.os.SystemClock;
@@ -51,7 +49,6 @@ import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
-import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -141,47 +138,14 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
     private CheckItemDataDao itemDataDao;
 
     private long checkerID;//调试员ID
-
-    /**
-     * 机型配置开始解析
-     */
-    public static final int DEVICE_PARSE_START = 0;
-    /**
-     * 机型配置解析中
-     */
-    public static final int DEVICE_PARSE_ING = 1;
     /**
      * 机型配置完成解析
      */
     public static final int DEVICE_PARSE_FINISH = 2;
     /**
-     * 机型调试记录数据初始化
-     */
-    public static final int DEVICE_RECORD_INIT = 3;
-    /**
-     * 机型调试记录数据初始化完成
-     */
-    public static final int RECORD_INIT_FINISH = 4;
-    /**
      * 进入调试主界面
      */
     public static final int SKIP_TO_CHECK = 5;
-    /**
-     * 机型调试记录数据初始化错误
-     */
-    public static final int RECORD_INIT_ERROR = 6;
-    /**
-     * J1939通讯线程 初始化
-     */
-    public static final int J1939_COMM_INIT = 7;
-    /**
-     * J1939通讯线程 初始化完成
-     */
-    public static final int J1939_COMM_INITED = 8;
-    /**
-     * 进度条取消显示
-     */
-    public static final int PROGRESS_DIALOG_CANCEL = 9;
     /**
      * 服务器机型列表初始化
      */
@@ -191,41 +155,9 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
      */
     public static final int DEV_LIST_LOADED = 11;
     /**
-     * 存在新的调试项目 需要初始化记录
-     */
-    public static final int NEW_ITEM_RECORD_INIT = 12;
-    /**
-     * 数据校验开始
-     */
-    public static final int VERIFY_RECORD_START = 13;
-    /**
-     * 数据校验进行中
-     */
-    public static final int VERIFY_RECORD_ING = 14;
-    /**
-     * 数据校验结束
-     */
-    public static final int VERIFY_RECORD_END = 15;
-    /**
-     * 开始服务器机型数据请求
-     */
-    public static final int SERVER_DEVICE_REQUEST = 16;
-    /**
-     * 服务器机型数据请求成功
-     */
-    public static final int SERVER_DEVICE_REQUEST_SUCCESS = 17;
-    /**
-     * 服务器机型数据请求失败
-     */
-    public static final int SERVER_DEVICE_REQUEST_ERROR = 18;
-    /**
      * 1939通讯线程重置
      */
     public static final int J1939_SERVICE_RESET = 20;
-    /**
-     * 重新登录
-     */
-    public static final int USER_RELOGIN = 21;
     /**
      * 通知服务器准备进入调试界面
      */
@@ -423,8 +355,14 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
             @Override
             public void run() {
                 SystemClock.sleep(500);
-                handler.sendEmptyMessage(VERIFY_RECORD_START);
+
                 Message message;
+                message = Message.obtain();
+                message.what = UPDATE_PROGRESS_CONTENT;
+                message.obj = "数据校验中";
+                message.arg1 = 15;
+                handler.sendMessage(message);
+
                 int p = 20;
 
                 //对当前的调试项目遍历，与数据库比对
@@ -446,20 +384,22 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
                     if (!inDB) {
                         newItemList.add(checkItemVO);
                     }
+
                     message = Message.obtain();
-                    message.what = VERIFY_RECORD_ING;
+                    String s = "数据校验：" + checkItemVO.getName();
+                    message.what = UPDATE_PROGRESS_CONTENT;
+                    message.obj = s;
                     message.arg1 = p;
-                    Bundle b = new Bundle();
-                    b.putCharSequence("name", checkItemVO.getName());
-                    message.setData(b);
                     handler.sendMessage(message);
+
                     p += 1;
                     SystemClock.sleep(50);
                 }
                 //发送校验完成状态
                 message = Message.obtain();
-                message.what = VERIFY_RECORD_END;
-                message.obj = p;
+                message.what = UPDATE_PROGRESS_CONTENT;
+                message.arg1 = p;
+                message.obj = "数据校验完成";
                 handler.sendMessage(message);
 
                 //最后判断 新调试项目集合是否为空
@@ -470,8 +410,9 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
                 } else {
                     //发送 更新数据 状态
                     message = Message.obtain();
-                    message.what = NEW_ITEM_RECORD_INIT;
-                    message.obj = p + 10;
+                    message.what = UPDATE_PROGRESS_CONTENT;
+                    message.obj = "数据库更新中";
+                    message.arg1 = p + 10;
                     handler.sendMessage(message);
                     //初始化新的调试项目记录
                     CheckItemData itemData;
@@ -485,9 +426,13 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
                     } catch (Exception e) {
                         //异常 进行提示
                         message = Message.obtain();
-                        message.what = RECORD_INIT_ERROR;
+                        message.what = UPDATE_PROGRESS_CONTENT;
                         message.obj = e.getMessage();
+                        message.arg1 = 100;
                         handler.sendMessage(message);
+                        SystemClock.sleep(1000);
+
+                        handler.sendEmptyMessage(DIALOG_CANCEL);
                     }
 
                     handler.sendEmptyMessage(SKIP_TO_CHECK);
@@ -528,27 +473,33 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
                         //handler 信息封装
                         message = Message.obtain();
                         p += 1;
-                        message.what = DEVICE_RECORD_INIT;
-                        message.obj = p;
-                        Bundle b = new Bundle();
-                        b.putCharSequence("name", checkItemVO.getName());
-                        message.setData(b);
+
+                        String s = "初始化配置：" + checkItemVO.getName() + " 数据信息";
+                        message.what = UPDATE_PROGRESS_CONTENT;
+                        message.obj = s;
+
                         //发送msg 更新UI
                         handler.sendMessage(message);
                         SystemClock.sleep(200);
                     }
 
                     //发送成功状态 更新UI
-                    handler.sendEmptyMessage(RECORD_INIT_FINISH);
+                    message = Message.obtain();
+                    message.what = UPDATE_PROGRESS_CONTENT;
+                    message.obj = "数据初始化完成";
+                    message.arg1 = 100;
+                    handler.sendMessage(message);
 
                     SystemClock.sleep(2000);
                     handler.sendEmptyMessage(SKIP_TO_CHECK);
                 } catch (Exception e) {
                     //异常 进行提示
                     message = Message.obtain();
-                    message.what = RECORD_INIT_ERROR;
+                    message.what = UPDATE_PROGRESS_CONTENT;
                     message.obj = e.getMessage();
+                    message.arg1 = 100;
                     handler.sendMessage(message);
+                    SystemClock.sleep(1000);
 
                     LogUtils.e(TAG, e.getMessage());
                 }
@@ -611,7 +562,7 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
                             handler.sendMessage(message);
 
                             SystemClock.sleep(1000);
-                            handler.sendEmptyMessage(PROGRESS_DIALOG_CANCEL);
+                            handler.sendEmptyMessage(DIALOG_CANCEL);
                         }
                     }
                 } catch (JSONException e) {
@@ -620,10 +571,10 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
                     if (URLCollections.isReLogin(result)) {
                         message.what = USER_RELOGIN;
                         message.obj = "用户身份异常，重新登录";
-                        handler.sendEmptyMessage(IndexActivity.PROGRESS_DIALOG_CANCEL);
+                        handler.sendEmptyMessage(DIALOG_CANCEL);
                     } else {
-                        message.what = IndexActivity.SERVER_DEVICE_REQUEST_ERROR;
-                        message.obj = "数据格式错误";
+                        message.what = IndexActivity.UPDATE_PROGRESS_CONTENT;
+                        message.obj = "数据格式错误，正在还原设置";
                         message.arg1 = 100;
                     }
                     handler.sendMessage(message);
@@ -638,31 +589,13 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
                     handler.sendMessage(message);
 
                     SystemClock.sleep(1000);
-                    handler.sendEmptyMessage(PROGRESS_DIALOG_CANCEL);
+                    handler.sendEmptyMessage(DIALOG_CANCEL);
                 }
             }
         });
 
         //判断当前页面是否符合条件跳入调试界面
         return true;
-    }
-
-    /**
-     * 重新登录
-     */
-    private void relogDialog() {
-        AlertDialog dialog = new AlertDialog.Builder(this)
-                .setTitle("重新登录")
-                .setCancelable(false)
-                .setMessage("用户凭证已过时，请重新登录")
-                .setPositiveButton("重新登录", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        startActivity(new Intent(IndexActivity.this, LoginActivity.class));
-                        finish();
-                    }
-                }).create();
-        dialog.show();
     }
 
     private InnerHandler handler = new InnerHandler(this);
@@ -672,17 +605,16 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
         // TODO: 2017/12/7 此处处理value 转换为时间格式并显示到 tvPreHeat组件
     }
 
-    private static class InnerHandler extends Handler {
-        private final WeakReference<IndexActivity> activityReference;
+    private static class InnerHandler extends BaseInnerHandler {
 
         private InnerHandler(IndexActivity activity) {
-            this.activityReference = new WeakReference<>(activity);
+            super(activity);
         }
 
         @Override
         public void handleMessage(Message msg) {
-            final IndexActivity mActivity = activityReference.get();
-            String name;
+            super.handleMessage(msg);
+            final IndexActivity mActivity = (IndexActivity) reference.get();
             if (mActivity != null) {
                 switch (msg.what) {
                     case J1939_SERVICE_RESET:
@@ -697,12 +629,6 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
                             mActivity.j1939TaskService = null;
                         }
                         break;
-                    case DEVICE_PARSE_START:
-                        mActivity.progressView.updateProgress((String) msg.obj, msg.arg1);
-                        break;
-                    case DEVICE_PARSE_ING:
-                        mActivity.progressView.updateProgress((String) msg.obj, msg.arg1);
-                        break;
                     case DEVICE_PARSE_FINISH:
                         Intent j1939Intent = new Intent(J1939TaskService.ACTION);
                         j1939Intent.setPackage(mActivity.getPackageName());
@@ -712,62 +638,16 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
                         //注册预热时间 数据监听器
                         Globals.modelFile.getDataSetVO().getDSItem("预热时间").addListener(mActivity);
                         break;
-                    case DEVICE_RECORD_INIT:
-                        name = (String) msg.getData().getCharSequence("name");
-                        mActivity.progressView.updateProgress("初始化配置：" + name + " 数据信息", (Integer) msg.obj);
-                        break;
-                    case RECORD_INIT_FINISH:
-                        mActivity.progressView.updateProgress("数据初始化完成", 100);
-                        break;
                     case SKIP_TO_CHECK:
                         mActivity.dialog.cancel();
                         Intent intent = new Intent(mActivity, CheckHomeActivity.class);
                         mActivity.startActivity(intent);
-                        break;
-                    case RECORD_INIT_ERROR:
-                        mActivity.progressView.updateProgress("异常：", (Integer) msg.obj);
-                        SystemClock.sleep(1000);
-                        mActivity.dialog.cancel();
-                        break;
-                    case J1939_COMM_INIT:
-                        mActivity.progressView.updateProgress((String) msg.obj, msg.arg1);
-                        break;
-                    case J1939_COMM_INITED:
-                        mActivity.progressView.updateProgress((String) msg.obj, msg.arg1);
-                        break;
-                    case PROGRESS_DIALOG_CANCEL:
-                        mActivity.dialog.cancel();
                         break;
                     case DEV_LIST_INIT:
                         mActivity.devListDialog.show();
                         break;
                     case DEV_LIST_LOADED:
                         mActivity.adapter.notifyDataSetChanged();
-                        break;
-                    case VERIFY_RECORD_START:
-                        mActivity.progressView.updateProgress("数据校验中", 15);
-                        break;
-                    case VERIFY_RECORD_ING:
-                        name = (String) msg.getData().getCharSequence("name");
-                        mActivity.progressView.updateProgress("数据校验：" + name, msg.arg1);
-                        break;
-                    case VERIFY_RECORD_END:
-                        mActivity.progressView.updateProgress("数据校验完成", msg.arg1);
-                        break;
-                    case NEW_ITEM_RECORD_INIT:
-                        mActivity.progressView.updateProgress("数据库更新中", msg.arg1);
-                        break;
-                    case SERVER_DEVICE_REQUEST:
-                        mActivity.progressView.updateProgress((String) msg.obj, msg.arg1);
-                        break;
-                    case SERVER_DEVICE_REQUEST_SUCCESS:
-                        mActivity.progressView.updateProgress((String) msg.obj, msg.arg1);
-                        break;
-                    case SERVER_DEVICE_REQUEST_ERROR:
-                        mActivity.progressView.updateProgress(msg.obj + ",正在还原设置", msg.arg1);
-                        break;
-                    case USER_RELOGIN:
-                        mActivity.relogDialog();
                         break;
                     case NOTIFY_SERVER_GOTO_CHECK:
                         mActivity.dialog.show();

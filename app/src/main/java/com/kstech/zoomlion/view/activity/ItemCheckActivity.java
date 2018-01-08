@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -48,7 +47,6 @@ import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
-import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
@@ -580,18 +578,17 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
 
     private InnerHandler handler = new InnerHandler(this);
 
-    private static class InnerHandler extends Handler {
-        WeakReference<ItemCheckActivity> reference;
+    private static class InnerHandler extends BaseInnerHandler {
         ItemCheckActivity activity;
 
         private InnerHandler(ItemCheckActivity activity) {
-            this.reference = new WeakReference<>(activity);
+            super(activity);
         }
 
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            activity = reference.get();
+            activity = (ItemCheckActivity) reference.get();
             if (activity != null) {
                 switch (msg.what) {
                     case NEW_CHECKITEM_REFRESH:

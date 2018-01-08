@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.ActionBar;
 import android.view.View;
@@ -35,7 +34,6 @@ import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
-import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -84,7 +82,7 @@ public class ItemDetailActivity extends BaseActivity {
     //图片数据集合
     private List<CheckImageData> imgList = new ArrayList<>();
     //谱图数据集合
-    private Map<String,List<Float>> listMap = new HashMap<>();
+    private Map<String, List<Float>> listMap = new HashMap<>();
     //值数据集合
     private List<CheckItemParamValueVO> params;
     //当前调试记录细节 实体类
@@ -187,7 +185,7 @@ public class ItemDetailActivity extends BaseActivity {
                     String name = chartData.getParamName();
                     String str = chartData.getChartData();
                     List<Float> listValue = JsonUtils.fromArrayJson(str, Float.class);
-                    listMap.put(name,listValue);
+                    listMap.put(name, listValue);
                 }
                 handler.sendEmptyMessage(CHART_DATA_LOADED);
             }
@@ -216,19 +214,19 @@ public class ItemDetailActivity extends BaseActivity {
 
     private InnerHandler handler = new InnerHandler(this);
 
-    private static class InnerHandler extends Handler {
-        private final WeakReference<ItemDetailActivity> reference;
+    private static class InnerHandler extends BaseInnerHandler {
 
         private InnerHandler(ItemDetailActivity activity) {
-            this.reference = new WeakReference<>(activity);
+            super(activity);
         }
 
         @Override
         public void handleMessage(Message msg) {
-            ItemDetailActivity mActivity = reference.get();
+            super.handleMessage(msg);
+            ItemDetailActivity mActivity = (ItemDetailActivity) reference.get();
             if (mActivity != null) {
 
-                switch (msg.what){
+                switch (msg.what) {
                     case IMG_ITEM_CLICK:
                         mActivity.updateDialog();
                         break;

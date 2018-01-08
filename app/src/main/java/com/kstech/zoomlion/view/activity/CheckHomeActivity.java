@@ -3,7 +3,6 @@ package com.kstech.zoomlion.view.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.Message;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutCompat;
@@ -44,7 +43,6 @@ import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
-import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -57,62 +55,100 @@ import java.util.Map;
 @ContentView(R.layout.activity_check_home)
 public class CheckHomeActivity extends BaseActivity {
 
-    //所有调试项目集合
+    /**
+     * 所有调试项目集合
+     */
     @ViewInject(R.id.ch_elv_item)
     private ExpandableListView itemsList;
 
-    //调试项目展示组件
+    /**
+     * 调试项目展示组件
+     */
     @ViewInject(R.id.ch_isv)
     private ItemShowView itemShowView;
 
-    //实时显示参数集合
+    /**
+     * 实时显示参数集合
+     */
     @ViewInject(R.id.ch_rv_realtimes)
     private RecyclerView realTimes;
 
-    //开始调试按钮
+    /**
+     * 开始调试按钮
+     */
     @ViewInject(R.id.ch_tv_start_check)
     private TextView tvStartCheck;
 
-    //调试设备类型
+    /**
+     * 调试设备类型
+     */
     @ViewInject(R.id.check_home_tv_device_type)
     private TextView tvDeviceType;
 
-    //调试设备编号
+    /**
+     * 调试设备编号
+     */
     @ViewInject(R.id.check_home_tv_device_identity)
     private TextView tvDeviceIdentity;
 
-    //根布局
+    /**
+     * 根布局
+     */
     @ViewInject(R.id.ll_check_home)
     private LinearLayout llRoot;
 
-    //整机调试记录描述
+    /**
+     * 整机调试记录描述
+     */
     @ViewInject(R.id.check_home_et_admin_desc)
     private ClearFocusByDownEditView etDesc;
 
-    //整机调试结论
+    /**
+     * 整机调试结论
+     */
     @ViewInject(R.id.ch_tv_check_result)
     private TextView tvCheckResult;
 
-    //整机调试次数
+    /**
+     * 整机调试次数
+     */
     @ViewInject(R.id.ch_tv_check_count)
     private TextView tvCheckCount;
 
-    //调试员
+    /**
+     * 调试员
+     */
     @ViewInject(R.id.ch_tv_check_user)
     private TextView tvCheckUser;
 
-    private List<RealTimeView> inHomeRealTimeViews = new ArrayList<>();//实时参数集合
+    /**
+     * 实时参数集合
+     */
+    private List<RealTimeView> inHomeRealTimeViews = new ArrayList<>();
+    /**
+     * recycler view layout管理器
+     */
+    private GridLayoutManager gridLayoutManager;
+    /**
+     * expand list view 适配器
+     */
+    private ExpandItemAdapter expandItemAdapter;
 
-    private GridLayoutManager gridLayoutManager;//recycler view layout管理器
-
-    private ExpandItemAdapter expandItemAdapter;//expand list view 适配器
-
-    //当前调试项目所包含的 调试细节记录表集合
+    /**
+     * 当前调试项目所包含的 调试细节记录表集合
+     */
     private List<CheckItemDetailData> ls = new ArrayList<>();
-
+    /**
+     * 实时参数展示adapter
+     */
     private RealTimeAdapter rvAdapter;
-
+    /**
+     * 调试项目列表上一组的position
+     */
     int lastGroup = 0;
+    /**
+     * 调试项目本地数据加载完成
+     */
     private static final int ITEM_RECORD_LOADED = 0;
 
     @Override
@@ -268,25 +304,20 @@ public class CheckHomeActivity extends BaseActivity {
 
     private InnerHandler handler = new InnerHandler(this);
 
-    private static class InnerHandler extends Handler {
-        /**
-         * The Reference.
-         */
-        final WeakReference<CheckHomeActivity> reference;
-
+    private static class InnerHandler extends BaseInnerHandler {
         /**
          * Instantiates a new Inner handler.
          *
          * @param activity the activity
          */
         InnerHandler(CheckHomeActivity activity) {
-            reference = new WeakReference<>(activity);
+            super(activity);
         }
 
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            CheckHomeActivity activity = reference.get();
+            CheckHomeActivity activity = (CheckHomeActivity) reference.get();
             if (activity != null) {
                 switch (msg.what) {
                     case ITEM_RECORD_LOADED:

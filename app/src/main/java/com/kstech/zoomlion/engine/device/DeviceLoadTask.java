@@ -67,7 +67,7 @@ public class DeviceLoadTask extends AsyncTask<Void, String, Void> {
         SystemClock.sleep(1000);
 
         message = Message.obtain();
-        message.what = IndexActivity.DEVICE_PARSE_START;
+        message.what = IndexActivity.UPDATE_PROGRESS_CONTENT;
         message.obj = "开始解析机型";
         message.arg1 = 10;
         handler.sendMessage(message);
@@ -76,7 +76,7 @@ public class DeviceLoadTask extends AsyncTask<Void, String, Void> {
             //整机编码不为空，向服务器请求机型数据
             if (InExc != null) {
                 message = Message.obtain();
-                message.what = IndexActivity.SERVER_DEVICE_REQUEST;
+                message.what = IndexActivity.UPDATE_PROGRESS_CONTENT;
                 message.obj = "向服务器请求机型数据";
                 message.arg1 = 20;
                 handler.sendMessage(message);
@@ -100,14 +100,14 @@ public class DeviceLoadTask extends AsyncTask<Void, String, Void> {
                         Globals.PROCESSID = object.getString("processId");
                         device = JsonUtils.fromJson(deviceInfo, Device.class);
 
-                        message.what = IndexActivity.SERVER_DEVICE_REQUEST_SUCCESS;
+                        message.what = IndexActivity.UPDATE_PROGRESS_CONTENT;
                         message.obj = "服务器机型数据加载完成";
                         message.arg1 = 28;
                         handler.sendMessage(message);
                         SystemClock.sleep(1000);
                     } else {
-                        message.what = IndexActivity.SERVER_DEVICE_REQUEST_ERROR;
-                        message.obj = "数据解析错误";
+                        message.what = IndexActivity.UPDATE_PROGRESS_CONTENT;
+                        message.obj = "数据解析错误,正在还原设置";
                         message.arg1 = 28;
                         handler.sendMessage(message);
                         SystemClock.sleep(1000);
@@ -118,10 +118,10 @@ public class DeviceLoadTask extends AsyncTask<Void, String, Void> {
                         message.what = IndexActivity.USER_RELOGIN;
                         message.obj = "用户身份异常，重新登录";
                         message.arg1 = 28;
-                        handler.sendEmptyMessage(IndexActivity.PROGRESS_DIALOG_CANCEL);
+                        handler.sendEmptyMessage(IndexActivity.DIALOG_CANCEL);
                     } else {
-                        message.what = IndexActivity.SERVER_DEVICE_REQUEST_ERROR;
-                        message.obj = "数据格式错误";
+                        message.what = IndexActivity.UPDATE_PROGRESS_CONTENT;
+                        message.obj = "数据格式错误,正在还原配置";
                         message.arg1 = 28;
                     }
                     handler.sendMessage(message);
@@ -129,8 +129,8 @@ public class DeviceLoadTask extends AsyncTask<Void, String, Void> {
                     SystemClock.sleep(1000);
                 } catch (Throwable throwable) {
                     throwable.printStackTrace();
-                    message.what = IndexActivity.SERVER_DEVICE_REQUEST_ERROR;
-                    message.obj = throwable.getMessage();
+                    message.what = IndexActivity.UPDATE_PROGRESS_CONTENT;
+                    message.obj = throwable.getMessage() + "，正在还原设置";
                     message.arg1 = 28;
                     handler.sendMessage(message);
                     SystemClock.sleep(1000);
@@ -138,7 +138,7 @@ public class DeviceLoadTask extends AsyncTask<Void, String, Void> {
             }
 
             message = Message.obtain();
-            message.what = IndexActivity.DEVICE_PARSE_ING;
+            message.what = IndexActivity.UPDATE_PROGRESS_CONTENT;
             message.obj = "进行机型数据解析";
             message.arg1 = 35;
             handler.sendMessage(message);
@@ -165,7 +165,7 @@ public class DeviceLoadTask extends AsyncTask<Void, String, Void> {
         int p = 10;
         while (isWaitting) {
             message = Message.obtain();
-            message.what = IndexActivity.J1939_COMM_INIT;
+            message.what = IndexActivity.UPDATE_PROGRESS_CONTENT;
             message.obj = "通讯线程正在初始化";
             message.arg1 = 40 + p;
             handler.sendMessage(message);
@@ -175,13 +175,13 @@ public class DeviceLoadTask extends AsyncTask<Void, String, Void> {
         }
 
         message = Message.obtain();
-        message.what = IndexActivity.J1939_COMM_INITED;
+        message.what = IndexActivity.UPDATE_PROGRESS_CONTENT;
         message.obj = "通讯线程启动完成";
         message.arg1 = 98;
         handler.sendMessage(message);
 
         SystemClock.sleep(300);
-        handler.sendEmptyMessage(IndexActivity.PROGRESS_DIALOG_CANCEL);
+        handler.sendEmptyMessage(IndexActivity.DIALOG_CANCEL);
 
         return null;
     }

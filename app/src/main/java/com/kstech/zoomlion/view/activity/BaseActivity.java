@@ -3,10 +3,14 @@ package com.kstech.zoomlion.view.activity;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
@@ -21,6 +25,8 @@ import android.widget.TextView;
 
 import com.kstech.zoomlion.utils.PermissionUtils;
 import com.kstech.zoomlion.view.widget.TextProgressView;
+
+import java.lang.ref.WeakReference;
 
 /**
  * Created by lijie on 2017/9/7.
@@ -37,6 +43,22 @@ public class BaseActivity extends AppCompatActivity {
      * 进度展示组件，与dialog结合使用
      */
     protected TextProgressView progressView;
+    /**
+     * 弹出弹窗
+     */
+    public static final int DIALOG_SHOW = 999;
+    /**
+     * 关闭弹窗
+     */
+    public static final int DIALOG_CANCEL = 998;
+    /**
+     * 更新进度条内容
+     */
+    public static final int UPDATE_PROGRESS_CONTENT = 997;
+    /**
+     * 重新登录
+     */
+    public static final int USER_RELOGIN = 21;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -135,6 +157,60 @@ public class BaseActivity extends AppCompatActivity {
     public void onRequestPermissionsResult(final int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
         PermissionUtils.requestPermissionsResult(this, requestCode, permissions, grantResults, mPermissionGrant);
+    }
+
+    /**
+     * 重新登录
+     */
+    protected void relogDialog() {
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setTitle("重新登录")
+                .setCancelable(false)
+                .setMessage("用户凭证已过时，请重新登录")
+                .setPositiveButton("重新登录", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        startActivity(new Intent(BaseActivity.this, LoginActivity.class));
+                        finish();
+                    }
+                }).create();
+        dialog.show();
+    }
+
+    /**
+     * handler Base类，通过弱引用来避免内存泄露,并实现一些基本信息的处理
+     */
+    protected static class BaseInnerHandler extends Handler {
+        WeakReference<BaseActivity> reference;
+
+        BaseInnerHandler(BaseActivity activity) {
+            this.reference = new WeakReference<>(activity);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            BaseActivity activity = reference.get();
+            if (activity != null) {
+                switch (msg.what) {
+                    case DIALOG_SHOW:
+                        activity.dialog.show();
+                        break;
+                    case DIALOG_CANCEL:
+                        activity.dialog.cancel();
+                        break;
+                    case UPDATE_PROGRESS_CONTENT:
+                        if (msg.obj != null && msg.arg1 > 0) {
+                            activity.progressView.updateProgress((String) msg.obj, msg.arg1);
+                        }
+                        break;
+                    case USER_RELOGIN:
+                        activity.relogDialog();
+                        break;
+                }
+            }
+
+        }
     }
 
 }
