@@ -381,6 +381,7 @@ public class LoginActivity extends BaseActivity {
 
                             //用户信息赋值给全局变量
                             Globals.currentUser = JsonUtils.fromJson(userInfo, UserInfo.class);
+                            URLCollections.initSID();
                             onProgressUpdate();
                         } else {
                             mError = "用户名或密码错误";

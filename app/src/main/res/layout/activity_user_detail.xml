@@ -147,7 +147,7 @@
 
                     <TextView
                         style="@style/IndexTerminalContentStyle"
-                        android:text="@{String.valueOf(user.sex?'男':'女')}" />
+                        android:text="@{user.sex}" />
                 </LinearLayout>
 
                 <LinearLayout

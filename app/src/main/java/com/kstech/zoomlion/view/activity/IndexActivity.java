@@ -14,6 +14,7 @@ import android.os.IBinder;
 import android.os.Message;
 import android.os.SystemClock;
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -31,6 +32,7 @@ import com.kstech.zoomlion.model.db.greendao.CheckItemDataDao;
 import com.kstech.zoomlion.model.db.greendao.CheckRecordDao;
 import com.kstech.zoomlion.model.enums.CheckRecordResultEnum;
 import com.kstech.zoomlion.model.session.DeviceCatSession;
+import com.kstech.zoomlion.model.session.URLCollections;
 import com.kstech.zoomlion.model.treelist.Element;
 import com.kstech.zoomlion.model.treelist.TreeViewAdapter;
 import com.kstech.zoomlion.model.treelist.TreeViewItemClickListener;
@@ -42,6 +44,9 @@ import com.kstech.zoomlion.utils.LogUtils;
 import com.kstech.zoomlion.utils.ThreadManager;
 import com.kstech.zoomlion.view.widget.TextProgressView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.xutils.http.RequestParams;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
@@ -142,8 +147,6 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
 
     private long checkerID;//调试员ID
 
-    private String deviceIdentity = "test_machine_id";//调试机型编码
-
     /**
      * 机型配置开始解析
      */
@@ -228,6 +231,18 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
      * 重新登录
      */
     public static final int USER_RELOGIN = 21;
+    /**
+     * 通知服务器准备进入调试界面
+     */
+    public static final int NOTIFY_SERVER_GOTO_CHECK = 22;
+    /**
+     * 服务器通讯进入调试页面失败
+     */
+    public static final int NOTIFY_SERVER_GOTO_CHECK_ERROR = 23;
+    /**
+     * 服务器通讯进入调试页面成功
+     */
+    public static final int NOTIFY_SERVER_GOTO_CHECK_SUCCESS = 24;
 
     public static final String TAG = "IndexActivity";
 
@@ -263,9 +278,13 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
         super.onCreate(savedInstanceState);
         x.view().inject(this);
         //String data = String.format(getString(R.string.index_welcome_user),Globals.currentUser.getName(),Globals.currentUser.getLast_login_time());
-        String data = String.format(getString(R.string.index_welcome_user), "测试", new Date());
+        String data = String.format(getString(R.string.index_welcome_user), Globals.currentUser.getUsername(), Globals.currentUser.getLastLoginTime() == null ? new Date() : Globals.currentUser.getLastLoginTime());
         tvUserWelcome.setText(data);
+
         tvTerminalName.setTextColor(Color.DKGRAY);
+        tvTerminalName.setText(Globals.currentTerminal.getName());
+        tvTerminalIP.setText(Globals.currentTerminal.getIp());
+
         tvDeviceIdentity.setTextColor(Color.RED);
         tvDeviceIdentity.setText("当前未检测到整机编号");
 
@@ -317,7 +336,7 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
         super.onDestroy();
         Intent j1939Intent = new Intent(J1939TaskService.ACTION);
         j1939Intent.setPackage(getPackageName());
-
+        Globals.PROCESSID = null;
         if (j1939TaskService != null) {
             j1939TaskService.stopJ1939Service();
             unbindService(conn);
@@ -333,32 +352,14 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
                 startActivity(new Intent(this, UserDetailActivity.class));
                 break;
             case R.id.index_btn_goto:
-                if (isAvalid()) {
-                    //查询本地是否存在记录
-                    CheckRecord cr = recordDao.queryBuilder().where(CheckRecordDao.Properties.DeviceIdentity
-                            .eq(deviceIdentity)).build().unique();
-
-                    //当为null时，说明此机型第一次调试，需要为其创建对应的数据
-                    if (cr == null) {
-                        //弹出对话框，更新数据库
-                        dialog.show();
-                        //数据初始化
-                        initRecord();
-                    } else {
-                        //弹出对话框
-                        dialog.show();
-                        //如果不为空，进行机型文件和数据库的校验
-                        verifyCheckRecord(cr);
-                    }
-
-                }
+                isAvalid();
                 break;
             case R.id.index_btn_exit:
                 finish();
                 break;
             case R.id.index_btn_auto_download:
                 // TODO: 2018/1/5 根据整机编码获取机型信息，此处模拟已经获取到整机编码
-                deviceLoadTask = new DeviceLoadTask(this, "016302A0112", handler);
+                deviceLoadTask = new DeviceLoadTask(this, Globals.deviceSN, handler);
                 deviceLoadTask.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
                 break;
             case R.id.index_btn_choose_from_server:
@@ -431,6 +432,7 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
         ThreadManager.getThreadPool().execute(new Runnable() {
             @Override
             public void run() {
+                SystemClock.sleep(500);
                 handler.sendEmptyMessage(VERIFY_RECORD_START);
                 Message message;
                 int p = 20;
@@ -512,7 +514,8 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
         ThreadManager.getThreadPool().execute(new Runnable() {
             @Override
             public void run() {
-                CheckRecord record = new CheckRecord(null, "", deviceIdentity,
+                SystemClock.sleep(500);
+                CheckRecord record = new CheckRecord(null, "", Globals.deviceSN,
                         "test_record_name", 123l,
                         CheckRecordResultEnum.UNFINISH.getCode(), new Date(),
                         null, 0, 0
@@ -571,6 +574,85 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
      */
     private boolean isAvalid() {
         // TODO: 2017/10/11 此处机型逻辑判断
+        //判断机型调试流程ID是否一致
+        ThreadManager.getThreadPool().execute(new Runnable() {
+            @Override
+            public void run() {
+                handler.sendEmptyMessage(NOTIFY_SERVER_GOTO_CHECK);
+                SystemClock.sleep(1000);
+                RequestParams params = new RequestParams(URLCollections.NOTIFY_SERVER_GOTO_CHECK);
+                params.addBodyParameter("sn", Globals.deviceSN);
+                params.addHeader("Cookie", Globals.SID);
+
+                String result = "";
+                try {
+                    result = x.http().postSync(params, String.class);
+                    JSONObject object = new JSONObject(result);
+                    Message message = Message.obtain();
+                    if (URLCollections.isRequestSuccess(object)) {
+                        String id = object.getString("processId");
+                        //判断当前processID与服务器processID是否一致
+                        if (!TextUtils.isEmpty(Globals.PROCESSID) && Globals.PROCESSID.equals(id)) {
+
+                            //查询本地是否存在记录
+                            CheckRecord cr = recordDao.queryBuilder().where(CheckRecordDao.Properties.DeviceIdentity
+                                    .eq(Globals.deviceSN)).build().unique();
+
+                            //当为null时，说明此机型第一次调试，需要为其创建对应的数据
+                            if (cr == null) {
+                                //当cr为空 arg1为负值
+                                message.arg1 = -1;
+                                message.what = NOTIFY_SERVER_GOTO_CHECK_SUCCESS;
+                                handler.sendMessage(message);
+                                SystemClock.sleep(1000);
+                            } else {
+                                //当cr不为空 arg1为正值
+                                message.arg1 = 1;
+                                message.obj = cr;
+                                message.what = NOTIFY_SERVER_GOTO_CHECK_SUCCESS;
+                                handler.sendMessage(message);
+                                SystemClock.sleep(1000);
+                            }
+
+                        } else {
+                            //不一致提示异常，停止进入
+                            message.what = NOTIFY_SERVER_GOTO_CHECK_ERROR;
+                            message.obj = "当前流程与服务器流程不一致，无法进入调试";
+                            handler.sendMessage(message);
+
+                            SystemClock.sleep(1000);
+                            handler.sendEmptyMessage(PROGRESS_DIALOG_CANCEL);
+                        }
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Message message = Message.obtain();
+                    if (URLCollections.isReLogin(result)) {
+                        message.what = USER_RELOGIN;
+                        message.obj = "用户身份异常，重新登录";
+                        handler.sendEmptyMessage(IndexActivity.PROGRESS_DIALOG_CANCEL);
+                    } else {
+                        message.what = IndexActivity.SERVER_DEVICE_REQUEST_ERROR;
+                        message.obj = "数据格式错误";
+                        message.arg1 = 100;
+                    }
+                    handler.sendMessage(message);
+
+                    SystemClock.sleep(1000);
+                } catch (Throwable throwable) {
+                    //此异常为无法
+                    throwable.printStackTrace();
+                    Message message = Message.obtain();
+                    message.what = NOTIFY_SERVER_GOTO_CHECK_ERROR;
+                    message.obj = throwable.getMessage();
+                    handler.sendMessage(message);
+
+                    SystemClock.sleep(1000);
+                    handler.sendEmptyMessage(PROGRESS_DIALOG_CANCEL);
+                }
+            }
+        });
+
         //判断当前页面是否符合条件跳入调试界面
         return true;
     }
@@ -696,6 +778,22 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
                         break;
                     case USER_RELOGIN:
                         mActivity.relogDialog();
+                        break;
+                    case NOTIFY_SERVER_GOTO_CHECK:
+                        mActivity.dialog.show();
+                        mActivity.progressView.updateProgress("服务器机型流程校验", 5);
+                        break;
+                    case NOTIFY_SERVER_GOTO_CHECK_SUCCESS:
+                        if (msg.arg1 > 0) {
+                            //如果不为空，进行机型文件和数据库的校验
+                            mActivity.verifyCheckRecord((CheckRecord) msg.obj);
+                        } else {
+                            //数据初始化
+                            mActivity.initRecord();
+                        }
+                        break;
+                    case NOTIFY_SERVER_GOTO_CHECK_ERROR:
+                        mActivity.progressView.updateProgress((String) msg.obj, 100);
                         break;
                 }
             }

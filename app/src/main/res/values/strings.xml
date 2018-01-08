@@ -23,7 +23,7 @@
     <string name="copyright">Copyright 2017 Zoomlion Heavy Industry Science&amp;Technology Co., Ltd. All rights reserved. </string>
     <string name="error_no_terminal">未选择测量终端</string>
     <!--应用引导页-->
-    <string name="index_welcome_user">你好，%1$s,欢迎使用！！上次登陆时间：%2$s</string>
+    <string name="index_welcome_user">你好，%1$s，欢迎使用！！上次登陆时间：%2$s</string>
 
     <!--项目记录细节展示页-->
     <string name="item_detail_tv_name">项目名称：</string>

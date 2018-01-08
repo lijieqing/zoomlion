@@ -63,7 +63,7 @@ public class UserDetailActivity extends BaseActivity {
         userInfo.setBirthday(DateUtil.getDateFormat(1993, 3, 1));
         userInfo.setPhoneNumber("258888");
         userInfo.setCellPhoneNumber("1585258888");
-        userInfo.setSex(true);
+        userInfo.setSex("男");
         userInfo.setNation("汉族");
         userInfo.setMarried(false);
         userInfo.setAddress("北京");

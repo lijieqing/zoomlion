@@ -180,4 +180,12 @@ public class Globals {
      * 当前测量终端
      */
     public static MeasureDev currentTerminal;
+    /**
+     * 当前泵车编码
+     */
+    public static final String deviceSN = "016302A0170008";
+    /**
+     * 调试流程ID
+     */
+    public static String PROCESSID;
 }

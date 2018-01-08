@@ -97,7 +97,7 @@ public class DeviceLoadTask extends AsyncTask<Void, String, Void> {
                     JSONObject object = new JSONObject(result);
                     if (URLCollections.isRequestSuccess(object)) {
                         String deviceInfo = object.getString("device");
-                        String processId = object.getString("processId");
+                        Globals.PROCESSID = object.getString("processId");
                         device = JsonUtils.fromJson(deviceInfo, Device.class);
 
                         message.what = IndexActivity.SERVER_DEVICE_REQUEST_SUCCESS;

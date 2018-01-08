@@ -31,6 +31,10 @@ public final class URLCollections {
      * 根据整机编码获取机型信息URL
      */
     public static String GET_DEVICE_BY_SN = ADDRESS + "/device/getDevice";
+    /**
+     * 向服务器请求进入调试
+     */
+    public static String NOTIFY_SERVER_GOTO_CHECK = ADDRESS + "/device/startCommissioning ";
 
     public static String REGISTER_PAD = ADDRESS + "/portabledev/register";//调试终端注册
     public static String USER_CANCEL = ADDRESS + "/user/cancel";//用户注销

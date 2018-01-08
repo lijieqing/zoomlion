@@ -20,7 +20,7 @@ public class UserInfo {
     /**
      * 性别：true-男，false-女
      */
-    private Boolean sex;
+    private String sex;
     /**
      * 民族
      */
@@ -108,11 +108,11 @@ public class UserInfo {
         this.birthday = birthday;
     }
 
-    public Boolean getSex() {
+    public String getSex() {
         return sex;
     }
 
-    public void setSex(Boolean sex) {
+    public void setSex(String sex) {
         this.sex = sex;
     }
 
