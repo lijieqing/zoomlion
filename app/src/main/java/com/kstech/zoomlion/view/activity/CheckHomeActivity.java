@@ -2,6 +2,7 @@ package com.kstech.zoomlion.view.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Message;
 import android.support.v7.widget.GridLayoutManager;
@@ -20,6 +21,7 @@ import android.widget.Toast;
 
 import com.kstech.zoomlion.MyApplication;
 import com.kstech.zoomlion.R;
+import com.kstech.zoomlion.engine.server.ItemCheckPrepareTask;
 import com.kstech.zoomlion.model.db.CheckItemData;
 import com.kstech.zoomlion.model.db.CheckItemDetailData;
 import com.kstech.zoomlion.model.db.CheckRecord;
@@ -143,6 +145,10 @@ public class CheckHomeActivity extends BaseActivity {
      */
     private RealTimeAdapter rvAdapter;
     /**
+     * 进入项目调试前的信息校验线程
+     */
+    private ItemCheckPrepareTask itemInfoLoadTask;
+    /**
      * 调试项目列表上一组的position
      */
     int lastGroup = 0;
@@ -150,6 +156,10 @@ public class CheckHomeActivity extends BaseActivity {
      * 调试项目本地数据加载完成
      */
     private static final int ITEM_RECORD_LOADED = 0;
+    /**
+     * 调试项目服务器信息加载完成
+     */
+    public static final int ITEM_SERVER_INFO_LOADED = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -293,9 +303,8 @@ public class CheckHomeActivity extends BaseActivity {
                 if (Globals.currentCheckItem == null) {
                     Toast.makeText(CheckHomeActivity.this, "未选择调试项目", Toast.LENGTH_SHORT).show();
                 } else {
-                    Intent intent = new Intent(CheckHomeActivity.this, ItemCheckActivity.class);
-                    intent.putExtra("itemID", Globals.currentCheckItem.getId());
-                    startActivity(intent);
+                    itemInfoLoadTask = new ItemCheckPrepareTask(handler);
+                    itemInfoLoadTask.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
                 }
                 break;
         }
@@ -322,6 +331,11 @@ public class CheckHomeActivity extends BaseActivity {
                 switch (msg.what) {
                     case ITEM_RECORD_LOADED:
                         activity.itemShowView.updateBody(activity.ls);
+                        break;
+                    case ITEM_SERVER_INFO_LOADED:
+                        Intent intent = new Intent(activity, ItemCheckActivity.class);
+                        intent.putExtra("itemID", Globals.currentCheckItem.getId());
+                        activity.startActivity(intent);
                         break;
                 }
             }

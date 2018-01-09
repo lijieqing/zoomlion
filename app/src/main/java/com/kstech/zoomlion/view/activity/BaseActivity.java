@@ -58,7 +58,7 @@ public class BaseActivity extends AppCompatActivity {
     /**
      * 重新登录
      */
-    public static final int USER_RELOGIN = 21;
+    public static final int USER_RELOGIN = 996;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -194,6 +194,7 @@ public class BaseActivity extends AppCompatActivity {
             if (activity != null) {
                 switch (msg.what) {
                     case DIALOG_SHOW:
+                        activity.progressView.reset();
                         activity.dialog.show();
                         break;
                     case DIALOG_CANCEL:

@@ -21,7 +21,7 @@ import com.kstech.zoomlion.model.db.CheckImageData;
 import com.kstech.zoomlion.model.db.greendao.CheckImageDataDao;
 import com.kstech.zoomlion.model.vo.CheckItemParamValueVO;
 import com.kstech.zoomlion.utils.DateUtil;
-import com.kstech.zoomlion.view.activity.BaseFunActivity;
+import com.kstech.zoomlion.view.activity.BaseActivity;
 
 import org.xutils.common.util.FileUtil;
 
@@ -34,9 +34,9 @@ import java.util.Date;
 
 public class CameraCapView extends RelativeLayout implements View.OnClickListener {
     /**
-     * 基础功能activity
+     * 上下文对象
      */
-    private BaseFunActivity activity;
+    private BaseActivity context;
     /**
      * 图片捕获布局
      */
@@ -78,10 +78,6 @@ public class CameraCapView extends RelativeLayout implements View.OnClickListene
      */
     private CheckImageDataDao imageDataDao;
 
-    public CameraCapView(Context context) {
-        super(context);
-    }
-
     public CameraCapView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
@@ -90,9 +86,9 @@ public class CameraCapView extends RelativeLayout implements View.OnClickListene
         super(context, attrs, defStyleAttr);
     }
 
-    public CameraCapView(Context context, BaseFunActivity activity) {
+    public CameraCapView(BaseActivity context) {
         super(context);
-        this.activity = activity;
+        this.context = context;
         initView();
     }
 
@@ -114,7 +110,7 @@ public class CameraCapView extends RelativeLayout implements View.OnClickListene
     private void initView() {
         imageDataDao = MyApplication.getApplication().getDaoSession().getCheckImageDataDao();
 
-        View view = View.inflate(activity, R.layout.camera_cap_view, null);
+        View view = View.inflate(context, R.layout.camera_cap_view, null);
         photoshow = view.findViewById(R.id.photoshow);
         takephoto = view.findViewById(R.id.takephoto);
         imageshowlayout = view.findViewById(R.id.imageshowlayout);
@@ -146,7 +142,7 @@ public class CameraCapView extends RelativeLayout implements View.OnClickListene
                 imageUri = Uri.fromFile(temp);
                 //指定照片保存路径（SD卡），workupload.jpg为一个临时文件，每次拍照后这个图片都会被替换
                 cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
-                activity.startActivityForResult(cameraIntent, 1);
+                context.startActivityForResult(cameraIntent, 1);
                 break;
             case R.id.agin:
                 cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -155,7 +151,7 @@ public class CameraCapView extends RelativeLayout implements View.OnClickListene
                 imageUri = Uri.fromFile(temp);
                 //指定照片保存路径（SD卡），workupload.jpg为一个临时文件，每次拍照后这个图片都会被替换
                 cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
-                activity.startActivityForResult(cameraIntent, 1);
+                context.startActivityForResult(cameraIntent, 1);
                 break;
             case R.id.finish:
                 takephoto.setVisibility(View.VISIBLE);
@@ -189,7 +185,7 @@ public class CameraCapView extends RelativeLayout implements View.OnClickListene
         FileUtil.copy(Environment.getExternalStorageDirectory() + "/workupload.jpg", fname);
         CheckImageData imgdata = new CheckImageData(null, paramDictId, new Date(), detailID, paramName, fname);
         long imgDBId = imageDataDao.insert(imgdata);
-        Toast.makeText(activity, "保存成功", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, "保存成功", Toast.LENGTH_SHORT).show();
         return imgDBId;
     }
 

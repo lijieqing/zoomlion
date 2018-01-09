@@ -22,7 +22,7 @@ import com.kstech.zoomlion.model.vo.CheckItemParamValueVO;
 import com.kstech.zoomlion.utils.DateUtil;
 import com.kstech.zoomlion.utils.ItemFunctionUtils;
 import com.kstech.zoomlion.utils.LogUtils;
-import com.kstech.zoomlion.view.activity.BaseFunActivity;
+import com.kstech.zoomlion.engine.check.BaseCheckFunction;
 
 import java.util.Date;
 
@@ -32,7 +32,8 @@ import java.util.Date;
  * 参数操作布局
  */
 public class ItemOperateBodyView extends RelativeLayout {
-    private BaseFunActivity baseFunActivity;
+    private Context context;
+    private BaseCheckFunction baseCheckFunction;
     private TextView tvParamName;//参数名称
     private TextView tvCamera;//是否拍照描述
     private TextView tvChart;//是否获取谱图描述
@@ -55,9 +56,9 @@ public class ItemOperateBodyView extends RelativeLayout {
      * @param checkItemParamValueVO the check item param value vo
      * @param qcID                  the qc id
      */
-    public ItemOperateBodyView(BaseFunActivity context, CheckItemParamValueVO checkItemParamValueVO, String qcID) {
+    public ItemOperateBodyView(Context context, CheckItemParamValueVO checkItemParamValueVO, String qcID) {
         super(context);
-        this.baseFunActivity = context;
+        this.context = context;
         this.checkItemParamValueVO = new CheckItemParamValueVO(checkItemParamValueVO);
         this.qcID = qcID;
 
@@ -90,12 +91,20 @@ public class ItemOperateBodyView extends RelativeLayout {
     }
 
     /**
+     * 设置基础调试功能对象
+     * @param function
+     */
+    public void setBaseCheckFunction(BaseCheckFunction function){
+        this.baseCheckFunction = function;
+    }
+
+    /**
      * 初始化布局 初始化参数功能信息
      *
      * @return
      */
     private View initView() {
-        View v = View.inflate(baseFunActivity, R.layout.check_item_operate_body, null);
+        View v = View.inflate(context, R.layout.check_item_operate_body, null);
         tvParamName = v.findViewById(R.id.tv_name);
         tvCamera = v.findViewById(R.id.tv_camera);
         tvChart = v.findViewById(R.id.tv_chart);
@@ -163,7 +172,7 @@ public class ItemOperateBodyView extends RelativeLayout {
                             LogUtils.e("ItemOperateView", "in listener pass:" + checkItemParamValueVO.getValue() + " id:" + i);
                             // TODO: 2017/10/18 判断是否需要图片，需要图片时，在给出合格不合格时，应该判断是否已保存图片
                             if (checkItemParamValueVO.getPicReq() && !picSaved) {
-                                Toast.makeText(baseFunActivity, "请先保存图片数据", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "请先保存图片数据", Toast.LENGTH_SHORT).show();
                                 radioGroup.clearCheck();
                             } else {
                                 if (radioGroup.getCheckedRadioButtonId() == i) {
@@ -174,7 +183,7 @@ public class ItemOperateBodyView extends RelativeLayout {
                         case R.id.rb_unpass:
                             LogUtils.e("ItemOperateView", "in listener unpass:" + checkItemParamValueVO.getValue() + " id:" + i);
                             if (checkItemParamValueVO.getPicReq() && !picSaved) {
-                                Toast.makeText(baseFunActivity, "请先保存图片数据", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "请先保存图片数据", Toast.LENGTH_SHORT).show();
                                 radioGroup.clearCheck();
                             } else {
                                 if (radioGroup.getCheckedRadioButtonId() == i) {
@@ -196,16 +205,16 @@ public class ItemOperateBodyView extends RelativeLayout {
         ivCamera.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                baseFunActivity.camera(checkItemParamValueVO, ItemOperateBodyView.this);
+                baseCheckFunction.camera(checkItemParamValueVO, ItemOperateBodyView.this);
             }
         });
 
         ivHandWriting.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                et = new EditText(baseFunActivity);
+                et = new EditText(context);
                 et.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
-                handwritingDialog = new AlertDialog.Builder(baseFunActivity)
+                handwritingDialog = new AlertDialog.Builder(context)
                         .setTitle("输入")
                         .setCancelable(true)
                         .setPositiveButton("确定", new DialogInterface.OnClickListener() {
@@ -233,7 +242,7 @@ public class ItemOperateBodyView extends RelativeLayout {
             picSaved = true;
             String date = DateUtil.getDateTimeFormat14(new Date());
             tvCamera.setText(date);
-            baseFunActivity.cameraCancel();
+            baseCheckFunction.cameraCancel();
         }
     }
 

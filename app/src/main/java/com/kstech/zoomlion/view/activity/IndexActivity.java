@@ -141,35 +141,35 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
     /**
      * 机型配置完成解析
      */
-    public static final int DEVICE_PARSE_FINISH = 2;
+    public static final int DEVICE_PARSE_FINISH = 0;
     /**
      * 进入调试主界面
      */
-    public static final int SKIP_TO_CHECK = 5;
+    public static final int SKIP_TO_CHECK = 1;
     /**
      * 服务器机型列表初始化
      */
-    public static final int DEV_LIST_INIT = 10;
+    public static final int DEV_LIST_INIT = 2;
     /**
      * 服务器机型列表初始化 完成
      */
-    public static final int DEV_LIST_LOADED = 11;
+    public static final int DEV_LIST_LOADED = 3;
     /**
      * 1939通讯线程重置
      */
-    public static final int J1939_SERVICE_RESET = 20;
+    public static final int J1939_SERVICE_RESET = 4;
     /**
      * 通知服务器准备进入调试界面
      */
-    public static final int NOTIFY_SERVER_GOTO_CHECK = 22;
+    public static final int NOTIFY_SERVER_GOTO_CHECK = 5;
     /**
      * 服务器通讯进入调试页面失败
      */
-    public static final int NOTIFY_SERVER_GOTO_CHECK_ERROR = 23;
+    public static final int NOTIFY_SERVER_GOTO_CHECK_ERROR = 6;
     /**
      * 服务器通讯进入调试页面成功
      */
-    public static final int NOTIFY_SERVER_GOTO_CHECK_SUCCESS = 24;
+    public static final int NOTIFY_SERVER_GOTO_CHECK_SUCCESS = 7;
 
     public static final String TAG = "IndexActivity";
 
@@ -477,6 +477,7 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
                         String s = "初始化配置：" + checkItemVO.getName() + " 数据信息";
                         message.what = UPDATE_PROGRESS_CONTENT;
                         message.obj = s;
+                        message.arg1 = p;
 
                         //发送msg 更新UI
                         handler.sendMessage(message);

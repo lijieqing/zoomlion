@@ -25,7 +25,7 @@ import com.kstech.zoomlion.model.xmlbean.Spectrum;
 import com.kstech.zoomlion.utils.DeviceUtil;
 import com.kstech.zoomlion.utils.Globals;
 import com.kstech.zoomlion.utils.JsonUtils;
-import com.kstech.zoomlion.view.activity.BaseFunActivity;
+import com.kstech.zoomlion.engine.check.BaseCheckFunction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +38,7 @@ import java.util.List;
 public class ItemOperateView extends RelativeLayout implements View.OnClickListener {
     private Context context;
     private LinearLayout ll_body;//调试项目参数操作显示区域
-    private BaseFunActivity baseFunActivity;
+    private BaseCheckFunction baseCheckFunction;
 
     private ImageView ivSave;//保存
     private ImageView ivStart;//开始
@@ -225,7 +225,10 @@ public class ItemOperateView extends RelativeLayout implements View.OnClickListe
         ItemOperateBodyView bodyView;
         for (CheckItemParamValueVO checkItemParamValueVO : itemVO.getParamNameList()) {
             //初始化参数操作布局
-            bodyView = new ItemOperateBodyView(baseFunActivity, checkItemParamValueVO, itemVO.getId());
+            bodyView = new ItemOperateBodyView(context, checkItemParamValueVO, itemVO.getId());
+            if (checkItemParamValueVO.getPicReq()){
+                bodyView.setBaseCheckFunction(baseCheckFunction);
+            }
             ll_body.addView(bodyView, params);
             //添加到参数布局集合
             bodyViews.add(bodyView);
@@ -311,10 +314,10 @@ public class ItemOperateView extends RelativeLayout implements View.OnClickListe
     /**
      * 设置功能baseFunActivity 用于回调 camera
      *
-     * @param baseFunActivity the base fun activity
+     * @param baseCheckFunction the base fun activity
      */
-    public void setCameraActivity(@NonNull BaseFunActivity baseFunActivity) {
-        this.baseFunActivity = baseFunActivity;
+    public void setCameraActivity(@NonNull BaseCheckFunction baseCheckFunction) {
+        this.baseCheckFunction = baseCheckFunction;
     }
 
     @Override
@@ -351,7 +354,7 @@ public class ItemOperateView extends RelativeLayout implements View.OnClickListe
                 break;
             case R.id.btn_clear_blur:
                 changeBlur();
-                baseFunActivity.initDetailData();
+                baseCheckFunction.initDetailData();
                 break;
 
         }
@@ -370,7 +373,7 @@ public class ItemOperateView extends RelativeLayout implements View.OnClickListe
             inBlur = true;
         }
 
-        baseFunActivity.onBlurChange(inBlur);
+        baseCheckFunction.onBlurChange(inBlur);
     }
 
     /**
@@ -387,7 +390,7 @@ public class ItemOperateView extends RelativeLayout implements View.OnClickListe
      */
     private void toNext() {
         if (inBlur) {
-            baseFunActivity.toNext();
+            baseCheckFunction.toNext();
         } else {
             Toast.makeText(context, "当前正处于调试状态，无法进入下一项目", Toast.LENGTH_SHORT).show();
         }
@@ -398,7 +401,7 @@ public class ItemOperateView extends RelativeLayout implements View.OnClickListe
      */
     private void toForward() {
         if (inBlur) {
-            baseFunActivity.toForward();
+            baseCheckFunction.toForward();
         } else {
             Toast.makeText(context, "当前正处于调试状态，无法进入上一项目", Toast.LENGTH_SHORT).show();
         }
@@ -422,7 +425,7 @@ public class ItemOperateView extends RelativeLayout implements View.OnClickListe
                     if ("RealParam".equals(bodyView.getInfo().getValMode()) || "Express".equals(bodyView.getInfo().getValMode())) {
                         paramValueVOList.add(bodyView.getInfo());
                     } else {
-                        Toast.makeText(baseFunActivity, bodyView.getInfo().getParamName() + "未检测到数据", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, bodyView.getInfo().getParamName() + "未检测到数据", Toast.LENGTH_SHORT).show();
                         return;
                     }
                 } else {
@@ -431,7 +434,7 @@ public class ItemOperateView extends RelativeLayout implements View.OnClickListe
             }
             String paramValues = JsonUtils.toJson(paramValueVOList);
 
-            baseFunActivity.saveRecord(paramValues);
+            baseCheckFunction.saveRecord(paramValues);
 
             //改变模糊状态
             changeBlur();
@@ -460,7 +463,7 @@ public class ItemOperateView extends RelativeLayout implements View.OnClickListe
         //更新调试状态为正在调试
         updateCheckStatus(true, false);
         //回调baseFunActivity开始调试
-        baseFunActivity.startCheck();
+        baseCheckFunction.startCheck();
     }
 
     /**
@@ -491,6 +494,6 @@ public class ItemOperateView extends RelativeLayout implements View.OnClickListe
         //更新调试状态为未在调试
         updateCheckStatus(false, false);
         //回调baseFunActivity停止调试
-        baseFunActivity.stopCheck();
+        baseCheckFunction.stopCheck();
     }
 }

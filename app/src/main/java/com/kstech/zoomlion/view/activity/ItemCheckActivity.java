@@ -18,10 +18,12 @@ import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.signature.ObjectKey;
 import com.kstech.zoomlion.MyApplication;
 import com.kstech.zoomlion.R;
+import com.kstech.zoomlion.engine.check.BaseCheckFunction;
 import com.kstech.zoomlion.engine.check.CheckResultVerify;
 import com.kstech.zoomlion.engine.check.ItemCheckCallBack;
 import com.kstech.zoomlion.engine.check.ItemCheckTask;
 import com.kstech.zoomlion.engine.check.XmlExpressionImpl;
+import com.kstech.zoomlion.engine.server.ItemCheckPrepareTask;
 import com.kstech.zoomlion.exception.MultiArithmeticException;
 import com.kstech.zoomlion.model.db.CheckChartData;
 import com.kstech.zoomlion.model.db.CheckItemData;
@@ -57,7 +59,7 @@ import java.util.Map;
  * 项目调试界面，对单个项目调试的操作界面，主要包含两个大的组件ItemOperateView和ItemShowViewInCheck
  */
 @ContentView(R.layout.activity_item_check)
-public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallBack {
+public class ItemCheckActivity extends BaseActivity implements ItemCheckCallBack,BaseCheckFunction {
     /**
      * 项目调试操作view
      */
@@ -141,9 +143,18 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
      */
     boolean pass = false;
 
+    /**
+     * 实时参数展示Fragment
+     */
     private RealTimeViewsFragment realTimeViewsFragment;
-
+    /**
+     * fragment管理器
+     */
     private FragmentManager fragmentManager;
+    /**
+     * 进入项目调试前的信息校验线程
+     */
+    private ItemCheckPrepareTask itemInfoLoadTask;
 
     /**
      * 更新调试项目
@@ -235,7 +246,7 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
     @Override
     public void camera(CheckItemParamValueVO checkItemParamValueVO, ItemOperateBodyView iobv) {
         //初始化图片捕捉view
-        cameraCapView = new CameraCapView(this, this);
+        cameraCapView = new CameraCapView(this);
         cameraCapView.itemParamInit(checkItemParamValueVO, detailID, iobv);
 
         //将图片捕捉view放到dialog中展示
@@ -249,7 +260,7 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
     }
 
     /************
-     * BaseFunActivity 回调
+     * BaseCheckFunction 回调
      */
     @Override
     public void startCheck() {
@@ -356,16 +367,9 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
         CheckItemVO temp = Globals.forwardCheckItem();
         if (temp != null) {
             itemvo = temp;
-            ThreadManager.getThreadPool().execute(new Runnable() {
-                @Override
-                public void run() {
-                    itemData = itemDao.queryBuilder().where(CheckItemDataDao.Properties.QcId.eq(Integer.parseInt(itemvo.getId()))).build().unique();
-                    itemDBID = itemData.getCheckItemId();
-                    itemData.resetCheckItemDetailDatas();
-
-                    handler.sendEmptyMessage(NEW_CHECKITEM_REFRESH);
-                }
-            });
+            itemInfoLoadTask = new ItemCheckPrepareTask(handler);
+            itemInfoLoadTask.setInCheckMode(this,false);
+            itemInfoLoadTask.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
         } else {
             Toast.makeText(this, "当前已是第一项", Toast.LENGTH_SHORT).show();
         }
@@ -376,19 +380,21 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
         CheckItemVO temp = Globals.nextCheckItem();
         if (temp != null) {
             itemvo = temp;
-            ThreadManager.getThreadPool().execute(new Runnable() {
-                @Override
-                public void run() {
-                    itemData = itemDao.queryBuilder().where(CheckItemDataDao.Properties.QcId.eq(Integer.parseInt(itemvo.getId()))).build().unique();
-                    itemDBID = itemData.getCheckItemId();
-                    itemData.resetCheckItemDetailDatas();
-
-                    handler.sendEmptyMessage(NEW_CHECKITEM_REFRESH);
-                }
-            });
+            itemInfoLoadTask = new ItemCheckPrepareTask(handler);
+            itemInfoLoadTask.setInCheckMode(this,true);
+            itemInfoLoadTask.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
         } else {
             Toast.makeText(this, "当前已是最后一项", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public void loadCheckItemData() {
+        itemData = itemDao.queryBuilder().where(CheckItemDataDao.Properties.QcId.eq(Integer.parseInt(itemvo.getId()))).build().unique();
+        itemDBID = itemData.getCheckItemId();
+        itemData.resetCheckItemDetailDatas();
+
+        handler.sendEmptyMessage(NEW_CHECKITEM_REFRESH);
     }
 
     @Override
@@ -403,7 +409,7 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
 
     @Override
     public void onBlurChange(boolean inBlur) {
-        super.onBlurChange(inBlur);
+
         if (inBlur) {
             if (realTimeViewsFragment.isAdded())
                 fragmentManager.beginTransaction().remove(realTimeViewsFragment).commit();
@@ -416,7 +422,7 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
     }
 
     /**
-     * BaseFunActivity 回调
+     * BaseCheckFunction 回调
      ****************
      */
 
@@ -601,7 +607,8 @@ public class ItemCheckActivity extends BaseFunActivity implements ItemCheckCallB
                     case NEW_DATA_REFRESH:
                         //此处更新iov组件 并传入detailData中
                         activity.iov.updateBodyAutoView(activity.valueVOList);
-                        activity.detailData.setParamsValues(JsonUtils.toJson(activity.valueVOList));
+                        if (activity.detailData != null)
+                            activity.detailData.setParamsValues(JsonUtils.toJson(activity.valueVOList));
                         activity.valueVOList.clear();
                         break;
                     case START_SAVE_RECORD:
