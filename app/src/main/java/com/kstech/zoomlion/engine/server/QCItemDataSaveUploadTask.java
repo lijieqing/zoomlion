@@ -10,6 +10,7 @@ import com.kstech.zoomlion.exception.MultiArithmeticException;
 import com.kstech.zoomlion.model.db.CheckChartData;
 import com.kstech.zoomlion.model.db.CheckItemData;
 import com.kstech.zoomlion.model.db.CheckItemDetailData;
+import com.kstech.zoomlion.model.db.CheckRecord;
 import com.kstech.zoomlion.model.enums.CheckItemDetailResultEnum;
 import com.kstech.zoomlion.model.enums.CheckItemResultEnum;
 import com.kstech.zoomlion.model.session.URLCollections;
@@ -30,10 +31,6 @@ import java.util.List;
  */
 public class QCItemDataSaveUploadTask extends AbstractDataTransferTask {
     /**
-     * 第几次调试
-     */
-    private int checkNO;
-    /**
      * 调试项目细节记录数据ID
      */
     private long detailID;
@@ -41,6 +38,8 @@ public class QCItemDataSaveUploadTask extends AbstractDataTransferTask {
      * 当前调试项目VO类
      */
     private CheckItemVO itemvo;
+
+    private CheckRecord record;
     /**
      * 当前调试项目数据
      */
@@ -65,6 +64,10 @@ public class QCItemDataSaveUploadTask extends AbstractDataTransferTask {
      * 泵车调试未通过次数
      */
     private int recordUnPassCount;
+    /**
+     * 服务器请求次数
+     */
+    private int requestTimes = 0;
 
     public QCItemDataSaveUploadTask(Handler handler) {
         super(handler);
@@ -79,18 +82,22 @@ public class QCItemDataSaveUploadTask extends AbstractDataTransferTask {
      * @param paramValues   参数值集合JSON串
      * @param detailID      调试项目细节数据ID
      * @param itemvo        调试项目VO类
-     * @param checkNO       当前为第几次调试
      */
     public void init(List<CheckChartData> chartDataList, CheckItemData itemData,
                      CheckItemDetailData detailData, String paramValues,
-                     long detailID, CheckItemVO itemvo, int checkNO) {
+                     long detailID, CheckItemVO itemvo) {
         this.chartDataList = chartDataList;
         this.itemData = itemData;
         this.detailData = detailData;
         this.paramValues = paramValues;
         this.detailID = detailID;
         this.itemvo = itemvo;
-        this.checkNO = checkNO;
+        record = itemData.getCheckRecord();
+    }
+
+    @Override
+    boolean needRequest() {
+        return requestTimes<1;
     }
 
     @Override
@@ -138,6 +145,10 @@ public class QCItemDataSaveUploadTask extends AbstractDataTransferTask {
             //重置itemDetailData的谱图数据
             detailData.resetCheckChartDatas();
 
+            //设置第几次调试
+            int detailCheckTimes = ItemCheckPrepareTask.serverItemDoneTimes+1;
+            detailData.setCheckTimes(detailCheckTimes);
+
             //更新
             MyApplication.getApplication().getDaoSession().getCheckItemDetailDataDao().update(detailData);
             //重置 调试细节记录表 为的是保持与数据库同步
@@ -156,10 +167,19 @@ public class QCItemDataSaveUploadTask extends AbstractDataTransferTask {
                 itemData.setCheckResult(CheckItemResultEnum.UNFINISH.getCode());
             }
             itemData.setSumCounts(sumCount);
+
+            record.setSumCounts(recordCount);
+            record.setUnpassCounts(recordUnPassCount);
+            MyApplication.getApplication().getDaoSession().getCheckRecordDao().update(record);
         } catch (MultiArithmeticException e) {
             e.printStackTrace();
             handler.sendEmptyMessage(ItemCheckActivity.RECORD_VERIFY_ERROR);
         }
+    }
+
+    @Override
+    String getRequestMessage() {
+        return "数据本地已保存，开始同步服务器";
     }
 
     @Override
@@ -170,9 +190,10 @@ public class QCItemDataSaveUploadTask extends AbstractDataTransferTask {
     @Override
     void initRequestParam(RequestParams params) {
         //将调试记录数据打包，并添加到param中
-        CompleteQCItemJSON qcitemJson = packageQCItemData(detailData, checkNO);
+        CompleteQCItemJSON qcitemJson = packageQCItemData(detailData);
         String result = JsonUtils.toJson(qcitemJson);
         params.setBodyContent(result);
+        requestTimes++;
     }
 
     @Override
@@ -198,9 +219,6 @@ public class QCItemDataSaveUploadTask extends AbstractDataTransferTask {
     void onRequestFinish(boolean success) {
         //更新数据库
         MyApplication.getApplication().getDaoSession().update(itemData);
-
-        itemData.getCheckRecord().setSumCounts(recordCount);
-        itemData.getCheckRecord().setUnpassCounts(recordUnPassCount);
 
         handler.sendEmptyMessage(ItemCheckActivity.RECORD_DATA_SAVED);
     }

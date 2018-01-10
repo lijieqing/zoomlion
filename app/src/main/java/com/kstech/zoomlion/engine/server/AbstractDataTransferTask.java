@@ -62,57 +62,68 @@ public abstract class AbstractDataTransferTask extends AsyncTask<Void, Integer, 
         //请求前执行任务
         beforeRequest();
 
-        RequestParams params = new RequestParams(getURL());
-        params.addHeader("Cookie", Globals.SID);
-        //初始化请求参数
-        initRequestParam(params);
+        RequestParams params;
+        while (needRequest()){
+            String result = "";
 
-        String result = "";
-        message = Message.obtain();
-
-        try {
-            result = x.http().postSync(params, String.class);
-            LogUtils.e("QCItemDataSaveUploadTask", result);
-            JSONObject object = new JSONObject(result);
-            if (!object.has("error")) {
-                //请求成功后调用
-                onRequestSuccess(object);
-                message.arg1 = 80;
-                message.obj = "请求成功！";
-                message.what = BaseActivity.UPDATE_PROGRESS_CONTENT;
-            } else {
-                //请求返回error
-                onRequestError();
-                message.obj = object.getString("error");
-                message.arg1 = 80;
-                message.what = BaseActivity.UPDATE_PROGRESS_CONTENT;
-            }
+            message = Message.obtain();
+            message.obj = getRequestMessage();
+            message.arg1 = 30;
+            message.what = BaseActivity.UPDATE_PROGRESS_CONTENT;
             handler.sendMessage(message);
-        } catch (JSONException e) {
-            e.printStackTrace();
-            if (URLCollections.isReLogin(result)) {
-                if (onReLogin(message)) {
-                    message.what = BaseActivity.USER_RELOGIN;
-                    handler.sendEmptyMessage(BaseActivity.DIALOG_CANCEL);
+
+            //初始化请求参数
+            params = new RequestParams(getURL());
+            params.addHeader("Cookie", Globals.SID);
+            initRequestParam(params);
+
+            message = Message.obtain();
+            try {
+                result = x.http().postSync(params, String.class);
+                LogUtils.e("QCItemDataSaveUploadTask", result);
+                JSONObject object = new JSONObject(result);
+                if (!object.has("error")) {
+                    //请求成功后调用
+                    onRequestSuccess(object);
+                    message.arg1 = 80;
+                    message.obj = "请求成功！";
+                    message.what = BaseActivity.UPDATE_PROGRESS_CONTENT;
+                } else {
+                    //请求返回error
+                    onRequestError();
+                    message.obj = object.getString("error");
+                    message.arg1 = 80;
+                    message.what = BaseActivity.UPDATE_PROGRESS_CONTENT;
+                }
+                handler.sendMessage(message);
+            } catch (JSONException e) {
+                e.printStackTrace();
+                if (URLCollections.isReLogin(result)) {
+                    if (onReLogin(message)) {
+                        message.what = BaseActivity.USER_RELOGIN;
+                        handler.sendEmptyMessage(BaseActivity.DIALOG_CANCEL);
+                    } else {
+                        message.what = BaseActivity.UPDATE_PROGRESS_CONTENT;
+                        message.obj = "用户登录无效，请求失败";
+                        message.arg1 = 80;
+                    }
                 } else {
                     message.what = BaseActivity.UPDATE_PROGRESS_CONTENT;
-                    message.obj = "用户登录无效，请求失败";
+                    message.obj = "未能正确解析服务器数据,请求失败";
                     message.arg1 = 80;
                 }
-            } else {
+                handler.sendMessage(message);
+                SystemClock.sleep(1000);
+                break;
+            } catch (Throwable throwable) {
+                throwable.printStackTrace();
                 message.what = BaseActivity.UPDATE_PROGRESS_CONTENT;
-                message.obj = "未能正确解析服务器数据,请求失败";
-                message.arg1 = 80;
+                message.obj = throwable.getMessage();
+                message.arg1 = 28;
+                handler.sendMessage(message);
+                SystemClock.sleep(1000);
+                break;
             }
-            handler.sendMessage(message);
-            SystemClock.sleep(1000);
-        } catch (Throwable throwable) {
-            throwable.printStackTrace();
-            message.what = BaseActivity.UPDATE_PROGRESS_CONTENT;
-            message.obj = throwable.getMessage();
-            message.arg1 = 28;
-            handler.sendMessage(message);
-            SystemClock.sleep(1000);
         }
 
         onRequestFinish(success);
@@ -120,6 +131,18 @@ public abstract class AbstractDataTransferTask extends AsyncTask<Void, Integer, 
         handler.sendEmptyMessage(BaseActivity.DIALOG_CANCEL);
         return null;
     }
+
+    /**
+     * 获取message描述信息
+     * @return 字符串
+     */
+    abstract String getRequestMessage();
+
+    /**
+     * 是否需要向服务器请求
+     * @return TRUE、FALSE
+     */
+    abstract boolean needRequest();
 
     /**
      * 请求前所做的数据准备
@@ -173,7 +196,7 @@ public abstract class AbstractDataTransferTask extends AsyncTask<Void, Integer, 
      * @param detailData 调试项目细节数据
      * @return 打包完成后的对象
      */
-    CompleteQCItemJSON packageQCItemData(CheckItemDetailData detailData, int checkNO) {
+    CompleteQCItemJSON packageQCItemData(CheckItemDetailData detailData) {
         //将调试项目数据打包为传输格式数据
         CompleteQCItemJSON qcItemJSON = new CompleteQCItemJSON();
 
@@ -197,7 +220,7 @@ public abstract class AbstractDataTransferTask extends AsyncTask<Void, Integer, 
             /*生成QCDataRecordForm对象*/
             QCDataRecordForm qcDataRecordForm = new QCDataRecordForm();
             //设置基本信息
-            qcDataRecordForm.setCheckNo(checkNO);
+            qcDataRecordForm.setCheckNo(detailData.getCheckTimes());
             qcDataRecordForm.setQcdataDictId(Long.valueOf(paramData.getDictID()));
             //获取当前参数数值，并判断参数结果状态
             String value = paramData.getValue();

@@ -280,7 +280,7 @@ public class ItemCheckActivity extends BaseActivity implements ItemCheckCallBack
     public void saveRecord(final String paramValues) {
         QCItemDataSaveUploadTask uploadServer = new QCItemDataSaveUploadTask(handler);
         uploadServer.init(chartDataList, itemData, detailData, paramValues,
-                detailID, itemvo, ItemCheckPrepareTask.serverItemDoneTimes);
+                detailID, itemvo);
         uploadServer.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
     }
 

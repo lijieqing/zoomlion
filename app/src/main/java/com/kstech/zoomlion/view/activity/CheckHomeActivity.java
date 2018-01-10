@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.kstech.zoomlion.MyApplication;
 import com.kstech.zoomlion.R;
 import com.kstech.zoomlion.engine.server.ItemCheckPrepareTask;
+import com.kstech.zoomlion.engine.server.QCItemDataReLoadTask;
 import com.kstech.zoomlion.model.db.CheckItemData;
 import com.kstech.zoomlion.model.db.CheckItemDetailData;
 import com.kstech.zoomlion.model.db.CheckRecord;
@@ -155,7 +156,7 @@ public class CheckHomeActivity extends BaseActivity {
     /**
      * 调试项目本地数据加载完成
      */
-    private static final int ITEM_RECORD_LOADED = 0;
+    public static final int ITEM_RECORD_LOADED = 0;
     /**
      * 调试项目服务器信息加载完成
      */
@@ -212,6 +213,8 @@ public class CheckHomeActivity extends BaseActivity {
         realTimes.setLayoutManager(gridLayoutManager);
         realTimes.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.HORIZONTAL_LIST));
         realTimes.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));
+
+        new QCItemDataReLoadTask(handler).executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
     }
 
     /**
