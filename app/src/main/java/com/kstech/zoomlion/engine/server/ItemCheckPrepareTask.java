@@ -5,11 +5,11 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
 
+import com.kstech.zoomlion.engine.check.BaseCheckFunction;
 import com.kstech.zoomlion.model.enums.CheckItemResultEnum;
 import com.kstech.zoomlion.model.session.URLCollections;
 import com.kstech.zoomlion.utils.Globals;
 import com.kstech.zoomlion.view.activity.BaseActivity;
-import com.kstech.zoomlion.engine.check.BaseCheckFunction;
 import com.kstech.zoomlion.view.activity.CheckHomeActivity;
 
 import org.json.JSONException;
@@ -49,11 +49,11 @@ public class ItemCheckPrepareTask extends AsyncTask<Void, Integer, Void> {
     /**
      * 当前调试项目的已完成次数
      */
-    private static int serverItemDoneTimes = -1;
+    public static int serverItemDoneTimes = -1;
     /**
      * 当前调试项目的服务器状态
      */
-    private static int serverItemStatus = -1;
+    public static int serverItemStatus = -1;
 
     public ItemCheckPrepareTask(Handler handler) {
         this.handler = handler;

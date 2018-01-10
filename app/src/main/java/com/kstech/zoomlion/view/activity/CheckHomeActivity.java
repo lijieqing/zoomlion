@@ -449,10 +449,10 @@ public class CheckHomeActivity extends BaseActivity {
                 case 0:
                     holder.iv.setBackgroundResource(R.drawable.circle_item_status_unstart);
                     break;
-                case 1:
+                case 2:
                     holder.iv.setBackgroundResource(R.drawable.circle_item_status_pass);
                     break;
-                case 2:
+                case 3:
                     holder.iv.setBackgroundResource(R.drawable.circle_item_status_unpass);
                     break;
             }

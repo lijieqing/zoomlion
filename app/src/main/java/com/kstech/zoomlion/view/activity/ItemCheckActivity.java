@@ -19,12 +19,11 @@ import com.bumptech.glide.signature.ObjectKey;
 import com.kstech.zoomlion.MyApplication;
 import com.kstech.zoomlion.R;
 import com.kstech.zoomlion.engine.check.BaseCheckFunction;
-import com.kstech.zoomlion.engine.check.CheckResultVerify;
 import com.kstech.zoomlion.engine.check.ItemCheckCallBack;
 import com.kstech.zoomlion.engine.check.ItemCheckTask;
 import com.kstech.zoomlion.engine.check.XmlExpressionImpl;
 import com.kstech.zoomlion.engine.server.ItemCheckPrepareTask;
-import com.kstech.zoomlion.exception.MultiArithmeticException;
+import com.kstech.zoomlion.engine.server.QCItemDataSaveUploadTask;
 import com.kstech.zoomlion.model.db.CheckChartData;
 import com.kstech.zoomlion.model.db.CheckItemData;
 import com.kstech.zoomlion.model.db.CheckItemDetailData;
@@ -32,7 +31,6 @@ import com.kstech.zoomlion.model.db.greendao.CheckChartDataDao;
 import com.kstech.zoomlion.model.db.greendao.CheckItemDataDao;
 import com.kstech.zoomlion.model.db.greendao.CheckItemDetailDataDao;
 import com.kstech.zoomlion.model.enums.CheckItemDetailResultEnum;
-import com.kstech.zoomlion.model.enums.CheckItemResultEnum;
 import com.kstech.zoomlion.model.vo.CheckItemParamValueVO;
 import com.kstech.zoomlion.model.vo.CheckItemVO;
 import com.kstech.zoomlion.utils.Globals;
@@ -59,7 +57,7 @@ import java.util.Map;
  * 项目调试界面，对单个项目调试的操作界面，主要包含两个大的组件ItemOperateView和ItemShowViewInCheck
  */
 @ContentView(R.layout.activity_item_check)
-public class ItemCheckActivity extends BaseActivity implements ItemCheckCallBack,BaseCheckFunction {
+public class ItemCheckActivity extends BaseActivity implements ItemCheckCallBack, BaseCheckFunction {
     /**
      * 项目调试操作view
      */
@@ -159,27 +157,27 @@ public class ItemCheckActivity extends BaseActivity implements ItemCheckCallBack
     /**
      * 更新调试项目
      */
-    private static final int NEW_CHECKITEM_REFRESH = 0;
+    public static final int NEW_CHECKITEM_REFRESH = 0;
     /**
      * 更新调试项目记录数据
      */
-    private static final int NEW_DATA_REFRESH = 1;
+    public static final int NEW_DATA_REFRESH = 1;
     /**
      * 开始保存调试记录数据
      */
-    private static final int START_SAVE_RECORD = 2;
+    public static final int START_SAVE_RECORD = 2;
     /**
      * 项目数据校验失败
      */
-    private static final int RECORD_VERIFY_ERROR = 3;
+    public static final int RECORD_VERIFY_ERROR = 3;
     /**
      * 项目记录数据初始化
      */
-    private static final int RECORD_DATA_INIT = 4;
+    public static final int RECORD_DATA_INIT = 4;
     /**
      * 调试项目数据保存完成
      */
-    private static final int RECORD_DATA_SAVED = 5;
+    public static final int RECORD_DATA_SAVED = 5;
     private static final String TAG = "ItemCheckActivity";
 
     @Override
@@ -280,86 +278,10 @@ public class ItemCheckActivity extends BaseActivity implements ItemCheckCallBack
 
     @Override
     public void saveRecord(final String paramValues) {
-        ThreadManager.getThreadPool().execute(new Runnable() {
-            @Override
-            public void run() {
-                //创建表达式处理对象
-                xmlExpression = new XmlExpressionImpl(detailData, paramValues);
-                handler.sendEmptyMessage(START_SAVE_RECORD);
-                //获取车辆总调试次数和未通过次数
-                int recordCount = itemData.getCheckRecord().getSumCounts() + 1;
-                int recordUnPassCount = itemData.getCheckRecord().getUnpassCounts();
-                String pValues;
-                try {
-                    //判断是否合格
-                    pass = CheckResultVerify.itemVerify(paramValues, xmlExpression);
-                    //获取判定后的参数数据集合
-                    pValues = CheckResultVerify.upDateParamValues();
-                    //根据是否合格，更新itemData和detailData
-                    if (pass) {
-                        int passCount = itemData.getPassCounts() + 1;
-                        //当前调试合格，更新连续通过次数
-                        itemData.setPassCounts(passCount);
-                        detailData.setCheckResult(CheckItemDetailResultEnum.PASS.getCode());
-                    } else {
-                        itemData.setPassCounts(0);
-                        detailData.setCheckResult(CheckItemDetailResultEnum.UNPASS.getCode());
-                        recordUnPassCount++;
-                    }
-
-                    handler.sendEmptyMessage(RECORD_DATA_INIT);
-                    //将数值存入detail data对象
-                    detailData.setParamsValues(pValues);
-
-                    detailData.setEndTime(new Date());
-
-                    //谱图数据保存
-                    if (itemvo.getSpectrum() != null) {
-                        for (CheckChartData chartData : chartDataList) {
-                            //设置detailID和创建时间
-                            chartData.setItemDetailId(detailID);
-                            chartData.setCreateTime(new Date());
-                            chartDataDao.insert(chartData);
-                        }
-                        //清空谱图数据集合
-                        chartDataList.clear();
-                    }
-                    //重置itemDetailData的谱图数据
-                    detailData.resetCheckChartDatas();
-
-                    //更新
-                    itemDetailDao.update(detailData);
-
-                    //重置 调试细节记录表 为的是保持与数据库同步
-                    itemData.resetCheckItemDetailDatas();
-
-                    //对itemData判定是否合格
-                    int sumCount = itemData.getCheckItemDetailDatas().size();
-                    if (sumCount >= itemvo.getTimes()) {
-                        //连续通过次数达到标准次数，合格，否则不合格
-                        if (itemData.getPassCounts() >= itemvo.getTimes()) {
-                            itemData.setCheckResult(CheckItemResultEnum.PASS.getCode());
-                        } else {
-                            itemData.setCheckResult(CheckItemResultEnum.UNPASS.getCode());
-                        }
-                    } else {
-                        itemData.setCheckResult(CheckItemResultEnum.UNFINISH.getCode());
-                    }
-                    // TODO: 2017/12/26 此处需要将数据提交服务器，根据返回结果更新upload字段
-                    //更新数据库
-                    itemDao.update(itemData);
-
-                    itemData.getCheckRecord().setSumCounts(recordCount);
-                    itemData.getCheckRecord().setUnpassCounts(recordUnPassCount);
-
-                    handler.sendEmptyMessage(RECORD_DATA_SAVED);
-                } catch (MultiArithmeticException e) {
-                    e.printStackTrace();
-                    handler.sendEmptyMessage(RECORD_VERIFY_ERROR);
-                }
-            }
-        });
-
+        QCItemDataSaveUploadTask uploadServer = new QCItemDataSaveUploadTask(handler);
+        uploadServer.init(chartDataList, itemData, detailData, paramValues,
+                detailID, itemvo, ItemCheckPrepareTask.serverItemDoneTimes);
+        uploadServer.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
     }
 
     @Override
@@ -368,7 +290,7 @@ public class ItemCheckActivity extends BaseActivity implements ItemCheckCallBack
         if (temp != null) {
             itemvo = temp;
             itemInfoLoadTask = new ItemCheckPrepareTask(handler);
-            itemInfoLoadTask.setInCheckMode(this,false);
+            itemInfoLoadTask.setInCheckMode(this, false);
             itemInfoLoadTask.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
         } else {
             Toast.makeText(this, "当前已是第一项", Toast.LENGTH_SHORT).show();
@@ -381,7 +303,7 @@ public class ItemCheckActivity extends BaseActivity implements ItemCheckCallBack
         if (temp != null) {
             itemvo = temp;
             itemInfoLoadTask = new ItemCheckPrepareTask(handler);
-            itemInfoLoadTask.setInCheckMode(this,true);
+            itemInfoLoadTask.setInCheckMode(this, true);
             itemInfoLoadTask.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
         } else {
             Toast.makeText(this, "当前已是最后一项", Toast.LENGTH_SHORT).show();
@@ -612,7 +534,6 @@ public class ItemCheckActivity extends BaseActivity implements ItemCheckCallBack
                         activity.valueVOList.clear();
                         break;
                     case START_SAVE_RECORD:
-                        activity.dialog.show();
                         activity.progressView.updateProgress("校验数据是否合格", 20);
                         break;
                     case RECORD_DATA_INIT:
@@ -624,11 +545,9 @@ public class ItemCheckActivity extends BaseActivity implements ItemCheckCallBack
                         activity.isv.updateBody(activity.itemDBID);
                         //计时器复位
                         activity.iov.chronometerReset(R.color.whiteColor, false);
-                        activity.dialog.cancel();
                         break;
                     case RECORD_VERIFY_ERROR:
                         activity.progressView.updateProgress("校验数据失败，请确保机型配置正确", 100);
-                        activity.dialog.cancel();
                         break;
                 }
 

@@ -6,8 +6,8 @@ package com.kstech.zoomlion.model.enums;
 
 public enum CheckItemResultEnum {
     UNFINISH("未完成", 0),
-    PASS("合格", 1),
-    UNPASS("不合格", 2);
+    PASS("合格", 2),
+    UNPASS("不合格", 3);
 
     private String desc;
     private int code;
@@ -31,10 +31,10 @@ public enum CheckItemResultEnum {
             case 0:
                 desc = UNFINISH.desc;
                 break;
-            case 1:
+            case 2:
                 desc = PASS.desc;
                 break;
-            case 2:
+            case 3:
                 desc = UNPASS.desc;
                 break;
         }

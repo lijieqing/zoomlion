@@ -36,6 +36,10 @@ public final class URLCollections {
      */
     public static String NOTIFY_SERVER_GOTO_CHECK = ADDRESS + "/device/startCommissioning";
     /**
+     * 上传调试项目细节数据记录
+     */
+    public static String UPDATE_CHECK_ITEM_DETAIL_DATA = ADDRESS + "/device/finishQCItemCheck";
+    /**
      * 在进入项目调试页面之前获取服务器相关信息
      */
     public static String GET_ITEM_CHECK_INFO = ADDRESS + "/device/startQCItemCheck";
@@ -44,7 +48,6 @@ public final class URLCollections {
     public static String USER_CANCEL = ADDRESS + "/user/cancel";//用户注销
     public static String CHECKER_LOGIN = ADDRESS + "/category/register_pad";//检验员登陆
     public static String DEVICE_LIST_GET = ADDRESS + "/category/usablecategories";//获取机型列表
-    public static String UPLOAD_ITEM_DETAIL_DATA = "http://localhost:8080/updatedata";//调试项目细节数据上传
     public static String GET_DEVICE_BY_CAT_ID = ADDRESS + "/category/downloadConfigurationFile";//根据分类ID获取机型信息
 
     /**
