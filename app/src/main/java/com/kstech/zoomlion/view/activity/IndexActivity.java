@@ -22,13 +22,13 @@ import com.kstech.zoomlion.R;
 import com.kstech.zoomlion.engine.comm.J1939TaskService;
 import com.kstech.zoomlion.engine.device.DeviceLoadTask;
 import com.kstech.zoomlion.engine.server.ServerProcessCheck;
+import com.kstech.zoomlion.engine.server.UserLogoutTask;
 import com.kstech.zoomlion.model.db.greendao.CheckItemDataDao;
 import com.kstech.zoomlion.model.db.greendao.CheckRecordDao;
 import com.kstech.zoomlion.model.session.DeviceCatSession;
 import com.kstech.zoomlion.model.treelist.Element;
 import com.kstech.zoomlion.model.treelist.TreeViewAdapter;
 import com.kstech.zoomlion.model.treelist.TreeViewItemClickListener;
-import com.kstech.zoomlion.model.vo.CheckItemVO;
 import com.kstech.zoomlion.utils.DeviceUtil;
 import com.kstech.zoomlion.utils.Globals;
 import com.kstech.zoomlion.utils.JsonUtils;
@@ -149,6 +149,10 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
      * 1939通讯线程重置
      */
     public static final int J1939_SERVICE_RESET = 4;
+    /**
+     * 用户登出
+     */
+    public static final int USER_LOGOUT = 5;
 
     public static final String TAG = "IndexActivity";
 
@@ -163,7 +167,6 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
     private AlertDialog devListDialog;
     private TreeViewAdapter adapter;
 
-    private List<CheckItemVO> newItemList;
     private ServiceConnection conn = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
@@ -256,7 +259,7 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
                 new ServerProcessCheck(handler).executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
                 break;
             case R.id.index_btn_exit:
-                finish();
+                new UserLogoutTask(handler).executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
                 break;
             case R.id.index_btn_auto_download:
                 // TODO: 2018/1/5 根据整机编码获取机型信息，此处模拟已经获取到整机编码
@@ -359,7 +362,6 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
                         Globals.modelFile.getDataSetVO().getDSItem("预热时间").addListener(mActivity);
                         break;
                     case SKIP_TO_CHECK:
-                        mActivity.dialog.cancel();
                         Intent intent = new Intent(mActivity, CheckHomeActivity.class);
                         mActivity.startActivity(intent);
                         break;
@@ -368,6 +370,9 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
                         break;
                     case DEV_LIST_LOADED:
                         mActivity.adapter.notifyDataSetChanged();
+                        break;
+                    case USER_LOGOUT:
+                        mActivity.finish();
                         break;
 
                 }

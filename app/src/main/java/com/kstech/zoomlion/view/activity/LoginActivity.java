@@ -130,6 +130,8 @@ public class LoginActivity extends BaseActivity {
         //isRegister = isPadRegister();
         changeRegisterStatus(true);
 
+        mPasswordView.setText("123");
+
         //获取文件读写权限
         initExternalPermission();
     }
@@ -377,7 +379,7 @@ public class LoginActivity extends BaseActivity {
                         JSONObject object = new JSONObject((String) result);
                         if (URLCollections.isRequestSuccess(object)) {
                             status = 2;
-                            String userInfo = object.getString("user");
+                            String userInfo = object.getString("userInfo");
 
                             //用户信息赋值给全局变量
                             Globals.currentUser = JsonUtils.fromJson(userInfo, UserInfo.class);

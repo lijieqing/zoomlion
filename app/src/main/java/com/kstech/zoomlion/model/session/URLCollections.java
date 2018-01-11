@@ -28,21 +28,25 @@ public final class URLCollections {
      */
     public static String USER_LOGIN = ADDRESS + "/appLogin";
     /**
+     * 用户登出URL
+     */
+    public static String USER_LOGOUT = ADDRESS + "/appLogout";
+    /**
      * 根据整机编码获取机型信息URL
      */
-    public static String GET_DEVICE_BY_SN = ADDRESS + "/device/getDevice";
+    public static String GET_DEVICE_BY_SN = ADDRESS + "/commissioning/getDevice";
     /**
      * 向服务器请求进入调试
      */
-    public static String NOTIFY_SERVER_GOTO_CHECK = ADDRESS + "/device/startCommissioning";
+    public static String NOTIFY_SERVER_GOTO_CHECK = ADDRESS + "/commissioning/startCommissioning";
     /**
      * 上传调试项目细节数据记录
      */
-    public static String UPDATE_CHECK_ITEM_DETAIL_DATA = ADDRESS + "/device/finishQCItemCheck";
+    public static String UPDATE_CHECK_ITEM_DETAIL_DATA = ADDRESS + "/commissioning/completeQCItem";
     /**
      * 在进入项目调试页面之前获取服务器相关信息
      */
-    public static String GET_ITEM_CHECK_INFO = ADDRESS + "/device/startQCItemCheck";
+    public static String GET_ITEM_CHECK_INFO = ADDRESS + "/commissioning/startQCItem";
 
     public static String REGISTER_PAD = ADDRESS + "/portabledev/register";//调试终端注册
     public static String USER_CANCEL = ADDRESS + "/user/cancel";//用户注销

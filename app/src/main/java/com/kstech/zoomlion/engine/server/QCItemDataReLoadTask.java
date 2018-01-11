@@ -20,7 +20,6 @@ import java.util.List;
 /**
  * Created by lijie on 2018/1/10.
  * 未同步调试项目细节数据再同步
- * // FIXME: 2018/1/11 重复上传
  */
 public class QCItemDataReLoadTask extends AbstractDataTransferTask {
     private LinkedList<CheckItemDetailData> unUploadDetailDatas;
