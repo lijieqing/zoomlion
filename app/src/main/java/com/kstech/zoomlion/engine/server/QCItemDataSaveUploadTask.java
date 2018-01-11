@@ -13,6 +13,7 @@ import com.kstech.zoomlion.model.db.CheckItemDetailData;
 import com.kstech.zoomlion.model.db.CheckRecord;
 import com.kstech.zoomlion.model.enums.CheckItemDetailResultEnum;
 import com.kstech.zoomlion.model.enums.CheckItemResultEnum;
+import com.kstech.zoomlion.model.enums.CheckRecordResultEnum;
 import com.kstech.zoomlion.model.session.URLCollections;
 import com.kstech.zoomlion.model.vo.CheckItemVO;
 import com.kstech.zoomlion.serverdata.CompleteQCItemJSON;
@@ -171,7 +172,7 @@ public class QCItemDataSaveUploadTask extends AbstractDataTransferTask {
 
             record.setSumCounts(recordCount);
             record.setUnpassCounts(recordUnPassCount);
-            MyApplication.getApplication().getDaoSession().getCheckRecordDao().update(record);
+
         } catch (MultiArithmeticException e) {
             e.printStackTrace();
             handler.sendEmptyMessage(ItemCheckActivity.RECORD_VERIFY_ERROR);
@@ -222,6 +223,21 @@ public class QCItemDataSaveUploadTask extends AbstractDataTransferTask {
         MyApplication.getApplication().getDaoSession().getCheckItemDataDao().update(itemData);
         MyApplication.getApplication().getDaoSession().getCheckItemDetailDataDao().update(detailData);
 
+        record.resetCheckItemDatas();
+
+        boolean finish = true;
+        for (CheckItemData checkItemData : record.getCheckItemDatas()) {
+            int result = checkItemData.getCheckResult();
+            if (result<2){
+                finish = false;
+            }
+        }
+        if (finish){
+            record.setCurrentStatus(CheckRecordResultEnum.FINISH.getCode());
+        }else {
+            record.setCurrentStatus(CheckRecordResultEnum.UNFINISH.getCode());
+        }
+        MyApplication.getApplication().getDaoSession().getCheckRecordDao().update(record);
         handler.sendEmptyMessage(ItemCheckActivity.RECORD_DATA_SAVED);
     }
 

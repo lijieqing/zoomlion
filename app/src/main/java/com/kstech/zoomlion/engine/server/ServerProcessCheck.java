@@ -8,10 +8,12 @@ import android.text.TextUtils;
 import com.kstech.zoomlion.MyApplication;
 import com.kstech.zoomlion.model.db.CheckItemData;
 import com.kstech.zoomlion.model.db.CheckRecord;
+import com.kstech.zoomlion.model.db.greendao.CheckItemDataDao;
 import com.kstech.zoomlion.model.db.greendao.CheckRecordDao;
 import com.kstech.zoomlion.model.enums.CheckRecordResultEnum;
 import com.kstech.zoomlion.model.session.URLCollections;
 import com.kstech.zoomlion.model.vo.CheckItemVO;
+import com.kstech.zoomlion.serverdata.QCItemStatus;
 import com.kstech.zoomlion.utils.Globals;
 import com.kstech.zoomlion.view.activity.BaseActivity;
 import com.kstech.zoomlion.view.activity.IndexActivity;
@@ -114,20 +116,21 @@ public class ServerProcessCheck extends AbstractDataTransferTask {
 
     @Override
     void onRequestFinish(boolean success) {
-        message = Message.obtain();
         if (skip) {
             if (hasRecord) {
                 verifyCheckRecord(record);
             } else {
                 initRecord();
             }
+            updateItemStatus();
         } else {
             //不一致提示异常，停止进入
+            message = Message.obtain();
             message.what = BaseActivity.UPDATE_PROGRESS_CONTENT;
             message.obj = "当前流程与服务器流程不一致，无法进入调试";
             message.arg1 = 100;
+            handler.sendMessage(message);
         }
-        handler.sendMessage(message);
     }
 
     @Override
@@ -135,6 +138,48 @@ public class ServerProcessCheck extends AbstractDataTransferTask {
         super.afterDialogCancel();
         if (skip) {
             handler.sendEmptyMessage(IndexActivity.SKIP_TO_CHECK);
+        }
+    }
+
+    /**
+     * 更新调试项目服务器状态数据
+     */
+    private void updateItemStatus() {
+        if (Globals.itemStatus != null) {
+            Message message;
+            CheckItemDataDao itemDao = MyApplication.getApplication().getDaoSession().getCheckItemDataDao();
+            CheckRecordDao recordDao = MyApplication.getApplication().getDaoSession().getCheckRecordDao();
+            CheckRecord cr = recordDao.queryBuilder()
+                    .where(CheckRecordDao.Properties.DeviceIdentity.eq(Globals.deviceSN))
+                    .build().unique();
+            if (cr != null) {
+                message = Message.obtain();
+                message.what = BaseActivity.UPDATE_PROGRESS_CONTENT;
+                message.obj = "更新调试项目状态";
+                message.arg1 = 75;
+                handler.sendMessage(message);
+                SystemClock.sleep(1000);
+
+                for (QCItemStatus itemStatus : Globals.itemStatus) {
+                    Long dictId = itemStatus.getQcitemDictId();
+                    String d = String.valueOf(dictId);
+                    CheckItemData item = itemDao.queryBuilder()
+                            .where(CheckItemDataDao.Properties.RecordId.eq(cr.getCheckRecordId()),
+                                    CheckItemDataDao.Properties.DictId.eq(d))
+                            .build().unique();
+                    if (item != null) {
+                        item.setSumCounts(itemStatus.getDoneTimes());
+                        item.setPassCounts(itemStatus.getPassTimes());
+                        itemDao.update(item);
+                    }
+                }
+
+                message = Message.obtain();
+                message.what = BaseActivity.UPDATE_PROGRESS_CONTENT;
+                message.obj = "调试项目状态数据更新完成";
+                message.arg1 = 95;
+                handler.sendMessage(message);
+            }
         }
     }
 

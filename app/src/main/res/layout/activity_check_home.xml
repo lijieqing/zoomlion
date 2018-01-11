@@ -210,12 +210,14 @@
                     android:orientation="vertical">
 
                     <Button
+                        android:id="@+id/ch_btn_record_pass"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1"
                         android:text="合格" />
 
                     <Button
+                        android:id="@+id/ch_btn_record_unpass"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1"

@@ -4,10 +4,11 @@ import android.support.annotation.NonNull;
 import android.widget.ExpandableListView;
 
 import com.kstech.zoomlion.engine.device.DeviceModelFile;
-import com.kstech.zoomlion.model.session.MeasureDev;
-import com.kstech.zoomlion.model.session.UserInfo;
+import com.kstech.zoomlion.serverdata.MeasureDev;
+import com.kstech.zoomlion.serverdata.UserInfo;
 import com.kstech.zoomlion.model.vo.CheckItemParamValueVO;
 import com.kstech.zoomlion.model.vo.CheckItemVO;
+import com.kstech.zoomlion.serverdata.QCItemStatus;
 import com.kstech.zoomlion.view.widget.IRecyclerScrollListener;
 
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ public class Globals {
 
     public static String PAD_HAS_REGISTER = "pad_has_register";//平板是否已注服务器注册
 
-    public static String SID = "sid=3aa35bc8-145e-40be-93e8-8e67e6899995";//服务器请求时需要添加到Cookie中= "sid=240f0b05-2574-43f1-b48a-94b4c243b618"
+    public static String SID;//服务器请求时需要添加到Cookie中= "sid=240f0b05-2574-43f1-b48a-94b4c243b618"
 
     /**
      * 调试记录相关变量
@@ -188,4 +189,8 @@ public class Globals {
      * 调试流程ID
      */
     public static String PROCESSID;
+    /**
+     * 服务器 调试项目状态对象集合
+     */
+    public static List<QCItemStatus> itemStatus;
 }

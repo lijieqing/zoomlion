@@ -1,4 +1,4 @@
-package com.kstech.zoomlion.model.session;
+package com.kstech.zoomlion.serverdata;
 
 /**
  * Created by lijie on 2017/11/21.

@@ -5,7 +5,7 @@
 
         <variable
             name="user"
-            type="com.kstech.zoomlion.model.session.UserInfo" />
+            type="com.kstech.zoomlion.serverdata.UserInfo" />
 
     </data>
 

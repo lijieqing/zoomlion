@@ -5,9 +5,11 @@ package com.kstech.zoomlion.model.enums;
  */
 
 public enum CheckRecordResultEnum {
-    UNFINISH("未完成", 0),
-    PASS("合格", 1),
-    UNPASS("不合格", 2);
+    UNSTART("未开始", 0),
+    UNFINISH("未完成", 1),
+    PASS("合格", 2),
+    UNPASS("不合格", 3),
+    FINISH("所有项目已完成，需要判定", 4);
 
     private String desc;
     private int code;
@@ -29,13 +31,19 @@ public enum CheckRecordResultEnum {
         String desc = "";
         switch (code) {
             case 0:
-                desc = UNFINISH.getDesc();
+                desc = UNSTART.getDesc();
                 break;
             case 1:
-                desc = PASS.getDesc();
+                desc = UNFINISH.getDesc();
                 break;
             case 2:
+                desc = PASS.getDesc();
+                break;
+            case 3:
                 desc = UNPASS.getDesc();
+                break;
+            case 4:
+                desc = FINISH.getDesc();
                 break;
         }
         return desc;

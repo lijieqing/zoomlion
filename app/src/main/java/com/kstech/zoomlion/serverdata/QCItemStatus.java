@@ -5,6 +5,7 @@ package com.kstech.zoomlion.serverdata;
  * @date 2017/12/21.
  */
 public class QCItemStatus {
+    private Long qcitemDictId;
     /**
      * 检测结果为合格的连续检测次数
      **/
@@ -52,5 +53,13 @@ public class QCItemStatus {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public Long getQcitemDictId() {
+        return qcitemDictId;
+    }
+
+    public void setQcitemDictId(Long qcitemDictId) {
+        this.qcitemDictId = qcitemDictId;
     }
 }

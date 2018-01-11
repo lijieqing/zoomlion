@@ -47,6 +47,10 @@ public final class URLCollections {
      * 在进入项目调试页面之前获取服务器相关信息
      */
     public static String GET_ITEM_CHECK_INFO = ADDRESS + "/commissioning/startQCItem";
+    /**
+     * 整机调试完成后，通知服务器并上传数据
+     */
+    public static String NOTIFY_SERVER_CHECK_COMPLETE = ADDRESS + "/commissioning/completeCommissioning";
 
     public static String REGISTER_PAD = ADDRESS + "/portabledev/register";//调试终端注册
     public static String USER_CANCEL = ADDRESS + "/user/cancel";//用户注销

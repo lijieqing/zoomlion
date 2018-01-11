@@ -14,7 +14,7 @@ import com.bumptech.glide.load.MultiTransformation;
 import com.bumptech.glide.request.RequestOptions;
 import com.kstech.zoomlion.R;
 import com.kstech.zoomlion.databinding.ActivityUserDetailBinding;
-import com.kstech.zoomlion.model.session.UserInfo;
+import com.kstech.zoomlion.serverdata.UserInfo;
 import com.kstech.zoomlion.utils.DateUtil;
 import com.kstech.zoomlion.utils.DeviceUtil;
 import com.kstech.zoomlion.view.widget.EditPasswordView;

@@ -8,6 +8,7 @@ import android.os.SystemClock;
 
 import com.kstech.zoomlion.model.session.URLCollections;
 import com.kstech.zoomlion.model.xmlbean.Device;
+import com.kstech.zoomlion.serverdata.QCItemStatus;
 import com.kstech.zoomlion.utils.Globals;
 import com.kstech.zoomlion.utils.JsonUtils;
 import com.kstech.zoomlion.utils.LogUtils;
@@ -98,6 +99,10 @@ public class DeviceLoadTask extends AsyncTask<Void, String, Void> {
                     if (URLCollections.isRequestSuccess(object)) {
                         String deviceInfo = object.getString("device");
                         Globals.PROCESSID = object.getString("processId");
+                        if (object.has("qcitemStatusList")) {
+                            String statusList = object.getString("qcitemStatusList");
+                            Globals.itemStatus = JsonUtils.fromArrayJson(statusList, QCItemStatus.class);
+                        }
                         device = JsonUtils.fromJson(deviceInfo, Device.class);
 
                         message.what = IndexActivity.UPDATE_PROGRESS_CONTENT;

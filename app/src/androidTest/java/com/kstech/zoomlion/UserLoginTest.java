@@ -3,7 +3,7 @@ package com.kstech.zoomlion;
 import android.os.SystemClock;
 import android.support.test.runner.AndroidJUnit4;
 
-import com.kstech.zoomlion.model.session.UserInfo;
+import com.kstech.zoomlion.serverdata.UserInfo;
 import com.kstech.zoomlion.utils.JsonUtils;
 import com.kstech.zoomlion.utils.LogUtils;
 

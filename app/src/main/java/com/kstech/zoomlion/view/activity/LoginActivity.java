@@ -28,10 +28,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kstech.zoomlion.R;
-import com.kstech.zoomlion.model.session.MeasureDev;
+import com.kstech.zoomlion.serverdata.MeasureDev;
 import com.kstech.zoomlion.model.session.RegisterSession;
 import com.kstech.zoomlion.model.session.URLCollections;
-import com.kstech.zoomlion.model.session.UserInfo;
+import com.kstech.zoomlion.serverdata.UserInfo;
 import com.kstech.zoomlion.utils.DeviceUtil;
 import com.kstech.zoomlion.utils.Globals;
 import com.kstech.zoomlion.utils.JsonUtils;

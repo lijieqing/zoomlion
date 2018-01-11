@@ -9,20 +9,12 @@ import com.kstech.zoomlion.engine.check.XmlExpressionImpl;
 import com.kstech.zoomlion.engine.device.DeviceModelFile;
 import com.kstech.zoomlion.engine.device.XMLAPI;
 import com.kstech.zoomlion.model.db.CheckImageData;
-import com.kstech.zoomlion.model.db.CheckItemData;
 import com.kstech.zoomlion.model.db.CheckItemDetailData;
 import com.kstech.zoomlion.model.db.greendao.CheckImageDataDao;
-import com.kstech.zoomlion.model.db.greendao.CheckItemDataDao;
-import com.kstech.zoomlion.model.session.SessionBlob;
-import com.kstech.zoomlion.model.session.SessionQCData;
-import com.kstech.zoomlion.model.session.SessionQCItem;
 import com.kstech.zoomlion.model.session.URLCollections;
-import com.kstech.zoomlion.model.vo.CheckItemParamValueVO;
-import com.kstech.zoomlion.model.vo.CheckItemVO;
 import com.kstech.zoomlion.model.xmlbean.DSItem;
 import com.kstech.zoomlion.model.xmlbean.Device;
 import com.kstech.zoomlion.model.xmlbean.Msg;
-import com.kstech.zoomlion.utils.FileUtils;
 import com.kstech.zoomlion.utils.Globals;
 import com.kstech.zoomlion.utils.JsonUtils;
 import com.kstech.zoomlion.utils.LogUtils;
@@ -37,7 +29,6 @@ import org.xutils.x;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpCookie;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -127,94 +118,6 @@ public class DaoTest {
         String min = XmlExpressionImpl.getYValue(4, "预热时间标准-月份", "预热时间标准-分钟");
         LogUtils.e(TAG, "预热时间" + min);
         SystemClock.sleep(1000);
-
-    }
-
-
-    @Test
-    public void TestMath() throws IOException {
-        Context appContext = InstrumentationRegistry.getTargetContext();
-        CheckItemDataDao itemDao = MyApplication.getApplication().getDaoSession().getCheckItemDataDao();
-        InputStream is = appContext.getAssets().open("zoomlion.xml");
-        Device device = (Device) XMLAPI.readXML(is);
-        DeviceModelFile model = DeviceModelFile.readFromFile(device);
-        for (CheckItemVO checkItemVO : model.getCheckItemList()) {
-            if ("液压油过滤工作时间".equals(checkItemVO.getName())) {
-                int qcId = Integer.parseInt(checkItemVO.getId());
-                List<CheckItemData> list = itemDao.queryBuilder().where(CheckItemDataDao.Properties.QcId.eq(qcId),
-                        CheckItemDataDao.Properties.ItemName.eq(checkItemVO.getName()))
-                        .build().list();
-                CheckItemData itemData = list.get(0);
-                CheckItemDetailData detailData = itemData.getCheckItemDetailDatas().get(1);
-                String paramV = detailData.getParamsValues();
-                List<CheckItemParamValueVO> pValues = JsonUtils.fromArrayJson(paramV, CheckItemParamValueVO.class);
-
-                List<SessionQCData> qcDataList = new ArrayList<>();
-                List<SessionBlob> blobs = new ArrayList<>();
-                SessionQCItem item = new SessionQCItem();
-                item.setDeviceId(1L);
-                item.setId(0L);
-                item.setQcitemId(2L);
-                item.setDoneTimes(2);
-                item.setPassTiems(1);
-                item.setStatus(3);
-                item.setRemark("test test");
-                long blobPos = 0;
-                for (int i = 0; i < pValues.size(); i++) {
-                    CheckItemParamValueVO value = pValues.get(i);
-                    long dictId = 15L;
-                    SessionQCData qcData = new SessionQCData();
-                    qcData.setDevId(1L);
-                    qcData.setDeviceQcitemId(2L);
-                    qcData.setDevQcitemNo(i);
-                    qcData.setQcitemDataId(dictId);
-                    if (value.getPicReq()) {
-                        SessionBlob sb = new SessionBlob();
-                        sb.setType(0);
-                        for (CheckImageData checkImageData : detailData.getCheckImageDatas()) {
-                            if (checkImageData.getParamName().equals(value.getParamName())) {
-                                String s = FileUtils.getImageStr(checkImageData.getImgPath());
-                                sb.setData(s);
-                                blobs.add(sb);
-                                qcData.setBlobId(blobPos);
-                                blobPos++;
-                            }
-                        }
-                    }
-                    try {
-                        float v = Float.valueOf(value.getValue());
-                        qcData.setData(v);
-                    } catch (NumberFormatException e) {
-                        String v = value.getValue();
-                        if ("合格".equals(v)) {
-                            qcData.setStatus(3);
-                        } else {
-                            qcData.setStatus(4);
-                        }
-                    }
-                    qcData.setValidMax(1000f);
-
-                    qcData.setValidMin(0f);
-
-                    qcData.setXdataId(123L);
-
-                    qcData.setXdataValue(889L);
-
-                    qcData.setDoneTime(new Date().toString());
-
-                    qcDataList.add(qcData);
-                }
-
-                String strItem = JsonUtils.toJson(item);
-                String strQCData = JsonUtils.toJson(qcDataList);
-                String strBlob = JsonUtils.toJson(blobs);
-
-                LogUtils.e(TAG, "items:" + strItem);
-                LogUtils.e(TAG, "strQCData:" + strQCData);
-                LogUtils.e(TAG, "strBlob:" + strBlob);
-
-            }
-        }
 
     }
 

@@ -1,6 +1,8 @@
 package com.kstech.zoomlion.view.activity;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -9,6 +11,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
@@ -21,6 +24,7 @@ import android.widget.Toast;
 
 import com.kstech.zoomlion.MyApplication;
 import com.kstech.zoomlion.R;
+import com.kstech.zoomlion.engine.server.CheckRecordConfirmTask;
 import com.kstech.zoomlion.engine.server.ItemCheckPrepareTask;
 import com.kstech.zoomlion.engine.server.QCItemDataReLoadTask;
 import com.kstech.zoomlion.model.db.CheckItemData;
@@ -40,6 +44,7 @@ import com.kstech.zoomlion.view.adapter.DividerItemDecoration;
 import com.kstech.zoomlion.view.widget.ClearFocusByDownEditView;
 import com.kstech.zoomlion.view.widget.ItemShowView;
 import com.kstech.zoomlion.view.widget.RealTimeView;
+import com.kstech.zoomlion.view.widget.VerificationCodeView;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
@@ -154,6 +159,10 @@ public class CheckHomeActivity extends BaseActivity {
      */
     int lastGroup = 0;
     /**
+     * 授权码长度
+     */
+    private static final int authorizeLength = 3;
+    /**
      * 调试项目本地数据加载完成
      */
     public static final int ITEM_RECORD_LOADED = 0;
@@ -161,6 +170,10 @@ public class CheckHomeActivity extends BaseActivity {
      * 调试项目服务器信息加载完成
      */
     public static final int ITEM_SERVER_INFO_LOADED = 1;
+    /**
+     * 整机调试记录上传成功
+     */
+    public static final int CHECK_RECORD_UPDATE_SUCCESS = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -299,7 +312,8 @@ public class CheckHomeActivity extends BaseActivity {
      *
      * @param view
      */
-    @Event(value = {R.id.ch_tv_start_check})
+    @Event(value = {R.id.ch_tv_start_check, R.id.ch_btn_record_pass, R.id.ch_btn_record_unpass},
+            type = View.OnClickListener.class)
     private void click(View view) {
         switch (view.getId()) {
             case R.id.ch_tv_start_check:
@@ -310,7 +324,50 @@ public class CheckHomeActivity extends BaseActivity {
                     itemInfoLoadTask.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
                 }
                 break;
+            case R.id.ch_btn_record_pass:
+                confirmCheckRecord(true);
+                break;
+            case R.id.ch_btn_record_unpass:
+                confirmCheckRecord(false);
+                break;
         }
+    }
+
+    /**
+     * 整机调试记录合格判定并上传
+     *
+     * @param pass 是否合格
+     */
+    private void confirmCheckRecord(final boolean pass) {
+        String desc = etDesc.getText().toString();
+        if (!TextUtils.isEmpty(desc)) {
+            final VerificationCodeView codeView = new VerificationCodeView(this);
+            codeView.setEtNumber(authorizeLength);
+            AlertDialog dialog = new AlertDialog.Builder(this)
+                    .setCancelable(false)
+                    .setTitle("授权码").setView(codeView)
+                    .setPositiveButton("开始同步", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //当授权码的长度与规定长度一致时，开始提交数据
+                            int len = codeView.getInputContent().trim().length();
+                            if (len == authorizeLength) {
+                                CheckRecordConfirmTask confirmTask = new CheckRecordConfirmTask(handler);
+                                confirmTask.init(codeView.getInputContent(), pass);
+                                confirmTask.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
+                                dialog.cancel();
+                            }else {
+                                Toast.makeText(CheckHomeActivity.this, "请输入完整授权码", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    })
+                    .setNegativeButton("取消同步", null)
+                    .create();
+            dialog.show();
+        } else {
+            Toast.makeText(this, "整机信息描述不能为空", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
 
@@ -339,6 +396,9 @@ public class CheckHomeActivity extends BaseActivity {
                         Intent intent = new Intent(activity, ItemCheckActivity.class);
                         intent.putExtra("itemID", Globals.currentCheckItem.getId());
                         activity.startActivity(intent);
+                        break;
+                    case CHECK_RECORD_UPDATE_SUCCESS:
+                        activity.finish();
                         break;
                 }
             }
@@ -451,7 +511,7 @@ public class CheckHomeActivity extends BaseActivity {
             int pass = 0;
             if (itemData != null) {
                 result = itemData.getCheckResult();
-                sum = itemData.getCheckItemDetailDatas().size();
+                sum = itemData.getSumCounts();
                 pass = 0;
                 for (CheckItemDetailData checkItemDetailData : itemData.getCheckItemDetailDatas()) {
                     if (checkItemDetailData.getCheckResult().equals(CheckItemDetailResultEnum.PASS.getCode())) {
@@ -462,6 +522,9 @@ public class CheckHomeActivity extends BaseActivity {
             switch (result) {
                 case 0:
                     holder.iv.setBackgroundResource(R.drawable.circle_item_status_unstart);
+                    break;
+                case 1:
+                    holder.iv.setBackgroundResource(R.drawable.circle_item_status_unfinish);
                     break;
                 case 2:
                     holder.iv.setBackgroundResource(R.drawable.circle_item_status_pass);
