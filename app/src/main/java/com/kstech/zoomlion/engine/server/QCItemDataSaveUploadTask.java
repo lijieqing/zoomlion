@@ -93,11 +93,12 @@ public class QCItemDataSaveUploadTask extends AbstractDataTransferTask {
         this.detailID = detailID;
         this.itemvo = itemvo;
         record = itemData.getCheckRecord();
+        requestTimes = 0;
     }
 
     @Override
     boolean needRequest() {
-        return requestTimes<1;
+        return requestTimes < 1;
     }
 
     @Override
@@ -146,7 +147,7 @@ public class QCItemDataSaveUploadTask extends AbstractDataTransferTask {
             detailData.resetCheckChartDatas();
 
             //设置第几次调试
-            int detailCheckTimes = ItemCheckPrepareTask.serverItemDoneTimes+1;
+            int detailCheckTimes = ItemCheckPrepareTask.serverItemDoneTimes + 1;
             detailData.setCheckTimes(detailCheckTimes);
 
             //更新

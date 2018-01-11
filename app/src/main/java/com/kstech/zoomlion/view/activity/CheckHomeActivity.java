@@ -446,8 +446,19 @@ public class CheckHomeActivity extends BaseActivity {
                     .where(CheckItemDataDao.Properties.QcId.eq(item.getId()),
                             CheckItemDataDao.Properties.RecordId.eq(Globals.recordID))
                     .build().unique();
-
-            int result = itemData.getCheckResult();
+            int result = 0;
+            int sum = 0;
+            int pass = 0;
+            if (itemData != null) {
+                result = itemData.getCheckResult();
+                sum = itemData.getCheckItemDetailDatas().size();
+                pass = 0;
+                for (CheckItemDetailData checkItemDetailData : itemData.getCheckItemDetailDatas()) {
+                    if (checkItemDetailData.getCheckResult().equals(CheckItemDetailResultEnum.PASS.getCode())) {
+                        pass++;
+                    }
+                }
+            }
             switch (result) {
                 case 0:
                     holder.iv.setBackgroundResource(R.drawable.circle_item_status_unstart);
@@ -459,13 +470,7 @@ public class CheckHomeActivity extends BaseActivity {
                     holder.iv.setBackgroundResource(R.drawable.circle_item_status_unpass);
                     break;
             }
-            int sum = itemData.getCheckItemDetailDatas().size();
-            int pass = 0;
-            for (CheckItemDetailData checkItemDetailData : itemData.getCheckItemDetailDatas()) {
-                if (checkItemDetailData.getCheckResult().equals(CheckItemDetailResultEnum.PASS.getCode())) {
-                    pass++;
-                }
-            }
+
             holder.tvSum.setText(String.valueOf(sum));
             holder.tvPass.setText(String.valueOf(pass));
 

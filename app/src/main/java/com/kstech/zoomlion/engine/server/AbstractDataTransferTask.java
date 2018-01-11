@@ -46,24 +46,27 @@ public abstract class AbstractDataTransferTask extends AsyncTask<Void, Integer, 
      * 消息数据对象
      */
     protected Message message;
-    /**
-     * 请求是否成功
-     */
-    private boolean success;
 
     public AbstractDataTransferTask(Handler handler) {
         this.handler = handler;
-        this.success = false;
     }
 
     @Override
     protected Void doInBackground(Void... voids) {
         handler.sendEmptyMessage(BaseActivity.DIALOG_SHOW);
+
+        message = Message.obtain();
+        message.obj = getTaskTitle();
+        message.arg1 = 5;
+        message.what = BaseActivity.UPDATE_PROGRESS_CONTENT;
+        handler.sendMessage(message);
+        SystemClock.sleep(500);
+
         //请求前执行任务
         beforeRequest();
 
         RequestParams params;
-        while (needRequest()){
+        while (needRequest()) {
             String result = "";
 
             message = Message.obtain();
@@ -71,13 +74,13 @@ public abstract class AbstractDataTransferTask extends AsyncTask<Void, Integer, 
             message.arg1 = 30;
             message.what = BaseActivity.UPDATE_PROGRESS_CONTENT;
             handler.sendMessage(message);
+            SystemClock.sleep(1000);
 
             //初始化请求参数
             params = new RequestParams(getURL());
             params.addHeader("Cookie", Globals.SID);
             initRequestParam(params);
 
-            message = Message.obtain();
             try {
                 result = x.http().postSync(params, String.class);
                 LogUtils.e("QCItemDataSaveUploadTask", result);
@@ -85,19 +88,22 @@ public abstract class AbstractDataTransferTask extends AsyncTask<Void, Integer, 
                 if (!object.has("error")) {
                     //请求成功后调用
                     onRequestSuccess(object);
-                    message.arg1 = 80;
+                    message = Message.obtain();
+                    message.arg1 = 50;
                     message.obj = "请求成功！";
                     message.what = BaseActivity.UPDATE_PROGRESS_CONTENT;
                 } else {
                     //请求返回error
                     onRequestError();
+                    message = Message.obtain();
                     message.obj = object.getString("error");
-                    message.arg1 = 80;
+                    message.arg1 = 50;
                     message.what = BaseActivity.UPDATE_PROGRESS_CONTENT;
                 }
                 handler.sendMessage(message);
             } catch (JSONException e) {
                 e.printStackTrace();
+                message = Message.obtain();
                 if (URLCollections.isReLogin(result)) {
                     if (onReLogin(message)) {
                         message.what = BaseActivity.USER_RELOGIN;
@@ -117,29 +123,34 @@ public abstract class AbstractDataTransferTask extends AsyncTask<Void, Integer, 
                 break;
             } catch (Throwable throwable) {
                 throwable.printStackTrace();
+                message = Message.obtain();
                 message.what = BaseActivity.UPDATE_PROGRESS_CONTENT;
                 message.obj = throwable.getMessage();
-                message.arg1 = 28;
+                message.arg1 = 100;
                 handler.sendMessage(message);
                 SystemClock.sleep(1000);
                 break;
             }
         }
 
-        onRequestFinish(success);
+        onRequestFinish(true);
 
+        SystemClock.sleep(1000);
         handler.sendEmptyMessage(BaseActivity.DIALOG_CANCEL);
+        afterDialogCancel();
         return null;
     }
 
     /**
      * 获取message描述信息
+     *
      * @return 字符串
      */
     abstract String getRequestMessage();
 
     /**
      * 是否需要向服务器请求
+     *
      * @return TRUE、FALSE
      */
     abstract boolean needRequest();
@@ -168,7 +179,7 @@ public abstract class AbstractDataTransferTask extends AsyncTask<Void, Integer, 
      *
      * @param data 返回的Json对象
      */
-    abstract void onRequestSuccess(JSONObject data);
+    abstract void onRequestSuccess(JSONObject data) throws JSONException;
 
     /**
      * 请求失败回调
@@ -189,6 +200,13 @@ public abstract class AbstractDataTransferTask extends AsyncTask<Void, Integer, 
      * @param success 请求是否成功
      */
     abstract void onRequestFinish(boolean success);
+
+    protected void afterDialogCancel() {
+    }
+
+    protected String getTaskTitle() {
+        return "任务开始";
+    }
 
     /**
      * 将调试项目细节数据打包成服务器传输格式

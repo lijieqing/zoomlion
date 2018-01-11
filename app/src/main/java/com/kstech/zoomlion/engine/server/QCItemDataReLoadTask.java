@@ -20,6 +20,7 @@ import java.util.List;
 /**
  * Created by lijie on 2018/1/10.
  * 未同步调试项目细节数据再同步
+ * // FIXME: 2018/1/11 重复上传
  */
 public class QCItemDataReLoadTask extends AbstractDataTransferTask {
     private LinkedList<CheckItemDetailData> unUploadDetailDatas;
@@ -32,10 +33,15 @@ public class QCItemDataReLoadTask extends AbstractDataTransferTask {
     }
 
     @Override
+    protected String getTaskTitle() {
+        return "本地数据同步校验";
+    }
+
+    @Override
     void beforeRequest() {
         detailDataDao = MyApplication.getApplication().getDaoSession().getCheckItemDetailDataDao();
         List<CheckItemDetailData> temp = detailDataDao.queryBuilder().where(CheckItemDetailDataDao.Properties.Uploaded.eq(false)).build().list();
-        if (temp!=null && temp.size()>0){
+        if (temp != null && temp.size() > 0) {
             unUploadDetailDatas.addAll(temp);
         }
     }
@@ -65,7 +71,7 @@ public class QCItemDataReLoadTask extends AbstractDataTransferTask {
 
     @Override
     void onRequestSuccess(JSONObject data) {
-        if (data.has("success")){
+        if (data.has("success")) {
             uploadData.setUploaded(true);
             detailDataDao.update(uploadData);
         }
