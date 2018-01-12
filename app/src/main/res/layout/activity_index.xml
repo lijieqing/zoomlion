@@ -283,38 +283,43 @@
                 android:layout_weight="2"
                 android:background="#209ece78"
                 android:orientation="horizontal">
+
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.4"
-                    android:gravity="center"
-                    android:background="@color/zoomLionColor">
+                    android:background="@color/zoomLionColor"
+                    android:gravity="center">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="机型信息初始化"
                         android:maxEms="1"
+                        android:text="机型信息初始化"
                         android:textColor="#fff"
                         android:textSize="20dp" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="2">
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="0dp"
-                    android:orientation="vertical"
                     android:layout_height="match_parent"
-                    android:layout_weight="2.1">
+                    android:layout_weight="2.1"
+                    android:orientation="vertical">
+
                     <TextView
-                        android:text="初始化参数列表"
-                        android:textSize="16sp"
-                        android:padding="5dp"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="初始化参数列表"
+                        android:textSize="16sp" />
+
                     <ListView
                         android:id="@+id/index_lv_initparams"
                         android:layout_width="match_parent"
@@ -367,7 +372,7 @@
                         <TextView
                             android:id="@+id/index_tv_device_born"
                             style="@style/IndexDeviceContentStyle"
-                            android:text="2017-10-01" />
+                            android:text="无" />
 
                         <TextView
                             style="@style/IndexDeviceNameStyle"
@@ -376,7 +381,7 @@
                         <TextView
                             android:id="@+id/index_tv_device_secondcheck"
                             style="@style/IndexDeviceContentStyle"
-                            android:text="否" />
+                            android:text="无" />
                     </LinearLayout>
 
                     <LinearLayout style="@style/IndexDeviceInfoStyle">
@@ -388,7 +393,7 @@
                         <TextView
                             android:id="@+id/index_tv_device_itemcounts"
                             style="@style/IndexDeviceContentStyle"
-                            android:text="96" />
+                            android:text="无" />
 
                         <TextView
                             style="@style/IndexDeviceNameStyle"
@@ -397,7 +402,7 @@
                         <TextView
                             android:id="@+id/index_tv_item_checkedcounts"
                             style="@style/IndexDeviceContentStyle"
-                            android:text="0" />
+                            android:text="无" />
                     </LinearLayout>
 
                     <LinearLayout style="@style/IndexDeviceInfoStyle">
@@ -413,12 +418,12 @@
 
                         <TextView
                             style="@style/IndexDeviceNameStyle"
-                            android:text="未调项目数" />
+                            android:text="已调未完成项目数" />
 
                         <TextView
                             android:id="@+id/index_tv_item_uncheckedcounts"
                             style="@style/IndexDeviceContentStyle"
-                            android:text="96" />
+                            android:text="无" />
                     </LinearLayout>
 
                     <LinearLayout style="@style/IndexDeviceInfoStyle">
@@ -430,7 +435,7 @@
                         <TextView
                             android:id="@+id/index_tv_record_result"
                             style="@style/IndexDeviceContentStyle"
-                            android:text="未调试" />
+                            android:text="无" />
 
                         <TextView
                             style="@style/IndexDeviceNameStyle"

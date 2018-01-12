@@ -4,11 +4,10 @@ import android.support.annotation.NonNull;
 import android.widget.ExpandableListView;
 
 import com.kstech.zoomlion.engine.device.DeviceModelFile;
-import com.kstech.zoomlion.serverdata.MeasureDev;
-import com.kstech.zoomlion.serverdata.UserInfo;
 import com.kstech.zoomlion.model.vo.CheckItemParamValueVO;
 import com.kstech.zoomlion.model.vo.CheckItemVO;
-import com.kstech.zoomlion.serverdata.QCItemStatus;
+import com.kstech.zoomlion.serverdata.MeasureDev;
+import com.kstech.zoomlion.serverdata.UserInfo;
 import com.kstech.zoomlion.view.widget.IRecyclerScrollListener;
 
 import java.util.ArrayList;
@@ -189,8 +188,5 @@ public class Globals {
      * 调试流程ID
      */
     public static String PROCESSID;
-    /**
-     * 服务器 调试项目状态对象集合
-     */
-    public static List<QCItemStatus> itemStatus;
+
 }

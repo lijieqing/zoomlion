@@ -13,8 +13,10 @@ import com.kstech.zoomlion.model.db.greendao.CheckRecordDao;
 import com.kstech.zoomlion.model.enums.CheckRecordResultEnum;
 import com.kstech.zoomlion.model.session.URLCollections;
 import com.kstech.zoomlion.model.vo.CheckItemVO;
+import com.kstech.zoomlion.serverdata.CommissioningStatistics;
 import com.kstech.zoomlion.serverdata.QCItemStatus;
 import com.kstech.zoomlion.utils.Globals;
+import com.kstech.zoomlion.utils.JsonUtils;
 import com.kstech.zoomlion.view.activity.BaseActivity;
 import com.kstech.zoomlion.view.activity.IndexActivity;
 
@@ -47,9 +49,19 @@ public class ServerProcessCheck extends AbstractDataTransferTask {
      * 已请求次数
      */
     private int requestTimes = 0;
+    /**
+     * 服务器 调试项目状态对象集合
+     */
+    List<QCItemStatus> itemStatus;
+
+    CommissioningStatistics deviceStatus;
 
     public ServerProcessCheck(Handler handler) {
         super(handler);
+    }
+
+    public void setDeviceStatus(CommissioningStatistics deviceStatus) {
+        this.deviceStatus = deviceStatus;
     }
 
     @Override
@@ -102,6 +114,10 @@ public class ServerProcessCheck extends AbstractDataTransferTask {
                 skip = true;
             }
         }
+        if (data.has("qcitemStatusList")) {
+            String statusList = data.getString("qcitemStatusList");
+            itemStatus = JsonUtils.fromArrayJson(statusList, QCItemStatus.class);
+        }
     }
 
     @Override
@@ -145,7 +161,7 @@ public class ServerProcessCheck extends AbstractDataTransferTask {
      * 更新调试项目服务器状态数据
      */
     private void updateItemStatus() {
-        if (Globals.itemStatus != null) {
+        if (itemStatus != null) {
             Message message;
             CheckItemDataDao itemDao = MyApplication.getApplication().getDaoSession().getCheckItemDataDao();
             CheckRecordDao recordDao = MyApplication.getApplication().getDaoSession().getCheckRecordDao();
@@ -153,6 +169,13 @@ public class ServerProcessCheck extends AbstractDataTransferTask {
                     .where(CheckRecordDao.Properties.DeviceIdentity.eq(Globals.deviceSN))
                     .build().unique();
             if (cr != null) {
+                //更新整机调试状态到本地
+                if (deviceStatus != null) {
+                    cr.setSumCounts(deviceStatus.getCompleteNumber() + deviceStatus.getDoingNumber());
+                    cr.setCurrentStatus(deviceStatus.getStatus());
+                    recordDao.update(cr);
+                }
+
                 message = Message.obtain();
                 message.what = BaseActivity.UPDATE_PROGRESS_CONTENT;
                 message.obj = "更新调试项目状态";
@@ -160,7 +183,7 @@ public class ServerProcessCheck extends AbstractDataTransferTask {
                 handler.sendMessage(message);
                 SystemClock.sleep(1000);
 
-                for (QCItemStatus itemStatus : Globals.itemStatus) {
+                for (QCItemStatus itemStatus : itemStatus) {
                     Long dictId = itemStatus.getQcitemDictId();
                     String d = String.valueOf(dictId);
                     CheckItemData item = itemDao.queryBuilder()

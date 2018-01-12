@@ -10,6 +10,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.Message;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -17,18 +18,17 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.kstech.zoomlion.MyApplication;
 import com.kstech.zoomlion.R;
 import com.kstech.zoomlion.engine.comm.J1939TaskService;
 import com.kstech.zoomlion.engine.device.DeviceLoadTask;
 import com.kstech.zoomlion.engine.server.ServerProcessCheck;
 import com.kstech.zoomlion.engine.server.UserLogoutTask;
-import com.kstech.zoomlion.model.db.greendao.CheckItemDataDao;
-import com.kstech.zoomlion.model.db.greendao.CheckRecordDao;
 import com.kstech.zoomlion.model.session.DeviceCatSession;
 import com.kstech.zoomlion.model.treelist.Element;
 import com.kstech.zoomlion.model.treelist.TreeViewAdapter;
 import com.kstech.zoomlion.model.treelist.TreeViewItemClickListener;
+import com.kstech.zoomlion.serverdata.CommissioningStatistics;
+import com.kstech.zoomlion.serverdata.CommissioningStatusEnum;
 import com.kstech.zoomlion.utils.DeviceUtil;
 import com.kstech.zoomlion.utils.Globals;
 import com.kstech.zoomlion.utils.JsonUtils;
@@ -124,10 +124,6 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
     @ViewInject(R.id.index_lv_initparams)
     private ListView lvInitParams;//初始化参数列表
 
-    private CheckRecordDao recordDao;
-
-    private CheckItemDataDao itemDataDao;
-
     private long checkerID;//调试员ID
     /**
      * 机型配置完成解析
@@ -153,6 +149,10 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
      * 用户登出
      */
     public static final int USER_LOGOUT = 5;
+    /**
+     * 更新整机状态信息
+     */
+    public static final int UPDATE_DEVICE_INFO = 6;
 
     public static final String TAG = "IndexActivity";
 
@@ -166,6 +166,7 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
     private ListView devListView;
     private AlertDialog devListDialog;
     private TreeViewAdapter adapter;
+    private CommissioningStatistics deviceStatus;
 
     private ServiceConnection conn = new ServiceConnection() {
         @Override
@@ -197,12 +198,8 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
         tvDeviceIdentity.setTextColor(Color.RED);
         tvDeviceIdentity.setText("当前未检测到整机编号");
 
-        //获取数据库操作对象
-        recordDao = MyApplication.getApplication().getDaoSession().getCheckRecordDao();
-        itemDataDao = MyApplication.getApplication().getDaoSession().getCheckItemDataDao();
-
         // TODO: 2017/10/11 加载默认机型信息，配置并启动通讯线程
-        deviceLoadTask = new DeviceLoadTask(this, null, handler);
+        deviceLoadTask = new DeviceLoadTask(null, handler);
         deviceLoadTask.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
 
         //初始化机型选择列表 相关数据
@@ -256,14 +253,16 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
                 startActivity(new Intent(this, UserDetailActivity.class));
                 break;
             case R.id.index_btn_goto:
-                new ServerProcessCheck(handler).executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
+                ServerProcessCheck spc = new ServerProcessCheck(handler);
+                spc.setDeviceStatus(deviceStatus);
+                spc.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
                 break;
             case R.id.index_btn_exit:
                 new UserLogoutTask(handler).executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
                 break;
             case R.id.index_btn_auto_download:
                 // TODO: 2018/1/5 根据整机编码获取机型信息，此处模拟已经获取到整机编码
-                deviceLoadTask = new DeviceLoadTask(this, Globals.deviceSN, handler);
+                deviceLoadTask = new DeviceLoadTask(Globals.deviceSN, handler);
                 deviceLoadTask.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
                 break;
             case R.id.index_btn_choose_from_server:
@@ -321,6 +320,27 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
         }
     }
 
+    /**
+     * 更新整机状态信息
+     */
+    private void updateDeviceInfo() {
+        //设置出厂日期
+        String deviceDate = TextUtils.isEmpty(Globals.modelFile.device.getDevBornDate()) ? "未设置出厂日期" : Globals.modelFile.device.getDevBornDate();
+        tvDeviceBornDate.setText(deviceDate);
+        //设置是否二次调试
+        tvDevSecondCheck.setText(deviceStatus.getCheckNo() == 0 ? "否" : "是");
+        //设置总调试次数
+        tvItemCounts.setText(String.valueOf(deviceStatus.getAmount()));
+        //设置已调试次数
+        tvItemCheckedCounts.setText(String.valueOf(deviceStatus.getCompleteNumber()));
+        //设置已调未完成次数
+        tvItemUncheckedCounts.setText(String.valueOf(deviceStatus.getDoingNumber()));
+        //最近调试项目
+        tvItemLastChecked.setText(TextUtils.isEmpty(deviceStatus.getLastQcitemName()) ? "无" : deviceStatus.getLastQcitemName());
+        //整机调试结论
+        tvRecordResult.setText(CommissioningStatusEnum.nameOf(deviceStatus.getStatus()).getName());
+    }
+
     private InnerHandler handler = new InnerHandler(this);
 
     @Override
@@ -373,6 +393,12 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
                         break;
                     case USER_LOGOUT:
                         mActivity.finish();
+                        break;
+                    case UPDATE_DEVICE_INFO:
+                        if (msg.obj != null) {
+                            mActivity.deviceStatus = (CommissioningStatistics) msg.obj;
+                            mActivity.updateDeviceInfo();
+                        }
                         break;
 
                 }

@@ -1,14 +1,14 @@
 package com.kstech.zoomlion.engine.device;
 
-import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
 
+import com.kstech.zoomlion.MyApplication;
 import com.kstech.zoomlion.model.session.URLCollections;
 import com.kstech.zoomlion.model.xmlbean.Device;
-import com.kstech.zoomlion.serverdata.QCItemStatus;
+import com.kstech.zoomlion.serverdata.CommissioningStatistics;
 import com.kstech.zoomlion.utils.Globals;
 import com.kstech.zoomlion.utils.JsonUtils;
 import com.kstech.zoomlion.utils.LogUtils;
@@ -32,10 +32,6 @@ public class DeviceLoadTask extends AsyncTask<Void, String, Void> {
      */
     private String InExc;
     /**
-     * 上下文对象
-     */
-    private Context context;
-    /**
      * 机型文件对象
      */
     private Device device;
@@ -45,9 +41,8 @@ public class DeviceLoadTask extends AsyncTask<Void, String, Void> {
     public boolean isWaitting = true;
 
 
-    public DeviceLoadTask(Context context, String InExc, Handler handler) {
+    public DeviceLoadTask(String InExc, Handler handler) {
         this.handler = handler;
-        this.context = context;
         this.InExc = InExc;
     }
 
@@ -91,7 +86,6 @@ public class DeviceLoadTask extends AsyncTask<Void, String, Void> {
                 //此处为同步请求数据操作
                 String result = "";
                 try {
-                    message = Message.obtain();
                     result = x.http().getSync(p, String.class);
 
                     LogUtils.e("DeviceLoadTask", result);
@@ -99,18 +93,26 @@ public class DeviceLoadTask extends AsyncTask<Void, String, Void> {
                     if (URLCollections.isRequestSuccess(object)) {
                         String deviceInfo = object.getString("device");
                         Globals.PROCESSID = object.getString("processId");
-                        if (object.has("qcitemStatusList")) {
-                            String statusList = object.getString("qcitemStatusList");
-                            Globals.itemStatus = JsonUtils.fromArrayJson(statusList, QCItemStatus.class);
-                        }
+                        String deviceStatus = object.getString("statistics");
+                        CommissioningStatistics status = JsonUtils.fromJson(deviceStatus, CommissioningStatistics.class);
+
                         device = JsonUtils.fromJson(deviceInfo, Device.class);
 
+                        message = Message.obtain();
                         message.what = IndexActivity.UPDATE_PROGRESS_CONTENT;
                         message.obj = "服务器机型数据加载完成";
                         message.arg1 = 28;
                         handler.sendMessage(message);
                         SystemClock.sleep(1000);
+
+                        message = Message.obtain();
+                        message.what = IndexActivity.UPDATE_DEVICE_INFO;
+                        message.obj = status;
+                        message.arg1 = 30;
+                        handler.sendMessage(message);
+                        SystemClock.sleep(1000);
                     } else {
+                        message = Message.obtain();
                         message.what = IndexActivity.UPDATE_PROGRESS_CONTENT;
                         message.obj = "数据解析错误,正在还原设置";
                         message.arg1 = 28;
@@ -119,6 +121,7 @@ public class DeviceLoadTask extends AsyncTask<Void, String, Void> {
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    message = Message.obtain();
                     if (URLCollections.isReLogin(result)) {
                         message.what = IndexActivity.USER_RELOGIN;
                         message.obj = "用户身份异常，重新登录";
@@ -134,6 +137,7 @@ public class DeviceLoadTask extends AsyncTask<Void, String, Void> {
                     SystemClock.sleep(1000);
                 } catch (Throwable throwable) {
                     throwable.printStackTrace();
+                    message = Message.obtain();
                     message.what = IndexActivity.UPDATE_PROGRESS_CONTENT;
                     message.obj = throwable.getMessage() + "，正在还原设置";
                     message.arg1 = 28;
@@ -149,7 +153,7 @@ public class DeviceLoadTask extends AsyncTask<Void, String, Void> {
             handler.sendMessage(message);
 
             if (device == null) {
-                device = (Device) XMLAPI.readXML(context.getAssets().open("zoomlion.xml"));
+                device = (Device) XMLAPI.readXML(MyApplication.getApplication().getAssets().open("zoomlion.xml"));
                 Globals.modelFile = DeviceModelFile.readFromFile(device);
             } else {
                 Globals.modelFile = DeviceModelFile.readFromFile(device);
