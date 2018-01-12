@@ -85,8 +85,9 @@ public class ServerProcessCheck extends AbstractDataTransferTask {
     }
 
     @Override
-    void initRequestParam(RequestParams params) {
+    boolean initRequestParam(RequestParams params) {
         params.addBodyParameter("sn", Globals.deviceSN);
+        return true;
     }
 
     @Override
@@ -212,7 +213,7 @@ public class ServerProcessCheck extends AbstractDataTransferTask {
      */
     private void initRecord() {
         CheckRecord record = new CheckRecord(null, "", Globals.deviceSN,
-                "test_record_name", 123l,
+                "test_record_name", 123l,Globals.currentUser.getUsername(),
                 CheckRecordResultEnum.UNFINISH.getCode(), new Date(),
                 null, 0, 0
                 , null, 0, false);

@@ -36,6 +36,9 @@ public class CheckRecord {
     private Long checkerId;//检验员ID
 
     @Property
+    private String checkerName;//检验员名称
+
+    @Property
     private Integer currentStatus;//当前检测记录状态
 
     @Unique
@@ -72,16 +75,17 @@ public class CheckRecord {
     @Generated(hash = 597129236)
     private transient CheckRecordDao myDao;
 
-    @Generated(hash = 867397948)
+    @Generated(hash = 514164489)
     public CheckRecord(Long checkRecordId, String deviceRecordServerId, String deviceIdentity,
-            String checkRecordName, Long checkerId, Integer currentStatus, Date createTime,
-            Date finishTime, Integer sumCounts, Integer unpassCounts, String checkRecordDesc,
-            Integer checkTimes, Boolean uploaded) {
+            String checkRecordName, Long checkerId, String checkerName, Integer currentStatus,
+            Date createTime, Date finishTime, Integer sumCounts, Integer unpassCounts,
+            String checkRecordDesc, Integer checkTimes, Boolean uploaded) {
         this.checkRecordId = checkRecordId;
         this.deviceRecordServerId = deviceRecordServerId;
         this.deviceIdentity = deviceIdentity;
         this.checkRecordName = checkRecordName;
         this.checkerId = checkerId;
+        this.checkerName = checkerName;
         this.currentStatus = currentStatus;
         this.createTime = createTime;
         this.finishTime = finishTime;
@@ -270,6 +274,14 @@ public class CheckRecord {
 
     public void setDeviceRecordServerId(String deviceRecordServerId) {
         this.deviceRecordServerId = deviceRecordServerId;
+    }
+
+    public String getCheckerName() {
+        return this.checkerName;
+    }
+
+    public void setCheckerName(String checkerName) {
+        this.checkerName = checkerName;
     }
 
 }

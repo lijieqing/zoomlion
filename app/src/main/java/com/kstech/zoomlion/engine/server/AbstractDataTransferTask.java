@@ -48,6 +48,8 @@ public abstract class AbstractDataTransferTask extends AsyncTask<Void, Integer, 
      */
     protected Message message;
 
+    private boolean post = true;
+
     public AbstractDataTransferTask(Handler handler) {
         this.handler = handler;
     }
@@ -80,10 +82,14 @@ public abstract class AbstractDataTransferTask extends AsyncTask<Void, Integer, 
             //初始化请求参数
             params = new RequestParams(getURL());
             params.addHeader("Cookie", Globals.SID);
-            initRequestParam(params);
+            post = initRequestParam(params);
 
             try {
-                result = x.http().postSync(params, String.class);
+                if (post){
+                    result = x.http().postSync(params, String.class);
+                }else {
+                    result = x.http().getSync(params, String.class);
+                }
                 LogUtils.e("QCItemDataSaveUploadTask", result);
                 JSONObject object = new JSONObject(result);
                 if (!object.has("error")) {
@@ -172,8 +178,10 @@ public abstract class AbstractDataTransferTask extends AsyncTask<Void, Integer, 
      * 请求参数数据初始化
      *
      * @param params 需要初始化的参数
+     *
+     * return 是否是POST请求
      */
-    abstract void initRequestParam(RequestParams params);
+    abstract boolean initRequestParam(RequestParams params);
 
     /**
      * 请求成功回调

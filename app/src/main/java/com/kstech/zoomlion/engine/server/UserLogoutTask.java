@@ -47,7 +47,8 @@ public class UserLogoutTask extends AbstractDataTransferTask {
     }
 
     @Override
-    void initRequestParam(RequestParams params) {
+    boolean initRequestParam(RequestParams params) {
+        return false;
     }
 
     @Override

@@ -84,7 +84,7 @@ public class CheckRecordConfirmTask extends AbstractDataTransferTask {
     }
 
     @Override
-    void initRequestParam(RequestParams params) {
+    boolean initRequestParam(RequestParams params) {
         CompleteCommissioningJSON recordResult = new CompleteCommissioningJSON();
         CommissioningResults results = new CommissioningResults();
 
@@ -97,6 +97,7 @@ public class CheckRecordConfirmTask extends AbstractDataTransferTask {
 
         String result = JsonUtils.toJson(recordResult);
         params.setBodyContent(result);
+        return true;
     }
 
     @Override

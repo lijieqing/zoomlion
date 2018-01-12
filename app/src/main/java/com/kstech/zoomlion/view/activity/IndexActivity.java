@@ -21,6 +21,7 @@ import android.widget.TextView;
 import com.kstech.zoomlion.R;
 import com.kstech.zoomlion.engine.comm.J1939TaskService;
 import com.kstech.zoomlion.engine.device.DeviceLoadTask;
+import com.kstech.zoomlion.engine.server.DeviceStatusUpdateTask;
 import com.kstech.zoomlion.engine.server.ServerProcessCheck;
 import com.kstech.zoomlion.engine.server.UserLogoutTask;
 import com.kstech.zoomlion.model.session.DeviceCatSession;
@@ -230,6 +231,7 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
         super.onRestart();
         //恢复 预热时间 数据监听器
         Globals.modelFile.getDataSetVO().getDSItem("预热时间").addListener(this);
+        new DeviceStatusUpdateTask(handler).executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
     }
 
     @Override

@@ -278,8 +278,7 @@ public class CheckHomeActivity extends BaseActivity {
             int count = record.getSumCounts();
             tvCheckCount.setText(String.valueOf(count));
             //车辆调试记录创建者
-            Long user = record.getCheckerId();
-            tvCheckUser.setText(String.valueOf(user));
+            tvCheckUser.setText(record.getCheckerName());
             //整机描述信息
             String desc = record.getCheckRecordDesc();
             if (desc != null) {

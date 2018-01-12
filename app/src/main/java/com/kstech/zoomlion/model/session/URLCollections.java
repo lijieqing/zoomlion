@@ -51,6 +51,10 @@ public final class URLCollections {
      * 整机调试完成后，通知服务器并上传数据
      */
     public static String NOTIFY_SERVER_CHECK_COMPLETE = ADDRESS + "/commissioning/completeCommissioning";
+    /**
+     * 获取整机泵车调试状态数据
+     */
+    public static String UPDATE_DEVICE_STATUS = ADDRESS + "/commissioning/getStatistics";
 
     public static String REGISTER_PAD = ADDRESS + "/portabledev/register";//调试终端注册
     public static String USER_CANCEL = ADDRESS + "/user/cancel";//用户注销

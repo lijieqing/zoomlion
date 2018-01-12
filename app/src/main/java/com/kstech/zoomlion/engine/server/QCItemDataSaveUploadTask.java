@@ -190,12 +190,13 @@ public class QCItemDataSaveUploadTask extends AbstractDataTransferTask {
     }
 
     @Override
-    void initRequestParam(RequestParams params) {
+    boolean initRequestParam(RequestParams params) {
         //将调试记录数据打包，并添加到param中
         CompleteQCItemJSON qcitemJson = packageQCItemData(detailData,itemData);
         String result = JsonUtils.toJson(qcitemJson);
         params.setBodyContent(result);
         requestTimes++;
+        return true;
     }
 
     @Override

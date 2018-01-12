@@ -29,14 +29,15 @@ public class CheckRecordDao extends AbstractDao<CheckRecord, Long> {
         public final static Property DeviceIdentity = new Property(2, String.class, "deviceIdentity", false, "DEVICE_IDENTITY");
         public final static Property CheckRecordName = new Property(3, String.class, "checkRecordName", false, "CHECK_RECORD_NAME");
         public final static Property CheckerId = new Property(4, Long.class, "checkerId", false, "CHECKER_ID");
-        public final static Property CurrentStatus = new Property(5, Integer.class, "currentStatus", false, "CURRENT_STATUS");
-        public final static Property CreateTime = new Property(6, java.util.Date.class, "createTime", false, "CREATE_TIME");
-        public final static Property FinishTime = new Property(7, java.util.Date.class, "finishTime", false, "FINISH_TIME");
-        public final static Property SumCounts = new Property(8, Integer.class, "sumCounts", false, "SUM_COUNTS");
-        public final static Property UnpassCounts = new Property(9, Integer.class, "unpassCounts", false, "UNPASS_COUNTS");
-        public final static Property CheckRecordDesc = new Property(10, String.class, "checkRecordDesc", false, "CHECK_RECORD_DESC");
-        public final static Property CheckTimes = new Property(11, Integer.class, "checkTimes", false, "CHECK_TIMES");
-        public final static Property Uploaded = new Property(12, Boolean.class, "uploaded", false, "UPLOADED");
+        public final static Property CheckerName = new Property(5, String.class, "checkerName", false, "CHECKER_NAME");
+        public final static Property CurrentStatus = new Property(6, Integer.class, "currentStatus", false, "CURRENT_STATUS");
+        public final static Property CreateTime = new Property(7, java.util.Date.class, "createTime", false, "CREATE_TIME");
+        public final static Property FinishTime = new Property(8, java.util.Date.class, "finishTime", false, "FINISH_TIME");
+        public final static Property SumCounts = new Property(9, Integer.class, "sumCounts", false, "SUM_COUNTS");
+        public final static Property UnpassCounts = new Property(10, Integer.class, "unpassCounts", false, "UNPASS_COUNTS");
+        public final static Property CheckRecordDesc = new Property(11, String.class, "checkRecordDesc", false, "CHECK_RECORD_DESC");
+        public final static Property CheckTimes = new Property(12, Integer.class, "checkTimes", false, "CHECK_TIMES");
+        public final static Property Uploaded = new Property(13, Boolean.class, "uploaded", false, "UPLOADED");
     }
 
     private DaoSession daoSession;
@@ -60,14 +61,15 @@ public class CheckRecordDao extends AbstractDao<CheckRecord, Long> {
                 "\"DEVICE_IDENTITY\" TEXT UNIQUE ," + // 2: deviceIdentity
                 "\"CHECK_RECORD_NAME\" TEXT," + // 3: checkRecordName
                 "\"CHECKER_ID\" INTEGER," + // 4: checkerId
-                "\"CURRENT_STATUS\" INTEGER," + // 5: currentStatus
-                "\"CREATE_TIME\" INTEGER UNIQUE ," + // 6: createTime
-                "\"FINISH_TIME\" INTEGER UNIQUE ," + // 7: finishTime
-                "\"SUM_COUNTS\" INTEGER," + // 8: sumCounts
-                "\"UNPASS_COUNTS\" INTEGER," + // 9: unpassCounts
-                "\"CHECK_RECORD_DESC\" TEXT," + // 10: checkRecordDesc
-                "\"CHECK_TIMES\" INTEGER," + // 11: checkTimes
-                "\"UPLOADED\" INTEGER);"); // 12: uploaded
+                "\"CHECKER_NAME\" TEXT," + // 5: checkerName
+                "\"CURRENT_STATUS\" INTEGER," + // 6: currentStatus
+                "\"CREATE_TIME\" INTEGER UNIQUE ," + // 7: createTime
+                "\"FINISH_TIME\" INTEGER UNIQUE ," + // 8: finishTime
+                "\"SUM_COUNTS\" INTEGER," + // 9: sumCounts
+                "\"UNPASS_COUNTS\" INTEGER," + // 10: unpassCounts
+                "\"CHECK_RECORD_DESC\" TEXT," + // 11: checkRecordDesc
+                "\"CHECK_TIMES\" INTEGER," + // 12: checkTimes
+                "\"UPLOADED\" INTEGER);"); // 13: uploaded
     }
 
     /** Drops the underlying database table. */
@@ -105,44 +107,49 @@ public class CheckRecordDao extends AbstractDao<CheckRecord, Long> {
             stmt.bindLong(5, checkerId);
         }
  
+        String checkerName = entity.getCheckerName();
+        if (checkerName != null) {
+            stmt.bindString(6, checkerName);
+        }
+ 
         Integer currentStatus = entity.getCurrentStatus();
         if (currentStatus != null) {
-            stmt.bindLong(6, currentStatus);
+            stmt.bindLong(7, currentStatus);
         }
  
         java.util.Date createTime = entity.getCreateTime();
         if (createTime != null) {
-            stmt.bindLong(7, createTime.getTime());
+            stmt.bindLong(8, createTime.getTime());
         }
  
         java.util.Date finishTime = entity.getFinishTime();
         if (finishTime != null) {
-            stmt.bindLong(8, finishTime.getTime());
+            stmt.bindLong(9, finishTime.getTime());
         }
  
         Integer sumCounts = entity.getSumCounts();
         if (sumCounts != null) {
-            stmt.bindLong(9, sumCounts);
+            stmt.bindLong(10, sumCounts);
         }
  
         Integer unpassCounts = entity.getUnpassCounts();
         if (unpassCounts != null) {
-            stmt.bindLong(10, unpassCounts);
+            stmt.bindLong(11, unpassCounts);
         }
  
         String checkRecordDesc = entity.getCheckRecordDesc();
         if (checkRecordDesc != null) {
-            stmt.bindString(11, checkRecordDesc);
+            stmt.bindString(12, checkRecordDesc);
         }
  
         Integer checkTimes = entity.getCheckTimes();
         if (checkTimes != null) {
-            stmt.bindLong(12, checkTimes);
+            stmt.bindLong(13, checkTimes);
         }
  
         Boolean uploaded = entity.getUploaded();
         if (uploaded != null) {
-            stmt.bindLong(13, uploaded ? 1L: 0L);
+            stmt.bindLong(14, uploaded ? 1L: 0L);
         }
     }
 
@@ -175,44 +182,49 @@ public class CheckRecordDao extends AbstractDao<CheckRecord, Long> {
             stmt.bindLong(5, checkerId);
         }
  
+        String checkerName = entity.getCheckerName();
+        if (checkerName != null) {
+            stmt.bindString(6, checkerName);
+        }
+ 
         Integer currentStatus = entity.getCurrentStatus();
         if (currentStatus != null) {
-            stmt.bindLong(6, currentStatus);
+            stmt.bindLong(7, currentStatus);
         }
  
         java.util.Date createTime = entity.getCreateTime();
         if (createTime != null) {
-            stmt.bindLong(7, createTime.getTime());
+            stmt.bindLong(8, createTime.getTime());
         }
  
         java.util.Date finishTime = entity.getFinishTime();
         if (finishTime != null) {
-            stmt.bindLong(8, finishTime.getTime());
+            stmt.bindLong(9, finishTime.getTime());
         }
  
         Integer sumCounts = entity.getSumCounts();
         if (sumCounts != null) {
-            stmt.bindLong(9, sumCounts);
+            stmt.bindLong(10, sumCounts);
         }
  
         Integer unpassCounts = entity.getUnpassCounts();
         if (unpassCounts != null) {
-            stmt.bindLong(10, unpassCounts);
+            stmt.bindLong(11, unpassCounts);
         }
  
         String checkRecordDesc = entity.getCheckRecordDesc();
         if (checkRecordDesc != null) {
-            stmt.bindString(11, checkRecordDesc);
+            stmt.bindString(12, checkRecordDesc);
         }
  
         Integer checkTimes = entity.getCheckTimes();
         if (checkTimes != null) {
-            stmt.bindLong(12, checkTimes);
+            stmt.bindLong(13, checkTimes);
         }
  
         Boolean uploaded = entity.getUploaded();
         if (uploaded != null) {
-            stmt.bindLong(13, uploaded ? 1L: 0L);
+            stmt.bindLong(14, uploaded ? 1L: 0L);
         }
     }
 
@@ -235,14 +247,15 @@ public class CheckRecordDao extends AbstractDao<CheckRecord, Long> {
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // deviceIdentity
             cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // checkRecordName
             cursor.isNull(offset + 4) ? null : cursor.getLong(offset + 4), // checkerId
-            cursor.isNull(offset + 5) ? null : cursor.getInt(offset + 5), // currentStatus
-            cursor.isNull(offset + 6) ? null : new java.util.Date(cursor.getLong(offset + 6)), // createTime
-            cursor.isNull(offset + 7) ? null : new java.util.Date(cursor.getLong(offset + 7)), // finishTime
-            cursor.isNull(offset + 8) ? null : cursor.getInt(offset + 8), // sumCounts
-            cursor.isNull(offset + 9) ? null : cursor.getInt(offset + 9), // unpassCounts
-            cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10), // checkRecordDesc
-            cursor.isNull(offset + 11) ? null : cursor.getInt(offset + 11), // checkTimes
-            cursor.isNull(offset + 12) ? null : cursor.getShort(offset + 12) != 0 // uploaded
+            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // checkerName
+            cursor.isNull(offset + 6) ? null : cursor.getInt(offset + 6), // currentStatus
+            cursor.isNull(offset + 7) ? null : new java.util.Date(cursor.getLong(offset + 7)), // createTime
+            cursor.isNull(offset + 8) ? null : new java.util.Date(cursor.getLong(offset + 8)), // finishTime
+            cursor.isNull(offset + 9) ? null : cursor.getInt(offset + 9), // sumCounts
+            cursor.isNull(offset + 10) ? null : cursor.getInt(offset + 10), // unpassCounts
+            cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11), // checkRecordDesc
+            cursor.isNull(offset + 12) ? null : cursor.getInt(offset + 12), // checkTimes
+            cursor.isNull(offset + 13) ? null : cursor.getShort(offset + 13) != 0 // uploaded
         );
         return entity;
     }
@@ -254,14 +267,15 @@ public class CheckRecordDao extends AbstractDao<CheckRecord, Long> {
         entity.setDeviceIdentity(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
         entity.setCheckRecordName(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
         entity.setCheckerId(cursor.isNull(offset + 4) ? null : cursor.getLong(offset + 4));
-        entity.setCurrentStatus(cursor.isNull(offset + 5) ? null : cursor.getInt(offset + 5));
-        entity.setCreateTime(cursor.isNull(offset + 6) ? null : new java.util.Date(cursor.getLong(offset + 6)));
-        entity.setFinishTime(cursor.isNull(offset + 7) ? null : new java.util.Date(cursor.getLong(offset + 7)));
-        entity.setSumCounts(cursor.isNull(offset + 8) ? null : cursor.getInt(offset + 8));
-        entity.setUnpassCounts(cursor.isNull(offset + 9) ? null : cursor.getInt(offset + 9));
-        entity.setCheckRecordDesc(cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10));
-        entity.setCheckTimes(cursor.isNull(offset + 11) ? null : cursor.getInt(offset + 11));
-        entity.setUploaded(cursor.isNull(offset + 12) ? null : cursor.getShort(offset + 12) != 0);
+        entity.setCheckerName(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
+        entity.setCurrentStatus(cursor.isNull(offset + 6) ? null : cursor.getInt(offset + 6));
+        entity.setCreateTime(cursor.isNull(offset + 7) ? null : new java.util.Date(cursor.getLong(offset + 7)));
+        entity.setFinishTime(cursor.isNull(offset + 8) ? null : new java.util.Date(cursor.getLong(offset + 8)));
+        entity.setSumCounts(cursor.isNull(offset + 9) ? null : cursor.getInt(offset + 9));
+        entity.setUnpassCounts(cursor.isNull(offset + 10) ? null : cursor.getInt(offset + 10));
+        entity.setCheckRecordDesc(cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11));
+        entity.setCheckTimes(cursor.isNull(offset + 12) ? null : cursor.getInt(offset + 12));
+        entity.setUploaded(cursor.isNull(offset + 13) ? null : cursor.getShort(offset + 13) != 0);
      }
     
     @Override
