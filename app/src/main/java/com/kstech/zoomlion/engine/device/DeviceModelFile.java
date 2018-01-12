@@ -512,6 +512,8 @@ public class DeviceModelFile {
      * @throws ExcException
      */
     private static void parseQCSet(DeviceModelFile result, Device device) throws ExcException {
+        result.checkItemMap.clear();
+        Globals.groups.clear();
         List<QCType> qcTypes = device.getQcSet().getQcTypes();
         for (QCType qcType : qcTypes) {
             Globals.groups.add(qcType.getName());
