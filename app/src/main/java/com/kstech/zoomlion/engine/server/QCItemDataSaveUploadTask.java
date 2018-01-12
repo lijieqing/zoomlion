@@ -157,7 +157,7 @@ public class QCItemDataSaveUploadTask extends AbstractDataTransferTask {
             itemData.resetCheckItemDetailDatas();
 
             //对itemData判定是否合格
-            int sumCount = itemData.getCheckItemDetailDatas().size();
+            int sumCount = itemData.getSumCounts()+1;
             if (sumCount >= itemvo.getTimes()) {
                 //连续通过次数达到标准次数，合格，否则不合格
                 if (itemData.getPassCounts() >= itemvo.getTimes()) {
@@ -192,7 +192,7 @@ public class QCItemDataSaveUploadTask extends AbstractDataTransferTask {
     @Override
     void initRequestParam(RequestParams params) {
         //将调试记录数据打包，并添加到param中
-        CompleteQCItemJSON qcitemJson = packageQCItemData(detailData);
+        CompleteQCItemJSON qcitemJson = packageQCItemData(detailData,itemData);
         String result = JsonUtils.toJson(qcitemJson);
         params.setBodyContent(result);
         requestTimes++;

@@ -512,12 +512,7 @@ public class CheckHomeActivity extends BaseActivity {
             if (itemData != null) {
                 result = itemData.getCheckResult();
                 sum = itemData.getSumCounts();
-                pass = 0;
-                for (CheckItemDetailData checkItemDetailData : itemData.getCheckItemDetailDatas()) {
-                    if (checkItemDetailData.getCheckResult().equals(CheckItemDetailResultEnum.PASS.getCode())) {
-                        pass++;
-                    }
-                }
+                pass = itemData.getPassCounts();
             }
             switch (result) {
                 case 0:

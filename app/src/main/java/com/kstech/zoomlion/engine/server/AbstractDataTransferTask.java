@@ -7,6 +7,7 @@ import android.os.SystemClock;
 
 import com.kstech.zoomlion.model.db.CheckChartData;
 import com.kstech.zoomlion.model.db.CheckImageData;
+import com.kstech.zoomlion.model.db.CheckItemData;
 import com.kstech.zoomlion.model.db.CheckItemDetailData;
 import com.kstech.zoomlion.model.session.URLCollections;
 import com.kstech.zoomlion.model.vo.CheckItemParamValueVO;
@@ -214,7 +215,7 @@ public abstract class AbstractDataTransferTask extends AsyncTask<Void, Integer, 
      * @param detailData 调试项目细节数据
      * @return 打包完成后的对象
      */
-    CompleteQCItemJSON packageQCItemData(CheckItemDetailData detailData) {
+    CompleteQCItemJSON packageQCItemData(CheckItemDetailData detailData, CheckItemData itemData) {
         //将调试项目数据打包为传输格式数据
         CompleteQCItemJSON qcItemJSON = new CompleteQCItemJSON();
 
@@ -226,7 +227,7 @@ public abstract class AbstractDataTransferTask extends AsyncTask<Void, Integer, 
 
         //设置基本数据信息
         qcItemJSON.setSn(Globals.deviceSN);
-        qcItemJSON.setQcitemDictId(Long.valueOf(detailData.getItemData().getDictId()));
+        qcItemJSON.setQcitemDictId(Long.valueOf(itemData.getDictId()));
 
         //解析调试项目参数数据集合
         String paramValues = detailData.getParamsValues();
@@ -304,10 +305,10 @@ public abstract class AbstractDataTransferTask extends AsyncTask<Void, Integer, 
 
         }
         //设置调试项目状态数据，包括已调次数、连续通过次数、和调试项目说明
-        qcItemStatus.setDoneTimes(detailData.getItemData().getSumCounts());
-        qcItemStatus.setPassTimes(detailData.getItemData().getPassCounts());
-        qcItemStatus.setStatus(detailData.getItemData().getCheckResult());
-        qcItemStatus.setRemark(detailData.getItemData().getItemDesc());
+        qcItemStatus.setDoneTimes(itemData.getSumCounts());
+        qcItemStatus.setPassTimes(itemData.getPassCounts());
+        qcItemStatus.setStatus(itemData.getCheckResult());
+        qcItemStatus.setRemark(itemData.getItemDesc());
 
         //组装QCItemResults，并赋值给qcItemJSON
         qcItemResults = new QCItemResults(qcItemStatus, qcDataRecordFormList, attachedFileList);

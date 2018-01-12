@@ -63,7 +63,7 @@ public class QCItemDataReLoadTask extends AbstractDataTransferTask {
     @Override
     void initRequestParam(RequestParams params) {
         uploadData = unUploadDetailDatas.pop();
-        CompleteQCItemJSON data = packageQCItemData(uploadData);
+        CompleteQCItemJSON data = packageQCItemData(uploadData,uploadData.getItemData());
         String result = JsonUtils.toJson(data);
         params.setBodyContent(result);
     }

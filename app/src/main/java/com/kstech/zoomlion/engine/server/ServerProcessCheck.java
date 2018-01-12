@@ -170,6 +170,7 @@ public class ServerProcessCheck extends AbstractDataTransferTask {
                     if (item != null) {
                         item.setSumCounts(itemStatus.getDoneTimes());
                         item.setPassCounts(itemStatus.getPassTimes());
+                        item.setCheckResult(itemStatus.getStatus());
                         itemDao.update(item);
                     }
                 }
