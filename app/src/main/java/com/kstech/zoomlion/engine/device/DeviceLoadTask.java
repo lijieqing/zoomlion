@@ -90,7 +90,14 @@ public class DeviceLoadTask extends AsyncTask<Void, String, Void> {
 
                     LogUtils.e("DeviceLoadTask", result);
                     JSONObject object = new JSONObject(result);
-                    if (URLCollections.isRequestSuccess(object)) {
+                    if (object.has("error")) {
+                        message = Message.obtain();
+                        message.what = IndexActivity.UPDATE_PROGRESS_CONTENT;
+                        message.obj = "请求错误：" + object.getString("error") + "，正在还原配置";
+                        message.arg1 = 28;
+                        handler.sendMessage(message);
+                        SystemClock.sleep(1000);
+                    } else if (object.has("processId")) {
                         String deviceInfo = object.getString("device");
                         Globals.PROCESSID = object.getString("processId");
                         String deviceStatus = object.getString("statistics");
@@ -114,11 +121,12 @@ public class DeviceLoadTask extends AsyncTask<Void, String, Void> {
                     } else {
                         message = Message.obtain();
                         message.what = IndexActivity.UPDATE_PROGRESS_CONTENT;
-                        message.obj = "数据解析错误,正在还原设置";
+                        message.obj = "数据格式错误，正在还原配置";
                         message.arg1 = 28;
                         handler.sendMessage(message);
                         SystemClock.sleep(1000);
                     }
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                     message = Message.obtain();

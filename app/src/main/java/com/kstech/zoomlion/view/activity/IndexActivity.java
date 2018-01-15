@@ -261,9 +261,13 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
                 startActivity(new Intent(this, UserDetailActivity.class));
                 break;
             case R.id.index_btn_goto:
-                ServerProcessCheck spc = new ServerProcessCheck(handler);
-                spc.setDeviceStatus(deviceStatus);
-                spc.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
+                if (Globals.PROCESSID == null) {
+                    Snackbar.make(root, "请先获取调试流程", Snackbar.LENGTH_SHORT).show();
+                } else {
+                    ServerProcessCheck spc = new ServerProcessCheck(handler);
+                    spc.setDeviceStatus(deviceStatus);
+                    spc.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
+                }
                 break;
             case R.id.index_btn_exit:
                 new UserLogoutTask(handler).executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
