@@ -64,7 +64,7 @@ public class UserLogoutTask extends AbstractDataTransferTask {
 
     @Override
     boolean onReLogin(Message message) {
-        return false;
+        return true;
     }
 
     @Override

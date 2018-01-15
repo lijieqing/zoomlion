@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/index_ll"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fff"
@@ -254,18 +255,18 @@
                     android:orientation="vertical">
 
                     <Button
+                        android:id="@+id/index_btn_view_record"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:text="服务器调试记录查看" />
+
+                    <Button
                         android:id="@+id/index_btn_auto_download"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1"
                         android:text="自动获取编码和机型" />
-
-                    <Button
-                        android:id="@+id/index_btn_choose_from_server"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:text="从服务器列表选择机型" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
@@ -397,7 +398,7 @@
 
                         <TextView
                             style="@style/IndexDeviceNameStyle"
-                            android:text="已调项目数" />
+                            android:text="已调完成项目数" />
 
                         <TextView
                             android:id="@+id/index_tv_item_checkedcounts"

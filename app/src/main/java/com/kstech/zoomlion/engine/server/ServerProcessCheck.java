@@ -128,7 +128,7 @@ public class ServerProcessCheck extends AbstractDataTransferTask {
 
     @Override
     boolean onReLogin(Message message) {
-        return false;
+        return true;
     }
 
     @Override
@@ -213,7 +213,7 @@ public class ServerProcessCheck extends AbstractDataTransferTask {
      */
     private void initRecord() {
         CheckRecord record = new CheckRecord(null, "", Globals.deviceSN,
-                "test_record_name", 123l,Globals.currentUser.getUsername(),
+                "test_record_name", 123l, Globals.currentUser.getUsername(),
                 CheckRecordResultEnum.UNFINISH.getCode(), new Date(),
                 null, 0, 0
                 , null, 0, false);

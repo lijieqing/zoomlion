@@ -10,11 +10,13 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.Message;
+import android.support.design.widget.Snackbar;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -24,7 +26,6 @@ import com.kstech.zoomlion.engine.device.DeviceLoadTask;
 import com.kstech.zoomlion.engine.server.DeviceStatusUpdateTask;
 import com.kstech.zoomlion.engine.server.ServerProcessCheck;
 import com.kstech.zoomlion.engine.server.UserLogoutTask;
-import com.kstech.zoomlion.model.session.DeviceCatSession;
 import com.kstech.zoomlion.model.treelist.Element;
 import com.kstech.zoomlion.model.treelist.TreeViewAdapter;
 import com.kstech.zoomlion.model.treelist.TreeViewItemClickListener;
@@ -32,9 +33,7 @@ import com.kstech.zoomlion.serverdata.CommissioningStatistics;
 import com.kstech.zoomlion.serverdata.CommissioningStatusEnum;
 import com.kstech.zoomlion.utils.DeviceUtil;
 import com.kstech.zoomlion.utils.Globals;
-import com.kstech.zoomlion.utils.JsonUtils;
 import com.kstech.zoomlion.utils.LogUtils;
-import com.kstech.zoomlion.utils.ThreadManager;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
@@ -43,7 +42,6 @@ import org.xutils.x;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import J1939.J1939_DataVar_ts;
 
@@ -58,6 +56,9 @@ import J1939.J1939_DataVar_ts;
  */
 @ContentView(R.layout.activity_index)
 public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.RealtimeChangeListener {
+
+    @ViewInject(R.id.index_ll)
+    private LinearLayout root;
 
     @ViewInject(R.id.index_iv_server_status)
     private ImageView ivServerStatus;//服务器状态图
@@ -88,9 +89,6 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
 
     @ViewInject(R.id.index_btn_auto_download)
     private Button btnAutoDownLoadDevice;//自动获取编码和机型按钮
-
-    @ViewInject(R.id.index_btn_choose_from_server)
-    private Button btnChooseDeviceFromServer;//自动获取编码和机型按钮
 
     @ViewInject(R.id.index_tv_device_born)
     private TextView tvDeviceBornDate;//设备出厂日期
@@ -189,7 +187,7 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
         super.onCreate(savedInstanceState);
         x.view().inject(this);
         //String data = String.format(getString(R.string.index_welcome_user),Globals.currentUser.getName(),Globals.currentUser.getLast_login_time());
-        String data = String.format(getString(R.string.index_welcome_user), Globals.currentUser.getUsername(), Globals.currentUser.getLastLoginTime() == null ? new Date() : Globals.currentUser.getLastLoginTime());
+        String data = String.format(getString(R.string.index_welcome_user), Globals.currentUser.getName(), Globals.currentUser.getLastLoginTime() == null ? new Date() : Globals.currentUser.getLastLoginTime());
         tvUserWelcome.setText(data);
 
         tvTerminalName.setTextColor(Color.DKGRAY);
@@ -231,7 +229,9 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
         super.onRestart();
         //恢复 预热时间 数据监听器
         Globals.modelFile.getDataSetVO().getDSItem("预热时间").addListener(this);
-        new DeviceStatusUpdateTask(handler).executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
+        if (Globals.deviceSN != null) {
+            new DeviceStatusUpdateTask(handler).executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
+        }
     }
 
     @Override
@@ -247,8 +247,14 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
         }
     }
 
-    @Event(value = {R.id.index_iv_user, R.id.index_btn_choose_from_server,
-            R.id.index_btn_goto, R.id.index_btn_exit, R.id.index_btn_auto_download})
+    @Override
+    public void onBackPressed() {
+        Snackbar.make(root, "请点击退出按钮", Snackbar.LENGTH_SHORT).show();
+    }
+
+    @Event(value = {R.id.index_iv_user, R.id.index_btn_goto,
+            R.id.index_btn_exit, R.id.index_btn_auto_download,
+            R.id.index_btn_view_record})
     private void click(View view) {
         switch (view.getId()) {
             case R.id.index_iv_user:
@@ -263,61 +269,14 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
                 new UserLogoutTask(handler).executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
                 break;
             case R.id.index_btn_auto_download:
+                Globals.deviceSN = "016302A0170008";
                 // TODO: 2018/1/5 根据整机编码获取机型信息，此处模拟已经获取到整机编码
                 deviceLoadTask = new DeviceLoadTask(Globals.deviceSN, handler);
                 deviceLoadTask.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
                 break;
-            case R.id.index_btn_choose_from_server:
-                handler.sendEmptyMessage(DEV_LIST_INIT);
-                rootElements.clear();
-                allElements.clear();
-                ThreadManager.getThreadPool().execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        String s = "{\"data\":[{\"id\":1,\"parent_id\":0,\"level\":1,\"sub_nums\":1,\"name\":\"root1\",\"remark\":\"remark_content\",\"full_code\":\"GSFUTYOPP\"}," +
-                                "{\"id\":2,\"parent_id\":0,\"level\":1,\"sub_nums\":1,\"name\":\"root2\",\"remark\":\"remark_content\",\"full_code\":\"GSFUTYOPP\"},\n" +
-                                "{\"id\":3,\"parent_id\":1,\"level\":2,\"sub_nums\":1,\"name\":\"second1\",\"remark\":\"remark_content\",\"full_code\":\"GSFUTYOPP\"},\n" +
-                                "{\"id\":4,\"parent_id\":2,\"level\":2,\"sub_nums\":1,\"name\":\"second2\",\"remark\":\"remark_content\",\"full_code\":\"GSFUTYOPP\"},\n" +
-                                "{\"id\":5,\"parent_id\":3,\"level\":3,\"sub_nums\":1,\"name\":\"third1\",\"remark\":\"remark_content\",\"full_code\":\"GSFUTYOPP\"},\n" +
-                                "{\"id\":6,\"parent_id\":4,\"level\":3,\"sub_nums\":1,\"name\":\"third2\",\"remark\":\"remark_content\",\"full_code\":\"GSFUTYOPP\"},\n" +
-                                "{\"id\":7,\"parent_id\":6,\"level\":4,\"sub_nums\":0,\"name\":\"fourth1\",\"remark\":\"remark_content\",\"full_code\":\"GSFUTYOPP\"}]}";
-                        //去服务器获取列表信息，此处模拟数据
-                        DeviceCatSession devCat = JsonUtils.fromJson(s, DeviceCatSession.class);
-                        List<DeviceCatSession> devs = devCat.getData();
-                        int parentID;
-                        int id;
-                        int level;
-                        String content;
-                        String fullCode;
-                        String desc;
-                        boolean hasChildren = true;
-
-                        Element element;
-                        for (DeviceCatSession dev : devs) {
-                            parentID = dev.getParent_id();
-                            id = dev.getId();
-                            level = dev.getLevel();
-                            content = dev.getName();
-                            fullCode = dev.getFull_code();
-                            desc = dev.getRemark();
-
-                            if (dev.getSub_nums() == Element.NO_PARENT) {
-                                hasChildren = false;
-                            }
-
-                            element = new Element(content, level, id, parentID, hasChildren, false);
-                            element.setFull_code(fullCode);
-                            element.setDesc(desc);
-
-                            if (level == Element.TOP_LEVEL) {
-                                rootElements.add(element);
-                            }
-                            allElements.add(element);
-                        }
-
-                        handler.sendEmptyMessage(DEV_LIST_LOADED);
-                    }
-                });
+            case R.id.index_btn_view_record:
+                Intent intent = new Intent(this, ViewRecordActivity.class);
+                startActivity(intent);
                 break;
         }
     }

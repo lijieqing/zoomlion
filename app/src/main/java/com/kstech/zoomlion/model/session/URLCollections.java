@@ -55,6 +55,10 @@ public final class URLCollections {
      * 获取整机泵车调试状态数据
      */
     public static String UPDATE_DEVICE_STATUS = ADDRESS + "/commissioning/getStatistics";
+    /**
+     * 获取用户详细信息
+     */
+    public static String GET_USER_DETAIL = ADDRESS + "/user/details";
 
     public static String REGISTER_PAD = ADDRESS + "/portabledev/register";//调试终端注册
     public static String USER_CANCEL = ADDRESS + "/user/cancel";//用户注销

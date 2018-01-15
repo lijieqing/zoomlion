@@ -24,7 +24,7 @@ android {
         //targetGenDirTest：设置生成单元测试目录
         //generateTests：设置自动生成单元测试用例
     }
-    dataBinding{
+    dataBinding {
         enabled true
     }
 }

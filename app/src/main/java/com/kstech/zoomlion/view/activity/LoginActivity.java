@@ -28,9 +28,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kstech.zoomlion.R;
-import com.kstech.zoomlion.serverdata.MeasureDev;
 import com.kstech.zoomlion.model.session.RegisterSession;
 import com.kstech.zoomlion.model.session.URLCollections;
+import com.kstech.zoomlion.serverdata.MeasureDev;
 import com.kstech.zoomlion.serverdata.UserInfo;
 import com.kstech.zoomlion.utils.DeviceUtil;
 import com.kstech.zoomlion.utils.Globals;
@@ -130,7 +130,7 @@ public class LoginActivity extends BaseActivity {
         //isRegister = isPadRegister();
         changeRegisterStatus(true);
 
-        mPasswordView.setText("123");
+        mPasswordView.setText("52tanwanlanyue");
 
         //获取文件读写权限
         initExternalPermission();
@@ -416,7 +416,6 @@ public class LoginActivity extends BaseActivity {
         @Override
         protected void onPostExecute(Integer status) {
             mAuthTask = null;
-            showProgress(false);
         }
 
         @Override
@@ -424,6 +423,7 @@ public class LoginActivity extends BaseActivity {
             super.onProgressUpdate(values);
             switch (status) {
                 case 1://密码错误
+                    showProgress(false);
                     Toast.makeText(LoginActivity.this, mError, Toast.LENGTH_SHORT).show();
                     mNameView.setError(mError);
                     mPasswordView.setError(mError);
@@ -435,16 +435,22 @@ public class LoginActivity extends BaseActivity {
                     Toast.makeText(LoginActivity.this, "登陆成功", Toast.LENGTH_SHORT).show();
                     //保存用户到记录
                     SharedPreferencesUtils.setParam(LoginActivity.this, Globals.LAST_USER, mName);
-                    user_record.add(mName);
+                    if (!user_record.contains(mName)) {
+                        user_record.add(mName);
+                    }
                     String sp = JsonUtils.toJson(user_record);
                     //添加到缓存列表
                     SharedPreferencesUtils.setParam(LoginActivity.this, Globals.USER_LOGIN_RECORD, sp);
+
                     Intent intent = new Intent(LoginActivity.this, IndexActivity.class);
+
+                    showProgress(false);
                     startActivity(intent);
                     finish();
                     break;
                 case 3:
                     Toast.makeText(LoginActivity.this, "与服务器通讯失败,错误信息:\n" + mError, Toast.LENGTH_SHORT).show();
+                    showProgress(false);
                     break;
             }
         }
@@ -452,7 +458,6 @@ public class LoginActivity extends BaseActivity {
         @Override
         protected void onCancelled() {
             mAuthTask = null;
-            showProgress(false);
         }
     }
 

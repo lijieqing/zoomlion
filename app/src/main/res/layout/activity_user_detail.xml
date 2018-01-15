@@ -44,7 +44,7 @@
                     android:layout_height="0dp"
                     android:layout_margin="5dp"
                     android:layout_weight="8"
-                    android:background="@drawable/ll_content_bg">
+                    android:background="@android:color/darker_gray">
 
                     <ImageView
                         android:id="@+id/user_detail_iv_user"

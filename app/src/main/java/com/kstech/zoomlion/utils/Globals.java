@@ -183,7 +183,7 @@ public class Globals {
     /**
      * 当前泵车编码
      */
-    public static final String deviceSN = "016302A0170008";
+    public static String deviceSN;
     /**
      * 调试流程ID
      */
