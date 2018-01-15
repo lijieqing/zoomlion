@@ -229,7 +229,7 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
         super.onRestart();
         //恢复 预热时间 数据监听器
         Globals.modelFile.getDataSetVO().getDSItem("预热时间").addListener(this);
-        if (Globals.deviceSN != null) {
+        if (Globals.PROCESSID != null) {
             new DeviceStatusUpdateTask(handler).executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
         }
     }
@@ -249,7 +249,7 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
 
     @Override
     public void onBackPressed() {
-        Snackbar.make(root, "请点击退出按钮", Snackbar.LENGTH_SHORT).show();
+        Snackbar.make(root, "点击退出按钮退出应用", Snackbar.LENGTH_SHORT).show();
     }
 
     @Event(value = {R.id.index_iv_user, R.id.index_btn_goto,
