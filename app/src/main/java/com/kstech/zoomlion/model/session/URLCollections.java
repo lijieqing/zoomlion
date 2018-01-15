@@ -59,6 +59,10 @@ public final class URLCollections {
      * 获取用户详细信息
      */
     public static String GET_USER_DETAIL = ADDRESS + "/user/details";
+    /**
+     * 修改用户密码
+     */
+    public static String CHANGE_PASSWORD = ADDRESS + "/user/changePassword";
 
     public static String REGISTER_PAD = ADDRESS + "/portabledev/register";//调试终端注册
     public static String USER_CANCEL = ADDRESS + "/user/cancel";//用户注销

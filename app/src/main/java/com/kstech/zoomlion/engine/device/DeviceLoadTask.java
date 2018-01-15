@@ -139,7 +139,7 @@ public class DeviceLoadTask extends AsyncTask<Void, String, Void> {
                     throwable.printStackTrace();
                     message = Message.obtain();
                     message.what = IndexActivity.UPDATE_PROGRESS_CONTENT;
-                    message.obj = throwable.getMessage() + "，正在还原设置";
+                    message.obj = "服务器通讯异常：" + throwable.getMessage() + "，正在还原设置";
                     message.arg1 = 28;
                     handler.sendMessage(message);
                     SystemClock.sleep(1000);

@@ -8,6 +8,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Message;
 import android.view.View;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestBuilder;
@@ -25,6 +26,9 @@ import java.util.Date;
 import jp.wasabeef.glide.transformations.BlurTransformation;
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
+/**
+ * 用户信息详情展示页
+ */
 public class UserDetailActivity extends BaseActivity {
     /**
      * 编辑密码时弹出的对话框
@@ -58,6 +62,10 @@ public class UserDetailActivity extends BaseActivity {
      * 更新用户信息
      */
     public static final int UPDATE_USER_DETAIL = 4;
+    /**
+     * 密码修改失败
+     */
+    public static final int PASS_EDIT_ERROR = 5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -166,10 +174,15 @@ public class UserDetailActivity extends BaseActivity {
             UserDetailActivity activity = (UserDetailActivity) reference.get();
             switch (msg.what) {
                 case PASS_EDIT_START:
-                    activity.passwordView.showProgress();
+                    activity.passwordView.showProgress(true);
                     break;
                 case PASS_EDIT_SUCCESS:
                     activity.passwordView.updateView(true);
+                    sendEmptyMessage(USER_RELOGIN);
+                    break;
+                case PASS_EDIT_ERROR:
+                    activity.passwordView.showProgress(false);
+                    Toast.makeText(activity, (String) msg.obj, Toast.LENGTH_SHORT).show();
                     break;
                 case PASS_EDIT_CANCEL:
                     activity.editPassDialog.cancel();
