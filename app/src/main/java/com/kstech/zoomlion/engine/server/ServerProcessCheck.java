@@ -170,12 +170,7 @@ public class ServerProcessCheck extends AbstractDataTransferTask {
                     .where(CheckRecordDao.Properties.DeviceIdentity.eq(Globals.deviceSN))
                     .build().unique();
             if (cr != null) {
-                //更新整机调试状态到本地
-                if (deviceStatus != null) {
-                    cr.setSumCounts(deviceStatus.getCompleteNumber() + deviceStatus.getDoingNumber());
-                    cr.setCurrentStatus(deviceStatus.getStatus());
-                    recordDao.update(cr);
-                }
+                int sumCount = 0;
 
                 message = Message.obtain();
                 message.what = BaseActivity.UPDATE_PROGRESS_CONTENT;
@@ -196,7 +191,16 @@ public class ServerProcessCheck extends AbstractDataTransferTask {
                         item.setPassCounts(itemStatus.getPassTimes());
                         item.setCheckResult(itemStatus.getStatus());
                         itemDao.update(item);
+                        //计算已调试次数
+                        sumCount += itemStatus.getDoneTimes();
                     }
+                }
+
+                //更新整机调试状态到本地
+                if (deviceStatus != null) {
+                    cr.setSumCounts(sumCount);
+                    cr.setCurrentStatus(deviceStatus.getStatus());
+                    recordDao.update(cr);
                 }
 
                 message = Message.obtain();

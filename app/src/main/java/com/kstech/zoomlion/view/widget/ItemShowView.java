@@ -22,6 +22,7 @@ import com.kstech.zoomlion.model.vo.CheckItemVO;
 import com.kstech.zoomlion.utils.DeviceUtil;
 import com.kstech.zoomlion.utils.Globals;
 import com.kstech.zoomlion.utils.JsonUtils;
+import com.kstech.zoomlion.utils.LogUtils;
 import com.kstech.zoomlion.view.adapter.DividerItemDecoration;
 import com.kstech.zoomlion.view.adapter.HeaderAdapter;
 import com.kstech.zoomlion.view.adapter.ResultAdapter;
@@ -33,9 +34,7 @@ import java.util.Map;
 
 /**
  * Created by lijie on 2017/7/27.
- */
-
-/**
+ * <p>
  * 首先说明一个item 指的是一个检测项目记录，即db中的@{@link com.kstech.zoomlion.model.db.CheckItemDetailData}类，
  * 其中的paramsValues储存的就是该检测记录的数据，对应多个@{@link CheckItemParamValueVO}
  */
@@ -101,6 +100,11 @@ public class ItemShowView extends RelativeLayout implements IRecyclerScrollListe
         this.addView(initView());
     }
 
+    /**
+     * 初始化布局，设置基本监听事件
+     *
+     * @return 初始化好的view对象
+     */
     private View initView() {
         avgMap = new HashMap<>();
         avgDatas = new ArrayList<>();
@@ -165,7 +169,7 @@ public class ItemShowView extends RelativeLayout implements IRecyclerScrollListe
 
 
     /**
-     * Update body.
+     * 更新项目调试记录展示布局
      *
      * @param paramValues 从数据库里面查出的@{@link CheckItemDetailData} 将里面的paramValue的json值读取出来，
      *                    转换为@{@link CheckItemParamValueVO}集合
@@ -199,6 +203,11 @@ public class ItemShowView extends RelativeLayout implements IRecyclerScrollListe
         updateResult(avgMap);
     }
 
+    /**
+     * 更新头部参数数据集合
+     *
+     * @param item 调试项目VO对象
+     */
     public void updateHead(@NonNull CheckItemVO item) {
         avgMap.clear();
         avgDatas.clear();
@@ -212,33 +221,47 @@ public class ItemShowView extends RelativeLayout implements IRecyclerScrollListe
         Globals.paramHeadVOs.addAll(item.getParamNameList());
         headerAdapter.notifyDataSetChanged();
 
-        for (CheckItemParamValueVO checkItemParamValueVO : item.getParamNameList()) {
+        for (CheckItemParamValueVO checkItemParamValueVO : Globals.paramHeadVOs) {
             avgMap.put(checkItemParamValueVO.getParamName(), new ArrayList<Float>());
         }
     }
 
+    /**
+     * 计算检测结果平均值，现在是使用数组预先储存位置，然后在添加到结果集合中，避免出现参数名和数值不对应
+     *
+     * @param resultMap 参数名与参数值集合的map对象
+     */
     private void updateResult(Map<String, List<Float>> resultMap) {
         float sum = 0;
         int index = 0;
+        //临时数组，用于存放每个参数得平均值，数组position代表该参数在paramHeadVOs中的位置
+        float[] temp = new float[Globals.paramHeadVOs.size()];
+        //遍历resultMap
         for (Map.Entry<String, List<Float>> stringListEntry : resultMap.entrySet()) {
             String name = stringListEntry.getKey();
             List<Float> values = stringListEntry.getValue();
+            //累加
             for (Float value : values) {
                 sum += value;
             }
+            //取平均值
             float avg = sum / values.size();
+            LogUtils.e(TAG, "name:" + name + " - avg:" + avg);
+            //查找该参数在paramHeadVOs中的位置
             for (int i = 0; i < Globals.paramHeadVOs.size(); i++) {
                 if (Globals.paramHeadVOs.get(i).getParamName().equals(name)) {
                     index = i;
                 }
             }
-            if (index <= avgDatas.size()) {
-                avgDatas.add(index, avg);
-            } else {
-                avgDatas.add(avg);
-            }
+            //将平均值放到临时数组的指定位置
+            temp[index] = avg;
+            //数据复位
             index = 0;
             sum = 0;
+        }
+        //按照paramHeadVOs中的参数顺序，将平均值加入到平均值集合中
+        for (int i = 0; i < Globals.paramHeadVOs.size(); i++) {
+            avgDatas.add(temp[i]);
         }
         resultAdapter.notifyDataSetChanged();
     }

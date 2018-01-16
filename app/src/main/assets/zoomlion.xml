@@ -1661,7 +1661,7 @@
                 </Msgs>
                 <QCParams>
                     <QCParam Param="支腿溢流压力" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
-                        ValidMax="" ValidMin="" ValueReq="true" />
+                        ValidMax="255" ValidMin="245" ValueReq="true" />
                 </QCParams>
                 <ENVParams />
                 <RealTimeParams>
@@ -1735,7 +1735,7 @@
                 </Msgs>
                 <QCParams>
                     <QCParam Param="左前支腿垂直伸出时间" PicReq="false" QCMode="Auto" ValMode="Auto"
-                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                        ValidAvg="" ValidMax="20" ValidMin="14" ValueReq="true" />
                 </QCParams>
                 <ENVParams />
                 <RealTimeParams>
@@ -1759,7 +1759,7 @@
                 </Msgs>
                 <QCParams>
                     <QCParam Param="左前支腿垂直回收时间" PicReq="false" QCMode="Auto" ValMode="Auto"
-                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                        ValidAvg="" ValidMax="30" ValidMin="20" ValueReq="true" />
                 </QCParams>
                 <ENVParams />
                 <RealTimeParams>
@@ -1779,13 +1779,13 @@
                 </Msgs>
                 <QCParams>
                     <QCParam Param="前支腿跨距" PicReq="false" QCMode="Auto" ValMode="Mann" ValidAvg=""
-                        ValidMax="" ValidMin="" ValueReq="true" />
+                        ValidMax="9645" ValidMin="9545" ValueReq="true" />
                     <QCParam Param="后支腿跨距" PicReq="false" QCMode="Auto" ValMode="Mann" ValidAvg=""
-                        ValidMax="" ValidMin="" ValueReq="true" />
+                        ValidMax="10370" ValidMin="10270" ValueReq="true" />
                     <QCParam Param="左支腿跨距" PicReq="false" QCMode="Auto" ValMode="Mann" ValidAvg=""
-                        ValidMax="" ValidMin="" ValueReq="true" />
+                        ValidMax="13500" ValidMin="13400" ValueReq="true" />
                     <QCParam Param="右支腿跨距" PicReq="false" QCMode="Auto" ValMode="Mann" ValidAvg=""
-                        ValidMax="" ValidMin="" ValueReq="true" />
+                        ValidMax="13500" ValidMin="13400" ValueReq="true" />
                 </QCParams>
                 <ENVParams />
                 <RealTimeParams />
@@ -1807,7 +1807,7 @@
                 </Msgs>
                 <QCParams>
                     <QCParam Param="一臂慢档展开时间" PicReq="false" QCMode="Auto" ValMode="Auto"
-                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                        ValidAvg="" ValidMax="264" ValidMin="216" ValueReq="true" />
                     <QCParam Param="一臂慢档展开电流" PicReq="false" QCMode="Auto" ValMode="Auto"
                         ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
                 </QCParams>
@@ -1836,7 +1836,7 @@
                 </Msgs>
                 <QCParams>
                     <QCParam Param="一臂慢档回收时间" PicReq="false" QCMode="Auto" ValMode="Auto"
-                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                        ValidAvg="" ValidMax="396" ValidMin="324" ValueReq="true" />
                     <QCParam Param="一臂慢档回收电流" PicReq="false" QCMode="Auto" ValMode="Auto"
                         ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
                 </QCParams>
@@ -1865,7 +1865,7 @@
                 </Msgs>
                 <QCParams>
                     <QCParam Param="一臂快档展开时间" PicReq="false" QCMode="Auto" ValMode="Auto"
-                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                        ValidAvg="" ValidMax="132" ValidMin="108" ValueReq="true" />
                     <QCParam Param="一臂快档展开电流" PicReq="false" QCMode="Auto" ValMode="Auto"
                         ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
                 </QCParams>
@@ -1894,7 +1894,7 @@
                 </Msgs>
                 <QCParams>
                     <QCParam Param="一臂快档回收时间" PicReq="false" QCMode="Auto" ValMode="Auto"
-                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                        ValidAvg="" ValidMax="198" ValidMin="162" ValueReq="true" />
                     <QCParam Param="一臂快档回收电流" PicReq="false" QCMode="Auto" ValMode="Auto"
                         ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
                 </QCParams>
@@ -1923,7 +1923,7 @@
                 </Msgs>
                 <QCParams>
                     <QCParam Param="二臂慢档展开时间" PicReq="false" QCMode="Auto" ValMode="Auto"
-                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                        ValidAvg="" ValidMax="198" ValidMin="162" ValueReq="true" />
                     <QCParam Param="二臂慢档展开电流" PicReq="false" QCMode="Auto" ValMode="Auto"
                         ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
                 </QCParams>
@@ -1952,7 +1952,7 @@
                 </Msgs>
                 <QCParams>
                     <QCParam Param="二臂快档展开时间" PicReq="false" QCMode="Auto" ValMode="Auto"
-                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                        ValidAvg="" ValidMax="99" ValidMin="81" ValueReq="true" />
                     <QCParam Param="二臂快档展开电流" PicReq="false" QCMode="Auto" ValMode="Auto"
                         ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
                 </QCParams>
@@ -1981,7 +1981,7 @@
                 </Msgs>
                 <QCParams>
                     <QCParam Param="二臂慢档回收时间" PicReq="false" QCMode="Auto" ValMode="Auto"
-                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                        ValidAvg="" ValidMax="198" ValidMin="162" ValueReq="true" />
                     <QCParam Param="二臂慢档回收电流" PicReq="false" QCMode="Auto" ValMode="Auto"
                         ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
                 </QCParams>
@@ -2010,7 +2010,7 @@
                 </Msgs>
                 <QCParams>
                     <QCParam Param="二臂快档回收时间" PicReq="false" QCMode="Auto" ValMode="Auto"
-                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                        ValidAvg="" ValidMax="99" ValidMin="81" ValueReq="true" />
                     <QCParam Param="二臂快档回收电流" PicReq="false" QCMode="Auto" ValMode="Auto"
                         ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
                 </QCParams>
@@ -2039,7 +2039,7 @@
                 </Msgs>
                 <QCParams>
                     <QCParam Param="三臂慢档展开时间" PicReq="false" QCMode="Auto" ValMode="Auto"
-                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                        ValidAvg="" ValidMax="154" ValidMin="126" ValueReq="true" />
                     <QCParam Param="三臂慢档展开电流" PicReq="false" QCMode="Auto" ValMode="Auto"
                         ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
                 </QCParams>
@@ -2068,7 +2068,7 @@
                 </Msgs>
                 <QCParams>
                     <QCParam Param="三臂快档展开时间" PicReq="false" QCMode="Auto" ValMode="Auto"
-                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                        ValidAvg="" ValidMax="77" ValidMin="63" ValueReq="true" />
                     <QCParam Param="三臂快档展开电流" PicReq="false" QCMode="Auto" ValMode="Auto"
                         ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
                 </QCParams>
@@ -2097,7 +2097,7 @@
                 </Msgs>
                 <QCParams>
                     <QCParam Param="三臂慢档回收时间" PicReq="false" QCMode="Auto" ValMode="Auto"
-                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                        ValidAvg="" ValidMax="154" ValidMin="126" ValueReq="true" />
                     <QCParam Param="三臂慢档回收电流" PicReq="false" QCMode="Auto" ValMode="Auto"
                         ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
                 </QCParams>
@@ -2126,7 +2126,7 @@
                 </Msgs>
                 <QCParams>
                     <QCParam Param="三臂快档回收时间" PicReq="false" QCMode="Auto" ValMode="Auto"
-                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                        ValidAvg="" ValidMax="77" ValidMin="63" ValueReq="true" />
                     <QCParam Param="三臂快档回收电流" PicReq="false" QCMode="Auto" ValMode="Auto"
                         ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
                 </QCParams>
@@ -2155,7 +2155,7 @@
                 </Msgs>
                 <QCParams>
                     <QCParam Param="四臂慢档展开时间" PicReq="false" QCMode="Auto" ValMode="Auto"
-                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                        ValidAvg="" ValidMax="110" ValidMin="90" ValueReq="true" />
                     <QCParam Param="四臂慢档展开电流" PicReq="false" QCMode="Auto" ValMode="Auto"
                         ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
                 </QCParams>
@@ -2184,7 +2184,7 @@
                 </Msgs>
                 <QCParams>
                     <QCParam Param="四臂快档展开时间" PicReq="false" QCMode="Auto" ValMode="Auto"
-                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                        ValidAvg="" ValidMax="55" ValidMin="45" ValueReq="true" />
                     <QCParam Param="四臂快档展开电流" PicReq="false" QCMode="Auto" ValMode="Auto"
                         ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
                 </QCParams>
@@ -2213,7 +2213,7 @@
                 </Msgs>
                 <QCParams>
                     <QCParam Param="四臂慢档回收时间" PicReq="false" QCMode="Auto" ValMode="Auto"
-                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                        ValidAvg="" ValidMax="110" ValidMin="90" ValueReq="true" />
                     <QCParam Param="四臂慢档回收电流" PicReq="false" QCMode="Auto" ValMode="Auto"
                         ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
                 </QCParams>
@@ -2242,7 +2242,7 @@
                 </Msgs>
                 <QCParams>
                     <QCParam Param="四臂快档回收时间" PicReq="false" QCMode="Auto" ValMode="Auto"
-                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                        ValidAvg="" ValidMax="55" ValidMin="45" ValueReq="true" />
                     <QCParam Param="四臂快档回收电流" PicReq="false" QCMode="Auto" ValMode="Auto"
                         ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
                 </QCParams>
@@ -2271,7 +2271,7 @@
                 </Msgs>
                 <QCParams>
                     <QCParam Param="五臂慢档展开时间" PicReq="false" QCMode="Auto" ValMode="Auto"
-                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                        ValidAvg="" ValidMax="55" ValidMin="45" ValueReq="true" />
                     <QCParam Param="五臂慢档展开电流" PicReq="false" QCMode="Auto" ValMode="Auto"
                         ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
                 </QCParams>
@@ -2300,7 +2300,7 @@
                 </Msgs>
                 <QCParams>
                     <QCParam Param="五臂快档展开时间" PicReq="false" QCMode="Auto" ValMode="Auto"
-                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                        ValidAvg="" ValidMax="27.5" ValidMin="22.5" ValueReq="true" />
                     <QCParam Param="五臂快档展开电流" PicReq="false" QCMode="Auto" ValMode="Auto"
                         ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
                 </QCParams>
@@ -2329,7 +2329,7 @@
                 </Msgs>
                 <QCParams>
                     <QCParam Param="五臂慢档回收时间" PicReq="false" QCMode="Auto" ValMode="Auto"
-                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                        ValidAvg="" ValidMax="55" ValidMin="45" ValueReq="true" />
                     <QCParam Param="五臂慢档回收电流" PicReq="false" QCMode="Auto" ValMode="Auto"
                         ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
                 </QCParams>
@@ -2358,7 +2358,7 @@
                 </Msgs>
                 <QCParams>
                     <QCParam Param="五臂快档回收时间" PicReq="false" QCMode="Auto" ValMode="Auto"
-                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                        ValidAvg="" ValidMax="27.5" ValidMin="22.5" ValueReq="true" />
                     <QCParam Param="五臂快档回收电流" PicReq="false" QCMode="Auto" ValMode="Auto"
                         ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
                 </QCParams>
@@ -2387,7 +2387,7 @@
                 </Msgs>
                 <QCParams>
                     <QCParam Param="六臂慢档展开时间" PicReq="false" QCMode="Auto" ValMode="Auto"
-                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                        ValidAvg="" ValidMax="22" ValidMin="18" ValueReq="true" />
                     <QCParam Param="六臂慢档展开电流" PicReq="false" QCMode="Auto" ValMode="Auto"
                         ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
                 </QCParams>
@@ -2416,7 +2416,7 @@
                 </Msgs>
                 <QCParams>
                     <QCParam Param="六臂快档展开时间" PicReq="false" QCMode="Auto" ValMode="Auto"
-                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                        ValidAvg="" ValidMax="11" ValidMin="9" ValueReq="true" />
                     <QCParam Param="六臂快档展开电流" PicReq="false" QCMode="Auto" ValMode="Auto"
                         ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
                 </QCParams>
@@ -2445,7 +2445,7 @@
                 </Msgs>
                 <QCParams>
                     <QCParam Param="六臂慢档回收时间" PicReq="false" QCMode="Auto" ValMode="Auto"
-                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                        ValidAvg="" ValidMax="22" ValidMin="18" ValueReq="true" />
                     <QCParam Param="六臂慢档回收电流" PicReq="false" QCMode="Auto" ValMode="Auto"
                         ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
                 </QCParams>
@@ -2474,7 +2474,7 @@
                 </Msgs>
                 <QCParams>
                     <QCParam Param="六臂快档回收时间" PicReq="false" QCMode="Auto" ValMode="Auto"
-                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                        ValidAvg="" ValidMax="11" ValidMin="9" ValueReq="true" />
                     <QCParam Param="六臂快档回收电流" PicReq="false" QCMode="Auto" ValMode="Auto"
                         ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
                 </QCParams>
@@ -2503,7 +2503,7 @@
                 </Msgs>
                 <QCParams>
                     <QCParam Param="顺时针回转慢档时间" PicReq="false" QCMode="Auto" ValMode="Auto"
-                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                        ValidAvg="" ValidMax="660" ValidMin="540" ValueReq="true" />
                     <QCParam Param="顺时针回转慢档电流" PicReq="false" QCMode="Auto" ValMode="Auto"
                         ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
                 </QCParams>
@@ -2532,7 +2532,7 @@
                 </Msgs>
                 <QCParams>
                     <QCParam Param="逆时针回转慢档时间" PicReq="false" QCMode="Auto" ValMode="Auto"
-                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                        ValidAvg="" ValidMax="660" ValidMin="540" ValueReq="true" />
                     <QCParam Param="逆时针回转慢档电流" PicReq="false" QCMode="Auto" ValMode="Auto"
                         ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
                 </QCParams>
@@ -2561,7 +2561,7 @@
                 </Msgs>
                 <QCParams>
                     <QCParam Param="顺时针回转快档时间" PicReq="false" QCMode="Auto" ValMode="Auto"
-                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                        ValidAvg="" ValidMax="330" ValidMin="270" ValueReq="true" />
                     <QCParam Param="顺时针回转快档电流" PicReq="false" QCMode="Auto" ValMode="Auto"
                         ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
                 </QCParams>
@@ -2575,7 +2575,6 @@
                     <RealTimeParam Name="臂架泵压力" />
                 </RealTimeParams>
             </QCItem>
-
             <QCItem AttachPGN="0xFFD7" Id="46" Name="逆时针回转快档" QCTimeout="20" QCTimes="5"
                 ReadyTimeout="10" Require="true">
                 <Spectrum EndMode="Auto" Interval="50" StartMode="Auto">
@@ -2591,7 +2590,7 @@
                 </Msgs>
                 <QCParams>
                     <QCParam Param="逆时针回转快档时间" PicReq="false" QCMode="Auto" ValMode="Auto"
-                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                        ValidAvg="" ValidMax="330" ValidMin="270" ValueReq="true" />
                     <QCParam Param="逆时针回转快档电流" PicReq="false" QCMode="Auto" ValMode="Auto"
                         ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
                 </QCParams>
@@ -2690,7 +2689,7 @@
                 </Msgs>
                 <QCParams>
                     <QCParam Param="主油泵压力切断值" PicReq="false" QCMode="Auto" ValMode="Auto"
-                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                        ValidAvg="" ValidMax="430" ValidMin="410" ValueReq="true" />
                 </QCParams>
                 <ENVParams />
                 <RealTimeParams>
@@ -2713,7 +2712,7 @@
                 </Msgs>
                 <QCParams>
                     <QCParam Param="主油泵溢流压力值" PicReq="false" QCMode="Auto" ValMode="Auto"
-                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                        ValidAvg="" ValidMax="494" ValidMin="474" ValueReq="true" />
                 </QCParams>
                 <ENVParams />
                 <RealTimeParams>
@@ -2843,7 +2842,7 @@
                 </Msgs>
                 <QCParams>
                     <QCParam Param="补油泵压力" PicReq="true" QCMode="Mann" ValMode="Auto" ValidAvg=""
-                        ValidMax="" ValidMin="" ValueReq="false" />
+                        ValidMax="33" ValidMin="30" ValueReq="false" />
                 </QCParams>
                 <ENVParams />
                 <RealTimeParams />
@@ -2860,7 +2859,7 @@
                 </Msgs>
                 <QCParams>
                     <QCParam Param="冲洗阀压力" PicReq="true" QCMode="Mann" ValMode="Auto" ValidAvg=""
-                        ValidMax="" ValidMin="" ValueReq="false" />
+                        ValidMax="30" ValidMin="25" ValueReq="false" />
                 </QCParams>
                 <ENVParams />
                 <RealTimeParams />
