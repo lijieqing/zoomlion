@@ -9,6 +9,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Message;
+import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -485,6 +486,8 @@ public class ItemCheckActivity extends BaseActivity implements ItemCheckCallBack
                         backInBlur();
                     }
                 });
+            } else if (iov.isChecking()) {
+                Snackbar.make(iov, "正在调试中，无法返回", Snackbar.LENGTH_SHORT).show();
             } else {
                 backInBlur();
             }

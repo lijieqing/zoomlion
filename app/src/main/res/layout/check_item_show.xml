@@ -27,6 +27,17 @@
                 android:layout_toRightOf="@id/tv_item"
                 android:text="某某检测项目" />
 
+            <TextView
+                android:id="@+id/tv_require_times"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textSize="14sp"
+                android:gravity="bottom"
+                android:layout_toRightOf="@id/tv_title"
+                android:layout_toEndOf="@id/tv_title"
+                android:layout_marginLeft="15dp"
+                android:layout_marginStart="15dp" />
+
             <CheckBox
                 android:id="@+id/ck_ignore"
                 android:layout_width="wrap_content"

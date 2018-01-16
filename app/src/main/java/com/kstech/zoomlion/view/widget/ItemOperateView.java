@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kstech.zoomlion.R;
+import com.kstech.zoomlion.engine.check.BaseCheckFunction;
 import com.kstech.zoomlion.model.vo.CheckItemParamValueVO;
 import com.kstech.zoomlion.model.vo.CheckItemVO;
 import com.kstech.zoomlion.model.xmlbean.SpecParam;
@@ -25,7 +26,6 @@ import com.kstech.zoomlion.model.xmlbean.Spectrum;
 import com.kstech.zoomlion.utils.DeviceUtil;
 import com.kstech.zoomlion.utils.Globals;
 import com.kstech.zoomlion.utils.JsonUtils;
-import com.kstech.zoomlion.engine.check.BaseCheckFunction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +46,7 @@ public class ItemOperateView extends RelativeLayout implements View.OnClickListe
     private TextView tvForward;//上一项目
     private TextView tvNext;//下一项目
 
-    public LinearLayout llCheckStatus;//当前调试项目状态，当准备就绪时变为绿色提示用户
+    private LinearLayout llCheckStatus;//当前调试项目状态，当准备就绪时变为绿色提示用户
     private LinearLayout llStart;
     private LinearLayout llSave;
     private LinearLayout llForward;
@@ -226,7 +226,7 @@ public class ItemOperateView extends RelativeLayout implements View.OnClickListe
         for (CheckItemParamValueVO checkItemParamValueVO : itemVO.getParamNameList()) {
             //初始化参数操作布局
             bodyView = new ItemOperateBodyView(context, checkItemParamValueVO, itemVO.getId());
-            if (checkItemParamValueVO.getPicReq()){
+            if (checkItemParamValueVO.getPicReq()) {
                 bodyView.setBaseCheckFunction(baseCheckFunction);
             }
             ll_body.addView(bodyView, params);
@@ -383,6 +383,15 @@ public class ItemOperateView extends RelativeLayout implements View.OnClickListe
      */
     public boolean isInBlur() {
         return inBlur;
+    }
+
+    /**
+     * 是否正在与测量终端 调试中
+     *
+     * @return boolean
+     */
+    public boolean isChecking() {
+        return isChecking;
     }
 
     /**

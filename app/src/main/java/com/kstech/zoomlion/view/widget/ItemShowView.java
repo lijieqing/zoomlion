@@ -40,6 +40,7 @@ import java.util.Map;
  */
 public class ItemShowView extends RelativeLayout implements IRecyclerScrollListener {
     private Context context;
+    private TextView tvRequireTimes;
     /**
      * 调试项目展示view的 参数头部集合 用来展示当前项目的参数名称
      */
@@ -115,6 +116,7 @@ public class ItemShowView extends RelativeLayout implements IRecyclerScrollListe
         bodyContains = v.findViewById(R.id.ll_body);
         itemTitle = v.findViewById(R.id.tv_title);
         seekBar = v.findViewById(R.id.sb);
+        tvRequireTimes = v.findViewById(R.id.tv_require_times);
 
         headerAdapter = new HeaderAdapter(context);
         resultAdapter = new ResultAdapter(avgDatas, context);
@@ -209,18 +211,22 @@ public class ItemShowView extends RelativeLayout implements IRecyclerScrollListe
      * @param item 调试项目VO对象
      */
     public void updateHead(@NonNull CheckItemVO item) {
-        avgMap.clear();
-        avgDatas.clear();
+        //设置调试项目基本信息
         itemTitle.setText(item.getName());
+        tvRequireTimes.setText(String.valueOf("标准次数：" + item.getTimes()));
+        //判断是否为必调项目
         if (!item.isRequire()) {
             cbIgnore.setChecked(true);
         } else {
             cbIgnore.setChecked(false);
         }
+        //添加调试参数到header集合
         Globals.paramHeadVOs.clear();
         Globals.paramHeadVOs.addAll(item.getParamNameList());
+        //刷新
         headerAdapter.notifyDataSetChanged();
-
+        //初始化参数结果集合map
+        avgMap.clear();
         for (CheckItemParamValueVO checkItemParamValueVO : Globals.paramHeadVOs) {
             avgMap.put(checkItemParamValueVO.getParamName(), new ArrayList<Float>());
         }
@@ -246,7 +252,7 @@ public class ItemShowView extends RelativeLayout implements IRecyclerScrollListe
             }
             //取平均值
             float avg = sum / values.size();
-            LogUtils.e(TAG, "name:" + name + " - avg:" + avg);
+
             //查找该参数在paramHeadVOs中的位置
             for (int i = 0; i < Globals.paramHeadVOs.size(); i++) {
                 if (Globals.paramHeadVOs.get(i).getParamName().equals(name)) {
@@ -260,6 +266,7 @@ public class ItemShowView extends RelativeLayout implements IRecyclerScrollListe
             sum = 0;
         }
         //按照paramHeadVOs中的参数顺序，将平均值加入到平均值集合中
+        avgDatas.clear();
         for (int i = 0; i < Globals.paramHeadVOs.size(); i++) {
             avgDatas.add(temp[i]);
         }
