@@ -115,8 +115,10 @@ public class DaoTest {
         Globals.modelFile = DeviceModelFile.readFromFile(device);
         Date date = new Date();
         float m = date.getMonth() + 1;
-        String min = XmlExpressionImpl.getYValue(4, "预热时间标准-月份", "预热时间标准-分钟");
-        LogUtils.e(TAG, "预热时间" + min);
+        String min = XmlExpressionImpl.getYValue(300, "恒功率压力段-压力", "恒功率压力段-最小泵送次数");
+        String max = XmlExpressionImpl.getYValue(300, "恒功率压力段-压力", "恒功率压力段-最大泵送次数");
+        LogUtils.e(TAG, "恒功率压力段-300 压力 最小次数" + min);
+        LogUtils.e(TAG, "恒功率压力段-300 压力 最大次数" + max);
         SystemClock.sleep(1000);
 
     }

@@ -59,6 +59,11 @@ public class CheckItemVO implements Serializable {
     private Spectrum spectrum;
 
     /**
+     * 附加pgn
+     */
+    private String attachPGN;
+
+    /**
      * 信息提示类，对应标签<Msgs/>,定义不同阶段对应的信息内容
      */
     private Msgs msgs = new Msgs();
@@ -257,6 +262,14 @@ public class CheckItemVO implements Serializable {
 
     public void setDictId(String dictId) {
         this.dictId = dictId;
+    }
+
+    public String getAttachPGN() {
+        return attachPGN;
+    }
+
+    public void setAttachPGN(String attachPGN) {
+        this.attachPGN = attachPGN;
     }
 
     private static class Msgs {

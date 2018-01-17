@@ -529,6 +529,7 @@ public class DeviceModelFile {
                 checkItem.setTimes(qcitemxml.getQCTimes());
                 checkItem.setReadyTimeout(qcitemxml.getReadyTimeout());
                 checkItem.setQcTimeout(qcitemxml.getQCTimeout());
+                checkItem.setAttachPGN(qcitemxml.getAttachPGN());
                 // 解析Msgs
                 checkItem.setReadyMsg(qcitemxml.getMsgs().getReadyMsg());
                 checkItem.setNotReadyMsg(qcitemxml.getMsgs().getNotReadyMsg());

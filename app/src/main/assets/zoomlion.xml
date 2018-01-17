@@ -35,6 +35,66 @@
             <Data Value="10" />
             <Data Value="10" />
         </DSItem>
+        <DSItem DataType="FLOAT" DecLen="1" Name="恒功率压力段-压力" Rows="18" Unit="bar">
+            <Data Value="0"/>
+            <Data Value="124.7"/>
+            <Data Value="130"/>
+            <Data Value="150"/>
+            <Data Value="170"/>
+            <Data Value="190"/>
+            <Data Value="210"/>
+            <Data Value="230"/>
+            <Data Value="270"/>
+            <Data Value="290"/>
+            <Data Value="310"/>
+            <Data Value="330"/>
+            <Data Value="350"/>
+            <Data Value="370"/>
+            <Data Value="390"/>
+            <Data Value="410"/>
+            <Data Value="430"/>
+            <Data Value="450"/>
+        </DSItem>
+        <DSItem DataType="FLOAT" DecLen="1" Name="恒功率压力段-最小泵送次数" Rows="18" Unit="bar">
+            <Data Value="24.1"/>
+            <Data Value="24.1"/>
+            <Data Value="23.2"/>
+            <Data Value="20.5"/>
+            <Data Value="18.4"/>
+            <Data Value="16.7"/>
+            <Data Value="15.2"/>
+            <Data Value="14.0"/>
+            <Data Value="12.1"/>
+            <Data Value="11.3"/>
+            <Data Value="10.6"/>
+            <Data Value="10.0"/>
+            <Data Value="9.5"/>
+            <Data Value="9.0"/>
+            <Data Value="8.5"/>
+            <Data Value="8.1"/>
+            <Data Value="7.7"/>
+            <Data Value="7.3"/>
+        </DSItem>
+        <DSItem DataType="FLOAT" DecLen="1" Name="恒功率压力段-最大泵送次数" Rows="18" Unit="bar">
+            <Data Value="26.1"/>
+            <Data Value="26.1"/>
+            <Data Value="25.2"/>
+            <Data Value="22.1"/>
+            <Data Value="19.7"/>
+            <Data Value="17.7"/>
+            <Data Value="16.1"/>
+            <Data Value="14.8"/>
+            <Data Value="12.7"/>
+            <Data Value="11.9"/>
+            <Data Value="11.1"/>
+            <Data Value="10.5"/>
+            <Data Value="9.9"/>
+            <Data Value="9.4"/>
+            <Data Value="8.9"/>
+            <Data Value="8.5"/>
+            <Data Value="8.1"/>
+            <Data Value="7.7"/>
+        </DSItem>
         <DSItem DataType="FLOAT" DecLen="1" Name="月温度标准" Rows="24" Unit="℃">
             <!--一月最大最小-->
             <Data Value="2" />
