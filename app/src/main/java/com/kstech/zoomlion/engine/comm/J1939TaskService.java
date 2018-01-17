@@ -6,6 +6,8 @@ import android.os.Binder;
 import android.os.IBinder;
 import android.util.Log;
 
+import com.kstech.zoomlion.utils.Globals;
+
 import J1939.J1939_Task;
 
 import static java.lang.Thread.State.TERMINATED;
@@ -43,8 +45,7 @@ public class J1939TaskService extends Service {
             j1939ProtTask.start();
 
             // 启动通讯任务
-            //// TODO: 2017/6/2 IP 此处写死 正式应用前记得改回
-            j1939CommTask = new CommunicationWorker("192.168.1.178", 4001, getApplicationContext());
+            j1939CommTask = new CommunicationWorker(Globals.currentTerminal.getIp(), Integer.parseInt(Globals.currentTerminal.getPort()), getApplicationContext());
             //j1939CommTask = new CommunicationWorker(Globals.currentTerminal.getIp(), 4001, getApplicationContext());
 
             j1939CommTask.start();

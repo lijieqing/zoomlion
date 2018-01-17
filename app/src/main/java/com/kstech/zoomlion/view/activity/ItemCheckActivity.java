@@ -476,6 +476,8 @@ public class ItemCheckActivity extends BaseActivity implements ItemCheckCallBack
      * ItemCheckCallBack回调 结束
      */
 
+    private long[] mClickTimes = new long[2];
+
     @Override
     public void onBackPressed() {
         if (!iov.isInBlur()) {
@@ -492,7 +494,14 @@ public class ItemCheckActivity extends BaseActivity implements ItemCheckCallBack
                 backInBlur();
             }
         } else {
-            super.onBackPressed();
+            System.arraycopy(mClickTimes, 1, mClickTimes, 0, mClickTimes.length - 1);
+            mClickTimes[mClickTimes.length - 1] = System.currentTimeMillis();
+            long inter = mClickTimes[mClickTimes.length - 1] - mClickTimes[0];
+            if (inter < 800) {
+                finish();
+            } else {
+                Snackbar.make(iov, "再按一次退出项目调试", Snackbar.LENGTH_SHORT).show();
+            }
         }
     }
 

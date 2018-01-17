@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Message;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.LinearLayoutManager;
@@ -33,7 +34,6 @@ import com.kstech.zoomlion.model.db.CheckRecord;
 import com.kstech.zoomlion.model.db.greendao.CheckItemDataDao;
 import com.kstech.zoomlion.model.db.greendao.CheckItemDetailDataDao;
 import com.kstech.zoomlion.model.db.greendao.CheckRecordDao;
-import com.kstech.zoomlion.model.enums.CheckItemDetailResultEnum;
 import com.kstech.zoomlion.model.enums.CheckRecordResultEnum;
 import com.kstech.zoomlion.model.vo.CheckItemVO;
 import com.kstech.zoomlion.model.vo.RealTimeParamVO;
@@ -306,6 +306,20 @@ public class CheckHomeActivity extends BaseActivity {
         Globals.setSelectedItem(itemsList);
     }
 
+    private long[] mClickTimes = new long[2];
+
+    @Override
+    public void onBackPressed() {
+        System.arraycopy(mClickTimes, 1, mClickTimes, 0, mClickTimes.length - 1);
+        mClickTimes[mClickTimes.length - 1] = System.currentTimeMillis();
+        long inter = mClickTimes[mClickTimes.length - 1] - mClickTimes[0];
+        if (inter < 800) {
+            finish();
+        } else {
+            Snackbar.make(llRoot, "再按一次退出调试页", Snackbar.LENGTH_SHORT).show();
+        }
+    }
+
     /**
      * 点击事件 处理
      *
@@ -355,7 +369,7 @@ public class CheckHomeActivity extends BaseActivity {
                                 confirmTask.init(codeView.getInputContent(), pass);
                                 confirmTask.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
                                 dialog.cancel();
-                            }else {
+                            } else {
                                 Toast.makeText(CheckHomeActivity.this, "请输入完整授权码", Toast.LENGTH_SHORT).show();
                             }
                         }

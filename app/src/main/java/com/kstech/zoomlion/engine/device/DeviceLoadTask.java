@@ -162,8 +162,10 @@ public class DeviceLoadTask extends AsyncTask<Void, String, Void> {
 
             if (device == null) {
                 device = (Device) XMLAPI.readXML(MyApplication.getApplication().getAssets().open("zoomlion.xml"));
+                device.getJ1939().setNodeAddr(Globals.currentTerminal.getCanNodeId());
                 Globals.modelFile = DeviceModelFile.readFromFile(device);
             } else {
+                device.getJ1939().setNodeAddr(Globals.currentTerminal.getCanNodeId());
                 Globals.modelFile = DeviceModelFile.readFromFile(device);
             }
 
