@@ -235,6 +235,7 @@ public class ItemCheckActivity extends BaseActivity implements ItemCheckCallBack
         }
     }
 
+    /* -------------------------------- BaseCheckFunction 回调开始 --------------------------------*/
     @Override
     public void cameraCancel() {
         if (picCatchDialog != null) {
@@ -258,9 +259,6 @@ public class ItemCheckActivity extends BaseActivity implements ItemCheckCallBack
         picCatchDialog.show();
     }
 
-    /************
-     * BaseCheckFunction 回调
-     */
     @Override
     public void startCheck() {
         //项目调试任务初始化和启动
@@ -344,10 +342,7 @@ public class ItemCheckActivity extends BaseActivity implements ItemCheckCallBack
         }
     }
 
-    /**
-     * BaseCheckFunction 回调
-     ****************
-     */
+    /* -------------------------------- BaseCheckFunction 回调结束 -------------------------------- */
 
     /**
      * 初始化调试项目细节记录表，并获取数据库索引ID，用于后来更新数据
@@ -359,9 +354,7 @@ public class ItemCheckActivity extends BaseActivity implements ItemCheckCallBack
         detailID = itemDetailDao.insert(detailData);
     }
 
-    /**
-     * ItemCheckCallBack回调 开始
-     */
+    /* -------------------------------- ItemCheckCallBack回调 开始 -------------------------------- */
     @Override
     public void onStart(ItemCheckTask task) {
         //在每次切换调试项目时，要给itemID重新赋值
@@ -472,9 +465,7 @@ public class ItemCheckActivity extends BaseActivity implements ItemCheckCallBack
         });
     }
 
-    /**
-     * ItemCheckCallBack回调 结束
-     */
+    /* -------------------------------- ItemCheckCallBack回调 结束 --------------------------------*/
 
     private long[] mClickTimes = new long[2];
 
