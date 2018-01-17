@@ -59,4 +59,20 @@
         <item>@string/permission_white_external_hint</item>
     </string-array>
 
+    <string name="item_instructions_record">
+        \n
+        \t\t 调试项目名：%1$s \n\n
+        \t\t 服务器记录次数：%2$d 次 \n\n
+        \t\t 本机调试次数：%3$d 次 \n\n
+        \t\t 合格判定次数：%4$d 次 \n\n
+        \t\t 调试项目结论：%5$s
+    </string>
+    <string name="item_instructions_vo">
+        \n\n\n
+        \t\t 调试超时时间：%1$d s \n\n
+        \t\t 谱图参数：%2$s  \n\n
+        \t\t 谱图采集间隔：%3$d mm \n\n
+        \t\t 本次调试参数：%4$d 个
+    </string>
+
 </resources>

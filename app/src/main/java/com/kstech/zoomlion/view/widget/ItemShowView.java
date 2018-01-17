@@ -22,7 +22,6 @@ import com.kstech.zoomlion.model.vo.CheckItemVO;
 import com.kstech.zoomlion.utils.DeviceUtil;
 import com.kstech.zoomlion.utils.Globals;
 import com.kstech.zoomlion.utils.JsonUtils;
-import com.kstech.zoomlion.utils.LogUtils;
 import com.kstech.zoomlion.view.adapter.DividerItemDecoration;
 import com.kstech.zoomlion.view.adapter.HeaderAdapter;
 import com.kstech.zoomlion.view.adapter.ResultAdapter;
@@ -213,7 +212,7 @@ public class ItemShowView extends RelativeLayout implements IRecyclerScrollListe
     public void updateHead(@NonNull CheckItemVO item) {
         //设置调试项目基本信息
         itemTitle.setText(item.getName());
-        tvRequireTimes.setText(String.valueOf("标准次数：" + item.getTimes()));
+        tvRequireTimes.setText(String.valueOf("判定次数：" + item.getTimes()));
         //判断是否为必调项目
         if (!item.isRequire()) {
             cbIgnore.setChecked(true);

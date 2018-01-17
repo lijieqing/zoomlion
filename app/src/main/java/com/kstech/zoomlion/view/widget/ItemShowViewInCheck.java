@@ -24,6 +24,8 @@ import com.kstech.zoomlion.model.enums.CheckItemDetailResultEnum;
 import com.kstech.zoomlion.model.enums.CheckItemResultEnum;
 import com.kstech.zoomlion.model.vo.CheckItemParamValueVO;
 import com.kstech.zoomlion.model.vo.CheckItemVO;
+import com.kstech.zoomlion.model.xmlbean.SpecParam;
+import com.kstech.zoomlion.model.xmlbean.Spectrum;
 import com.kstech.zoomlion.utils.DateUtil;
 import com.kstech.zoomlion.utils.Globals;
 import com.kstech.zoomlion.view.activity.ItemDetailActivity;
@@ -68,6 +70,11 @@ public class ItemShowViewInCheck extends RelativeLayout {
      * 当前调试项目结论
      */
     private TextView tvItemResult;
+    /**
+     * 当前项目细节说明
+     */
+    private TextView tvRecordInstructions;
+    private TextView tvVOInstructions;
     /**
      * 支持上拉加载布局
      */
@@ -123,6 +130,8 @@ public class ItemShowViewInCheck extends RelativeLayout {
         tvDeviceNum = v.findViewById(R.id.tv_device_num);
         tvItemResult = v.findViewById(R.id.tv_item_result);
         refreshLayout = v.findViewById(R.id.detail_fresh_load);
+        tvRecordInstructions = v.findViewById(R.id.isv_tv_instructions_record);
+        tvVOInstructions = v.findViewById(R.id.isv_tv_instructions_vo);
 
         detailDataAdapter = new DetailDataAdapter(detailDatas, context);
         linearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
@@ -190,10 +199,50 @@ public class ItemShowViewInCheck extends RelativeLayout {
 
         detailDatas.addAll(temp);
         detailDataAdapter.notifyDataSetChanged();
+        updateInstructions(itemData);
+    }
+
+    /**
+     * 更新调试项目说明
+     *
+     * @param itemData 调试项目数据对象
+     */
+    private void updateInstructions(CheckItemData itemData) {
+        //项目调试记录相关说明
+        String itemName = itemData.getItemName();
+        int sumCount = itemData.getSumCounts();
+        int localSize = detailDatas.size();
+        int requireTimes = Globals.currentCheckItem.getTimes();
+        String result = CheckItemResultEnum.getDescByCode(itemData.getCheckResult());
+        String recordModel = context.getResources().getString(R.string.item_instructions_record);
+        String instruction = String.format(recordModel, itemName, sumCount, localSize, requireTimes, result);
+        tvRecordInstructions.setText(instruction);
+        //调试项目标准相关说明
+        int timeout = Globals.currentCheckItem.getQcTimeout();
+        int specInterval;
+        Spectrum spec = Globals.currentCheckItem.getSpectrum();
+        StringBuilder specParams = new StringBuilder();
+        int paramNum;
+        if (spec == null || spec.getSpecParams().size() == 0) {
+            specParams.append("无谱图参数");
+            specInterval = 0;
+        } else {
+            for (SpecParam specParam : spec.getSpecParams()) {
+                specParams.append(specParam.getParam()).append(" ");
+            }
+            specInterval = spec.getInterval();
+        }
+        paramNum = Globals.currentCheckItem.getParamNameList().size();
+
+        String voModel = context.getResources().getString(R.string.item_instructions_vo);
+        instruction = String.format(voModel, timeout, specParams.toString(), specInterval, paramNum);
+        tvVOInstructions.setText(instruction);
+
     }
 
     /**
      * 更新调试项目展示组件头部信息
+     *
      * @param item
      */
     public void updateHead(@NonNull CheckItemVO item) {
@@ -204,9 +253,10 @@ public class ItemShowViewInCheck extends RelativeLayout {
 
     /**
      * 绑定对应的iov操作组件
+     *
      * @param iov ItemOperateView
      */
-    public void bindIOV(ItemOperateView iov){
+    public void bindIOV(ItemOperateView iov) {
         this.iov = iov;
     }
 
@@ -250,13 +300,13 @@ public class ItemShowViewInCheck extends RelativeLayout {
             imgDetail.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (iov.isInBlur()){
+                    if (iov.isInBlur()) {
                         Intent intent = new Intent(context, ItemDetailActivity.class);
                         intent.putExtra("detailID", detailData.getCheckItemDetailId());
                         context.startActivity(intent);
                         Toast.makeText(context, "展示细节", Toast.LENGTH_SHORT).show();
-                    }else {
-                        Toast.makeText(context,"调试中，无法访问记录",Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(context, "调试中，无法访问记录", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
