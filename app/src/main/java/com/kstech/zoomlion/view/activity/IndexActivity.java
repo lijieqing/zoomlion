@@ -133,14 +133,6 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
      */
     public static final int SKIP_TO_CHECK = 1;
     /**
-     * 服务器机型列表初始化
-     */
-    public static final int DEV_LIST_INIT = 2;
-    /**
-     * 服务器机型列表初始化 完成
-     */
-    public static final int DEV_LIST_LOADED = 3;
-    /**
      * 1939通讯线程重置
      */
     public static final int J1939_SERVICE_RESET = 4;
@@ -152,21 +144,27 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
      * 更新整机状态信息
      */
     public static final int UPDATE_DEVICE_INFO = 6;
+    /**
+     * 机型加载线程
+     */
+    private DeviceLoadTask deviceLoadTask;
+    /**
+     * J1939通讯线程Service
+     */
+    private J1939TaskService j1939TaskService;
+    /**
+     * 整机状态描述对象
+     */
+    private CommissioningStatistics deviceStatus;
+    /**
+     * 是否从调试页面返回
+     */
+    private boolean backFromCheck = false;
 
     public static final String TAG = "IndexActivity";
-
-    //通讯线程相关变量
-    private DeviceLoadTask deviceLoadTask;
-    private J1939TaskService j1939TaskService;
-
-    //机型分类列表相关变量
-    private ArrayList<Element> rootElements;
-    private ArrayList<Element> allElements;
-    private ListView devListView;
-    private AlertDialog devListDialog;
-    private TreeViewAdapter adapter;
-    private CommissioningStatistics deviceStatus;
-
+    /**
+     * 服务连接对象
+     */
     private ServiceConnection conn = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
@@ -201,20 +199,6 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
         deviceLoadTask = new DeviceLoadTask(null, handler);
         deviceLoadTask.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
 
-        //初始化机型选择列表 相关数据
-        devListView = new ListView(this);
-        rootElements = new ArrayList<>();
-        allElements = new ArrayList<>();
-        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        adapter = new TreeViewAdapter(rootElements, allElements, inflater);
-        adapter.setContentSize(16);
-        adapter.setDefaultHeight(DeviceUtil.deviceHeight(this) / 9);
-        devListView.setAdapter(adapter);
-        devListView.setOnItemClickListener(new TreeViewItemClickListener(adapter, this));
-        devListDialog = new AlertDialog.Builder(this)
-                .setCancelable(true)
-                .setView(devListView)
-                .create();
     }
 
     @Override
@@ -229,7 +213,8 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
         super.onRestart();
         //恢复 预热时间 数据监听器
         Globals.modelFile.getDataSetVO().getDSItem("预热时间").addListener(this);
-        if (Globals.PROCESSID != null) {
+        if (Globals.PROCESSID != null && backFromCheck) {
+            backFromCheck = false;
             new DeviceStatusUpdateTask(handler).executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
         }
     }
@@ -347,14 +332,9 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
                         Globals.modelFile.getDataSetVO().getDSItem("预热时间").addListener(mActivity);
                         break;
                     case SKIP_TO_CHECK:
+                        mActivity.backFromCheck = true;
                         Intent intent = new Intent(mActivity, CheckHomeActivity.class);
                         mActivity.startActivity(intent);
-                        break;
-                    case DEV_LIST_INIT:
-                        mActivity.devListDialog.show();
-                        break;
-                    case DEV_LIST_LOADED:
-                        mActivity.adapter.notifyDataSetChanged();
                         break;
                     case USER_LOGOUT:
                         mActivity.finish();

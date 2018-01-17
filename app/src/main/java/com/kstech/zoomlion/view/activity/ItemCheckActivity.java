@@ -488,7 +488,7 @@ public class ItemCheckActivity extends BaseActivity implements ItemCheckCallBack
             System.arraycopy(mClickTimes, 1, mClickTimes, 0, mClickTimes.length - 1);
             mClickTimes[mClickTimes.length - 1] = System.currentTimeMillis();
             long inter = mClickTimes[mClickTimes.length - 1] - mClickTimes[0];
-            if (inter < 800) {
+            if (inter < 1000) {
                 finish();
             } else {
                 Snackbar.make(iov, "再按一次退出项目调试", Snackbar.LENGTH_SHORT).show();
