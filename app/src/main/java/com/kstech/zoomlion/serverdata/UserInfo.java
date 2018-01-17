@@ -18,9 +18,13 @@ public class UserInfo {
      */
     private String birthday;
     /**
-     * 性别：true-男，false-女
+     * 性别
      */
     private String sex;
+    /**
+     * 性别描述
+     */
+    private String sexDescription;
     /**
      * 民族
      */
@@ -29,6 +33,10 @@ public class UserInfo {
      * 婚否
      */
     private Boolean married;
+    /**
+     * 婚否描述
+     */
+    private String marriedDescription;
     /**
      * 座机号码
      */
@@ -61,7 +69,38 @@ public class UserInfo {
      * 最后登录时间
      */
     private String lastLoginTime;
-
+    /**
+     * 用户状态
+     */
+    private Integer status;
+    /**
+     * 用户状态描述
+     */
+    private String statusName;
+    /**
+     * 所属部门ID
+     */
+    private Long departmentId;
+    /**
+     * 所属部门名称
+     */
+    private String departmentName;
+    /**
+     * 用户角色Id集合
+     */
+    private String roleIds;
+    /**
+     * 角色名称集合
+     */
+    private String rolesName;
+    /**
+     * 用户机型授权的ID集合
+     */
+    private String categoryIds;
+    /**
+     * 用户机型授权的名称集合
+     */
+    private String categoriesName;
 
     public UserInfo() {
     }
@@ -106,14 +145,6 @@ public class UserInfo {
 
     public void setBirthday(String birthday) {
         this.birthday = birthday;
-    }
-
-    public String getSex() {
-        return sex;
-    }
-
-    public void setSex(String sex) {
-        this.sex = sex;
     }
 
     public String getNation() {
@@ -194,5 +225,93 @@ public class UserInfo {
 
     public void setLastLoginTime(String lastLoginTime) {
         this.lastLoginTime = lastLoginTime;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public String getSexDescription() {
+        return sexDescription;
+    }
+
+    public void setSexDescription(String sexDescription) {
+        this.sexDescription = sexDescription;
+    }
+
+    public String getMarriedDescription() {
+        return marriedDescription;
+    }
+
+    public void setMarriedDescription(String marriedDescription) {
+        this.marriedDescription = marriedDescription;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public String getStatusName() {
+        return statusName;
+    }
+
+    public void setStatusName(String statusName) {
+        this.statusName = statusName;
+    }
+
+    public Long getDepartmentId() {
+        return departmentId;
+    }
+
+    public void setDepartmentId(Long departmentId) {
+        this.departmentId = departmentId;
+    }
+
+    public String getDepartmentName() {
+        return departmentName;
+    }
+
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
+    }
+
+    public String getRoleIds() {
+        return roleIds;
+    }
+
+    public void setRoleIds(String roleIds) {
+        this.roleIds = roleIds;
+    }
+
+    public String getRolesName() {
+        return rolesName;
+    }
+
+    public void setRolesName(String rolesName) {
+        this.rolesName = rolesName;
+    }
+
+    public String getCategoryIds() {
+        return categoryIds;
+    }
+
+    public void setCategoryIds(String categoryIds) {
+        this.categoryIds = categoryIds;
+    }
+
+    public String getCategoriesName() {
+        return categoriesName;
+    }
+
+    public void setCategoriesName(String categoriesName) {
+        this.categoriesName = categoriesName;
     }
 }

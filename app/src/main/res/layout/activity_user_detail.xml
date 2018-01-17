@@ -102,7 +102,59 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="0.4"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/IndexTerminalNameStyle"
+                        android:text="部门：" />
+
+                    <TextView
+                        style="@style/IndexTerminalContentStyle"
+                        android:text="@{user.departmentName}" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/IndexTerminalNameStyle"
+                        android:text="角色：" />
+
+                    <TextView
+                        style="@style/IndexTerminalContentStyle"
+                        android:text="@{user.rolesName}" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/IndexTerminalNameStyle"
+                        android:text="可调设备：" />
+
+                    <TextView
+                        style="@style/IndexTerminalContentStyle"
+                        android:text="@{user.categoriesName}" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.6"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -147,7 +199,7 @@
 
                     <TextView
                         style="@style/IndexTerminalContentStyle"
-                        android:text="@{user.sex}" />
+                        android:text="@{user.sexDescription}" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -177,7 +229,7 @@
 
                     <TextView
                         style="@style/IndexTerminalContentStyle"
-                        android:text="@{String.valueOf(user.married?'是':'否')}" />
+                        android:text="@{user.marriedDescription}" />
                 </LinearLayout>
 
                 <LinearLayout
