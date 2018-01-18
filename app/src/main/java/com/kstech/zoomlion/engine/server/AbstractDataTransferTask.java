@@ -85,9 +85,9 @@ public abstract class AbstractDataTransferTask extends AsyncTask<Void, Integer, 
             post = initRequestParam(params);
 
             try {
-                if (post){
+                if (post) {
                     result = x.http().postSync(params, String.class);
-                }else {
+                } else {
                     result = x.http().getSync(params, String.class);
                 }
                 LogUtils.e("QCItemDataSaveUploadTask", result);
@@ -178,8 +178,8 @@ public abstract class AbstractDataTransferTask extends AsyncTask<Void, Integer, 
      * 请求参数数据初始化
      *
      * @param params 需要初始化的参数
-     *
-     * return 是否是POST请求
+     *               <p>
+     *               return 是否是POST请求
      */
     abstract boolean initRequestParam(RequestParams params);
 
@@ -284,14 +284,16 @@ public abstract class AbstractDataTransferTask extends AsyncTask<Void, Integer, 
 
             //添加图片和谱图附件数据,0-pic.1-spec
             int pos = attachedFileList.size();
-            if (detailData.getCheckImageDatas().size() > 0) {
-                CheckImageData imgData = detailData.getCheckImageDatas().get(0);
-                AttachedFile picFile = new AttachedFile();
-                picFile.setType(0);
-                picFile.setData(FileUtils.getImageStr(imgData.getImgPath()));
-                attachedFileList.add(picFile);
+            for (CheckImageData checkImageData : detailData.getCheckImageDatas()) {
+                if (paramData.getParamName().equals(checkImageData.getParamName())) {
+                    AttachedFile picFile = new AttachedFile();
+                    picFile.setType(0);
+                    picFile.setData(FileUtils.getImageStr(checkImageData.getImgPath()));
 
-                qcDataRecordForm.setAttachedFileIndex(pos);
+                    attachedFileList.add(picFile);
+
+                    qcDataRecordForm.setAttachedFileIndex(pos);
+                }
             }
             pos = attachedFileList.size();
             if (detailData.getCheckChartDatas().size() > 0) {
