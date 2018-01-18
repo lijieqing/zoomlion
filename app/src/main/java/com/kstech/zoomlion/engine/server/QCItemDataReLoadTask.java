@@ -4,8 +4,10 @@ import android.os.Handler;
 import android.os.Message;
 
 import com.kstech.zoomlion.MyApplication;
+import com.kstech.zoomlion.model.db.CheckItemData;
 import com.kstech.zoomlion.model.db.CheckItemDetailData;
 import com.kstech.zoomlion.model.db.greendao.CheckItemDetailDataDao;
+import com.kstech.zoomlion.model.enums.CheckItemDetailResultEnum;
 import com.kstech.zoomlion.model.session.URLCollections;
 import com.kstech.zoomlion.serverdata.CompleteQCItemJSON;
 import com.kstech.zoomlion.utils.JsonUtils;
@@ -63,7 +65,20 @@ public class QCItemDataReLoadTask extends AbstractDataTransferTask {
     @Override
     boolean initRequestParam(RequestParams params) {
         uploadData = unUploadDetailDatas.pop();
-        CompleteQCItemJSON data = packageQCItemData(uploadData,uploadData.getItemData());
+        CheckItemData itemData = uploadData.getItemData();
+        //更新本地数据
+        int serverCount = itemData.getSumCounts();
+        int localNum = uploadData.getCheckTimes()+1;
+
+        if (localNum >= serverCount){
+            itemData.setSumCounts(itemData.getSumCounts()+1);
+            if (uploadData.getCheckResult().equals(CheckItemDetailResultEnum.PASS.getCode())){
+                itemData.setPassCounts(itemData.getPassCounts()+1);
+            }
+            itemData.update();
+        }
+
+        CompleteQCItemJSON data = packageQCItemData(uploadData,itemData);
         String result = JsonUtils.toJson(data);
         params.setBodyContent(result);
         return true;

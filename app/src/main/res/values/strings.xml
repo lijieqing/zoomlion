@@ -61,7 +61,7 @@
 
     <string name="item_instructions_record">
         \n
-        \t\t 调试项目名：%1$s \n\n
+        \t\t 项目：%1$s \n\n
         \t\t 服务器记录次数：%2$d 次 \n\n
         \t\t 本机调试次数：%3$d 次 \n\n
         \t\t 判定合格次数：%4$d 次 \n\n
@@ -70,7 +70,7 @@
     <string name="item_instructions_vo">
         \n\n\n
         \t\t 调试超时时间：%1$d s \n\n
-        \t\t 谱图参数：%2$s  \n\n
+        \t\t 谱图参数：%2$d 个  \n\n
         \t\t 谱图采集间隔：%3$d mm \n\n
         \t\t 调试参数数量：%4$d 个
     </string>

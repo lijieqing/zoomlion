@@ -221,21 +221,19 @@ public class ItemShowViewInCheck extends RelativeLayout {
         int timeout = Globals.currentCheckItem.getQcTimeout();
         int specInterval;
         Spectrum spec = Globals.currentCheckItem.getSpectrum();
-        StringBuilder specParams = new StringBuilder();
+        int specNum;
         int paramNum;
         if (spec == null || spec.getSpecParams().size() == 0) {
-            specParams.append("无谱图参数");
+            specNum = 0;
             specInterval = 0;
         } else {
-            for (SpecParam specParam : spec.getSpecParams()) {
-                specParams.append(specParam.getParam()).append(" ");
-            }
+            specNum = spec.getSpecParams().size();
             specInterval = spec.getInterval();
         }
         paramNum = Globals.currentCheckItem.getParamNameList().size();
 
         String voModel = context.getResources().getString(R.string.item_instructions_vo);
-        instruction = String.format(voModel, timeout, specParams.toString(), specInterval, paramNum);
+        instruction = String.format(voModel, timeout, specNum, specInterval, paramNum);
         tvVOInstructions.setText(instruction);
 
     }

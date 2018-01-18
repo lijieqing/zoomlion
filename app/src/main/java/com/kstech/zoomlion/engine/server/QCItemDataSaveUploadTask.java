@@ -148,8 +148,7 @@ public class QCItemDataSaveUploadTask extends AbstractDataTransferTask {
             detailData.resetCheckChartDatas();
 
             //设置第几次调试
-            int detailCheckTimes = ItemCheckPrepareTask.serverItemDoneTimes + 1;
-            detailData.setCheckTimes(detailCheckTimes);
+            detailData.setCheckTimes(ItemCheckPrepareTask.serverItemDoneTimes++);
 
             //更新
             MyApplication.getApplication().getDaoSession().getCheckItemDetailDataDao().update(detailData);
@@ -157,7 +156,7 @@ public class QCItemDataSaveUploadTask extends AbstractDataTransferTask {
             itemData.resetCheckItemDetailDatas();
 
             //对itemData判定是否合格
-            int sumCount = itemData.getSumCounts()+1;
+            int sumCount = itemData.getSumCounts() + 1;
             if (sumCount >= itemvo.getTimes()) {
                 //连续通过次数达到标准次数，合格，否则不合格
                 if (itemData.getPassCounts() >= itemvo.getTimes()) {
@@ -192,7 +191,7 @@ public class QCItemDataSaveUploadTask extends AbstractDataTransferTask {
     @Override
     boolean initRequestParam(RequestParams params) {
         //将调试记录数据打包，并添加到param中
-        CompleteQCItemJSON qcitemJson = packageQCItemData(detailData,itemData);
+        CompleteQCItemJSON qcitemJson = packageQCItemData(detailData, itemData);
         String result = JsonUtils.toJson(qcitemJson);
         params.setBodyContent(result);
         requestTimes++;
@@ -229,13 +228,13 @@ public class QCItemDataSaveUploadTask extends AbstractDataTransferTask {
         boolean finish = true;
         for (CheckItemData checkItemData : record.getCheckItemDatas()) {
             int result = checkItemData.getCheckResult();
-            if (result<2){
+            if (result < 2) {
                 finish = false;
             }
         }
-        if (finish){
+        if (finish) {
             record.setCurrentStatus(CheckRecordResultEnum.FINISH.getCode());
-        }else {
+        } else {
             record.setCurrentStatus(CheckRecordResultEnum.UNFINISH.getCode());
         }
         MyApplication.getApplication().getDaoSession().getCheckRecordDao().update(record);
