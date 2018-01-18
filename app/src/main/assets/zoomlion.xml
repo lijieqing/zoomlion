@@ -11,7 +11,7 @@
     xmlns="http://www.kaishang.com">
     <DataSet>
         <!--月份与分钟一一对应，两组数据数量相同，且月份不能出现重复-->
-        <DSItem DataType="FLOAT" DecLen="1" Name="预热时间标准-月份" Rows="10" Unit="月">
+        <DSItem DataType="FLOAT" DecLen="1" Name="预热时间标准_月份" Rows="10" Unit="月">
             <Data Value="1" />
             <Data Value="2" />
             <Data Value="3" />
@@ -23,7 +23,7 @@
             <Data Value="11" />
             <Data Value="12" />
         </DSItem>
-        <DSItem DataType="FLOAT" DecLen="1" Name="预热时间标准-分钟" Rows="10" Unit="Min">
+        <DSItem DataType="FLOAT" DecLen="1" Name="预热时间标准_分钟" Rows="10" Unit="Min">
             <Data Value="10" />
             <Data Value="10" />
             <Data Value="10" />
@@ -35,65 +35,65 @@
             <Data Value="10" />
             <Data Value="10" />
         </DSItem>
-        <DSItem DataType="FLOAT" DecLen="1" Name="恒功率压力段-压力" Rows="18" Unit="bar">
-            <Data Value="0"/>
-            <Data Value="124.7"/>
-            <Data Value="130"/>
-            <Data Value="150"/>
-            <Data Value="170"/>
-            <Data Value="190"/>
-            <Data Value="210"/>
-            <Data Value="230"/>
-            <Data Value="270"/>
-            <Data Value="290"/>
-            <Data Value="310"/>
-            <Data Value="330"/>
-            <Data Value="350"/>
-            <Data Value="370"/>
-            <Data Value="390"/>
-            <Data Value="410"/>
-            <Data Value="430"/>
-            <Data Value="450"/>
+        <DSItem DataType="FLOAT" DecLen="1" Name="恒功率压力段_压力" Rows="18" Unit="bar">
+            <Data Value="0" />
+            <Data Value="124.7" />
+            <Data Value="130" />
+            <Data Value="150" />
+            <Data Value="170" />
+            <Data Value="190" />
+            <Data Value="210" />
+            <Data Value="230" />
+            <Data Value="270" />
+            <Data Value="290" />
+            <Data Value="310" />
+            <Data Value="330" />
+            <Data Value="350" />
+            <Data Value="370" />
+            <Data Value="390" />
+            <Data Value="410" />
+            <Data Value="430" />
+            <Data Value="450" />
         </DSItem>
-        <DSItem DataType="FLOAT" DecLen="1" Name="恒功率压力段-最小泵送次数" Rows="18" Unit="bar">
-            <Data Value="24.1"/>
-            <Data Value="24.1"/>
-            <Data Value="23.2"/>
-            <Data Value="20.5"/>
-            <Data Value="18.4"/>
-            <Data Value="16.7"/>
-            <Data Value="15.2"/>
-            <Data Value="14.0"/>
-            <Data Value="12.1"/>
-            <Data Value="11.3"/>
-            <Data Value="10.6"/>
-            <Data Value="10.0"/>
-            <Data Value="9.5"/>
-            <Data Value="9.0"/>
-            <Data Value="8.5"/>
-            <Data Value="8.1"/>
-            <Data Value="7.7"/>
-            <Data Value="7.3"/>
+        <DSItem DataType="FLOAT" DecLen="1" Name="恒功率压力段_最小泵送次数" Rows="18" Unit="bar">
+            <Data Value="24.1" />
+            <Data Value="24.1" />
+            <Data Value="23.2" />
+            <Data Value="20.5" />
+            <Data Value="18.4" />
+            <Data Value="16.7" />
+            <Data Value="15.2" />
+            <Data Value="14.0" />
+            <Data Value="12.1" />
+            <Data Value="11.3" />
+            <Data Value="10.6" />
+            <Data Value="10.0" />
+            <Data Value="9.5" />
+            <Data Value="9.0" />
+            <Data Value="8.5" />
+            <Data Value="8.1" />
+            <Data Value="7.7" />
+            <Data Value="7.3" />
         </DSItem>
-        <DSItem DataType="FLOAT" DecLen="1" Name="恒功率压力段-最大泵送次数" Rows="18" Unit="bar">
-            <Data Value="26.1"/>
-            <Data Value="26.1"/>
-            <Data Value="25.2"/>
-            <Data Value="22.1"/>
-            <Data Value="19.7"/>
-            <Data Value="17.7"/>
-            <Data Value="16.1"/>
-            <Data Value="14.8"/>
-            <Data Value="12.7"/>
-            <Data Value="11.9"/>
-            <Data Value="11.1"/>
-            <Data Value="10.5"/>
-            <Data Value="9.9"/>
-            <Data Value="9.4"/>
-            <Data Value="8.9"/>
-            <Data Value="8.5"/>
-            <Data Value="8.1"/>
-            <Data Value="7.7"/>
+        <DSItem DataType="FLOAT" DecLen="1" Name="恒功率压力段_最大泵送次数" Rows="18" Unit="bar">
+            <Data Value="26.1" />
+            <Data Value="26.1" />
+            <Data Value="25.2" />
+            <Data Value="22.1" />
+            <Data Value="19.7" />
+            <Data Value="17.7" />
+            <Data Value="16.1" />
+            <Data Value="14.8" />
+            <Data Value="12.7" />
+            <Data Value="11.9" />
+            <Data Value="11.1" />
+            <Data Value="10.5" />
+            <Data Value="9.9" />
+            <Data Value="9.4" />
+            <Data Value="8.9" />
+            <Data Value="8.5" />
+            <Data Value="8.1" />
+            <Data Value="7.7" />
         </DSItem>
         <DSItem DataType="FLOAT" DecLen="1" Name="月温度标准" Rows="24" Unit="℃">
             <!--一月最大最小-->
@@ -3125,9 +3125,10 @@
                     <QCParam Param="第一压力段恒功率标定系数" PicReq="false" QCMode="None" ValMode="Auto"
                         ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
                     <QCParam Param="第一压力段泵送次数" PicReq="false" QCMode="Auto" ValMode="Auto"
-                        ValidAvg="" ValidMax="${expPower('第一压力段恒功能标定最高泵送次数')}"
-                        ValidMin="${expPower('第一压力段恒功能标定最低泵送次数')}" ValueReq="true"
-                        XParam="${getCurrentParam('第一压力段泵送压力')}" XRange="${expPower('第一压力段范围')}" />
+                        ValidAvg="" ValidMax="${expPower('恒功率压力段_最大泵送次数')}"
+                        ValidMin="${expPower('恒功率压力段_最小泵送次数')}" ValueReq="true"
+                        XParam="${getCurrentParam('第一压力段泵送压力')}"
+                        XRange="${expPower('恒功率压力段_压力')}" />
                 </QCParams>
                 <ENVParams />
                 <RealTimeParams>
@@ -3161,9 +3162,10 @@
                     <QCParam Param="第二压力段恒功率标定系数" PicReq="false" QCMode="None" ValMode="Auto"
                         ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
                     <QCParam Param="第二压力段泵送次数" PicReq="false" QCMode="Auto" ValMode="Auto"
-                        ValidAvg="" ValidMax="${expPower('第二压力段恒功能标定最高泵送次数')}"
-                        ValidMin="${expPower('第二压力段恒功能标定最低泵送次数')}" ValueReq="true"
-                        XParam="${getCurrentParam('第二压力段泵送压力')}" XRange="${expPower('第二压力段范围')}" />
+                        ValidAvg="" ValidMax="${expPower('恒功率压力段_最大泵送次数')}"
+                        ValidMin="${expPower('恒功率压力段_最小泵送次数')}" ValueReq="true"
+                        XParam="${getCurrentParam('第二压力段泵送压力')}"
+                        XRange="${expPower('恒功率压力段_压力')}" />
                 </QCParams>
                 <ENVParams />
                 <RealTimeParams>
@@ -3197,9 +3199,10 @@
                     <QCParam Param="第三压力段恒功率标定系数" PicReq="false" QCMode="None" ValMode="Auto"
                         ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
                     <QCParam Param="第三压力段泵送次数" PicReq="false" QCMode="Auto" ValMode="Auto"
-                        ValidAvg="" ValidMax="${expPower('第三压力段恒功能标定最高泵送次数')}"
-                        ValidMin="${expPower('第三压力段恒功能标定最低泵送次数')}" ValueReq="true"
-                        XParam="${getCurrentParam('第三压力段泵送压力')}" XRange="${expPower('第三压力段范围')}" />
+                        ValidAvg="" ValidMax="${expPower('恒功率压力段_最大泵送次数')}"
+                        ValidMin="${expPower('恒功率压力段_最小泵送次数')}" ValueReq="true"
+                        XParam="${getCurrentParam('第三压力段泵送压力')}"
+                        XRange="${expPower('恒功率压力段_压力')}" />
                 </QCParams>
                 <ENVParams />
                 <RealTimeParams>
@@ -3233,9 +3236,10 @@
                     <QCParam Param="第四压力段恒功率标定系数" PicReq="false" QCMode="None" ValMode="Auto"
                         ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
                     <QCParam Param="第四压力段泵送次数" PicReq="false" QCMode="Auto" ValMode="Auto"
-                        ValidAvg="" ValidMax="${expPower('第四压力段恒功能标定最高泵送次数')}"
-                        ValidMin="${expPower('第四压力段恒功能标定最低泵送次数')}" ValueReq="true"
-                        XParam="${getCurrentParam('第四压力段泵送压力')}" XRange="${expPower('第四压力段范围')}" />
+                        ValidAvg="" ValidMax="${expPower('恒功率压力段_最大泵送次数')}"
+                        ValidMin="${expPower('恒功率压力段_最小泵送次数')}" ValueReq="true"
+                        XParam="${getCurrentParam('第四压力段泵送压力')}"
+                        XRange="${expPower('恒功率压力段_压力')}" />
                 </QCParams>
                 <ENVParams />
                 <RealTimeParams>

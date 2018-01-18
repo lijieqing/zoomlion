@@ -149,8 +149,20 @@ public class XmlExpressionImpl implements BaseXmlExpression {
         //获取当前操作需要的基本数据
         String xParamName = null;
         String xRangeName = null;
+        String paramStr = "${expPower('" + param + "')}";
         for (CheckItemParamValueVO checkItemParamValueVO : list) {
+            String max = checkItemParamValueVO.getValidMax() == null ? "" : checkItemParamValueVO.getValidMax();
+            String min = checkItemParamValueVO.getValidMin() == null ? "" : checkItemParamValueVO.getValidMin();
+
             if (param.equals(checkItemParamValueVO.getParamName())) {
+                xParamName = checkItemParamValueVO.getXParamName();
+                xRangeName = checkItemParamValueVO.getXRange();
+            }
+            if (max.equals(paramStr)) {
+                xParamName = checkItemParamValueVO.getXParamName();
+                xRangeName = checkItemParamValueVO.getXRange();
+            }
+            if (min.equals(paramStr)) {
                 xParamName = checkItemParamValueVO.getXParamName();
                 xRangeName = checkItemParamValueVO.getXRange();
             }
