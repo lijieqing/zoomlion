@@ -147,7 +147,10 @@
 
                     <TextView
                         style="@style/IndexTerminalContentStyle"
-                        android:text="@{user.categoriesName}" />
+                        android:text="查看全部"
+                        android:textColor="@color/zoomLionColor"
+                        android:clickable="true"
+                        android:onClick="@{user.showCategories}"/>
                 </LinearLayout>
             </LinearLayout>
 

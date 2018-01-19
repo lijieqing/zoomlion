@@ -209,13 +209,12 @@ public class ItemShowViewInCheck extends RelativeLayout {
      */
     private void updateInstructions(CheckItemData itemData) {
         //项目调试记录相关说明
-        String itemName = itemData.getItemName();
         int sumCount = itemData.getSumCounts();
         int localSize = detailDatas.size();
         int requireTimes = Globals.currentCheckItem.getTimes();
         String result = CheckItemResultEnum.getDescByCode(itemData.getCheckResult());
         String recordModel = context.getResources().getString(R.string.item_instructions_record);
-        String instruction = String.format(recordModel, itemName, sumCount, localSize, requireTimes, result);
+        String instruction = String.format(recordModel, sumCount, localSize, requireTimes, result);
         tvRecordInstructions.setText(instruction);
         //调试项目标准相关说明
         int timeout = Globals.currentCheckItem.getQcTimeout();

@@ -1,5 +1,9 @@
 package com.kstech.zoomlion.serverdata;
 
+import android.app.AlertDialog;
+import android.text.TextUtils;
+import android.view.View;
+
 /**
  * Created by lijie on 2017/11/21.
  */
@@ -313,5 +317,25 @@ public class UserInfo {
 
     public void setCategoriesName(String categoriesName) {
         this.categoriesName = categoriesName;
+    }
+
+    /**
+     * 展示可调设备型号
+     * @param view
+     */
+    public void showCategories(View view){
+        String[] strs = categoriesName.split(",");
+
+        StringBuilder sb = new StringBuilder();
+        if (!TextUtils.isEmpty(categoriesName)){
+            for (String str : strs) {
+                sb.append(str).append("\n");
+            }
+        }
+        new AlertDialog.Builder(view.getContext())
+                .setTitle("可调设备")
+                .setMessage(sb.toString())
+                .create()
+                .show();
     }
 }

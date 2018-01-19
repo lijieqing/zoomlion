@@ -11,24 +11,16 @@ import com.kstech.zoomlion.engine.device.XMLAPI;
 import com.kstech.zoomlion.model.db.CheckImageData;
 import com.kstech.zoomlion.model.db.CheckItemDetailData;
 import com.kstech.zoomlion.model.db.greendao.CheckImageDataDao;
-import com.kstech.zoomlion.model.session.URLCollections;
-import com.kstech.zoomlion.model.xmlbean.DSItem;
 import com.kstech.zoomlion.model.xmlbean.Device;
 import com.kstech.zoomlion.model.xmlbean.Msg;
 import com.kstech.zoomlion.utils.Globals;
-import com.kstech.zoomlion.utils.JsonUtils;
 import com.kstech.zoomlion.utils.LogUtils;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.xutils.common.Callback;
-import org.xutils.http.RequestParams;
-import org.xutils.http.cookie.DbCookieStore;
-import org.xutils.x;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.HttpCookie;
 import java.util.Date;
 import java.util.List;
 
@@ -61,45 +53,6 @@ public class DaoTest {
                 LogUtils.e("ImgTest", "null");
             LogUtils.e("ImgTest", checkImageData.getParamName() + " : " + checkImageData.getImgPath());
         }
-    }
-
-    @Test
-    public void CopyDB() {
-        RequestParams p = new RequestParams(URLCollections.GET_DEVICE_BY_CAT_ID);
-        p.addQueryStringParameter("categoryId", "1");
-        p.addHeader("Cookie", "sid=4ee83ce8-38d8-4df5-a277-711e9337262c");
-        x.http().get(p, new Callback.CommonCallback<String>() {
-            @Override
-            public void onSuccess(String result) {
-                DbCookieStore cookie = DbCookieStore.INSTANCE;
-                for (HttpCookie httpCookie : cookie.getCookies()) {
-                    String name = httpCookie.getName();
-                    String value = httpCookie.getValue();
-                    LogUtils.e(TAG, "name: " + name);
-                    LogUtils.e(TAG, "value: " + value);
-                }
-                Device device = JsonUtils.fromJson(result, Device.class);
-                for (DSItem dsItem : device.getDataSet().getDsItems()) {
-                    //LogUtils.e(TAG,dsItem.getDictID());
-                }
-            }
-
-            @Override
-            public void onError(Throwable ex, boolean isOnCallback) {
-                LogUtils.e(TAG, ex.toString());
-            }
-
-            @Override
-            public void onCancelled(CancelledException cex) {
-                LogUtils.e(TAG, cex.toString());
-            }
-
-            @Override
-            public void onFinished() {
-                LogUtils.e(TAG, "onFinished");
-            }
-        });
-        SystemClock.sleep(10000);
     }
 
     @Test

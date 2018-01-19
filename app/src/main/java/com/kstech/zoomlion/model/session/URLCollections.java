@@ -1,10 +1,7 @@
 package com.kstech.zoomlion.model.session;
 
-import android.text.TextUtils;
-
 import com.kstech.zoomlion.utils.Globals;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 import org.xutils.http.cookie.DbCookieStore;
 
@@ -18,7 +15,7 @@ public final class URLCollections {
     private URLCollections() {
     }
 
-    private static String ADDRESS = "http://192.168.2.16:8080/zoomlion";
+    private static String ADDRESS = "http://192.168.253.2:8080/zoomlion";
     /**
      * 获取测量终端列表URL
      */
@@ -65,10 +62,6 @@ public final class URLCollections {
     public static String CHANGE_PASSWORD = ADDRESS + "/user/changePassword";
 
     public static String REGISTER_PAD = ADDRESS + "/portabledev/register";//调试终端注册
-    public static String USER_CANCEL = ADDRESS + "/user/cancel";//用户注销
-    public static String CHECKER_LOGIN = ADDRESS + "/category/register_pad";//检验员登陆
-    public static String DEVICE_LIST_GET = ADDRESS + "/category/usablecategories";//获取机型列表
-    public static String GET_DEVICE_BY_CAT_ID = ADDRESS + "/category/downloadConfigurationFile";//根据分类ID获取机型信息
 
     /**
      * 判断请求是否成功
@@ -78,14 +71,8 @@ public final class URLCollections {
      */
     public static boolean isRequestSuccess(JSONObject object) {
         boolean success = true;
-        try {
-            String errDesc = object.getString("error");
-            if (!TextUtils.isEmpty(errDesc)) {
-                success = false;
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-            success = true;
+        if (object.has("error")) {
+            success = false;
         }
         return success;
     }

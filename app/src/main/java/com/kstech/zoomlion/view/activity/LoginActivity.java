@@ -358,7 +358,7 @@ public class LoginActivity extends BaseActivity {
         @Override
         protected Integer doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
-            String mac = "";
+            String mac = null;
             try {
                 mac = DeviceUtil.macAddress();
             } catch (SocketException e) {
