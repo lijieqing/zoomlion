@@ -350,7 +350,7 @@ public class ItemCheckActivity extends BaseActivity implements ItemCheckCallBack
     private void initNewDetailRecord() {
         detailData = new CheckItemDetailData(null, itemDBID, 12l, "admin", 1l, "measure",
                 1, itemvo.getJsonParams(), CheckItemDetailResultEnum.UNFINISH.getCode(),
-                new Date(), null, null, false);
+                new Date(), null, null, false,false);
         detailID = itemDetailDao.insert(detailData);
     }
 

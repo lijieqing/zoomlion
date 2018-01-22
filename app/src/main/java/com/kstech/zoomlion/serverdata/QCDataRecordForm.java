@@ -16,7 +16,11 @@ public class QCDataRecordForm {
     /**
      * 如果检测项目的数据项要求拍照留存，则为照片原图在大对象数据表中的记录Idn关联到TP_DEVICE_QCBLOB.C_IDn
      */
-    private Integer attachedFileIndex;
+    private Integer pictureIndex;
+    /**
+     * 谱图索引
+     */
+    private Integer spectrogramIndex;
     /**
      * 检测数据值。显示时根据关联数据项类型确定显示格式
      */
@@ -58,12 +62,20 @@ public class QCDataRecordForm {
         this.qcdataDictId = qcdataDictId;
     }
 
-    public Integer getAttachedFileIndex() {
-        return attachedFileIndex;
+    public Integer getPictureIndex() {
+        return pictureIndex;
     }
 
-    public void setAttachedFileIndex(Integer attachedFileIndex) {
-        this.attachedFileIndex = attachedFileIndex;
+    public void setPictureIndex(Integer pictureIndex) {
+        this.pictureIndex = pictureIndex;
+    }
+
+    public Integer getSpectrogramIndex() {
+        return spectrogramIndex;
+    }
+
+    public void setSpectrogramIndex(Integer spectrogramIndex) {
+        this.spectrogramIndex = spectrogramIndex;
     }
 
     public Float getData() {

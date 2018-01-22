@@ -65,6 +65,9 @@ public class CheckItemDetailData {
     @Property
     private Boolean uploaded;//是否已上传
 
+    @Property
+    private Boolean serverData;//是否是服务器下载数据
+
     @ToMany(referencedJoinProperty = "itemDetailId")
     private List<CheckImageData> checkImageDatas; //图片数据关联 一对多
 
@@ -79,10 +82,11 @@ public class CheckItemDetailData {
     @Generated(hash = 823363946)
     private transient CheckItemDetailDataDao myDao;
 
-    @Generated(hash = 1468533916)
+    @Generated(hash = 977608158)
     public CheckItemDetailData(Long checkItemDetailId, Long itemId, Long checkerId, String checkerName,
             Long measureDeviceId, String measureDeviceName, Integer checkTimes, String paramsValues,
-            Integer checkResult, Date startTime, Date endTime, String DESC, Boolean uploaded) {
+            Integer checkResult, Date startTime, Date endTime, String DESC, Boolean uploaded,
+            Boolean serverData) {
         this.checkItemDetailId = checkItemDetailId;
         this.itemId = itemId;
         this.checkerId = checkerId;
@@ -96,6 +100,7 @@ public class CheckItemDetailData {
         this.endTime = endTime;
         this.DESC = DESC;
         this.uploaded = uploaded;
+        this.serverData = serverData;
     }
 
     @Generated(hash = 525031784)
@@ -337,6 +342,14 @@ public class CheckItemDetailData {
 
     public void setCheckTimes(Integer checkTimes) {
         this.checkTimes = checkTimes;
+    }
+
+    public Boolean getServerData() {
+        return this.serverData;
+    }
+
+    public void setServerData(Boolean serverData) {
+        this.serverData = serverData;
     }
 
 }

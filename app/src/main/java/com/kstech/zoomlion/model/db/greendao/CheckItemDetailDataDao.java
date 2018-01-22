@@ -44,6 +44,7 @@ public class CheckItemDetailDataDao extends AbstractDao<CheckItemDetailData, Lon
         public final static Property EndTime = new Property(10, java.util.Date.class, "endTime", false, "END_TIME");
         public final static Property DESC = new Property(11, String.class, "DESC", false, "DESC");
         public final static Property Uploaded = new Property(12, Boolean.class, "uploaded", false, "UPLOADED");
+        public final static Property ServerData = new Property(13, Boolean.class, "serverData", false, "SERVER_DATA");
     }
 
     private DaoSession daoSession;
@@ -75,7 +76,8 @@ public class CheckItemDetailDataDao extends AbstractDao<CheckItemDetailData, Lon
                 "\"START_TIME\" INTEGER UNIQUE ," + // 9: startTime
                 "\"END_TIME\" INTEGER UNIQUE ," + // 10: endTime
                 "\"DESC\" TEXT," + // 11: DESC
-                "\"UPLOADED\" INTEGER);"); // 12: uploaded
+                "\"UPLOADED\" INTEGER," + // 12: uploaded
+                "\"SERVER_DATA\" INTEGER);"); // 13: serverData
     }
 
     /** Drops the underlying database table. */
@@ -152,6 +154,11 @@ public class CheckItemDetailDataDao extends AbstractDao<CheckItemDetailData, Lon
         if (uploaded != null) {
             stmt.bindLong(13, uploaded ? 1L: 0L);
         }
+ 
+        Boolean serverData = entity.getServerData();
+        if (serverData != null) {
+            stmt.bindLong(14, serverData ? 1L: 0L);
+        }
     }
 
     @Override
@@ -222,6 +229,11 @@ public class CheckItemDetailDataDao extends AbstractDao<CheckItemDetailData, Lon
         if (uploaded != null) {
             stmt.bindLong(13, uploaded ? 1L: 0L);
         }
+ 
+        Boolean serverData = entity.getServerData();
+        if (serverData != null) {
+            stmt.bindLong(14, serverData ? 1L: 0L);
+        }
     }
 
     @Override
@@ -250,7 +262,8 @@ public class CheckItemDetailDataDao extends AbstractDao<CheckItemDetailData, Lon
             cursor.isNull(offset + 9) ? null : new java.util.Date(cursor.getLong(offset + 9)), // startTime
             cursor.isNull(offset + 10) ? null : new java.util.Date(cursor.getLong(offset + 10)), // endTime
             cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11), // DESC
-            cursor.isNull(offset + 12) ? null : cursor.getShort(offset + 12) != 0 // uploaded
+            cursor.isNull(offset + 12) ? null : cursor.getShort(offset + 12) != 0, // uploaded
+            cursor.isNull(offset + 13) ? null : cursor.getShort(offset + 13) != 0 // serverData
         );
         return entity;
     }
@@ -270,6 +283,7 @@ public class CheckItemDetailDataDao extends AbstractDao<CheckItemDetailData, Lon
         entity.setEndTime(cursor.isNull(offset + 10) ? null : new java.util.Date(cursor.getLong(offset + 10)));
         entity.setDESC(cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11));
         entity.setUploaded(cursor.isNull(offset + 12) ? null : cursor.getShort(offset + 12) != 0);
+        entity.setServerData(cursor.isNull(offset + 13) ? null : cursor.getShort(offset + 13) != 0);
      }
     
     @Override

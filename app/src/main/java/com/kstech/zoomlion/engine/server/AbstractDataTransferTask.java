@@ -81,6 +81,7 @@ public abstract class AbstractDataTransferTask extends AsyncTask<Void, Integer, 
 
             //初始化请求参数
             params = new RequestParams(getURL());
+            params.setConnectTimeout(1000 * 30);
             params.addHeader("Cookie", Globals.SID);
             post = initRequestParam(params);
 
@@ -292,25 +293,28 @@ public abstract class AbstractDataTransferTask extends AsyncTask<Void, Integer, 
 
                     attachedFileList.add(picFile);
 
-                    qcDataRecordForm.setAttachedFileIndex(pos);
+                    qcDataRecordForm.setPictureIndex(pos);
                 }
             }
             pos = attachedFileList.size();
-            if (detailData.getCheckChartDatas().size() > 0) {
-                Map<String, List<Float>> listMap = new HashMap<>();
-                for (CheckChartData chartData : detailData.getCheckChartDatas()) {
-                    String name = chartData.getParamName();
-                    String str = chartData.getChartData();
-                    List<Float> listValue = JsonUtils.fromArrayJson(str, Float.class);
-                    listMap.put(name, listValue);
-                }
-                String charts = JsonUtils.toJson(listMap);
-                AttachedFile chartFile = new AttachedFile();
-                chartFile.setType(1);
-                chartFile.setData(charts);
-                attachedFileList.add(chartFile);
 
-                qcDataRecordForm.setAttachedFileIndex(pos);
+            if (i == 0) {
+                if (detailData.getCheckChartDatas().size() > 0) {
+                    Map<String, List<Float>> listMap = new HashMap<>();
+                    for (CheckChartData chartData : detailData.getCheckChartDatas()) {
+                        String name = chartData.getParamName();
+                        String str = chartData.getChartData();
+                        List<Float> listValue = JsonUtils.fromArrayJson(str, Float.class);
+                        listMap.put(name, listValue);
+                    }
+                    String charts = JsonUtils.toJson(listMap);
+                    AttachedFile chartFile = new AttachedFile();
+                    chartFile.setType(1);
+                    chartFile.setData(charts);
+                    attachedFileList.add(chartFile);
+
+                    qcDataRecordForm.setSpectrogramIndex(pos);
+                }
             }
 
         }
