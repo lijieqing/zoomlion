@@ -15,7 +15,7 @@ public final class URLCollections {
     private URLCollections() {
     }
 
-    private static String ADDRESS = "http://192.168.253.2:8080/zoomlion";
+    private static String ADDRESS = "http://192.168.32.119:8080/zoomlion";
     /**
      * 获取测量终端列表URL
      */
