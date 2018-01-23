@@ -8,7 +8,6 @@ import com.kstech.zoomlion.model.db.CheckRecord;
 import com.kstech.zoomlion.model.db.greendao.CheckRecordDao;
 import com.kstech.zoomlion.model.enums.CheckRecordResultEnum;
 import com.kstech.zoomlion.model.session.URLCollections;
-import com.kstech.zoomlion.serverdata.CommissioningResults;
 import com.kstech.zoomlion.serverdata.CompleteCommissioningJSON;
 import com.kstech.zoomlion.utils.Globals;
 import com.kstech.zoomlion.utils.JsonUtils;
@@ -86,14 +85,10 @@ public class CheckRecordConfirmTask extends AbstractDataTransferTask {
     @Override
     boolean initRequestParam(RequestParams params) {
         CompleteCommissioningJSON recordResult = new CompleteCommissioningJSON();
-        CommissioningResults results = new CommissioningResults();
-
-        results.setStatus(record.getCurrentStatus());
-        results.setRemark(record.getCheckRecordDesc());
-
         recordResult.setSn(Globals.deviceSN);
         recordResult.setAuthorizationCode(authorizeCode);
-        recordResult.setCommissioningResults(results);
+        recordResult.setStatus(record.getCurrentStatus());
+        recordResult.setRemark(record.getCheckRecordDesc());
 
         String result = JsonUtils.toJson(recordResult);
         params.setBodyContent(result);

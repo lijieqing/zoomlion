@@ -13,10 +13,8 @@ import com.kstech.zoomlion.model.session.URLCollections;
 import com.kstech.zoomlion.model.vo.CheckItemParamValueVO;
 import com.kstech.zoomlion.serverdata.AttachedFile;
 import com.kstech.zoomlion.serverdata.CompleteQCItemJSON;
-import com.kstech.zoomlion.serverdata.QCDataRecordForm;
+import com.kstech.zoomlion.serverdata.QCDataRecordCreateForm;
 import com.kstech.zoomlion.serverdata.QCDataStatusEnum;
-import com.kstech.zoomlion.serverdata.QCItemResults;
-import com.kstech.zoomlion.serverdata.QCItemStatus;
 import com.kstech.zoomlion.utils.FileUtils;
 import com.kstech.zoomlion.utils.Globals;
 import com.kstech.zoomlion.utils.JsonUtils;
@@ -229,10 +227,8 @@ public abstract class AbstractDataTransferTask extends AsyncTask<Void, Integer, 
         CompleteQCItemJSON qcItemJSON = new CompleteQCItemJSON();
 
         //需要处理出来的数据
-        QCItemResults qcItemResults;
-        List<QCDataRecordForm> qcDataRecordFormList = new ArrayList<>();
+        List<QCDataRecordCreateForm> qcDataRecordCreateFormList = new ArrayList<>();
         List<AttachedFile> attachedFileList = new ArrayList<>();
-        QCItemStatus qcItemStatus = new QCItemStatus();
 
         //设置基本数据信息
         qcItemJSON.setSn(Globals.deviceSN);
@@ -246,10 +242,10 @@ public abstract class AbstractDataTransferTask extends AsyncTask<Void, Integer, 
         for (int i = 0; i < paramDatas.size(); i++) {
             paramData = paramDatas.get(i);
             /*生成QCDataRecordForm对象*/
-            QCDataRecordForm qcDataRecordForm = new QCDataRecordForm();
+            QCDataRecordCreateForm qcDataRecordCreateForm = new QCDataRecordCreateForm();
             //设置基本信息
-            qcDataRecordForm.setCheckNo(detailData.getCheckTimes());
-            qcDataRecordForm.setQcdataDictId(Long.valueOf(paramData.getDictID()));
+            qcDataRecordCreateForm.setCheckNo(detailData.getCheckTimes());
+            qcDataRecordCreateForm.setQcdataDictId(Long.valueOf(paramData.getDictID()));
             //获取当前参数数值，并判断参数结果状态
             String value = paramData.getValue();
             Float fv;
@@ -276,12 +272,12 @@ public abstract class AbstractDataTransferTask extends AsyncTask<Void, Integer, 
                 }
             }
             //为当前参数赋值
-            qcDataRecordForm.setData(fv);
-            qcDataRecordForm.setValidMax(max);
-            qcDataRecordForm.setValidMin(min);
-            qcDataRecordForm.setStatus(status);
+            qcDataRecordCreateForm.setData(fv);
+            qcDataRecordCreateForm.setValidMax(max);
+            qcDataRecordCreateForm.setValidMin(min);
+            qcDataRecordCreateForm.setStatus(status);
             //加入参数数据集合
-            qcDataRecordFormList.add(qcDataRecordForm);
+            qcDataRecordCreateFormList.add(qcDataRecordCreateForm);
 
             //添加图片和谱图附件数据,0-pic.1-spec
             int pos = attachedFileList.size();
@@ -293,7 +289,7 @@ public abstract class AbstractDataTransferTask extends AsyncTask<Void, Integer, 
 
                     attachedFileList.add(picFile);
 
-                    qcDataRecordForm.setPictureIndex(pos);
+                    qcDataRecordCreateForm.setPictureIndex(pos);
                 }
             }
             pos = attachedFileList.size();
@@ -313,21 +309,19 @@ public abstract class AbstractDataTransferTask extends AsyncTask<Void, Integer, 
                     chartFile.setData(charts);
                     attachedFileList.add(chartFile);
 
-                    qcDataRecordForm.setSpectrogramIndex(pos);
+                    qcDataRecordCreateForm.setSpectrogramIndex(pos);
                 }
             }
 
         }
         //设置调试项目状态数据，包括已调次数、连续通过次数、和调试项目说明
-        qcItemStatus.setDoneTimes(itemData.getSumCounts());
-        qcItemStatus.setPassTimes(itemData.getPassCounts());
-        qcItemStatus.setStatus(itemData.getCheckResult());
-        qcItemStatus.setRemark(itemData.getItemDesc());
+        qcItemJSON.setDoneTimes(itemData.getSumCounts());
+        qcItemJSON.setPassTimes(itemData.getPassCounts());
+        qcItemJSON.setStatus(itemData.getCheckResult());
 
         //组装QCItemResults，并赋值给qcItemJSON
-        qcItemResults = new QCItemResults(qcItemStatus, qcDataRecordFormList, attachedFileList);
-
-        qcItemJSON.setQcitemResults(qcItemResults);
+        qcItemJSON.setAttachedFiles(attachedFileList);
+        qcItemJSON.setQcdataRecordCreateForms(qcDataRecordCreateFormList);
 
         return qcItemJSON;
     }

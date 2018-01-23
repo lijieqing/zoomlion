@@ -4,7 +4,7 @@ package com.kstech.zoomlion.serverdata;
  * @author 7yrs
  * @date 2017/12/28.
  */
-public class QCDataRecordForm {
+public class QCDataRecordCreateForm {
     /**
      * 设备检测项目的检测序次。第1次检测时为1，第二次检测时为2…
      */

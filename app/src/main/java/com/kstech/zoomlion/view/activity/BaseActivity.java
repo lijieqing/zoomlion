@@ -167,6 +167,12 @@ public class BaseActivity extends AppCompatActivity {
                 .setTitle("重新登录")
                 .setCancelable(false)
                 .setMessage("用户凭证已过时，请重新登录")
+                .setNegativeButton("直接退出", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                })
                 .setPositiveButton("重新登录", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

@@ -3,9 +3,8 @@ package com.kstech.zoomlion.serverdata;
 /**
  * @author 7yrs
  * @date 2017/12/28.
- *
+ * <p>
  * 整机调试完成后
- *
  */
 public class CompleteCommissioningJSON {
     /**
@@ -17,9 +16,13 @@ public class CompleteCommissioningJSON {
      */
     private String sn;
     /**
-     * 泵车调试结果
+     * 设备状态：未检 、正在检测、合格、不合格、强制合格
      */
-    private CommissioningResults commissioningResults;
+    private Integer status;
+    /**
+     * 设备调试结果说明
+     */
+    private String remark;
 
     public String getAuthorizationCode() {
         return authorizationCode;
@@ -37,11 +40,19 @@ public class CompleteCommissioningJSON {
         this.sn = sn;
     }
 
-    public CommissioningResults getCommissioningResults() {
-        return commissioningResults;
+    public Integer getStatus() {
+        return status;
     }
 
-    public void setCommissioningResults(CommissioningResults commissioningResults) {
-        this.commissioningResults = commissioningResults;
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 }
