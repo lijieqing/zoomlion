@@ -17,9 +17,10 @@
             <TextView
                 android:id="@+id/tv_item"
                 style="@style/ItemTitle"
+                android:drawableLeft="@drawable/pic_item_icon"
                 android:layout_alignParentLeft="true"
                 android:layout_marginLeft="5dp"
-                android:text="项目名称：" />
+                android:text=" 项目名称：" />
 
             <TextView
                 android:id="@+id/tv_title"
