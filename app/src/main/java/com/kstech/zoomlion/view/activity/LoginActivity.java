@@ -368,6 +368,8 @@ public class LoginActivity extends BaseActivity {
             HashMap<String, String> maps = new HashMap<>();
             maps.put("username", mName);
             maps.put("password", mPassword);
+            // TODO: 2018/1/23 此处用于模拟器调试，正式版需要删除
+            if (mac == null) mac = "FF:FF:FF:FF:FF:FF";
             maps.put("mac", mac);
             maps.put("measure_dev_id", mMT.getId() + "");
 

@@ -255,11 +255,11 @@
                     android:orientation="vertical">
 
                     <Button
-                        android:id="@+id/index_btn_view_record"
+                        android:id="@+id/index_btn_get_sn"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1"
-                        android:text="服务器调试记录查看" />
+                        android:text="获取车辆整机编码" />
 
                     <Button
                         android:id="@+id/index_btn_auto_download"

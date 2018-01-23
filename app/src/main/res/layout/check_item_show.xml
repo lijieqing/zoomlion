@@ -11,7 +11,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="1.5"
             android:orientation="horizontal">
 
             <TextView
@@ -31,12 +31,12 @@
                 android:id="@+id/tv_require_times"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:textSize="14sp"
-                android:gravity="bottom"
-                android:layout_toRightOf="@id/tv_title"
-                android:layout_toEndOf="@id/tv_title"
                 android:layout_marginLeft="15dp"
-                android:layout_marginStart="15dp" />
+                android:layout_marginStart="15dp"
+                android:layout_toEndOf="@id/tv_title"
+                android:layout_toRightOf="@id/tv_title"
+                android:gravity="bottom"
+                android:textSize="14sp" />
 
             <CheckBox
                 android:id="@+id/ck_ignore"
@@ -52,7 +52,15 @@
                 android:layout_marginRight="20dp"
                 android:layout_toLeftOf="@id/ck_ignore"
                 android:drawableLeft="@drawable/describe"
-                android:text="项目描述" />
+                android:text=" 项目描述" />
+
+            <TextView
+                android:id="@+id/tv_item_showserver"
+                style="@style/ItemTitle"
+                android:layout_marginRight="20dp"
+                android:layout_toLeftOf="@id/tv_item_desc"
+                android:drawableLeft="@drawable/pic_server_show_data"
+                android:text=" 查看服务器数据" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -113,7 +121,7 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="7.5"
+            android:layout_weight="7"
             android:scrollbars="vertical">
 
             <LinearLayout

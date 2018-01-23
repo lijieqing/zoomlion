@@ -79,7 +79,7 @@ public abstract class AbstractDataTransferTask extends AsyncTask<Void, Integer, 
 
             //初始化请求参数
             params = new RequestParams(getURL());
-            params.setConnectTimeout(1000 * 30);
+            params.setConnectTimeout(1000 * 60);
             params.addHeader("Cookie", Globals.SID);
             post = initRequestParam(params);
 
@@ -90,23 +90,26 @@ public abstract class AbstractDataTransferTask extends AsyncTask<Void, Integer, 
                     result = x.http().getSync(params, String.class);
                 }
                 LogUtils.e("QCItemDataSaveUploadTask", result);
-                JSONObject object = new JSONObject(result);
-                if (!object.has("error")) {
-                    //请求成功后调用
-                    onRequestSuccess(object);
-                    message = Message.obtain();
-                    message.arg1 = 50;
-                    message.obj = "请求成功！";
-                    message.what = BaseActivity.UPDATE_PROGRESS_CONTENT;
-                } else {
-                    //请求返回error
-                    onRequestError();
-                    message = Message.obtain();
-                    message.obj = object.getString("error");
-                    message.arg1 = 50;
-                    message.what = BaseActivity.UPDATE_PROGRESS_CONTENT;
+                if (!onResponse(result)) {
+                    JSONObject object = new JSONObject(result);
+                    if (!object.has("error")) {
+                        //请求成功后调用
+                        onRequestSuccess(object);
+                        message = Message.obtain();
+                        message.arg1 = 50;
+                        message.obj = "请求成功！";
+                        message.what = BaseActivity.UPDATE_PROGRESS_CONTENT;
+                    } else {
+                        //请求返回error
+                        onRequestError();
+                        message = Message.obtain();
+                        message.obj = object.getString("error");
+                        message.arg1 = 50;
+                        message.what = BaseActivity.UPDATE_PROGRESS_CONTENT;
+                    }
+                    handler.sendMessage(message);
                 }
-                handler.sendMessage(message);
+
             } catch (JSONException e) {
                 e.printStackTrace();
                 message = Message.obtain();
@@ -209,7 +212,21 @@ public abstract class AbstractDataTransferTask extends AsyncTask<Void, Integer, 
      */
     abstract void onRequestFinish(boolean success);
 
+    /**
+     * 在dialog取消后回调此方法，子类可根据需求去实现
+     */
     protected void afterDialogCancel() {
+    }
+
+    /**
+     * 在收到服务器返回的字符串后回调此方法，默认返回FALSE，继续进行json数据转换
+     * 子类若不想进行json转换，返回TRUE即可
+     *
+     * @param response 服务器数据
+     * @return 是否进行json转换
+     */
+    protected boolean onResponse(String response) {
+        return false;
     }
 
     protected String getTaskTitle() {

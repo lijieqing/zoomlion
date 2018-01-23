@@ -1,8 +1,6 @@
 package com.kstech.zoomlion.view.activity;
 
-import android.app.AlertDialog;
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.graphics.Color;
@@ -12,13 +10,13 @@ import android.os.IBinder;
 import android.os.Message;
 import android.support.design.widget.Snackbar;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.kstech.zoomlion.R;
 import com.kstech.zoomlion.engine.comm.J1939TaskService;
@@ -26,12 +24,8 @@ import com.kstech.zoomlion.engine.device.DeviceLoadTask;
 import com.kstech.zoomlion.engine.server.DeviceStatusUpdateTask;
 import com.kstech.zoomlion.engine.server.ServerProcessCheck;
 import com.kstech.zoomlion.engine.server.UserLogoutTask;
-import com.kstech.zoomlion.model.treelist.Element;
-import com.kstech.zoomlion.model.treelist.TreeViewAdapter;
-import com.kstech.zoomlion.model.treelist.TreeViewItemClickListener;
 import com.kstech.zoomlion.serverdata.CommissioningStatistics;
 import com.kstech.zoomlion.serverdata.CommissioningStatusEnum;
-import com.kstech.zoomlion.utils.DeviceUtil;
 import com.kstech.zoomlion.utils.Globals;
 import com.kstech.zoomlion.utils.LogUtils;
 
@@ -40,7 +34,6 @@ import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 import J1939.J1939_DataVar_ts;
@@ -239,7 +232,7 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
 
     @Event(value = {R.id.index_iv_user, R.id.index_btn_goto,
             R.id.index_btn_exit, R.id.index_btn_auto_download,
-            R.id.index_btn_view_record})
+            R.id.index_btn_get_sn})
     private void click(View view) {
         switch (view.getId()) {
             case R.id.index_iv_user:
@@ -263,9 +256,8 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
                 deviceLoadTask = new DeviceLoadTask(Globals.deviceSN, handler);
                 deviceLoadTask.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
                 break;
-            case R.id.index_btn_view_record:
-                Intent intent = new Intent(this, ViewRecordActivity.class);
-                startActivity(intent);
+            case R.id.index_btn_get_sn:
+                Toast.makeText(this, Globals.deviceSN, Toast.LENGTH_SHORT).show();
                 break;
         }
     }

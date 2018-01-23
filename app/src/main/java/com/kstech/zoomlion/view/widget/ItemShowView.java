@@ -1,6 +1,7 @@
 package com.kstech.zoomlion.view.widget;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -22,6 +23,7 @@ import com.kstech.zoomlion.model.vo.CheckItemVO;
 import com.kstech.zoomlion.utils.DeviceUtil;
 import com.kstech.zoomlion.utils.Globals;
 import com.kstech.zoomlion.utils.JsonUtils;
+import com.kstech.zoomlion.view.activity.ViewRecordActivity;
 import com.kstech.zoomlion.view.adapter.DividerItemDecoration;
 import com.kstech.zoomlion.view.adapter.HeaderAdapter;
 import com.kstech.zoomlion.view.adapter.ResultAdapter;
@@ -73,6 +75,14 @@ public class ItemShowView extends RelativeLayout implements IRecyclerScrollListe
      */
     TextView itemTitle;
     /**
+     * 查看服务器数据按钮
+     */
+    TextView tvServerData;
+    /**
+     * 调试项目描述信息按钮
+     */
+    TextView tvItemDesc;
+    /**
      * 调试项目数据统计集合
      */
     Map<String, List<Float>> avgMap;
@@ -80,6 +90,10 @@ public class ItemShowView extends RelativeLayout implements IRecyclerScrollListe
      * 调试项目统计结果集合
      */
     List<Float> avgDatas;
+    /**
+     * 调试项目字典ID
+     */
+    String dictID;
     private static String TAG = "ItemShowView";
 
     public ItemShowView(Context context) {
@@ -116,6 +130,17 @@ public class ItemShowView extends RelativeLayout implements IRecyclerScrollListe
         itemTitle = v.findViewById(R.id.tv_title);
         seekBar = v.findViewById(R.id.sb);
         tvRequireTimes = v.findViewById(R.id.tv_require_times);
+        tvServerData = v.findViewById(R.id.tv_item_showserver);
+        tvItemDesc = v.findViewById(R.id.tv_item_desc);
+
+        tvServerData.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, ViewRecordActivity.class);
+                intent.putExtra("dictID", dictID);
+                context.startActivity(intent);
+            }
+        });
 
         headerAdapter = new HeaderAdapter(context);
         resultAdapter = new ResultAdapter(avgDatas, context);
@@ -210,6 +235,7 @@ public class ItemShowView extends RelativeLayout implements IRecyclerScrollListe
      * @param item 调试项目VO对象
      */
     public void updateHead(@NonNull CheckItemVO item) {
+        dictID = item.getDictId();
         //设置调试项目基本信息
         itemTitle.setText(item.getName());
         tvRequireTimes.setText(String.valueOf("判定次数：" + item.getTimes()));

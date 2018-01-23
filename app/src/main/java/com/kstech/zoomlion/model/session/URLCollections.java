@@ -60,6 +60,10 @@ public final class URLCollections {
      * 修改用户密码
      */
     public static String CHANGE_PASSWORD = ADDRESS + "/user/changePassword";
+    /**
+     * 根据调试项目dict ID获取调试项目记录
+     */
+    public static String GET_ITEM_RECORD_BY_DICT = ADDRESS + "/commissioning/getQCItemRecord";
 
     public static String REGISTER_PAD = ADDRESS + "/portabledev/register";//调试终端注册
 

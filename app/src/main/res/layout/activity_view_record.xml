@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.kstech.zoomlion.view.activity.ViewRecordActivity">
+
     <LinearLayout
         android:id="@+id/index_ll_head"
         android:layout_width="match_parent"
@@ -23,11 +24,10 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_marginStart="5dp"
-                android:layout_marginLeft="5dp"
                 android:layout_centerInParent="true"
-                android:src="@drawable/zoomlion_logo"
-                />
+                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp"
+                android:src="@drawable/zoomlion_logo" />
 
             <TextView
                 android:id="@+id/vr_tv_title"
@@ -37,10 +37,12 @@
         </RelativeLayout>
 
     </LinearLayout>
+
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/vr_rv"
             android:layout_width="0dp"
@@ -48,11 +50,16 @@
             android:layout_weight="1">
 
         </android.support.v7.widget.RecyclerView>
-        <LinearLayout
-            android:layout_weight="3"
-            android:layout_width="0dp"
-            android:layout_height="match_parent">
 
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3">
+
+            <TextView
+                android:id="@+id/test"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
         </LinearLayout>
     </LinearLayout>
 
