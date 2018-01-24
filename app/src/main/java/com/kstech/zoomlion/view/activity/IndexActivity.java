@@ -11,10 +11,11 @@ import android.os.Message;
 import android.support.design.widget.Snackbar;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +25,9 @@ import com.kstech.zoomlion.engine.device.DeviceLoadTask;
 import com.kstech.zoomlion.engine.server.DeviceStatusUpdateTask;
 import com.kstech.zoomlion.engine.server.ServerProcessCheck;
 import com.kstech.zoomlion.engine.server.UserLogoutTask;
+import com.kstech.zoomlion.model.vo.CheckItemVO;
+import com.kstech.zoomlion.model.xmlbean.PG;
+import com.kstech.zoomlion.model.xmlbean.SP;
 import com.kstech.zoomlion.serverdata.CommissioningStatistics;
 import com.kstech.zoomlion.serverdata.CommissioningStatusEnum;
 import com.kstech.zoomlion.utils.Globals;
@@ -34,7 +38,9 @@ import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import J1939.J1939_DataVar_ts;
 
@@ -113,8 +119,8 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
     @ViewInject(R.id.index_btn_goto)
     private Button btnGotoCheck;//进入调试界面
 
-    @ViewInject(R.id.index_lv_initparams)
-    private ListView lvInitParams;//初始化参数列表
+    @ViewInject(R.id.index_gv_initparams)
+    private GridView gvInitParams;//初始化参数列表
 
     private long checkerID;//调试员ID
     /**
@@ -153,7 +159,18 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
      * 是否从调试页面返回
      */
     private boolean backFromCheck = false;
-
+    /**
+     * 初始化参数集合
+     */
+    private List<String> initParams = new ArrayList<>();
+    /**
+     * 初始化参数适配器
+     */
+    private ArrayAdapter<String> initParamAdapter;
+    /**
+     * 初始化参数Key值
+     */
+    private static final String INIT_PARAM = "Init";
     public static final String TAG = "IndexActivity";
     /**
      * 服务连接对象
@@ -187,6 +204,10 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
 
         tvDeviceIdentity.setTextColor(Color.RED);
         tvDeviceIdentity.setText("当前未检测到整机编号");
+
+        initParamAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,
+                android.R.id.text1, initParams);
+        gvInitParams.setAdapter(initParamAdapter);
 
         // TODO: 2017/10/11 加载默认机型信息，配置并启动通讯线程
         deviceLoadTask = new DeviceLoadTask(null, handler);
@@ -283,6 +304,28 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
         tvRecordResult.setText(CommissioningStatusEnum.nameOf(deviceStatus.getStatus()).getName());
     }
 
+    /**
+     * 获取初始化参数集合
+     */
+    private void getInitParams() {
+        initParams.clear();
+        CheckItemVO initVO = Globals.modelFile.checkItemMap.get(INIT_PARAM).get(0);
+        String attachPGN = initVO.getAttachPGN();
+        List<PG> pgs = Globals.modelFile.device.getJ1939().getPgs();
+
+        for (PG pg : pgs) {
+            if (attachPGN.equals(pg.getPGN())) {
+                for (SP sp : pg.getSps()) {
+                    String param = sp.getRef();
+                    initParams.add(param);
+                }
+                break;
+            }
+        }
+
+        initParamAdapter.notifyDataSetChanged();
+    }
+
     private InnerHandler handler = new InnerHandler(this);
 
     @Override
@@ -320,6 +363,8 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
                         j1939Intent.putExtra("reload", true);
                         mActivity.bindService(j1939Intent, mActivity.conn, BIND_AUTO_CREATE);
                         mActivity.startService(j1939Intent);
+
+                        mActivity.getInitParams();
                         //注册预热时间 数据监听器
                         Globals.modelFile.getDataSetVO().getDSItem("预热时间").addListener(mActivity);
                         break;
