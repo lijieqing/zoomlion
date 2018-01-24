@@ -137,7 +137,7 @@
         <!--初始化参数-->
         <DSItem DataType="FLOAT" DecLen="0" Name="初始化" Unit="U" />
 
-        <DSItem DataType="FLOAT" DecLen="0" Name="主泵品牌" Unit="U" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="主泵品牌" Unit="U" Value="3" />
         <DSItem DataType="FLOAT" DecLen="0" Name="主泵排量" Unit="U" />
         <DSItem DataType="FLOAT" DecLen="0" Name="主泵类型" Unit="U" />
         <DSItem DataType="FLOAT" DecLen="0" Name="液压系统" Unit="U" />
@@ -292,7 +292,21 @@
         <DSItem DataType="FLOAT" DecLen="0" Name="搅伴溢流压力值" Unit="a" />
         <DSItem DataType="FLOAT" DecLen="0" Name="搅伴反转起始压力" Unit="a" />
         <DSItem DataType="FLOAT" DecLen="0" Name="分配自适应" Unit="a" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="左前支腿水平伸出时间" Unit="a" />
+
+        <DSItem DataType="FLOAT" DecLen="0" Name="右前支腿水平伸出时间" Unit="s" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="右前支腿水平回收时间" Unit="s" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="右前支腿垂直伸出时间" Unit="s" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="右前支腿垂直回收时间" Unit="s" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="左后支腿水平伸出时间" Unit="s" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="左后支腿水平回收时间" Unit="s" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="左后支腿垂直伸出时间" Unit="s" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="左后支腿垂直回收时间" Unit="s" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="右后支腿水平伸出时间" Unit="s" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="右后支腿水平回收时间" Unit="s" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="右后支腿垂直伸出时间" Unit="s" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="右后支腿垂直回收时间" Unit="s" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="左前支腿水平伸出时间" Unit="s" />
+
         <DSItem DataType="FLOAT" DecLen="0" Name="风扇开启情况" Unit="a" />
         <DSItem DataType="BOOL" DecLen="0" Name="气动润滑开启开关" Unit="开/关" />
         <DSItem DataType="FLOAT" DecLen="0" Name="处理后的泵送压力" Unit="a" />
@@ -588,13 +602,37 @@
         <DSItem DataType="BYTE" Name="左前支腿水平回收不检测时间" Unit="s" Value="15" />
         <DSItem DataType="BYTE" Name="左前支腿垂直伸出不检测时间" Unit="s" Value="15" />
         <DSItem DataType="BYTE" Name="左前支腿垂直回收不检测时间" Unit="s" Value="15" />
-
-        <DSItem DataType="BYTE" Name="一臂慢档展开终止斜率阀值" Unit="s" Value="15" />
-        <DSItem DataType="BYTE" Name="一臂慢档回收终止斜率阀值" Unit="s" Value="15" />
+        <DSItem DataType="BYTE" Name="右前支腿水平伸出不检测时间" Value="0" />
+        <DSItem DataType="BYTE" Name="右前支腿水平伸出终止斜率阀值" Value="0" />
+        <DSItem DataType="BYTE" Name="右前支腿水平回收不检测时间" Value="0" />
+        <DSItem DataType="BYTE" Name="右前支腿水平回收终止斜率阀值" Value="0" />
+        <DSItem DataType="BYTE" Name="右前支腿垂直伸出不检测时间" Value="0" />
+        <DSItem DataType="BYTE" Name="右前支腿垂直伸出终止斜率阀值" Value="0" />
+        <DSItem DataType="BYTE" Name="右前支腿垂直回收不检测时间" Value="0" />
+        <DSItem DataType="BYTE" Name="右前支腿垂直回收终止斜率阀值" Value="0" />
+        <DSItem DataType="BYTE" Name="左后支腿水平伸出不检测时间" Value="0" />
+        <DSItem DataType="BYTE" Name="左后支腿水平伸出终止斜率阀值" Value="0" />
+        <DSItem DataType="BYTE" Name="左后支腿水平回收不检测时间" Value="0" />
+        <DSItem DataType="BYTE" Name="左后支腿水平回收终止斜率阀值" Value="0" />
+        <DSItem DataType="BYTE" Name="左后支腿垂直伸出不检测时间" Value="0" />
+        <DSItem DataType="BYTE" Name="左后支腿垂直伸出终止斜率阀值" Value="0" />
+        <DSItem DataType="BYTE" Name="左后支腿垂直回收不检测时间" Value="0" />
+        <DSItem DataType="BYTE" Name="左后支腿垂直回收终止斜率阀值" Value="0" />
+        <DSItem DataType="BYTE" Name="右后支腿水平伸出不检测时间" Value="0" />
+        <DSItem DataType="BYTE" Name="右后支腿水平伸出终止斜率阀值" Value="0" />
+        <DSItem DataType="BYTE" Name="右后支腿水平回收不检测时间" Value="0" />
+        <DSItem DataType="BYTE" Name="右后支腿水平回收终止斜率阀值" Value="0" />
+        <DSItem DataType="BYTE" Name="右后支腿垂直伸出不检测时间" Value="0" />
+        <DSItem DataType="BYTE" Name="右后支腿垂直伸出终止斜率阀值" Value="0" />
+        <DSItem DataType="BYTE" Name="右后支腿垂直回收不检测时间" Value="0" />
+        <DSItem DataType="BYTE" Name="右后支腿垂直回收终止斜率阀值" Value="0" />
         <DSItem DataType="BYTE" Name="左前支腿水平伸出终止斜率阀值" Value="5" />
         <DSItem DataType="BYTE" Name="左前支腿水平回收终止斜率阀值" Value="5" />
         <DSItem DataType="BYTE" Name="左前支腿垂直伸出终止斜率阀值" Value="5" />
         <DSItem DataType="BYTE" Name="左前支腿垂直回收终止斜率阀值" Value="5" />
+
+        <DSItem DataType="BYTE" Name="一臂慢档展开终止斜率阀值" Unit="s" Value="15" />
+        <DSItem DataType="BYTE" Name="一臂慢档回收终止斜率阀值" Unit="s" Value="15" />
         <DSItem DataType="BYTE" Name="一臂慢档展开不检测时间" Unit="s" Value="15" />
         <DSItem DataType="BYTE" Name="一臂慢档回收不检测时间" Unit="s" Value="15" />
         <DSItem DataType="BYTE" Name="一臂慢档展开K标定系数" Value="5" />
@@ -1195,7 +1233,54 @@
                 Type="1" />
         </PG>
         <PG Dir="Rx" Len="8" PGN="0xFF5C" Prio="3" Rate="100" Req="0" ReqCyc="0" SA="0x01" Type="2">
-            <SP Bits="0" Bytes="4" Off="0" Ref="初始化" Res="1" SBit="1" SByte="1" SPN="0"
+            <SP Bits="0" Bytes="4" Off="0" Ref="初始化" Res="1" SBit="1" SByte="1" SPN="0" Type="1" />
+        </PG>
+        <PG Dir="Rx" Len="8" PGN="0xFF5D" Prio="3" Rate="100" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="0" Bytes="2" Off="0" Ref="右前支腿水平伸出时间" Res="0.001" SBit="1" SByte="1" SPN="0"
+                Type="1" />
+        </PG>
+        <PG Dir="Rx" Len="8" PGN="0xFF5E" Prio="3" Rate="100" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="0" Bytes="2" Off="0" Ref="右前支腿水平回收时间" Res="0.001" SBit="1" SByte="1" SPN="0"
+                Type="1" />
+        </PG>
+        <PG Dir="Rx" Len="8" PGN="0xFF5F" Prio="3" Rate="100" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="0" Bytes="2" Off="0" Ref="右前支腿垂直伸出时间" Res="0.001" SBit="1" SByte="1" SPN="0"
+                Type="1" />
+        </PG>
+        <PG Dir="Rx" Len="8" PGN="0xFF60" Prio="3" Rate="100" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="0" Bytes="2" Off="0" Ref="右前支腿垂直回收时间" Res="0.001" SBit="1" SByte="1" SPN="0"
+                Type="1" />
+        </PG>
+        <PG Dir="Rx" Len="8" PGN="0xFF61" Prio="3" Rate="100" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="0" Bytes="2" Off="0" Ref="左后支腿水平伸出时间" Res="0.001" SBit="1" SByte="1" SPN="0"
+                Type="1" />
+        </PG>
+        <PG Dir="Rx" Len="8" PGN="0xFF62" Prio="3" Rate="100" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="0" Bytes="2" Off="0" Ref="左后支腿水平回收时间" Res="0.001" SBit="1" SByte="1" SPN="0"
+                Type="1" />
+        </PG>
+        <PG Dir="Rx" Len="8" PGN="0xFF63" Prio="3" Rate="100" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="0" Bytes="2" Off="0" Ref="左后支腿垂直伸出时间" Res="0.001" SBit="1" SByte="1" SPN="0"
+                Type="1" />
+        </PG>
+        <PG Dir="Rx" Len="8" PGN="0xFF64" Prio="3" Rate="100" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="0" Bytes="2" Off="0" Ref="左后支腿垂直回收时间" Res="0.001" SBit="1" SByte="1" SPN="0"
+                Type="1" />
+        </PG>
+        <PG Dir="Rx" Len="8" PGN="0xFF65" Prio="3" Rate="100" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="0" Bytes="2" Off="0" Ref="右后支腿水平伸出时间" Res="0.001" SBit="1" SByte="1" SPN="0"
+                Type="1" />
+        </PG>
+        <PG Dir="Rx" Len="8" PGN="0xFF66" Prio="3" Rate="100" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="0" Bytes="2" Off="0" Ref="右后支腿水平回收时间" Res="0.001" SBit="1" SByte="1" SPN="0"
+                Type="1" />
+        </PG>
+        <PG Dir="Rx" Len="8" PGN="0xFF67" Prio="3" Rate="100" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="0" Bytes="2" Off="0" Ref="右后支腿垂直伸出时间" Res="0.001" SBit="1" SByte="1" SPN="0"
+                Type="1" />
+        </PG>
+        <PG Dir="Rx" Len="8" PGN="0xFF68" Prio="3" Rate="100" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="0" Bytes="2" Off="0" Ref="右后支腿垂直回收时间" Res="0.001" SBit="1" SByte="1" SPN="0"
                 Type="1" />
         </PG>
 
@@ -1619,7 +1704,102 @@
             <SP Bits="0" Bytes="2" Off="0" Ref="左前支腿垂直回收终止斜率阀值" Res="1" SBit="1" SByte="5" SPN="0"
                 Type="1" />
         </PG>
-
+        <PG Dir="Tx" Len="8" PGN="0xFFE5" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="0" Bytes="2" Off="0" Ref="当前检测项目" Res="1" SBit="1" SByte="1" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="右前支腿水平伸出不检测时间" Res="1" SBit="1" SByte="3" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="右前支腿水平伸出终止斜率阀值" Res="1" SBit="1" SByte="5" SPN="0"
+                Type="1" />
+        </PG>
+        <PG Dir="Tx" Len="8" PGN="0xFFE6" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="0" Bytes="2" Off="0" Ref="当前检测项目" Res="1" SBit="1" SByte="1" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="右前支腿水平回收不检测时间" Res="1" SBit="1" SByte="3" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="右前支腿水平回收终止斜率阀值" Res="1" SBit="1" SByte="5" SPN="0"
+                Type="1" />
+        </PG>
+        <PG Dir="Tx" Len="8" PGN="0xFFE7" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="0" Bytes="2" Off="0" Ref="当前检测项目" Res="1" SBit="1" SByte="1" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="右前支腿垂直伸出不检测时间" Res="1" SBit="1" SByte="3" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="右前支腿垂直伸出终止斜率阀值" Res="1" SBit="1" SByte="5" SPN="0"
+                Type="1" />
+        </PG>
+        <PG Dir="Tx" Len="8" PGN="0xFFE8" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="0" Bytes="2" Off="0" Ref="当前检测项目" Res="1" SBit="1" SByte="1" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="右前支腿垂直回收不检测时间" Res="1" SBit="1" SByte="3" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="右前支腿垂直回收终止斜率阀值" Res="1" SBit="1" SByte="5" SPN="0"
+                Type="1" />
+        </PG>
+        <PG Dir="Tx" Len="8" PGN="0xFFE9" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="0" Bytes="2" Off="0" Ref="当前检测项目" Res="1" SBit="1" SByte="1" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="左后支腿水平伸出不检测时间" Res="1" SBit="1" SByte="3" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="左后支腿水平伸出终止斜率阀值" Res="1" SBit="1" SByte="5" SPN="0"
+                Type="1" />
+        </PG>
+        <PG Dir="Tx" Len="8" PGN="0xFFEA" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="0" Bytes="2" Off="0" Ref="当前检测项目" Res="1" SBit="1" SByte="1" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="左后支腿水平回收不检测时间" Res="1" SBit="1" SByte="3" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="左后支腿水平回收终止斜率阀值" Res="1" SBit="1" SByte="5" SPN="0"
+                Type="1" />
+        </PG>
+        <PG Dir="Tx" Len="8" PGN="0xFFEB" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="0" Bytes="2" Off="0" Ref="当前检测项目" Res="1" SBit="1" SByte="1" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="左后支腿垂直伸出不检测时间" Res="1" SBit="1" SByte="3" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="左后支腿垂直伸出终止斜率阀值" Res="1" SBit="1" SByte="5" SPN="0"
+                Type="1" />
+        </PG>
+        <PG Dir="Tx" Len="8" PGN="0xFFEC" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="0" Bytes="2" Off="0" Ref="当前检测项目" Res="1" SBit="1" SByte="1" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="左后支腿垂直回收不检测时间" Res="1" SBit="1" SByte="3" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="左后支腿垂直回收终止斜率阀值" Res="1" SBit="1" SByte="5" SPN="0"
+                Type="1" />
+        </PG>
+        <PG Dir="Tx" Len="8" PGN="0xFFED" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="0" Bytes="2" Off="0" Ref="当前检测项目" Res="1" SBit="1" SByte="1" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="右后支腿水平伸出不检测时间" Res="1" SBit="1" SByte="3" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="右后支腿水平伸出终止斜率阀值" Res="1" SBit="1" SByte="5" SPN="0"
+                Type="1" />
+        </PG>
+        <PG Dir="Tx" Len="8" PGN="0xFFEE" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="0" Bytes="2" Off="0" Ref="当前检测项目" Res="1" SBit="1" SByte="1" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="右后支腿水平回收不检测时间" Res="1" SBit="1" SByte="3" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="右后支腿水平回收终止斜率阀值" Res="1" SBit="1" SByte="5" SPN="0"
+                Type="1" />
+        </PG>
+        <PG Dir="Tx" Len="8" PGN="0xFFEF" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="0" Bytes="2" Off="0" Ref="当前检测项目" Res="1" SBit="1" SByte="1" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="右后支腿垂直伸出不检测时间" Res="1" SBit="1" SByte="3" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="右后支腿垂直伸出终止斜率阀值" Res="1" SBit="1" SByte="5" SPN="0"
+                Type="1" />
+        </PG>
+        <PG Dir="Tx" Len="8" PGN="0xFFF8" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="0" Bytes="2" Off="0" Ref="当前检测项目" Res="1" SBit="1" SByte="1" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="右后支腿垂直回收不检测时间" Res="1" SBit="1" SByte="3" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="右后支腿垂直回收终止斜率阀值" Res="1" SBit="1" SByte="5" SPN="0"
+                Type="1" />
+        </PG>
         <!--一臂慢档展开-->
         <PG Dir="Tx" Len="16" PGN="0xFFF0" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x00" Type="2">
             <SP Bits="0" Bytes="2" Off="0" Ref="当前检测项目" Res="1" SBit="1" SByte="1" SPN="0"
@@ -1732,123 +1912,232 @@
                 SPN="0" Type="1" />
         </PG>
         <PG Dir="Tx" Len="16" PGN="0xFFF7" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
-            <SP Bits="0" Bytes="1" Off="0" Ref="主泵品牌" Res="1" SBit="1" SByte="1" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="主泵排量" Res="1" SBit="1" SByte="2" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="主泵类型" Res="1" SBit="1" SByte="3" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="液压系统" Res="1" SBit="1" SByte="4" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="油缸类型" Res="1" SBit="1" SByte="5" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="换向类型" Res="1" SBit="1" SByte="6" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="高低压类型" Res="1" SBit="1" SByte="7" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="液位传感器" Res="1" SBit="1" SByte="8" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="油温传感器" Res="1" SBit="1" SByte="9" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="恒压泵类型" Res="1" SBit="1" SByte="10" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="锁车模式" Res="1" SBit="1" SByte="11" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="软件恒功率" Res="1" SBit="1" SByte="12" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="支撑方式" Res="1" SBit="1" SByte="13" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="臂架类型" Res="1" SBit="1" SByte="14" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="臂架EP泵" Res="1" SBit="1" SByte="15" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="回转阀" Res="1" SBit="1" SByte="16" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="编码器类型" Res="1" SBit="1" SByte="17" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="一臂倾角" Res="1" SBit="1" SByte="18" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="二臂倾角" Res="1" SBit="1" SByte="19" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="三臂倾角" Res="1" SBit="1" SByte="20" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="四臂倾角" Res="1" SBit="1" SByte="21" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="五臂倾角" Res="1" SBit="1" SByte="22" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="六臂倾角" Res="1" SBit="1" SByte="23" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="七臂倾角" Res="1" SBit="1" SByte="24" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="臂架调速模式" Res="1" SBit="1" SByte="25" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="底盘类型" Res="1" SBit="1" SByte="26" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="主动减震" Res="1" SBit="1" SByte="27" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="回转减震" Res="1" SBit="1" SByte="28" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="臂架防干涉" Res="1" SBit="1" SByte="29" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="合流功能" Res="1" SBit="1" SByte="30" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="主泵降温" Res="1" SBit="1" SByte="31" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="油缸锁紧" Res="1" SBit="1" SByte="32" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="搅伴安全控制" Res="1" SBit="1" SByte="33" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="料位安全控制" Res="1" SBit="1" SByte="34" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="防倾翻" Res="1" SBit="1" SByte="35" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="应急换向" Res="1" SBit="1" SByte="36" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="优化行程" Res="1" SBit="1" SByte="37" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="节能模式" Res="1" SBit="1" SByte="38" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="分配控制" Res="1" SBit="1" SByte="39" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="泵送启动方式" Res="1" SBit="1" SByte="40" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="臂架控制模式" Res="1" SBit="1" SByte="41" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="泵送点动方式" Res="1" SBit="1" SByte="42" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="料况自适应" Res="1" SBit="1" SByte="43" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="泵送行程初始化" Res="1" SBit="1" SByte="44" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="故障诊断" Res="1" SBit="1" SByte="45" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="2" Off="0" Ref="泵送节能速度" Res="1" SBit="1" SByte="47" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="2" Off="0" Ref="支腿臂架转速" Res="1" SBit="1" SByte="48" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="2" Off="0" Ref="怠速速度" Res="1" SBit="1" SByte="49" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="2" Off="0" Ref="最高转速" Res="1" SBit="1" SByte="50" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="2" Off="0" Ref="减速延时时间" Res="1" SBit="1" SByte="51" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="2" Off="0" Ref="油泵超速报警值" Res="1" SBit="1" SByte="52" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="超档位传动比" Res="1" SBit="1" SByte="52" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="速度参数自学习" Res="1" SBit="1" SByte="53" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="主缸停止延时" Res="1" SBit="1" SByte="54" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="分配停止延时" Res="1" SBit="1" SByte="55" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="换向延时时间" Res="1" SBit="1" SByte="56" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="降排量时间" Res="1" SBit="1" SByte="57" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="2" Off="0" Ref="降排量压力" Res="1" SBit="1" SByte="59" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="超压降排量时间" Res="1" SBit="1" SByte="59" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="起调压力" Res="1" SBit="1" SByte="60" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="恒功率系数" Res="1" SBit="1" SByte="61" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="最小控制压力" Res="1" SBit="1" SByte="62" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="排量修正系数" Res="1" SBit="1" SByte="63" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="2" Off="0" Ref="优化行程最小时间" Res="1" SBit="1" SByte="65" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="2" Off="0" Ref="优化行程启动压力" Res="1" SBit="1" SByte="66" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="2" Off="0" Ref="优化行程最大时间" Res="1" SBit="1" SByte="67" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="2" Off="0" Ref="泵送降温启动温度" Res="1" SBit="1" SByte="68" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="2" Off="0" Ref="砼缸直径" Res="1" SBit="1" SByte="69" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="2" Off="0" Ref="1100rpm对应功率" Res="1" SBit="1" SByte="70" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="2" Off="0" Ref="1500rpm对应功率" Res="1" SBit="1" SByte="71" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="停泵时间间隔1" Res="1" SBit="1" SByte="71" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="停泵时间间隔2" Res="1" SBit="1" SByte="72" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="2" Off="0" Ref="主缸单独得电时间" Res="1" SBit="1" SByte="74" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="2" Off="0" Ref="泵送停止时间" Res="1" SBit="1" SByte="75" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="主缸停止延时设置0～1.5档（低压）" Res="1" SBit="1" SByte="75" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="0～1.5档（高压）" Res="1" SBit="1" SByte="76" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="1.5～2.5档（低压）" Res="1" SBit="1" SByte="77" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="1.5～2.5档（高压）" Res="1" SBit="1" SByte="78" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="2.5～3.5档（低压）" Res="1" SBit="1" SByte="79" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="2.5～3.5档（高压）" Res="1" SBit="1" SByte="80" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="3.5～4.5档（低压）" Res="1" SBit="1" SByte="81" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="3.5～4.5档（高压）" Res="1" SBit="1" SByte="82" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="4.5～6档（低压）" Res="1" SBit="1" SByte="83" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="4.5～6档（高压）" Res="1" SBit="1" SByte="84" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="6～10档（低压）" Res="1" SBit="1" SByte="85" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="主缸停止延时设置6～10档（高压）" Res="1" SBit="1" SByte="86" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="开机润滑时间" Res="1" SBit="1" SByte="87" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="关机润滑时间" Res="1" SBit="1" SByte="88" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="气动润滑时间" Res="1" SBit="1" SByte="89" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="2" Off="0" Ref="润滑停歇时间" Res="1" SBit="1" SByte="91" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="2" Off="0" Ref="风扇自启动温度" Res="1" SBit="1" SByte="92" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="2" Off="0" Ref="自加热启动温度" Res="1" SBit="1" SByte="93" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="2" Off="0" Ref="自加热停止温度" Res="1" SBit="1" SByte="94" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="2" Off="0" Ref="压力切断值" Res="1" SBit="1" SByte="95" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="2" Off="0" Ref="全支撑安全范围" Res="1" SBit="1" SByte="96" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="节能档位" Res="1" SBit="1" SByte="96" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="泵送行程参数" Res="1" SBit="1" SByte="97" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="回转启动速度缓冲" Res="1" SBit="1" SByte="98" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="一臂启动速度缓冲" Res="1" SBit="1" SByte="99" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="二臂启动速度缓冲" Res="1" SBit="1" SByte="100" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="三臂启动速度缓冲" Res="1" SBit="1" SByte="101" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="四臂启动速度缓冲" Res="1" SBit="1" SByte="102" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="五臂启动速度缓冲" Res="1" SBit="1" SByte="103" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="六臂启动速度缓冲" Res="1" SBit="1" SByte="104" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="七臂启动速度缓冲" Res="1" SBit="1" SByte="105" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="回转停止速度缓冲" Res="1" SBit="1" SByte="106" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="一臂停止速度缓冲" Res="1" SBit="1" SByte="107" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="二臂停止速度缓冲" Res="1" SBit="1" SByte="108" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="三臂停止速度缓冲" Res="1" SBit="1" SByte="109" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="四臂停止速度缓冲" Res="1" SBit="1" SByte="110" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="五臂停止速度缓冲" Res="1" SBit="1" SByte="111" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="六臂停止速度缓冲" Res="1" SBit="1" SByte="112" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="七臂停止速度缓冲" Res="1" SBit="1" SByte="113" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="2" Off="0" Ref="合流阀最大电流" Res="1" SBit="1" SByte="114" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="2" Off="0" Ref="合流阀最小电流" Res="1" SBit="1" SByte="116" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="2" Off="0" Ref="臂架降温启动温度" Res="1" SBit="1" SByte="118" SPN="0" Type="1"/>
-            <SP Bits="0" Bytes="1" Off="0" Ref="分配压力" Res="1" SBit="1" SByte="120" SPN="0" Type="1"/>
+            <SP Bits="0" Bytes="1" Off="0" Ref="主泵品牌" Res="1" SBit="1" SByte="1" SPN="0" Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="主泵排量" Res="1" SBit="1" SByte="2" SPN="0" Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="主泵类型" Res="1" SBit="1" SByte="3" SPN="0" Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="液压系统" Res="1" SBit="1" SByte="4" SPN="0" Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="油缸类型" Res="1" SBit="1" SByte="5" SPN="0" Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="换向类型" Res="1" SBit="1" SByte="6" SPN="0" Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="高低压类型" Res="1" SBit="1" SByte="7" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="液位传感器" Res="1" SBit="1" SByte="8" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="油温传感器" Res="1" SBit="1" SByte="9" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="恒压泵类型" Res="1" SBit="1" SByte="10" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="锁车模式" Res="1" SBit="1" SByte="11" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="软件恒功率" Res="1" SBit="1" SByte="12" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="支撑方式" Res="1" SBit="1" SByte="13" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="臂架类型" Res="1" SBit="1" SByte="14" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="臂架EP泵" Res="1" SBit="1" SByte="15" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="回转阀" Res="1" SBit="1" SByte="16" SPN="0" Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="编码器类型" Res="1" SBit="1" SByte="17" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="一臂倾角" Res="1" SBit="1" SByte="18" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="二臂倾角" Res="1" SBit="1" SByte="19" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="三臂倾角" Res="1" SBit="1" SByte="20" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="四臂倾角" Res="1" SBit="1" SByte="21" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="五臂倾角" Res="1" SBit="1" SByte="22" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="六臂倾角" Res="1" SBit="1" SByte="23" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="七臂倾角" Res="1" SBit="1" SByte="24" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="臂架调速模式" Res="1" SBit="1" SByte="25" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="底盘类型" Res="1" SBit="1" SByte="26" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="主动减震" Res="1" SBit="1" SByte="27" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="回转减震" Res="1" SBit="1" SByte="28" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="臂架防干涉" Res="1" SBit="1" SByte="29" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="合流功能" Res="1" SBit="1" SByte="30" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="主泵降温" Res="1" SBit="1" SByte="31" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="油缸锁紧" Res="1" SBit="1" SByte="32" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="搅伴安全控制" Res="1" SBit="1" SByte="33" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="料位安全控制" Res="1" SBit="1" SByte="34" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="防倾翻" Res="1" SBit="1" SByte="35" SPN="0" Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="应急换向" Res="1" SBit="1" SByte="36" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="优化行程" Res="1" SBit="1" SByte="37" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="节能模式" Res="1" SBit="1" SByte="38" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="分配控制" Res="1" SBit="1" SByte="39" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="泵送启动方式" Res="1" SBit="1" SByte="40" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="臂架控制模式" Res="1" SBit="1" SByte="41" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="泵送点动方式" Res="1" SBit="1" SByte="42" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="料况自适应" Res="1" SBit="1" SByte="43" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="泵送行程初始化" Res="1" SBit="1" SByte="44" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="故障诊断" Res="1" SBit="1" SByte="45" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="泵送节能速度" Res="1" SBit="1" SByte="47" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="支腿臂架转速" Res="1" SBit="1" SByte="48" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="怠速速度" Res="1" SBit="1" SByte="49" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="最高转速" Res="1" SBit="1" SByte="50" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="减速延时时间" Res="1" SBit="1" SByte="51" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="油泵超速报警值" Res="1" SBit="1" SByte="52" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="超档位传动比" Res="1" SBit="1" SByte="52" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="速度参数自学习" Res="1" SBit="1" SByte="53" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="主缸停止延时" Res="1" SBit="1" SByte="54" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="分配停止延时" Res="1" SBit="1" SByte="55" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="换向延时时间" Res="1" SBit="1" SByte="56" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="降排量时间" Res="1" SBit="1" SByte="57" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="降排量压力" Res="1" SBit="1" SByte="59" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="超压降排量时间" Res="1" SBit="1" SByte="59" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="起调压力" Res="1" SBit="1" SByte="60" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="恒功率系数" Res="1" SBit="1" SByte="61" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="最小控制压力" Res="1" SBit="1" SByte="62" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="排量修正系数" Res="1" SBit="1" SByte="63" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="优化行程最小时间" Res="1" SBit="1" SByte="65" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="优化行程启动压力" Res="1" SBit="1" SByte="66" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="优化行程最大时间" Res="1" SBit="1" SByte="67" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="泵送降温启动温度" Res="1" SBit="1" SByte="68" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="砼缸直径" Res="1" SBit="1" SByte="69" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="1100rpm对应功率" Res="1" SBit="1" SByte="70" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="1500rpm对应功率" Res="1" SBit="1" SByte="71" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="停泵时间间隔1" Res="1" SBit="1" SByte="71" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="停泵时间间隔2" Res="1" SBit="1" SByte="72" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="主缸单独得电时间" Res="1" SBit="1" SByte="74" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="泵送停止时间" Res="1" SBit="1" SByte="75" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="主缸停止延时设置0～1.5档（低压）" Res="1" SBit="1" SByte="75"
+                SPN="0" Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="0～1.5档（高压）" Res="1" SBit="1" SByte="76" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="1.5～2.5档（低压）" Res="1" SBit="1" SByte="77" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="1.5～2.5档（高压）" Res="1" SBit="1" SByte="78" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="2.5～3.5档（低压）" Res="1" SBit="1" SByte="79" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="2.5～3.5档（高压）" Res="1" SBit="1" SByte="80" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="3.5～4.5档（低压）" Res="1" SBit="1" SByte="81" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="3.5～4.5档（高压）" Res="1" SBit="1" SByte="82" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="4.5～6档（低压）" Res="1" SBit="1" SByte="83" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="4.5～6档（高压）" Res="1" SBit="1" SByte="84" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="6～10档（低压）" Res="1" SBit="1" SByte="85" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="主缸停止延时设置6～10档（高压）" Res="1" SBit="1" SByte="86"
+                SPN="0" Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="开机润滑时间" Res="1" SBit="1" SByte="87" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="关机润滑时间" Res="1" SBit="1" SByte="88" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="气动润滑时间" Res="1" SBit="1" SByte="89" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="润滑停歇时间" Res="1" SBit="1" SByte="91" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="风扇自启动温度" Res="1" SBit="1" SByte="92" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="自加热启动温度" Res="1" SBit="1" SByte="93" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="自加热停止温度" Res="1" SBit="1" SByte="94" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="压力切断值" Res="1" SBit="1" SByte="95" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="全支撑安全范围" Res="1" SBit="1" SByte="96" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="节能档位" Res="1" SBit="1" SByte="96" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="泵送行程参数" Res="1" SBit="1" SByte="97" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="回转启动速度缓冲" Res="1" SBit="1" SByte="98" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="一臂启动速度缓冲" Res="1" SBit="1" SByte="99" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="二臂启动速度缓冲" Res="1" SBit="1" SByte="100" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="三臂启动速度缓冲" Res="1" SBit="1" SByte="101" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="四臂启动速度缓冲" Res="1" SBit="1" SByte="102" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="五臂启动速度缓冲" Res="1" SBit="1" SByte="103" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="六臂启动速度缓冲" Res="1" SBit="1" SByte="104" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="七臂启动速度缓冲" Res="1" SBit="1" SByte="105" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="回转停止速度缓冲" Res="1" SBit="1" SByte="106" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="一臂停止速度缓冲" Res="1" SBit="1" SByte="107" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="二臂停止速度缓冲" Res="1" SBit="1" SByte="108" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="三臂停止速度缓冲" Res="1" SBit="1" SByte="109" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="四臂停止速度缓冲" Res="1" SBit="1" SByte="110" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="五臂停止速度缓冲" Res="1" SBit="1" SByte="111" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="六臂停止速度缓冲" Res="1" SBit="1" SByte="112" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="七臂停止速度缓冲" Res="1" SBit="1" SByte="113" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="合流阀最大电流" Res="1" SBit="1" SByte="114" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="合流阀最小电流" Res="1" SBit="1" SByte="116" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="臂架降温启动温度" Res="1" SBit="1" SByte="118" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="分配压力" Res="1" SBit="1" SByte="120" SPN="0"
+                Type="1" />
         </PG>
 
 
@@ -2061,6 +2350,258 @@
                 <QCParams>
                     <QCParam Param="左前支腿垂直回收时间" PicReq="false" QCMode="Auto" ValMode="Auto"
                         ValidAvg="" ValidMax="30" ValidMin="20" ValueReq="true" />
+                </QCParams>
+                <ENVParams />
+                <RealTimeParams>
+                    <RealTimeParam Name="发动机转速" />
+                    <RealTimeParam Name="液压油温温度" />
+                    <RealTimeParam Name="臂架泵压力" />
+                </RealTimeParams>
+            </QCItem>
+            <QCItem AttachPGN="0xFFE5" Id="6" Name="右前支腿水平伸出" QCTimeout="20" QCTimes="5"
+                ReadyTimeout="10" Require="true">
+                <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
+                    <QCProgressMsg>
+                        <QCProgress Code="" Msg="" />
+                    </QCProgressMsg>
+                    <QCErrMsg>
+                        <QCErr Code="" Msg="" />
+                    </QCErrMsg>
+                </Msgs>
+                <QCParams>
+                    <QCParam Param="右前支腿水平伸出时间" PicReq="true" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                </QCParams>
+                <ENVParams />
+                <RealTimeParams>
+                    <RealTimeParam Name="发动机转速" />
+                    <RealTimeParam Name="液压油温温度" />
+                    <RealTimeParam Name="臂架泵压力" />
+                </RealTimeParams>
+            </QCItem>
+            <QCItem AttachPGN="0xFFE6" Id="7" Name="右前支腿水平回收" QCTimeout="20" QCTimes="5"
+                ReadyTimeout="10" Require="true">
+                <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
+                    <QCProgressMsg>
+                        <QCProgress Code="" Msg="" />
+                    </QCProgressMsg>
+                    <QCErrMsg>
+                        <QCErr Code="" Msg="" />
+                    </QCErrMsg>
+                </Msgs>
+                <QCParams>
+                    <QCParam Param="右前支腿水平回收时间" PicReq="true" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                </QCParams>
+                <ENVParams />
+                <RealTimeParams>
+                    <RealTimeParam Name="发动机转速" />
+                    <RealTimeParam Name="液压油温温度" />
+                    <RealTimeParam Name="臂架泵压力" />
+                </RealTimeParams>
+            </QCItem>
+            <QCItem AttachPGN="0xFFE7" Id="8" Name="右前支腿垂直伸出" QCTimeout="20" QCTimes="5"
+                ReadyTimeout="10" Require="true">
+                <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
+                    <QCProgressMsg>
+                        <QCProgress Code="" Msg="" />
+                    </QCProgressMsg>
+                    <QCErrMsg>
+                        <QCErr Code="" Msg="" />
+                    </QCErrMsg>
+                </Msgs>
+                <QCParams>
+                    <QCParam Param="右前支腿垂直伸出时间" PicReq="true" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                </QCParams>
+                <ENVParams />
+                <RealTimeParams>
+                    <RealTimeParam Name="发动机转速" />
+                    <RealTimeParam Name="液压油温温度" />
+                    <RealTimeParam Name="臂架泵压力" />
+                </RealTimeParams>
+            </QCItem>
+            <QCItem AttachPGN="0xFFE8" Id="9" Name="右前支腿垂直回收" QCTimeout="20" QCTimes="5"
+                ReadyTimeout="10" Require="true">
+                <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
+                    <QCProgressMsg>
+                        <QCProgress Code="" Msg="" />
+                    </QCProgressMsg>
+                    <QCErrMsg>
+                        <QCErr Code="" Msg="" />
+                    </QCErrMsg>
+                </Msgs>
+                <QCParams>
+                    <QCParam Param="右前支腿垂直回收时间" PicReq="true" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                </QCParams>
+                <ENVParams />
+                <RealTimeParams>
+                    <RealTimeParam Name="发动机转速" />
+                    <RealTimeParam Name="液压油温温度" />
+                    <RealTimeParam Name="臂架泵压力" />
+                </RealTimeParams>
+            </QCItem>
+            <QCItem AttachPGN="0xFFE9" Id="10" Name="左后支腿水平伸出" QCTimeout="20" QCTimes="5"
+                ReadyTimeout="10" Require="true">
+                <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
+                    <QCProgressMsg>
+                        <QCProgress Code="" Msg="" />
+                    </QCProgressMsg>
+                    <QCErrMsg>
+                        <QCErr Code="" Msg="" />
+                    </QCErrMsg>
+                </Msgs>
+                <QCParams>
+                    <QCParam Param="左后支腿水平伸出时间" PicReq="true" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                </QCParams>
+                <ENVParams />
+                <RealTimeParams>
+                    <RealTimeParam Name="发动机转速" />
+                    <RealTimeParam Name="液压油温温度" />
+                    <RealTimeParam Name="臂架泵压力" />
+                </RealTimeParams>
+            </QCItem>
+            <QCItem AttachPGN="0xFFEA" Id="11" Name="左后支腿水平回收" QCTimeout="20" QCTimes="5"
+                ReadyTimeout="10" Require="true">
+                <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
+                    <QCProgressMsg>
+                        <QCProgress Code="" Msg="" />
+                    </QCProgressMsg>
+                    <QCErrMsg>
+                        <QCErr Code="" Msg="" />
+                    </QCErrMsg>
+                </Msgs>
+                <QCParams>
+                    <QCParam Param="左后支腿水平回收时间" PicReq="true" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                </QCParams>
+                <ENVParams />
+                <RealTimeParams>
+                    <RealTimeParam Name="发动机转速" />
+                    <RealTimeParam Name="液压油温温度" />
+                    <RealTimeParam Name="臂架泵压力" />
+                </RealTimeParams>
+            </QCItem>
+            <QCItem AttachPGN="0xFFEB" Id="12" Name="左后支腿垂直伸出" QCTimeout="20" QCTimes="5"
+                ReadyTimeout="10" Require="true">
+                <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
+                    <QCProgressMsg>
+                        <QCProgress Code="" Msg="" />
+                    </QCProgressMsg>
+                    <QCErrMsg>
+                        <QCErr Code="" Msg="" />
+                    </QCErrMsg>
+                </Msgs>
+                <QCParams>
+                    <QCParam Param="左后支腿垂直伸出时间" PicReq="true" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                </QCParams>
+                <ENVParams />
+                <RealTimeParams>
+                    <RealTimeParam Name="发动机转速" />
+                    <RealTimeParam Name="液压油温温度" />
+                    <RealTimeParam Name="臂架泵压力" />
+                </RealTimeParams>
+            </QCItem>
+            <QCItem AttachPGN="0xFFEC" Id="13" Name="左后支腿垂直回收" QCTimeout="20" QCTimes="5"
+                ReadyTimeout="10" Require="true">
+                <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
+                    <QCProgressMsg>
+                        <QCProgress Code="" Msg="" />
+                    </QCProgressMsg>
+                    <QCErrMsg>
+                        <QCErr Code="" Msg="" />
+                    </QCErrMsg>
+                </Msgs>
+                <QCParams>
+                    <QCParam Param="左后支腿垂直回收时间" PicReq="true" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                </QCParams>
+                <ENVParams />
+                <RealTimeParams>
+                    <RealTimeParam Name="发动机转速" />
+                    <RealTimeParam Name="液压油温温度" />
+                    <RealTimeParam Name="臂架泵压力" />
+                </RealTimeParams>
+            </QCItem>
+            <QCItem AttachPGN="0xFFED" Id="14" Name="右后支腿水平伸出" QCTimeout="20" QCTimes="5"
+                ReadyTimeout="10" Require="true">
+                <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
+                    <QCProgressMsg>
+                        <QCProgress Code="" Msg="" />
+                    </QCProgressMsg>
+                    <QCErrMsg>
+                        <QCErr Code="" Msg="" />
+                    </QCErrMsg>
+                </Msgs>
+                <QCParams>
+                    <QCParam Param="右后支腿水平伸出时间" PicReq="true" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                </QCParams>
+                <ENVParams />
+                <RealTimeParams>
+                    <RealTimeParam Name="发动机转速" />
+                    <RealTimeParam Name="液压油温温度" />
+                    <RealTimeParam Name="臂架泵压力" />
+                </RealTimeParams>
+            </QCItem>
+            <QCItem AttachPGN="0xFFEE" Id="15" Name="右后支腿水平回收" QCTimeout="20" QCTimes="5"
+                ReadyTimeout="10" Require="true">
+                <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
+                    <QCProgressMsg>
+                        <QCProgress Code="" Msg="" />
+                    </QCProgressMsg>
+                    <QCErrMsg>
+                        <QCErr Code="" Msg="" />
+                    </QCErrMsg>
+                </Msgs>
+                <QCParams>
+                    <QCParam Param="右后支腿水平回收时间" PicReq="true" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                </QCParams>
+                <ENVParams />
+                <RealTimeParams>
+                    <RealTimeParam Name="发动机转速" />
+                    <RealTimeParam Name="液压油温温度" />
+                    <RealTimeParam Name="臂架泵压力" />
+                </RealTimeParams>
+            </QCItem>
+            <QCItem AttachPGN="0xFFEF" Id="16" Name="右后支腿垂直伸出" QCTimeout="20" QCTimes="5"
+                ReadyTimeout="10" Require="true">
+                <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
+                    <QCProgressMsg>
+                        <QCProgress Code="" Msg="" />
+                    </QCProgressMsg>
+                    <QCErrMsg>
+                        <QCErr Code="" Msg="" />
+                    </QCErrMsg>
+                </Msgs>
+                <QCParams>
+                    <QCParam Param="右后支腿垂直伸出时间" PicReq="true" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                </QCParams>
+                <ENVParams />
+                <RealTimeParams>
+                    <RealTimeParam Name="发动机转速" />
+                    <RealTimeParam Name="液压油温温度" />
+                    <RealTimeParam Name="臂架泵压力" />
+                </RealTimeParams>
+            </QCItem>
+            <QCItem AttachPGN="0xFFF8" Id="17" Name="右后支腿垂直回收" QCTimeout="20" QCTimes="5"
+                ReadyTimeout="10" Require="true">
+                <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
+                    <QCProgressMsg>
+                        <QCProgress Code="" Msg="" />
+                    </QCProgressMsg>
+                    <QCErrMsg>
+                        <QCErr Code="" Msg="" />
+                    </QCErrMsg>
+                </Msgs>
+                <QCParams>
+                    <QCParam Param="右后支腿垂直回收时间" PicReq="true" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
                 </QCParams>
                 <ENVParams />
                 <RealTimeParams>
@@ -3713,7 +4254,7 @@
                 </RealTimeParams>
             </QCItem>
         </QCType>
-        <QCType Name="GPS特殊处理">
+        <QCType Name="GPS">
             <QCItem Id="83" Name="GPS系统验证" QCTimeout="20" QCTimes="2" ReadyTimeout="10"
                 Require="true">
                 <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
@@ -4016,8 +4557,8 @@
             </QCItem>
         </QCType>
         <QCType Name="Init">
-            <QCItem AttachPGN="0xFFF7" Id="999" Name="参数初始化" QCTimeout="20" QCTimes="1" ReadyTimeout="20"
-                Require="true">
+            <QCItem AttachPGN="0xFFF7" Id="999" Name="参数初始化" QCTimeout="20" QCTimes="1"
+                ReadyTimeout="20" Require="true">
                 <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
                     <QCProgressMsg>
                         <QCProgress Code="" Msg="" />

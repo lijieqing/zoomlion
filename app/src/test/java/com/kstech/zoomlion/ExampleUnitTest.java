@@ -1,10 +1,24 @@
 package com.kstech.zoomlion;
 
+import com.kstech.zoomlion.engine.device.XMLAPI;
 import com.kstech.zoomlion.model.session.DeviceCatSession;
+import com.kstech.zoomlion.model.xmlbean.DSItem;
+import com.kstech.zoomlion.model.xmlbean.DataSet;
+import com.kstech.zoomlion.model.xmlbean.J1939;
+import com.kstech.zoomlion.model.xmlbean.PG;
+import com.kstech.zoomlion.model.xmlbean.QCItem;
+import com.kstech.zoomlion.model.xmlbean.QCParam;
+import com.kstech.zoomlion.model.xmlbean.QCParams;
+import com.kstech.zoomlion.model.xmlbean.QCType;
+import com.kstech.zoomlion.model.xmlbean.SP;
 import com.kstech.zoomlion.utils.JsonUtils;
 
 import org.junit.Test;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -48,13 +62,133 @@ public class ExampleUnitTest {
     }
 
     @Test
-    public void strTest() {
-        String s = "${getPicTime('液压油过滤结束')}-${getPicTime('液压油过滤开始')}";
-        boolean b = s.startsWith("${");
-        System.out.println(b);
-        s = s.replace("${", "").replace("}", "");
-        System.out.println(s);
-        b = s.contains("-");
-        System.out.println(b);
+    public void strTest() throws IOException, IllegalAccessException, InvocationTargetException {
+        String v = "右前支腿水平伸出时间\n" +
+                "右前支腿水平回收时间\n" +
+                "右前支腿垂直伸出时间\n" +
+                "右前支腿垂直回收时间\n" +
+                "左后支腿水平伸出时间\n" +
+                "左后支腿水平回收时间\n" +
+                "左后支腿垂直伸出时间\n" +
+                "左后支腿垂直回收时间\n" +
+                "右后支腿水平伸出时间\n" +
+                "右后支腿水平回收时间\n" +
+                "右后支腿垂直伸出时间\n" +
+                "右后支腿垂直回收时间";
+        String[] vs = v.split("\n");
+        J1939 type = (J1939) XMLAPI.readXML(new FileInputStream("/Users/lijie/Desktop/zoo.xml"));
+        int id = 6;
+        int pgn = 0xff5d;
+        for (String s : vs) {
+            PG p = new PG();
+            p.setPGN("0x"+Integer.toHexString(pgn).toUpperCase());
+            p.setDir("Rx");
+            p.setLen("8");
+            p.setPrio("3");
+            p.setRate("100");
+            p.setReq("0");
+            p.setReqCyc("0");
+            p.setSA("0x01");
+            p.setType("2");
+            // p.getSps().add(pg.getSps().get(0));
+            SP sp = new SP();
+            sp.setBits("0");
+            sp.setBytes("2");
+            sp.setOff("0");
+            //sp.setRef(s.replace("时间","")+"不检测时间");
+            sp.setRef(s);
+            sp.setRes("0.001");
+            sp.setSBit("1");
+            sp.setSByte("1");
+            sp.setSPN("0");
+            sp.setType("1");
+            p.getSps().add(sp);
+            // sp = new SP();
+            // sp.setBits("0");
+            // sp.setBytes("2");
+            // sp.setOff("0");
+            // sp.setRef(s.replace("时间","")+"终止斜率阀值");
+            // sp.setRes("1");
+            // sp.setSBit("1");
+            // sp.setSByte("5");
+            // sp.setSPN("0");
+            // sp.setType("1");
+            // p.getSps().add(sp);
+
+            pgn++;
+            type.getPgs().add(p);
+        }
+
+        XMLAPI.writeXML2File(type,"/Users/lijie/Desktop/zoo.xml");
+    }
+
+    @Test
+    public void testDS() throws IOException, IllegalAccessException, InvocationTargetException {
+        String v = "右前支腿水平伸出时间\n" +
+                "右前支腿水平回收时间\n" +
+                "右前支腿垂直伸出时间\n" +
+                "右前支腿垂直回收时间\n" +
+                "左后支腿水平伸出时间\n" +
+                "左后支腿水平回收时间\n" +
+                "左后支腿垂直伸出时间\n" +
+                "左后支腿垂直回收时间\n" +
+                "右后支腿水平伸出时间\n" +
+                "右后支腿水平回收时间\n" +
+                "右后支腿垂直伸出时间\n" +
+                "右后支腿垂直回收时间";
+        String[] vs = v.split("\n");
+        DataSet type = (DataSet) XMLAPI.readXML(new FileInputStream("/Users/lijie/Desktop/zoo.xml"));
+        type.getDsItems().clear();
+        for (String s : vs) {
+            DSItem ds = new DSItem();
+            ds.setDataType("FLOAT");
+            ds.setDecLen("0");
+            //ds.setName(s.replace("时间","")+"不检测时间");
+            ds.setName(s);
+            ds.setUnit("s");
+            ds.setValue("0");
+            type.getDsItems().add(ds);
+            // ds = new DSItem();
+            // ds.setDataType("FLOAT");
+            // ds.setDecLen("0");
+            // ds.setName(s.replace("时间","")+"终止斜率阀值");
+            // ds.setUnit("UN");
+            // ds.setValue("0");
+            // type.getDsItems().add(ds);
+        }
+
+        XMLAPI.writeXML2File(type,"/Users/lijie/Desktop/zoo.xml");
+    }
+    @Test
+    public void testQC() throws IOException, IllegalAccessException, InvocationTargetException {
+        String v = "右前支腿水平伸出时间\n" +
+                "右前支腿水平回收时间\n" +
+                "右前支腿垂直伸出时间\n" +
+                "右前支腿垂直回收时间\n" +
+                "左后支腿水平伸出时间\n" +
+                "左后支腿水平回收时间\n" +
+                "左后支腿垂直伸出时间\n" +
+                "左后支腿垂直回收时间\n" +
+                "右后支腿水平伸出时间\n" +
+                "右后支腿水平回收时间\n" +
+                "右后支腿垂直伸出时间\n" +
+                "右后支腿垂直回收时间";
+        String[] vs = v.split("\n");
+        QCParams type = (QCParams) XMLAPI.readXML(new FileInputStream("/Users/lijie/Desktop/zoo.xml"));
+        type.getQcParams().clear();
+        for (String s : vs) {
+            QCParam param = new QCParam();
+            param.setParam(s);
+            param.setValueReq(true);
+            param.setPicReq(true);
+            param.setValMode("Auto");
+            param.setQCMode("Auto");
+            param.setValidMax("");
+            param.setValidAvg("");
+            param.setValidMin("");
+
+            type.getQcParams().add(param);
+        }
+        XMLAPI.writeXML2File(type,"/Users/lijie/Desktop/zoo.xml");
     }
 }
