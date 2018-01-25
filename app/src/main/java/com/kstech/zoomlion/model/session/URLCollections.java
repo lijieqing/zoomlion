@@ -64,6 +64,14 @@ public final class URLCollections {
      * 根据调试项目dict ID获取调试项目记录
      */
     public static String GET_ITEM_RECORD_BY_DICT = ADDRESS + "/commissioning/getQCItemRecord";
+    /**
+     * 图片请求前缀
+     */
+    public static String PIC_URL_PREFIX = ADDRESS + "/file/picture/";
+    /**
+     * 图片请求后缀
+     */
+    public static String PIC_URL_SUFFIX = ".jpg";
 
     public static String REGISTER_PAD = ADDRESS + "/portabledev/register";//调试终端注册
 

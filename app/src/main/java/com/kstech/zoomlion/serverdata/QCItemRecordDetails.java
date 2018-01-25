@@ -1,12 +1,15 @@
 package com.kstech.zoomlion.serverdata;
 
+import android.support.annotation.NonNull;
+
+import java.util.Date;
 import java.util.List;
 
 /**
  * @author 7yrs
  * @date 2018/1/19.
  */
-public class QCItemRecordDetails {
+public class QCItemRecordDetails implements Comparable<QCItemRecordDetails>{
     /**
      * 调试项记录Id
      */
@@ -129,5 +132,10 @@ public class QCItemRecordDetails {
                 ", status=" + status +
                 ", doneDate='" + doneDate + '\'' +
                 '}';
+    }
+
+    @Override
+    public int compareTo(@NonNull QCItemRecordDetails o) {
+        return o.getCheckNO()-checkNO;
     }
 }
