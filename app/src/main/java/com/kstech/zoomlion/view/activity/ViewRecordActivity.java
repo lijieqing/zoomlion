@@ -1,8 +1,11 @@
 package com.kstech.zoomlion.view.activity;
 
+import android.app.AlertDialog;
+import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Message;
+import android.support.v7.app.ActionBar;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -13,6 +16,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
+import com.github.mikephil.charting.charts.LineChart;
 import com.kstech.zoomlion.R;
 import com.kstech.zoomlion.engine.server.ItemRecordLoadTask;
 import com.kstech.zoomlion.model.session.URLCollections;
@@ -54,6 +60,9 @@ public class ViewRecordActivity extends BaseActivity {
     @ViewInject(R.id.vr_tv_record_result)
     private TextView tvRecordResult;
 
+    @ViewInject(R.id.vr_line_chart)
+    private LineChart lineChart;
+
     /**
      * 调试项目服务器数据集合
      */
@@ -86,9 +95,18 @@ public class ViewRecordActivity extends BaseActivity {
      * 数据集合adapter
      */
     private DataAdapter dataAdapter;
-
+    /**
+     * 图片展示弹窗
+     */
+    private AlertDialog picShowDialog;
+    /**
+     * 调试项目记录加载完成
+     */
     public static final int ITEM_RECORD_LOADED = 0;
-
+    /**
+     * 图片大图加载完成
+     */
+    private static final int PIC_LOAD_FINISH = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,6 +115,9 @@ public class ViewRecordActivity extends BaseActivity {
         String dictID = getIntent().getStringExtra("dictID");
         tvTitle.setText(Globals.currentCheckItem.getName());
         tvTitle.setTextSize(24);
+
+        picShowDialog = new AlertDialog.Builder(this, android.R.style.Theme_DeviceDefault_Dialog_MinWidth)
+                .create();
 
         timeListAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,
                 android.R.id.text1, itemTimeList);
@@ -113,6 +134,23 @@ public class ViewRecordActivity extends BaseActivity {
         dataAdapter = new DataAdapter();
         lvPicList.setAdapter(imgAdapter);
         lvResultList.setAdapter(dataAdapter);
+
+        lvPicList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Glide.with(ViewRecordActivity.this).asBitmap().load(imgList.get(position).url)
+                        .into(new SimpleTarget<Bitmap>() {
+                            @Override
+                            public void onResourceReady(Bitmap resource, Transition<? super Bitmap> transition) {
+                                Message message = Message.obtain();
+                                message.what = PIC_LOAD_FINISH;
+                                message.obj = resource;
+                                handler.sendMessage(message);
+                            }
+                        });
+            }
+        });
 
         ItemRecordLoadTask loadTask = new ItemRecordLoadTask(handler);
         loadTask.setDictID(dictID);
@@ -159,6 +197,28 @@ public class ViewRecordActivity extends BaseActivity {
         tvRecordResult.setText(QCDataStatusEnum.nameOf(currentRecord.getStatus()).getName());
     }
 
+    //更新图片展示界面
+    public void updatePicDialog(Bitmap bitmap) {
+        ImageView iv = new ImageView(this);
+        iv.setImageBitmap(bitmap);
+        iv.setLayoutParams(new ActionBar.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+
+        if (picShowDialog.isShowing()) {
+            picShowDialog.cancel();
+            picShowDialog = new AlertDialog.Builder(this, android.R.style.Theme_DeviceDefault_Dialog_MinWidth)
+                    .create();
+            picShowDialog.setView(iv);
+            picShowDialog.show();
+        } else {
+            picShowDialog = new AlertDialog.Builder(this, android.R.style.Theme_DeviceDefault_Dialog_MinWidth)
+                    .create();
+            picShowDialog.setView(iv);
+            picShowDialog.show();
+        }
+
+    }
+
+
     private InnerHandler handler = new InnerHandler(this);
 
     private static class InnerHandler extends BaseInnerHandler {
@@ -183,6 +243,9 @@ public class ViewRecordActivity extends BaseActivity {
                     }
                     vrActivity.itemRecordDetails.addAll(datas);
                     vrActivity.timeListAdapter.notifyDataSetChanged();
+                    break;
+                case PIC_LOAD_FINISH:
+                    vrActivity.updatePicDialog((Bitmap) msg.obj);
                     break;
             }
         }
@@ -224,7 +287,7 @@ public class ViewRecordActivity extends BaseActivity {
             }
             holder = (ViewHolder) view.getTag();
             holder.tvParamName.setText(getItem(i).name);
-            holder.tvDesc.setText(getItem(i).url);
+            holder.tvDesc.setText("点击查看大图");
             Glide.with(ViewRecordActivity.this).load(getItem(i).url).thumbnail(0.1f).into(holder.imageView);
 
             view.setMinimumHeight(DeviceUtil.deviceHeight(ViewRecordActivity.this) / 7);
@@ -240,6 +303,9 @@ public class ViewRecordActivity extends BaseActivity {
         }
     }
 
+    /**
+     * 图片数据对象
+     */
     private class ImageData {
         String name;
         String url;
@@ -250,6 +316,9 @@ public class ViewRecordActivity extends BaseActivity {
         }
     }
 
+    /**
+     * 参数数值数据对象
+     */
     private class ResultData {
         String name;
         String unit;
