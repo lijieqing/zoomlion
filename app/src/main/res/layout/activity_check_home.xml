@@ -22,6 +22,23 @@
             android:layout_marginLeft="5dp"
             android:layout_marginTop="2dp"
             android:src="@drawable/header_logo" />
+
+        <TextView
+            android:id="@+id/ch_tv_gps"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:clickable="true"
+            android:drawableLeft="@drawable/pic_gps_icon"
+            android:drawableStart="@drawable/pic_gps_icon"
+            android:focusable="true"
+            android:gravity="center"
+            android:text="GPS系统验证"
+            android:textSize="18sp" />
     </RelativeLayout>
 
     <LinearLayout

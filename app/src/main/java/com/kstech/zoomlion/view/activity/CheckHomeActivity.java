@@ -130,6 +130,12 @@ public class CheckHomeActivity extends BaseActivity {
     private TextView tvCheckUser;
 
     /**
+     * GPS系统验证
+     */
+    @ViewInject(R.id.ch_tv_gps)
+    private TextView tvGPS;
+
+    /**
      * 实时参数集合
      */
     private List<RealTimeView> inHomeRealTimeViews = new ArrayList<>();
@@ -210,6 +216,19 @@ public class CheckHomeActivity extends BaseActivity {
                 return false;
             }
         });
+        //过滤group内容，去除Init和GPS
+        Globals.groups.remove("Init");
+        if (!Globals.modelFile.checkItemMap.containsKey("GPS")) {
+            tvGPS.setVisibility(View.GONE);
+        } else {
+            Globals.groups.remove("GPS");
+            tvGPS.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(CheckHomeActivity.this, "GPS", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
 
         //实例化实时展示参数组件
         for (RealTimeParamVO realTimeParamVO : Globals.modelFile.getRealTimeParamList()) {
