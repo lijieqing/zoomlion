@@ -237,7 +237,7 @@ public class ViewRecordActivity extends BaseActivity {
 
         tvRecordsChecker.setText(currentRecord.getOperatorName());
         String model = getResources().getString(R.string.view_record_check_times);
-        String times = String.format(model, currentRecord.getCheckNO());
+        String times = String.format(model, currentRecord.getCheckNO()+1);
         tvRecordNum.setText(String.valueOf(times));
         tvRecordResult.setText(QCDataStatusEnum.nameOf(currentRecord.getStatus()).getName());
     }
