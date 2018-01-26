@@ -14,6 +14,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.SimpleTarget;
@@ -27,14 +28,23 @@ import com.kstech.zoomlion.serverdata.QCDataStatusEnum;
 import com.kstech.zoomlion.serverdata.QCItemRecordDetails;
 import com.kstech.zoomlion.utils.DeviceUtil;
 import com.kstech.zoomlion.utils.Globals;
+import com.kstech.zoomlion.utils.JsonUtils;
+import com.kstech.zoomlion.utils.ThreadManager;
+import com.kstech.zoomlion.view.adapter.LineChartAdapter;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.xutils.http.RequestParams;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 @ContentView(R.layout.activity_view_record)
 public class ViewRecordActivity extends BaseActivity {
@@ -107,6 +117,14 @@ public class ViewRecordActivity extends BaseActivity {
      * 图片大图加载完成
      */
     private static final int PIC_LOAD_FINISH = 1;
+    /**
+     * 谱图数据加载完成
+     */
+    public static final int SPEC_LOAD_FINISH = 2;
+    /**
+     * 谱图请求错误
+     */
+    public static final int SPEC_LOAD_ERROR = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -164,10 +182,35 @@ public class ViewRecordActivity extends BaseActivity {
         imgList.clear();
         dataList.clear();
 
-        Long specID = currentRecord.getSpectrogramId();
+        final Long specID = currentRecord.getSpectrogramId();
         if (specID != null) {
-            //当存在谱图ID时
-
+            //当存在谱图ID时,请求谱图数据
+            ThreadManager.getThreadPool().execute(new Runnable() {
+                @Override
+                public void run() {
+                    String url = URLCollections.SPEC_URL_PREFIX + specID;
+                    RequestParams params = new RequestParams(url);
+                    try {
+                        Map<String, List<Float>> map = new HashMap<>();
+                        String result = x.http().getSync(params, String.class);
+                        JSONObject object = new JSONObject(result);
+                        Iterator<String> keys = object.keys();
+                        while (keys.hasNext()) {
+                            String key = keys.next();
+                            JSONArray array = (JSONArray) object.get(key);
+                            String value = array.toString();
+                            map.put(key, JsonUtils.fromArrayJson(value, Float.class));
+                        }
+                        Message message = Message.obtain();
+                        message.obj = map;
+                        message.what = SPEC_LOAD_FINISH;
+                        handler.sendMessage(message);
+                    } catch (Throwable throwable) {
+                        handler.sendEmptyMessage(SPEC_LOAD_ERROR);
+                        throwable.printStackTrace();
+                    }
+                }
+            });
         }
         //遍历当前调试项目细节记录各个参数
         for (QCDataRecordDetails qcData : currentRecord.getQcdataRecordVOList()) {
@@ -193,11 +236,25 @@ public class ViewRecordActivity extends BaseActivity {
         dataAdapter.notifyDataSetChanged();
 
         tvRecordsChecker.setText(currentRecord.getOperatorName());
-        tvRecordNum.setText(String.valueOf(currentRecord.getCheckNO()));
+        String model = getResources().getString(R.string.view_record_check_times);
+        String times = String.format(model, currentRecord.getCheckNO());
+        tvRecordNum.setText(String.valueOf(times));
         tvRecordResult.setText(QCDataStatusEnum.nameOf(currentRecord.getStatus()).getName());
     }
 
-    //更新图片展示界面
+    /**
+     * 更新谱图信息
+     *
+     * @param map 谱图数据对象
+     */
+    private void updateSpec(Map<String, List<Float>> map) {
+        LineChartAdapter chartAdapter = new LineChartAdapter(lineChart, map);
+        chartAdapter.setYAxis(150, 0, 15);
+    }
+
+    /**
+     * 更新图片展示界面
+     */
     public void updatePicDialog(Bitmap bitmap) {
         ImageView iv = new ImageView(this);
         iv.setImageBitmap(bitmap);
@@ -246,6 +303,12 @@ public class ViewRecordActivity extends BaseActivity {
                     break;
                 case PIC_LOAD_FINISH:
                     vrActivity.updatePicDialog((Bitmap) msg.obj);
+                    break;
+                case SPEC_LOAD_FINISH:
+                    vrActivity.updateSpec((Map<String, List<Float>>) msg.obj);
+                    break;
+                case SPEC_LOAD_ERROR:
+                    Toast.makeText(vrActivity, "谱图请求错误", Toast.LENGTH_SHORT).show();
                     break;
             }
         }

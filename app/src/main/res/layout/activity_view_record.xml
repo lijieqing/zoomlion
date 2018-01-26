@@ -34,168 +34,198 @@
                 android:id="@+id/vr_tv_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true" />
+                android:layout_centerInParent="true"
+                android:textSize="26sp" />
         </RelativeLayout>
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@drawable/ll_change_check_title_bg"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center_vertical|end"
-            android:text="调试员："
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/vr_tv_record_checker"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center_vertical|start"
-            android:textSize="16sp" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center_vertical|end"
-            android:text="调试顺序："
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/vr_tv_record_no"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center_vertical|start"
-            android:textSize="16sp" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center_vertical|end"
-            android:text="调试结论："
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/vr_tv_record_result"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center_vertical|start"
-            android:textSize="16sp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="6"
         android:orientation="horizontal">
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginEnd="1dp"
-            android:layout_marginRight="1dp"
-            android:layout_weight="2"
-            android:orientation="vertical">
+            android:layout_weight="1">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:background="@color/zoomLionColor"
-                android:gravity="center"
-                android:text="调试时间"
-                android:textColor="#fff"
-                android:textSize="16sp" />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="1dp"
+                android:layout_marginRight="1dp"
+                android:layout_weight="2"
+                android:orientation="vertical">
 
-            <ListView
-                android:id="@+id/vr_lv"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="#8dcba2"
+                    android:gravity="center"
+                    android:text="调试记录(按完成时间)"
+                    android:textColor="#fff"
+                    android:textSize="16sp" />
+
+                <ListView
+                    android:id="@+id/vr_lv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginRight="1dp"
             android:layout_weight="3"
             android:orientation="vertical">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="#8dcba2"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical|end"
+                    android:text="调试员："
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/vr_tv_record_checker"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical|start"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical|end"
+                    android:text="调试次序："
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/vr_tv_record_no"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical|start"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical|end"
+                    android:text="调试结论："
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/vr_tv_record_result"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical|start"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:background="@color/zoomLionColor"
-                android:gravity="center"
-                android:text="参数数值"
-                android:textColor="#fff"
-                android:textSize="16sp" />
+                android:layout_height="1px"
+                android:background="#000" />
 
-            <ListView
-                android:id="@+id/vr_lv_result"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
 
-            </ListView>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="1dp"
+                    android:layout_weight="3"
+                    android:background="#eee"
+                    android:orientation="vertical">
 
-        </LinearLayout>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:background="#8dcba2"
+                        android:gravity="center"
+                        android:text="参数数值"
+                        android:textColor="#fff"
+                        android:textSize="16sp" />
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginRight="1dp"
-            android:layout_weight="3"
-            android:orientation="vertical">
+                    <ListView
+                        android:id="@+id/vr_lv_result"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:background="@color/zoomLionColor"
-                android:gravity="center"
-                android:text="图片数据"
-                android:textColor="#fff"
-                android:textSize="16sp" />
+                    </ListView>
 
-            <ListView
-                android:id="@+id/vr_lv_pic"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                </LinearLayout>
 
-            </ListView>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="1dp"
+                    android:layout_weight="3"
+                    android:background="#eee"
+                    android:orientation="vertical">
 
-        </LinearLayout>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:background="#8dcba2"
+                        android:gravity="center"
+                        android:text="图片数据"
+                        android:textColor="#fff"
+                        android:textSize="16sp" />
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginRight="1dp"
-            android:layout_weight="3"
-            android:orientation="vertical">
+                    <ListView
+                        android:id="@+id/vr_lv_pic"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:background="@color/zoomLionColor"
-                android:gravity="center"
-                android:text="谱图数据"
-                android:textColor="#fff"
-                android:textSize="16sp" />
+                    </ListView>
 
-            <com.github.mikephil.charting.charts.LineChart
-                android:id="@+id/vr_line_chart"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                </LinearLayout>
 
-            </com.github.mikephil.charting.charts.LineChart>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="1dp"
+                    android:layout_weight="3"
+                    android:background="#eee"
+                    android:orientation="vertical">
 
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:background="#8dcba2"
+                        android:gravity="center"
+                        android:text="谱图数据"
+                        android:textColor="#fff"
+                        android:textSize="16sp" />
+
+                    <com.github.mikephil.charting.charts.LineChart
+                        android:id="@+id/vr_line_chart"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                    </com.github.mikephil.charting.charts.LineChart>
+
+                </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
+
 
 </LinearLayout>

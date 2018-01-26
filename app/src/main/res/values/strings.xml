@@ -73,5 +73,8 @@
         \t\t 谱图采集间隔：%3$d mm \n\n
         \t\t 调试参数数量：%4$d 个
     </string>
+    <string name="view_record_check_times">
+        第%1$d次调试
+    </string>
 
 </resources>

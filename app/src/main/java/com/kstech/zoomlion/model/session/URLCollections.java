@@ -72,6 +72,10 @@ public final class URLCollections {
      * 图片请求后缀
      */
     public static String PIC_URL_SUFFIX = ".jpg";
+    /**
+     * 谱图数据请求前缀
+     */
+    public static String SPEC_URL_PREFIX = ADDRESS + "/file/spectrogram/";
 
     public static String REGISTER_PAD = ADDRESS + "/portabledev/register";//调试终端注册
 
