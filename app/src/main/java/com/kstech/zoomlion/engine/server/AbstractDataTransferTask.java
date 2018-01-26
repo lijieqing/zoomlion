@@ -54,14 +54,10 @@ public abstract class AbstractDataTransferTask extends AsyncTask<Void, Integer, 
 
     @Override
     protected Void doInBackground(Void... voids) {
-        handler.sendEmptyMessage(BaseActivity.DIALOG_SHOW);
-
-        message = Message.obtain();
-        message.obj = getTaskTitle();
-        message.arg1 = 5;
-        message.what = BaseActivity.UPDATE_PROGRESS_CONTENT;
-        handler.sendMessage(message);
-        SystemClock.sleep(500);
+        //弹出dialog
+        sendMsg(BaseActivity.DIALOG_SHOW, null, 0);
+        //更新进度
+        sendMsg(BaseActivity.UPDATE_PROGRESS_CONTENT, getTaskTitle(), 5);
 
         //请求前执行任务
         beforeRequest();
@@ -69,13 +65,7 @@ public abstract class AbstractDataTransferTask extends AsyncTask<Void, Integer, 
         RequestParams params;
         while (needRequest()) {
             String result = "";
-
-            message = Message.obtain();
-            message.obj = getRequestMessage();
-            message.arg1 = 30;
-            message.what = BaseActivity.UPDATE_PROGRESS_CONTENT;
-            handler.sendMessage(message);
-            SystemClock.sleep(1000);
+            sendMsg(BaseActivity.UPDATE_PROGRESS_CONTENT, getRequestMessage(), 30);
 
             //初始化请求参数
             params = new RequestParams(getURL());
@@ -95,54 +85,37 @@ public abstract class AbstractDataTransferTask extends AsyncTask<Void, Integer, 
                     if (!object.has("error")) {
                         //请求成功后调用
                         onRequestSuccess(object);
-                        message = Message.obtain();
-                        message.arg1 = 50;
-                        message.obj = "请求成功！";
-                        message.what = BaseActivity.UPDATE_PROGRESS_CONTENT;
+                        sendMsg(BaseActivity.UPDATE_PROGRESS_CONTENT, "请求成功！", 50);
                     } else {
                         //请求返回error
                         onRequestError();
-                        message = Message.obtain();
-                        message.obj = object.getString("error");
-                        message.arg1 = 50;
-                        message.what = BaseActivity.UPDATE_PROGRESS_CONTENT;
+                        sendMsg(BaseActivity.UPDATE_PROGRESS_CONTENT, object.getString("error"), 50);
                     }
-                    handler.sendMessage(message);
+
                 }
 
             } catch (JSONException e) {
                 e.printStackTrace();
-                message = Message.obtain();
+
                 if (URLCollections.isReLogin(result)) {
-                    if (onReLogin(message)) {
-                        message.what = BaseActivity.USER_RELOGIN;
-                        handler.sendEmptyMessage(BaseActivity.DIALOG_CANCEL);
+                    if (onReLogin()) {
+                        sendMsg(BaseActivity.USER_RELOGIN, null, 80);
                     } else {
-                        message.what = BaseActivity.UPDATE_PROGRESS_CONTENT;
-                        message.obj = "用户登录无效，请求失败";
-                        message.arg1 = 80;
+                        sendMsg(BaseActivity.UPDATE_PROGRESS_CONTENT, "用户登录无效，请求失败", 80);
                     }
                 } else {
-                    message.what = BaseActivity.UPDATE_PROGRESS_CONTENT;
-                    message.obj = "未能正确解析服务器数据,请求失败";
-                    message.arg1 = 80;
+                    sendMsg(BaseActivity.UPDATE_PROGRESS_CONTENT, "未能正确解析服务器数据,请求失败", 80);
                 }
-                handler.sendMessage(message);
-                SystemClock.sleep(1000);
+
                 break;
             } catch (Throwable throwable) {
                 throwable.printStackTrace();
-                message = Message.obtain();
-                message.what = BaseActivity.UPDATE_PROGRESS_CONTENT;
-                message.obj = throwable.getMessage();
-                message.arg1 = 100;
-                handler.sendMessage(message);
-                SystemClock.sleep(1000);
+                sendMsg(BaseActivity.UPDATE_PROGRESS_CONTENT, throwable.getMessage(), 100);
                 break;
             }
         }
 
-        onRequestFinish(true);
+        onRequestFinish();
 
         SystemClock.sleep(1000);
         handler.sendEmptyMessage(BaseActivity.DIALOG_CANCEL);
@@ -151,30 +124,52 @@ public abstract class AbstractDataTransferTask extends AsyncTask<Void, Integer, 
     }
 
     /**
+     * 发送更新信息
+     *
+     * @param what     信息标记
+     * @param obj      信息内容
+     * @param progress 进度指示
+     */
+    protected void sendMsg(int what, Object obj, int progress) {
+        if (obj == null) {
+            handler.sendEmptyMessage(what);
+        } else {
+            message = Message.obtain();
+            message.what = what;
+            message.obj = obj;
+            message.arg1 = progress;
+
+            handler.sendMessage(message);
+            SystemClock.sleep(1000);
+        }
+    }
+
+    /**
      * 获取message描述信息
      *
      * @return 字符串
      */
-    abstract String getRequestMessage();
+    protected abstract String getRequestMessage();
 
     /**
      * 是否需要向服务器请求
      *
      * @return TRUE、FALSE
      */
-    abstract boolean needRequest();
+    protected abstract boolean needRequest();
 
     /**
      * 请求前所做的数据准备
      */
-    abstract void beforeRequest();
+    protected void beforeRequest() {
+    }
 
     /**
      * 获取URL
      *
      * @return 需要请求的URL地址
      */
-    abstract String getURL();
+    protected abstract String getURL();
 
     /**
      * 请求参数数据初始化
@@ -183,34 +178,34 @@ public abstract class AbstractDataTransferTask extends AsyncTask<Void, Integer, 
      *               <p>
      *               return 是否是POST请求
      */
-    abstract boolean initRequestParam(RequestParams params);
+    protected abstract boolean initRequestParam(RequestParams params);
 
     /**
      * 请求成功回调
      *
      * @param data 返回的Json对象
      */
-    abstract void onRequestSuccess(JSONObject data) throws JSONException;
+    protected void onRequestSuccess(JSONObject data) throws JSONException {
+    }
 
     /**
      * 请求失败回调
      */
-    abstract void onRequestError();
+    protected void onRequestError() {
+    }
 
     /**
-     * 重新登录回调
+     * 是否提示重新登录回调
      *
-     * @param message 消息对象
      * @return 是否重新登录
      */
-    abstract boolean onReLogin(Message message);
+    protected abstract boolean onReLogin();
 
     /**
      * 请求完成回调
-     *
-     * @param success 请求是否成功
      */
-    abstract void onRequestFinish(boolean success);
+    protected void onRequestFinish() {
+    }
 
     /**
      * 在dialog取消后回调此方法，子类可根据需求去实现
@@ -225,7 +220,7 @@ public abstract class AbstractDataTransferTask extends AsyncTask<Void, Integer, 
      * @param response 服务器数据
      * @return 是否进行json转换
      */
-    protected boolean onResponse(String response) {
+    protected boolean onResponse(String response) throws JSONException {
         return false;
     }
 
@@ -239,7 +234,7 @@ public abstract class AbstractDataTransferTask extends AsyncTask<Void, Integer, 
      * @param detailData 调试项目细节数据
      * @return 打包完成后的对象
      */
-    CompleteQCItemJSON packageQCItemData(CheckItemDetailData detailData, CheckItemData itemData) {
+    protected CompleteQCItemJSON packageQCItemData(CheckItemDetailData detailData, CheckItemData itemData) {
         //将调试项目数据打包为传输格式数据
         CompleteQCItemJSON qcItemJSON = new CompleteQCItemJSON();
 

@@ -9,8 +9,6 @@ import com.kstech.zoomlion.utils.Globals;
 import com.kstech.zoomlion.utils.JsonUtils;
 import com.kstech.zoomlion.view.activity.ViewRecordActivity;
 
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.xutils.http.RequestParams;
 
 import java.util.List;
@@ -32,27 +30,22 @@ public class ItemRecordLoadTask extends AbstractDataTransferTask {
     }
 
     @Override
-    String getRequestMessage() {
+    protected String getRequestMessage() {
         return "调试项目数据获取中";
     }
 
     @Override
-    boolean needRequest() {
+    protected boolean needRequest() {
         return count++ < 1;
     }
 
     @Override
-    void beforeRequest() {
-
-    }
-
-    @Override
-    String getURL() {
+    protected String getURL() {
         return URLCollections.GET_ITEM_RECORD_BY_DICT;
     }
 
     @Override
-    boolean initRequestParam(RequestParams params) {
+    protected boolean initRequestParam(RequestParams params) {
         params.addQueryStringParameter("sn", Globals.deviceSN);
         params.addQueryStringParameter("qcitemDictId", dictID);
         return false;
@@ -60,7 +53,7 @@ public class ItemRecordLoadTask extends AbstractDataTransferTask {
 
     @Override
     protected boolean onResponse(String response) {
-        super.onResponse(response);
+
         List<QCItemRecordDetails> datas = JsonUtils.fromArrayJson(response, QCItemRecordDetails.class);
         message = Message.obtain();
         message.obj = datas;
@@ -70,22 +63,8 @@ public class ItemRecordLoadTask extends AbstractDataTransferTask {
     }
 
     @Override
-    void onRequestSuccess(JSONObject data) throws JSONException {
-
-    }
-
-    @Override
-    void onRequestError() {
-
-    }
-
-    @Override
-    boolean onReLogin(Message message) {
+    protected boolean onReLogin() {
         return true;
     }
 
-    @Override
-    void onRequestFinish(boolean success) {
-
-    }
 }

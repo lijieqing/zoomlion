@@ -1,7 +1,6 @@
 package com.kstech.zoomlion.engine.server;
 
 import android.os.Handler;
-import android.os.Message;
 
 import com.kstech.zoomlion.model.session.URLCollections;
 import com.kstech.zoomlion.serverdata.UserInfo;
@@ -26,58 +25,41 @@ public class UserDetailLoadTask extends AbstractDataTransferTask {
     }
 
     @Override
-    String getRequestMessage() {
+    protected String getRequestMessage() {
         return "获取用户详情";
     }
 
     @Override
-    boolean needRequest() {
+    protected boolean needRequest() {
         return count++ < 1;
     }
 
     @Override
-    void beforeRequest() {
-
-    }
-
-    @Override
-    String getURL() {
+    protected String getURL() {
         return URLCollections.GET_USER_DETAIL;
     }
 
     @Override
-    boolean initRequestParam(RequestParams params) {
+    protected boolean initRequestParam(RequestParams params) {
         return false;
     }
 
     @Override
-    void onRequestSuccess(JSONObject data) throws JSONException {
+    protected void onRequestSuccess(JSONObject data) throws JSONException {
         user = JsonUtils.fromJson(data.toString(), UserInfo.class);
     }
 
     @Override
-    void onRequestError() {
-
-    }
-
-    @Override
-    boolean onReLogin(Message message) {
+    protected boolean onReLogin() {
         return true;
     }
 
     @Override
-    void onRequestFinish(boolean success) {
+    protected void onRequestFinish() {
         if (user != null) {
-            message = Message.obtain();
-            message.what = UserDetailActivity.UPDATE_USER_DETAIL;
-            message.obj = user;
-            handler.sendMessage(message);
+            sendMsg(UserDetailActivity.UPDATE_USER_DETAIL, user, 0);
         } else {
-            message = Message.obtain();
-            message.what = BaseActivity.UPDATE_PROGRESS_CONTENT;
-            message.obj = "无法获取用户详细信息";
-            message.arg1 = 95;
-            handler.sendMessage(message);
+            sendMsg(BaseActivity.UPDATE_PROGRESS_CONTENT, "无法获取用户详细信息", 95);
         }
     }
 }

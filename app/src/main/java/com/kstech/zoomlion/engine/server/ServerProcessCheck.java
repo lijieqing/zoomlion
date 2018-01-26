@@ -65,33 +65,28 @@ public class ServerProcessCheck extends AbstractDataTransferTask {
     }
 
     @Override
-    String getRequestMessage() {
+    protected String getRequestMessage() {
         return "服务器机型流程校验";
     }
 
     @Override
-    boolean needRequest() {
+    protected boolean needRequest() {
         return requestTimes++ < 1;
     }
 
     @Override
-    void beforeRequest() {
-
-    }
-
-    @Override
-    String getURL() {
+    protected String getURL() {
         return URLCollections.NOTIFY_SERVER_GOTO_CHECK;
     }
 
     @Override
-    boolean initRequestParam(RequestParams params) {
+    protected boolean initRequestParam(RequestParams params) {
         params.addBodyParameter("sn", Globals.deviceSN);
         return true;
     }
 
     @Override
-    void onRequestSuccess(JSONObject data) throws JSONException {
+    protected void onRequestSuccess(JSONObject data) throws JSONException {
         if (data.has("processId")) {
             message = Message.obtain();
             String id = data.getString("processId");
@@ -122,17 +117,12 @@ public class ServerProcessCheck extends AbstractDataTransferTask {
     }
 
     @Override
-    void onRequestError() {
-
-    }
-
-    @Override
-    boolean onReLogin(Message message) {
+    protected boolean onReLogin() {
         return true;
     }
 
     @Override
-    void onRequestFinish(boolean success) {
+    protected void onRequestFinish() {
         if (skip) {
             if (hasRecord) {
                 verifyCheckRecord(record);
@@ -142,11 +132,7 @@ public class ServerProcessCheck extends AbstractDataTransferTask {
             updateItemStatus();
         } else {
             //不一致提示异常，停止进入
-            message = Message.obtain();
-            message.what = BaseActivity.UPDATE_PROGRESS_CONTENT;
-            message.obj = "当前流程与服务器流程不一致，无法进入调试";
-            message.arg1 = 100;
-            handler.sendMessage(message);
+            sendMsg(BaseActivity.UPDATE_PROGRESS_CONTENT, "当前流程与服务器流程不一致，无法进入调试", 100);
         }
     }
 
@@ -172,12 +158,7 @@ public class ServerProcessCheck extends AbstractDataTransferTask {
             if (cr != null) {
                 int sumCount = 0;
 
-                message = Message.obtain();
-                message.what = BaseActivity.UPDATE_PROGRESS_CONTENT;
-                message.obj = "更新调试项目状态";
-                message.arg1 = 75;
-                handler.sendMessage(message);
-                SystemClock.sleep(1000);
+                sendMsg(BaseActivity.UPDATE_PROGRESS_CONTENT, "更新调试项目状态", 75);
 
                 for (QCItemStatus itemStatus : itemStatus) {
                     Long dictId = itemStatus.getQcitemDictId();
@@ -203,11 +184,7 @@ public class ServerProcessCheck extends AbstractDataTransferTask {
                     recordDao.update(cr);
                 }
 
-                message = Message.obtain();
-                message.what = BaseActivity.UPDATE_PROGRESS_CONTENT;
-                message.obj = "调试项目状态数据更新完成";
-                message.arg1 = 95;
-                handler.sendMessage(message);
+                sendMsg(BaseActivity.UPDATE_PROGRESS_CONTENT, "调试项目状态数据更新完成", 95);
             }
         }
     }
@@ -273,12 +250,8 @@ public class ServerProcessCheck extends AbstractDataTransferTask {
     private void verifyCheckRecord(CheckRecord cr) {
         Globals.recordID = cr.getCheckRecordId();
         List<CheckItemVO> newItemList = new ArrayList<>();
-        Message message;
-        message = Message.obtain();
-        message.what = BaseActivity.UPDATE_PROGRESS_CONTENT;
-        message.obj = "数据校验中";
-        message.arg1 = 50;
-        handler.sendMessage(message);
+
+        sendMsg(BaseActivity.UPDATE_PROGRESS_CONTENT, "数据校验中", 50);
 
         //对当前的调试项目遍历，与数据库比对
         for (CheckItemVO checkItemVO : Globals.modelFile.allCheckItemList) {
@@ -309,20 +282,12 @@ public class ServerProcessCheck extends AbstractDataTransferTask {
             SystemClock.sleep(50);
         }
         //发送校验完成状态
-        message = Message.obtain();
-        message.what = BaseActivity.UPDATE_PROGRESS_CONTENT;
-        message.arg1 = 75;
-        message.obj = "数据校验完成";
-        handler.sendMessage(message);
+        sendMsg(BaseActivity.UPDATE_PROGRESS_CONTENT, "数据校验完成", 75);
 
         //最后判断 新调试项目集合是否为空
         if (newItemList.size() > 0) {
             //发送 更新数据 状态
-            message = Message.obtain();
-            message.what = BaseActivity.UPDATE_PROGRESS_CONTENT;
-            message.obj = "数据库更新中";
-            message.arg1 = 78;
-            handler.sendMessage(message);
+            sendMsg(BaseActivity.UPDATE_PROGRESS_CONTENT, "数据库更新中", 78);
             //初始化新的调试项目记录
             CheckItemData itemData;
             try {
@@ -334,11 +299,7 @@ public class ServerProcessCheck extends AbstractDataTransferTask {
                 }
             } catch (Exception e) {
                 //异常 进行提示
-                message = Message.obtain();
-                message.what = BaseActivity.UPDATE_PROGRESS_CONTENT;
-                message.obj = e.getMessage();
-                message.arg1 = 100;
-                handler.sendMessage(message);
+                sendMsg(BaseActivity.UPDATE_PROGRESS_CONTENT, e.getMessage(), 100);
             }
         }
     }

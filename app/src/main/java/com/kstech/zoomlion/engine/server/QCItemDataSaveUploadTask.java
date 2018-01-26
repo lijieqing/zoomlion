@@ -1,7 +1,6 @@
 package com.kstech.zoomlion.engine.server;
 
 import android.os.Handler;
-import android.os.Message;
 
 import com.kstech.zoomlion.MyApplication;
 import com.kstech.zoomlion.engine.check.CheckResultVerify;
@@ -98,12 +97,12 @@ public class QCItemDataSaveUploadTask extends AbstractDataTransferTask {
     }
 
     @Override
-    boolean needRequest() {
+    protected boolean needRequest() {
         return requestTimes < 1;
     }
 
     @Override
-    void beforeRequest() {
+    protected void beforeRequest() {
         //创建表达式处理对象
         XmlExpressionImpl xmlExpression = new XmlExpressionImpl(detailData, paramValues);
         handler.sendEmptyMessage(ItemCheckActivity.START_SAVE_RECORD);
@@ -179,17 +178,17 @@ public class QCItemDataSaveUploadTask extends AbstractDataTransferTask {
     }
 
     @Override
-    String getRequestMessage() {
+    protected String getRequestMessage() {
         return "数据本地已保存，开始同步服务器";
     }
 
     @Override
-    String getURL() {
+    protected String getURL() {
         return URLCollections.UPDATE_CHECK_ITEM_DETAIL_DATA;
     }
 
     @Override
-    boolean initRequestParam(RequestParams params) {
+    protected boolean initRequestParam(RequestParams params) {
         //将调试记录数据打包，并添加到param中
         CompleteQCItemJSON qcitemJson = packageQCItemData(detailData, itemData);
         String result = JsonUtils.toJson(qcitemJson);
@@ -199,7 +198,7 @@ public class QCItemDataSaveUploadTask extends AbstractDataTransferTask {
     }
 
     @Override
-    void onRequestSuccess(JSONObject data) {
+    protected void onRequestSuccess(JSONObject data) {
         if (data.has("success")) {
             detailData.setUploaded(true);
         } else {
@@ -208,17 +207,12 @@ public class QCItemDataSaveUploadTask extends AbstractDataTransferTask {
     }
 
     @Override
-    void onRequestError() {
-
-    }
-
-    @Override
-    boolean onReLogin(Message message) {
+    protected boolean onReLogin() {
         return false;
     }
 
     @Override
-    void onRequestFinish(boolean success) {
+    protected void onRequestFinish() {
         //更新数据库
         MyApplication.getApplication().getDaoSession().getCheckItemDataDao().update(itemData);
         MyApplication.getApplication().getDaoSession().getCheckItemDetailDataDao().update(detailData);

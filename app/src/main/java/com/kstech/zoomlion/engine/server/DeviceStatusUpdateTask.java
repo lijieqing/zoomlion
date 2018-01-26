@@ -26,33 +26,28 @@ public class DeviceStatusUpdateTask extends AbstractDataTransferTask {
     }
 
     @Override
-    String getRequestMessage() {
+    protected String getRequestMessage() {
         return "更新整机状态";
     }
 
     @Override
-    boolean needRequest() {
+    protected boolean needRequest() {
         return count++ < 1;
     }
 
     @Override
-    void beforeRequest() {
-
-    }
-
-    @Override
-    String getURL() {
+    protected String getURL() {
         return URLCollections.UPDATE_DEVICE_STATUS;
     }
 
     @Override
-    boolean initRequestParam(RequestParams params) {
+    protected boolean initRequestParam(RequestParams params) {
         params.addQueryStringParameter("sn", Globals.deviceSN);
         return false;
     }
 
     @Override
-    void onRequestSuccess(JSONObject data) throws JSONException {
+    protected void onRequestSuccess(JSONObject data) throws JSONException {
         if (data.has("statistics")) {
             String deviceStatus = data.getString("statistics");
             status = JsonUtils.fromJson(deviceStatus, CommissioningStatistics.class);
@@ -60,18 +55,13 @@ public class DeviceStatusUpdateTask extends AbstractDataTransferTask {
     }
 
     @Override
-    void onRequestError() {
-
+    protected boolean onReLogin() {
+        return true;
     }
 
     @Override
-    boolean onReLogin(Message message) {
-        return false;
-    }
-
-    @Override
-    void onRequestFinish(boolean success) {
-        if (status!=null){
+    protected void onRequestFinish() {
+        if (status != null) {
             message = Message.obtain();
             message.obj = status;
             message.what = IndexActivity.UPDATE_DEVICE_INFO;

@@ -1,7 +1,6 @@
 package com.kstech.zoomlion.engine.server;
 
 import android.os.Handler;
-import android.os.Message;
 
 import com.kstech.zoomlion.MyApplication;
 import com.kstech.zoomlion.model.db.CheckItemData;
@@ -39,7 +38,7 @@ public class QCItemDataReLoadTask extends AbstractDataTransferTask {
     }
 
     @Override
-    void beforeRequest() {
+    protected void beforeRequest() {
         detailDataDao = MyApplication.getApplication().getDaoSession().getCheckItemDetailDataDao();
         List<CheckItemDetailData> temp = detailDataDao.queryBuilder().where(CheckItemDetailDataDao.Properties.Uploaded.eq(false)).build().list();
         if (temp != null && temp.size() > 0) {
@@ -48,44 +47,44 @@ public class QCItemDataReLoadTask extends AbstractDataTransferTask {
     }
 
     @Override
-    boolean needRequest() {
+    protected boolean needRequest() {
         return unUploadDetailDatas.size() > 0;
     }
 
     @Override
-    String getRequestMessage() {
+    protected String getRequestMessage() {
         return "发现未同步数据，开始同步";
     }
 
     @Override
-    String getURL() {
+    protected String getURL() {
         return URLCollections.UPDATE_CHECK_ITEM_DETAIL_DATA;
     }
 
     @Override
-    boolean initRequestParam(RequestParams params) {
+    protected boolean initRequestParam(RequestParams params) {
         uploadData = unUploadDetailDatas.pop();
         CheckItemData itemData = uploadData.getItemData();
         //更新本地数据
         int serverCount = itemData.getSumCounts();
-        int localNum = uploadData.getCheckTimes()+1;
+        int localNum = uploadData.getCheckTimes() + 1;
 
-        if (localNum >= serverCount){
-            itemData.setSumCounts(itemData.getSumCounts()+1);
-            if (uploadData.getCheckResult().equals(CheckItemDetailResultEnum.PASS.getCode())){
-                itemData.setPassCounts(itemData.getPassCounts()+1);
+        if (localNum >= serverCount) {
+            itemData.setSumCounts(itemData.getSumCounts() + 1);
+            if (uploadData.getCheckResult().equals(CheckItemDetailResultEnum.PASS.getCode())) {
+                itemData.setPassCounts(itemData.getPassCounts() + 1);
             }
             itemData.update();
         }
 
-        CompleteQCItemJSON data = packageQCItemData(uploadData,itemData);
+        CompleteQCItemJSON data = packageQCItemData(uploadData, itemData);
         String result = JsonUtils.toJson(data);
         params.setBodyContent(result);
         return true;
     }
 
     @Override
-    void onRequestSuccess(JSONObject data) {
+    protected void onRequestSuccess(JSONObject data) {
         if (data.has("success")) {
             uploadData.setUploaded(true);
             detailDataDao.update(uploadData);
@@ -93,17 +92,12 @@ public class QCItemDataReLoadTask extends AbstractDataTransferTask {
     }
 
     @Override
-    void onRequestError() {
-
-    }
-
-    @Override
-    boolean onReLogin(Message message) {
+    protected boolean onReLogin() {
         return true;
     }
 
     @Override
-    void onRequestFinish(boolean success) {
+    protected void onRequestFinish() {
         handler.sendEmptyMessage(CheckHomeActivity.ITEM_RECORD_LOADED);
     }
 }

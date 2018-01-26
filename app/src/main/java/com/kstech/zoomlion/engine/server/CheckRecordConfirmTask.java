@@ -41,17 +41,17 @@ public class CheckRecordConfirmTask extends AbstractDataTransferTask {
     }
 
     @Override
-    String getRequestMessage() {
+    protected String getRequestMessage() {
         return "整机调试记录上传";
     }
 
     @Override
-    boolean needRequest() {
+    protected boolean needRequest() {
         return need;
     }
 
     @Override
-    void beforeRequest() {
+    protected void beforeRequest() {
         CheckRecordDao recordDao = MyApplication.getApplication().getDaoSession().getCheckRecordDao();
         List<CheckRecord> records = recordDao.queryBuilder()
                 .where(CheckRecordDao.Properties.DeviceIdentity.eq(Globals.deviceSN))
@@ -78,12 +78,12 @@ public class CheckRecordConfirmTask extends AbstractDataTransferTask {
     }
 
     @Override
-    String getURL() {
+    protected String getURL() {
         return URLCollections.NOTIFY_SERVER_CHECK_COMPLETE;
     }
 
     @Override
-    boolean initRequestParam(RequestParams params) {
+    protected boolean initRequestParam(RequestParams params) {
         CompleteCommissioningJSON recordResult = new CompleteCommissioningJSON();
         recordResult.setSn(Globals.deviceSN);
         recordResult.setAuthorizationCode(authorizeCode);
@@ -96,24 +96,19 @@ public class CheckRecordConfirmTask extends AbstractDataTransferTask {
     }
 
     @Override
-    void onRequestSuccess(JSONObject data) throws JSONException {
+    protected void onRequestSuccess(JSONObject data) throws JSONException {
         if (data.has("success")) {
             uploaded = true;
         }
     }
 
     @Override
-    void onRequestError() {
-
-    }
-
-    @Override
-    boolean onReLogin(Message message) {
+    protected boolean onReLogin() {
         return true;
     }
 
     @Override
-    void onRequestFinish(boolean success) {
+    protected void onRequestFinish() {
         if (record != null) {
             record.setUploaded(uploaded);
             MyApplication.getApplication().getDaoSession().getCheckRecordDao().update(record);

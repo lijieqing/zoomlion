@@ -1,7 +1,6 @@
 package com.kstech.zoomlion.engine.server;
 
 import android.os.Handler;
-import android.os.Message;
 
 import com.kstech.zoomlion.model.session.URLCollections;
 import com.kstech.zoomlion.view.activity.IndexActivity;
@@ -27,48 +26,35 @@ public class UserLogoutTask extends AbstractDataTransferTask {
     }
 
     @Override
-    String getRequestMessage() {
+    protected String getRequestMessage() {
         return "请求用户注销";
     }
 
     @Override
-    boolean needRequest() {
+    protected boolean needRequest() {
         return requstTimes++ < 1;
     }
 
     @Override
-    void beforeRequest() {
-
-    }
-
-    @Override
-    String getURL() {
+    protected String getURL() {
         return URLCollections.USER_LOGOUT;
     }
 
     @Override
-    boolean initRequestParam(RequestParams params) {
+    protected boolean initRequestParam(RequestParams params) {
         return false;
     }
 
     @Override
-    void onRequestSuccess(JSONObject data) throws JSONException {
+    protected void onRequestSuccess(JSONObject data) throws JSONException {
         if (data.has("success")) {
             logoutSuccess = true;
         }
     }
 
     @Override
-    void onRequestError() {
-    }
-
-    @Override
-    boolean onReLogin(Message message) {
+    protected boolean onReLogin() {
         return true;
-    }
-
-    @Override
-    void onRequestFinish(boolean success) {
     }
 
     @Override
