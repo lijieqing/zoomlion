@@ -19,6 +19,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Iterator;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -189,6 +190,31 @@ public class ExampleUnitTest {
 
             type.getQcParams().add(param);
         }
+        XMLAPI.writeXML2File(type,"/Users/lijie/Desktop/zoo.xml");
+    }
+    @Test
+    public void TestAttachPgn() throws IOException, IllegalAccessException, InvocationTargetException {
+        J1939 type = (J1939) XMLAPI.readXML(new FileInputStream("/Users/lijie/Desktop/zoo.xml"));
+        for (PG pg : type.getPgs()) {
+            Iterator<SP> it = pg.getSps().iterator();
+            while (it.hasNext()){
+                SP sp = it.next();
+                if ("当前检测项目".equals(sp.getRef()) || sp.getRef().contains("K标定系数")){
+                    it.remove();
+                }
+            }
+        }
+
+        for (PG pg : type.getPgs()) {
+            int count = 1;
+            for (int i = 0; i < pg.getSps().size(); i++) {
+                SP sp = pg.getSps().get(i);
+                int sbyte = count + i;
+                sp.setSByte(""+ sbyte);
+                count++;
+            }
+        }
+
         XMLAPI.writeXML2File(type,"/Users/lijie/Desktop/zoo.xml");
     }
 }
