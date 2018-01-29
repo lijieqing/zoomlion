@@ -75,6 +75,14 @@ public class MessageShowView extends RelativeLayout {
     }
 
     /**
+     * 清空消息队列，刷新布局
+     */
+    public void clearMessage(){
+        messageList.clear();
+        adapter.notifyDataSetChanged();
+    }
+
+    /**
      * 信息提示对象
      */
     private class Info {

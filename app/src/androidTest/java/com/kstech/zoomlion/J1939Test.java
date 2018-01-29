@@ -1,26 +1,18 @@
 package com.kstech.zoomlion;
 
 import android.content.Context;
-import android.os.Environment;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
 import com.kstech.zoomlion.engine.device.DeviceModelFile;
 import com.kstech.zoomlion.engine.device.XMLAPI;
-import com.kstech.zoomlion.model.db.CheckImageData;
-import com.kstech.zoomlion.model.db.CheckItemDetailData;
-import com.kstech.zoomlion.model.db.greendao.CheckImageDataDao;
 import com.kstech.zoomlion.model.xmlbean.Device;
-import com.kstech.zoomlion.utils.Globals;
 import com.kstech.zoomlion.utils.LogUtils;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.xutils.common.util.FileUtil;
 
-import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
 
 import J1939.J1939_DataVar_ts;
 

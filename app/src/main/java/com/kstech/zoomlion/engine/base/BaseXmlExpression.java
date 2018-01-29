@@ -1,4 +1,4 @@
-package com.kstech.zoomlion.engine.check;
+package com.kstech.zoomlion.engine.base;
 
 /**
  * Created by lijie on 2017/10/3.

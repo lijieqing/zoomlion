@@ -1,5 +1,6 @@
 package com.kstech.zoomlion.engine.check;
 
+import com.kstech.zoomlion.engine.base.BaseXmlExpression;
 import com.kstech.zoomlion.exception.MultiArithmeticException;
 import com.kstech.zoomlion.model.vo.CheckItemParamValueVO;
 import com.kstech.zoomlion.utils.JsonUtils;

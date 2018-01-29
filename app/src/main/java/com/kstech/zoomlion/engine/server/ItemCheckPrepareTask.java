@@ -5,7 +5,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
 
-import com.kstech.zoomlion.engine.check.BaseCheckFunction;
+import com.kstech.zoomlion.engine.base.BaseCheckFunction;
 import com.kstech.zoomlion.model.enums.CheckItemResultEnum;
 import com.kstech.zoomlion.model.session.URLCollections;
 import com.kstech.zoomlion.utils.Globals;

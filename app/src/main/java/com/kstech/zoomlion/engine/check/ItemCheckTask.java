@@ -3,6 +3,7 @@ package com.kstech.zoomlion.engine.check;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 
+import com.kstech.zoomlion.engine.base.ItemCheckCallBack;
 import com.kstech.zoomlion.engine.comm.CommandSender;
 import com.kstech.zoomlion.model.vo.CheckItemParamValueVO;
 import com.kstech.zoomlion.model.vo.CheckItemVO;

@@ -1,5 +1,6 @@
-package com.kstech.zoomlion.engine.check;
+package com.kstech.zoomlion.engine.base;
 
+import com.kstech.zoomlion.engine.check.ItemCheckTask;
 import com.kstech.zoomlion.model.vo.CheckItemParamValueVO;
 
 import java.util.LinkedList;

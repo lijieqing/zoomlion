@@ -1,6 +1,7 @@
 package com.kstech.zoomlion.engine.check;
 
 import com.kstech.zoomlion.MyApplication;
+import com.kstech.zoomlion.engine.base.BaseXmlExpression;
 import com.kstech.zoomlion.model.db.CheckImageData;
 import com.kstech.zoomlion.model.db.CheckItemData;
 import com.kstech.zoomlion.model.db.CheckItemDetailData;

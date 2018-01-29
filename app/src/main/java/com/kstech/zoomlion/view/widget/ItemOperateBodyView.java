@@ -22,7 +22,7 @@ import com.kstech.zoomlion.model.vo.CheckItemParamValueVO;
 import com.kstech.zoomlion.utils.DateUtil;
 import com.kstech.zoomlion.utils.ItemFunctionUtils;
 import com.kstech.zoomlion.utils.LogUtils;
-import com.kstech.zoomlion.engine.check.BaseCheckFunction;
+import com.kstech.zoomlion.engine.base.BaseCheckFunction;
 
 import java.util.Date;
 

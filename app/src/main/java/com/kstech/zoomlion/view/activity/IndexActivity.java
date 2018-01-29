@@ -23,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kstech.zoomlion.R;
+import com.kstech.zoomlion.engine.check.ParamInitTask;
 import com.kstech.zoomlion.engine.comm.J1939TaskService;
 import com.kstech.zoomlion.engine.device.DeviceLoadTask;
 import com.kstech.zoomlion.engine.server.DeviceStatusUpdateTask;
@@ -211,8 +212,6 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
      * 旋转动画
      */
     private RotateAnimation animation;
-
-    private long checkerID;//调试员ID
     /**
      * 机型配置完成解析
      */
@@ -233,6 +232,14 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
      * 更新整机状态信息
      */
     public static final int UPDATE_DEVICE_INFO = 6;
+    /**
+     * 更新参数初始化信息
+     */
+    public static final int UPDATE_PARAM_INIT_INFO = 7;
+    /**
+     * 参数初始化动画结束
+     */
+    public static final int PARAM_INIT_ANIM_CLEAR = 8;
     /**
      * 机型加载线程
      */
@@ -380,7 +387,9 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
                 break;
             case R.id.index_rl_param_init:
                 ivRefresh.startAnimation(animation);
+                messageShowView.clearMessage();
                 messageShowView.updateMessage(new Date(), "准备开始初始化");
+                new ParamInitTask(handler).executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
                 break;
         }
     }
@@ -484,6 +493,17 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
                         if (msg.obj != null) {
                             mActivity.deviceStatus = (CommissioningStatistics) msg.obj;
                             mActivity.updateDeviceInfo();
+                        }
+                        break;
+                    case UPDATE_PARAM_INIT_INFO:
+                        mActivity.messageShowView.updateMessage(new Date(), (String) msg.obj);
+                        break;
+                    case PARAM_INIT_ANIM_CLEAR:
+                        mActivity.ivRefresh.clearAnimation();
+                        if (msg.obj == null){
+                            mActivity.messageShowView.updateMessage(new Date(), "参数初始化完成，可以开启调试");
+                        }else {
+                            mActivity.messageShowView.updateMessage(new Date(), (String) msg.obj);
                         }
                         break;
 
