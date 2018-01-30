@@ -50,7 +50,7 @@ public class XmlExpressionImpl implements BaseXmlExpression {
                 .getDaoSession().getCheckItemDetailDataDao();
         //根据QCID获取对应的调试项目数据
         CheckItemData itemData = itemDataDao.queryBuilder()
-                .where(CheckItemDataDao.Properties.RecordId.eq(1),
+                .where(CheckItemDataDao.Properties.RecordId.eq(Globals.recordID),
                         CheckItemDataDao.Properties.QcId.eq(qcid)).build().unique();
         if (itemData != null) {
             //按时间顺序降序排列获取调试项目细节记录
