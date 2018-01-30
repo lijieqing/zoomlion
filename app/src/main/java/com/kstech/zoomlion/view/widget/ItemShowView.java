@@ -206,6 +206,9 @@ public class ItemShowView extends RelativeLayout implements IRecyclerScrollListe
 
         Globals.addSeekBarScrollListener(this);
         for (CheckItemDetailData paramValue : paramValues) {
+            //更新到最新
+            paramValue.refresh();
+
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, DeviceUtil.deviceHeight(context) / 15);
             ItemBodyShowView ibs = new ItemBodyShowView(context, paramValue);
             bodyContains.addView(ibs, params);
