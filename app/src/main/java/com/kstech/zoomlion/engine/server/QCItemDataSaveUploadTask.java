@@ -214,8 +214,8 @@ public class QCItemDataSaveUploadTask extends AbstractDataTransferTask {
     @Override
     protected void onRequestFinish() {
         //更新数据库
-        MyApplication.getApplication().getDaoSession().getCheckItemDataDao().update(itemData);
-        MyApplication.getApplication().getDaoSession().getCheckItemDetailDataDao().update(detailData);
+        itemData.update();
+        detailData.update();
 
         record.resetCheckItemDatas();
 

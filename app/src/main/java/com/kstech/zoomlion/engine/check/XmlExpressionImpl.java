@@ -52,26 +52,26 @@ public class XmlExpressionImpl implements BaseXmlExpression {
         CheckItemData itemData = itemDataDao.queryBuilder()
                 .where(CheckItemDataDao.Properties.RecordId.eq(Globals.recordID),
                         CheckItemDataDao.Properties.QcId.eq(qcid)).build().unique();
-        if (itemData != null) {
-            //按时间顺序降序排列获取调试项目细节记录
-            List<CheckItemDetailData> list = itemDetailDataDao.queryBuilder()
-                    .where(CheckItemDetailDataDao.Properties.ItemId.eq(itemData.getCheckItemId()))
-                    .orderDesc(CheckItemDetailDataDao.Properties.StartTime).build().list();
 
-            if (list != null) {
-                //获取最新的调试细节数据
-                String paramValues = list.get(0).getParamsValues();
-                List<CheckItemParamValueVO> valueList = JsonUtils.fromArrayJson(paramValues, CheckItemParamValueVO.class);
-                //循环查找与param对应的数据并返回
-                for (CheckItemParamValueVO checkItemParamValueVO : valueList) {
-                    if (param.equals(checkItemParamValueVO.getParamName())) {
-                        return checkItemParamValueVO.getValue();
-                    }
+        //按时间顺序降序排列获取调试项目细节记录
+        List<CheckItemDetailData> list = itemDetailDataDao.queryBuilder()
+                .where(CheckItemDetailDataDao.Properties.ItemId.eq(itemData.getCheckItemId()))
+                .orderDesc(CheckItemDetailDataDao.Properties.StartTime).build().list();
+        if (list.size() > 0) {
+            //获取最新的调试细节数据
+            CheckItemDetailData detailData = list.get(0);
+            //此处需要刷新一下，不刷新可能会出现取不到参数数据现象
+            detailData.refresh();
+            String paramValues = detailData.getParamsValues();
+            List<CheckItemParamValueVO> valueList = JsonUtils.fromArrayJson(paramValues, CheckItemParamValueVO.class);
+            //循环查找与param对应的数据并返回
+            for (CheckItemParamValueVO checkItemParamValueVO : valueList) {
+                if (param.equals(checkItemParamValueVO.getParamName())) {
+                    return checkItemParamValueVO.getValue();
                 }
             }
         }
-
-        return null;
+        return NOVALUE.toString();
     }
 
     @Override
@@ -86,7 +86,7 @@ public class XmlExpressionImpl implements BaseXmlExpression {
                 return String.valueOf(min);
             }
         }
-        return null;
+        return NOVALUE.toString();
     }
 
     @Override
@@ -103,7 +103,7 @@ public class XmlExpressionImpl implements BaseXmlExpression {
                 return checkItemParamValueVO.getValue();
             }
         }
-        return null;
+        return NOVALUE.toString();
     }
 
     @Override
@@ -120,7 +120,7 @@ public class XmlExpressionImpl implements BaseXmlExpression {
             }
         }
         if (tempar == null) {
-            return null;
+            return NOVALUE.toString();
         }
         return tempar.getDatas().get(maxValuePosition).getValue();
     }
@@ -139,7 +139,7 @@ public class XmlExpressionImpl implements BaseXmlExpression {
             }
         }
         if (tempar == null) {
-            return null;
+            return NOVALUE.toString();
         }
 
         return tempar.getDatas().get(minValuePosition).getValue();
