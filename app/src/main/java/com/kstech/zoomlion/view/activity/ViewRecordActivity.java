@@ -21,6 +21,7 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.github.mikephil.charting.charts.LineChart;
 import com.kstech.zoomlion.R;
+import com.kstech.zoomlion.engine.base.BaseXmlExpression;
 import com.kstech.zoomlion.engine.server.ItemRecordLoadTask;
 import com.kstech.zoomlion.model.session.URLCollections;
 import com.kstech.zoomlion.serverdata.QCDataRecordDetails;
@@ -237,7 +238,7 @@ public class ViewRecordActivity extends BaseActivity {
 
         tvRecordsChecker.setText(currentRecord.getOperatorName());
         String model = getResources().getString(R.string.view_record_check_times);
-        String times = String.format(model, currentRecord.getCheckNO()+1);
+        String times = String.format(model, currentRecord.getCheckNO() + 1);
         tvRecordNum.setText(String.valueOf(times));
         tvRecordResult.setText(QCDataStatusEnum.nameOf(currentRecord.getStatus()).getName());
     }
@@ -436,8 +437,12 @@ public class ViewRecordActivity extends BaseActivity {
             String name = getItem(position).name;
             holder.tvName.setText(name);
             holder.tvValue.setText(getItem(position).data + " " + getItem(position).unit);
-            holder.tvMax.setText("最大值：" + getItem(position).max);
-            holder.tvMin.setText("最小值：" + getItem(position).min);
+            Float fMax = Float.valueOf(getItem(position).max);
+            Float fMin = Float.valueOf(getItem(position).min);
+            String max = BaseXmlExpression.NOVALUE.equals(fMax) ? "未解析出最大值" : getItem(position).max;
+            String min = BaseXmlExpression.NOVALUE.equals(fMin) ? "未解析出最小值" : getItem(position).min;
+            holder.tvMax.setText("最大值：" + max);
+            holder.tvMin.setText("最小值：" + min);
 
             return convertView;
         }

@@ -4314,8 +4314,8 @@
                     </QCErrMsg>
                 </Msgs>
                 <QCParams>
-                    <QCParam Param="液压油温温度" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
-                        ValidMax="${getMaxMouthTemperature()}"
+                    <QCParam Param="液压油温温度" PicReq="false" QCMode="Auto" ValMode="RealParam"
+                        ValidAvg="" ValidMax="${getMaxMouthTemperature()}"
                         ValidMin="${getMinMouthTemperature()}" ValueReq="true" />
                 </QCParams>
                 <ENVParams />

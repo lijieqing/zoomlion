@@ -6,17 +6,14 @@ import com.kstech.zoomlion.model.xmlbean.DSItem;
 import com.kstech.zoomlion.model.xmlbean.DataSet;
 import com.kstech.zoomlion.model.xmlbean.J1939;
 import com.kstech.zoomlion.model.xmlbean.PG;
-import com.kstech.zoomlion.model.xmlbean.QCItem;
 import com.kstech.zoomlion.model.xmlbean.QCParam;
 import com.kstech.zoomlion.model.xmlbean.QCParams;
-import com.kstech.zoomlion.model.xmlbean.QCType;
 import com.kstech.zoomlion.model.xmlbean.SP;
 import com.kstech.zoomlion.utils.JsonUtils;
 
 import org.junit.Test;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Iterator;
@@ -82,7 +79,7 @@ public class ExampleUnitTest {
         int pgn = 0xff5d;
         for (String s : vs) {
             PG p = new PG();
-            p.setPGN("0x"+Integer.toHexString(pgn).toUpperCase());
+            p.setPGN("0x" + Integer.toHexString(pgn).toUpperCase());
             p.setDir("Rx");
             p.setLen("8");
             p.setPrio("3");
@@ -120,7 +117,7 @@ public class ExampleUnitTest {
             type.getPgs().add(p);
         }
 
-        XMLAPI.writeXML2File(type,"/Users/lijie/Desktop/zoo.xml");
+        XMLAPI.writeXML2File(type, "/Users/lijie/Desktop/zoo.xml");
     }
 
     @Test
@@ -158,8 +155,9 @@ public class ExampleUnitTest {
             // type.getDsItems().add(ds);
         }
 
-        XMLAPI.writeXML2File(type,"/Users/lijie/Desktop/zoo.xml");
+        XMLAPI.writeXML2File(type, "/Users/lijie/Desktop/zoo.xml");
     }
+
     @Test
     public void testQC() throws IOException, IllegalAccessException, InvocationTargetException {
         String v = "右前支腿水平伸出时间\n" +
@@ -190,16 +188,17 @@ public class ExampleUnitTest {
 
             type.getQcParams().add(param);
         }
-        XMLAPI.writeXML2File(type,"/Users/lijie/Desktop/zoo.xml");
+        XMLAPI.writeXML2File(type, "/Users/lijie/Desktop/zoo.xml");
     }
+
     @Test
     public void TestAttachPgn() throws IOException, IllegalAccessException, InvocationTargetException {
         J1939 type = (J1939) XMLAPI.readXML(new FileInputStream("/Users/lijie/Desktop/zoo.xml"));
         for (PG pg : type.getPgs()) {
             Iterator<SP> it = pg.getSps().iterator();
-            while (it.hasNext()){
+            while (it.hasNext()) {
                 SP sp = it.next();
-                if ("当前检测项目".equals(sp.getRef()) || sp.getRef().contains("K标定系数")){
+                if ("当前检测项目".equals(sp.getRef()) || sp.getRef().contains("K标定系数")) {
                     it.remove();
                 }
             }
@@ -210,11 +209,20 @@ public class ExampleUnitTest {
             for (int i = 0; i < pg.getSps().size(); i++) {
                 SP sp = pg.getSps().get(i);
                 int sbyte = count + i;
-                sp.setSByte(""+ sbyte);
+                sp.setSByte("" + sbyte);
                 count++;
             }
         }
 
-        XMLAPI.writeXML2File(type,"/Users/lijie/Desktop/zoo.xml");
+        XMLAPI.writeXML2File(type, "/Users/lijie/Desktop/zoo.xml");
+    }
+
+    @Test
+    public void testFloat() {
+        String f = "999.00000";
+        Float f1 = 999f;
+        Float f2 = Float.valueOf(f);
+        boolean b = f1.equals(f2);
+        System.out.println(b);
     }
 }

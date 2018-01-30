@@ -11,6 +11,11 @@ package com.kstech.zoomlion.engine.base;
 
 public interface BaseXmlExpression {
     /**
+     * 当无法解析出标准值时赋值为 -999
+     */
+    Float NOVALUE = -999f;
+
+    /**
      * 获取本地数据库中该参数的最新一条数据
      *
      * @param param the param 所查参数名称

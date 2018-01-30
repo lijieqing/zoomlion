@@ -18,6 +18,7 @@ import com.bumptech.glide.Glide;
 import com.github.mikephil.charting.charts.LineChart;
 import com.kstech.zoomlion.MyApplication;
 import com.kstech.zoomlion.R;
+import com.kstech.zoomlion.engine.base.BaseXmlExpression;
 import com.kstech.zoomlion.model.db.CheckChartData;
 import com.kstech.zoomlion.model.db.CheckImageData;
 import com.kstech.zoomlion.model.db.CheckItemDetailData;
@@ -329,8 +330,12 @@ public class ItemDetailActivity extends BaseActivity {
             String name = getItem(position).getParamName();
             holder.tvName.setText(name);
             holder.tvValue.setText(getItem(position).getValue() + " " + getItem(position).getUnit());
-            holder.tvMax.setText("最大值：" + getItem(position).getValidMax());
-            holder.tvMin.setText("最小值：" + getItem(position).getValidMin());
+            Float fMax = Float.valueOf(getItem(position).getValidMax());
+            Float fMin = Float.valueOf(getItem(position).getValidMin());
+            String max = BaseXmlExpression.NOVALUE.equals(fMax) ? "未解析出最大值" : getItem(position).getValidMax();
+            String min = BaseXmlExpression.NOVALUE.equals(fMin) ? "未解析出最小值" : getItem(position).getValidMin();
+            holder.tvMax.setText("最大值：" + max);
+            holder.tvMin.setText("最小值：" + min);
 
             return convertView;
         }
