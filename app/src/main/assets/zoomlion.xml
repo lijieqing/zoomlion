@@ -274,6 +274,7 @@
         <DSItem DataType="FLOAT" DecLen="0" Name="分配压力" Unit="U" />
         <!--实时显示参数-->
         <DSItem DataType="FLOAT" DecLen="0" Name="整机编码" Unit="D" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="整机编码_回复" Unit="D" />
         <DSItem DataType="FLOAT" DecLen="0" Name="工作档位" Unit="D" />
         <DSItem DataType="FLOAT" DecLen="0" Name="发动机转速" Unit="rpm" />
         <DSItem DataType="FLOAT" DecLen="0" Name="油泵转速" Unit="rpm" />
@@ -426,11 +427,6 @@
         <DSItem DataType="FLOAT" DecLen="0" Name="恒压泵最大电流" Unit="MPa" />
         <DSItem DataType="FLOAT" DecLen="0" Name="恒压泵手控电流压力" Unit="MPa" />
 
-        <DSItem DataType="FLOAT" DecLen="0" Name="第一压力段泵送时间" Unit="s" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="第二压力段泵送时间" Unit="s" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="第三压力段泵送时间" Unit="s" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="第四压力段泵送时间" Unit="s" />
-
         <DSItem DataType="FLOAT" DecLen="0" Name="主油泵温度" Unit="a" />
         <DSItem DataType="FLOAT" DecLen="0" Name="支腿溢流压力" Unit="a" />
         <DSItem DataType="FLOAT" DecLen="0" Name="摆动到位时间" Unit="a" />
@@ -501,6 +497,9 @@
         <DSItem DataType="FLOAT" DecLen="0" Name="顺时针回转快档电流" Unit="a" />
         <DSItem DataType="FLOAT" DecLen="0" Name="逆时针回转快档时间" Unit="a" />
         <DSItem DataType="FLOAT" DecLen="0" Name="逆时针回转快档电流" Unit="a" />
+
+        <DSItem DataType="FLOAT" DecLen="0" Name="传感器零点标定" Unit="a" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="传感器最大值标定" Unit="a" />
 
         <!--AttachPGN相关-->
         <DSItem DataType="BYTE" DecLen="1" Name="一臂快档展开不检测时间" Unit="s" Value="15" />
@@ -915,7 +914,8 @@
             <SP Bits="0" Bytes="2" Off="0" Ref="搅伴压力" Res="0.001" SBit="1" SByte="7" SPN="0"
                 Type="1" />
         </PG>
-        <PG Dir="Rx" Len="8" PGN="0xFF0E" Prio="3" Rate="100" Req="0" ReqCyc="0" SA="0x01" Type="2">
+        <PG Dir="Rx" Len="20" PGN="0xFF0E" Prio="3" Rate="100" Req="0" ReqCyc="0" SA="0x01"
+            Type="2">
             <SP Bits="0" Bytes="2" Off="0" Ref="整机编码" Res="0.001" SBit="1" SByte="1" SPN="0"
                 Type="1" />
         </PG>
@@ -1075,19 +1075,16 @@
             <SP Bits="0" Bytes="4" Off="0" Ref="超档位报警次数" Res="0.001" SBit="1" SByte="5" SPN="0"
                 Type="1" />
         </PG>
-        <PG Dir="Rx" Len="16" PGN="0xFF32" Prio="3" Rate="100" Req="0" ReqCyc="0" SA="0x01"
-            Type="2">
-            <SP Bits="0" Bytes="2" Off="0" Ref="主油缸到位率" Res="0.001" SBit="1" SByte="1" SPN="0"
+        <PG Dir="Rx" Len="8" PGN="0xFF32" Prio="3" Rate="100" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="1" Bytes="0" Off="0" Ref="行程优化开启" Res="0.001" SBit="1" SByte="1" SPN="0"
                 Type="1" />
-            <SP Bits="0" Bytes="2" Off="0" Ref="换向次数" Res="0.001" SBit="3" SByte="1" SPN="0"
+            <SP Bits="15" Bytes="0" Off="0" Ref="主油缸到位率" Res="0.001" SBit="2" SByte="1" SPN="0"
                 Type="1" />
-            <SP Bits="0" Bytes="2" Off="0" Ref="行程过长" Res="0.001" SBit="5" SByte="1" SPN="0"
+            <SP Bits="0" Bytes="2" Off="0" Ref="换向次数" Res="0.001" SBit="1" SByte="3" SPN="0"
                 Type="1" />
-            <SP Bits="0" Bytes="2" Off="0" Ref="行程过短" Res="0.001" SBit="7" SByte="1" SPN="0"
+            <SP Bits="0" Bytes="2" Off="0" Ref="行程过长" Res="0.001" SBit="1" SByte="5" SPN="0"
                 Type="1" />
-            <SP Bits="0" Bytes="2" Off="0" Ref="行程优化开启" Res="0.001" SBit="9" SByte="1" SPN="0"
-                Type="1" />
-            <SP Bits="0" Bytes="2" Off="0" Ref="泵送油缸动作逻辑" Res="0.001" SBit="11" SByte="1" SPN="0"
+            <SP Bits="0" Bytes="2" Off="0" Ref="行程过短" Res="0.001" SBit="1" SByte="7" SPN="0"
                 Type="1" />
         </PG>
         <PG Dir="Rx" Len="8" PGN="0xFF33" Prio="3" Rate="100" Req="0" ReqCyc="0" SA="0x01" Type="2">
@@ -1382,13 +1379,9 @@
                 Type="1" />
         </PG>
         <PG Dir="Rx" Len="8" PGN="0xFF6E" Prio="3" Rate="100" Req="0" ReqCyc="0" SA="0x01" Type="2">
-            <SP Bits="0" Bytes="2" Off="0" Ref="第一压力段泵送时间" Res="0.001" SBit="1" SByte="1" SPN="0"
+            <SP Bits="0" Bytes="2" Off="0" Ref="传感器零点标定" Res="0.001" SBit="1" SByte="1" SPN="0"
                 Type="1" />
-            <SP Bits="0" Bytes="2" Off="0" Ref="第二压力段泵送时间" Res="0.001" SBit="1" SByte="3" SPN="0"
-                Type="1" />
-            <SP Bits="0" Bytes="2" Off="0" Ref="第三压力段泵送时间" Res="0.001" SBit="1" SByte="5" SPN="0"
-                Type="1" />
-            <SP Bits="0" Bytes="2" Off="0" Ref="第四压力段泵送时间" Res="0.001" SBit="1" SByte="7" SPN="0"
+            <SP Bits="0" Bytes="2" Off="0" Ref="传感器最大值标定" Res="0.001" SBit="1" SByte="3" SPN="0"
                 Type="1" />
         </PG>
 
@@ -2070,22 +2063,252 @@
             <SP Bits="0" Bytes="1" Off="0" Ref="分配压力" Res="1" SBit="1" SByte="120" SPN="0"
                 Type="1" />
         </PG>
-        <PG Dir="Tx" Len="16" PGN="0xFFF9" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x00" Type="2">
-            <SP Bits="0" Bytes="2" Off="0" Ref="第一压力段起始压力" Res="1" SBit="1" SByte="1" SPN="0"
+        <PG Dir="Tx" Len="36" PGN="0xFFF9" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="0" Bytes="20" Off="0" Ref="整机编码_回复" Res="1" SBit="1" SByte="1" SPN="0"
                 Type="1" />
-            <SP Bits="0" Bytes="2" Off="0" Ref="第一压力段中止压力" Res="1" SBit="1" SByte="3" SPN="0"
+            <SP Bits="0" Bytes="2" Off="0" Ref="第一压力段起始压力" Res="1" SBit="1" SByte="21" SPN="0"
                 Type="1" />
-            <SP Bits="0" Bytes="2" Off="0" Ref="第二压力段起始压力" Res="1" SBit="1" SByte="5" SPN="0"
+            <SP Bits="0" Bytes="2" Off="0" Ref="第一压力段中止压力" Res="1" SBit="1" SByte="23" SPN="0"
                 Type="1" />
-            <SP Bits="0" Bytes="2" Off="0" Ref="第二压力段中止压力" Res="1" SBit="1" SByte="7" SPN="0"
+            <SP Bits="0" Bytes="2" Off="0" Ref="第二压力段起始压力" Res="1" SBit="1" SByte="25" SPN="0"
                 Type="1" />
-            <SP Bits="0" Bytes="2" Off="0" Ref="第三压力段起始压力" Res="1" SBit="1" SByte="9" SPN="0"
+            <SP Bits="0" Bytes="2" Off="0" Ref="第二压力段中止压力" Res="1" SBit="1" SByte="27" SPN="0"
                 Type="1" />
-            <SP Bits="0" Bytes="2" Off="0" Ref="第三压力段中止压力" Res="1" SBit="1" SByte="11" SPN="0"
+            <SP Bits="0" Bytes="2" Off="0" Ref="第三压力段起始压力" Res="1" SBit="1" SByte="29" SPN="0"
                 Type="1" />
-            <SP Bits="0" Bytes="2" Off="0" Ref="第四压力段起始压力" Res="1" SBit="1" SByte="13" SPN="0"
+            <SP Bits="0" Bytes="2" Off="0" Ref="第三压力段中止压力" Res="1" SBit="1" SByte="31" SPN="0"
                 Type="1" />
-            <SP Bits="0" Bytes="2" Off="0" Ref="第四压力段中止压力" Res="1" SBit="1" SByte="15" SPN="0"
+            <SP Bits="0" Bytes="2" Off="0" Ref="第四压力段起始压力" Res="1" SBit="1" SByte="33" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="第四压力段中止压力" Res="1" SBit="1" SByte="35" SPN="0"
+                Type="1" />
+        </PG>
+        <PG Dir="Tx" Len="16" PGN="0xFFFA" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="0" Bytes="1" Off="0" Ref="主泵品牌" Res="1" SBit="1" SByte="1" SPN="0" Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="主泵排量" Res="1" SBit="1" SByte="2" SPN="0" Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="主泵类型" Res="1" SBit="1" SByte="3" SPN="0" Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="液压系统" Res="1" SBit="1" SByte="4" SPN="0" Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="油缸类型" Res="1" SBit="1" SByte="5" SPN="0" Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="换向类型" Res="1" SBit="1" SByte="6" SPN="0" Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="高低压类型" Res="1" SBit="1" SByte="7" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="液位传感器" Res="1" SBit="1" SByte="8" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="油温传感器" Res="1" SBit="1" SByte="9" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="恒压泵类型" Res="1" SBit="1" SByte="10" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="锁车模式" Res="1" SBit="1" SByte="11" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="软件恒功率" Res="1" SBit="1" SByte="12" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="支撑方式" Res="1" SBit="1" SByte="13" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="臂架类型" Res="1" SBit="1" SByte="14" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="臂架EP泵" Res="1" SBit="1" SByte="15" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="回转阀" Res="1" SBit="1" SByte="16" SPN="0" Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="编码器类型" Res="1" SBit="1" SByte="17" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="一臂倾角" Res="1" SBit="1" SByte="18" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="二臂倾角" Res="1" SBit="1" SByte="19" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="三臂倾角" Res="1" SBit="1" SByte="20" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="四臂倾角" Res="1" SBit="1" SByte="21" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="五臂倾角" Res="1" SBit="1" SByte="22" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="六臂倾角" Res="1" SBit="1" SByte="23" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="七臂倾角" Res="1" SBit="1" SByte="24" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="臂架调速模式" Res="1" SBit="1" SByte="25" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="底盘类型" Res="1" SBit="1" SByte="26" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="主动减震" Res="1" SBit="1" SByte="27" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="回转减震" Res="1" SBit="1" SByte="28" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="臂架防干涉" Res="1" SBit="1" SByte="29" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="合流功能" Res="1" SBit="1" SByte="30" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="主泵降温" Res="1" SBit="1" SByte="31" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="油缸锁紧" Res="1" SBit="1" SByte="32" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="搅伴安全控制" Res="1" SBit="1" SByte="33" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="料位安全控制" Res="1" SBit="1" SByte="34" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="防倾翻" Res="1" SBit="1" SByte="35" SPN="0" Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="应急换向" Res="1" SBit="1" SByte="36" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="优化行程" Res="1" SBit="1" SByte="37" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="节能模式" Res="1" SBit="1" SByte="38" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="分配控制" Res="1" SBit="1" SByte="39" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="泵送启动方式" Res="1" SBit="1" SByte="40" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="臂架控制模式" Res="1" SBit="1" SByte="41" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="泵送点动方式" Res="1" SBit="1" SByte="42" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="料况自适应" Res="1" SBit="1" SByte="43" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="泵送行程初始化" Res="1" SBit="1" SByte="44" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="故障诊断" Res="1" SBit="1" SByte="45" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="泵送节能速度" Res="1" SBit="1" SByte="47" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="支腿臂架转速" Res="1" SBit="1" SByte="48" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="怠速速度" Res="1" SBit="1" SByte="49" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="最高转速" Res="1" SBit="1" SByte="50" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="减速延时时间" Res="1" SBit="1" SByte="51" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="油泵超速报警值" Res="1" SBit="1" SByte="52" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="超档位传动比" Res="1" SBit="1" SByte="52" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="速度参数自学习" Res="1" SBit="1" SByte="53" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="主缸停止延时" Res="1" SBit="1" SByte="54" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="分配停止延时" Res="1" SBit="1" SByte="55" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="换向延时时间" Res="1" SBit="1" SByte="56" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="降排量时间" Res="1" SBit="1" SByte="57" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="降排量压力" Res="1" SBit="1" SByte="59" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="超压降排量时间" Res="1" SBit="1" SByte="59" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="起调压力" Res="1" SBit="1" SByte="60" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="恒功率系数" Res="1" SBit="1" SByte="61" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="最小控制压力" Res="1" SBit="1" SByte="62" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="排量修正系数" Res="1" SBit="1" SByte="63" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="优化行程最小时间" Res="1" SBit="1" SByte="65" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="优化行程启动压力" Res="1" SBit="1" SByte="66" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="优化行程最大时间" Res="1" SBit="1" SByte="67" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="泵送降温启动温度" Res="1" SBit="1" SByte="68" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="砼缸直径" Res="1" SBit="1" SByte="69" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="1100rpm对应功率" Res="1" SBit="1" SByte="70" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="1500rpm对应功率" Res="1" SBit="1" SByte="71" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="停泵时间间隔1" Res="1" SBit="1" SByte="71" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="停泵时间间隔2" Res="1" SBit="1" SByte="72" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="主缸单独得电时间" Res="1" SBit="1" SByte="74" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="泵送停止时间" Res="1" SBit="1" SByte="75" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="主缸停止延时设置0～1.5档（低压）" Res="1" SBit="1" SByte="75"
+                SPN="0" Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="0～1.5档（高压）" Res="1" SBit="1" SByte="76" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="1.5～2.5档（低压）" Res="1" SBit="1" SByte="77" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="1.5～2.5档（高压）" Res="1" SBit="1" SByte="78" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="2.5～3.5档（低压）" Res="1" SBit="1" SByte="79" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="2.5～3.5档（高压）" Res="1" SBit="1" SByte="80" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="3.5～4.5档（低压）" Res="1" SBit="1" SByte="81" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="3.5～4.5档（高压）" Res="1" SBit="1" SByte="82" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="4.5～6档（低压）" Res="1" SBit="1" SByte="83" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="4.5～6档（高压）" Res="1" SBit="1" SByte="84" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="6～10档（低压）" Res="1" SBit="1" SByte="85" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="主缸停止延时设置6～10档（高压）" Res="1" SBit="1" SByte="86"
+                SPN="0" Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="开机润滑时间" Res="1" SBit="1" SByte="87" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="关机润滑时间" Res="1" SBit="1" SByte="88" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="气动润滑时间" Res="1" SBit="1" SByte="89" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="润滑停歇时间" Res="1" SBit="1" SByte="91" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="风扇自启动温度" Res="1" SBit="1" SByte="92" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="自加热启动温度" Res="1" SBit="1" SByte="93" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="自加热停止温度" Res="1" SBit="1" SByte="94" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="压力切断值" Res="1" SBit="1" SByte="95" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="全支撑安全范围" Res="1" SBit="1" SByte="96" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="节能档位" Res="1" SBit="1" SByte="96" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="泵送行程参数" Res="1" SBit="1" SByte="97" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="回转启动速度缓冲" Res="1" SBit="1" SByte="98" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="一臂启动速度缓冲" Res="1" SBit="1" SByte="99" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="二臂启动速度缓冲" Res="1" SBit="1" SByte="100" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="三臂启动速度缓冲" Res="1" SBit="1" SByte="101" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="四臂启动速度缓冲" Res="1" SBit="1" SByte="102" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="五臂启动速度缓冲" Res="1" SBit="1" SByte="103" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="六臂启动速度缓冲" Res="1" SBit="1" SByte="104" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="七臂启动速度缓冲" Res="1" SBit="1" SByte="105" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="回转停止速度缓冲" Res="1" SBit="1" SByte="106" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="一臂停止速度缓冲" Res="1" SBit="1" SByte="107" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="二臂停止速度缓冲" Res="1" SBit="1" SByte="108" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="三臂停止速度缓冲" Res="1" SBit="1" SByte="109" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="四臂停止速度缓冲" Res="1" SBit="1" SByte="110" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="五臂停止速度缓冲" Res="1" SBit="1" SByte="111" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="六臂停止速度缓冲" Res="1" SBit="1" SByte="112" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="七臂停止速度缓冲" Res="1" SBit="1" SByte="113" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="合流阀最大电流" Res="1" SBit="1" SByte="114" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="合流阀最小电流" Res="1" SBit="1" SByte="116" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="臂架降温启动温度" Res="1" SBit="1" SByte="118" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="1" Off="0" Ref="分配压力" Res="1" SBit="1" SByte="120" SPN="0"
                 Type="1" />
         </PG>
 
@@ -4530,8 +4753,8 @@
                         ValidMax="" ValidMin="" ValueReq="true" />
                     <QCParam Param="行程优化开启" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="泵送油缸动作逻辑" PicReq="false" QCMode="Auto" ValMode="Auto"
-                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="泵送油缸动作逻辑" PicReq="false" QCMode="Auto" ValMode="Mann"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="false" />
                 </QCParams>
                 <ENVParams />
                 <RealTimeParams />
@@ -4642,8 +4865,10 @@
                 <ENVParams />
                 <RealTimeParams />
             </QCItem>
-            <QCItem AttachPGN="0xFFF9" Id="103" Name="四压力短泵送时间统计" QCTimeout="20" QCTimes="1"
-                ReadyTimeout="20" Require="true">
+        </QCType>
+        <QCType Name="备份">
+            <QCItem Id="254" Name="车辆初始化参数备份" QCTimeout="20" QCTimes="1" ReadyTimeout="20"
+                Require="true">
                 <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
                     <QCProgressMsg>
                         <QCProgress Code="" Msg="" />
@@ -4653,14 +4878,259 @@
                     </QCErrMsg>
                 </Msgs>
                 <QCParams>
-                    <QCParam Param="第一压力段泵送时间" PicReq="false" QCMode="Auto" ValMode="Auto"
+                    <QCParam Param="主泵品牌" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="主泵排量" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="主泵类型" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="液压系统" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="油缸类型" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="换向类型" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="高低压类型" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="液位传感器" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="油温传感器" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="恒压泵类型" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="锁车模式" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="软件恒功率" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="支撑方式" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="臂架类型" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="臂架EP泵" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="回转阀" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="编码器类型" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="一臂倾角" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="二臂倾角" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="三臂倾角" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="四臂倾角" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="五臂倾角" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="六臂倾角" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="七臂倾角" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="臂架调速模式" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="底盘类型" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="主动减震" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="回转减震" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="臂架防干涉" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="合流功能" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="主泵降温" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="油缸锁紧" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="搅伴安全控制" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="料位安全控制" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="防倾翻" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="应急换向" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="优化行程" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="节能模式" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="分配控制" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="泵送启动方式" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="臂架控制模式" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="泵送点动方式" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="料况自适应" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="泵送行程初始化" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="故障诊断" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="泵送节能速度" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="支腿臂架转速" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="怠速速度" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="最高转速" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="减速延时时间" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="油泵超速报警值" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="超档位传动比" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="速度参数自学习" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="主缸停止延时" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="分配停止延时" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="换向延时时间" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="降排量时间" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="降排量压力" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="超压降排量时间" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="起调压力" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="恒功率系数" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="最小控制压力" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="排量修正系数" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="优化行程最小时间" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="优化行程启动压力" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="优化行程最大时间" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="泵送降温启动温度" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="砼缸直径" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="1100rpm对应功率" PicReq="true" QCMode="Auto" ValMode="Auto"
                         ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="第二压力段泵送时间" PicReq="false" QCMode="Auto" ValMode="Auto"
+                    <QCParam Param="1500rpm对应功率" PicReq="true" QCMode="Auto" ValMode="Auto"
                         ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="第三压力段泵送时间" PicReq="false" QCMode="Auto" ValMode="Auto"
+                    <QCParam Param="停泵时间间隔1" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="停泵时间间隔2" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="主缸单独得电时间" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="泵送停止时间" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="主缸停止延时设置0～1.5档（低压）" PicReq="true" QCMode="Auto" ValMode="Auto"
                         ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="第四压力段泵送时间" PicReq="false" QCMode="Auto" ValMode="Auto"
+                    <QCParam Param="0～1.5档（高压）" PicReq="true" QCMode="Auto" ValMode="Auto"
                         ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="1.5～2.5档（低压）" PicReq="true" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="1.5～2.5档（高压）" PicReq="true" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="2.5～3.5档（低压）" PicReq="true" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="2.5～3.5档（高压）" PicReq="true" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="3.5～4.5档（低压）" PicReq="true" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="3.5～4.5档（高压）" PicReq="true" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="4.5～6档（低压）" PicReq="true" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="4.5～6档（高压）" PicReq="true" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="6～10档（低压）" PicReq="true" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="主缸停止延时设置6～10档（高压）" PicReq="true" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="开机润滑时间" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="关机润滑时间" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="气动润滑时间" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="润滑停歇时间" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="风扇自启动温度" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="自加热启动温度" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="自加热停止温度" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="压力切断值" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="全支撑安全范围" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="节能档位" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="泵送行程参数" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="回转启动速度缓冲" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="一臂启动速度缓冲" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="二臂启动速度缓冲" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="三臂启动速度缓冲" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="四臂启动速度缓冲" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="五臂启动速度缓冲" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="六臂启动速度缓冲" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="七臂启动速度缓冲" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="回转停止速度缓冲" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="一臂停止速度缓冲" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="二臂停止速度缓冲" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="三臂停止速度缓冲" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="四臂停止速度缓冲" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="五臂停止速度缓冲" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="六臂停止速度缓冲" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="七臂停止速度缓冲" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="合流阀最大电流" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="合流阀最小电流" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="臂架降温启动温度" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="分配压力" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                </QCParams>
+                <ENVParams />
+                <RealTimeParams />
+            </QCItem>
+            <QCItem Id="255" Name="车辆标定参数备份" QCTimeout="20" QCTimes="1" ReadyTimeout="20"
+                Require="true">
+                <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
+                    <QCProgressMsg>
+                        <QCProgress Code="" Msg="" />
+                    </QCProgressMsg>
+                    <QCErrMsg>
+                        <QCErr Code="" Msg="" />
+                    </QCErrMsg>
+                </Msgs>
+                <QCParams>
+                    <QCParam Param="传感器零点标定" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="传感器最大值标定" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
                 </QCParams>
                 <ENVParams />
                 <RealTimeParams />

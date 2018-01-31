@@ -14,6 +14,7 @@ import com.kstech.zoomlion.utils.JsonUtils;
 import org.junit.Test;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Iterator;
@@ -218,11 +219,24 @@ public class ExampleUnitTest {
     }
 
     @Test
-    public void testFloat() {
-        String f = "999.00000";
-        Float f1 = 999f;
-        Float f2 = Float.valueOf(f);
-        boolean b = f1.equals(f2);
-        System.out.println(b);
+    public void testFloat() throws IOException, IllegalAccessException, InvocationTargetException {
+        J1939 type = (J1939) XMLAPI.readXML(new FileInputStream("/Users/lijie/Desktop/f.xml"));
+        QCParams params = new QCParams();
+        for (PG pg : type.getPgs()) {
+            for (SP sp : pg.getSps()) {
+                QCParam param = new QCParam();
+                param.setParam(sp.getRef());
+                param.setValueReq(true);
+                param.setPicReq(true);
+                param.setValMode("Auto");
+                param.setQCMode("Auto");
+                param.setValidMax("");
+                param.setValidAvg("");
+                param.setValidMin("");
+
+                params.getQcParams().add(param);
+            }
+        }
+        XMLAPI.writeXML2File(params, "/Users/lijie/Desktop/r.xml");
     }
 }
