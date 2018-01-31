@@ -25,6 +25,7 @@
 
         <TextView
             android:id="@+id/ch_tv_gps"
+            android:background="@drawable/click_ripple"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
