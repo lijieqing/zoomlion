@@ -33,7 +33,7 @@
         <activity android:name=".view.activity.IndexActivity" />
         <activity android:name=".view.activity.CheckHomeActivity" />
         <activity android:name=".view.activity.UserDetailActivity" />
-        <activity android:name=".view.activity.ViewRecordActivity"/>
+        <activity android:name=".view.activity.ViewRecordActivity" />
 
         <service
             android:name=".engine.comm.J1939TaskService"
@@ -43,6 +43,10 @@
                 <action android:name="com.kstech.engine.comm.J1939" />
             </intent-filter>
         </service>
+        <service
+            android:name=".engine.server.UploadService"
+            android:enabled="true"
+            android:exported="false" />
 
     </application>
 

@@ -1,11 +1,15 @@
 package com.kstech.zoomlion.view.activity;
 
 import android.app.AlertDialog;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.ServiceConnection;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.os.Message;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.GridLayoutManager;
@@ -20,6 +24,7 @@ import android.widget.ExpandableListView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,7 +32,7 @@ import com.kstech.zoomlion.MyApplication;
 import com.kstech.zoomlion.R;
 import com.kstech.zoomlion.engine.server.CheckRecordConfirmTask;
 import com.kstech.zoomlion.engine.server.ItemCheckPrepareTask;
-import com.kstech.zoomlion.engine.server.QCItemDataReLoadTask;
+import com.kstech.zoomlion.engine.server.UploadService;
 import com.kstech.zoomlion.model.db.CheckItemData;
 import com.kstech.zoomlion.model.db.CheckItemDetailData;
 import com.kstech.zoomlion.model.db.CheckRecord;
@@ -135,6 +140,15 @@ public class CheckHomeActivity extends BaseActivity {
     @ViewInject(R.id.ch_tv_gps)
     private TextView tvGPS;
 
+    @ViewInject(R.id.ch_rl_upload)
+    private RelativeLayout rlUpload;
+
+    @ViewInject(R.id.ch_iv_upload)
+    private ImageView ivUpload;
+    /**
+     * 数据上传动画
+     */
+    private AnimationDrawable uploadAnim;
     /**
      * 实时参数集合
      */
@@ -180,6 +194,27 @@ public class CheckHomeActivity extends BaseActivity {
      * 整机调试记录上传成功
      */
     public static final int CHECK_RECORD_UPDATE_SUCCESS = 2;
+    /**
+     * 数据记录上传开始
+     */
+    public static final int RECORD_UPDATE_START = 3;
+    /**
+     * 数据记录上传完成
+     */
+    public static final int RECORD_UPDATE_FINISH = 4;
+
+    ServiceConnection uploadConn = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            UploadService.UploadBinder bind = (UploadService.UploadBinder) service;
+            bind.setHandler(handler);
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -246,7 +281,12 @@ public class CheckHomeActivity extends BaseActivity {
         realTimes.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.HORIZONTAL_LIST));
         realTimes.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));
 
-        new QCItemDataReLoadTask(handler).executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
+        //上传动画初始化
+        uploadAnim = (AnimationDrawable) ivUpload.getBackground();
+        //启动数据定时上传服务
+        Intent start = new Intent(this, UploadService.class);
+        startService(start);
+        bindService(start, uploadConn, BIND_AUTO_CREATE);
     }
 
     /**
@@ -339,12 +379,21 @@ public class CheckHomeActivity extends BaseActivity {
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unbindService(uploadConn);
+        Intent end = new Intent(this, UploadService.class);
+        stopService(end);
+    }
+
     /**
      * 点击事件 处理
      *
      * @param view
      */
-    @Event(value = {R.id.ch_tv_start_check, R.id.ch_btn_record_pass, R.id.ch_btn_record_unpass},
+    @Event(value = {R.id.ch_tv_start_check, R.id.ch_btn_record_pass, R.id.ch_btn_record_unpass,
+            R.id.ch_rl_upload},
             type = View.OnClickListener.class)
     private void click(View view) {
         switch (view.getId()) {
@@ -361,6 +410,11 @@ public class CheckHomeActivity extends BaseActivity {
                 break;
             case R.id.ch_btn_record_unpass:
                 confirmCheckRecord(false);
+                break;
+            case R.id.ch_rl_upload:
+                Intent start = new Intent(this, UploadService.class);
+                startService(start);
+                bindService(start, uploadConn, BIND_AUTO_CREATE);
                 break;
         }
     }
@@ -431,6 +485,12 @@ public class CheckHomeActivity extends BaseActivity {
                         break;
                     case CHECK_RECORD_UPDATE_SUCCESS:
                         activity.finish();
+                        break;
+                    case RECORD_UPDATE_START:
+                        activity.uploadAnim.start();
+                        break;
+                    case RECORD_UPDATE_FINISH:
+                        activity.uploadAnim.stop();
                         break;
                 }
             }
