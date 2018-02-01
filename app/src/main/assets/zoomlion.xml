@@ -4761,7 +4761,7 @@
             </QCItem>
         </QCType>
         <QCType Name="Init">
-            <QCItem AttachPGN="0xFFF7" Id="999" Name="参数初始化" QCTimeout="20" QCTimes="1"
+            <QCItem AttachPGN="0xFFF7" Id="253" Name="参数初始化" QCTimeout="20" QCTimes="1"
                 ReadyTimeout="20" Require="true">
                 <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
                     <QCProgressMsg>
