@@ -4878,239 +4878,239 @@
                     </QCErrMsg>
                 </Msgs>
                 <QCParams>
-                    <QCParam Param="主泵品牌" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="主泵品牌" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="主泵排量" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="主泵排量" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="主泵类型" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="主泵类型" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="液压系统" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="液压系统" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="油缸类型" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="油缸类型" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="换向类型" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="换向类型" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="高低压类型" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="高低压类型" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="液位传感器" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="液位传感器" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="油温传感器" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="油温传感器" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="恒压泵类型" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="恒压泵类型" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="锁车模式" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="锁车模式" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="软件恒功率" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="软件恒功率" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="支撑方式" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="支撑方式" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="臂架类型" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="臂架类型" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="臂架EP泵" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="臂架EP泵" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="回转阀" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="回转阀" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="编码器类型" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="编码器类型" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="一臂倾角" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="一臂倾角" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="二臂倾角" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="二臂倾角" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="三臂倾角" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="三臂倾角" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="四臂倾角" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="四臂倾角" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="五臂倾角" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="五臂倾角" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="六臂倾角" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="六臂倾角" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="七臂倾角" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="七臂倾角" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="臂架调速模式" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="臂架调速模式" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="底盘类型" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="底盘类型" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="主动减震" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="主动减震" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="回转减震" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="回转减震" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="臂架防干涉" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="臂架防干涉" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="合流功能" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="合流功能" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="主泵降温" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="主泵降温" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="油缸锁紧" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="油缸锁紧" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="搅伴安全控制" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="搅伴安全控制" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="料位安全控制" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="料位安全控制" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="防倾翻" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="防倾翻" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="应急换向" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="应急换向" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="优化行程" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="优化行程" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="节能模式" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="节能模式" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="分配控制" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="分配控制" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="泵送启动方式" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="泵送启动方式" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="臂架控制模式" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="臂架控制模式" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="泵送点动方式" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="泵送点动方式" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="料况自适应" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="料况自适应" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="泵送行程初始化" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="泵送行程初始化" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="故障诊断" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="故障诊断" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="泵送节能速度" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="泵送节能速度" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="支腿臂架转速" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="支腿臂架转速" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="怠速速度" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="怠速速度" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="最高转速" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="最高转速" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="减速延时时间" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="减速延时时间" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="油泵超速报警值" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="油泵超速报警值" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="超档位传动比" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="超档位传动比" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="速度参数自学习" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="速度参数自学习" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="主缸停止延时" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="主缸停止延时" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="分配停止延时" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="分配停止延时" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="换向延时时间" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="换向延时时间" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="降排量时间" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="降排量时间" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="降排量压力" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="降排量压力" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="超压降排量时间" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="超压降排量时间" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="起调压力" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="起调压力" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="恒功率系数" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="恒功率系数" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="最小控制压力" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="最小控制压力" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="排量修正系数" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="排量修正系数" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="优化行程最小时间" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="优化行程最小时间" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="优化行程启动压力" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="优化行程启动压力" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="优化行程最大时间" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="优化行程最大时间" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="泵送降温启动温度" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="泵送降温启动温度" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="砼缸直径" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="砼缸直径" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="1100rpm对应功率" PicReq="true" QCMode="Auto" ValMode="Auto"
+                    <QCParam Param="1100rpm对应功率" PicReq="false" QCMode="Auto" ValMode="Auto"
                         ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="1500rpm对应功率" PicReq="true" QCMode="Auto" ValMode="Auto"
+                    <QCParam Param="1500rpm对应功率" PicReq="false" QCMode="Auto" ValMode="Auto"
                         ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="停泵时间间隔1" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="停泵时间间隔1" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="停泵时间间隔2" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="停泵时间间隔2" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="主缸单独得电时间" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="主缸单独得电时间" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="泵送停止时间" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="泵送停止时间" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="主缸停止延时设置0～1.5档（低压）" PicReq="true" QCMode="Auto" ValMode="Auto"
+                    <QCParam Param="主缸停止延时设置0～1.5档（低压）" PicReq="false" QCMode="Auto" ValMode="Auto"
                         ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="0～1.5档（高压）" PicReq="true" QCMode="Auto" ValMode="Auto"
+                    <QCParam Param="0～1.5档（高压）" PicReq="false" QCMode="Auto" ValMode="Auto"
                         ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="1.5～2.5档（低压）" PicReq="true" QCMode="Auto" ValMode="Auto"
+                    <QCParam Param="1.5～2.5档（低压）" PicReq="false" QCMode="Auto" ValMode="Auto"
                         ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="1.5～2.5档（高压）" PicReq="true" QCMode="Auto" ValMode="Auto"
+                    <QCParam Param="1.5～2.5档（高压）" PicReq="false" QCMode="Auto" ValMode="Auto"
                         ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="2.5～3.5档（低压）" PicReq="true" QCMode="Auto" ValMode="Auto"
+                    <QCParam Param="2.5～3.5档（低压）" PicReq="false" QCMode="Auto" ValMode="Auto"
                         ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="2.5～3.5档（高压）" PicReq="true" QCMode="Auto" ValMode="Auto"
+                    <QCParam Param="2.5～3.5档（高压）" PicReq="false" QCMode="Auto" ValMode="Auto"
                         ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="3.5～4.5档（低压）" PicReq="true" QCMode="Auto" ValMode="Auto"
+                    <QCParam Param="3.5～4.5档（低压）" PicReq="false" QCMode="Auto" ValMode="Auto"
                         ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="3.5～4.5档（高压）" PicReq="true" QCMode="Auto" ValMode="Auto"
+                    <QCParam Param="3.5～4.5档（高压）" PicReq="false" QCMode="Auto" ValMode="Auto"
                         ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="4.5～6档（低压）" PicReq="true" QCMode="Auto" ValMode="Auto"
+                    <QCParam Param="4.5～6档（低压）" PicReq="false" QCMode="Auto" ValMode="Auto"
                         ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="4.5～6档（高压）" PicReq="true" QCMode="Auto" ValMode="Auto"
+                    <QCParam Param="4.5～6档（高压）" PicReq="false" QCMode="Auto" ValMode="Auto"
                         ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="6～10档（低压）" PicReq="true" QCMode="Auto" ValMode="Auto"
+                    <QCParam Param="6～10档（低压）" PicReq="false" QCMode="Auto" ValMode="Auto"
                         ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="主缸停止延时设置6～10档（高压）" PicReq="true" QCMode="Auto" ValMode="Auto"
+                    <QCParam Param="主缸停止延时设置6～10档（高压）" PicReq="false" QCMode="Auto" ValMode="Auto"
                         ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="开机润滑时间" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="开机润滑时间" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="关机润滑时间" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="关机润滑时间" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="气动润滑时间" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="气动润滑时间" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="润滑停歇时间" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="润滑停歇时间" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="风扇自启动温度" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="风扇自启动温度" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="自加热启动温度" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="自加热启动温度" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="自加热停止温度" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="自加热停止温度" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="压力切断值" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="压力切断值" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="全支撑安全范围" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="全支撑安全范围" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="节能档位" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="节能档位" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="泵送行程参数" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="泵送行程参数" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="回转启动速度缓冲" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="回转启动速度缓冲" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="一臂启动速度缓冲" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="一臂启动速度缓冲" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="二臂启动速度缓冲" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="二臂启动速度缓冲" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="三臂启动速度缓冲" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="三臂启动速度缓冲" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="四臂启动速度缓冲" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="四臂启动速度缓冲" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="五臂启动速度缓冲" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="五臂启动速度缓冲" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="六臂启动速度缓冲" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="六臂启动速度缓冲" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="七臂启动速度缓冲" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="七臂启动速度缓冲" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="回转停止速度缓冲" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="回转停止速度缓冲" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="一臂停止速度缓冲" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="一臂停止速度缓冲" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="二臂停止速度缓冲" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="二臂停止速度缓冲" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="三臂停止速度缓冲" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="三臂停止速度缓冲" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="四臂停止速度缓冲" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="四臂停止速度缓冲" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="五臂停止速度缓冲" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="五臂停止速度缓冲" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="六臂停止速度缓冲" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="六臂停止速度缓冲" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="七臂停止速度缓冲" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="七臂停止速度缓冲" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="合流阀最大电流" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="合流阀最大电流" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="合流阀最小电流" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="合流阀最小电流" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="臂架降温启动温度" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="臂架降温启动温度" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="分配压力" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="分配压力" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
                 </QCParams>
                 <ENVParams />
@@ -5127,9 +5127,9 @@
                     </QCErrMsg>
                 </Msgs>
                 <QCParams>
-                    <QCParam Param="传感器零点标定" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="传感器零点标定" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="传感器最大值标定" PicReq="true" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                    <QCParam Param="传感器最大值标定" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
                 </QCParams>
                 <ENVParams />
