@@ -39,6 +39,10 @@ public class DeviceLoadTask extends AsyncTask<Void, String, Void> {
      * 是否正在等待，当通讯线程启动完成后，置为false
      */
     public boolean isWaitting = true;
+    /**
+     * 服务器机型加载完成
+     */
+    private boolean deviceLoadSuccess = false;
 
 
     public DeviceLoadTask(String InExc, Handler handler) {
@@ -164,9 +168,12 @@ public class DeviceLoadTask extends AsyncTask<Void, String, Void> {
                 device = (Device) XMLAPI.readXML(MyApplication.getApplication().getAssets().open("zoomlion.xml"));
                 device.getJ1939().setNodeAddr(Globals.currentTerminal.getCanNodeId());
                 Globals.modelFile = DeviceModelFile.readFromFile(device);
+                Globals.deviceSN = null;
             } else {
+                deviceLoadSuccess = true;
                 device.getJ1939().setNodeAddr(Globals.currentTerminal.getCanNodeId());
                 Globals.modelFile = DeviceModelFile.readFromFile(device);
+                Globals.modelFile.dataSetVO.getDSItem("整机编码_回复").setStrValue(Globals.deviceSN);
             }
 
             device = null;
@@ -198,7 +205,10 @@ public class DeviceLoadTask extends AsyncTask<Void, String, Void> {
         message.obj = "通讯线程启动完成";
         message.arg1 = 98;
         handler.sendMessage(message);
-
+        if (deviceLoadSuccess){
+            SystemClock.sleep(1000);
+            handler.sendEmptyMessage(IndexActivity.DEVICE_LOADING_FINISH);
+        }
         SystemClock.sleep(300);
         handler.sendEmptyMessage(IndexActivity.DIALOG_CANCEL);
 

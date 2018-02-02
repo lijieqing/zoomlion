@@ -2473,9 +2473,9 @@
                 </Msgs>
                 <QCParams>
                     <QCParam Param="左前支腿水平回收时间" PicReq="false" QCMode="Auto" ValMode="Auto"
-                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" XParam=" " XRange=" " />
-                    <QCParam Param="左前支腿水平回收平均油温" PicReq="true" QCMode="Auto" ValMode="Auto"
-                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" XParam=" " XRange=" " />
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="左前支腿水平回收平均油温" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
                 </QCParams>
                 <ENVParams />
                 <RealTimeParams>
@@ -2501,8 +2501,8 @@
                     <QCParam Param="左前支腿垂直伸出时间" PicReq="false" QCMode="Auto" ValMode="Auto"
                         ValidAvg="" ValidMax="20" ValidMin="14" ValueReq="true" XParam=" "
                         XRange=" " />
-                    <QCParam Param="左前支腿垂直伸出平均油温" PicReq="true" QCMode="Auto" ValMode="Auto"
-                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" XParam=" " XRange=" " />
+                    <QCParam Param="左前支腿垂直伸出平均油温" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
                 </QCParams>
                 <ENVParams />
                 <RealTimeParams>
@@ -2528,8 +2528,8 @@
                     <QCParam Param="左前支腿垂直回收时间" PicReq="false" QCMode="Auto" ValMode="Auto"
                         ValidAvg="" ValidMax="30" ValidMin="20" ValueReq="true" XParam=" "
                         XRange=" " />
-                    <QCParam Param="左前支腿垂直回收平均油温" PicReq="true" QCMode="Auto" ValMode="Auto"
-                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" XParam=" " XRange=" " />
+                    <QCParam Param="左前支腿垂直回收平均油温" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
                 </QCParams>
                 <ENVParams />
                 <RealTimeParams>
@@ -2549,10 +2549,10 @@
                     </QCErrMsg>
                 </Msgs>
                 <QCParams>
-                    <QCParam Param="右前支腿水平伸出时间" PicReq="true" QCMode="Auto" ValMode="Auto"
-                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" XParam=" " XRange=" " />
-                    <QCParam Param="右前支腿水平伸出平均油温" PicReq="true" QCMode="Auto" ValMode="Auto"
-                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" XParam=" " XRange=" " />
+                    <QCParam Param="右前支腿水平伸出时间" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="右前支腿水平伸出平均油温" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
                 </QCParams>
                 <ENVParams />
                 <RealTimeParams>
@@ -2572,10 +2572,10 @@
                     </QCErrMsg>
                 </Msgs>
                 <QCParams>
-                    <QCParam Param="右前支腿水平回收时间" PicReq="true" QCMode="Auto" ValMode="Auto"
-                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" XParam=" " XRange=" " />
-                    <QCParam Param="右前支腿水平回收平均油温" PicReq="true" QCMode="Auto" ValMode="Auto"
-                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" XParam=" " XRange=" " />
+                    <QCParam Param="右前支腿水平回收时间" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="右前支腿水平回收平均油温" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
                 </QCParams>
                 <ENVParams />
                 <RealTimeParams>
@@ -2595,10 +2595,10 @@
                     </QCErrMsg>
                 </Msgs>
                 <QCParams>
-                    <QCParam Param="右前支腿垂直伸出时间" PicReq="true" QCMode="Auto" ValMode="Auto"
-                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" XParam=" " XRange=" " />
-                    <QCParam Param="右前支腿垂直伸出平均油温" PicReq="true" QCMode="Auto" ValMode="Auto"
-                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" XParam=" " XRange=" " />
+                    <QCParam Param="右前支腿垂直伸出时间" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="右前支腿垂直伸出平均油温" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
                 </QCParams>
                 <ENVParams />
                 <RealTimeParams>
@@ -2618,10 +2618,10 @@
                     </QCErrMsg>
                 </Msgs>
                 <QCParams>
-                    <QCParam Param="右前支腿垂直回收时间" PicReq="true" QCMode="Auto" ValMode="Auto"
-                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" XParam=" " XRange=" " />
-                    <QCParam Param="右前支腿垂直回收平均油温" PicReq="true" QCMode="Auto" ValMode="Auto"
-                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" XParam=" " XRange=" " />
+                    <QCParam Param="右前支腿垂直回收时间" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="右前支腿垂直回收平均油温" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
                 </QCParams>
                 <ENVParams />
                 <RealTimeParams>
@@ -2641,10 +2641,10 @@
                     </QCErrMsg>
                 </Msgs>
                 <QCParams>
-                    <QCParam Param="左后支腿水平伸出时间" PicReq="true" QCMode="Auto" ValMode="Auto"
-                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" XParam=" " XRange=" " />
-                    <QCParam Param="左后支腿水平伸出平均油温" PicReq="true" QCMode="Auto" ValMode="Auto"
-                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" XParam=" " XRange=" " />
+                    <QCParam Param="左后支腿水平伸出时间" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="左后支腿水平伸出平均油温" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
                 </QCParams>
                 <ENVParams />
                 <RealTimeParams>
@@ -2664,10 +2664,10 @@
                     </QCErrMsg>
                 </Msgs>
                 <QCParams>
-                    <QCParam Param="左后支腿水平回收时间" PicReq="true" QCMode="Auto" ValMode="Auto"
-                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" XParam=" " XRange=" " />
-                    <QCParam Param="左后支腿水平回收平均油温" PicReq="true" QCMode="Auto" ValMode="Auto"
-                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" XParam=" " XRange=" " />
+                    <QCParam Param="左后支腿水平回收时间" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="左后支腿水平回收平均油温" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
                 </QCParams>
                 <ENVParams />
                 <RealTimeParams>
@@ -2687,10 +2687,10 @@
                     </QCErrMsg>
                 </Msgs>
                 <QCParams>
-                    <QCParam Param="左后支腿垂直伸出时间" PicReq="true" QCMode="Auto" ValMode="Auto"
-                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" XParam=" " XRange=" " />
-                    <QCParam Param="左后支腿垂直伸出平均油温" PicReq="true" QCMode="Auto" ValMode="Auto"
-                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" XParam=" " XRange=" " />
+                    <QCParam Param="左后支腿垂直伸出时间" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="左后支腿垂直伸出平均油温" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
                 </QCParams>
                 <ENVParams />
                 <RealTimeParams>
@@ -2710,10 +2710,10 @@
                     </QCErrMsg>
                 </Msgs>
                 <QCParams>
-                    <QCParam Param="左后支腿垂直回收时间" PicReq="true" QCMode="Auto" ValMode="Auto"
-                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" XParam=" " XRange=" " />
-                    <QCParam Param="左后支腿垂直回收平均油温" PicReq="true" QCMode="Auto" ValMode="Auto"
-                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" XParam=" " XRange=" " />
+                    <QCParam Param="左后支腿垂直回收时间" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="左后支腿垂直回收平均油温" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
                 </QCParams>
                 <ENVParams />
                 <RealTimeParams>
@@ -2733,10 +2733,10 @@
                     </QCErrMsg>
                 </Msgs>
                 <QCParams>
-                    <QCParam Param="右后支腿水平伸出时间" PicReq="true" QCMode="Auto" ValMode="Auto"
-                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" XParam=" " XRange=" " />
-                    <QCParam Param="右后支腿水平伸出平均油温" PicReq="true" QCMode="Auto" ValMode="Auto"
-                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" XParam=" " XRange=" " />
+                    <QCParam Param="右后支腿水平伸出时间" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="右后支腿水平伸出平均油温" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
                 </QCParams>
                 <ENVParams />
                 <RealTimeParams>
@@ -2756,10 +2756,10 @@
                     </QCErrMsg>
                 </Msgs>
                 <QCParams>
-                    <QCParam Param="右后支腿水平回收时间" PicReq="true" QCMode="Auto" ValMode="Auto"
-                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" XParam=" " XRange=" " />
-                    <QCParam Param="右后支腿水平回收平均油温" PicReq="true" QCMode="Auto" ValMode="Auto"
-                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" XParam=" " XRange=" " />
+                    <QCParam Param="右后支腿水平回收时间" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="右后支腿水平回收平均油温" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
                 </QCParams>
                 <ENVParams />
                 <RealTimeParams>
@@ -2779,10 +2779,10 @@
                     </QCErrMsg>
                 </Msgs>
                 <QCParams>
-                    <QCParam Param="右后支腿垂直伸出时间" PicReq="true" QCMode="Auto" ValMode="Auto"
-                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" XParam=" " XRange=" " />
-                    <QCParam Param="右后支腿垂直伸出平均油温" PicReq="true" QCMode="Auto" ValMode="Auto"
-                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" XParam=" " XRange=" " />
+                    <QCParam Param="右后支腿垂直伸出时间" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="右后支腿垂直伸出平均油温" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
                 </QCParams>
                 <ENVParams />
                 <RealTimeParams>
@@ -2802,10 +2802,10 @@
                     </QCErrMsg>
                 </Msgs>
                 <QCParams>
-                    <QCParam Param="右后支腿垂直回收时间" PicReq="true" QCMode="Auto" ValMode="Auto"
-                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" XParam=" " XRange=" " />
-                    <QCParam Param="右后支腿垂直回收平均油温" PicReq="true" QCMode="Auto" ValMode="Auto"
-                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" XParam=" " XRange=" " />
+                    <QCParam Param="右后支腿垂直回收时间" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="右后支腿垂直回收平均油温" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
                 </QCParams>
                 <ENVParams />
                 <RealTimeParams>

@@ -234,7 +234,7 @@ public abstract class AbstractDataTransferTask extends AsyncTask<Void, Integer, 
      * @param detailData 调试项目细节数据
      * @return 打包完成后的对象
      */
-    protected CompleteQCItemJSON packageQCItemData(CheckItemDetailData detailData, CheckItemData itemData) {
+    public static CompleteQCItemJSON packageQCItemData(CheckItemDetailData detailData, CheckItemData itemData) {
         //将调试项目数据打包为传输格式数据
         CompleteQCItemJSON qcItemJSON = new CompleteQCItemJSON();
 

@@ -202,6 +202,10 @@ public class CheckHomeActivity extends BaseActivity {
      * 数据记录上传完成
      */
     public static final int RECORD_UPDATE_FINISH = 4;
+    /**
+     * 记录备份结果信息
+     */
+    public static final int RECORD_UPDATE_INFO = 5;
 
     ServiceConnection uploadConn = new ServiceConnection() {
         @Override
@@ -488,6 +492,15 @@ public class CheckHomeActivity extends BaseActivity {
                         break;
                     case RECORD_UPDATE_START:
                         activity.uploadAnim.start();
+                        break;
+                    case RECORD_UPDATE_INFO:
+                        int total = (int) msg.obj;
+                        if (total >= 0) {
+                            Snackbar.make(activity.llRoot, "无未上传数据", Snackbar.LENGTH_SHORT).show();
+                        } else {
+                            Snackbar.make(activity.llRoot, "数据备分完成！成功：" + msg.arg1
+                                    + "  失败：" + msg.arg2, Snackbar.LENGTH_SHORT).show();
+                        }
                         break;
                     case RECORD_UPDATE_FINISH:
                         activity.uploadAnim.stop();

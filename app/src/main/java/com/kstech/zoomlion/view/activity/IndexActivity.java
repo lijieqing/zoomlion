@@ -241,6 +241,10 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
      */
     public static final int PARAM_INIT_ANIM_CLEAR = 8;
     /**
+     * 服务器机型加载完成
+     */
+    public static final int DEVICE_LOADING_FINISH = 9;
+    /**
      * 机型加载线程
      */
     private DeviceLoadTask deviceLoadTask;
@@ -257,6 +261,10 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
      */
     private boolean backFromCheck = false;
     /**
+     * 机型信息加载中
+     */
+    private boolean deviceLoading = false;
+    /**
      * 初始化参数集合
      */
     private List<String> initParams = new ArrayList<>();
@@ -268,6 +276,17 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
      * 初始化参数Key值
      */
     private static final String INIT_PARAM = "Init";
+    /**
+     * 机型文件中 预热时间的数据变量名
+     */
+    private static final String PREHEATING_TIME = "预热时间";
+    /**
+     * 机型文件中 整机编码的数据变量名
+     */
+    private static final String DEVICE_SN = "整机编码";
+    /**
+     * 打印tag
+     */
     public static final String TAG = "IndexActivity";
     /**
      * 服务连接对象
@@ -324,14 +343,16 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
     protected void onStop() {
         super.onStop();
         //取消 预热时间 数据监听器
-        Globals.modelFile.getDataSetVO().getDSItem("预热时间").removeListener(this);
+        Globals.modelFile.getDataSetVO().getDSItem(PREHEATING_TIME).removeListener(this);
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
-        //恢复 预热时间 数据监听器
-        Globals.modelFile.getDataSetVO().getDSItem("预热时间").addListener(this);
+        //注册 预热时间、整机编码 数据监听器
+        Globals.modelFile.getDataSetVO().getDSItem(PREHEATING_TIME).addListener(this);
+        Globals.modelFile.getDataSetVO().getDSItem(DEVICE_SN).addListener(this);
+
         if (Globals.PROCESSID != null && backFromCheck) {
             backFromCheck = false;
             new DeviceStatusUpdateTask(handler).executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
@@ -383,7 +404,8 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
                 deviceLoadTask.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
                 break;
             case R.id.index_btn_get_sn:
-                Toast.makeText(this, Globals.deviceSN, Toast.LENGTH_SHORT).show();
+                String currentSN = Globals.modelFile.dataSetVO.getDSItem("整机编码_回复").getStrValue();
+                Toast.makeText(this, currentSN, Toast.LENGTH_SHORT).show();
                 break;
             case R.id.index_rl_param_init:
                 ivRefresh.startAnimation(animation);
@@ -442,8 +464,39 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
     private InnerHandler handler = new InnerHandler(this);
 
     @Override
-    public void onDataChanged(short dsItemPosition, float value) {
-        // TODO: 2017/12/7 此处处理value 转换为时间格式并显示到 tvPreHeat组件
+    public void onDataChanged(short dsItemPosition, Object value) {
+        //处理预热时间数据
+        if (dsItemPosition == Globals.modelFile.dataSetVO.getItemIndex(PREHEATING_TIME)) {
+
+        }
+        //处理整机编码数据
+        if (dsItemPosition == Globals.modelFile.dataSetVO.getItemIndex(DEVICE_SN)) {
+            verifyDeviceSN((String) value);
+        }
+    }
+
+    /**
+     * 校验整机编码是否正确
+     *
+     * @param sn 整机编码
+     */
+    private void verifyDeviceSN(String sn) {
+        if (!TextUtils.isEmpty(Globals.deviceSN)) {
+            //当整机编码变化且不是ERROR时，请求机型信息
+            if (!Globals.deviceSN.equals(sn) && !"ERROR".equals(sn) && !deviceLoading) {
+                deviceLoading = true;
+                Globals.deviceSN = sn;
+                deviceLoadTask = new DeviceLoadTask(Globals.deviceSN, handler);
+                deviceLoadTask.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
+            }
+        }else {
+            if (!TextUtils.isEmpty(sn) && !"ERROR".equals(sn) && !deviceLoading){
+                deviceLoading = true;
+                Globals.deviceSN = sn;
+                deviceLoadTask = new DeviceLoadTask(Globals.deviceSN, handler);
+                deviceLoadTask.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
+            }
+        }
     }
 
     private static class InnerHandler extends BaseInnerHandler {
@@ -477,7 +530,6 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
                         mActivity.bindService(j1939Intent, mActivity.conn, BIND_AUTO_CREATE);
                         mActivity.startService(j1939Intent);
 
-                        mActivity.getInitParams();
                         //注册预热时间 数据监听器
                         Globals.modelFile.getDataSetVO().getDSItem("预热时间").addListener(mActivity);
                         break;
@@ -498,11 +550,15 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
                     case UPDATE_PARAM_INIT_INFO:
                         mActivity.messageShowView.updateMessage(new Date(), (String) msg.obj);
                         break;
+                    case DEVICE_LOADING_FINISH:
+                        mActivity.deviceLoading = false;
+                        mActivity.getInitParams();
+                        break;
                     case PARAM_INIT_ANIM_CLEAR:
                         mActivity.ivRefresh.clearAnimation();
-                        if (msg.obj == null){
+                        if (msg.obj == null) {
                             mActivity.messageShowView.updateMessage(new Date(), "参数初始化完成，可以开启调试");
-                        }else {
+                        } else {
                             mActivity.messageShowView.updateMessage(new Date(), (String) msg.obj);
                         }
                         break;
