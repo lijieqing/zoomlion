@@ -594,6 +594,8 @@ public class DeviceModelFile {
             return Integer.valueOf(dataValue);
         } else if (dataType.equals("SHORT")) {
             return Short.valueOf(dataValue);
+        } else if (dataType.equals("STRING")) {
+            return dataValue;
         }
         return null;
     }

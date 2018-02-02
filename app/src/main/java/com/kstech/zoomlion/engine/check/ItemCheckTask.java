@@ -213,7 +213,7 @@ public class ItemCheckTask extends AsyncTask<Void, String, Void> implements J193
     }
 
     @Override
-    public void onDataChanged(short dsItemPosition, float value) {
+    public void onDataChanged(short dsItemPosition, Object value) {
         if (inSpecRepairMode) {
             //谱图补传状态
             //序列号即为每个集合的下标
@@ -247,7 +247,7 @@ public class ItemCheckTask extends AsyncTask<Void, String, Void> implements J193
         } else {
             //非谱图补传状态，正常接收处理数据
             //将谱图顺序号存入集合
-            specOrderList.add(value);
+            specOrderList.add((Float) value);
 
             //遍历谱图参数集合，获取对应的谱图参数数据
             for (SpecParam specParam : spectrum.getSpecParams()) {

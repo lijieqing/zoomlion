@@ -4,6 +4,8 @@ import android.util.Log;
 
 import com.kstech.zoomlion.utils.Globals;
 
+import java.io.UnsupportedEncodingException;
+
 public class GenericRxDBoxCallback implements IRxDBoxCallback {
 
     /**
@@ -12,7 +14,7 @@ public class GenericRxDBoxCallback implements IRxDBoxCallback {
      * @param wIdx：   变量索引
      * @param fValue： 变量值
      */
-    private void SetDataVarValue(short wIdx, float fValue) {
+    private void setDataVarValue(short wIdx, float fValue) {
 
         J1939_DataVar_ts pDD;
         VARTYPE vt;
@@ -26,8 +28,20 @@ public class GenericRxDBoxCallback implements IRxDBoxCallback {
             pDD.setValue((long) fValue);
         }
         // TODO: 2017/5/24  监听回调
-        pDD.notifyListener(wIdx,fValue);
+        pDD.notifyListener(wIdx, fValue);
         Log.e("GenericRxDBoxCallback", fValue + "");
+    }
+
+    private void setDataVarValue(short wIdx, J1939_DataVar_ts dataStr, byte[] strBytes) {
+        String strValue;
+        try {
+            strValue = new String(strBytes, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            strValue = "ERROR";
+        }
+        dataStr.setStrValue(strValue);
+        dataStr.notifyListener(wIdx, strValue);
     }
 
 
@@ -71,19 +85,27 @@ public class GenericRxDBoxCallback implements IRxDBoxCallback {
                 bBits = (byte) (bBytes << 3);                //
             }
 
-            for (j = (short) (bBytes - 1); j >= 0; j--) {        // 将所涉及的字节按小端序列组装成32位字
-                dwValue = (dwValue << 8) | (pPGCfg.pData[wSByte + j] & 0xFF);
+            J1939_DataVar_ts dataStr = J1939_Context.j1939_DataVarCfg[pSPCfg.wRefDataIdx];
+            if (dataStr.bDataType == VARTYPE.STRING) {
+                byte[] strBytes = new byte[bBytes];
+                for (j = 0; j < bBytes; j++) {
+                    strBytes[j] = pPGCfg.pData[wSByte + j];
+                }
+                setDataVarValue(pSPCfg.wRefDataIdx, dataStr, strBytes);
+            } else {
+                for (j = (short) (bBytes - 1); j >= 0; j--) {        // 将所涉及的字节按小端序列组装成32位字
+                    dwValue = (dwValue << 8) | (pPGCfg.pData[wSByte + j] & 0xFF);
+                }
+
+                dwValue >>= (bSBit);                            // 将起始位移至最低位
+                if (bBits < 32) {
+                    dwValue &= ((1 << bBits) - 1);            // 将前面多出的位清0
+                }
+
+                fValue = pSPCfg.fRes * ((float) dwValue) + pSPCfg.fOffset;
+
+                setDataVarValue(pSPCfg.wRefDataIdx, fValue);
             }
-
-            dwValue >>= (bSBit);                            // 将起始位移至最低位
-            if (bBits < 32) {
-                dwValue &= ((1 << bBits) - 1);            // 将前面多出的位清0
-            }
-
-            fValue = pSPCfg.fRes * ((float) dwValue) + pSPCfg.fOffset;
-
-            SetDataVarValue(pSPCfg.wRefDataIdx, fValue);
-
         }
 
         if (pPGCfg.dwPGN >= (0xFF20 & 0x0000FFFF) &&

@@ -273,8 +273,8 @@
         <DSItem DataType="FLOAT" DecLen="0" Name="臂架降温启动温度" Unit="U" />
         <DSItem DataType="FLOAT" DecLen="0" Name="分配压力" Unit="U" />
         <!--实时显示参数-->
-        <DSItem DataType="FLOAT" DecLen="0" Name="整机编码" Unit="D" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="整机编码_回复" Unit="D" />
+        <DSItem DataType="STRING" DecLen="0" Name="整机编码" Unit="D" />
+        <DSItem DataType="STRING" DecLen="0" Name="整机编码_回复" Unit="D" />
         <DSItem DataType="FLOAT" DecLen="0" Name="工作档位" Unit="D" />
         <DSItem DataType="FLOAT" DecLen="0" Name="发动机转速" Unit="rpm" />
         <DSItem DataType="FLOAT" DecLen="0" Name="油泵转速" Unit="rpm" />
