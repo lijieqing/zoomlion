@@ -49,16 +49,10 @@ public interface BaseCheckFunction {
      * 跳到下一调试项目
      */
     void toNext();
-
     /**
-     * 模糊块消失回调
+     * 模糊块消失前回调
      */
-    void initDetailData();
-
-    /**
-     * 模糊块复原回调
-     */
-    void removeDetailData();
+    void clearBlur();
 
     /**
      * 加载调试项目数据信息

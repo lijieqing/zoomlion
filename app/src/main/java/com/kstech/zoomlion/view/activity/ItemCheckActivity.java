@@ -22,6 +22,7 @@ import com.kstech.zoomlion.R;
 import com.kstech.zoomlion.engine.base.BaseCheckFunction;
 import com.kstech.zoomlion.engine.base.ItemCheckCallBack;
 import com.kstech.zoomlion.engine.check.ItemCheckTask;
+import com.kstech.zoomlion.engine.check.ReadyToCheckTask;
 import com.kstech.zoomlion.engine.check.XmlExpressionImpl;
 import com.kstech.zoomlion.engine.server.ItemCheckPrepareTask;
 import com.kstech.zoomlion.engine.server.QCItemDataSaveUploadTask;
@@ -179,6 +180,10 @@ public class ItemCheckActivity extends BaseActivity implements ItemCheckCallBack
      * 调试项目数据保存完成
      */
     public static final int RECORD_DATA_SAVED = 5;
+    /**
+     * 测量终端准备调试完成
+     */
+    public static final int TERMINAL_READY_CHECK = 6;
     private static final String TAG = "ItemCheckActivity";
 
     @Override
@@ -317,15 +322,9 @@ public class ItemCheckActivity extends BaseActivity implements ItemCheckCallBack
 
         handler.sendEmptyMessage(NEW_CHECKITEM_REFRESH);
     }
-
     @Override
-    public void initDetailData() {
-        initNewDetailRecord();
-    }
-
-    @Override
-    public void removeDetailData() {
-        itemDetailDao.deleteByKey(detailID);
+    public void clearBlur() {
+        new ReadyToCheckTask(this,handler).executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
     }
 
     @Override
@@ -551,6 +550,10 @@ public class ItemCheckActivity extends BaseActivity implements ItemCheckCallBack
                         break;
                     case RECORD_VERIFY_ERROR:
                         activity.progressView.updateProgress("校验数据失败，请确保机型配置正确", 100);
+                        break;
+                    case TERMINAL_READY_CHECK:
+                        activity.iov.changeBlur();
+                        activity.initNewDetailRecord();
                         break;
                 }
 

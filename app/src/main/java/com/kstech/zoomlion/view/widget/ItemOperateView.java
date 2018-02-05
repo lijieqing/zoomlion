@@ -353,8 +353,7 @@ public class ItemOperateView extends RelativeLayout implements View.OnClickListe
                 toNext();
                 break;
             case R.id.btn_clear_blur:
-                changeBlur();
-                baseCheckFunction.initDetailData();
+                baseCheckFunction.clearBlur();
                 break;
 
         }
