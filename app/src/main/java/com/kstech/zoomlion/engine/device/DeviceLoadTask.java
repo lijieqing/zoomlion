@@ -205,9 +205,14 @@ public class DeviceLoadTask extends AsyncTask<Void, String, Void> {
         message.obj = "通讯线程启动完成";
         message.arg1 = 98;
         handler.sendMessage(message);
-        if (deviceLoadSuccess){
+        if (deviceLoadSuccess) {
+            //机型下载成功，通知线程恢复状态，并刷新初始化参数
             SystemClock.sleep(1000);
             handler.sendEmptyMessage(IndexActivity.DEVICE_LOADING_FINISH);
+        } else {
+            //机型下载失败，通知线程恢复状态，无需刷新初始化参数
+            SystemClock.sleep(1000);
+            handler.sendEmptyMessage(IndexActivity.DEVICE_LOADING_FAILED);
         }
         SystemClock.sleep(300);
         handler.sendEmptyMessage(IndexActivity.DIALOG_CANCEL);

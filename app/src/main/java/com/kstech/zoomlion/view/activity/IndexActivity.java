@@ -245,6 +245,10 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
      */
     public static final int DEVICE_LOADING_FINISH = 9;
     /**
+     * 服务器机型加载失败
+     */
+    public static final int DEVICE_LOADING_FAILED = 10;
+    /**
      * 机型加载线程
      */
     private DeviceLoadTask deviceLoadTask;
@@ -471,7 +475,28 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
         }
         //处理整机编码数据
         if (dsItemPosition == Globals.modelFile.dataSetVO.getItemIndex(DEVICE_SN)) {
-            verifyDeviceSN((String) value);
+            final String deviceSN = (String) value;
+            if (!"ERROR".equals(deviceSN) && !TextUtils.isEmpty(deviceSN)) {
+                //更新UI
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        tvDeviceIdentity.setTextColor(Color.BLACK);
+                        tvDeviceIdentity.setText(deviceSN);
+                    }
+                });
+                //校验整机编码并请求新机型
+                verifyDeviceSN((String) value);
+            } else {
+                //更新UI
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        tvDeviceIdentity.setTextColor(Color.RED);
+                        tvDeviceIdentity.setText("当前未检测到整机编号");
+                    }
+                });
+            }
         }
     }
 
@@ -483,14 +508,14 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
     private void verifyDeviceSN(String sn) {
         if (!TextUtils.isEmpty(Globals.deviceSN)) {
             //当整机编码变化且不是ERROR时，请求机型信息
-            if (!Globals.deviceSN.equals(sn) && !"ERROR".equals(sn) && !deviceLoading) {
+            if (!Globals.deviceSN.equals(sn) && !deviceLoading) {
                 deviceLoading = true;
                 Globals.deviceSN = sn;
                 deviceLoadTask = new DeviceLoadTask(Globals.deviceSN, handler);
                 deviceLoadTask.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
             }
-        }else {
-            if (!TextUtils.isEmpty(sn) && !"ERROR".equals(sn) && !deviceLoading){
+        } else {
+            if (!TextUtils.isEmpty(sn) && !deviceLoading) {
                 deviceLoading = true;
                 Globals.deviceSN = sn;
                 deviceLoadTask = new DeviceLoadTask(Globals.deviceSN, handler);
@@ -553,6 +578,9 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
                     case DEVICE_LOADING_FINISH:
                         mActivity.deviceLoading = false;
                         mActivity.getInitParams();
+                        break;
+                    case DEVICE_LOADING_FAILED:
+                        mActivity.deviceLoading = false;
                         break;
                     case PARAM_INIT_ANIM_CLEAR:
                         mActivity.ivRefresh.clearAnimation();
