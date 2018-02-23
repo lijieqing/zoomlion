@@ -36,6 +36,7 @@ import com.kstech.zoomlion.model.enums.CheckItemDetailResultEnum;
 import com.kstech.zoomlion.model.vo.CheckItemParamValueVO;
 import com.kstech.zoomlion.model.vo.CheckItemVO;
 import com.kstech.zoomlion.utils.Globals;
+import com.kstech.zoomlion.utils.ItemFunctionUtils;
 import com.kstech.zoomlion.utils.JsonUtils;
 import com.kstech.zoomlion.utils.LogUtils;
 import com.kstech.zoomlion.utils.ThreadManager;
@@ -324,7 +325,12 @@ public class ItemCheckActivity extends BaseActivity implements ItemCheckCallBack
     }
     @Override
     public void clearBlur() {
-        new ReadyToCheckTask(this,handler).executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
+        //需要通讯启动准备调试任务，否则直接进入
+        if (ItemFunctionUtils.isCommItem(Integer.parseInt(Globals.currentCheckItem.getId()))){
+            new ReadyToCheckTask(this,handler).executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
+        }else {
+            handler.sendEmptyMessage(TERMINAL_READY_CHECK);
+        }
     }
 
     @Override

@@ -284,7 +284,20 @@ public class ItemOperateBodyView extends RelativeLayout {
      * @return
      */
     public boolean isParamEmpty(){
-        return (checkItemParamValueVO.getPicReq()&&!picSaved) && checkItemParamValueVO.getValue().equals("");
+        boolean empty = true;
+        if (checkItemParamValueVO.getPicReq()){
+            if (picSaved){
+                empty = false;
+            }
+            if (!checkItemParamValueVO.getValue().equals("")){
+                empty = false;
+            }
+        }else {
+            if (!checkItemParamValueVO.getValue().equals("")){
+                empty = false;
+            }
+        }
+        return empty;
     }
 
     public CheckItemParamValueVO getInfo() {
