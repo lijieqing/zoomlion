@@ -256,8 +256,35 @@ public class ItemOperateBodyView extends RelativeLayout {
         checkItemParamValueVO.setValue(value);
     }
 
+    /**
+     * 判断某个值是否为空
+     * @return 空
+     */
     public boolean isValueEmpty() {
-        return checkItemParamValueVO.getValue().equals("");
+        boolean empty = false;
+        if (checkItemParamValueVO.getPicReq()){
+            if (!picSaved){
+                empty = true;
+            }else {
+                if (checkItemParamValueVO.getValue().equals("")){
+                    empty = true;
+                }
+            }
+        }else {
+            if (checkItemParamValueVO.getValue().equals("")){
+                empty = true;
+            }
+        }
+
+        return empty;
+    }
+
+    /**
+     * 判断当前参数数据是否为空
+     * @return
+     */
+    public boolean isParamEmpty(){
+        return (checkItemParamValueVO.getPicReq()&&!picSaved) && checkItemParamValueVO.getValue().equals("");
     }
 
     public CheckItemParamValueVO getInfo() {

@@ -482,7 +482,7 @@ public class ItemOperateView extends RelativeLayout implements View.OnClickListe
     public boolean isBodyViewHasValue() {
         boolean hasValue = false;
         for (ItemOperateBodyView bodyView : bodyViews) {
-            if (!bodyView.isValueEmpty()) {
+            if (!bodyView.isParamEmpty()) {
                 hasValue = true;
             }
         }

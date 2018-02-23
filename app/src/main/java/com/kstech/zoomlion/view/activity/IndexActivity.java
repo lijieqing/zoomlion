@@ -556,7 +556,7 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
                         mActivity.startService(j1939Intent);
 
                         //注册预热时间 数据监听器
-                        Globals.modelFile.getDataSetVO().getDSItem("预热时间").addListener(mActivity);
+                        Globals.modelFile.getDataSetVO().getDSItem("开机时间").addListener(mActivity);
                         break;
                     case SKIP_TO_CHECK:
                         mActivity.backFromCheck = true;
