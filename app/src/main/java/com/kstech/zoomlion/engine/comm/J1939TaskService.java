@@ -45,8 +45,8 @@ public class J1939TaskService extends Service {
             j1939ProtTask.start();
 
             // 启动通讯任务
-            j1939CommTask = new CommunicationWorker(Globals.currentTerminal.getIp(), Integer.parseInt(Globals.currentTerminal.getPort()), getApplicationContext());
-            //j1939CommTask = new CommunicationWorker(Globals.currentTerminal.getIp(), 4001, getApplicationContext());
+            //j1939CommTask = new CommunicationWorker(Globals.currentTerminal.getIp(), Integer.parseInt(Globals.currentTerminal.getPort()), getApplicationContext());
+            j1939CommTask = new CommunicationWorker("192.168.0.178", 4001, getApplicationContext());
 
             j1939CommTask.start();
             Log.e("IndexActivity", "j1939CommTask start");

@@ -33,10 +33,15 @@ public class RealTimeViewsFragment extends Fragment {
     GridLayoutManager layoutManager;
 
     public void init(Activity activity) {
-        realTimeViewList = new ArrayList<>();
+        if (realTimeViewList == null) {
+            realTimeViewList = new ArrayList<>();
+        }
+        realTimeViewList.clear();
         //实例化实时展示参数组件
         for (RealTimeParamVO realTimeParamVO : Globals.modelFile.getRealTimeParamList()) {
-            realTimeViewList.add(new RealTimeView(activity, realTimeParamVO));
+            RealTimeView rtv = new RealTimeView(activity, realTimeParamVO);
+            realTimeViewList.add(rtv);
+            Globals.modelFile.dataSetVO.getDSItem(realTimeParamVO.getName()).addListener(rtv);
         }
     }
 

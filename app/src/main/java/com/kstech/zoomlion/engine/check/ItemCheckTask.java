@@ -99,7 +99,7 @@ public class ItemCheckTask extends AsyncTask<Void, String, Void> implements J193
             return null;
         }
         // 发送检测命令
-        //CommandSender.sendStartCheckCommand(qcID + "", times);
+        CommandSender.sendStartCheckCommand(qcID + "", times);
         //获得checkitemVO
         CheckItemVO checkItemVO = Globals.modelFile.getCheckItemVO(qcID + "");
         //获取调试参数集合

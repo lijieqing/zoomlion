@@ -2030,24 +2030,24 @@
             <SP Bits="0" Bytes="1" Off="0" Ref="分配压力" Res="1" SBit="1" SByte="120" SPN="0"
                 Type="1" />
         </PG>
-        <PG Dir="Tx" Len="36" PGN="0xFFF9" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
-            <SP Bits="0" Bytes="20" Off="0" Ref="整机编码_回复" Res="1" SBit="1" SByte="1" SPN="0"
+        <PG Dir="Tx" Len="40" PGN="0xFFF9" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="0" Bytes="2" Off="0" Ref="第一压力段起始压力" Res="1" SBit="1" SByte="1" SPN="0"
                 Type="1" />
-            <SP Bits="0" Bytes="2" Off="0" Ref="第一压力段起始压力" Res="1" SBit="1" SByte="21" SPN="0"
+            <SP Bits="0" Bytes="2" Off="0" Ref="第一压力段中止压力" Res="1" SBit="1" SByte="3" SPN="0"
                 Type="1" />
-            <SP Bits="0" Bytes="2" Off="0" Ref="第一压力段中止压力" Res="1" SBit="1" SByte="23" SPN="0"
+            <SP Bits="0" Bytes="2" Off="0" Ref="第二压力段起始压力" Res="1" SBit="1" SByte="5" SPN="0"
                 Type="1" />
-            <SP Bits="0" Bytes="2" Off="0" Ref="第二压力段起始压力" Res="1" SBit="1" SByte="25" SPN="0"
+            <SP Bits="0" Bytes="2" Off="0" Ref="第二压力段中止压力" Res="1" SBit="1" SByte="7" SPN="0"
                 Type="1" />
-            <SP Bits="0" Bytes="2" Off="0" Ref="第二压力段中止压力" Res="1" SBit="1" SByte="27" SPN="0"
+            <SP Bits="0" Bytes="2" Off="0" Ref="第三压力段起始压力" Res="1" SBit="1" SByte="9" SPN="0"
                 Type="1" />
-            <SP Bits="0" Bytes="2" Off="0" Ref="第三压力段起始压力" Res="1" SBit="1" SByte="29" SPN="0"
+            <SP Bits="0" Bytes="2" Off="0" Ref="第三压力段中止压力" Res="1" SBit="1" SByte="11" SPN="0"
                 Type="1" />
-            <SP Bits="0" Bytes="2" Off="0" Ref="第三压力段中止压力" Res="1" SBit="1" SByte="31" SPN="0"
+            <SP Bits="0" Bytes="2" Off="0" Ref="第四压力段起始压力" Res="1" SBit="1" SByte="13" SPN="0"
                 Type="1" />
-            <SP Bits="0" Bytes="2" Off="0" Ref="第四压力段起始压力" Res="1" SBit="1" SByte="33" SPN="0"
+            <SP Bits="0" Bytes="2" Off="0" Ref="第四压力段中止压力" Res="1" SBit="1" SByte="15" SPN="0"
                 Type="1" />
-            <SP Bits="0" Bytes="2" Off="0" Ref="第四压力段中止压力" Res="1" SBit="1" SByte="35" SPN="0"
+            <SP Bits="0" Bytes="20" Off="0" Ref="整机编码_回复" Res="1" SBit="1" SByte="17" SPN="0"
                 Type="1" />
         </PG>
         <PG Dir="Tx" Len="16" PGN="0xFFFA" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
@@ -4729,6 +4729,7 @@
         <RealTimeParam Name="臂架泵压力" />
         <RealTimeParam Name="摆阀压力" />
         <RealTimeParam Name="搅伴压力" />
+        <RealTimeParam Name="整机编码" />
     </RealTimeSet>
 
     <!--故障提示信息，包含J1939与自定义故障信息,注意RefName仅仅具有描述作用，不具备索引能力-->

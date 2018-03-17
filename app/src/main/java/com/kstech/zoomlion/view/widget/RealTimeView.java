@@ -102,6 +102,21 @@ public class RealTimeView extends RelativeLayout implements J1939_DataVar_ts.Rea
                 }
             });
         }
+
+        if ("BOOL".equals(realTimeParamVO.getDataType())) {
+            final int b = Integer.parseInt(formatValue);
+            context.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if (b==0){
+                        ivSwitch.setBackgroundResource(R.drawable.pic_real_off);
+                    }
+                    if (b==1){
+                        ivSwitch.setBackgroundResource(R.drawable.pic_real_on);
+                    }
+                }
+            });
+        }
         context.runOnUiThread(new Runnable() {
             @Override
             public void run() {

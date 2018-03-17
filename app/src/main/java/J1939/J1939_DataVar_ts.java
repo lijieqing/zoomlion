@@ -102,6 +102,10 @@ public class J1939_DataVar_ts {
             listenerLinkedList.remove(listener);
     }
 
+    public void clearListeners(){
+        listenerLinkedList.clear();
+    }
+
     public void notifyListener(short dsItemPosition, Object value) {
         for (RealtimeChangeListener listener : listenerLinkedList) {
             listener.onDataChanged(dsItemPosition, value);
