@@ -4,6 +4,7 @@ import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 
 import com.kstech.zoomlion.engine.base.ItemCheckCallBack;
+import com.kstech.zoomlion.engine.comm.CommandResp;
 import com.kstech.zoomlion.engine.comm.CommandSender;
 import com.kstech.zoomlion.model.vo.CheckItemParamValueVO;
 import com.kstech.zoomlion.model.vo.CheckItemVO;
@@ -28,7 +29,7 @@ import J1939.J1939_DataVar_ts;
  */
 public class ItemCheckTask extends AsyncTask<Void, String, Void> implements J1939_DataVar_ts.RealtimeChangeListener {
     /**
-     * 项目调试已用时
+     * 项目调试已用时单位：秒
      */
     private int remainSeconds = 0;
     /**
@@ -131,8 +132,8 @@ public class ItemCheckTask extends AsyncTask<Void, String, Void> implements J193
 
         //规定时间内循环接受数据
         while (remainSeconds < 10 && isRunning) {
-            //String startCheckCommandResp = CommandResp.getStartCheckCommandResp(qcID + "", times);
-            String startCheckCommandResp = "";
+            String startCheckCommandResp = CommandResp.getStartCheckCommandResp(qcID + "", times);
+            //String startCheckCommandResp = "";
             if ("".equals(startCheckCommandResp)) {
                 //调试过程回调
                 callBack.onProgress("等待测量终端信息");
@@ -325,7 +326,7 @@ public class ItemCheckTask extends AsyncTask<Void, String, Void> implements J193
         String checkvalue;
         //小数点后位数
         byte bDataDec = dataVar.bDataDec;
-        StringBuffer sb = new StringBuffer();
+        StringBuffer sb = new StringBuffer("0");
         if (bDataDec != 0) {
             sb.append(".");
             for (int i = 0; i < bDataDec; i++) {

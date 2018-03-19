@@ -44,6 +44,13 @@
             android:layout_weight="4"
             android:layout_width="0dp"
             android:layout_height="match_parent" />
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/debug_line_chart"
+            android:layout_width="0dp"
+            android:layout_weight="4"
+            android:layout_height="match_parent">
+
+        </com.github.mikephil.charting.charts.LineChart>
 
     </LinearLayout>
     <LinearLayout

@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
+import com.github.mikephil.charting.charts.LineChart;
 import com.kstech.zoomlion.R;
 import com.kstech.zoomlion.engine.base.ItemCheckCallBack;
 import com.kstech.zoomlion.engine.check.ItemCheckTask;
@@ -23,6 +24,7 @@ import com.kstech.zoomlion.engine.device.XMLAPI;
 import com.kstech.zoomlion.model.vo.CheckItemParamValueVO;
 import com.kstech.zoomlion.model.xmlbean.Device;
 import com.kstech.zoomlion.utils.Globals;
+import com.kstech.zoomlion.view.adapter.LineChartAdapter;
 import com.kstech.zoomlion.view.fragment.RealTimeViewsFragment;
 import com.kstech.zoomlion.view.widget.MessageShowView;
 
@@ -34,6 +36,7 @@ import org.xutils.x;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -52,17 +55,26 @@ public class DebugActivity extends BaseActivity {
 
     @ViewInject(R.id.debug_terminal_ip)
     private EditText terminalIP;
+
+    @ViewInject(R.id.debug_line_chart)
+    private LineChart lineChart;
+
     private static final int DEVICE_LOAD_SUCCESS = 0;
     private static final int DEVICE_LOAD_ERROR = 1;
     private static final int COMM_SERVICE_START = 2;
     private static final int UPDATE_TASK_MSG = 3;
     private static final int J1939_COMM_STOPED = 4;
+    private static final int UPDATE_SPEC_DATA = 5;
 
     J1939TaskService j1939TaskService;
 
     ItemCheckTask checkTask;
 
     RealTimeViewsFragment realTimeFragment;
+
+    LineChartAdapter lineChartAdapter;
+
+    Map<String,List<Float>> value;
     /**
      * 服务连接对象
      */
@@ -87,6 +99,7 @@ public class DebugActivity extends BaseActivity {
         x.view().inject(this);
 
         realTimeFragment = new RealTimeViewsFragment();
+        value = new HashMap<>();
     }
 
     @Event(type = View.OnClickListener.class,
@@ -108,7 +121,7 @@ public class DebugActivity extends BaseActivity {
                             Device device = (Device) XMLAPI.readXML(getAssets().open("zoomlion.xml"));
                             Globals.modelFile = DeviceModelFile.readFromFile(device);
                             handler.sendEmptyMessage(DEVICE_LOAD_SUCCESS);
-                            Globals.modelFile.dataSetVO.getDSItem("整机编码_回复").setStrValue("AAAAAS");
+
                         } catch (IOException e) {
                             e.printStackTrace();
                             handler.sendEmptyMessage(DEVICE_LOAD_ERROR);
@@ -139,6 +152,7 @@ public class DebugActivity extends BaseActivity {
             case R.id.debug_dev_num:
                 String str = Globals.modelFile.getDataSetVO().getDSItem("整机编码").getStrValue();
                 messageShowView.updateMessage(new Date(),"整机编码："+str);
+                Globals.modelFile.dataSetVO.getDSItem("整机编码_回复").setStrValue(str);
                 break;
         }
     }
@@ -183,6 +197,11 @@ public class DebugActivity extends BaseActivity {
                     activity.j1939TaskService = null;
                     activity.showRealTimeView();
                     break;
+                case UPDATE_SPEC_DATA:
+                    activity.lineChartAdapter = new LineChartAdapter(activity.lineChart,activity.value);
+                    activity.lineChartAdapter.setDescription("谱图数据");
+                    activity.lineChartAdapter.setYAxis(150,0,10);
+                    break;
             }
         }
     }
@@ -190,7 +209,7 @@ public class DebugActivity extends BaseActivity {
     private void updateTaskInfo(String msg){
         Message message = Message.obtain();
         message.what = UPDATE_TASK_MSG;
-        message.obj = msg;
+        message.obj = msg==null?"无":msg;
         handler.sendMessage(message);
     }
 
@@ -225,6 +244,14 @@ public class DebugActivity extends BaseActivity {
         @Override
         public void onSuccess(List<CheckItemParamValueVO> headers, Map<String, LinkedList<Float>> specMap, String msg) {
             updateTaskInfo(msg);
+            StringBuilder sb = new StringBuilder("success: ");
+            for (CheckItemParamValueVO header : headers) {
+                sb.append(header.getParamName())
+                        .append("：")
+                        .append(header.getValue())
+                        .append("\n");
+            }
+            updateTaskInfo(sb.toString());
         }
 
         @Override
@@ -235,6 +262,14 @@ public class DebugActivity extends BaseActivity {
         @Override
         public void onTimeOut(List<CheckItemParamValueVO> headers, String msg, Map<String, LinkedList<Float>> specMap) {
             updateTaskInfo(msg);
+            if (specMap != null){
+                for (Map.Entry<String, LinkedList<Float>> listEntry : specMap.entrySet()) {
+                    String key = listEntry.getKey();
+                    LinkedList<Float> listF = listEntry.getValue();
+                    value.put(key,listF);
+                }
+                handler.sendEmptyMessage(UPDATE_SPEC_DATA);
+            }
         }
 
         @Override

@@ -1,5 +1,7 @@
 package J1939;
 
+import android.text.TextUtils;
+
 import java.util.Arrays;
 
 /**
@@ -16,7 +18,7 @@ public class GenericTxDBoxCallback implements ITxDBoxCallback {
     /**
      * 获取变量值。根据变量类型取值（非浮点类型值转换为浮点类型值）
      *
-     * @param wIdx：   变量索引
+     * @param wIdx： 变量索引
      */
     private float GetDataVarValue(short wIdx) {
 
@@ -96,7 +98,7 @@ public class GenericTxDBoxCallback implements ITxDBoxCallback {
             for (k = 0; k < iValueNums; k++) {
 
                 if (pDD.bDataType == VARTYPE.STRING) {
-                    String str = pDD.getStrValue();
+                    String str = TextUtils.isEmpty(pDD.getStrValue()) ? "" : pDD.getStrValue();
                     byte[] bytes = str.getBytes();
                     for (j = 0; j < bBytes; j++) {
                         if (j >= bytes.length) {

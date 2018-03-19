@@ -890,7 +890,7 @@
                 Type="1" />
             <SP Bits="0" Bytes="2" Off="0" Ref="摆阀压力" Res="0.01" SBit="1" SByte="5" SPN="0"
                 Type="1" />
-            <SP Bits="0" Bytes="2" Off="0" Ref="搅伴压力" Res="0.01" SBit="1" SByte="7" SPN="0"
+            <SP Bits="0" Bytes="2" Off="0" Ref="搅伴压力" Res="0.001" SBit="1" SByte="7" SPN="0"
                 Type="1" />
         </PG>
         <PG Dir="Rx" Len="24" PGN="0xFF0E" Prio="3" Rate="100" Req="0" ReqCyc="0" SA="0x01"
