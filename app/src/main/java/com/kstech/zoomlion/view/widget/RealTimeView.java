@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageView;
@@ -86,7 +87,6 @@ public class RealTimeView extends RelativeLayout implements J1939_DataVar_ts.Rea
     @Override
     public void onDataChanged(final short dsItemPosition, final Object value) {
         J1939_DataVar_ts dataVar = Globals.modelFile.getDataSetVO().getDSItem(tvName.getText().toString());
-        formatValue(dataVar);
         if (checkDTC(dataVar)) {
             context.runOnUiThread(new Runnable() {
                 @Override
@@ -104,33 +104,44 @@ public class RealTimeView extends RelativeLayout implements J1939_DataVar_ts.Rea
         }
 
         if ("BOOL".equals(realTimeParamVO.getDataType())) {
+            formatValue(dataVar);
             final int b = Integer.parseInt(formatValue);
             context.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    if (b==0){
+                    if (b == 0) {
                         ivSwitch.setBackgroundResource(R.drawable.pic_real_off);
                     }
-                    if (b==1){
+                    if (b == 1) {
                         ivSwitch.setBackgroundResource(R.drawable.pic_real_on);
                     }
                 }
             });
+        } else if ("STRING".equals(realTimeParamVO.getDataType())) {
+            final String strValue = dataVar.getStrValue();
+            context.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    tvValue.setText(TextUtils.isEmpty(strValue) ? "无字符串信息" : strValue);
+                }
+            });
+        } else {
+            //不是开关量，不是字符串。进行格式转换
+            formatValue(dataVar);
+            context.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    tvValue.setText(formatValue + "");
+                }
+            });
         }
-        context.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                tvValue.setText(formatValue + "");
-            }
-        });
-
     }
 
     //对接收到的数据进行精度转换
     private void formatValue(J1939_DataVar_ts dataVar) {
         // 保留小数点位数
         byte bDataDec = dataVar.bDataDec;
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder("0");
         if (bDataDec != 0) {
             sb.append(".");
             for (int i = 0; i < bDataDec; i++) {

@@ -279,8 +279,8 @@
         <DSItem DataType="FLOAT" DecLen="0" Name="发动机转速" Unit="rpm" />
         <DSItem DataType="FLOAT" DecLen="0" Name="油泵转速" Unit="rpm" />
         <DSItem DataType="FLOAT" DecLen="0" Name="液压油温温度" Unit="℃" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="主油泵压力" Unit="bar" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="泵送压力" Unit="bar" />
+        <DSItem DataType="FLOAT" DecLen="2" Name="主油泵压力" Unit="bar" />
+        <DSItem DataType="FLOAT" DecLen="2" Name="泵送压力" Unit="bar" />
         <DSItem DataType="FLOAT" DecLen="0" Name="泵送次数" Unit="次" />
         <DSItem DataType="FLOAT" DecLen="0" Name="比例阀电流" Unit="mA" />
         <DSItem DataType="FLOAT" DecLen="0" Name="左直线位移" Unit="mA" />
@@ -290,9 +290,9 @@
         <DSItem DataType="BOOL" DecLen="0" Name="高低压" Unit="开/关" />
         <DSItem DataType="BOOL" DecLen="0" Name="正反泵" Unit="开/关" />
         <DSItem DataType="BOOL" DecLen="0" Name="电液控" Unit="开/关" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="臂架泵压力" Unit="bar" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="搅伴压力" Unit="bar" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="摆阀压力" Unit="bar" />
+        <DSItem DataType="FLOAT" DecLen="2" Name="臂架泵压力" Unit="bar" />
+        <DSItem DataType="FLOAT" DecLen="2" Name="搅伴压力" Unit="bar" />
+        <DSItem DataType="FLOAT" DecLen="2" Name="摆阀压力" Unit="bar" />
 
         <DSItem DataType="FLOAT" DecLen="0" Name="1臂遥杆伸出行程" Unit="UK" Value="0" />
         <DSItem DataType="FLOAT" DecLen="0" Name="2臂遥杆伸出行程" Unit="UK" Value="0" />
