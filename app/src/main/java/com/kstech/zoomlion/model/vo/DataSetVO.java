@@ -45,7 +45,7 @@ public class DataSetVO {
 	}
 
 	public J1939_DataVar_ts getDSItem(String name){
-		Log.e("--------------", name);
+		//Log.e("--------------", name);
 		return j1939_DataVarCfg[itemIntexMap.get(name)];
 	}
 	// 发送区承载数据对象

@@ -96,6 +96,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent" />
             <Button
+                android:id="@+id/debug_qc_ready"
+                android:text="准备调试项目"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+            <Button
                 android:id="@+id/debug_qc_start"
                 android:text="开始调试项目"
                 android:layout_width="wrap_content"

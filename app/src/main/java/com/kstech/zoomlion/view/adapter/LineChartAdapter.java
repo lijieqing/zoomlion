@@ -153,7 +153,7 @@ public class LineChartAdapter {
             lineData.notifyDataChanged();
             lineChart.notifyDataSetChanged();
             //设置在曲线图中显示的最大数量
-            lineChart.setVisibleXRangeMaximum(10);
+            lineChart.setVisibleXRangeMaximum(200);
             //移到某个位置
             lineChart.moveViewToX(lineData.getEntryCount() - 5);
         }

@@ -13,11 +13,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.kstech.zoomlion.R;
 import com.kstech.zoomlion.engine.base.ItemCheckCallBack;
 import com.kstech.zoomlion.engine.check.ItemCheckTask;
+import com.kstech.zoomlion.engine.check.ItemReadyTask;
+import com.kstech.zoomlion.engine.check.ReadyToCheckTask;
 import com.kstech.zoomlion.engine.comm.J1939TaskService;
 import com.kstech.zoomlion.engine.device.DeviceModelFile;
 import com.kstech.zoomlion.engine.device.XMLAPI;
@@ -62,7 +65,7 @@ public class DebugActivity extends BaseActivity {
     private static final int DEVICE_LOAD_SUCCESS = 0;
     private static final int DEVICE_LOAD_ERROR = 1;
     private static final int COMM_SERVICE_START = 2;
-    private static final int UPDATE_TASK_MSG = 3;
+    public static final int UPDATE_TASK_MSG = 3;
     private static final int J1939_COMM_STOPED = 4;
     private static final int UPDATE_SPEC_DATA = 5;
 
@@ -107,7 +110,8 @@ public class DebugActivity extends BaseActivity {
                     R.id.debug_read_xml,
                     R.id.debug_qc_start,
                     R.id.debug_comm_stop,
-                    R.id.debug_dev_num
+                    R.id.debug_dev_num,
+                    R.id.debug_qc_ready
             }
     )
     private void event(View view) {
@@ -145,6 +149,9 @@ public class DebugActivity extends BaseActivity {
                 if (j1939TaskService == null){
                     messageShowView.updateMessage(new Date(),"通讯线程未启动");
                 }else {
+                    lineChart.clear();
+                    lineChart.notifyDataSetChanged();
+
                     checkTask = new ItemCheckTask(new DebugCheckTask());
                     checkTask.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
                 }
@@ -153,6 +160,18 @@ public class DebugActivity extends BaseActivity {
                 String str = Globals.modelFile.getDataSetVO().getDSItem("整机编码").getStrValue();
                 messageShowView.updateMessage(new Date(),"整机编码："+str);
                 Globals.modelFile.dataSetVO.getDSItem("整机编码_回复").setStrValue(str);
+                break;
+            case R.id.debug_qc_ready:
+                String id = qcId.getText().toString();
+                String times = qcTimes.getText().toString();
+                String qcID = TextUtils.isEmpty(id)?"-1":id;
+                int qcTimes = Integer.parseInt(TextUtils.isEmpty(times)?"-1":times);
+                if (!"-1".equals(qcID) && -1!=qcTimes){
+                    new ItemReadyTask(qcID,qcTimes,handler).executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
+                }else {
+                    Toast.makeText(this,"qcID 或 qcTimes 未设置",Toast.LENGTH_SHORT).show();
+                }
+
                 break;
         }
     }
@@ -200,7 +219,7 @@ public class DebugActivity extends BaseActivity {
                 case UPDATE_SPEC_DATA:
                     activity.lineChartAdapter = new LineChartAdapter(activity.lineChart,activity.value);
                     activity.lineChartAdapter.setDescription("谱图数据");
-                    activity.lineChartAdapter.setYAxis(150,0,10);
+                    activity.lineChartAdapter.setYAxis(500,0,10);
                     break;
             }
         }
@@ -244,11 +263,20 @@ public class DebugActivity extends BaseActivity {
         @Override
         public void onSuccess(List<CheckItemParamValueVO> headers, Map<String, LinkedList<Float>> specMap, String msg) {
             updateTaskInfo(msg);
+            if (specMap != null){
+                value.clear();
+                for (Map.Entry<String, LinkedList<Float>> listEntry : specMap.entrySet()) {
+                    String key = listEntry.getKey();
+                    LinkedList<Float> listF = listEntry.getValue();
+                    value.put(key,listF);
+                }
+                handler.sendEmptyMessage(UPDATE_SPEC_DATA);
+            }
             StringBuilder sb = new StringBuilder("success: ");
             for (CheckItemParamValueVO header : headers) {
                 sb.append(header.getParamName())
                         .append("：")
-                        .append(header.getValue())
+                        .append(TextUtils.isEmpty(header.getValue())?"未取到数值":header.getValue())
                         .append("\n");
             }
             updateTaskInfo(sb.toString());
@@ -270,6 +298,14 @@ public class DebugActivity extends BaseActivity {
                 }
                 handler.sendEmptyMessage(UPDATE_SPEC_DATA);
             }
+            StringBuilder sb = new StringBuilder("success: ");
+            for (CheckItemParamValueVO header : headers) {
+                sb.append(header.getParamName())
+                        .append("：")
+                        .append(TextUtils.isEmpty(header.getValue())?"未取到数值":header.getValue())
+                        .append("\n");
+            }
+            updateTaskInfo(sb.toString());
         }
 
         @Override

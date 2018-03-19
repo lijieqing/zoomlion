@@ -29,7 +29,7 @@ public class GenericRxDBoxCallback implements IRxDBoxCallback {
         }
         // TODO: 2017/5/24  监听回调
         pDD.notifyListener(wIdx, fValue);
-        Log.e("GenericRxDBoxCallback", fValue + "");
+        //Log.e("GenericRxDBoxCallback", fValue + "");
     }
 
     private void setDataVarValue(short wIdx, J1939_DataVar_ts dataStr, byte[] strBytes) {
@@ -108,7 +108,7 @@ public class GenericRxDBoxCallback implements IRxDBoxCallback {
             }
         }
 
-        if (pPGCfg.dwPGN >= (0xFF20 & 0x0000FFFF) &&
+        if (pPGCfg.dwPGN >= (0xFF00 & 0x0000FFFF) &&
                 pPGCfg.dwPGN < (0xFF80 & 0x0000FFFF)) {
             J1939_DataVar_ts lastCheckValueDSItem = Globals.modelFile
                     .getDataSetVO().getLastCheckValueDSItem();

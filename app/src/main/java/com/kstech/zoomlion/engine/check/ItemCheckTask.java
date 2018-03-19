@@ -11,6 +11,7 @@ import com.kstech.zoomlion.model.vo.CheckItemVO;
 import com.kstech.zoomlion.model.xmlbean.SpecParam;
 import com.kstech.zoomlion.model.xmlbean.Spectrum;
 import com.kstech.zoomlion.utils.Globals;
+import com.kstech.zoomlion.utils.LogUtils;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -131,7 +132,7 @@ public class ItemCheckTask extends AsyncTask<Void, String, Void> implements J193
         }, 1000, 1000);
 
         //规定时间内循环接受数据
-        while (remainSeconds < 10 && isRunning) {
+        while (remainSeconds < 60 && isRunning) {
             String startCheckCommandResp = CommandResp.getStartCheckCommandResp(qcID + "", times);
             //String startCheckCommandResp = "";
             if ("".equals(startCheckCommandResp)) {
