@@ -5,116 +5,140 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.kstech.zoomlion.view.activity.DebugActivity">
+
     <LinearLayout
-        android:background="#acacac"
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:background="#acacac"
+        android:orientation="horizontal">
+
         <TextView
-            android:text="实时参数"
-            android:textSize="30sp"
-            android:maxEms="1"
-            android:gravity="center"
-            android:focusableInTouchMode="true"
-            android:focusable="true"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:gravity="center"
+            android:maxEms="1"
+            android:text="实时参数"
+            android:textSize="30sp" />
+
         <LinearLayout
             android:id="@+id/debug_ll_realtime"
-            android:orientation="vertical"
-            android:layout_weight="8"
             android:layout_width="0dp"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:layout_weight="8"
+            android:orientation="vertical" />
     </LinearLayout>
+
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
         <TextView
-            android:text="日志信息"
-            android:textSize="30sp"
-            android:maxEms="1"
-            android:gravity="center"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:maxEms="1"
+            android:text="日志信息"
+            android:textSize="30sp" />
+
         <com.kstech.zoomlion.view.widget.MessageShowView
             android:id="@+id/debug_msv"
-            android:layout_weight="4"
             android:layout_width="0dp"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_weight="4" />
+
         <com.github.mikephil.charting.charts.LineChart
             android:id="@+id/debug_line_chart"
             android:layout_width="0dp"
-            android:layout_weight="4"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_weight="4">
 
         </com.github.mikephil.charting.charts.LineChart>
 
     </LinearLayout>
+
     <LinearLayout
-        android:background="#EEE"
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:background="#EEE"
+        android:orientation="vertical">
+
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
             <EditText
                 android:id="@+id/debug_qc_id"
-                android:hint="QC Id"
-                android:inputType="number"
                 android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:layout_height="match_parent" />
+                android:hint="QC Id"
+                android:inputType="number" />
+
             <EditText
                 android:id="@+id/debug_qc_times"
-                android:hint="QC Times"
-                android:inputType="number"
                 android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:layout_height="match_parent" />
+                android:hint="QC Times"
+                android:inputType="number" />
+
             <EditText
                 android:id="@+id/debug_terminal_ip"
-                android:hint="IP:192.168.0.178"
                 android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:layout_height="match_parent" />
+                android:hint="IP:192.168.0.178" />
         </LinearLayout>
+
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
             <Button
                 android:id="@+id/debug_read_xml"
-                android:text="读取机型信息"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:text="读取机型信息" />
+
             <Button
                 android:id="@+id/debug_qc_ready"
-                android:text="准备调试项目"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:text="准备调试项目" />
+
             <Button
                 android:id="@+id/debug_qc_start"
-                android:text="开始调试项目"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:text="开始调试项目" />
+
             <Button
                 android:id="@+id/debug_comm_stop"
-                android:text="停止通讯"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:text="停止通讯" />
+
             <Button
                 android:id="@+id/debug_dev_num"
-                android:text="整机编码"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:text="整机编码" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:onClick="testMax"
+                android:text="大量数据" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

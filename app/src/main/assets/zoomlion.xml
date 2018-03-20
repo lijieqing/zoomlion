@@ -797,7 +797,7 @@
             继续处理过程（发送检测完成指示帧，或其它）
         -->
         <PG Dir="Tx" Len="8" PGN="0xFFB2" Prio="3" Rate="100" Req="0" ReqCyc="0" SA="0x01" Type="2">
-            <SP Bits="0" Bytes="2" Off="0" Ref="谱图_补传顺序号" Res="0.001" SBit="1" SByte="1" SPN="0"
+            <SP Bits="0" Bytes="2" Off="0" Ref="谱图_补传顺序号" Res="1" SBit="1" SByte="1" SPN="0"
                 Type="1" />
         </PG>
 
@@ -909,21 +909,21 @@
                 Type="1" />
         </PG>
         <PG Dir="Rx" Len="8" PGN="0xFF15" Prio="3" Rate="100" Req="0" ReqCyc="0" SA="0x01" Type="2">
-            <SP Bits="0" Bytes="8" Off="0" Ref="左前支腿水平回收时间" Res="0.01" SBit="1" SByte="1" SPN="0"
+            <SP Bits="0" Bytes="2" Off="0" Ref="左前支腿水平回收时间" Res="0.01" SBit="1" SByte="1" SPN="0"
                 Type="1" />
-            <SP Bits="0" Bytes="2" Off="50" Ref="左前支腿水平回收平均油温" Res="0.1" SBit="1" SByte="3" SPN="0"
+            <SP Bits="0" Bytes="2" Off="-50" Ref="左前支腿水平回收平均油温" Res="0.1" SBit="1" SByte="3" SPN="0"
                 Type="1" />
         </PG>
         <PG Dir="Rx" Len="8" PGN="0xFF16" Prio="3" Rate="100" Req="0" ReqCyc="0" SA="0x01" Type="2">
-            <SP Bits="0" Bytes="8" Off="0" Ref="左前支腿垂直伸出时间" Res="0.01" SBit="1" SByte="1" SPN="0"
+            <SP Bits="0" Bytes="2" Off="0" Ref="左前支腿垂直伸出时间" Res="0.01" SBit="1" SByte="1" SPN="0"
                 Type="1" />
-            <SP Bits="0" Bytes="2" Off="50" Ref="左前支腿垂直伸出平均油温" Res="0.1" SBit="1" SByte="3" SPN="0"
+            <SP Bits="0" Bytes="2" Off="-50" Ref="左前支腿垂直伸出平均油温" Res="0.1" SBit="1" SByte="3" SPN="0"
                 Type="1" />
         </PG>
         <PG Dir="Rx" Len="8" PGN="0xFF17" Prio="3" Rate="100" Req="0" ReqCyc="0" SA="0x01" Type="2">
-            <SP Bits="0" Bytes="8" Off="0" Ref="左前支腿垂直回收时间" Res="0.01" SBit="1" SByte="1" SPN="0"
+            <SP Bits="0" Bytes="2" Off="0" Ref="左前支腿垂直回收时间" Res="0.01" SBit="1" SByte="1" SPN="0"
                 Type="1" />
-            <SP Bits="0" Bytes="2" Off="50" Ref="左前支腿垂直回收平均油温" Res="0.1" SBit="1" SByte="3" SPN="0"
+            <SP Bits="0" Bytes="2" Off="-50" Ref="左前支腿垂直回收平均油温" Res="0.1" SBit="1" SByte="3" SPN="0"
                 Type="1" />
         </PG>
         <PG Dir="Rx" Len="8" PGN="0xFF18" Prio="3" Rate="100" Req="0" ReqCyc="0" SA="0x01" Type="2">

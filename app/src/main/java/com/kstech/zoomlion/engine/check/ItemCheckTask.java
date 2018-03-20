@@ -1,7 +1,7 @@
 package com.kstech.zoomlion.engine.check;
 
 import android.os.AsyncTask;
-import android.support.annotation.NonNull;
+import android.os.SystemClock;
 
 import com.kstech.zoomlion.engine.base.ItemCheckCallBack;
 import com.kstech.zoomlion.engine.comm.CommandResp;
@@ -12,6 +12,8 @@ import com.kstech.zoomlion.model.xmlbean.SpecParam;
 import com.kstech.zoomlion.model.xmlbean.Spectrum;
 import com.kstech.zoomlion.utils.Globals;
 import com.kstech.zoomlion.utils.LogUtils;
+
+import org.greenrobot.greendao.annotation.NotNull;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -79,6 +81,10 @@ public class ItemCheckTask extends AsyncTask<Void, String, Void> implements J193
      */
     private boolean inSpecRepairMode = false;
 
+    private boolean hasLost = false;
+
+    private boolean repaired = false;
+
     /**
      * 设置项目调试回调
      *
@@ -111,8 +117,6 @@ public class ItemCheckTask extends AsyncTask<Void, String, Void> implements J193
 
         //如果存在谱图参数进行初始化，包括注册监听
         if (spectrum != null) {
-            //添加谱图顺序号监听器
-            Globals.modelFile.dataSetVO.getDSItem(specOrder).addListener(this);
             //初始化谱图参数相关结合
             specMap = new HashMap<>();
             specOrderList = new LinkedList<>();
@@ -121,6 +125,8 @@ public class ItemCheckTask extends AsyncTask<Void, String, Void> implements J193
                 //谱图参数名称为key，定义空集合作为value
                 specMap.put(name, new LinkedList<Float>());
             }
+
+            registerTaskListener();
         }
         //创建计时器任务，延时1s后启动
         Timer timer = new Timer();
@@ -132,7 +138,7 @@ public class ItemCheckTask extends AsyncTask<Void, String, Void> implements J193
         }, 1000, 1000);
 
         //规定时间内循环接受数据
-        while (remainSeconds < 60 && isRunning) {
+        while (remainSeconds < 3 * 60 && isRunning) {
             String startCheckCommandResp = CommandResp.getStartCheckCommandResp(qcID + "", times);
             //String startCheckCommandResp = "";
             if ("".equals(startCheckCommandResp)) {
@@ -153,7 +159,7 @@ public class ItemCheckTask extends AsyncTask<Void, String, Void> implements J193
                 callBack.onTaskStop(true);
                 //移除监听,取消计时
                 timer.cancel();
-                removeListener();
+                removeTaskListener();
                 return null;
             } else if ("传感器故障".equals(startCheckCommandResp) || "检测失败".equals(startCheckCommandResp)) {
                 //处理参数数据
@@ -163,38 +169,38 @@ public class ItemCheckTask extends AsyncTask<Void, String, Void> implements J193
                 callBack.onTaskStop(true);
                 //移除监听,取消计时
                 timer.cancel();
-                removeListener();
+                removeTaskListener();
                 return null;
-            } else if ("谱图上传完成".equals(startCheckCommandResp)) {
+            } else if ("谱图上传完成".equals(startCheckCommandResp) && !repaired) {
                 //初始化补传顺序号集合
                 lostSpecList = new LinkedList<>();
                 //获取谱图数据总数量
                 int totalSize = (int) Globals.modelFile.getDataSetVO().getDSItem("附加码").getValue();
+                LogUtils.e("ItemCheckTask", "totalSize" + totalSize);
                 //判断是否存在遗漏顺序号
-                boolean hasLost = verifySpecOrder(totalSize, specOrderList, lostSpecList);
+                hasLost = verifySpecOrder(totalSize, specOrderList, lostSpecList);
+                LogUtils.e("ItemCheckTask", "hasLost" + hasLost);
                 if (hasLost) {
+                    removeTaskListener();
+
                     //存在漏传，开启谱图补传模式
                     inSpecRepairMode = true;
-                    //取出顶部元素，发送补传命令
-                    float top = lostSpecList.pop();
-                    CommandSender.sendSpecRepairCommand((long) top);
+                    SpecRepairThread specRepairThread = new SpecRepairThread();
+                    try {
+                        specRepairThread.start();
+                        specRepairThread.join();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 } else {
                     //发送无需补传命令
-                    CommandSender.sendSpecRepairCommand(0xffff);
+                    CommandSender.sendSpecRepairCommand(0xffff, null);
                 }
 
             }
         }
 
         timer.cancel();
-        //模拟数据
-        if (spectrum != null) {
-            for (SpecParam specParam : spectrum.getSpecParams()) {
-                for (int i = 0; i < 1000; i++) {
-                    specMap.get(specParam.getParam()).add((float) (Math.random() * 100));
-                }
-            }
-        }
 
         if (!isRunning) {
             callBack.onTaskStop(false);
@@ -216,54 +222,34 @@ public class ItemCheckTask extends AsyncTask<Void, String, Void> implements J193
 
     @Override
     public void onDataChanged(short dsItemPosition, Object value) {
-        if (inSpecRepairMode) {
-            //谱图补传状态
-            //序列号即为每个集合的下标
-            int index = (int) value;
-
-            //遍历谱图参数集合，获取对应的谱图参数数据
-            for (SpecParam specParam : spectrum.getSpecParams()) {
-                //获取谱图参数名称
-                String specName = specParam.getParam();
-                //组装谱图数据参数名
-                String specValueName = preFix + specName;
-                //谱图数据参数对象
-                J1939_DataVar_ts dataVar = Globals.modelFile.getDataSetVO().getDSItem(specValueName);
-                //获取谱图参数数据，并转换成标准精度
-                String data = getDataVarValue(dataVar);
-                //添加到指定的谱图参数 数据集合中
-                specMap.get(specName).add(index, Float.valueOf(data));
-            }
-            //判断补传谱图序列号集合是否为空
-            if (lostSpecList.size() > 0) {
-                //取出顶部元素，发送补传命令
-                float top = lostSpecList.pop();
-                CommandSender.sendSpecRepairCommand((long) top);
-            } else {
-                //退出谱图补传模式
-                inSpecRepairMode = false;
-                //发送无需补传命令
-                CommandSender.sendSpecRepairCommand(0xffff);
-            }
-
-        } else {
+        if (!inSpecRepairMode) {
             //非谱图补传状态，正常接收处理数据
-            //将谱图顺序号存入集合
-            specOrderList.add((Float) value);
-
-            //遍历谱图参数集合，获取对应的谱图参数数据
-            for (SpecParam specParam : spectrum.getSpecParams()) {
-                //获取谱图参数名称
-                String specName = specParam.getParam();
-                //组装谱图数据参数名
-                String specValueName = preFix + specName;
-                //谱图数据参数对象
-                J1939_DataVar_ts dataVar = Globals.modelFile.getDataSetVO().getDSItem(specValueName);
-                //获取谱图参数数据，并转换成标准精度
-                String data = getDataVarValue(dataVar);
-                //添加到指定的谱图参数 数据集合中
-                specMap.get(specName).add(Float.valueOf(data));
+            LogUtils.e("ItemCheckTask", " 正常接收序列号: " + value);
+            //谱图序列号数据回调
+            if (dsItemPosition == Globals.modelFile.dataSetVO.getItemIndex(specOrder)) {
+                //将谱图顺序号存入集合
+                specOrderList.add((Float) value);
+            } else {
+                //非谱图序列号回调
+                //遍历谱图参数集合，获取对应的谱图参数数据
+                for (SpecParam specParam : spectrum.getSpecParams()) {
+                    //获取谱图参数名称
+                    String specName = specParam.getParam();
+                    //组装谱图数据参数名
+                    String specValueName = preFix + specName;
+                    if (dsItemPosition == Globals.modelFile.dataSetVO.getItemIndex(specValueName)) {
+                        //谱图数据参数对象
+                        J1939_DataVar_ts dataVar = Globals.modelFile.getDataSetVO().getDSItem(specValueName);
+                        //获取谱图参数数据，并转换成标准精度
+                        String data = getDataVarValue(dataVar);
+                        //添加到指定的谱图参数 数据集合中
+                        specMap.get(specName).add(Float.valueOf(data));
+                        //非谱图补传状态，正常接收处理数据
+                        LogUtils.e("ItemCheckTask", " 正常接收数值: " + data);
+                    }
+                }
             }
+
         }
     }
 
@@ -275,12 +261,12 @@ public class ItemCheckTask extends AsyncTask<Void, String, Void> implements J193
      * @param lostSpecOrderList 丢失数据集合
      * @return 是否连续
      */
-    private boolean verifySpecOrder(int total, @NonNull LinkedList<Float> specOrderlist, @NonNull List<Float> lostSpecOrderList) {
+    private boolean verifySpecOrder(int total, @NotNull LinkedList<Float> specOrderlist, @NotNull LinkedList<Float> lostSpecOrderList) {
         //是否存在漏传数据，TRUE为存在漏传
         boolean result = false;
-
         //对集合先排序
         Collections.sort(specOrderlist);
+        //total+=1;
         //比较最后一个参数顺序号与参数数据数量
         float endLost = total - specOrderlist.getLast();
         if (endLost > 1) {
@@ -291,14 +277,17 @@ public class ItemCheckTask extends AsyncTask<Void, String, Void> implements J193
                 lostSpecOrderList.add(repair);
             }
         }
-
         //定义变量记录 上一条序号数据
-        float last = 0;
+        float last = 1;
         //按顺序遍历谱图顺序号集合
         for (int i = 0; i < specOrderlist.size(); i++) {
             if (i == 0) {
                 //i=0 时第一个数据，不需要判断
-                last = specOrderlist.get(i);
+                float temp = specOrderlist.get(i);
+                for (float f = 1; f < temp; f++) {
+                    lostSpecOrderList.add(f);
+                }
+                last = temp;
             } else {
                 //设置临时变量，计算上一次的顺序号和本次序列号是否连续
                 float temp = specOrderlist.get(i) - last;
@@ -390,10 +379,155 @@ public class ItemCheckTask extends AsyncTask<Void, String, Void> implements J193
     /**
      * 在谱图收集时，当任务结束需要调用此方法来取消监听
      */
-    private void removeListener() {
+    private void removeTaskListener() {
         if (spectrum != null) {
             //移除谱图序列号监听器
             Globals.modelFile.dataSetVO.getDSItem(specOrder).removeListener(this);
+            for (String specName : specMap.keySet()) {
+                //组装谱图数据参数名
+                String specValueName = preFix + specName;
+                //注册监听
+                Globals.modelFile.dataSetVO.getDSItem(specValueName).removeListener(this);
+            }
+        }
+    }
+
+    /**
+     * 注册监听
+     */
+    private void registerTaskListener() {
+        if (spectrum != null) {
+            //添加谱图顺序号监听器
+            Globals.modelFile.dataSetVO.getDSItem(specOrder).addListener(this);
+            for (String specName : specMap.keySet()) {
+                //组装谱图数据参数名
+                String specValueName = preFix + specName;
+                //注册监听
+                Globals.modelFile.dataSetVO.getDSItem(specValueName).addListener(this);
+            }
+        }
+    }
+
+    /**
+     * 谱图补传线程
+     */
+    class SpecRepairThread extends Thread implements J1939_DataVar_ts.RealtimeChangeListener {
+        boolean received;
+        float index;
+
+        @Override
+        public void run() {
+            //添加谱图顺序号监听器
+            registerListener();
+            while (lostSpecList.size() > 0) {
+                //取出顶部元素，发送补传命令
+                index = lostSpecList.getFirst();
+                LogUtils.e("ItemCheckTask", "SpecRepairThread Spec Float: " + index);
+
+                CommandSender.sendSpecRepairCommand((long) index, spectrum.getSpecParams());
+                received = false;
+                while (!received) {
+                    //等待接收到数值后，结束此循环
+                }
+            }
+            repaired = true;
+            //清楚谱图顺序号监听器
+            removeListener();
+
+            //退出谱图补传模式
+            inSpecRepairMode = false;
+            //设置为无需补传
+            hasLost = false;
+            //发送无需补传命令
+            CommandSender.sendSpecRepairCommand(0xffff, null);
+            lostSpecList.clear();
+            SystemClock.sleep(1000);
+        }
+
+        @Override
+        public void onDataChanged(short dsItemPosition, Object value) {
+            if (inSpecRepairMode) {
+                //谱图补传状态
+                //序列号即为每个集合的下标
+                //遍历谱图参数集合，获取对应的谱图参数数据
+                for (SpecParam specParam : spectrum.getSpecParams()) {
+                    //获取谱图参数名称
+                    String specName = specParam.getParam();
+                    //组装谱图数据参数名
+                    String specValueName = preFix + specName;
+
+                    short specPos = Globals.modelFile.dataSetVO.getItemIndex(specValueName);
+
+                    if (dsItemPosition == specPos) {
+                        //获取谱图参数数据，并转换成标准精度
+                        LogUtils.e("ItemCheckTask", "index:" + index + " specValueName:" + specValueName + " value:" + value);
+                        //添加到指定的谱图参数 数据集合中
+                        insertValueInPosition(index, (Float) value, specOrderList, specMap.get(specName));
+                        //更新谱图参数集合
+                        insertValueInPosition(index, index, specOrderList, specOrderList);
+                        lostSpecList.pop();
+                        received = true;
+                    }
+                }
+            }
+        }
+
+        /**
+         * 注册谱图数据监听
+         */
+        private void registerListener() {
+            for (String specName : specMap.keySet()) {
+                //组装谱图数据参数名
+                String specValueName = preFix + specName;
+                //注册监听
+                Globals.modelFile.dataSetVO.getDSItem(specValueName).addListener(this);
+            }
+        }
+
+        /**
+         * 移除谱图数据监听
+         */
+        private void removeListener() {
+            for (String specName : specMap.keySet()) {
+                //组装谱图数据参数名
+                String specValueName = preFix + specName;
+                //注册监听
+                Globals.modelFile.dataSetVO.getDSItem(specValueName).removeListener(this);
+            }
+        }
+
+        /**
+         * 将数值插入到valueList指定位置，
+         * 切起，对于posList 我们默认再添加数据时默认是按顺序添加的
+         * 否则此方法无法达到预期效果
+         *
+         * @param currentPos 当前插入的位置
+         * @param value      当前插入的数值
+         * @param posList    位置集合列表
+         * @param valueList  待插入数值集合列表
+         */
+        private void insertValueInPosition(float currentPos, float value, LinkedList<Float> posList, LinkedList<Float> valueList) {
+            int index = 0;
+            //当前位置最大，添加到集合的尾部
+            if (currentPos > posList.getLast()) {
+                valueList.addLast(value);
+                return;
+            }
+            //当前位置最小，添加到集合的头部
+            if (currentPos < posList.getFirst()) {
+                valueList.addFirst(value);
+                return;
+            }
+            //在位置集合内部
+            for (int i = 0; i < posList.size(); i++) {
+                if (currentPos > posList.get(i)) {
+                    index++;
+                } else {
+                    index = i;
+                    break;
+                }
+            }
+            valueList.add(index, value);
         }
     }
 }

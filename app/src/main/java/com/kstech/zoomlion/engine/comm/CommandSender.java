@@ -1,7 +1,12 @@
 package com.kstech.zoomlion.engine.comm;
 
 
+import android.support.annotation.Nullable;
+
+import com.kstech.zoomlion.model.xmlbean.SpecParam;
 import com.kstech.zoomlion.utils.Globals;
+
+import java.util.List;
 
 import J1939.J1939_Context;
 import J1939.J1939_DataVar_ts;
@@ -76,11 +81,17 @@ public class CommandSender {
      *
      * @param specOrder 待补传谱图顺序号
      */
-    public static void sendSpecRepairCommand(long specOrder) {
+    public static void sendSpecRepairCommand(long specOrder, @Nullable List<SpecParam> specParamList) {
         J1939_DataVar_ts specDSItem = Globals.modelFile.getDataSetVO().getSpecRepairDSItem();
         specDSItem.setValue(specOrder);
         J1939_PGCfg_ts repairPGN = Globals.modelFile.j1939PgSetVO
                 .getPg(SPEC_REPAIR_PGN);
+        if (specParamList != null) {
+            for (SpecParam specParam : specParamList) {
+                String specValueName = "谱图_" + specParam.getParam();
+                Globals.modelFile.dataSetVO.getDSItem(specValueName).setFloatValue(0);
+            }
+        }
         J1939_Context.j1939_API.j1939_sendDatabox((short) repairPGN.wDBNumber);
     }
 
