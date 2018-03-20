@@ -803,19 +803,19 @@
 
         <!--调试项目相关pgn-->
         <PG Dir="Rx" Len="8" PGN="0xFF03" Prio="3" Rate="100" Req="0" ReqCyc="0" SA="0x01" Type="2">
-            <SP Bits="0" Bytes="8" Off="0" Ref="风扇开启开关" Res="0.001" SBit="1" SByte="1" SPN="0"
+            <SP Bits="0" Bytes="1" Off="0" Ref="风扇开启开关" Res="1" SBit="1" SByte="1" SPN="0"
                 Type="1" />
         </PG>
         <PG Dir="Rx" Len="8" PGN="0xFF05" Prio="3" Rate="100" Req="0" ReqCyc="0" SA="0x01" Type="2">
-            <SP Bits="0" Bytes="8" Off="0" Ref="搅伴压力开关（指示灯）" Res="0.001" SBit="1" SByte="1" SPN="0"
+            <SP Bits="0" Bytes="1" Off="0" Ref="搅伴压力开关（指示灯）" Res="1" SBit="1" SByte="1" SPN="0"
                 Type="1" />
         </PG>
         <PG Dir="Rx" Len="8" PGN="0xFF06" Prio="3" Rate="100" Req="0" ReqCyc="0" SA="0x01" Type="2">
-            <SP Bits="0" Bytes="8" Off="0" Ref="润滑开启开关" Res="0.001" SBit="1" SByte="1" SPN="0"
+            <SP Bits="0" Bytes="1" Off="0" Ref="润滑开启开关" Res="1" SBit="1" SByte="1" SPN="0"
                 Type="1" />
         </PG>
         <PG Dir="Rx" Len="8" PGN="0xFF07" Prio="3" Rate="100" Req="0" ReqCyc="0" SA="0x01" Type="2">
-            <SP Bits="0" Bytes="8" Off="0" Ref="气动润滑开启开关" Res="0.001" SBit="1" SByte="1" SPN="0"
+            <SP Bits="0" Bytes="1" Off="0" Ref="气动润滑开启开关" Res="1" SBit="1" SByte="1" SPN="0"
                 Type="1" />
         </PG>
         <PG Dir="Rx" Len="8" PGN="0xFF08" Prio="3" Rate="100" Req="0" ReqCyc="0" SA="0x01" Type="2">
