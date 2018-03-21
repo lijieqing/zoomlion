@@ -154,6 +154,8 @@ public class ItemCheckTask extends AsyncTask<Void, String, Void> implements J193
                 String content = "";
                 //处理参数数据
                 List<CheckItemParamValueVO> resluts = paramValueFormat(headers, true);
+                //过滤重复序列号数据
+                filterList(specOrderList,specMap);
                 // 检测完成回调，返回paramResults
                 callBack.onSuccess(resluts, specMap, content);
                 callBack.onTaskStop(true);
@@ -176,10 +178,8 @@ public class ItemCheckTask extends AsyncTask<Void, String, Void> implements J193
                 lostSpecList = new LinkedList<>();
                 //获取谱图数据总数量
                 int totalSize = (int) Globals.modelFile.getDataSetVO().getDSItem("附加码").getValue();
-                LogUtils.e("ItemCheckTask", "totalSize" + totalSize);
                 //判断是否存在遗漏顺序号
                 hasLost = verifySpecOrder(totalSize, specOrderList, lostSpecList);
-                LogUtils.e("ItemCheckTask", "hasLost" + hasLost);
                 if (hasLost) {
                     removeTaskListener();
 
@@ -223,10 +223,10 @@ public class ItemCheckTask extends AsyncTask<Void, String, Void> implements J193
     @Override
     public void onDataChanged(short dsItemPosition, Object value) {
         if (!inSpecRepairMode) {
-            //非谱图补传状态，正常接收处理数据
-            LogUtils.e("ItemCheckTask", " 正常接收序列号: " + value);
             //谱图序列号数据回调
             if (dsItemPosition == Globals.modelFile.dataSetVO.getItemIndex(specOrder)) {
+                //非谱图补传状态，正常接收处理数据
+                LogUtils.e("ItemCheckTask", " 正常接收序列号: " + value);
                 //将谱图顺序号存入集合
                 specOrderList.add((Float) value);
             } else {
@@ -254,6 +254,28 @@ public class ItemCheckTask extends AsyncTask<Void, String, Void> implements J193
     }
 
     /**
+     * 过滤重复序列号，以及对应的数据
+     * @param posList 序列号集合
+     * @param specMap 数据集合
+     */
+    private void filterList(LinkedList<Float> posList,Map<String, LinkedList<Float>> specMap){
+        float temp = 0;
+        for (int i = 0; i < posList.size(); i++) {
+            if (i==0){
+                temp = posList.get(i);
+            }else {
+                float currentF = posList.get(i);
+                if (temp == currentF){
+                    posList.remove(i);
+                    for (LinkedList<Float> floats : specMap.values()) {
+                        floats.remove(i);
+                    }
+                }
+                temp = posList.get(i);
+            }
+        }
+    }
+    /**
      * 判断集合中的数据是否为连续，并将丢失部分计算出来
      *
      * @param total             谱图参数数据总数
@@ -266,7 +288,7 @@ public class ItemCheckTask extends AsyncTask<Void, String, Void> implements J193
         boolean result = false;
         //对集合先排序
         Collections.sort(specOrderlist);
-        //total+=1;
+        total+=1;
         //比较最后一个参数顺序号与参数数据数量
         float endLost = total - specOrderlist.getLast();
         if (endLost > 1) {
