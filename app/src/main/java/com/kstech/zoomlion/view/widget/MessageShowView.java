@@ -69,15 +69,29 @@ public class MessageShowView extends RelativeLayout {
      * @param content 信息内容
      */
     public void updateMessage(Date date, String content) {
-        Info info = new Info(date, content);
-        messageList.push(info);
-        adapter.notifyDataSetChanged();
+        updateMessage(date, content, false);
+    }
+
+    /**
+     * 更新信息展示
+     *
+     * @param date      信息日期
+     * @param content   信息内容
+     * @param forceShow 强制输出
+     */
+    public void updateMessage(Date date, String content, boolean forceShow) {
+
+        if (forceShow || messageList.size() == 0 || messageList.getFirst().date.getSeconds() != date.getSeconds()) {
+            Info info = new Info(date, content);
+            messageList.push(info);
+            adapter.notifyDataSetChanged();
+        }
     }
 
     /**
      * 清空消息队列，刷新布局
      */
-    public void clearMessage(){
+    public void clearMessage() {
         messageList.clear();
         adapter.notifyDataSetChanged();
     }

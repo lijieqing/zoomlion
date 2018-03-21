@@ -220,7 +220,10 @@ public class DebugActivity extends BaseActivity {
                     activity.messageShowView.updateMessage(new Date(), "加载失败");
                     break;
                 case UPDATE_TASK_MSG:
-                    activity.messageShowView.updateMessage(new Date(), (String) msg.obj);
+                    boolean forceShow = false;
+                    if (msg.arg1 == -1)
+                        forceShow = true;
+                    activity.messageShowView.updateMessage(new Date(), (String) msg.obj, forceShow);
                     break;
                 case J1939_COMM_STOPED:
                     activity.unbindService(activity.conn);
@@ -237,10 +240,12 @@ public class DebugActivity extends BaseActivity {
         }
     }
 
-    private void updateTaskInfo(String msg) {
+    private void updateTaskInfo(String msg, boolean force) {
         Message message = Message.obtain();
         message.what = UPDATE_TASK_MSG;
         message.obj = msg == null ? "无" : msg;
+        if (force)
+            message.arg1 = -1;
         handler.sendMessage(message);
     }
 
@@ -264,25 +269,29 @@ public class DebugActivity extends BaseActivity {
 
         @Override
         public void onStartError(String msg) {
-            updateTaskInfo(msg);
+            updateTaskInfo(msg, true);
         }
 
         @Override
         public void onProgress(String progress) {
-            updateTaskInfo(progress);
+            updateTaskInfo(progress, false);
         }
 
         @Override
         public void onSuccess(List<CheckItemParamValueVO> headers, Map<String, LinkedList<Float>> specMap, String msg) {
-            updateTaskInfo(msg);
+            updateTaskInfo(msg, true);
             if (specMap != null) {
                 value.clear();
                 for (Map.Entry<String, LinkedList<Float>> listEntry : specMap.entrySet()) {
                     String key = listEntry.getKey();
                     LinkedList<Float> listF = listEntry.getValue();
-                    value.put(key, listF);
+                    if (listF.size() > 0) {
+                        value.put(key, listF);
+                    }
                 }
-                handler.sendEmptyMessage(UPDATE_SPEC_DATA);
+                if (value.size() > 0) {
+                    handler.sendEmptyMessage(UPDATE_SPEC_DATA);
+                }
             }
             StringBuilder sb = new StringBuilder("success: ");
             for (CheckItemParamValueVO header : headers) {
@@ -291,24 +300,28 @@ public class DebugActivity extends BaseActivity {
                         .append(TextUtils.isEmpty(header.getValue()) ? "未取到数值" : header.getValue())
                         .append("\n");
             }
-            updateTaskInfo(sb.toString());
+            updateTaskInfo(sb.toString(), true);
         }
 
         @Override
         public void onResultError(List<CheckItemParamValueVO> headers, String msg) {
-            updateTaskInfo(msg);
+            updateTaskInfo(msg, true);
         }
 
         @Override
         public void onTimeOut(List<CheckItemParamValueVO> headers, String msg, Map<String, LinkedList<Float>> specMap) {
-            updateTaskInfo(msg);
+            updateTaskInfo(msg, true);
             if (specMap != null) {
                 for (Map.Entry<String, LinkedList<Float>> listEntry : specMap.entrySet()) {
                     String key = listEntry.getKey();
                     LinkedList<Float> listF = listEntry.getValue();
-                    value.put(key, listF);
+                    if (listF.size() > 0) {
+                        value.put(key, listF);
+                    }
                 }
-                handler.sendEmptyMessage(UPDATE_SPEC_DATA);
+                if (value.size() > 0) {
+                    handler.sendEmptyMessage(UPDATE_SPEC_DATA);
+                }
             }
             StringBuilder sb = new StringBuilder("success: ");
             for (CheckItemParamValueVO header : headers) {
@@ -317,7 +330,7 @@ public class DebugActivity extends BaseActivity {
                         .append(TextUtils.isEmpty(header.getValue()) ? "未取到数值" : header.getValue())
                         .append("\n");
             }
-            updateTaskInfo(sb.toString());
+            updateTaskInfo(sb.toString(), true);
         }
 
         @Override
