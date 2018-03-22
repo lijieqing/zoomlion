@@ -15,7 +15,7 @@ public final class URLCollections {
     private URLCollections() {
     }
 
-    private static String ADDRESS = "http://192.168.32.119:8080/zoomlion";
+    private static String ADDRESS = "http://192.168.32.176:8080/zoomlion";
     /**
      * 获取测量终端列表URL
      */
@@ -23,15 +23,15 @@ public final class URLCollections {
     /**
      * 用户登录URL
      */
-    public static String USER_LOGIN = ADDRESS + "/appLogin";
+    public static String USER_LOGIN = ADDRESS + "/login_app";
     /**
      * 用户登出URL
      */
-    public static String USER_LOGOUT = ADDRESS + "/appLogout";
+    public static String USER_LOGOUT = ADDRESS + "/logout_app";
     /**
      * 根据整机编码获取机型信息URL
      */
-    public static String GET_DEVICE_BY_SN = ADDRESS + "/commissioning/getDevice";
+    public static String GET_DEVICE_BY_SN = ADDRESS + "/commissioning/getProcessDetails";
     /**
      * 向服务器请求进入调试
      */

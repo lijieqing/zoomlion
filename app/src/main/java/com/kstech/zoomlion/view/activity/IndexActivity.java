@@ -283,7 +283,7 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
     /**
      * 机型文件中 预热时间的数据变量名
      */
-    private static final String PREHEATING_TIME = "预热时间";
+    private static final String PREHEATING_TIME = "开机时间";
     /**
      * 机型文件中 整机编码的数据变量名
      */

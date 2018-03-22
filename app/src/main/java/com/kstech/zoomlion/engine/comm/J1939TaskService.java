@@ -20,6 +20,11 @@ public class J1939TaskService extends Service {
 
     // 1939任务
     public CommunicationWorker j1939CommTask = null;
+    /**
+     * @deprecated
+     * 测试使用方法，正式版不会使用
+     */
+    public static String ipAddress;
 
     public J1939TaskService() {
     }
@@ -46,7 +51,7 @@ public class J1939TaskService extends Service {
 
             // 启动通讯任务
             //j1939CommTask = new CommunicationWorker(Globals.currentTerminal.getIp(), Integer.parseInt(Globals.currentTerminal.getPort()), getApplicationContext());
-            j1939CommTask = new CommunicationWorker("192.168.0.178", 4001, getApplicationContext());
+            j1939CommTask = new CommunicationWorker(ipAddress, 4001, getApplicationContext());
 
             j1939CommTask.start();
             Log.e("IndexActivity", "j1939CommTask start");

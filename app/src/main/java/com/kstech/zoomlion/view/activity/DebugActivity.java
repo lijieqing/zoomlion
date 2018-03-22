@@ -115,7 +115,13 @@ public class DebugActivity extends BaseActivity {
     private void event(View view) {
         switch (view.getId()) {
             case R.id.debug_read_xml:
-                messageShowView.updateMessage(new Date(), "机型加载中，请稍候...");
+                String ip = terminalIP.getText().toString().trim();
+                if (TextUtils.isEmpty(ip) || ip.split("\\.").length!=4){
+                    messageShowView.updateMessage(new Date(), ip + " 不合法的 IP",true);
+                    return;
+                }
+                J1939TaskService.ipAddress = ip;
+                messageShowView.updateMessage(new Date(), "机型加载中，通讯 IP"+ip +" 请稍候...");
                 new Thread() {
                     @Override
                     public void run() {

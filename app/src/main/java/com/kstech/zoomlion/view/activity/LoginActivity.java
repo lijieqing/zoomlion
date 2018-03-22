@@ -371,7 +371,7 @@ public class LoginActivity extends BaseActivity {
             // TODO: 2018/1/23 此处用于模拟器调试，正式版需要删除
             if (mac == null) mac = "FF:FF:FF:FF:FF:FF";
             maps.put("mac", mac);
-            maps.put("measure_dev_id", mMT.getId() + "");
+            maps.put("measureDevId", mMT.getId() + "");
 
             new MyHttpUtils().xutilsPost(null, URLCollections.USER_LOGIN, maps, new MyHttpUtils.MyHttpCallback() {
                 @Override
@@ -381,7 +381,7 @@ public class LoginActivity extends BaseActivity {
                         JSONObject object = new JSONObject((String) result);
                         if (URLCollections.isRequestSuccess(object)) {
                             status = 2;
-                            String userInfo = object.getString("userInfo");
+                            String userInfo = object.getJSONObject("userinfo").toString();
 
                             //用户信息赋值给全局变量
                             Globals.currentUser = JsonUtils.fromJson(userInfo, UserInfo.class);
