@@ -96,7 +96,14 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:hint="IP:192.168.0.178"
-                android:inputType="textUri"/>
+                android:inputType="text"/>
+            <EditText
+                android:id="@+id/debug_terminal_port"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:hint="port:4001"
+                android:inputType="number"/>
         </LinearLayout>
 
         <LinearLayout

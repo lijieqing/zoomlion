@@ -71,7 +71,7 @@ public class CommunicationWorker extends Thread {
     /**
      * 超过该时间间隔没有收到消息视作通讯中断，需要重新建立链接
      */
-    private static long TIME_OUT_TIME = 5 * 1000;
+    private static final long TIME_OUT_TIME = 5 * 1000;
 
     private static String TAG = "CommunicationWorker";
 
@@ -82,15 +82,11 @@ public class CommunicationWorker extends Thread {
         super.start();
     }
 
-    /*
-     * 构造函数
+    /**
+     *  构造函数
      *
      * 根据服务器IP地址和侦听端口号实例化本对象
      */
-    public CommunicationWorker(String serverIPAddress, int serverListenPort, Context context) {
-        new CommunicationWorker(serverIPAddress, serverListenPort, context, null);
-    }
-
     public CommunicationWorker(String serverIPAddress, int serverListenPort, Context context, @Nullable Handler handler) {
         super();
         this.serverIPAddress = serverIPAddress;
@@ -269,7 +265,7 @@ public class CommunicationWorker extends Thread {
                         Log.e(TAG, "---S S I D---" + ssid);
                     }
                     Log.e(TAG, "before create socket");
-                    if ("\"DLINK_DWL2000_01\"".equals(ssid) || "\"TP-LINK_Outdoor_E85A88\"".equals(ssid) || "\"DLINK_DWL_2000_01\"".equals(ssid) || "\"dlink_zoomlion_test\"".equals(ssid)) {
+                    if ("\"COMFAST_OutDoor\"".equals(ssid) || "\"TP-LINK_Outdoor_E85A88\"".equals(ssid) || "\"DLINK_DWL_2000_01\"".equals(ssid) || "\"dlink_zoomlion_test\"".equals(ssid)) {
                         Log.e(TAG, "serverIPAddress" + serverIPAddress);
                         sockTcp = new Socket(serverIPAddress, serverListenPort);
                         Log.e(TAG, "create socket " + sockTcp);

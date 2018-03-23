@@ -57,6 +57,9 @@ public class DebugActivity extends BaseActivity {
     @ViewInject(R.id.debug_terminal_ip)
     private EditText terminalIP;
 
+    @ViewInject(R.id.debug_terminal_port)
+    private EditText terminalPort;
+
     @ViewInject(R.id.debug_line_chart)
     private LineChart lineChart;
 
@@ -98,6 +101,7 @@ public class DebugActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         x.view().inject(this);
+        J1939TaskService.inDebug = true;
 
         realTimeFragment = new RealTimeViewsFragment();
         value = new HashMap<>();
@@ -116,11 +120,13 @@ public class DebugActivity extends BaseActivity {
         switch (view.getId()) {
             case R.id.debug_read_xml:
                 String ip = terminalIP.getText().toString().trim();
-                if (TextUtils.isEmpty(ip) || ip.split("\\.").length!=4){
-                    messageShowView.updateMessage(new Date(), ip + " 不合法的 IP",true);
+                String port = terminalPort.getText().toString().trim();
+                if (TextUtils.isEmpty(ip) || ip.split("\\.").length!=4 || TextUtils.isEmpty(port)){
+                    messageShowView.updateMessage(new Date(), ip + " 不合法的 IP 或 端口号",true);
                     return;
                 }
                 J1939TaskService.ipAddress = ip;
+                J1939TaskService.ipPort = Integer.parseInt(port);
                 messageShowView.updateMessage(new Date(), "机型加载中，通讯 IP"+ip +" 请稍候...");
                 new Thread() {
                     @Override

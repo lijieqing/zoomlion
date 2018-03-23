@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.util.Log;
 
+import com.kstech.zoomlion.MyApplication;
 import com.kstech.zoomlion.utils.Globals;
 
 import J1939.J1939_Task;
@@ -28,6 +29,12 @@ public class J1939TaskService extends Service {
      * 测试使用方法，正式版不会使用
      */
     public static String ipAddress;
+    /**
+     * @deprecated
+     * 测试使用方法，正式版不会使用
+     */
+    public static int ipPort = 0;
+    public static boolean inDebug = false;
 
     public J1939TaskService() {
     }
@@ -53,8 +60,11 @@ public class J1939TaskService extends Service {
             j1939ProtTask.start();
 
             // 启动通讯任务
-            j1939CommTask = new CommunicationWorker(Globals.currentTerminal.getIp(), Integer.parseInt(Globals.currentTerminal.getPort()), getApplicationContext(),indexHandler);
-            //j1939CommTask = new CommunicationWorker(ipAddress, 4001, getApplicationContext());
+            if (inDebug){
+                j1939CommTask = new CommunicationWorker(ipAddress, ipPort, getApplicationContext(),null);
+            }else {
+                j1939CommTask = new CommunicationWorker(Globals.currentTerminal.getIp(), Integer.parseInt(Globals.currentTerminal.getPort()), getApplicationContext(),indexHandler);
+            }
 
             j1939CommTask.start();
             Log.e("IndexActivity", "j1939CommTask start");

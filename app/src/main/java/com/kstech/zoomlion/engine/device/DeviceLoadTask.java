@@ -101,11 +101,13 @@ public class DeviceLoadTask extends AsyncTask<Void, String, Void> {
                         message.arg1 = 28;
                         handler.sendMessage(message);
                         SystemClock.sleep(1000);
-                    } else if (object.has("processId")) {
-                        String deviceInfo = object.getString("device");
-                        Globals.PROCESSID = object.getString("processId");
-                        String deviceStatus = object.getString("statistics");
+                    } else if (object.has("processDetails")) {
+                        String deviceStatus = object.getString("commissioningStatus");
                         CommissioningStatistics status = JsonUtils.fromJson(deviceStatus, CommissioningStatistics.class);
+
+                        JSONObject processDetail = object.getJSONObject("processDetails");
+                        String deviceInfo = processDetail.getString("device");
+                        Globals.PROCESSID = processDetail.getString("id");
 
                         device = JsonUtils.fromJson(deviceInfo, Device.class);
 

@@ -411,6 +411,7 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
                 new UserLogoutTask(handler).executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
                 break;
             case R.id.index_btn_auto_download:
+                //Globals.deviceSN = "016302A0000170008";
                 // TODO: 2018/1/5 根据整机编码获取机型信息，此处模拟已经获取到整机编码
                 deviceLoadTask = new DeviceLoadTask(Globals.deviceSN, handler);
                 deviceLoadTask.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
@@ -563,8 +564,9 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
                         mActivity.bindService(j1939Intent, mActivity.conn, BIND_AUTO_CREATE);
                         mActivity.startService(j1939Intent);
 
-                        //注册预热时间 数据监听器
-                        Globals.modelFile.getDataSetVO().getDSItem("开机时间").addListener(mActivity);
+                        //注册 预热时间、整机编码 数据监听器
+                        Globals.modelFile.getDataSetVO().getDSItem(PREHEATING_TIME).addListener(mActivity);
+                        Globals.modelFile.getDataSetVO().getDSItem(DEVICE_SN).addListener(mActivity);
                         break;
                     case SKIP_TO_CHECK:
                         mActivity.backFromCheck = true;
