@@ -333,6 +333,16 @@ public class LoginActivity extends BaseActivity {
         }
     }
 
+    /**
+     * 用于测量终端测试使用，正式版应该删除此方法以及对应控件
+     * @param view view
+     */
+    public void gotoDebug(View view) {
+        Intent intent = new Intent(this,DebugActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
 
     /**
      * 登陆线程

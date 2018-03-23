@@ -76,5 +76,6 @@
     <string name="view_record_check_times">
         第%1$d次调试
     </string>
+    <string name="terminal_conn_status">终端连接%1$s</string>
 
 </resources>

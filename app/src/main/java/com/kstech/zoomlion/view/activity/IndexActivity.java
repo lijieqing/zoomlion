@@ -249,6 +249,14 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
      */
     public static final int DEVICE_LOADING_FAILED = 10;
     /**
+     * 测量终端连接成功
+     */
+    public static final  int TERMINAL_CONN_SUCCESS = 11;
+    /**
+     * 测量终端连接失败
+     */
+    public static final  int TERMINAL_CONN_FAILED = 12;
+    /**
      * 机型加载线程
      */
     private DeviceLoadTask deviceLoadTask;
@@ -301,6 +309,7 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
             LogUtils.e(TAG, "service connect");
             J1939TaskService.MyBinder binder = (J1939TaskService.MyBinder) service;
             j1939TaskService = binder.task;
+            j1939TaskService.setIndexHandler(handler);
             deviceLoadTask.isWaitting = false;
         }
 
@@ -402,7 +411,6 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
                 new UserLogoutTask(handler).executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
                 break;
             case R.id.index_btn_auto_download:
-                Globals.deviceSN = "016302A0170008";
                 // TODO: 2018/1/5 根据整机编码获取机型信息，此处模拟已经获取到整机编码
                 deviceLoadTask = new DeviceLoadTask(Globals.deviceSN, handler);
                 deviceLoadTask.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
@@ -589,6 +597,14 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
                         } else {
                             mActivity.messageShowView.updateMessage(new Date(), (String) msg.obj);
                         }
+                        break;
+                    case TERMINAL_CONN_SUCCESS:
+                        mActivity.ivTerminalStatus.setImageResource(R.drawable.terminal_connect);
+                        mActivity.tvTerminalStatus.setText(mActivity.getString(R.string.terminal_conn_status,"成功"));
+                        break;
+                    case TERMINAL_CONN_FAILED:
+                        mActivity.ivTerminalStatus.setImageResource(R.drawable.terminal_disconnect);
+                        mActivity.tvTerminalStatus.setText(mActivity.getString(R.string.terminal_conn_status,"失败"));
                         break;
 
                 }

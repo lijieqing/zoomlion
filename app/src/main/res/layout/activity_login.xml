@@ -33,7 +33,12 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="5">
-
+            <Button
+                android:onClick="gotoDebug"
+                android:layout_gravity="center"
+                android:text="测量终端调试"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
         </LinearLayout>
 
         <RelativeLayout

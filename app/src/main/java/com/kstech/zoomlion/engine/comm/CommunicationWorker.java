@@ -6,8 +6,12 @@ package com.kstech.zoomlion.engine.comm;
 import android.content.Context;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.os.Handler;
 import android.os.SystemClock;
+import android.support.annotation.Nullable;
 import android.util.Log;
+
+import com.kstech.zoomlion.view.activity.IndexActivity;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -56,6 +60,8 @@ public class CommunicationWorker extends Thread {
 
     private Context context;
 
+    private Handler indexHandler;
+
     /**
      * 线程终止状态
      */
@@ -82,13 +88,22 @@ public class CommunicationWorker extends Thread {
      * 根据服务器IP地址和侦听端口号实例化本对象
      */
     public CommunicationWorker(String serverIPAddress, int serverListenPort, Context context) {
+        new CommunicationWorker(serverIPAddress, serverListenPort, context, null);
+    }
+
+    public CommunicationWorker(String serverIPAddress, int serverListenPort, Context context, @Nullable Handler handler) {
         super();
         this.serverIPAddress = serverIPAddress;
         this.serverListenPort = serverListenPort;
         this.context = context;
         stop = false;
+        this.indexHandler = handler;
     }
 
+    public void setIndexHandler(Handler handler){
+        this.indexHandler = handler;
+
+    }
     public void setStop(boolean stop) {
         this.stop = stop;
     }
@@ -254,10 +269,12 @@ public class CommunicationWorker extends Thread {
                         Log.e(TAG, "---S S I D---" + ssid);
                     }
                     Log.e(TAG, "before create socket");
-                    if ("\"DLINK_DWL2000_01\"".equals(ssid)|| "\"TP-LINK_Outdoor_E85A88\"".equals(ssid) || "\"DLINK_DWL_2000_01\"".equals(ssid) || "\"dlink_zoomlion_test\"".equals(ssid)) {
+                    if ("\"DLINK_DWL2000_01\"".equals(ssid) || "\"TP-LINK_Outdoor_E85A88\"".equals(ssid) || "\"DLINK_DWL_2000_01\"".equals(ssid) || "\"dlink_zoomlion_test\"".equals(ssid)) {
                         Log.e(TAG, "serverIPAddress" + serverIPAddress);
                         sockTcp = new Socket(serverIPAddress, serverListenPort);
                         Log.e(TAG, "create socket " + sockTcp);
+                        if (indexHandler != null)
+                            indexHandler.sendEmptyMessage(IndexActivity.TERMINAL_CONN_SUCCESS);
                     }
                     Log.e(TAG, "after create socket" + sockTcp);
                 }
@@ -274,12 +291,8 @@ public class CommunicationWorker extends Thread {
 
 
                 if ((System.currentTimeMillis() - lastRecvTime) > TIME_OUT_TIME) {
-                    // CAN接收中断超过1分钟，通讯错误
-                    /*
-                    conn.close();
-					conn.setToInterrupted();
-					*/
-                    //Globals.notifyListener(true);
+                    if (indexHandler != null)
+                        indexHandler.sendEmptyMessage(IndexActivity.TERMINAL_CONN_FAILED);
                     if (sockTcp != null) {
                         sockTcp.close();
                         in = null;
@@ -379,6 +392,8 @@ public class CommunicationWorker extends Thread {
                 if (stop) {
                     break;
                 }
+                if (indexHandler != null)
+                    indexHandler.sendEmptyMessage(IndexActivity.TERMINAL_CONN_FAILED);
                 e.printStackTrace();
                 Log.e(TAG, "----- create exception ----");
                 Log.e(TAG, "----- create exception ----" + e.toString());

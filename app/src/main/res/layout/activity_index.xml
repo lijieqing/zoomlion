@@ -73,7 +73,7 @@
                     android:id="@+id/index_tv_server_status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="服务器连接正常" />
+                    android:text="服务器连接状态" />
             </LinearLayout>
 
             <LinearLayout
@@ -105,7 +105,7 @@
                     android:id="@+id/index_tv_terminal_status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="终端连接正常" />
+                    android:text="终端连接状态"/>
             </LinearLayout>
 
         </android.support.constraint.ConstraintLayout>

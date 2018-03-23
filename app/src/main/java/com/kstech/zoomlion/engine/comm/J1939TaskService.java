@@ -3,6 +3,7 @@ package com.kstech.zoomlion.engine.comm;
 import android.app.Service;
 import android.content.Intent;
 import android.os.Binder;
+import android.os.Handler;
 import android.os.IBinder;
 import android.util.Log;
 
@@ -20,6 +21,8 @@ public class J1939TaskService extends Service {
 
     // 1939任务
     public CommunicationWorker j1939CommTask = null;
+
+    private Handler indexHandler;
     /**
      * @deprecated
      * 测试使用方法，正式版不会使用
@@ -50,8 +53,8 @@ public class J1939TaskService extends Service {
             j1939ProtTask.start();
 
             // 启动通讯任务
-            //j1939CommTask = new CommunicationWorker(Globals.currentTerminal.getIp(), Integer.parseInt(Globals.currentTerminal.getPort()), getApplicationContext());
-            j1939CommTask = new CommunicationWorker(ipAddress, 4001, getApplicationContext());
+            j1939CommTask = new CommunicationWorker(Globals.currentTerminal.getIp(), Integer.parseInt(Globals.currentTerminal.getPort()), getApplicationContext(),indexHandler);
+            //j1939CommTask = new CommunicationWorker(ipAddress, 4001, getApplicationContext());
 
             j1939CommTask.start();
             Log.e("IndexActivity", "j1939CommTask start");
@@ -74,6 +77,18 @@ public class J1939TaskService extends Service {
         }
     }
 
+    /**
+     * 设置 J939状态更新 Handler
+     * @param handler handler
+     */
+    public void setIndexHandler(Handler handler){
+        this.indexHandler = handler;
+        j1939CommTask.setIndexHandler(handler);
+    }
+
+    /**
+     * 停止 J939通讯线程
+     */
     public void stopJ1939Service() {
         // 配置文件加载后需要重新初始化1939任务，任务中包括实时参数的增量初始化
         if (j1939ProtTask != null && j1939ProtTask.isRunning) {
