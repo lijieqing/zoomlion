@@ -35,7 +35,7 @@ public class GenericRxDBoxCallback implements IRxDBoxCallback {
     private void setDataVarValue(short wIdx, J1939_DataVar_ts dataStr, byte[] strBytes) {
         String strValue;
         try {
-            strValue = new String(strBytes, "UTF-8");
+            strValue = new String(strBytes, "US-ASCII");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
             strValue = "ERROR";

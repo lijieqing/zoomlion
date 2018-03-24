@@ -213,24 +213,26 @@ public class ViewRecordActivity extends BaseActivity {
                 }
             });
         }
-        //遍历当前调试项目细节记录各个参数
-        for (QCDataRecordDetails qcData : currentRecord.getQcdataRecordVOList()) {
-            String name = qcData.getName();
-            Long picID = qcData.getPictureId();
-            if (picID != null) {
-                //存在图片ID，生成图片数据对象
-                String url = URLCollections.PIC_URL_PREFIX + picID + URLCollections.PIC_URL_SUFFIX;
-                ImageData imageData = new ImageData(name, url);
-                imgList.add(imageData);
-            }
-            Float data = qcData.getData();
-            if (data != null) {
-                //存在参数数值，生成参数数值对象
-                String unit = qcData.getUnit();
-                String max = qcData.getValidMax() + "";
-                String min = qcData.getValidMin() + "";
-                ResultData resultData = new ResultData(name, unit, String.valueOf(data), max, min);
-                dataList.add(resultData);
+        if (currentRecord.getQcDaraRecordDetailList() != null) {
+            //遍历当前调试项目细节记录各个参数
+            for (QCDataRecordDetails qcData : currentRecord.getQcDaraRecordDetailList()) {
+                String name = qcData.getName();
+                Long picID = qcData.getPictureId();
+                if (picID != null) {
+                    //存在图片ID，生成图片数据对象
+                    String url = URLCollections.PIC_URL_PREFIX + picID + URLCollections.PIC_URL_SUFFIX;
+                    ImageData imageData = new ImageData(name, url);
+                    imgList.add(imageData);
+                }
+                Float data = qcData.getData();
+                if (data != null) {
+                    //存在参数数值，生成参数数值对象
+                    String unit = qcData.getUnit();
+                    String max = qcData.getValidMax() + "";
+                    String min = qcData.getValidMin() + "";
+                    ResultData resultData = new ResultData(name, unit, String.valueOf(data), max, min);
+                    dataList.add(resultData);
+                }
             }
         }
         imgAdapter.notifyDataSetChanged();
@@ -250,7 +252,7 @@ public class ViewRecordActivity extends BaseActivity {
      */
     private void updateSpec(Map<String, List<Float>> map) {
         LineChartAdapter chartAdapter = new LineChartAdapter(lineChart, map);
-        chartAdapter.setYAxis(150, 0, 15);
+        chartAdapter.setYAxis(500, 0, 10);
     }
 
     /**

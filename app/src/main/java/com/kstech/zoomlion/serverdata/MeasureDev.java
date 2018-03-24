@@ -68,7 +68,7 @@ public class MeasureDev {
     }
 
     public String getCanNodeId() {
-        return canNodeId;
+        return "0x" + canNodeId;
     }
 
     public void setCanNodeId(String canNodeId) {

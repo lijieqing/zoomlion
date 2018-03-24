@@ -233,7 +233,7 @@ public class ItemDetailActivity extends BaseActivity {
                         break;
                     case CHART_DATA_LOADED:
                         mActivity.lineChartAdapter = new LineChartAdapter(mActivity.lineChart, mActivity.listMap);
-                        mActivity.lineChartAdapter.setYAxis(300, 0, 15);
+                        mActivity.lineChartAdapter.setYAxis(500, 0, 10);
                         break;
                 }
             }

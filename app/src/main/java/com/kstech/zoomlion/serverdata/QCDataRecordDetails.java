@@ -8,7 +8,7 @@ public class QCDataRecordDetails {
     /**
      * 调试项记录Id
      */
-    private Long qcitemRecordId;
+    private Long commissioningRecordId;
     /**
      * 调试次数
      */
@@ -43,11 +43,11 @@ public class QCDataRecordDetails {
     private Integer status;
 
     public Long getQcitemRecordId() {
-        return qcitemRecordId;
+        return commissioningRecordId;
     }
 
     public void setQcitemRecordId(Long qcitemRecordId) {
-        this.qcitemRecordId = qcitemRecordId;
+        this.commissioningRecordId = qcitemRecordId;
     }
 
     public Integer getCheckNo() {
@@ -117,7 +117,7 @@ public class QCDataRecordDetails {
     @Override
     public String toString() {
         return "QCDataRecordDetails{" +
-                "qcitemRecordId=" + qcitemRecordId +
+                "qcitemRecordId=" + commissioningRecordId +
                 ", checkNo=" + checkNo +
                 ", name='" + name + '\'' +
                 ", data=" + data +

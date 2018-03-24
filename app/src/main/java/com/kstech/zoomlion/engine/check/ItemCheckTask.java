@@ -154,8 +154,10 @@ public class ItemCheckTask extends AsyncTask<Void, String, Void> implements J193
                 String content = "";
                 //处理参数数据
                 List<CheckItemParamValueVO> resluts = paramValueFormat(headers, true);
-                //过滤重复序列号数据
-                filterList(specOrderList,specMap);
+                if (specMap != null) {
+                    //过滤重复序列号数据
+                    filterList(specOrderList, specMap);
+                }
                 // 检测完成回调，返回paramResults
                 callBack.onSuccess(resluts, specMap, content);
                 callBack.onTaskStop(true);
@@ -255,17 +257,19 @@ public class ItemCheckTask extends AsyncTask<Void, String, Void> implements J193
 
     /**
      * 过滤重复序列号，以及对应的数据
+     *
      * @param posList 序列号集合
      * @param specMap 数据集合
      */
-    private void filterList(LinkedList<Float> posList,Map<String, LinkedList<Float>> specMap){
+    private void filterList(LinkedList<Float> posList, Map<String, LinkedList<Float>> specMap) {
+        if (posList == null || specMap == null) return;
         float temp = 0;
         for (int i = 0; i < posList.size(); i++) {
-            if (i==0){
+            if (i == 0) {
                 temp = posList.get(i);
-            }else {
+            } else {
                 float currentF = posList.get(i);
-                if (temp == currentF){
+                if (temp == currentF) {
                     posList.remove(i);
                     for (LinkedList<Float> floats : specMap.values()) {
                         floats.remove(i);
@@ -275,6 +279,7 @@ public class ItemCheckTask extends AsyncTask<Void, String, Void> implements J193
             }
         }
     }
+
     /**
      * 判断集合中的数据是否为连续，并将丢失部分计算出来
      *
@@ -288,7 +293,7 @@ public class ItemCheckTask extends AsyncTask<Void, String, Void> implements J193
         boolean result = false;
         //对集合先排序
         Collections.sort(specOrderlist);
-        total+=1;
+        total += 1;
         //比较最后一个参数顺序号与参数数据数量
         float endLost = total - specOrderlist.getLast();
         if (endLost > 1) {

@@ -47,6 +47,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import J1939.J1939_Context;
 import J1939.J1939_DataVar_ts;
 
 /**
@@ -251,11 +252,11 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
     /**
      * 测量终端连接成功
      */
-    public static final  int TERMINAL_CONN_SUCCESS = 11;
+    public static final int TERMINAL_CONN_SUCCESS = 11;
     /**
      * 测量终端连接失败
      */
-    public static final  int TERMINAL_CONN_FAILED = 12;
+    public static final int TERMINAL_CONN_FAILED = 12;
     /**
      * 机型加载线程
      */
@@ -296,6 +297,10 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
      * 机型文件中 整机编码的数据变量名
      */
     private static final String DEVICE_SN = "整机编码";
+    /**
+     * 整机编码长度
+     */
+    private static final int DEVICE_SN_LENGTH = 17;
     /**
      * 打印tag
      */
@@ -417,6 +422,7 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
                 deviceLoadTask.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
                 break;
             case R.id.index_btn_get_sn:
+                J1939_Context.j1939_API.j1939_sendRequestPGN((short) 0x01, Integer.parseInt("FF0E", 16));
                 String currentSN = Globals.modelFile.dataSetVO.getDSItem("整机编码_回复").getStrValue();
                 Toast.makeText(this, currentSN, Toast.LENGTH_SHORT).show();
                 break;
@@ -485,6 +491,7 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
         //处理整机编码数据
         if (dsItemPosition == Globals.modelFile.dataSetVO.getItemIndex(DEVICE_SN)) {
             final String deviceSN = (String) value;
+            LogUtils.e(TAG, "deviceSN: " + deviceSN);
             if (!"ERROR".equals(deviceSN) && !TextUtils.isEmpty(deviceSN)) {
                 //更新UI
                 runOnUiThread(new Runnable() {
@@ -515,21 +522,40 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
      * @param sn 整机编码
      */
     private void verifyDeviceSN(String sn) {
-        if (!TextUtils.isEmpty(Globals.deviceSN)) {
-            //当整机编码变化且不是ERROR时，请求机型信息
-            if (!Globals.deviceSN.equals(sn) && !deviceLoading) {
-                deviceLoading = true;
-                Globals.deviceSN = sn;
-                deviceLoadTask = new DeviceLoadTask(Globals.deviceSN, handler);
-                deviceLoadTask.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
+        if (sn.length() >= DEVICE_SN_LENGTH) {
+            sn = sn.substring(0, DEVICE_SN_LENGTH);
+
+            if (!TextUtils.isEmpty(Globals.deviceSN)) {
+                //当整机编码变化且不是ERROR时，请求机型信息
+                if (!Globals.deviceSN.equals(sn) && !deviceLoading) {
+                    deviceLoading = true;
+                    Globals.deviceSN = sn;
+                    deviceLoadTask = new DeviceLoadTask(Globals.deviceSN, handler);
+                    deviceLoadTask.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
+                }
+                //整机编码相同，回复测量终端，停止接收编码
+                if (Globals.deviceSN.equals(sn) && !deviceLoading) {
+                    String str = Globals.modelFile.getDataSetVO().getDSItem(DEVICE_SN).getStrValue();
+                    LogUtils.e(TAG, "verifyDeviceSN str: " + str);
+                    Globals.modelFile.dataSetVO.getDSItem("整机编码_回复").setStrValue(str);
+                }
+            } else {
+                if (!TextUtils.isEmpty(sn) && !deviceLoading) {
+                    deviceLoading = true;
+                    Globals.deviceSN = sn;
+                    deviceLoadTask = new DeviceLoadTask(Globals.deviceSN, handler);
+                    deviceLoadTask.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
+                }
             }
         } else {
-            if (!TextUtils.isEmpty(sn) && !deviceLoading) {
-                deviceLoading = true;
-                Globals.deviceSN = sn;
-                deviceLoadTask = new DeviceLoadTask(Globals.deviceSN, handler);
-                deviceLoadTask.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
-            }
+            //更新UI
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    tvDeviceIdentity.setTextColor(Color.RED);
+                    tvDeviceIdentity.setText("整机编码长度不合法");
+                }
+            });
         }
     }
 
@@ -602,11 +628,11 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
                         break;
                     case TERMINAL_CONN_SUCCESS:
                         mActivity.ivTerminalStatus.setImageResource(R.drawable.terminal_connect);
-                        mActivity.tvTerminalStatus.setText(mActivity.getString(R.string.terminal_conn_status,"成功"));
+                        mActivity.tvTerminalStatus.setText(mActivity.getString(R.string.terminal_conn_status, "成功"));
                         break;
                     case TERMINAL_CONN_FAILED:
                         mActivity.ivTerminalStatus.setImageResource(R.drawable.terminal_disconnect);
-                        mActivity.tvTerminalStatus.setText(mActivity.getString(R.string.terminal_conn_status,"失败"));
+                        mActivity.tvTerminalStatus.setText(mActivity.getString(R.string.terminal_conn_status, "失败"));
                         break;
 
                 }

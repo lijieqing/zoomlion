@@ -9,6 +9,9 @@ import com.kstech.zoomlion.utils.Globals;
 import com.kstech.zoomlion.utils.JsonUtils;
 import com.kstech.zoomlion.view.activity.ViewRecordActivity;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.xutils.http.RequestParams;
 
 import java.util.List;
@@ -51,15 +54,19 @@ public class ItemRecordLoadTask extends AbstractDataTransferTask {
         return false;
     }
 
-    @Override
-    protected boolean onResponse(String response) {
 
-        List<QCItemRecordDetails> datas = JsonUtils.fromArrayJson(response, QCItemRecordDetails.class);
-        message = Message.obtain();
-        message.obj = datas;
-        message.what = ViewRecordActivity.ITEM_RECORD_LOADED;
-        handler.sendMessage(message);
-        return true;
+    @Override
+    protected void onRequestSuccess(JSONObject data) throws JSONException {
+        if (data.has("qcitemRecordDetails")) {
+            JSONArray records = data.getJSONArray("qcitemRecordDetails");
+            String recordJ = records.toString();
+            List<QCItemRecordDetails> datas = JsonUtils.fromArrayJson(recordJ, QCItemRecordDetails.class);
+            message = Message.obtain();
+            message.obj = datas;
+            message.what = ViewRecordActivity.ITEM_RECORD_LOADED;
+            handler.sendMessage(message);
+        }
+
     }
 
     @Override

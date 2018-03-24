@@ -323,12 +323,13 @@ public class ItemCheckActivity extends BaseActivity implements ItemCheckCallBack
 
         handler.sendEmptyMessage(NEW_CHECKITEM_REFRESH);
     }
+
     @Override
     public void clearBlur() {
         //需要通讯启动准备调试任务，否则直接进入
-        if (ItemFunctionUtils.isCommItem(Integer.parseInt(Globals.currentCheckItem.getId()))){
-            new ReadyToCheckTask(this,handler).executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
-        }else {
+        if (ItemFunctionUtils.isCommItem(Integer.parseInt(Globals.currentCheckItem.getId()))) {
+            new ReadyToCheckTask(this, handler).executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
+        } else {
             handler.sendEmptyMessage(TERMINAL_READY_CHECK);
         }
     }
@@ -355,7 +356,7 @@ public class ItemCheckActivity extends BaseActivity implements ItemCheckCallBack
     private void initNewDetailRecord() {
         detailData = new CheckItemDetailData(null, itemDBID, 12l, "admin", 1l, "measure",
                 1, itemvo.getJsonParams(), CheckItemDetailResultEnum.UNFINISH.getCode(),
-                new Date(), null, null, false,false);
+                new Date(), null, null, false, false);
         detailID = itemDetailDao.insert(detailData);
     }
 
@@ -551,6 +552,8 @@ public class ItemCheckActivity extends BaseActivity implements ItemCheckCallBack
                         activity.progressView.updateProgress("数据保存成功！", 90);
                         //更新调试项目展示内容
                         activity.isv.updateBody(activity.itemDBID);
+                        //保存按钮复位
+                        activity.iov.updateCheckStatus(false, false);
                         //计时器复位
                         activity.iov.chronometerReset(R.color.whiteColor, false);
                         break;

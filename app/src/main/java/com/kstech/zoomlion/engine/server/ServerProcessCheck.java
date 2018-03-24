@@ -3,7 +3,6 @@ package com.kstech.zoomlion.engine.server;
 import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
-import android.text.TextUtils;
 
 import com.kstech.zoomlion.MyApplication;
 import com.kstech.zoomlion.model.db.CheckItemData;
@@ -82,37 +81,32 @@ public class ServerProcessCheck extends AbstractDataTransferTask {
     @Override
     protected boolean initRequestParam(RequestParams params) {
         params.addBodyParameter("sn", Globals.deviceSN);
+        params.addBodyParameter("processId", Globals.PROCESSID);
         return true;
     }
 
     @Override
     protected void onRequestSuccess(JSONObject data) throws JSONException {
-        if (data.has("processId")) {
-            message = Message.obtain();
-            String id = data.getString("processId");
-            //判断当前processID与服务器processID是否一致
-            if (!TextUtils.isEmpty(Globals.PROCESSID) && Globals.PROCESSID.equals(id)) {
 
-                //查询本地是否存在记录
-                CheckRecord cr = MyApplication.getApplication().getDaoSession().getCheckRecordDao()
-                        .queryBuilder().where(CheckRecordDao.Properties.DeviceIdentity
-                                .eq(Globals.deviceSN)).build().unique();
-                //当为null时，说明此机型第一次调试，需要为其创建对应的数据
-                if (cr == null) {
-                    //当cr为空 arg1为负值
-                    hasRecord = false;
-                } else {
-                    //当cr不为空 arg1为正值
-                    hasRecord = true;
-                    record = cr;
-                }
-                //设置为可以跳转
-                skip = true;
-            }
-        }
         if (data.has("qcitemStatusList")) {
             String statusList = data.getString("qcitemStatusList");
             itemStatus = JsonUtils.fromArrayJson(statusList, QCItemStatus.class);
+
+            //查询本地是否存在记录
+            CheckRecord cr = MyApplication.getApplication().getDaoSession().getCheckRecordDao()
+                    .queryBuilder().where(CheckRecordDao.Properties.DeviceIdentity
+                            .eq(Globals.deviceSN)).build().unique();
+            //当为null时，说明此机型第一次调试，需要为其创建对应的数据
+            if (cr == null) {
+                //当cr为空 arg1为负值
+                hasRecord = false;
+            } else {
+                //当cr不为空 arg1为正值
+                hasRecord = true;
+                record = cr;
+            }
+            //设置为可以跳转
+            skip = true;
         }
     }
 

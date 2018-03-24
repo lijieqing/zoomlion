@@ -290,6 +290,8 @@ public class ItemOperateView extends RelativeLayout implements View.OnClickListe
             tvStart.setText("开始");
             if (canSave) {
                 ivSave.setBackgroundResource(R.drawable.save);
+            } else {
+                ivSave.setBackgroundResource(R.drawable.save_disable);
             }
             isChecking = false;
         }

@@ -2,14 +2,13 @@ package com.kstech.zoomlion.serverdata;
 
 import android.support.annotation.NonNull;
 
-import java.util.Date;
 import java.util.List;
 
 /**
  * @author 7yrs
  * @date 2018/1/19.
  */
-public class QCItemRecordDetails implements Comparable<QCItemRecordDetails>{
+public class QCItemRecordDetails implements Comparable<QCItemRecordDetails> {
     /**
      * 调试项记录Id
      */
@@ -29,7 +28,7 @@ public class QCItemRecordDetails implements Comparable<QCItemRecordDetails>{
     /**
      * 调试次数
      */
-    private Integer checkNO;
+    private Integer checkNo;
     /**
      * 谱图Id
      */
@@ -37,7 +36,7 @@ public class QCItemRecordDetails implements Comparable<QCItemRecordDetails>{
     /**
      * 调试项参数详情列表
      */
-    private List<QCDataRecordDetails> qcdataRecordVOList;
+    private List<QCDataRecordDetails> qcDataRecordDetailsList;
     /**
      * 单次调试项结果
      */
@@ -80,19 +79,19 @@ public class QCItemRecordDetails implements Comparable<QCItemRecordDetails>{
     }
 
     public Integer getCheckNO() {
-        return checkNO;
+        return checkNo;
     }
 
     public void setCheckNO(Integer checkNO) {
-        this.checkNO = checkNO;
+        this.checkNo = checkNO;
     }
 
-    public List<QCDataRecordDetails> getQcdataRecordVOList() {
-        return qcdataRecordVOList;
+    public List<QCDataRecordDetails> getQcDaraRecordDetailList() {
+        return qcDataRecordDetailsList;
     }
 
     public void setQcdataRecordVOList(List<QCDataRecordDetails> qcdataRecordVOList) {
-        this.qcdataRecordVOList = qcdataRecordVOList;
+        this.qcDataRecordDetailsList = qcdataRecordVOList;
     }
 
     public Long getSpectrogramId() {
@@ -126,9 +125,9 @@ public class QCItemRecordDetails implements Comparable<QCItemRecordDetails>{
                 ", qcitemDictId=" + qcitemDictId +
                 ", operatorName='" + operatorName + '\'' +
                 ", measureDeviceName='" + measureDeviceName + '\'' +
-                ", checkNO=" + checkNO +
+                ", checkNo=" + checkNo +
                 ", spectrogramId=" + spectrogramId +
-                ", qcdataRecordVOList=" + qcdataRecordVOList +
+                ", qcdataRecordVOList=" + qcDataRecordDetailsList +
                 ", status=" + status +
                 ", doneDate='" + doneDate + '\'' +
                 '}';
@@ -136,6 +135,6 @@ public class QCItemRecordDetails implements Comparable<QCItemRecordDetails>{
 
     @Override
     public int compareTo(@NonNull QCItemRecordDetails o) {
-        return o.getCheckNO()-checkNO;
+        return o.getCheckNO() - checkNo;
     }
 }
