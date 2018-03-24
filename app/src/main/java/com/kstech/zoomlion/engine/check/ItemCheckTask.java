@@ -291,6 +291,9 @@ public class ItemCheckTask extends AsyncTask<Void, String, Void> implements J193
     private boolean verifySpecOrder(int total, @NotNull LinkedList<Float> specOrderlist, @NotNull LinkedList<Float> lostSpecOrderList) {
         //是否存在漏传数据，TRUE为存在漏传
         boolean result = false;
+        if (specOrderlist==null || lostSpecOrderList==null){
+            return false;
+        }
         //对集合先排序
         Collections.sort(specOrderlist);
         total += 1;

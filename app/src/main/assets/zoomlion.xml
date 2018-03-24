@@ -2463,8 +2463,7 @@
                 </Msgs>
                 <QCParams>
                     <QCParam Param="左前支腿垂直伸出时间" PicReq="false" QCMode="Auto" ValMode="Auto"
-                        ValidAvg="" ValidMax="20" ValidMin="14" ValueReq="true" XParam=" "
-                        XRange=" " />
+                        ValidAvg="" ValidMax="20" ValidMin="14" ValueReq="true" XParam="" XRange="" />
                     <QCParam Param="左前支腿垂直伸出平均油温" PicReq="false" QCMode="Auto" ValMode="Auto"
                         ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
                 </QCParams>
@@ -2496,6 +2495,9 @@
             </QCItem>
             <QCItem AttachPGN="0xFFE5" Id="6" Name="右前支腿水平伸出" QCTimeout="20" QCTimes="5"
                 ReadyTimeout="10" Require="true">
+                <Spectrum EndMode="Auto" Interval="50" StartMode="Auto">
+                    <SpecParam Param="臂架泵压力" />
+                </Spectrum>
                 <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
                     <QCProgressMsg>
                         <QCProgress Code="" Msg="" />
@@ -2515,6 +2517,9 @@
             </QCItem>
             <QCItem AttachPGN="0xFFE6" Id="7" Name="右前支腿水平回收" QCTimeout="20" QCTimes="5"
                 ReadyTimeout="10" Require="true">
+                <Spectrum EndMode="Auto" Interval="50" StartMode="Auto">
+                    <SpecParam Param="臂架泵压力" />
+                </Spectrum>
                 <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
                     <QCProgressMsg>
                         <QCProgress Code="" Msg="" />
@@ -2534,6 +2539,9 @@
             </QCItem>
             <QCItem AttachPGN="0xFFE7" Id="8" Name="右前支腿垂直伸出" QCTimeout="20" QCTimes="5"
                 ReadyTimeout="10" Require="true">
+                <Spectrum EndMode="Auto" Interval="50" StartMode="Auto">
+                    <SpecParam Param="臂架泵压力" />
+                </Spectrum>
                 <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
                     <QCProgressMsg>
                         <QCProgress Code="" Msg="" />
@@ -2553,6 +2561,9 @@
             </QCItem>
             <QCItem AttachPGN="0xFFE8" Id="9" Name="右前支腿垂直回收" QCTimeout="20" QCTimes="5"
                 ReadyTimeout="10" Require="true">
+                <Spectrum EndMode="Auto" Interval="50" StartMode="Auto">
+                    <SpecParam Param="臂架泵压力" />
+                </Spectrum>
                 <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
                     <QCProgressMsg>
                         <QCProgress Code="" Msg="" />
@@ -2572,6 +2583,9 @@
             </QCItem>
             <QCItem AttachPGN="0xFFE9" Id="10" Name="左后支腿水平伸出" QCTimeout="20" QCTimes="5"
                 ReadyTimeout="10" Require="true">
+                <Spectrum EndMode="Auto" Interval="50" StartMode="Auto">
+                    <SpecParam Param="臂架泵压力" />
+                </Spectrum>
                 <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
                     <QCProgressMsg>
                         <QCProgress Code="" Msg="" />
@@ -2591,6 +2605,9 @@
             </QCItem>
             <QCItem AttachPGN="0xFFEA" Id="11" Name="左后支腿水平回收" QCTimeout="20" QCTimes="5"
                 ReadyTimeout="10" Require="true">
+                <Spectrum EndMode="Auto" Interval="50" StartMode="Auto">
+                    <SpecParam Param="臂架泵压力" />
+                </Spectrum>
                 <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
                     <QCProgressMsg>
                         <QCProgress Code="" Msg="" />
@@ -2610,6 +2627,9 @@
             </QCItem>
             <QCItem AttachPGN="0xFFEB" Id="12" Name="左后支腿垂直伸出" QCTimeout="20" QCTimes="5"
                 ReadyTimeout="10" Require="true">
+                <Spectrum EndMode="Auto" Interval="50" StartMode="Auto">
+                    <SpecParam Param="臂架泵压力" />
+                </Spectrum>
                 <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
                     <QCProgressMsg>
                         <QCProgress Code="" Msg="" />
@@ -2629,6 +2649,9 @@
             </QCItem>
             <QCItem AttachPGN="0xFFEC" Id="13" Name="左后支腿垂直回收" QCTimeout="20" QCTimes="5"
                 ReadyTimeout="10" Require="true">
+                <Spectrum EndMode="Auto" Interval="50" StartMode="Auto">
+                    <SpecParam Param="臂架泵压力" />
+                </Spectrum>
                 <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
                     <QCProgressMsg>
                         <QCProgress Code="" Msg="" />
@@ -2648,6 +2671,9 @@
             </QCItem>
             <QCItem AttachPGN="0xFFED" Id="14" Name="右后支腿水平伸出" QCTimeout="20" QCTimes="5"
                 ReadyTimeout="10" Require="true">
+                <Spectrum EndMode="Auto" Interval="50" StartMode="Auto">
+                    <SpecParam Param="臂架泵压力" />
+                </Spectrum>
                 <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
                     <QCProgressMsg>
                         <QCProgress Code="" Msg="" />
@@ -2667,6 +2693,9 @@
             </QCItem>
             <QCItem AttachPGN="0xFFEE" Id="15" Name="右后支腿水平回收" QCTimeout="20" QCTimes="5"
                 ReadyTimeout="10" Require="true">
+                <Spectrum EndMode="Auto" Interval="50" StartMode="Auto">
+                    <SpecParam Param="臂架泵压力" />
+                </Spectrum>
                 <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
                     <QCProgressMsg>
                         <QCProgress Code="" Msg="" />
@@ -2686,6 +2715,9 @@
             </QCItem>
             <QCItem AttachPGN="0xFFEF" Id="16" Name="右后支腿垂直伸出" QCTimeout="20" QCTimes="5"
                 ReadyTimeout="10" Require="true">
+                <Spectrum EndMode="Auto" Interval="50" StartMode="Auto">
+                    <SpecParam Param="臂架泵压力" />
+                </Spectrum>
                 <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
                     <QCProgressMsg>
                         <QCProgress Code="" Msg="" />
@@ -2705,6 +2737,9 @@
             </QCItem>
             <QCItem AttachPGN="0xFFF8" Id="17" Name="右后支腿垂直回收" QCTimeout="20" QCTimes="5"
                 ReadyTimeout="10" Require="true">
+                <Spectrum EndMode="Auto" Interval="50" StartMode="Auto">
+                    <SpecParam Param="臂架泵压力" />
+                </Spectrum>
                 <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
                     <QCProgressMsg>
                         <QCProgress Code="" Msg="" />
@@ -4409,8 +4444,8 @@
                 <QCParams>
                     <QCParam Param="恒压泵最小电流" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="恒压泵最小电流压力" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
-                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="恒压泵最小电流压力" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
                 </QCParams>
                 <ENVParams />
                 <RealTimeParams />
@@ -4428,8 +4463,8 @@
                 <QCParams>
                     <QCParam Param="恒压泵最大电流" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
                         ValidMax="" ValidMin="" ValueReq="true" />
-                    <QCParam Param="恒压泵最大电流压力" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
-                        ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="恒压泵最大电流压力" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
                 </QCParams>
                 <ENVParams />
                 <RealTimeParams />
@@ -4445,8 +4480,8 @@
                     </QCErrMsg>
                 </Msgs>
                 <QCParams>
-                    <QCParam Param="恒压泵手控电流" PicReq="false" QCMode="Auto" ValMode="Auto"
-                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                    <QCParam Param="恒压泵手控电流" PicReq="false" QCMode="Auto" ValMode="Auto" ValidAvg=""
+                        ValidMax="" ValidMin="" ValueReq="true" />
                     <QCParam Param="恒压泵手控电流压力" PicReq="false" QCMode="Auto" ValMode="Auto"
                         ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
                 </QCParams>

@@ -6,8 +6,10 @@ import com.kstech.zoomlion.model.xmlbean.DSItem;
 import com.kstech.zoomlion.model.xmlbean.DataSet;
 import com.kstech.zoomlion.model.xmlbean.J1939;
 import com.kstech.zoomlion.model.xmlbean.PG;
+import com.kstech.zoomlion.model.xmlbean.QCItem;
 import com.kstech.zoomlion.model.xmlbean.QCParam;
 import com.kstech.zoomlion.model.xmlbean.QCParams;
+import com.kstech.zoomlion.model.xmlbean.QCType;
 import com.kstech.zoomlion.model.xmlbean.SP;
 import com.kstech.zoomlion.utils.JsonUtils;
 
@@ -220,23 +222,15 @@ public class ExampleUnitTest {
 
     @Test
     public void testFloat() throws IOException, IllegalAccessException, InvocationTargetException {
-        J1939 type = (J1939) XMLAPI.readXML(new FileInputStream("/Users/lijie/Desktop/f.xml"));
-        QCParams params = new QCParams();
-        for (PG pg : type.getPgs()) {
-            for (SP sp : pg.getSps()) {
-                QCParam param = new QCParam();
-                param.setParam(sp.getRef());
-                param.setValueReq(true);
-                param.setPicReq(true);
-                param.setValMode("Auto");
-                param.setQCMode("Auto");
-                param.setValidMax("");
-                param.setValidAvg("");
-                param.setValidMin("");
+        QCType type = (QCType) XMLAPI.readXML(new FileInputStream("/Users/lijie/Desktop/spec.xml"));
 
-                params.getQcParams().add(param);
+        QCItem item = type.getQcItems().get(0);
+        for (int i = 0; i < type.getQcItems().size(); i++) {
+            if (i != 0){
+                type.getQcItems().get(i).setSpectrum(item.getSpectrum());
             }
         }
-        XMLAPI.writeXML2File(params, "/Users/lijie/Desktop/r.xml");
+
+        XMLAPI.writeXML2File(type, "/Users/lijie/Desktop/spec.xml");
     }
 }

@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.kstech.zoomlion.R;
+import com.kstech.zoomlion.engine.comm.CommandResp;
 import com.kstech.zoomlion.engine.comm.CommandSender;
 import com.kstech.zoomlion.utils.Globals;
 import com.kstech.zoomlion.view.activity.ItemCheckActivity;
@@ -152,12 +153,9 @@ public class ReadyToCheckTask extends AsyncTask<Void, String, Void> {
         isRunning = true;
 
         publishProgress("progress", "与终端通讯进行准备检测--最大耗时--", Globals.currentCheckItem.getReadyTimeout()+"秒");
-        while (remainSeconds < Globals.currentCheckItem.getReadyTimeout() && isRunning) {
-            //readyToCheckCommandResp = CommandResp.getReadyToCheckCommandResp(Globals.currentCheckItem.getId(), 1);
+        while (remainSeconds < 10 && isRunning) {
+            readyToCheckCommandResp = CommandResp.getReadyToCheckCommandResp(Globals.currentCheckItem.getId(), 1);
 
-            if (remainSeconds == 7){
-                readyToCheckCommandResp = "准备就绪";
-            }
             if ("准备就绪".equals(readyToCheckCommandResp)) {
                 String readyMsg = Globals.currentCheckItem.getReadyMsg();
                 String content = "准备就绪";
@@ -178,12 +176,10 @@ public class ReadyToCheckTask extends AsyncTask<Void, String, Void> {
                 //     content = Globals.getResConfig().getResourceVO().getMsg(notReadyMsg).getContent();
                 // }
                 publishProgress("error", "--无法进入检测--", content);
-                SystemClock.sleep(1000);
                 return null;
             }
         }
         publishProgress("timeout", "--与终端进行准备检测通讯--超时--", "无法开始检测");
-        SystemClock.sleep(1000);
         return null;
     }
 
