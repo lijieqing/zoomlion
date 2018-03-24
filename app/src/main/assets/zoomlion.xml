@@ -1363,7 +1363,7 @@
 
         <!--AttachPGN 在调试项目时需要一并下发的PGN 下发顺序不清楚-->
 
-        <PG Dir="Tx" Len="16" PGN="0xFFC0" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x00" Type="2">
+        <PG Dir="Tx" Len="8" PGN="0xFFC0" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
             <SP Bits="0" Bytes="2" Off="0" Ref="一臂快档展开不检测时间" Res="1" SBit="1" SByte="1" SPN="0"
                 Type="1" />
             <SP Bits="0" Bytes="2" Off="0" Ref="一臂快档展开终止斜率阀值" Res="1" SBit="1" SByte="3" SPN="0"
@@ -1373,7 +1373,7 @@
             <SP Bits="0" Bytes="2" Off="0" Ref="一臂快档展开时间最小值" Res="1" SBit="1" SByte="7" SPN="0"
                 Type="1" />
         </PG>
-        <PG Dir="Tx" Len="16" PGN="0xFFC1" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x00" Type="2">
+        <PG Dir="Tx" Len="8" PGN="0xFFC1" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
             <SP Bits="0" Bytes="2" Off="0" Ref="一臂快档回收不检测时间" Res="1" SBit="1" SByte="1" SPN="0"
                 Type="1" />
             <SP Bits="0" Bytes="2" Off="0" Ref="一臂快档回收终止斜率阀值" Res="1" SBit="1" SByte="3" SPN="0"
@@ -1383,7 +1383,7 @@
             <SP Bits="0" Bytes="2" Off="0" Ref="一臂快档回收时间最小值" Res="1" SBit="1" SByte="7" SPN="0"
                 Type="1" />
         </PG>
-        <PG Dir="Tx" Len="16" PGN="0xFFC2" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x00" Type="2">
+        <PG Dir="Tx" Len="8" PGN="0xFFC2" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
             <SP Bits="0" Bytes="2" Off="0" Ref="二臂慢档回收不检测时间" Res="1" SBit="1" SByte="1" SPN="0"
                 Type="1" />
             <SP Bits="0" Bytes="2" Off="0" Ref="二臂慢档回收终止斜率阀值" Res="1" SBit="1" SByte="3" SPN="0"
@@ -1393,7 +1393,7 @@
             <SP Bits="0" Bytes="2" Off="0" Ref="二臂慢档回收时间最小值" Res="1" SBit="1" SByte="7" SPN="0"
                 Type="1" />
         </PG>
-        <PG Dir="Tx" Len="16" PGN="0xFFC3" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x00" Type="2">
+        <PG Dir="Tx" Len="8" PGN="0xFFC3" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
             <SP Bits="0" Bytes="2" Off="0" Ref="二臂快档回收不检测时间" Res="1" SBit="1" SByte="1" SPN="0"
                 Type="1" />
             <SP Bits="0" Bytes="2" Off="0" Ref="二臂快档回收终止斜率阀值" Res="1" SBit="1" SByte="3" SPN="0"
@@ -1403,7 +1403,7 @@
             <SP Bits="0" Bytes="2" Off="0" Ref="二臂快档回收时间最小值" Res="1" SBit="1" SByte="7" SPN="0"
                 Type="1" />
         </PG>
-        <PG Dir="Tx" Len="16" PGN="0xFFC4" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x00" Type="2">
+        <PG Dir="Tx" Len="8" PGN="0xFFC4" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
             <SP Bits="0" Bytes="2" Off="0" Ref="三臂慢档展开不检测时间" Res="1" SBit="1" SByte="1" SPN="0"
                 Type="1" />
             <SP Bits="0" Bytes="2" Off="0" Ref="三臂慢档展开终止斜率阀值" Res="1" SBit="1" SByte="3" SPN="0"
@@ -1413,7 +1413,7 @@
             <SP Bits="0" Bytes="2" Off="0" Ref="三臂慢档展开时间最小值" Res="1" SBit="1" SByte="7" SPN="0"
                 Type="1" />
         </PG>
-        <PG Dir="Tx" Len="16" PGN="0xFFC5" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x00" Type="2">
+        <PG Dir="Tx" Len="8" PGN="0xFFC5" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
             <SP Bits="0" Bytes="2" Off="0" Ref="三臂快档展开不检测时间" Res="1" SBit="1" SByte="1" SPN="0"
                 Type="1" />
             <SP Bits="0" Bytes="2" Off="0" Ref="三臂快档展开终止斜率阀值" Res="1" SBit="1" SByte="3" SPN="0"
@@ -1423,7 +1423,7 @@
             <SP Bits="0" Bytes="2" Off="0" Ref="三臂快档展开时间最小值" Res="1" SBit="1" SByte="7" SPN="0"
                 Type="1" />
         </PG>
-        <PG Dir="Tx" Len="16" PGN="0xFFC6" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x00" Type="2">
+        <PG Dir="Tx" Len="8" PGN="0xFFC6" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
             <SP Bits="0" Bytes="2" Off="0" Ref="三臂慢档回收不检测时间" Res="1" SBit="1" SByte="1" SPN="0"
                 Type="1" />
             <SP Bits="0" Bytes="2" Off="0" Ref="三臂慢档回收终止斜率阀值" Res="1" SBit="1" SByte="3" SPN="0"
@@ -1433,7 +1433,7 @@
             <SP Bits="0" Bytes="2" Off="0" Ref="三臂慢档回收时间最小值" Res="1" SBit="1" SByte="7" SPN="0"
                 Type="1" />
         </PG>
-        <PG Dir="Tx" Len="16" PGN="0xFFC7" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x00" Type="2">
+        <PG Dir="Tx" Len="8" PGN="0xFFC7" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
             <SP Bits="0" Bytes="2" Off="0" Ref="三臂快档回收不检测时间" Res="1" SBit="1" SByte="1" SPN="0"
                 Type="1" />
             <SP Bits="0" Bytes="2" Off="0" Ref="三臂快档回收终止斜率阀值" Res="1" SBit="1" SByte="3" SPN="0"
@@ -1443,7 +1443,7 @@
             <SP Bits="0" Bytes="2" Off="0" Ref="三臂快档回收时间最小值" Res="1" SBit="1" SByte="7" SPN="0"
                 Type="1" />
         </PG>
-        <PG Dir="Tx" Len="16" PGN="0xFFC8" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x00" Type="2">
+        <PG Dir="Tx" Len="8" PGN="0xFFC8" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
             <SP Bits="0" Bytes="2" Off="0" Ref="四臂慢档展开不检测时间" Res="1" SBit="1" SByte="1" SPN="0"
                 Type="1" />
             <SP Bits="0" Bytes="2" Off="0" Ref="四臂慢档展开终止斜率阀值" Res="1" SBit="1" SByte="3" SPN="0"
@@ -1453,7 +1453,7 @@
             <SP Bits="0" Bytes="2" Off="0" Ref="四臂慢档展开时间最小值" Res="1" SBit="1" SByte="7" SPN="0"
                 Type="1" />
         </PG>
-        <PG Dir="Tx" Len="16" PGN="0xFFC9" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x00" Type="2">
+        <PG Dir="Tx" Len="8" PGN="0xFFC9" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
             <SP Bits="0" Bytes="2" Off="0" Ref="四臂快档展开不检测时间" Res="1" SBit="1" SByte="1" SPN="0"
                 Type="1" />
             <SP Bits="0" Bytes="2" Off="0" Ref="四臂快档展开终止斜率阀值" Res="1" SBit="1" SByte="3" SPN="0"
@@ -1463,7 +1463,7 @@
             <SP Bits="0" Bytes="2" Off="0" Ref="四臂快档展开时间最小值" Res="1" SBit="1" SByte="7" SPN="0"
                 Type="1" />
         </PG>
-        <PG Dir="Tx" Len="16" PGN="0xFFCA" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x00" Type="2">
+        <PG Dir="Tx" Len="8" PGN="0xFFCA" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
             <SP Bits="0" Bytes="2" Off="0" Ref="四臂慢档回收不检测时间" Res="1" SBit="1" SByte="1" SPN="0"
                 Type="1" />
             <SP Bits="0" Bytes="2" Off="0" Ref="四臂慢档回收终止斜率阀值" Res="1" SBit="1" SByte="3" SPN="0"
@@ -1473,7 +1473,7 @@
             <SP Bits="0" Bytes="2" Off="0" Ref="四臂慢档回收时间最小值" Res="1" SBit="1" SByte="7" SPN="0"
                 Type="1" />
         </PG>
-        <PG Dir="Tx" Len="16" PGN="0xFFCB" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x00" Type="2">
+        <PG Dir="Tx" Len="8" PGN="0xFFCB" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
             <SP Bits="0" Bytes="2" Off="0" Ref="四臂快档回收不检测时间" Res="1" SBit="1" SByte="1" SPN="0"
                 Type="1" />
             <SP Bits="0" Bytes="2" Off="0" Ref="四臂快档回收终止斜率阀值" Res="1" SBit="1" SByte="3" SPN="0"
@@ -1483,7 +1483,7 @@
             <SP Bits="0" Bytes="2" Off="0" Ref="四臂快档回收时间最小值" Res="1" SBit="1" SByte="7" SPN="0"
                 Type="1" />
         </PG>
-        <PG Dir="Tx" Len="16" PGN="0xFFCC" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x00" Type="2">
+        <PG Dir="Tx" Len="8" PGN="0xFFCC" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
             <SP Bits="0" Bytes="2" Off="0" Ref="五臂慢档展开不检测时间" Res="1" SBit="1" SByte="1" SPN="0"
                 Type="1" />
             <SP Bits="0" Bytes="2" Off="0" Ref="五臂慢档展开终止斜率阀值" Res="1" SBit="1" SByte="3" SPN="0"
@@ -1493,7 +1493,7 @@
             <SP Bits="0" Bytes="2" Off="0" Ref="五臂慢档展开时间最小值" Res="1" SBit="1" SByte="7" SPN="0"
                 Type="1" />
         </PG>
-        <PG Dir="Tx" Len="16" PGN="0xFFCD" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x00" Type="2">
+        <PG Dir="Tx" Len="8" PGN="0xFFCD" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
             <SP Bits="0" Bytes="2" Off="0" Ref="五臂快档展开不检测时间" Res="1" SBit="1" SByte="1" SPN="0"
                 Type="1" />
             <SP Bits="0" Bytes="2" Off="0" Ref="五臂快档展开终止斜率阀值" Res="1" SBit="1" SByte="3" SPN="0"
@@ -1503,7 +1503,7 @@
             <SP Bits="0" Bytes="2" Off="0" Ref="五臂快档展开时间最小值" Res="1" SBit="1" SByte="7" SPN="0"
                 Type="1" />
         </PG>
-        <PG Dir="Tx" Len="16" PGN="0xFFCE" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x00" Type="2">
+        <PG Dir="Tx" Len="8" PGN="0xFFCE" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
             <SP Bits="0" Bytes="2" Off="0" Ref="五臂慢档回收不检测时间" Res="1" SBit="1" SByte="1" SPN="0"
                 Type="1" />
             <SP Bits="0" Bytes="2" Off="0" Ref="五臂慢档回收终止斜率阀值" Res="1" SBit="1" SByte="3" SPN="0"
@@ -1513,7 +1513,7 @@
             <SP Bits="0" Bytes="2" Off="0" Ref="五臂慢档回收时间最小值" Res="1" SBit="1" SByte="7" SPN="0"
                 Type="1" />
         </PG>
-        <PG Dir="Tx" Len="16" PGN="0xFFCF" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x00" Type="2">
+        <PG Dir="Tx" Len="8" PGN="0xFFCF" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
             <SP Bits="0" Bytes="2" Off="0" Ref="五臂快档回收不检测时间" Res="1" SBit="1" SByte="1" SPN="0"
                 Type="1" />
             <SP Bits="0" Bytes="2" Off="0" Ref="五臂快档回收终止斜率阀值" Res="1" SBit="1" SByte="3" SPN="0"
@@ -1523,7 +1523,7 @@
             <SP Bits="0" Bytes="2" Off="0" Ref="五臂快档回收时间最小值" Res="1" SBit="1" SByte="7" SPN="0"
                 Type="1" />
         </PG>
-        <PG Dir="Tx" Len="16" PGN="0xFFD0" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x00" Type="2">
+        <PG Dir="Tx" Len="8" PGN="0xFFD0" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
             <SP Bits="0" Bytes="2" Off="0" Ref="六臂慢档展开不检测时间" Res="1" SBit="1" SByte="1" SPN="0"
                 Type="1" />
             <SP Bits="0" Bytes="2" Off="0" Ref="六臂慢档展开终止斜率阀值" Res="1" SBit="1" SByte="3" SPN="0"
@@ -1533,7 +1533,7 @@
             <SP Bits="0" Bytes="2" Off="0" Ref="六臂慢档展开时间最小值" Res="1" SBit="1" SByte="7" SPN="0"
                 Type="1" />
         </PG>
-        <PG Dir="Tx" Len="16" PGN="0xFFD1" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x00" Type="2">
+        <PG Dir="Tx" Len="8" PGN="0xFFD1" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
             <SP Bits="0" Bytes="2" Off="0" Ref="六臂快档展开不检测时间" Res="1" SBit="1" SByte="1" SPN="0"
                 Type="1" />
             <SP Bits="0" Bytes="2" Off="0" Ref="六臂快档展开终止斜率阀值" Res="1" SBit="1" SByte="3" SPN="0"
@@ -1543,7 +1543,7 @@
             <SP Bits="0" Bytes="2" Off="0" Ref="六臂快档展开时间最小值" Res="1" SBit="1" SByte="7" SPN="0"
                 Type="1" />
         </PG>
-        <PG Dir="Tx" Len="16" PGN="0xFFD2" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x00" Type="2">
+        <PG Dir="Tx" Len="8" PGN="0xFFD2" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
             <SP Bits="0" Bytes="2" Off="0" Ref="六臂慢档回收不检测时间" Res="1" SBit="1" SByte="1" SPN="0"
                 Type="1" />
             <SP Bits="0" Bytes="2" Off="0" Ref="六臂慢档回收终止斜率阀值" Res="1" SBit="1" SByte="3" SPN="0"
@@ -1553,7 +1553,7 @@
             <SP Bits="0" Bytes="2" Off="0" Ref="六臂慢档回收时间最小值" Res="1" SBit="1" SByte="7" SPN="0"
                 Type="1" />
         </PG>
-        <PG Dir="Tx" Len="16" PGN="0xFFD3" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x00" Type="2">
+        <PG Dir="Tx" Len="8" PGN="0xFFD3" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
             <SP Bits="0" Bytes="2" Off="0" Ref="六臂快档回收不检测时间" Res="1" SBit="1" SByte="1" SPN="0"
                 Type="1" />
             <SP Bits="0" Bytes="2" Off="0" Ref="六臂快档回收终止斜率阀值" Res="1" SBit="1" SByte="3" SPN="0"
@@ -1563,7 +1563,7 @@
             <SP Bits="0" Bytes="2" Off="0" Ref="六臂快档回收时间最小值" Res="1" SBit="1" SByte="7" SPN="0"
                 Type="1" />
         </PG>
-        <PG Dir="Tx" Len="16" PGN="0xFFD4" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x00" Type="2">
+        <PG Dir="Tx" Len="8" PGN="0xFFD4" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
             <SP Bits="0" Bytes="2" Off="0" Ref="顺时针回转慢档不检测时间" Res="1" SBit="1" SByte="1" SPN="0"
                 Type="1" />
             <SP Bits="0" Bytes="2" Off="0" Ref="顺时针回转慢档终止斜率阀值" Res="1" SBit="1" SByte="3" SPN="0"
@@ -1573,7 +1573,7 @@
             <SP Bits="0" Bytes="2" Off="0" Ref="顺时针回转慢档时间最小值" Res="1" SBit="1" SByte="7" SPN="0"
                 Type="1" />
         </PG>
-        <PG Dir="Tx" Len="16" PGN="0xFFD5" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x00" Type="2">
+        <PG Dir="Tx" Len="8" PGN="0xFFD5" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
             <SP Bits="0" Bytes="2" Off="0" Ref="逆时针回转慢档不检测时间" Res="1" SBit="1" SByte="1" SPN="0"
                 Type="1" />
             <SP Bits="0" Bytes="2" Off="0" Ref="逆时针回转慢档终止斜率阀值" Res="1" SBit="1" SByte="3" SPN="0"
@@ -1583,7 +1583,7 @@
             <SP Bits="0" Bytes="2" Off="0" Ref="逆时针回转慢档时间最小值" Res="1" SBit="1" SByte="7" SPN="0"
                 Type="1" />
         </PG>
-        <PG Dir="Tx" Len="16" PGN="0xFFD6" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x00" Type="2">
+        <PG Dir="Tx" Len="8" PGN="0xFFD6" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
             <SP Bits="0" Bytes="2" Off="0" Ref="顺时针回转快档不检测时间" Res="1" SBit="1" SByte="1" SPN="0"
                 Type="1" />
             <SP Bits="0" Bytes="2" Off="0" Ref="顺时针回转快档终止斜率阀值" Res="1" SBit="1" SByte="3" SPN="0"
@@ -1593,7 +1593,7 @@
             <SP Bits="0" Bytes="2" Off="0" Ref="顺时针回转快档时间最小值" Res="1" SBit="1" SByte="7" SPN="0"
                 Type="1" />
         </PG>
-        <PG Dir="Tx" Len="16" PGN="0xFFD7" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x00" Type="2">
+        <PG Dir="Tx" Len="8" PGN="0xFFD7" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
             <SP Bits="0" Bytes="2" Off="0" Ref="逆时针回转快档不检测时间" Res="1" SBit="1" SByte="1" SPN="0"
                 Type="1" />
             <SP Bits="0" Bytes="2" Off="0" Ref="逆时针回转快档终止斜率阀值" Res="1" SBit="1" SByte="3" SPN="0"
@@ -1603,7 +1603,7 @@
             <SP Bits="0" Bytes="2" Off="0" Ref="逆时针回转快档时间最小值" Res="1" SBit="1" SByte="7" SPN="0"
                 Type="1" />
         </PG>
-        <PG Dir="Tx" Len="16" PGN="0xFFD8" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x00" Type="2">
+        <PG Dir="Tx" Len="8" PGN="0xFFD8" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
             <SP Bits="0" Bytes="2" Off="0" Ref="一臂慢档回收不检测时间" Res="1" SBit="1" SByte="1" SPN="0"
                 Type="1" />
             <SP Bits="0" Bytes="2" Off="0" Ref="一臂慢档回收终止斜率阀值" Res="1" SBit="1" SByte="3" SPN="0"
@@ -1613,7 +1613,7 @@
             <SP Bits="0" Bytes="2" Off="0" Ref="一臂慢档回收时间最小值" Res="1" SBit="1" SByte="7" SPN="0"
                 Type="1" />
         </PG>
-        <PG Dir="Tx" Len="16" PGN="0xFFD9" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x00" Type="2">
+        <PG Dir="Tx" Len="8" PGN="0xFFD9" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
             <SP Bits="0" Bytes="2" Off="0" Ref="二臂慢档展开不检测时间" Res="1" SBit="1" SByte="1" SPN="0"
                 Type="1" />
             <SP Bits="0" Bytes="2" Off="0" Ref="二臂慢档展开终止斜率阀值" Res="1" SBit="1" SByte="3" SPN="0"
@@ -1623,7 +1623,7 @@
             <SP Bits="0" Bytes="2" Off="0" Ref="二臂慢档展开时间最小值" Res="1" SBit="1" SByte="7" SPN="0"
                 Type="1" />
         </PG>
-        <PG Dir="Tx" Len="16" PGN="0xFFDA" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x00" Type="2">
+        <PG Dir="Tx" Len="8" PGN="0xFFDA" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
             <SP Bits="0" Bytes="2" Off="0" Ref="二臂快档展开不检测时间" Res="1" SBit="1" SByte="1" SPN="0"
                 Type="1" />
             <SP Bits="0" Bytes="2" Off="0" Ref="二臂快档展开终止斜率阀值" Res="1" SBit="1" SByte="3" SPN="0"
@@ -1729,7 +1729,7 @@
             <SP Bits="0" Bytes="2" Off="0" Ref="右后支腿垂直回收终止斜率阀值" Res="1" SBit="1" SByte="3" SPN="0"
                 Type="1" />
         </PG>
-        <PG Dir="Tx" Len="16" PGN="0xFFF0" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x00" Type="2">
+        <PG Dir="Tx" Len="8" PGN="0xFFF0" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
             <SP Bits="0" Bytes="2" Off="0" Ref="一臂慢档展开不检测时间" Res="1" SBit="1" SByte="1" SPN="0"
                 Type="1" />
             <SP Bits="0" Bytes="2" Off="0" Ref="一臂慢档展开终止斜率阀值" Res="1" SBit="1" SByte="3" SPN="0"
@@ -1739,7 +1739,7 @@
             <SP Bits="0" Bytes="2" Off="0" Ref="一臂慢档展开时间最小值" Res="1" SBit="1" SByte="7" SPN="0"
                 Type="1" />
         </PG>
-        <PG Dir="Tx" Len="16" PGN="0xFFF1" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x00" Type="2">
+        <PG Dir="Tx" Len="8" PGN="0xFFF1" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
             <SP Bits="0" Bytes="2" Off="0" Ref="最大排量电流" Res="1" SBit="1" SByte="1" SPN="0"
                 Type="1" />
             <SP Bits="0" Bytes="2" Off="0" Ref="10档泵送标准次数的最大值" Res="1" SBit="1" SByte="3" SPN="0"
@@ -1747,7 +1747,7 @@
             <SP Bits="0" Bytes="2" Off="0" Ref="10档泵送标准次数的最小值" Res="1" SBit="1" SByte="5" SPN="0"
                 Type="1" />
         </PG>
-        <PG Dir="Tx" Len="16" PGN="0xFFF2" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x00" Type="2">
+        <PG Dir="Tx" Len="8" PGN="0xFFF2" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
             <SP Bits="0" Bytes="2" Off="0" Ref="最小排量电流" Res="1" SBit="1" SByte="1" SPN="0"
                 Type="1" />
             <SP Bits="0" Bytes="2" Off="0" Ref="0.6档泵送标准次数的最大值" Res="1" SBit="1" SByte="3" SPN="0"
@@ -1755,7 +1755,7 @@
             <SP Bits="0" Bytes="2" Off="0" Ref="0.6档泵送标准次数的最小值" Res="1" SBit="1" SByte="5" SPN="0"
                 Type="1" />
         </PG>
-        <PG Dir="Tx" Len="16" PGN="0xFFF3" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x00" Type="2">
+        <PG Dir="Tx" Len="16" PGN="0xFFF3" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
             <SP Bits="0" Bytes="2" Off="0" Ref="第一压力段最小压力" Res="1" SBit="1" SByte="1" SPN="0"
                 Type="1" />
             <SP Bits="0" Bytes="2" Off="0" Ref="第一压力段最大压力" Res="1" SBit="1" SByte="3" SPN="0"
@@ -1769,7 +1769,7 @@
             <SP Bits="0" Bytes="2" Off="0" Ref="第一压力段最大压力泵送次数的最大值" Res="1" SBit="1" SByte="11"
                 SPN="0" Type="1" />
         </PG>
-        <PG Dir="Tx" Len="16" PGN="0xFFF4" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x00" Type="2">
+        <PG Dir="Tx" Len="16" PGN="0xFFF4" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
             <SP Bits="0" Bytes="2" Off="0" Ref="第二压力段最小压力" Res="1" SBit="1" SByte="1" SPN="0"
                 Type="1" />
             <SP Bits="0" Bytes="2" Off="0" Ref="第二压力段最大压力" Res="1" SBit="1" SByte="3" SPN="0"
@@ -1783,7 +1783,7 @@
             <SP Bits="0" Bytes="2" Off="0" Ref="第二压力段最大压力泵送次数的最大值" Res="1" SBit="1" SByte="11"
                 SPN="0" Type="1" />
         </PG>
-        <PG Dir="Tx" Len="16" PGN="0xFFF5" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x00" Type="2">
+        <PG Dir="Tx" Len="16" PGN="0xFFF5" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
             <SP Bits="0" Bytes="2" Off="0" Ref="第三压力段最小压力" Res="1" SBit="1" SByte="1" SPN="0"
                 Type="1" />
             <SP Bits="0" Bytes="2" Off="0" Ref="第三压力段最大压力" Res="1" SBit="1" SByte="3" SPN="0"
@@ -1797,7 +1797,7 @@
             <SP Bits="0" Bytes="2" Off="0" Ref="第三压力段最大压力泵送次数的最大值" Res="1" SBit="1" SByte="11"
                 SPN="0" Type="1" />
         </PG>
-        <PG Dir="Tx" Len="16" PGN="0xFFF6" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x00" Type="2">
+        <PG Dir="Tx" Len="16" PGN="0xFFF6" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
             <SP Bits="0" Bytes="2" Off="0" Ref="第四压力段最小压力" Res="1" SBit="1" SByte="1" SPN="0"
                 Type="1" />
             <SP Bits="0" Bytes="2" Off="0" Ref="第四压力段最大压力" Res="1" SBit="1" SByte="3" SPN="0"
@@ -2310,7 +2310,7 @@
                             0x41 - 谱图数据上传完成，数据总点数在“附加码”域中
             检测指示码：    正在检测时的检测进度指示码或检测故障时的故障指示码，用于指示要显示的信息
          -->
-        <PG Dir="Tx" Len="8" PGN="0xFF80" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x00" Type="2">
+        <PG Dir="Tx" Len="8" PGN="0xFF80" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
             <SP Bits="8" Bytes="1" Off="0" Ref="当前检测项目" Res="1" SBit="1" SByte="1" Type="1" />
             <SP Bits="8" Bytes="1" Off="0" Ref="当前检测次序" Res="1" SBit="1" SByte="2" Type="1" />
             <SP Bits="8" Bytes="1" Off="0" Ref="检测命令" Res="1" SBit="1" SByte="3" Type="1" />
@@ -2331,7 +2331,7 @@
             <SP Bits="8" Bytes="2" Off="0" Ref="附加码" Res="1" SBit="1" SByte="6" Type="1" />
         </PG>
 
-        <PG Dir="Tx" Len="8" PGN="0xFF82" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x00" Type="2">
+        <PG Dir="Tx" Len="8" PGN="0xFF82" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
             <!-- 应答状态接收确认帧
                当检测终端接收到测量终端发送的应答状态帧（PGN=0xFF81)后，必须发送此PGN(0xFF82)以对应答状态帧进行接收确认。
                测量终端发送应答状态帧后必须在收到此应答状态确认帧（或测量中止命令帧）后才能继续执行，否则以50ms为周期重复发送
@@ -2344,7 +2344,7 @@
             <SP Bits="8" Bytes="1" Off="0" Ref="检测指示码" Res="1" SBit="1" SByte="5" Type="1" />
         </PG>
 
-        <PG Dir="Tx" Len="8" PGN="0xFF83" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x00" Type="2">
+        <PG Dir="Tx" Len="8" PGN="0xFF83" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
             <!-- 测量值接收确认帧
               当检测终端接收到检测项目值帧（ 0xFF20  <= PGN < 0xFF80 ）时，将检测项目值PGN写入变量 “最新接收的测量值PGN”并
               发送此帧（PGN=0xFF83)来确认测量值接收。检测终端在发送检测项目值帧后必须接收到此测量值确认帧（或测量中止命令帧）后
@@ -2463,7 +2463,8 @@
                 </Msgs>
                 <QCParams>
                     <QCParam Param="左前支腿垂直伸出时间" PicReq="false" QCMode="Auto" ValMode="Auto"
-                        ValidAvg="" ValidMax="20" ValidMin="14" ValueReq="true" XParam="" XRange="" />
+                        ValidAvg="" ValidMax="20" ValidMin="14" ValueReq="true" XParam=""
+                        XRange="" />
                     <QCParam Param="左前支腿垂直伸出平均油温" PicReq="false" QCMode="Auto" ValMode="Auto"
                         ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
                 </QCParams>
