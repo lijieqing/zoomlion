@@ -131,7 +131,13 @@ public class EditPasswordView extends RelativeLayout {
                                 result = x.http().postSync(params, String.class);
                                 JSONObject object = new JSONObject(result);
                                 if (object.has("success")) {
-                                    handler.sendEmptyMessage(UserDetailActivity.PASS_EDIT_SUCCESS);
+                                    //用户退出登录
+                                    params = new RequestParams(URLCollections.USER_LOGOUT);
+                                    params.addHeader("Cookie", Globals.SID);
+                                    String re = x.http().getSync(params, String.class);
+                                    if (re != null && re.contains("success")) {
+                                        handler.sendEmptyMessage(UserDetailActivity.PASS_EDIT_SUCCESS);
+                                    }
                                 }
                                 if (object.has("error")) {
                                     Message message = Message.obtain();

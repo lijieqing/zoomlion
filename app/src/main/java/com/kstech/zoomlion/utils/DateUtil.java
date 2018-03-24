@@ -8,41 +8,53 @@ import java.util.Date;
 public class DateUtil {
 
     /**
-     *
      * @return
      */
-    public static String getCurrentEndMin(){
+    public static String getCurrentEndMin() {
         Date date = new Date();
         return dateSimpleFormat(date, defaultDateMinFormat.get());
     }
+
     /**
      * param 2016-09-30
      */
-    public static int[] getYearMonthDay(String date){
+    public static int[] getYearMonthDay(String date) {
         int[] result = new int[3];
         String[] strAry = date.split("-");
         result[0] = Integer.parseInt(strAry[0]);
-        result[1] = Integer.parseInt(strAry[1])-1;
+        result[1] = Integer.parseInt(strAry[1]) - 1;
         result[2] = Integer.parseInt(strAry[2]);
         return result;
     }
 
-    /** yyyyMMddHHmmss字符串 */
+    /**
+     * yyyyMMddHHmmss字符串
+     */
     public static final String DEFAULT_DATE_TIME_FORMAT_14 = "yyyyMMddHHmmss";
 
-    /** yyyy-MM-dd HH:mm:ss字符串 */
+    /**
+     * yyyy-MM-dd HH:mm:ss字符串
+     */
     public static final String DEFAULT_DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
 
-    /** yyyy-MM-dd HH:mm:ss字符串 */
+    /**
+     * yyyy-MM-dd HH:mm:ss字符串
+     */
     public static final String DEFAULT_DATE_MIN_FORMAT = "yyyy-MM-dd HH:mm";
 
-    /** yyyy-MM-dd字符串 */
+    /**
+     * yyyy-MM-dd字符串
+     */
     public static final String DEFAULT_FORMAT_DATE = "yyyy-MM-dd";
 
-    /** HH:mm:ss字符串 */
+    /**
+     * HH:mm:ss字符串
+     */
     public static final String DEFAULT_FORMAT_TIME = "HH:mm:ss";
 
-    /** yyyyMMddHHmmss格式 */
+    /**
+     * yyyyMMddHHmmss格式
+     */
     public static final ThreadLocal<SimpleDateFormat> defaultDateTimeFormat14 = new ThreadLocal<SimpleDateFormat>() {
 
         @Override
@@ -51,7 +63,9 @@ public class DateUtil {
         }
 
     };
-    /** yyyy-MM-dd HH:mm:ss格式 */
+    /**
+     * yyyy-MM-dd HH:mm:ss格式
+     */
     public static final ThreadLocal<SimpleDateFormat> defaultDateTimeFormat = new ThreadLocal<SimpleDateFormat>() {
 
         @Override
@@ -61,7 +75,9 @@ public class DateUtil {
 
     };
 
-    /** yyyy-MM-dd HH:mm:ss格式 */
+    /**
+     * yyyy-MM-dd HH:mm:ss格式
+     */
     public static final ThreadLocal<SimpleDateFormat> defaultDateMinFormat = new ThreadLocal<SimpleDateFormat>() {
 
         @Override
@@ -71,7 +87,9 @@ public class DateUtil {
 
     };
 
-    /** yyyy-MM-dd格式 */
+    /**
+     * yyyy-MM-dd格式
+     */
     public static final ThreadLocal<SimpleDateFormat> defaultDateFormat = new ThreadLocal<SimpleDateFormat>() {
 
         @Override
@@ -81,7 +99,9 @@ public class DateUtil {
 
     };
 
-    /** HH:mm:ss格式 */
+    /**
+     * HH:mm:ss格式
+     */
     public static final ThreadLocal<SimpleDateFormat> defaultTimeFormat = new ThreadLocal<SimpleDateFormat>() {
 
         @Override
@@ -93,6 +113,7 @@ public class DateUtil {
 
     /**
      * 将long时间转成yyyy-MM-dd HH:mm:ss字符串<br>
+     *
      * @param timeInMillis 时间long值
      * @return yyyy-MM-dd HH:mm:ss
      */
@@ -102,6 +123,7 @@ public class DateUtil {
 
     /**
      * 将long时间转成yyyy-MM-dd字符串<br>
+     *
      * @param timeInMillis
      * @return yyyy-MM-dd
      */
@@ -112,8 +134,9 @@ public class DateUtil {
     /**
      * 将date转成yyyyMMddHHmmss字符串
      * <br>
+     *
      * @param date Date对象
-     * @return  yyyyMMddHHmmss
+     * @return yyyyMMddHHmmss
      */
     public static String getDateTimeFormat14(Date date) {
         return dateSimpleFormat(date, defaultDateTimeFormat14.get());
@@ -122,8 +145,9 @@ public class DateUtil {
     /**
      * 将date转成yyyy-MM-dd HH:mm:ss字符串
      * <br>
+     *
      * @param date Date对象
-     * @return  yyyy-MM-dd HH:mm:ss
+     * @return yyyy-MM-dd HH:mm:ss
      */
     public static String getDateTimeFormat(Date date) {
         return dateSimpleFormat(date, defaultDateTimeFormat.get());
@@ -131,11 +155,12 @@ public class DateUtil {
 
     /**
      * 将年月日的int转成yyyy-MM-dd的字符串
-     * @param year 年
+     *
+     * @param year  年
      * @param month 月 1-12
-     * @param day 日
-     * 注：月表示Calendar的月，比实际小1
-     * 对输入项未做判断
+     * @param day   日
+     *              注：月表示Calendar的月，比实际小1
+     *              对输入项未做判断
      */
     public static String getDateFormat(int year, int month, int day) {
         return getDateFormat(getDate(year, month, day));
@@ -143,6 +168,7 @@ public class DateUtil {
 
     /**
      * 将date转成yyyy-MM-dd字符串<br>
+     *
      * @param date Date对象
      * @return yyyy-MM-dd
      */
@@ -152,6 +178,7 @@ public class DateUtil {
 
     /**
      * 获得HH:mm:ss的时间
+     *
      * @param date
      * @return
      */
@@ -161,7 +188,8 @@ public class DateUtil {
 
     /**
      * 格式化日期显示格式
-     * @param sdate 原始日期格式 "yyyy-MM-dd"
+     *
+     * @param sdate  原始日期格式 "yyyy-MM-dd"
      * @param format 格式化后日期格式
      * @return 格式化后的日期显示
      */
@@ -173,7 +201,8 @@ public class DateUtil {
 
     /**
      * 格式化日期显示格式
-     * @param date Date对象
+     *
+     * @param date   Date对象
      * @param format 格式化后日期格式
      * @return 格式化后的日期显示
      */
@@ -184,10 +213,11 @@ public class DateUtil {
 
     /**
      * 将date转成字符串
-     * @param date Date
+     *
+     * @param date   Date
      * @param format SimpleDateFormat
-     * <br>
-     * 注： SimpleDateFormat为空时，采用默认的yyyy-MM-dd HH:mm:ss格式
+     *               <br>
+     *               注： SimpleDateFormat为空时，采用默认的yyyy-MM-dd HH:mm:ss格式
      * @return yyyy-MM-dd HH:mm:ss
      */
     public static String dateSimpleFormat(Date date, SimpleDateFormat format) {
@@ -198,6 +228,7 @@ public class DateUtil {
 
     /**
      * 将"yyyy-MM-dd HH:mm:ss" 格式的字符串转成Date
+     *
      * @param strDate 时间字符串
      * @return Date
      */
@@ -207,6 +238,7 @@ public class DateUtil {
 
     /**
      * 将"yyyy-MM-dd" 格式的字符串转成Date
+     *
      * @param strDate
      * @return Date
      */
@@ -216,8 +248,9 @@ public class DateUtil {
 
     /**
      * 将指定格式的时间字符串转成Date对象
+     *
      * @param strDate 时间字符串
-     * @param format 格式化字符串
+     * @param format  格式化字符串
      * @return Date
      */
     public static Date getDateByFormat(String strDate, String format) {
@@ -227,9 +260,10 @@ public class DateUtil {
     /**
      * 将String字符串按照一定格式转成Date<br>
      * 注： SimpleDateFormat为空时，采用默认的yyyy-MM-dd HH:mm:ss格式
+     *
      * @param strDate 时间字符串
-     * @param format SimpleDateFormat对象
-     * @exception ParseException 日期格式转换出错
+     * @param format  SimpleDateFormat对象
+     * @throws ParseException 日期格式转换出错
      */
     private static Date getDateByFormat(String strDate, SimpleDateFormat format) {
         if (format == null)
@@ -244,10 +278,11 @@ public class DateUtil {
 
     /**
      * 将年月日的int转成date
-     * @param year 年
+     *
+     * @param year  年
      * @param month 月 1-12
-     * @param day 日
-     * 注：月表示Calendar的月，比实际小1
+     * @param day   日
+     *              注：月表示Calendar的月，比实际小1
      */
     public static Date getDate(int year, int month, int day) {
         Calendar mCalendar = Calendar.getInstance();
@@ -259,7 +294,7 @@ public class DateUtil {
      * 求两个日期相差天数
      *
      * @param strat 起始日期，格式yyyy-MM-dd
-     * @param end 终止日期，格式yyyy-MM-dd
+     * @param end   终止日期，格式yyyy-MM-dd
      * @return 两个日期相差天数
      */
     public static long getIntervalDays(String strat, String end) {
@@ -269,6 +304,7 @@ public class DateUtil {
 
     /**
      * 获得当前年份
+     *
      * @return year(int)
      */
     public static int getCurrentYear() {
@@ -278,6 +314,7 @@ public class DateUtil {
 
     /**
      * 获得当前月份
+     *
      * @return month(int) 1-12
      */
     public static int getCurrentMonth() {
@@ -287,6 +324,7 @@ public class DateUtil {
 
     /**
      * 获得当月几号
+     *
      * @return day(int)
      */
     public static int getDayOfMonth() {
@@ -296,6 +334,7 @@ public class DateUtil {
 
     /**
      * 获得今天的日期(格式：yyyy-MM-dd)
+     *
      * @return yyyy-MM-dd
      */
     public static String getToday() {
@@ -305,6 +344,7 @@ public class DateUtil {
 
     /**
      * 获得昨天的日期(格式：yyyy-MM-dd)
+     *
      * @return yyyy-MM-dd
      */
     public static String getYesterday() {
@@ -315,6 +355,7 @@ public class DateUtil {
 
     /**
      * 获得前天的日期(格式：yyyy-MM-dd)
+     *
      * @return yyyy-MM-dd
      */
     public static String getBeforeYesterday() {
@@ -325,6 +366,7 @@ public class DateUtil {
 
     /**
      * 获得几天之前或者几天之后的日期
+     *
      * @param diff 差值：正的往后推，负的往前推
      * @return
      */
@@ -337,7 +379,7 @@ public class DateUtil {
     /**
      * 取得给定日期加上一定天数后的日期对象.
      *
-     * @param date 给定的日期对象
+     * @param sDate  给定的日期对象
      * @param amount 需要添加的天数，如果是向前的天数，使用负数就可以.
      * @return Date 加上一定天数以后的Date对象.
      */
@@ -349,7 +391,7 @@ public class DateUtil {
     /**
      * 取得给定日期加上一定天数后的日期对象.
      *
-     * @param date 给定的日期对象
+     * @param date   给定的日期对象
      * @param amount 需要添加的天数，如果是向前的天数，使用负数就可以.
      * @return Date 加上一定天数以后的Date对象.
      */
@@ -362,6 +404,7 @@ public class DateUtil {
 
     /**
      * 获得一个计算十分秒之后的日期对象
+     *
      * @param date
      * @param hOffset 时偏移量，可为负
      * @param mOffset 分偏移量，可为负
@@ -381,12 +424,12 @@ public class DateUtil {
     /**
      * 根据指定的年月日小时分秒，返回一个java.Util.Date对象。
      *
-     * @param year 年
-     * @param month 月 0-11
-     * @param date 日
+     * @param year      年
+     * @param month     月 0-11
+     * @param date      日
      * @param hourOfDay 小时 0-23
-     * @param minute 分 0-59
-     * @param second 秒 0-59
+     * @param minute    分 0-59
+     * @param second    秒 0-59
      * @return 一个Date对象
      */
     public static Date getDate(int year, int month, int date, int hourOfDay,
@@ -398,6 +441,7 @@ public class DateUtil {
 
     /**
      * 获得年月日数据
+     *
      * @param sDate yyyy-MM-dd格式
      * @return arr[0]:年， arr[1]:月 0-11 , arr[2]日
      */
@@ -407,6 +451,7 @@ public class DateUtil {
 
     /**
      * 获得年月日数据
+     *
      * @return arr[0]:年， arr[1]:月 0-11 , arr[2]日
      */
     public static int[] getYearMonthAndDayFromDate(Date date) {
@@ -417,5 +462,48 @@ public class DateUtil {
         arr[1] = calendar.get(Calendar.MONTH);
         arr[2] = calendar.get(Calendar.DAY_OF_MONTH);
         return arr;
+    }
+
+    /**
+     * 时间转换算法，将秒转为 MM:SS 格式
+     *
+     * @param seconds 秒
+     * @return MM:SS
+     */
+    public static String secondsFormat(Float seconds) {
+        StringBuilder sb = new StringBuilder();
+        int hour;
+        int min;
+        int sec;
+
+        min = (int) (seconds / 60);
+        sec = (int) (seconds % 60);
+
+        //计算小时
+        if (min > 60) {
+            hour = min / 60;
+            if (hour < 10) {
+                sb.append(0).append(hour);
+            } else {
+                sb.append(hour);
+            }
+            sb.append(":");
+            min = min % 60;
+        }
+        //计算分钟
+        if (min < 10) {
+            sb.append("0").append(min);
+        } else {
+            sb.append(min);
+        }
+        sb.append(":");
+        //计算秒
+        if (sec < 10) {
+            sb.append("0").append(sec);
+        } else {
+            sb.append(sec);
+        }
+
+        return sb.toString();
     }
 }

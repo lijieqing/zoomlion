@@ -34,6 +34,7 @@ import com.kstech.zoomlion.model.xmlbean.PG;
 import com.kstech.zoomlion.model.xmlbean.SP;
 import com.kstech.zoomlion.serverdata.CommissioningStatistics;
 import com.kstech.zoomlion.serverdata.CommissioningStatusEnum;
+import com.kstech.zoomlion.utils.DateUtil;
 import com.kstech.zoomlion.utils.Globals;
 import com.kstech.zoomlion.utils.LogUtils;
 import com.kstech.zoomlion.view.widget.MessageShowView;
@@ -278,6 +279,14 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
      */
     private boolean deviceLoading = false;
     /**
+     * 开机时间，单位 S
+     */
+    private float preHeatTimeF;
+    /**
+     * 是否预热时间足够
+     */
+    private boolean preHeated = false;
+    /**
      * 初始化参数集合
      */
     private List<String> initParams = new ArrayList<>();
@@ -407,9 +416,14 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
                 if (Globals.PROCESSID == null) {
                     Snackbar.make(root, "请先获取调试流程", Snackbar.LENGTH_SHORT).show();
                 } else {
-                    ServerProcessCheck spc = new ServerProcessCheck(handler);
-                    spc.setDeviceStatus(deviceStatus);
-                    spc.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
+                    if (preHeated) {
+                        ServerProcessCheck spc = new ServerProcessCheck(handler);
+                        spc.setDeviceStatus(deviceStatus);
+                        spc.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
+                    } else {
+                        Snackbar.make(root, "预热时间不满足标准时间", Snackbar.LENGTH_SHORT).show();
+                    }
+
                 }
                 break;
             case R.id.index_btn_exit:
@@ -486,7 +500,19 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
     public void onDataChanged(short dsItemPosition, Object value) {
         //处理预热时间数据
         if (dsItemPosition == Globals.modelFile.dataSetVO.getItemIndex(PREHEATING_TIME)) {
-
+            preHeatTimeF = Globals.modelFile.dataSetVO.getDSItem(PREHEATING_TIME).getFloatValue();
+            final String preHeatTime = DateUtil.secondsFormat(preHeatTimeF);
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if (preHeatTimeF > 5 * 60) {
+                        preHeated = true;
+                    } else {
+                        preHeated = false;
+                    }
+                    tvPreHeat.setText(preHeatTime);
+                }
+            });
         }
         //处理整机编码数据
         if (dsItemPosition == Globals.modelFile.dataSetVO.getItemIndex(DEVICE_SN)) {

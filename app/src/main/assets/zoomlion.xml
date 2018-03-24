@@ -428,7 +428,7 @@
 
         <DSItem DataType="FLOAT" DecLen="0" Name="主油泵温度" Unit="℃" />
         <DSItem DataType="FLOAT" DecLen="0" Name="支腿溢流压力" Unit="bar" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="摆动到位时间" Unit="s" />
+        <DSItem DataType="FLOAT" DecLen="2" Name="摆动到位时间" Unit="s" />
         <DSItem DataType="FLOAT" DecLen="0" Name="润滑间歇时间" Unit="s" />
         <DSItem DataType="FLOAT" DecLen="0" Name="复杂料况" Unit="U" />
         <DSItem DataType="FLOAT" DecLen="0" Name="润滑开启开关" Unit="开/关" />
