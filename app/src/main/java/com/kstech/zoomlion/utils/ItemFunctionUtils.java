@@ -89,6 +89,21 @@ public final class ItemFunctionUtils {
         }
         return isCommItem;
     }
+    /**
+     * 判断当前调试项目是否为只需要与测量终端通讯
+     * @param qcID 调试项目ID
+     * @return 是否需要通讯
+     */
+    public static boolean isJustComm(String qcID){
+        boolean isJustComm = true;
+        for (CheckItemParamValueVO checkItemParamValueVO : Globals.modelFile.getCheckItemVO(qcID).getParamNameList()) {
+            if (!(checkItemParamValueVO.getValueReq() && "Auto".equals(checkItemParamValueVO.getValMode()))) {
+                isJustComm = false;
+                break;
+            }
+        }
+        return isJustComm;
+    }
 
     /**
      * 判断项目是否是 不包含图片数据的项目，是返回true

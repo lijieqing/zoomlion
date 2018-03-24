@@ -68,6 +68,10 @@ public class QCItemDataSaveUploadTask extends AbstractDataTransferTask {
      * 服务器请求次数
      */
     private int requestTimes = 0;
+    /**
+     * 是否测量失败
+     */
+    private boolean hasError;
 
     public QCItemDataSaveUploadTask(Handler handler) {
         super(handler);
@@ -76,6 +80,7 @@ public class QCItemDataSaveUploadTask extends AbstractDataTransferTask {
     /**
      * 初始化基本数据
      *
+     * @param hasError 是否存在异常
      * @param chartDataList 谱图数据集合
      * @param itemData      调试项目数据对象
      * @param detailData    调试项目细节数据对象
@@ -83,7 +88,7 @@ public class QCItemDataSaveUploadTask extends AbstractDataTransferTask {
      * @param detailID      调试项目细节数据ID
      * @param itemvo        调试项目VO类
      */
-    public void init(List<CheckChartData> chartDataList, CheckItemData itemData,
+    public void init(boolean hasError, List<CheckChartData> chartDataList, CheckItemData itemData,
                      CheckItemDetailData detailData, String paramValues,
                      long detailID, CheckItemVO itemvo) {
         this.chartDataList = chartDataList;
@@ -92,6 +97,7 @@ public class QCItemDataSaveUploadTask extends AbstractDataTransferTask {
         this.paramValues = paramValues;
         this.detailID = detailID;
         this.itemvo = itemvo;
+        this.hasError = hasError;
         record = itemData.getCheckRecord();
         requestTimes = 0;
     }
@@ -121,7 +127,11 @@ public class QCItemDataSaveUploadTask extends AbstractDataTransferTask {
                 //当前调试合格，更新连续通过次数
                 itemData.setPassCounts(passCount);
                 detailData.setCheckResult(CheckItemDetailResultEnum.PASS.getCode());
-            } else {
+            } else if (hasError){
+                itemData.setPassCounts(0);
+                detailData.setCheckResult(CheckItemDetailResultEnum.FAILED.getCode());
+                recordUnPassCount++;
+            }else {
                 itemData.setPassCounts(0);
                 detailData.setCheckResult(CheckItemDetailResultEnum.UNPASS.getCode());
                 recordUnPassCount++;

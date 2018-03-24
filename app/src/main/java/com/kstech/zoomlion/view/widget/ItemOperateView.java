@@ -422,7 +422,7 @@ public class ItemOperateView extends RelativeLayout implements View.OnClickListe
      *
      * @param isChecking
      */
-    private void saveRecord(boolean isChecking) {
+    public void saveRecord(boolean isChecking) {
         if (isChecking) {
             Toast.makeText(context, "调试未完成，无法保存！", Toast.LENGTH_SHORT).show();
         } else {

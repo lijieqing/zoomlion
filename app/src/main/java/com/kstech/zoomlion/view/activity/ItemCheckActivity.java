@@ -140,9 +140,9 @@ public class ItemCheckActivity extends BaseActivity implements ItemCheckCallBack
      */
     List<CheckItemParamValueVO> valueVOList = new ArrayList<>();
     /**
-     * 调试项目细节记录是否合格
+     * 调试项目细节记录是否出现异常
      */
-    boolean pass = false;
+    boolean hasError = false;
 
     /**
      * 实时参数展示Fragment
@@ -185,6 +185,10 @@ public class ItemCheckActivity extends BaseActivity implements ItemCheckCallBack
      * 测量终端准备调试完成
      */
     public static final int TERMINAL_READY_CHECK = 6;
+    /**
+     * 自动保存数据
+     */
+    public static final int AUTO_SAVE_RECORD = 7;
     private static final String TAG = "ItemCheckActivity";
 
     @Override
@@ -284,7 +288,7 @@ public class ItemCheckActivity extends BaseActivity implements ItemCheckCallBack
     @Override
     public void saveRecord(final String paramValues) {
         QCItemDataSaveUploadTask uploadServer = new QCItemDataSaveUploadTask(handler);
-        uploadServer.init(chartDataList, itemData, detailData, paramValues,
+        uploadServer.init(hasError, chartDataList, itemData, detailData, paramValues,
                 detailID, itemvo);
         uploadServer.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
     }
@@ -354,7 +358,7 @@ public class ItemCheckActivity extends BaseActivity implements ItemCheckCallBack
      * 初始化调试项目细节记录表，并获取数据库索引ID，用于后来更新数据
      */
     private void initNewDetailRecord() {
-        detailData = new CheckItemDetailData(null, itemDBID, 12l, "admin", 1l, "measure",
+        detailData = new CheckItemDetailData(null, itemDBID, 12l, Globals.currentUser.getName(), 1l, "measure",
                 1, itemvo.getJsonParams(), CheckItemDetailResultEnum.UNFINISH.getCode(),
                 new Date(), null, null, false, false);
         detailID = itemDetailDao.insert(detailData);
@@ -421,6 +425,7 @@ public class ItemCheckActivity extends BaseActivity implements ItemCheckCallBack
 
     @Override
     public void onResultError(List<CheckItemParamValueVO> headers, String msg) {
+        hasError = true;
         //将获得的参数数据添加到集合
         valueVOList.addAll(headers);
 
@@ -429,13 +434,12 @@ public class ItemCheckActivity extends BaseActivity implements ItemCheckCallBack
 
     @Override
     public void onTimeOut(List<CheckItemParamValueVO> headers, String msg, Map<String, LinkedList<Float>> specMap) {
+        hasError = true;
         //利用超时 模拟接收数据
         for (CheckItemParamValueVO header : headers) {
             if (header.getValueReq() && "Auto".equals(header.getValMode())) {
-                double val = Math.random() * 100;
                 CheckItemParamValueVO vo = new CheckItemParamValueVO(header);
-
-                vo.setValue(val + "");
+                vo.setValue("0");
                 valueVOList.add(vo);
             }
         }
@@ -541,9 +545,16 @@ public class ItemCheckActivity extends BaseActivity implements ItemCheckCallBack
                         if (activity.detailData != null)
                             activity.detailData.setParamsValues(JsonUtils.toJson(activity.valueVOList));
                         activity.valueVOList.clear();
+
+                        if (ItemFunctionUtils.isJustComm(activity.itemvo.getId())){
+                            sendEmptyMessage(AUTO_SAVE_RECORD);
+                        }
                         break;
                     case START_SAVE_RECORD:
                         activity.progressView.updateProgress("校验数据是否合格", 20);
+                        break;
+                    case AUTO_SAVE_RECORD:
+                        activity.iov.saveRecord(false);
                         break;
                     case RECORD_DATA_INIT:
                         activity.progressView.updateProgress("校验数据完成，调试数据保存中", 45);
