@@ -48,8 +48,8 @@ public class DeviceStatusUpdateTask extends AbstractDataTransferTask {
 
     @Override
     protected void onRequestSuccess(JSONObject data) throws JSONException {
-        if (data.has("statistics")) {
-            String deviceStatus = data.getString("statistics");
+        if (data.has("commissioningStatus")) {
+            String deviceStatus = data.getString("commissioningStatus");
             status = JsonUtils.fromJson(deviceStatus, CommissioningStatistics.class);
         }
     }

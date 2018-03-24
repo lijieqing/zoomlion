@@ -1125,7 +1125,7 @@ public class J1939 implements IJ1939_API {
 						);														//
 				*/
                 System.arraycopy(pRxCanMsg.data_au8, 1,
-                        pRxMsg.rxbuf_pau8, 0,
+                        pRxMsg.rxbuf_pau8, pRxMsg.lenRx_u16,
                         dataLen);
                 pRxCM.cts_rxFrames_u8++;                                        //			已接收帧数增加1
                 pRxMsg.lenRx_u16 = (short) ((pRxCM.cts_FrameNo_u8 - 1) * 7 + dataLen);        //			已接收字节数

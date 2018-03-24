@@ -271,7 +271,9 @@ public class CheckHomeActivity extends BaseActivity {
 
         //实例化实时展示参数组件
         for (RealTimeParamVO realTimeParamVO : Globals.modelFile.getRealTimeParamList()) {
-            inHomeRealTimeViews.add(new RealTimeView(this, realTimeParamVO));
+            RealTimeView rlv = new RealTimeView(this, realTimeParamVO);
+            Globals.modelFile.dataSetVO.getDSItem(realTimeParamVO.getName()).addListener(rlv);
+            inHomeRealTimeViews.add(rlv);
         }
         rvAdapter = new RealTimeAdapter();
 
@@ -293,6 +295,29 @@ public class CheckHomeActivity extends BaseActivity {
         bindService(start, uploadConn, BIND_AUTO_CREATE);
     }
 
+    /**
+     * 添加实时监听
+     */
+    private void addRealListener(){
+        if (inHomeRealTimeViews != null){
+            for (RealTimeView inHomeRealTimeView : inHomeRealTimeViews) {
+                String name = inHomeRealTimeView.getRealTimeParamVO().getName();
+                Globals.modelFile.dataSetVO.getDSItem(name).addListener(inHomeRealTimeView);
+            }
+        }
+    }
+
+    /**
+     * 移除实时监听
+     */
+    private void removeRealListener(){
+        if (inHomeRealTimeViews!=null){
+            for (RealTimeView inHomeRealTimeView : inHomeRealTimeViews) {
+                String name = inHomeRealTimeView.getRealTimeParamVO().getName();
+                Globals.modelFile.dataSetVO.getDSItem(name).removeListener(inHomeRealTimeView);
+            }
+        }
+    }
     /**
      * 更新调试项目相关布局
      *
@@ -367,6 +392,18 @@ public class CheckHomeActivity extends BaseActivity {
         expandItemAdapter.notifyDataSetChanged();
 
         Globals.setSelectedItem(itemsList);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        removeRealListener();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        addRealListener();
     }
 
     private long[] mClickTimes = new long[2];
