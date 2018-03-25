@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.text.TextUtils;
 import android.view.View;
 
+import com.kstech.zoomlion.model.session.URLCollections;
+
 /**
  * Created by lijie on 2017/11/21.
  */
@@ -60,7 +62,7 @@ public class UserInfo {
     /**
      * 照片
      */
-    private String photo;
+    private Integer photo;
     /**
      * 学历
      */
@@ -200,10 +202,10 @@ public class UserInfo {
     }
 
     public String getPhoto() {
-        return photo;
+        return URLCollections.PIC_URL_PREFIX+photo+URLCollections.PIC_URL_SUFFIX;
     }
 
-    public void setPhoto(String photo) {
+    public void setPhoto(Integer photo) {
         this.photo = photo;
     }
 

@@ -172,29 +172,31 @@ public class UserDetailActivity extends BaseActivity {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             UserDetailActivity activity = (UserDetailActivity) reference.get();
-            switch (msg.what) {
-                case PASS_EDIT_START:
-                    activity.passwordView.showProgress(true);
-                    break;
-                case PASS_EDIT_SUCCESS:
-                    activity.passwordView.updateView(true);
-                    sendEmptyMessage(USER_RELOGIN);
-                    break;
-                case PASS_EDIT_ERROR:
-                    activity.passwordView.showProgress(false);
-                    Toast.makeText(activity, (String) msg.obj, Toast.LENGTH_SHORT).show();
-                    break;
-                case PASS_EDIT_CANCEL:
-                    activity.editPassDialog.cancel();
-                    activity.passwordView.resetView();
-                    break;
-                case PASS_EDIT_RELOGIN:
-                    activity.editPassDialog.cancel();
-                    activity.passwordView.resetView();
-                    break;
-                case UPDATE_USER_DETAIL:
-                    activity.updateUser((UserInfo) msg.obj);
-                    break;
+            if (activity!=null){
+                switch (msg.what) {
+                    case PASS_EDIT_START:
+                        activity.passwordView.showProgress(true);
+                        break;
+                    case PASS_EDIT_SUCCESS:
+                        activity.passwordView.updateView(true);
+                        sendEmptyMessage(USER_RELOGIN);
+                        break;
+                    case PASS_EDIT_ERROR:
+                        activity.passwordView.showProgress(false);
+                        Toast.makeText(activity, (String) msg.obj, Toast.LENGTH_SHORT).show();
+                        break;
+                    case PASS_EDIT_CANCEL:
+                        activity.editPassDialog.cancel();
+                        activity.passwordView.resetView();
+                        break;
+                    case PASS_EDIT_RELOGIN:
+                        activity.editPassDialog.cancel();
+                        activity.passwordView.resetView();
+                        break;
+                    case UPDATE_USER_DETAIL:
+                        activity.updateUser((UserInfo) msg.obj);
+                        break;
+                }
             }
         }
     }

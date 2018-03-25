@@ -635,7 +635,9 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
                         }
                         break;
                     case UPDATE_PARAM_INIT_INFO:
-                        mActivity.messageShowView.updateMessage(new Date(), (String) msg.obj);
+                        boolean force = false;
+                        if (msg.arg1 == -1) force = true;
+                        mActivity.messageShowView.updateMessage(new Date(), (String) msg.obj,force);
                         break;
                     case DEVICE_LOADING_FINISH:
                         mActivity.deviceLoading = false;
@@ -647,9 +649,9 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
                     case PARAM_INIT_ANIM_CLEAR:
                         mActivity.ivRefresh.clearAnimation();
                         if (msg.obj == null) {
-                            mActivity.messageShowView.updateMessage(new Date(), "参数初始化完成，可以开启调试");
+                            mActivity.messageShowView.updateMessage(new Date(), "参数初始化完成，可以开启调试",true);
                         } else {
-                            mActivity.messageShowView.updateMessage(new Date(), (String) msg.obj);
+                            mActivity.messageShowView.updateMessage(new Date(), (String) msg.obj,true);
                         }
                         break;
                     case TERMINAL_CONN_SUCCESS:

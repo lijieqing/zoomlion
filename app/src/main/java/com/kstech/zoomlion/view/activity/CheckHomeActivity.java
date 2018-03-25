@@ -30,6 +30,7 @@ import android.widget.Toast;
 
 import com.kstech.zoomlion.MyApplication;
 import com.kstech.zoomlion.R;
+import com.kstech.zoomlion.engine.check.GPSVerifyTask;
 import com.kstech.zoomlion.engine.server.CheckRecordConfirmTask;
 import com.kstech.zoomlion.engine.server.ItemCheckPrepareTask;
 import com.kstech.zoomlion.engine.server.UploadService;
@@ -206,6 +207,10 @@ public class CheckHomeActivity extends BaseActivity {
      * 记录备份结果信息
      */
     public static final int RECORD_UPDATE_INFO = 5;
+    /**
+     * GPS 验证相关信息
+     */
+    public static final int GPS_VERIFY_MSG = 6;
 
     ServiceConnection uploadConn = new ServiceConnection() {
         @Override
@@ -264,6 +269,7 @@ public class CheckHomeActivity extends BaseActivity {
             tvGPS.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    new GPSVerifyTask(handler).executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
                     Toast.makeText(CheckHomeActivity.this, "GPS", Toast.LENGTH_SHORT).show();
                 }
             });
@@ -541,6 +547,15 @@ public class CheckHomeActivity extends BaseActivity {
                         break;
                     case RECORD_UPDATE_FINISH:
                         activity.uploadAnim.stop();
+                        break;
+                    case GPS_VERIFY_MSG:
+                         if (msg.arg1 == -1){
+                             Intent start = new Intent(activity, UploadService.class);
+                             activity.startService(start);
+                             activity.bindService(start, activity.uploadConn, BIND_AUTO_CREATE);
+                         }
+
+                        Snackbar.make(activity.llRoot, (String)msg.obj, Snackbar.LENGTH_SHORT).show();
                         break;
                 }
             }

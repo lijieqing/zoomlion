@@ -290,29 +290,31 @@ public class ViewRecordActivity extends BaseActivity {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             ViewRecordActivity vrActivity = (ViewRecordActivity) reference.get();
-            switch (msg.what) {
-                case ITEM_RECORD_LOADED:
-                    vrActivity.itemTimeList.clear();
-                    vrActivity.itemRecordDetails.clear();
-                    //对调试记录数据进行排序
-                    List<QCItemRecordDetails> datas = (List<QCItemRecordDetails>) msg.obj;
-                    Collections.sort(datas);
-                    //将时间提取到列表中
-                    for (QCItemRecordDetails data : datas) {
-                        vrActivity.itemTimeList.add(data.getDoneDate());
-                    }
-                    vrActivity.itemRecordDetails.addAll(datas);
-                    vrActivity.timeListAdapter.notifyDataSetChanged();
-                    break;
-                case PIC_LOAD_FINISH:
-                    vrActivity.updatePicDialog((Bitmap) msg.obj);
-                    break;
-                case SPEC_LOAD_FINISH:
-                    vrActivity.updateSpec((Map<String, List<Float>>) msg.obj);
-                    break;
-                case SPEC_LOAD_ERROR:
-                    Toast.makeText(vrActivity, "谱图请求错误", Toast.LENGTH_SHORT).show();
-                    break;
+            if (vrActivity!=null){
+                switch (msg.what) {
+                    case ITEM_RECORD_LOADED:
+                        vrActivity.itemTimeList.clear();
+                        vrActivity.itemRecordDetails.clear();
+                        //对调试记录数据进行排序
+                        List<QCItemRecordDetails> datas = (List<QCItemRecordDetails>) msg.obj;
+                        Collections.sort(datas);
+                        //将时间提取到列表中
+                        for (QCItemRecordDetails data : datas) {
+                            vrActivity.itemTimeList.add(data.getDoneDate());
+                        }
+                        vrActivity.itemRecordDetails.addAll(datas);
+                        vrActivity.timeListAdapter.notifyDataSetChanged();
+                        break;
+                    case PIC_LOAD_FINISH:
+                        vrActivity.updatePicDialog((Bitmap) msg.obj);
+                        break;
+                    case SPEC_LOAD_FINISH:
+                        vrActivity.updateSpec((Map<String, List<Float>>) msg.obj);
+                        break;
+                    case SPEC_LOAD_ERROR:
+                        Toast.makeText(vrActivity, "谱图请求错误", Toast.LENGTH_SHORT).show();
+                        break;
+                }
             }
         }
     }

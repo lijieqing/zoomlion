@@ -215,7 +215,7 @@
         <DSItem DataType="FLOAT" DecLen="0" Name="降排量压力" Unit="U" />
         <DSItem DataType="FLOAT" DecLen="0" Name="超压降排量时间" Unit="U" />
         <DSItem DataType="FLOAT" DecLen="0" Name="起调压力" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="恒功率系数" Unit="U" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="恒功率系数" Unit="U" Value="100"/>
         <DSItem DataType="FLOAT" DecLen="0" Name="最小控制压力" Unit="U" />
         <DSItem DataType="FLOAT" DecLen="0" Name="排量修正系数" Unit="U" />
         <DSItem DataType="FLOAT" DecLen="0" Name="优化行程最小时间" Unit="U" />
@@ -502,134 +502,134 @@
 
         <!--AttachPGN相关-->
         <DSItem DataType="BYTE" DecLen="1" Name="一臂快档展开不检测时间" Unit="s" Value="5" />
-        <DSItem DataType="BYTE" DecLen="1" Name="一臂快档展开终止斜率阀值" Unit="U" Value="1000" />
+        <DSItem DataType="WORD" DecLen="1" Name="一臂快档展开终止斜率阀值" Unit="U" Value="1000" />
         <DSItem DataType="BYTE" DecLen="1" Name="一臂快档展开时间最大值" Unit="s" Value="15" />
         <DSItem DataType="BYTE" DecLen="1" Name="一臂快档展开时间最小值" Unit="s" Value="15" />
 
         <DSItem DataType="BYTE" DecLen="1" Name="一臂快档回收不检测时间" Unit="s" Value="5" />
-        <DSItem DataType="BYTE" DecLen="1" Name="一臂快档回收终止斜率阀值" Unit="U" Value="1000" />
+        <DSItem DataType="WORD" DecLen="1" Name="一臂快档回收终止斜率阀值" Unit="U" Value="1000" />
         <DSItem DataType="BYTE" DecLen="1" Name="一臂快档回收时间最大值" Unit="s" Value="15" />
         <DSItem DataType="BYTE" DecLen="1" Name="一臂快档回收时间最小值" Unit="s" Value="15" />
 
         <DSItem DataType="BYTE" DecLen="1" Name="二臂慢档展开不检测时间" Unit="s" Value="5" />
-        <DSItem DataType="BYTE" DecLen="1" Name="二臂慢档展开终止斜率阀值" Unit="U" Value="1000" />
+        <DSItem DataType="WORD" DecLen="1" Name="二臂慢档展开终止斜率阀值" Unit="U" Value="1000" />
         <DSItem DataType="BYTE" DecLen="1" Name="二臂慢档展开时间最大值" Unit="s" Value="15" />
         <DSItem DataType="BYTE" DecLen="1" Name="二臂慢档展开时间最小值" Unit="s" Value="15" />
 
         <DSItem DataType="BYTE" DecLen="1" Name="二臂快档展开" Unit="s" Value="15" />
         <DSItem DataType="BYTE" DecLen="1" Name="二臂快档展开不检测时间" Unit="s" Value="5" />
-        <DSItem DataType="BYTE" DecLen="1" Name="二臂快档展开终止斜率阀值" Unit="U" Value="1000" />
+        <DSItem DataType="WORD" DecLen="1" Name="二臂快档展开终止斜率阀值" Unit="U" Value="1000" />
         <DSItem DataType="BYTE" DecLen="1" Name="二臂快档展开时间最大值" Unit="s" Value="15" />
         <DSItem DataType="BYTE" DecLen="1" Name="二臂快档展开时间最小值" Unit="s" Value="15" />
 
         <DSItem DataType="BYTE" DecLen="1" Name="二臂慢档回收不检测时间" Unit="s" Value="5" />
-        <DSItem DataType="BYTE" DecLen="1" Name="二臂慢档回收终止斜率阀值" Unit="U" Value="1000" />
+        <DSItem DataType="WORD" DecLen="1" Name="二臂慢档回收终止斜率阀值" Unit="U" Value="1000" />
         <DSItem DataType="BYTE" DecLen="1" Name="二臂慢档回收时间最大值" Unit="s" Value="15" />
         <DSItem DataType="BYTE" DecLen="1" Name="二臂慢档回收时间最小值" Unit="s" Value="15" />
 
         <DSItem DataType="BYTE" DecLen="1" Name="二臂快档回收不检测时间" Unit="s" Value="5" />
-        <DSItem DataType="BYTE" DecLen="1" Name="二臂快档回收终止斜率阀值" Unit="U" Value="1000" />
+        <DSItem DataType="WORD" DecLen="1" Name="二臂快档回收终止斜率阀值" Unit="U" Value="1000" />
         <DSItem DataType="BYTE" DecLen="1" Name="二臂快档回收时间最大值" Unit="s" Value="15" />
         <DSItem DataType="BYTE" DecLen="1" Name="二臂快档回收时间最小值" Unit="s" Value="15" />
 
         <DSItem DataType="BYTE" DecLen="1" Name="三臂慢档展开不检测时间" Unit="s" Value="5" />
-        <DSItem DataType="BYTE" DecLen="1" Name="三臂慢档展开终止斜率阀值" Unit="U" Value="1000" />
+        <DSItem DataType="WORD" DecLen="1" Name="三臂慢档展开终止斜率阀值" Unit="U" Value="1000" />
         <DSItem DataType="BYTE" DecLen="1" Name="三臂慢档展开时间最大值" Unit="s" Value="15" />
         <DSItem DataType="BYTE" DecLen="1" Name="三臂慢档展开时间最小值" Unit="s" Value="15" />
 
         <DSItem DataType="BYTE" DecLen="1" Name="三臂快档展开不检测时间" Unit="s" Value="5" />
-        <DSItem DataType="BYTE" DecLen="1" Name="三臂快档展开终止斜率阀值" Unit="U" Value="1000" />
+        <DSItem DataType="WORD" DecLen="1" Name="三臂快档展开终止斜率阀值" Unit="U" Value="1000" />
         <DSItem DataType="BYTE" DecLen="1" Name="三臂快档展开时间最大值" Unit="s" Value="15" />
         <DSItem DataType="BYTE" DecLen="1" Name="三臂快档展开时间最小值" Unit="s" Value="15" />
 
         <DSItem DataType="BYTE" DecLen="1" Name="三臂慢档回收不检测时间" Unit="s" Value="5" />
-        <DSItem DataType="BYTE" DecLen="1" Name="三臂慢档回收终止斜率阀值" Unit="U" Value="1000" />
+        <DSItem DataType="WORD" DecLen="1" Name="三臂慢档回收终止斜率阀值" Unit="U" Value="1000" />
         <DSItem DataType="BYTE" DecLen="1" Name="三臂慢档回收时间最大值" Unit="s" Value="15" />
         <DSItem DataType="BYTE" DecLen="1" Name="三臂慢档回收时间最小值" Unit="s" Value="15" />
 
         <DSItem DataType="BYTE" DecLen="1" Name="三臂快档回收不检测时间" Unit="s" Value="5" />
-        <DSItem DataType="BYTE" DecLen="1" Name="三臂快档回收终止斜率阀值" Unit="U" Value="1000" />
+        <DSItem DataType="WORD" DecLen="1" Name="三臂快档回收终止斜率阀值" Unit="U" Value="1000" />
         <DSItem DataType="BYTE" DecLen="1" Name="三臂快档回收时间最大值" Unit="s" Value="15" />
         <DSItem DataType="BYTE" DecLen="1" Name="三臂快档回收时间最小值" Unit="s" Value="15" />
 
         <DSItem DataType="BYTE" DecLen="1" Name="四臂慢档展开不检测时间" Unit="s" Value="5" />
-        <DSItem DataType="BYTE" DecLen="1" Name="四臂慢档展开终止斜率阀值" Unit="U" Value="1000" />
+        <DSItem DataType="WORD" DecLen="1" Name="四臂慢档展开终止斜率阀值" Unit="U" Value="1000" />
         <DSItem DataType="BYTE" DecLen="1" Name="四臂慢档展开时间最大值" Unit="s" Value="15" />
         <DSItem DataType="BYTE" DecLen="1" Name="四臂慢档展开时间最小值" Unit="s" Value="15" />
 
         <DSItem DataType="BYTE" DecLen="1" Name="四臂快档展开" Unit="s" Value="15" />
         <DSItem DataType="BYTE" DecLen="1" Name="四臂快档展开不检测时间" Unit="s" Value="5" />
-        <DSItem DataType="BYTE" DecLen="1" Name="四臂快档展开终止斜率阀值" Unit="U" Value="1000" />
+        <DSItem DataType="WORD" DecLen="1" Name="四臂快档展开终止斜率阀值" Unit="U" Value="1000" />
         <DSItem DataType="BYTE" DecLen="1" Name="四臂快档展开时间最大值" Unit="s" Value="15" />
         <DSItem DataType="BYTE" DecLen="1" Name="四臂快档展开时间最小值" Unit="s" Value="15" />
 
         <DSItem DataType="BYTE" DecLen="1" Name="四臂慢档回收不检测时间" Unit="s" Value="5" />
-        <DSItem DataType="BYTE" DecLen="1" Name="四臂慢档回收终止斜率阀值" Unit="U" Value="1000" />
+        <DSItem DataType="WORD" DecLen="1" Name="四臂慢档回收终止斜率阀值" Unit="U" Value="1000" />
         <DSItem DataType="BYTE" DecLen="1" Name="四臂慢档回收时间最大值" Unit="s" Value="15" />
         <DSItem DataType="BYTE" DecLen="1" Name="四臂慢档回收时间最小值" Unit="s" Value="15" />
 
         <DSItem DataType="BYTE" DecLen="1" Name="四臂快档回收不检测时间" Unit="s" Value="5" />
-        <DSItem DataType="BYTE" DecLen="1" Name="四臂快档回收终止斜率阀值" Unit="U" Value="1000" />
+        <DSItem DataType="WORD" DecLen="1" Name="四臂快档回收终止斜率阀值" Unit="U" Value="1000" />
         <DSItem DataType="BYTE" DecLen="1" Name="四臂快档回收时间最大值" Unit="s" Value="15" />
         <DSItem DataType="BYTE" DecLen="1" Name="四臂快档回收时间最小值" Unit="s" Value="15" />
 
         <DSItem DataType="BYTE" DecLen="1" Name="五臂慢档展开不检测时间" Unit="s" Value="5" />
-        <DSItem DataType="BYTE" DecLen="1" Name="五臂慢档展开终止斜率阀值" Unit="U" Value="1000" />
+        <DSItem DataType="WORD" DecLen="1" Name="五臂慢档展开终止斜率阀值" Unit="U" Value="1000" />
         <DSItem DataType="BYTE" DecLen="1" Name="五臂慢档展开时间最大值" Unit="s" Value="15" />
         <DSItem DataType="BYTE" DecLen="1" Name="五臂慢档展开时间最小值" Unit="s" Value="15" />
 
         <DSItem DataType="BYTE" DecLen="1" Name="五臂快档展开不检测时间" Unit="s" Value="5" />
-        <DSItem DataType="BYTE" DecLen="1" Name="五臂快档展开终止斜率阀值" Unit="U" Value="1000" />
+        <DSItem DataType="WORD" DecLen="1" Name="五臂快档展开终止斜率阀值" Unit="U" Value="1000" />
         <DSItem DataType="BYTE" DecLen="1" Name="五臂快档展开时间最大值" Unit="s" Value="15" />
         <DSItem DataType="BYTE" DecLen="1" Name="五臂快档展开时间最小值" Unit="s" Value="15" />
 
         <DSItem DataType="BYTE" DecLen="1" Name="五臂慢档回收不检测时间" Unit="s" Value="5" />
-        <DSItem DataType="BYTE" DecLen="1" Name="五臂慢档回收终止斜率阀值" Unit="U" Value="1000" />
+        <DSItem DataType="WORD" DecLen="1" Name="五臂慢档回收终止斜率阀值" Unit="U" Value="1000" />
         <DSItem DataType="BYTE" DecLen="1" Name="五臂慢档回收时间最大值" Unit="s" Value="15" />
         <DSItem DataType="BYTE" DecLen="1" Name="五臂慢档回收时间最小值" Unit="s" Value="15" />
 
         <DSItem DataType="BYTE" DecLen="1" Name="五臂快档回收不检测时间" Unit="s" Value="5" />
-        <DSItem DataType="BYTE" DecLen="1" Name="五臂快档回收终止斜率阀值" Unit="U" Value="1000" />
+        <DSItem DataType="WORD" DecLen="1" Name="五臂快档回收终止斜率阀值" Unit="U" Value="1000" />
         <DSItem DataType="BYTE" DecLen="1" Name="五臂快档回收时间最大值" Unit="s" Value="15" />
         <DSItem DataType="BYTE" DecLen="1" Name="五臂快档回收时间最小值" Unit="s" Value="15" />
 
         <DSItem DataType="BYTE" DecLen="1" Name="六臂慢档展开不检测时间" Unit="s" Value="5" />
-        <DSItem DataType="BYTE" DecLen="1" Name="六臂慢档展开终止斜率阀值" Unit="U" Value="1000" />
+        <DSItem DataType="WORD" DecLen="1" Name="六臂慢档展开终止斜率阀值" Unit="U" Value="1000" />
         <DSItem DataType="BYTE" DecLen="1" Name="六臂慢档展开时间最大值" Unit="s" Value="15" />
         <DSItem DataType="BYTE" DecLen="1" Name="六臂慢档展开时间最小值" Unit="s" Value="15" />
 
         <DSItem DataType="BYTE" DecLen="1" Name="六臂快档展开不检测时间" Unit="s" Value="5" />
-        <DSItem DataType="BYTE" DecLen="1" Name="六臂快档展开终止斜率阀值" Unit="U" Value="1000" />
+        <DSItem DataType="WORD" DecLen="1" Name="六臂快档展开终止斜率阀值" Unit="U" Value="1000" />
         <DSItem DataType="BYTE" DecLen="1" Name="六臂快档展开时间最大值" Unit="s" Value="15" />
         <DSItem DataType="BYTE" DecLen="1" Name="六臂快档展开时间最小值" Unit="s" Value="15" />
 
         <DSItem DataType="BYTE" DecLen="1" Name="六臂慢档回收不检测时间" Unit="s" Value="5" />
-        <DSItem DataType="BYTE" DecLen="1" Name="六臂慢档回收终止斜率阀值" Unit="U" Value="1000" />
+        <DSItem DataType="WORD" DecLen="1" Name="六臂慢档回收终止斜率阀值" Unit="U" Value="1000" />
         <DSItem DataType="BYTE" DecLen="1" Name="六臂慢档回收时间最大值" Unit="s" Value="15" />
         <DSItem DataType="BYTE" DecLen="1" Name="六臂慢档回收时间最小值" Unit="s" Value="15" />
 
         <DSItem DataType="BYTE" DecLen="1" Name="六臂快档回收不检测时间" Unit="s" Value="5" />
-        <DSItem DataType="BYTE" DecLen="1" Name="六臂快档回收终止斜率阀值" Unit="U" Value="1000" />
+        <DSItem DataType="WORD" DecLen="1" Name="六臂快档回收终止斜率阀值" Unit="U" Value="1000" />
         <DSItem DataType="BYTE" DecLen="1" Name="六臂快档回收时间最大值" Unit="s" Value="15" />
         <DSItem DataType="BYTE" DecLen="1" Name="六臂快档回收时间最小值" Unit="s" Value="15" />
 
         <DSItem DataType="BYTE" DecLen="1" Name="顺时针回转慢档不检测时间" Unit="s" Value="5" />
-        <DSItem DataType="BYTE" DecLen="1" Name="顺时针回转慢档终止斜率阀值" Unit="U" Value="1000" />
+        <DSItem DataType="WORD" DecLen="1" Name="顺时针回转慢档终止斜率阀值" Unit="U" Value="1000" />
         <DSItem DataType="BYTE" DecLen="1" Name="顺时针回转慢档时间最大值" Unit="s" Value="15" />
         <DSItem DataType="BYTE" DecLen="1" Name="顺时针回转慢档时间最小值" Unit="s" Value="15" />
 
         <DSItem DataType="BYTE" DecLen="1" Name="逆时针回转慢档不检测时间" Unit="s" Value="5" />
-        <DSItem DataType="BYTE" DecLen="1" Name="逆时针回转慢档终止斜率阀值" Unit="U" Value="1000" />
+        <DSItem DataType="WORD" DecLen="1" Name="逆时针回转慢档终止斜率阀值" Unit="U" Value="1000" />
         <DSItem DataType="BYTE" DecLen="1" Name="逆时针回转慢档时间最大值" Unit="s" Value="15" />
         <DSItem DataType="BYTE" DecLen="1" Name="逆时针回转慢档时间最小值" Unit="s" Value="15" />
 
         <DSItem DataType="BYTE" DecLen="1" Name="顺时针回转快档不检测时间" Unit="s" Value="5" />
-        <DSItem DataType="BYTE" DecLen="1" Name="顺时针回转快档终止斜率阀值" Unit="U" Value="1000" />
+        <DSItem DataType="WORD" DecLen="1" Name="顺时针回转快档终止斜率阀值" Unit="U" Value="1000" />
         <DSItem DataType="BYTE" DecLen="1" Name="顺时针回转快档时间最大值" Unit="s" Value="15" />
         <DSItem DataType="BYTE" DecLen="1" Name="顺时针回转快档时间最小值" Unit="s" Value="15" />
 
         <DSItem DataType="BYTE" DecLen="1" Name="逆时针回转快档不检测时间" Unit="s" Value="5" />
-        <DSItem DataType="BYTE" DecLen="1" Name="逆时针回转快档终止斜率阀值" Unit="U" Value="1000" />
+        <DSItem DataType="WORD" DecLen="1" Name="逆时针回转快档终止斜率阀值" Unit="U" Value="1000" />
         <DSItem DataType="BYTE" DecLen="1" Name="逆时针回转快档时间最大值" Unit="s" Value="15" />
         <DSItem DataType="BYTE" DecLen="1" Name="逆时针回转快档时间最小值" Unit="s" Value="15" />
 
@@ -638,36 +638,36 @@
         <DSItem DataType="BYTE" Name="左前支腿垂直伸出不检测时间" Unit="s" Value="5" />
         <DSItem DataType="BYTE" Name="左前支腿垂直回收不检测时间" Unit="s" Value="5" />
         <DSItem DataType="BYTE" Name="右前支腿水平伸出不检测时间" Value="5" />
-        <DSItem DataType="BYTE" Name="右前支腿水平伸出终止斜率阀值" Value="1000" />
+        <DSItem DataType="WORD" Name="右前支腿水平伸出终止斜率阀值" Value="1000" />
         <DSItem DataType="BYTE" Name="右前支腿水平回收不检测时间" Value="5" />
-        <DSItem DataType="BYTE" Name="右前支腿水平回收终止斜率阀值" Value="1000" />
+        <DSItem DataType="WORD" Name="右前支腿水平回收终止斜率阀值" Value="1000" />
         <DSItem DataType="BYTE" Name="右前支腿垂直伸出不检测时间" Value="5" />
-        <DSItem DataType="BYTE" Name="右前支腿垂直伸出终止斜率阀值" Value="1000" />
+        <DSItem DataType="WORD" Name="右前支腿垂直伸出终止斜率阀值" Value="1000" />
         <DSItem DataType="BYTE" Name="右前支腿垂直回收不检测时间" Value="5" />
-        <DSItem DataType="BYTE" Name="右前支腿垂直回收终止斜率阀值" Value="1000" />
+        <DSItem DataType="WORD" Name="右前支腿垂直回收终止斜率阀值" Value="1000" />
         <DSItem DataType="BYTE" Name="左后支腿水平伸出不检测时间" Value="5" />
-        <DSItem DataType="BYTE" Name="左后支腿水平伸出终止斜率阀值" Value="1000" />
+        <DSItem DataType="WORD" Name="左后支腿水平伸出终止斜率阀值" Value="1000" />
         <DSItem DataType="BYTE" Name="左后支腿水平回收不检测时间" Value="5" />
-        <DSItem DataType="BYTE" Name="左后支腿水平回收终止斜率阀值" Value="1000" />
+        <DSItem DataType="WORD" Name="左后支腿水平回收终止斜率阀值" Value="1000" />
         <DSItem DataType="BYTE" Name="左后支腿垂直伸出不检测时间" Value="5" />
-        <DSItem DataType="BYTE" Name="左后支腿垂直伸出终止斜率阀值" Value="1000" />
+        <DSItem DataType="WORD" Name="左后支腿垂直伸出终止斜率阀值" Value="1000" />
         <DSItem DataType="BYTE" Name="左后支腿垂直回收不检测时间" Value="5" />
-        <DSItem DataType="BYTE" Name="左后支腿垂直回收终止斜率阀值" Value="1000" />
+        <DSItem DataType="WORD" Name="左后支腿垂直回收终止斜率阀值" Value="1000" />
         <DSItem DataType="BYTE" Name="右后支腿水平伸出不检测时间" Value="5" />
-        <DSItem DataType="BYTE" Name="右后支腿水平伸出终止斜率阀值" Value="1000" />
+        <DSItem DataType="WORD" Name="右后支腿水平伸出终止斜率阀值" Value="1000" />
         <DSItem DataType="BYTE" Name="右后支腿水平回收不检测时间" Value="5" />
-        <DSItem DataType="BYTE" Name="右后支腿水平回收终止斜率阀值" Value="1000" />
+        <DSItem DataType="WORD" Name="右后支腿水平回收终止斜率阀值" Value="1000" />
         <DSItem DataType="BYTE" Name="右后支腿垂直伸出不检测时间" Value="5" />
-        <DSItem DataType="BYTE" Name="右后支腿垂直伸出终止斜率阀值" Value="1000" />
+        <DSItem DataType="WORD" Name="右后支腿垂直伸出终止斜率阀值" Value="1000" />
         <DSItem DataType="BYTE" Name="右后支腿垂直回收不检测时间" Value="5" />
-        <DSItem DataType="BYTE" Name="右后支腿垂直回收终止斜率阀值" Value="1000" />
-        <DSItem DataType="BYTE" Name="左前支腿水平伸出终止斜率阀值" Value="1000" />
-        <DSItem DataType="BYTE" Name="左前支腿水平回收终止斜率阀值" Value="1000" />
-        <DSItem DataType="BYTE" Name="左前支腿垂直伸出终止斜率阀值" Value="1000" />
-        <DSItem DataType="BYTE" Name="左前支腿垂直回收终止斜率阀值" Value="1000" />
+        <DSItem DataType="WORD" Name="右后支腿垂直回收终止斜率阀值" Value="1000" />
+        <DSItem DataType="WORD" Name="左前支腿水平伸出终止斜率阀值" Value="1000" />
+        <DSItem DataType="WORD" Name="左前支腿水平回收终止斜率阀值" Value="1000" />
+        <DSItem DataType="WORD" Name="左前支腿垂直伸出终止斜率阀值" Value="1000" />
+        <DSItem DataType="WORD" Name="左前支腿垂直回收终止斜率阀值" Value="1000" />
 
-        <DSItem DataType="BYTE" Name="一臂慢档展开终止斜率阀值" Unit="s" Value="1000" />
-        <DSItem DataType="BYTE" Name="一臂慢档回收终止斜率阀值" Unit="s" Value="1000" />
+        <DSItem DataType="WORD" Name="一臂慢档展开终止斜率阀值" Unit="s" Value="1000" />
+        <DSItem DataType="WORD" Name="一臂慢档回收终止斜率阀值" Unit="s" Value="1000" />
         <DSItem DataType="BYTE" Name="一臂慢档展开不检测时间" Unit="s" Value="5" />
         <DSItem DataType="BYTE" Name="一臂慢档回收不检测时间" Unit="s" Value="5" />
         <DSItem DataType="BYTE" Name="最大排量电流" Value="50" />
