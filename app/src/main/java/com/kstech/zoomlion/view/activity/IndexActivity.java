@@ -23,10 +23,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kstech.zoomlion.R;
-import com.kstech.zoomlion.engine.check.ParamInitTask;
 import com.kstech.zoomlion.engine.comm.J1939TaskService;
 import com.kstech.zoomlion.engine.device.DeviceLoadTask;
 import com.kstech.zoomlion.engine.server.DeviceStatusUpdateTask;
+import com.kstech.zoomlion.engine.server.ParamInitUploadTask;
 import com.kstech.zoomlion.engine.server.ServerProcessCheck;
 import com.kstech.zoomlion.engine.server.UserLogoutTask;
 import com.kstech.zoomlion.model.vo.CheckItemVO;
@@ -337,7 +337,7 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         x.view().inject(this);
-        String data = String.format(getString(R.string.index_welcome_user),Globals.currentUser.getName(),Globals.currentUser.getLastLoginTime());
+        String data = String.format(getString(R.string.index_welcome_user), Globals.currentUser.getName(), Globals.currentUser.getLastLoginTime());
         //String data = String.format(getString(R.string.index_welcome_user), Globals.currentUser.getName(), Globals.currentUser.getLastLoginTime() == null ? new Date() : Globals.currentUser.getLastLoginTime());
         tvUserWelcome.setText(data);
 
@@ -444,7 +444,7 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
                 ivRefresh.startAnimation(animation);
                 messageShowView.clearMessage();
                 messageShowView.updateMessage(new Date(), "准备开始初始化");
-                new ParamInitTask(handler).executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
+                new ParamInitUploadTask(handler).executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
                 break;
         }
     }
@@ -637,7 +637,7 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
                     case UPDATE_PARAM_INIT_INFO:
                         boolean force = false;
                         if (msg.arg1 == -1) force = true;
-                        mActivity.messageShowView.updateMessage(new Date(), (String) msg.obj,force);
+                        mActivity.messageShowView.updateMessage(new Date(), (String) msg.obj, force);
                         break;
                     case DEVICE_LOADING_FINISH:
                         mActivity.deviceLoading = false;
@@ -649,9 +649,9 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
                     case PARAM_INIT_ANIM_CLEAR:
                         mActivity.ivRefresh.clearAnimation();
                         if (msg.obj == null) {
-                            mActivity.messageShowView.updateMessage(new Date(), "参数初始化完成，可以开启调试",true);
+                            mActivity.messageShowView.updateMessage(new Date(), "参数初始化完成，可以开启调试", true);
                         } else {
-                            mActivity.messageShowView.updateMessage(new Date(), (String) msg.obj,true);
+                            mActivity.messageShowView.updateMessage(new Date(), (String) msg.obj, true);
                         }
                         break;
                     case TERMINAL_CONN_SUCCESS:

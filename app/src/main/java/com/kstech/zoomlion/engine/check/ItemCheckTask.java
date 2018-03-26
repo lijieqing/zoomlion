@@ -138,7 +138,7 @@ public class ItemCheckTask extends AsyncTask<Void, String, Void> implements J193
         }, 1000, 1000);
 
         //规定时间内循环接受数据
-        while (remainSeconds < 3 * 60 && isRunning) {
+        while (remainSeconds < 12 * 60 && isRunning) {
             String startCheckCommandResp = CommandResp.getStartCheckCommandResp(qcID + "", times);
             //String startCheckCommandResp = "";
             if ("".equals(startCheckCommandResp)) {
@@ -291,7 +291,7 @@ public class ItemCheckTask extends AsyncTask<Void, String, Void> implements J193
     private boolean verifySpecOrder(int total, @NotNull LinkedList<Float> specOrderlist, @NotNull LinkedList<Float> lostSpecOrderList) {
         //是否存在漏传数据，TRUE为存在漏传
         boolean result = false;
-        if (specOrderlist==null || lostSpecOrderList==null){
+        if (specOrderlist == null || lostSpecOrderList == null) {
             return false;
         }
         //对集合先排序

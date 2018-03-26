@@ -394,7 +394,6 @@ public class ItemCheckActivity extends BaseActivity implements ItemCheckCallBack
 
     @Override
     public void onProgress(String progress) {
-        LogUtils.e(TAG, progress);
     }
 
     @Override
@@ -546,7 +545,7 @@ public class ItemCheckActivity extends BaseActivity implements ItemCheckCallBack
                             activity.detailData.setParamsValues(JsonUtils.toJson(activity.valueVOList));
                         activity.valueVOList.clear();
 
-                        if (ItemFunctionUtils.isJustComm(activity.itemvo.getId())){
+                        if (ItemFunctionUtils.isJustComm(activity.itemvo.getId())) {
                             sendEmptyMessage(AUTO_SAVE_RECORD);
                         }
                         break;

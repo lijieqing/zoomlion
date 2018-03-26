@@ -1,6 +1,5 @@
-package com.kstech.zoomlion.engine.check;
+package com.kstech.zoomlion.engine.server;
 
-import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
@@ -9,15 +8,16 @@ import com.kstech.zoomlion.engine.comm.CommandResp;
 import com.kstech.zoomlion.engine.comm.CommandSender;
 import com.kstech.zoomlion.model.enums.CheckItemResultEnum;
 import com.kstech.zoomlion.model.session.URLCollections;
-import com.kstech.zoomlion.model.vo.CheckItemParamValueVO;
 import com.kstech.zoomlion.model.vo.CheckItemVO;
 import com.kstech.zoomlion.serverdata.AttachedFile;
 import com.kstech.zoomlion.serverdata.CompleteQCItemJSON;
 import com.kstech.zoomlion.serverdata.QCDataRecordCreateForm;
 import com.kstech.zoomlion.utils.Globals;
 import com.kstech.zoomlion.utils.JsonUtils;
+import com.kstech.zoomlion.utils.LogUtils;
 import com.kstech.zoomlion.view.activity.IndexActivity;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.xutils.http.RequestParams;
 import org.xutils.x;
@@ -28,40 +28,96 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 /**
- * Created by lijie on 2018/1/29.
+ * Created by lijie on 2018/3/25.
+ * 参数初始化线程
  */
-
-public class ParamInitTask extends AsyncTask<Void, Integer, Void> {
-    private boolean prepared;
+public class ParamInitUploadTask extends AbstractDataTransferTask {
+    private Handler indexHandler;
+    /**
+     * 初始化用时单位：秒
+     */
     private int remainSeconds;
-    private Handler handler;
+    /**
+     * 初始化信息
+     */
     private CheckItemVO initItem;
-    private boolean initSuccess = false;
+    /**
+     * 已请求次数
+     */
+    private int requestTimes = 0;
 
-    public ParamInitTask(Handler handler) {
-        this.handler = handler;
+    public ParamInitUploadTask(Handler handler) {
+        super(handler);
+        this.indexHandler = handler;
     }
 
     @Override
-    protected void onPreExecute() {
+    protected boolean showDialog() {
+        return false;
+    }
+
+    @Override
+    protected void beforeRequest() {
         List<CheckItemVO> initList = Globals.modelFile.checkItemMap.get("Init");
-        if (initList!=null && initList.size()>0){
+        if (initList != null && initList.size() > 0) {
             initItem = initList.get(0);
+        } else {
+            requestTimes = 1;
+            updateMsg(IndexActivity.PARAM_INIT_ANIM_CLEAR, "XML 文件未找到初始化信息", true);
         }
     }
 
     @Override
-    protected Void doInBackground(Void... voids) {
-        if (initItem == null){
-            sendMsg(IndexActivity.PARAM_INIT_ANIM_CLEAR, "XML 文件未找到初始化信息",true);
-            return null;
-        }
+    protected boolean needRequest() {
+        return requestTimes++ < 1;
+    }
 
-        prepared = false;
+    @Override
+    protected String getURL() {
+        return URLCollections.NOTIFY_SERVER_GOTO_CHECK;
+    }
+
+    @Override
+    protected boolean initRequestParam(RequestParams params) {
+        params.addBodyParameter("sn", Globals.deviceSN);
+        params.addBodyParameter("processId", Globals.PROCESSID);
+        return true;
+    }
+
+    @Override
+    protected boolean onReLogin() {
+        return true;
+    }
+
+    @Override
+    protected void onRequestSuccess(JSONObject data) throws JSONException {
+        paramInit();
+    }
+
+
+    /**
+     * 发送信息
+     *
+     * @param what    目标
+     * @param content 内容
+     */
+    private void updateMsg(int what, String content, boolean forceShow) {
+        Message message = Message.obtain();
+        message.what = what;
+        message.obj = content;
+        message.arg1 = forceShow ? -1 : 0;
+        handler.sendMessage(message);
+    }
+
+    /**
+     * 参数初始化流程
+     */
+    private void paramInit() {
+        boolean prepared = false;
         remainSeconds = 0;
         CommandSender.sendReadyToCheckCommand(initItem.getId(), 1);
         //创建计时器任务，延时1s后启动
-        sendMsg(IndexActivity.UPDATE_PARAM_INIT_INFO, "发送准备命令 --准备阶段",false);
+        updateMsg(IndexActivity.UPDATE_PARAM_INIT_INFO, "发送准备命令 --准备阶段", false);
         Timer prepareTimer = new Timer();
         prepareTimer.schedule(new TimerTask() {
             @Override
@@ -75,27 +131,29 @@ public class ParamInitTask extends AsyncTask<Void, Integer, Void> {
         while (remainSeconds < 60) {
             prepareResp = CommandResp.getReadyToCheckCommandResp(initItem.getId(), 1);
             if ("".equals(prepareResp)) {
-                
+
             } else if ("准备就绪".equals(prepareResp)) {
                 prepared = true;
                 prepareTimer.cancel();
-                sendMsg(IndexActivity.UPDATE_PARAM_INIT_INFO, "终端准备就绪",true);
+                updateMsg(IndexActivity.UPDATE_PARAM_INIT_INFO, "终端准备就绪", true);
                 break;
             } else if ("传感器故障".equals(prepareResp)) {
-                sendMsg(IndexActivity.UPDATE_PARAM_INIT_INFO, "初始化失败-准备调试未通过",true);
+                updateMsg(IndexActivity.UPDATE_PARAM_INIT_INFO, "初始化失败-准备调试未通过", true);
                 prepareTimer.cancel();
-                return null;
+                break;
             }
         }
 
         //准备调试完成，进入项目调试流程
         if (prepared) {
+            //休眠，让测量终端确认收到
+            SystemClock.sleep(2000);
             //重置数据
             remainSeconds = 0;
 
             // 发送开始调试命令
             CommandSender.sendStartCheckCommand(initItem.getId(), 1);
-            sendMsg(IndexActivity.UPDATE_PARAM_INIT_INFO, "发送初始化命令",true);
+            updateMsg(IndexActivity.UPDATE_PARAM_INIT_INFO, "发送初始化命令", true);
             //启动计时器
             Timer checkTimer = new Timer();
             checkTimer.schedule(new TimerTask() {
@@ -106,49 +164,49 @@ public class ParamInitTask extends AsyncTask<Void, Integer, Void> {
             }, 500, 1000);
 
             String checkResp = "";
+            boolean timeout = true;
             while (remainSeconds < 60) {
                 checkResp = CommandResp.getStartCheckCommandResp(initItem.getId(), 1);
                 if ("".equals(checkResp)) {
 
                 } else if ("正在检测".equals(checkResp)) {
-                    sendMsg(IndexActivity.UPDATE_PARAM_INIT_INFO, "参数初始化中",true);
+                    updateMsg(IndexActivity.UPDATE_PARAM_INIT_INFO, "参数初始化中", true);
                     SystemClock.sleep(500);
 
                 } else if ("检测完成".equals(checkResp)) {
                     // TODO: 2018/1/29 初始化完成后，保存并上传记录
                     int v = (int) Globals.modelFile.dataSetVO.getDSItem("初始化").getFloatValue();
-                    if (v==1){
-                        initSuccess = true;
+                    if (v == 1) {
                         packageInitData();
-                    }else {
-                        sendMsg(IndexActivity.PARAM_INIT_ANIM_CLEAR, "初始化失败",true);
+                    } else {
+                        updateMsg(IndexActivity.PARAM_INIT_ANIM_CLEAR, "初始化失败", true);
                     }
-
+                    timeout = false;
                     checkTimer.cancel();
-                    return null;
+                    break;
                 } else if ("传感器故障".equals(checkResp) || "检测失败".equals(checkResp)) {
+                    updateMsg(IndexActivity.PARAM_INIT_ANIM_CLEAR, "初始化失败", true);
 
-                    sendMsg(IndexActivity.PARAM_INIT_ANIM_CLEAR, "初始化失败",true);
+                    timeout = false;
                     checkTimer.cancel();
-                    return null;
+                    break;
                 }
             }
-            sendMsg(IndexActivity.PARAM_INIT_ANIM_CLEAR, "初始化超时",true);
-
-            checkTimer.cancel();
-            return null;
+            if (timeout) {
+                updateMsg(IndexActivity.PARAM_INIT_ANIM_CLEAR, "初始化超时", true);
+                checkTimer.cancel();
+            }
         } else {
-            sendMsg(IndexActivity.PARAM_INIT_ANIM_CLEAR, "准备初始化超时",true);
+            updateMsg(IndexActivity.PARAM_INIT_ANIM_CLEAR, "准备初始化超时", true);
             //准备调试超时通知
             prepareTimer.cancel();
-            return null;
         }
     }
 
     /**
      * 打包数据上传服务器
      */
-    private void packageInitData(){
+    private void packageInitData() {
         CompleteQCItemJSON itemJSON = new CompleteQCItemJSON();
         itemJSON.setSn(Globals.deviceSN);
         itemJSON.setStatus(CheckItemResultEnum.PASS.getCode());
@@ -174,43 +232,19 @@ public class ParamInitTask extends AsyncTask<Void, Integer, Void> {
         String json = JsonUtils.toJson(itemJSON);
         params.setBodyContent(json);
 
-        boolean again = true;
-        int count = 0;
         try {
-            while (again){
-                if (count>10){
-                    again = false;
-                }
-                String result = x.http().postSync(params, String.class);
-                JSONObject object = new JSONObject(result);
-                if (object.has("error") ){
-                    count++;
-                    sendMsg(IndexActivity.UPDATE_PARAM_INIT_INFO, "数据上传失败，正在重新上传",true);
-                    break;
-                }
-                if (object.has("success")){
-                    sendMsg(IndexActivity.PARAM_INIT_ANIM_CLEAR, null,true);
-                    again = false;
-                }
+            String result = x.http().postSync(params, String.class);
+            LogUtils.e("ParamInitTask", result);
+            JSONObject object = new JSONObject(result);
+            if (object.has("error")) {
+                updateMsg(IndexActivity.UPDATE_PARAM_INIT_INFO, "数据上传失败，正在重新上传", true);
+            } else if (object.has("success")) {
+                updateMsg(IndexActivity.PARAM_INIT_ANIM_CLEAR, null, true);
             }
 
         } catch (Throwable throwable) {
-            sendMsg(IndexActivity.PARAM_INIT_ANIM_CLEAR, "数据上传失败",true);
+            updateMsg(IndexActivity.PARAM_INIT_ANIM_CLEAR, "数据上传失败", true);
             throwable.printStackTrace();
         }
-    }
-
-    /**
-     * 发送信息
-     *
-     * @param what    目标
-     * @param content 内容
-     */
-    private void sendMsg(int what, String content,boolean forceShow) {
-        Message message = Message.obtain();
-        message.what = what;
-        message.obj = content;
-        message.arg1 = forceShow?-1:0;
-        handler.sendMessage(message);
     }
 }

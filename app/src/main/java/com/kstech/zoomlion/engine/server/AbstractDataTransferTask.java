@@ -131,16 +131,18 @@ public abstract class AbstractDataTransferTask extends AsyncTask<Void, Integer, 
      * @param progress 进度指示
      */
     protected void sendMsg(int what, Object obj, int progress) {
-        if (obj == null) {
-            handler.sendEmptyMessage(what);
-        } else {
-            message = Message.obtain();
-            message.what = what;
-            message.obj = obj;
-            message.arg1 = progress;
+        if (showDialog()) {
+            if (obj == null) {
+                handler.sendEmptyMessage(what);
+            } else {
+                message = Message.obtain();
+                message.what = what;
+                message.obj = obj;
+                message.arg1 = progress;
 
-            handler.sendMessage(message);
-            SystemClock.sleep(1000);
+                handler.sendMessage(message);
+                SystemClock.sleep(1000);
+            }
         }
     }
 
@@ -149,7 +151,9 @@ public abstract class AbstractDataTransferTask extends AsyncTask<Void, Integer, 
      *
      * @return 字符串
      */
-    protected abstract String getRequestMessage();
+    protected String getRequestMessage() {
+        return "";
+    }
 
     /**
      * 是否需要向服务器请求
@@ -226,6 +230,15 @@ public abstract class AbstractDataTransferTask extends AsyncTask<Void, Integer, 
 
     protected String getTaskTitle() {
         return "任务开始";
+    }
+
+    /**
+     * 是否展示弹窗进度
+     *
+     * @return 默认展示
+     */
+    protected boolean showDialog() {
+        return true;
     }
 
     /**
