@@ -4,6 +4,7 @@ import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
+import android.text.TextUtils;
 
 import com.kstech.zoomlion.model.db.CheckChartData;
 import com.kstech.zoomlion.model.db.CheckImageData;
@@ -278,9 +279,9 @@ public abstract class AbstractDataTransferTask extends AsyncTask<Void, Integer, 
             Float min;
             int status;
             if (paramData.getValueReq()) {
-                fv = Float.valueOf(value);
-                max = Float.valueOf(paramData.getValidMax());
-                min = Float.valueOf(paramData.getValidMin());
+                fv = TextUtils.isEmpty(value) ? 0 : Float.valueOf(value);
+                max = TextUtils.isEmpty(paramData.getValidMax()) || !TextUtils.isDigitsOnly(paramData.getValidMax()) ? 0 : Float.valueOf(paramData.getValidMax());
+                min = TextUtils.isEmpty(paramData.getValidMin()) || !TextUtils.isDigitsOnly(paramData.getValidMin()) ? 0 : Float.valueOf(paramData.getValidMin());
                 if (fv >= min && fv <= max) {
                     status = QCDataStatusEnum.QUALIFIED.getValue();
                 } else {

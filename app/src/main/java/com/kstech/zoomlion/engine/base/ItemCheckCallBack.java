@@ -40,7 +40,7 @@ public interface ItemCheckCallBack {
      * @param msg     调试结果信息
      * @param specMap 谱图参数数据集合
      */
-    void onSuccess(List<CheckItemParamValueVO> headers, Map<String, LinkedList<Float>> specMap, String msg);
+    void onSuccess(List<CheckItemParamValueVO> headers, Map<String, List<Float>> specMap, String msg);
 
     /**
      * 调试过程故障回调
@@ -56,7 +56,7 @@ public interface ItemCheckCallBack {
      * @param headers 参数实体集合
      * @param msg     调试结果信息
      */
-    void onTimeOut(List<CheckItemParamValueVO> headers, String msg, Map<String, LinkedList<Float>> specMap);
+    void onTimeOut(List<CheckItemParamValueVO> headers, String msg, Map<String, List<Float>> specMap);
 
     void onTaskStop(boolean canSave);
 }

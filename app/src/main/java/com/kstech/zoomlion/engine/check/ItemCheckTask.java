@@ -38,7 +38,7 @@ public class ItemCheckTask extends AsyncTask<Void, String, Void> implements J193
     /**
      * 调试线程状态
      */
-    public boolean isRunning = false;
+    public static boolean isRunning = false;
     /**
      * 调试项目的qcID
      */
@@ -67,11 +67,11 @@ public class ItemCheckTask extends AsyncTask<Void, String, Void> implements J193
     /**
      * 谱图参数数据记录集合，key用谱图参数名称
      */
-    private Map<String, LinkedList<Float>> specMap;
+    private Map<String, List<Float>> specMap;
     /**
      * 谱图顺序号集合
      */
-    private LinkedList<Float> specOrderList;
+    private List<Float> specOrderList;
     /**
      * 待补传的谱图顺序号集合
      */
@@ -161,6 +161,7 @@ public class ItemCheckTask extends AsyncTask<Void, String, Void> implements J193
                 // 检测完成回调，返回paramResults
                 callBack.onSuccess(resluts, specMap, content);
                 callBack.onTaskStop(true);
+                ItemCheckTask.isRunning = false;
                 //移除监听,取消计时
                 timer.cancel();
                 removeTaskListener();
@@ -171,6 +172,7 @@ public class ItemCheckTask extends AsyncTask<Void, String, Void> implements J193
                 //调试异常回调
                 callBack.onResultError(resluts, startCheckCommandResp);
                 callBack.onTaskStop(true);
+                ItemCheckTask.isRunning = false;
                 //移除监听,取消计时
                 timer.cancel();
                 removeTaskListener();
@@ -210,8 +212,9 @@ public class ItemCheckTask extends AsyncTask<Void, String, Void> implements J193
             // 通讯超时回调
             callBack.onTimeOut(headers, "通讯超时", specMap);
             callBack.onTaskStop(true);
-        }
 
+            isRunning = false;
+        }
         return null;
     }
 
@@ -261,7 +264,7 @@ public class ItemCheckTask extends AsyncTask<Void, String, Void> implements J193
      * @param posList 序列号集合
      * @param specMap 数据集合
      */
-    private void filterList(LinkedList<Float> posList, Map<String, LinkedList<Float>> specMap) {
+    private void filterList(List<Float> posList, Map<String, List<Float>> specMap) {
         if (posList == null || specMap == null) return;
         float temp = 0;
         for (int i = 0; i < posList.size(); i++) {
@@ -271,7 +274,7 @@ public class ItemCheckTask extends AsyncTask<Void, String, Void> implements J193
                 float currentF = posList.get(i);
                 if (temp == currentF) {
                     posList.remove(i);
-                    for (LinkedList<Float> floats : specMap.values()) {
+                    for (List<Float> floats : specMap.values()) {
                         floats.remove(i);
                     }
                 }
@@ -288,7 +291,7 @@ public class ItemCheckTask extends AsyncTask<Void, String, Void> implements J193
      * @param lostSpecOrderList 丢失数据集合
      * @return 是否连续
      */
-    private boolean verifySpecOrder(int total, @NotNull LinkedList<Float> specOrderlist, @NotNull LinkedList<Float> lostSpecOrderList) {
+    private boolean verifySpecOrder(int total, @NotNull List<Float> specOrderlist, @NotNull List<Float> lostSpecOrderList) {
         //是否存在漏传数据，TRUE为存在漏传
         boolean result = false;
         if (specOrderlist == null || lostSpecOrderList == null) {
@@ -298,12 +301,12 @@ public class ItemCheckTask extends AsyncTask<Void, String, Void> implements J193
         Collections.sort(specOrderlist);
         total += 1;
         //比较最后一个参数顺序号与参数数据数量
-        float endLost = total - specOrderlist.getLast();
+        float endLost = total - specOrderlist.get(specOrderlist.size()-1);
         if (endLost > 1) {
             //出现偏差，加入补发集合
             result = true;
             for (int i = 1; i < endLost; i++) {
-                float repair = specOrderlist.getLast() + i;
+                float repair = specOrderlist.get(specOrderlist.size()-1) + i;
                 lostSpecOrderList.add(repair);
             }
         }
@@ -536,16 +539,16 @@ public class ItemCheckTask extends AsyncTask<Void, String, Void> implements J193
          * @param posList    位置集合列表
          * @param valueList  待插入数值集合列表
          */
-        private void insertValueInPosition(float currentPos, float value, LinkedList<Float> posList, LinkedList<Float> valueList) {
+        private void insertValueInPosition(float currentPos, float value, List<Float> posList, List<Float> valueList) {
             int index = 0;
             //当前位置最大，添加到集合的尾部
-            if (currentPos > posList.getLast()) {
-                valueList.addLast(value);
+            if (currentPos > posList.get(posList.size()-1)) {
+                valueList.add(value);
                 return;
             }
             //当前位置最小，添加到集合的头部
-            if (currentPos < posList.getFirst()) {
-                valueList.addFirst(value);
+            if (currentPos < posList.get(0)) {
+                valueList.add(0,value);
                 return;
             }
             //在位置集合内部

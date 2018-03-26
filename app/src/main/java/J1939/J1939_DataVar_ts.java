@@ -93,13 +93,17 @@ public class J1939_DataVar_ts {
     private LinkedList<RealtimeChangeListener> listenerLinkedList = new LinkedList<>();
 
     public void addListener(RealtimeChangeListener listener) {
-        if (listener != null && !listenerLinkedList.contains(listener))
-            listenerLinkedList.add(listener);
+        synchronized (this){
+            if (listener != null && !listenerLinkedList.contains(listener))
+                listenerLinkedList.add(listener);
+        }
     }
 
     public void removeListener(RealtimeChangeListener listener) {
-        if (listener != null && listenerLinkedList.contains(listener))
-            listenerLinkedList.remove(listener);
+        synchronized (this){
+            if (listener != null && listenerLinkedList.contains(listener))
+                listenerLinkedList.remove(listener);
+        }
     }
 
     public void clearListeners(){
@@ -107,8 +111,10 @@ public class J1939_DataVar_ts {
     }
 
     public void notifyListener(short dsItemPosition, Object value) {
-        for (RealtimeChangeListener listener : listenerLinkedList) {
-            listener.onDataChanged(dsItemPosition, value);
+        synchronized (this){
+            for (int i = 0; i < listenerLinkedList.size(); i++) {
+                listenerLinkedList.get(i).onDataChanged(dsItemPosition, value);
+            }
         }
     }
 

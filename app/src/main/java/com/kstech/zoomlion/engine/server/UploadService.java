@@ -11,6 +11,7 @@ import android.os.SystemClock;
 import android.util.Log;
 
 import com.kstech.zoomlion.MyApplication;
+import com.kstech.zoomlion.engine.check.ItemCheckTask;
 import com.kstech.zoomlion.model.db.CheckItemData;
 import com.kstech.zoomlion.model.db.CheckItemDetailData;
 import com.kstech.zoomlion.model.db.greendao.CheckItemDetailDataDao;
@@ -102,6 +103,10 @@ public class UploadService extends Service {
 
         @Override
         public void run() {
+            //如果正在调试，不进行上传
+            if (ItemCheckTask.isRunning){
+                return;
+            }
             while (handler == null) {
                 Log.d("UploadService", "---------upload---等待连接---" + this);
                 SystemClock.sleep(200);

@@ -192,12 +192,12 @@ public class DebugActivity extends BaseActivity {
         new Thread() {
             @Override
             public void run() {
-                List<Float> datas = new ArrayList<>();
-                Float f;
-                for (int i = 0; i < 20000; i++) {
-                    f = Float.valueOf(i);
-                    datas.add(f);
+                LinkedList<Float> values = new LinkedList<>();
+                for (int i = 0; i < 90000; i++) {
+                    float r = (float) (Math.random()*500);
+                    values.add(r);
                 }
+                System.out.println(values.size());
             }
         }.start();
     }
@@ -290,13 +290,13 @@ public class DebugActivity extends BaseActivity {
         }
 
         @Override
-        public void onSuccess(List<CheckItemParamValueVO> headers, Map<String, LinkedList<Float>> specMap, String msg) {
+        public void onSuccess(List<CheckItemParamValueVO> headers, Map<String, List<Float>> specMap, String msg) {
             updateTaskInfo(msg, true);
             if (specMap != null) {
                 value.clear();
-                for (Map.Entry<String, LinkedList<Float>> listEntry : specMap.entrySet()) {
+                for (Map.Entry<String, List<Float>> listEntry : specMap.entrySet()) {
                     String key = listEntry.getKey();
-                    LinkedList<Float> listF = listEntry.getValue();
+                    List<Float> listF = listEntry.getValue();
                     if (listF.size() > 0) {
                         value.put(key, listF);
                     }
@@ -321,12 +321,12 @@ public class DebugActivity extends BaseActivity {
         }
 
         @Override
-        public void onTimeOut(List<CheckItemParamValueVO> headers, String msg, Map<String, LinkedList<Float>> specMap) {
+        public void onTimeOut(List<CheckItemParamValueVO> headers, String msg, Map<String, List<Float>> specMap) {
             updateTaskInfo(msg, true);
             if (specMap != null) {
-                for (Map.Entry<String, LinkedList<Float>> listEntry : specMap.entrySet()) {
+                for (Map.Entry<String, List<Float>> listEntry : specMap.entrySet()) {
                     String key = listEntry.getKey();
-                    LinkedList<Float> listF = listEntry.getValue();
+                    List<Float> listF = listEntry.getValue();
                     if (listF.size() > 0) {
                         value.put(key, listF);
                     }

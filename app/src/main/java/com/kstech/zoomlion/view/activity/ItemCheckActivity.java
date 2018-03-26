@@ -397,17 +397,17 @@ public class ItemCheckActivity extends BaseActivity implements ItemCheckCallBack
     }
 
     @Override
-    public void onSuccess(List<CheckItemParamValueVO> headers, Map<String, LinkedList<Float>> specMap, String msg) {
+    public void onSuccess(List<CheckItemParamValueVO> headers, Map<String, List<Float>> specMap, String msg) {
         //将获得的参数数据添加到集合
         valueVOList.addAll(headers);
         //处理谱图
         if (specMap != null) {
             //谱图数据不为空时，生成谱图数据，并添加到集合中
-            for (Map.Entry<String, LinkedList<Float>> sle : specMap.entrySet()) {
+            for (Map.Entry<String, List<Float>> sle : specMap.entrySet()) {
                 CheckChartData chartData = new CheckChartData();
 
                 String specName = sle.getKey();
-                LinkedList<Float> specValue = sle.getValue();
+                List<Float> specValue = sle.getValue();
                 String unit = Globals.modelFile.dataSetVO.getDSItem(specName).sUnit;
                 String data = JsonUtils.toJson(specValue);
 
@@ -432,7 +432,7 @@ public class ItemCheckActivity extends BaseActivity implements ItemCheckCallBack
     }
 
     @Override
-    public void onTimeOut(List<CheckItemParamValueVO> headers, String msg, Map<String, LinkedList<Float>> specMap) {
+    public void onTimeOut(List<CheckItemParamValueVO> headers, String msg, Map<String, List<Float>> specMap) {
         hasError = true;
         //利用超时 模拟接收数据
         for (CheckItemParamValueVO header : headers) {
@@ -444,11 +444,11 @@ public class ItemCheckActivity extends BaseActivity implements ItemCheckCallBack
         }
         if (specMap != null) {
             //谱图处理
-            for (Map.Entry<String, LinkedList<Float>> sle : specMap.entrySet()) {
+            for (Map.Entry<String, List<Float>> sle : specMap.entrySet()) {
                 CheckChartData chartData = new CheckChartData();
 
                 String specName = sle.getKey();
-                LinkedList<Float> specValue = sle.getValue();
+                List<Float> specValue = sle.getValue();
                 String unit = Globals.modelFile.dataSetVO.getDSItem(specName).sUnit;
                 String data = JsonUtils.toJson(specValue);
 
