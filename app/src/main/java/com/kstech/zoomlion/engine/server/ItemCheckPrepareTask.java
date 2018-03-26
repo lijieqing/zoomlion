@@ -111,10 +111,11 @@ public class ItemCheckPrepareTask extends AsyncTask<Void, Integer, Void> {
                 SystemClock.sleep(1000);
 
                 handler.sendEmptyMessage(BaseActivity.DIALOG_CANCEL);
-                handler.sendEmptyMessage(CheckHomeActivity.ITEM_SERVER_INFO_LOADED);
 
                 if (inCheckMode && funActivity != null) {
                     funActivity.loadCheckItemData();
+                }else {
+                    handler.sendEmptyMessage(CheckHomeActivity.ITEM_SERVER_INFO_LOADED);
                 }
             } else {
                 message.what = BaseActivity.UPDATE_PROGRESS_CONTENT;
