@@ -398,7 +398,9 @@ public class LoginActivity extends BaseActivity {
                             URLCollections.initSID();
                             onProgressUpdate();
                         } else {
-                            mError = "用户名或密码错误";
+                            JSONObject eObj = (JSONObject) object.get("error");
+                            String msg = eObj.getString("message");
+                            mError = TextUtils.isEmpty(msg)?"未知错误":msg;
                             status = 1;
                             onProgressUpdate();
                         }
