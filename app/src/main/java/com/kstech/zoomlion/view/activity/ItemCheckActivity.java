@@ -330,6 +330,8 @@ public class ItemCheckActivity extends BaseActivity implements ItemCheckCallBack
 
     @Override
     public void clearBlur() {
+        //开启事务
+        MyApplication.getApplication().getDb().beginTransaction();
         //需要通讯启动准备调试任务，否则直接进入
         if (ItemFunctionUtils.isCommItem(Integer.parseInt(Globals.currentCheckItem.getId()))) {
             new ReadyToCheckTask(this, handler).executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
@@ -345,6 +347,9 @@ public class ItemCheckActivity extends BaseActivity implements ItemCheckCallBack
             if (realTimeViewsFragment.isAdded())
                 fragmentManager.beginTransaction().remove(realTimeViewsFragment).commit();
             llRealTime.setVisibility(View.INVISIBLE);
+            //关闭事务
+            MyApplication.getApplication().getDb().setTransactionSuccessful();
+            MyApplication.getApplication().getDb().endTransaction();
         } else {
             llRealTime.setVisibility(View.VISIBLE);
             if (!realTimeViewsFragment.isAdded())
