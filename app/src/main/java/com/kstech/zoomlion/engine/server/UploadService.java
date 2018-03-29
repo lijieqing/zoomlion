@@ -137,7 +137,7 @@ public class UploadService extends Service {
                     itemData.update();
                 }
                 //初始化请求参数
-                RequestParams params = new RequestParams(URLCollections.UPDATE_CHECK_ITEM_DETAIL_DATA);
+                RequestParams params = new RequestParams(URLCollections.getUpdateCheckItemDetailDataURL());
                 params.setConnectTimeout(1000 * 60);
                 params.addHeader("Cookie", Globals.SID);
 

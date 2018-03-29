@@ -75,7 +75,7 @@ public class ItemCheckPrepareTask extends AsyncTask<Void, Integer, Void> {
     protected void onPreExecute() {
         super.onPreExecute();
         //URLCollections.GET_ITEM_CHECK_INFO
-        params = new RequestParams(URLCollections.GET_ITEM_CHECK_INFO);
+        params = new RequestParams(URLCollections.getGetItemCheckInfoURL());
         params.addHeader("Cookie", Globals.SID);
 
         handler.sendEmptyMessage(BaseActivity.DIALOG_SHOW);

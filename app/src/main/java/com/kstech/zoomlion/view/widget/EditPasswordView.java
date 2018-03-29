@@ -122,7 +122,7 @@ public class EditPasswordView extends RelativeLayout {
                         @Override
                         public void run() {
                             handler.sendEmptyMessage(UserDetailActivity.PASS_EDIT_START);
-                            RequestParams params = new RequestParams(URLCollections.CHANGE_PASSWORD);
+                            RequestParams params = new RequestParams(URLCollections.getChangePasswordURL());
                             params.addHeader("Cookie", Globals.SID);
                             params.addBodyParameter("originPassword", oldPass);
                             params.addBodyParameter("newPassword", newPass);
@@ -132,7 +132,7 @@ public class EditPasswordView extends RelativeLayout {
                                 JSONObject object = new JSONObject(result);
                                 if (object.has("success")) {
                                     //用户退出登录
-                                    params = new RequestParams(URLCollections.USER_LOGOUT);
+                                    params = new RequestParams(URLCollections.getUserLogoutURL());
                                     params.addHeader("Cookie", Globals.SID);
                                     String re = x.http().getSync(params, String.class);
                                     if (re != null && re.contains("success")) {

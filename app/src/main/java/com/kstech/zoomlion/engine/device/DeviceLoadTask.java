@@ -83,7 +83,7 @@ public class DeviceLoadTask extends AsyncTask<Void, String, Void> {
 
                 SystemClock.sleep(300);
 
-                RequestParams p = new RequestParams(URLCollections.GET_DEVICE_BY_SN);
+                RequestParams p = new RequestParams(URLCollections.getGetDeviceBySnURL());
                 p.addHeader("Cookie", Globals.SID);
                 p.addQueryStringParameter("sn", InExc);
 

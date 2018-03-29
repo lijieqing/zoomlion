@@ -36,7 +36,7 @@ public class UserDetailLoadTask extends AbstractDataTransferTask {
 
     @Override
     protected String getURL() {
-        return URLCollections.GET_USER_DETAIL;
+        return URLCollections.getGetUserDetailURL();
     }
 
     @Override

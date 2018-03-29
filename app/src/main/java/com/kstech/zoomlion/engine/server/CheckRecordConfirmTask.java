@@ -79,7 +79,7 @@ public class CheckRecordConfirmTask extends AbstractDataTransferTask {
 
     @Override
     protected String getURL() {
-        return URLCollections.NOTIFY_SERVER_CHECK_COMPLETE;
+        return URLCollections.getNotifyServerCheckCompleteURL();
     }
 
     @Override

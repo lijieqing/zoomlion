@@ -37,7 +37,7 @@ public class UserLogoutTask extends AbstractDataTransferTask {
 
     @Override
     protected String getURL() {
-        return URLCollections.USER_LOGOUT;
+        return URLCollections.getUserLogoutURL();
     }
 
     @Override

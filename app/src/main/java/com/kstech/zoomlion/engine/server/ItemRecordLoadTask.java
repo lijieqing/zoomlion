@@ -44,7 +44,7 @@ public class ItemRecordLoadTask extends AbstractDataTransferTask {
 
     @Override
     protected String getURL() {
-        return URLCollections.GET_ITEM_RECORD_BY_DICT;
+        return URLCollections.getGetItemRecordByDictURL();
     }
 
     @Override

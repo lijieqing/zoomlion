@@ -1,6 +1,8 @@
 package com.kstech.zoomlion.model.session;
 
+import com.kstech.zoomlion.MyApplication;
 import com.kstech.zoomlion.utils.Globals;
+import com.kstech.zoomlion.utils.SharedPreferencesUtils;
 
 import org.json.JSONObject;
 import org.xutils.http.cookie.DbCookieStore;
@@ -16,58 +18,98 @@ public final class URLCollections {
     }
 
     private static String ADDRESS = "http://192.168.32.54:9080/zoomlion";
+
     /**
      * 获取测量终端列表URL
      */
-    public static String TERMINAL_LIST_GET = ADDRESS + "/measure/showList";
+    public static String getTerminalListURL() {
+        return getADDRESS() + "/measure/showList";
+    }
+
     /**
      * 用户登录URL
      */
-    public static String USER_LOGIN = ADDRESS + "/login_app";
+    public static String getUserLoginURL() {
+        return getADDRESS() + "/login_app";
+    }
+
     /**
      * 用户登出URL
      */
-    public static String USER_LOGOUT = ADDRESS + "/logout_app";
+    public static String getUserLogoutURL() {
+        return getADDRESS() + "/logout_app";
+    }
+
     /**
      * 根据整机编码获取机型信息URL
      */
-    public static String GET_DEVICE_BY_SN = ADDRESS + "/commissioning/getProcessDetails";
+    public static String getGetDeviceBySnURL() {
+        return getADDRESS() + "/commissioning/getProcessDetails";
+    }
+
     /**
      * 向服务器请求进入调试
      */
-    public static String NOTIFY_SERVER_GOTO_CHECK = ADDRESS + "/commissioning/startCommissioning";
+    public static String getNotifyServerGotoCheckURL() {
+        return getADDRESS() + "/commissioning/startCommissioning";
+    }
+
     /**
      * 上传调试项目细节数据记录
      */
-    public static String UPDATE_CHECK_ITEM_DETAIL_DATA = ADDRESS + "/commissioning/completeQCItem";
+    public static String getUpdateCheckItemDetailDataURL() {
+        return getADDRESS() + "/commissioning/completeQCItem";
+    }
+
     /**
      * 在进入项目调试页面之前获取服务器相关信息
      */
-    public static String GET_ITEM_CHECK_INFO = ADDRESS + "/commissioning/startQCItem";
+    public static String getGetItemCheckInfoURL() {
+        return getADDRESS() + "/commissioning/startQCItem";
+    }
+
     /**
      * 整机调试完成后，通知服务器并上传数据
      */
-    public static String NOTIFY_SERVER_CHECK_COMPLETE = ADDRESS + "/commissioning/completeCommissioning";
+    public static String getNotifyServerCheckCompleteURL() {
+        return getADDRESS() + "/commissioning/completeCommissioning";
+    }
+
     /**
      * 获取整机泵车调试状态数据
      */
-    public static String UPDATE_DEVICE_STATUS = ADDRESS + "/commissioning/getStatistics";
+    public static String getUpdateDeviceStatusURL() {
+        return getADDRESS() + "/commissioning/getStatistics";
+    }
+
     /**
      * 获取用户详细信息
      */
-    public static String GET_USER_DETAIL = ADDRESS + "/user/details";
+    public static String getGetUserDetailURL() {
+        return getADDRESS() + "/user/details";
+    }
+
     /**
      * 修改用户密码
      */
-    public static String CHANGE_PASSWORD = ADDRESS + "/user/changePassword";
+    public static String getChangePasswordURL() {
+        return getADDRESS() + "/user/changePassword";
+    }
+
     /**
      * 根据调试项目dict ID获取调试项目记录
      */
-    public static String GET_ITEM_RECORD_BY_DICT = ADDRESS + "/commissioning/getQCItemRecord";
+    public static String getGetItemRecordByDictURL() {
+        return getADDRESS() + "/commissioning/getQCItemRecord";
+    }
+
     /**
      * 图片请求前缀
      */
-    public static String PIC_URL_PREFIX = ADDRESS + "/file/picture/";
+    public static String getPicUrlPrefix() {
+        return getADDRESS() + "/file/picture/";
+    }
+
     /**
      * 图片请求后缀
      */
@@ -75,9 +117,31 @@ public final class URLCollections {
     /**
      * 谱图数据请求前缀
      */
-    public static String SPEC_URL_PREFIX = ADDRESS + "/file/spectrogram/";
+    public static String getSpecUrlPrefix() {
+        return getADDRESS() + "/file/spectrogram/";
+    }
 
     public static String REGISTER_PAD = ADDRESS + "/portabledev/register";//调试终端注册
+
+    /**
+     * 拼装地址 http://192.168.32.54:9080/zoomlion
+     *
+     * @return 基础 URL
+     */
+    private static String getADDRESS() {
+        StringBuilder address = new StringBuilder();
+        address.append("http://");
+        String ip = (String) SharedPreferencesUtils
+                .getParam(MyApplication.getApplication(), "ServerIP", "192.168.32.54");
+        address.append(ip);
+        address.append(":");
+        String port = (String) SharedPreferencesUtils
+                .getParam(MyApplication.getApplication(), "Port", "9080");
+        address.append(port);
+        address.append("/zoomlion");
+
+        return address.toString();
+    }
 
     /**
      * 判断请求是否成功

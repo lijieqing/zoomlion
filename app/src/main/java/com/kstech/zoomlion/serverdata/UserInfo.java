@@ -202,7 +202,7 @@ public class UserInfo {
     }
 
     public String getPhoto() {
-        return URLCollections.PIC_URL_PREFIX+photo+URLCollections.PIC_URL_SUFFIX;
+        return URLCollections.getPicUrlPrefix()+photo+URLCollections.PIC_URL_SUFFIX;
     }
 
     public void setPhoto(Integer photo) {

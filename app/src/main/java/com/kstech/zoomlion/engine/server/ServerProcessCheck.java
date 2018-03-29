@@ -75,7 +75,7 @@ public class ServerProcessCheck extends AbstractDataTransferTask {
 
     @Override
     protected String getURL() {
-        return URLCollections.NOTIFY_SERVER_GOTO_CHECK;
+        return URLCollections.getNotifyServerGotoCheckURL();
     }
 
     @Override

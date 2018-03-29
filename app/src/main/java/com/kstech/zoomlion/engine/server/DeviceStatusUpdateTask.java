@@ -37,7 +37,7 @@ public class DeviceStatusUpdateTask extends AbstractDataTransferTask {
 
     @Override
     protected String getURL() {
-        return URLCollections.UPDATE_DEVICE_STATUS;
+        return URLCollections.getUpdateDeviceStatusURL();
     }
 
     @Override

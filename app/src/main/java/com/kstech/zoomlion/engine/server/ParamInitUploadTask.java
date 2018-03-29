@@ -74,7 +74,7 @@ public class ParamInitUploadTask extends AbstractDataTransferTask {
 
     @Override
     protected String getURL() {
-        return URLCollections.NOTIFY_SERVER_GOTO_CHECK;
+        return URLCollections.getNotifyServerGotoCheckURL();
     }
 
     @Override
@@ -226,7 +226,7 @@ public class ParamInitUploadTask extends AbstractDataTransferTask {
 
         itemJSON.setQcdataRecordCreateForms(dataForm);
 
-        RequestParams params = new RequestParams(URLCollections.UPDATE_CHECK_ITEM_DETAIL_DATA);
+        RequestParams params = new RequestParams(URLCollections.getUpdateCheckItemDetailDataURL());
         params.setConnectTimeout(1000 * 60);
         params.addHeader("Cookie", Globals.SID);
         String json = JsonUtils.toJson(itemJSON);

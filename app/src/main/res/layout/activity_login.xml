@@ -33,12 +33,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="5">
-            <Button
-                android:onClick="gotoDebug"
-                android:layout_gravity="center"
-                android:text="测量终端调试"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+
         </LinearLayout>
 
         <RelativeLayout
@@ -186,6 +181,15 @@
             android:layout_centerInParent="true"
             android:text="@string/copyright"
             android:textColor="#fff" />
+        <ImageButton
+            android:onClick="showMenu"
+            android:layout_marginRight="50dp"
+            android:id="@+id/btn_setting"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/pic_setting"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
     </RelativeLayout>
     <!-- Login progress -->
 </LinearLayout>

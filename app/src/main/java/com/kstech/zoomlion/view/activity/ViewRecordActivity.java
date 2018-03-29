@@ -189,7 +189,7 @@ public class ViewRecordActivity extends BaseActivity {
             ThreadManager.getThreadPool().execute(new Runnable() {
                 @Override
                 public void run() {
-                    String url = URLCollections.SPEC_URL_PREFIX + specID;
+                    String url = URLCollections.getSpecUrlPrefix() + specID;
                     RequestParams params = new RequestParams(url);
                     try {
                         Map<String, List<Float>> map = new HashMap<>();
@@ -220,7 +220,7 @@ public class ViewRecordActivity extends BaseActivity {
                 Long picID = qcData.getPictureId();
                 if (picID != null) {
                     //存在图片ID，生成图片数据对象
-                    String url = URLCollections.PIC_URL_PREFIX + picID + URLCollections.PIC_URL_SUFFIX;
+                    String url = URLCollections.getPicUrlPrefix() + picID + URLCollections.PIC_URL_SUFFIX;
                     ImageData imageData = new ImageData(name, url);
                     imgList.add(imageData);
                 }

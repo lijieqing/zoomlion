@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group>
+        <item android:title="服务器 IP" android:id="@+id/server_ip"/>
+        <item android:title="服务器 Port" android:id="@+id/server_port"/>
+        <item android:title="进入调试界面" android:id="@+id/goto_debug"/>
+    </group>
+</menu>

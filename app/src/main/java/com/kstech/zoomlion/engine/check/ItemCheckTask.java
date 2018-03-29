@@ -222,7 +222,9 @@ public class ItemCheckTask extends AsyncTask<Void, String, Void> implements J193
      * 停止当前调试
      */
     public void stopCheck() {
+        CommandSender.sendStopCheckCommand(qcID + "", times);
         isRunning = false;
+        removeTaskListener();
     }
 
     @Override

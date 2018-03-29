@@ -13,8 +13,12 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.support.design.widget.Snackbar;
+import android.text.InputType;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
@@ -24,9 +28,11 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.kstech.zoomlion.MyApplication;
 import com.kstech.zoomlion.R;
 import com.kstech.zoomlion.model.session.RegisterSession;
 import com.kstech.zoomlion.model.session.URLCollections;
@@ -333,14 +339,77 @@ public class LoginActivity extends BaseActivity {
         }
     }
 
-    /**
-     * 用于测量终端测试使用，正式版应该删除此方法以及对应控件
-     * @param view view
-     */
-    public void gotoDebug(View view) {
-        Intent intent = new Intent(this,DebugActivity.class);
-        startActivity(intent);
-        finish();
+    public void showMenu(final View view) {
+        PopupMenu menu = new PopupMenu(this,view);
+        final EditText value = new EditText(this);
+        menu.inflate(R.menu.menu_setting);
+        menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.server_ip:
+                        value.setText((String) SharedPreferencesUtils
+                                .getParam(LoginActivity.this,"ServerIP","192.168.32.54"));
+                        new AlertDialog.Builder(LoginActivity.this)
+                                .setTitle("服务器 IP 设置")
+                                .setPositiveButton("确定修改", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        String ip = value.getText().toString();
+                                        if (!TextUtils.isEmpty(ip)){
+                                            if (ip.split("\\.").length!=4){
+                                                Snackbar.make(view,"无效的 IP",Snackbar.LENGTH_SHORT).show();
+                                                return;
+                                            }
+                                            Log.e("LoginActivity",ip);
+                                            SharedPreferencesUtils.setParam(LoginActivity.this,"ServerIP",ip);
+
+                                            Snackbar.make(view, URLCollections.getGetDeviceBySnURL(),Snackbar.LENGTH_SHORT).show();
+
+                                        }
+                                    }
+                                })
+                                .setNegativeButton("取消",null)
+                                .setView(value)
+                                .setCancelable(true)
+                                .show();
+                        break;
+                    case R.id.server_port:
+                        value.setText((String) SharedPreferencesUtils
+                                .getParam(LoginActivity.this,"Port","9080"));
+                        value.setInputType(InputType.TYPE_CLASS_NUMBER);
+                        new AlertDialog.Builder(LoginActivity.this)
+                                .setTitle("服务器 端口 设置")
+                                .setPositiveButton("确定修改", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        String port = value.getText().toString();
+                                        if (!TextUtils.isEmpty(port)){
+                                            Log.e("LoginActivity",port);
+                                            SharedPreferencesUtils.setParam(LoginActivity.this,"Port",port);
+                                        }
+                                    }
+                                })
+                                .setNegativeButton("取消",null)
+                                .setView(value)
+                                .setCancelable(true)
+                                .show();
+                        break;
+                    case R.id.goto_debug:
+                        Intent intent = new Intent(LoginActivity.this,DebugActivity.class);
+                        startActivity(intent);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                finish();
+                            }
+                        });
+                        break;
+                }
+                return false;
+            }
+        });
+        menu.show();
     }
 
 
@@ -383,7 +452,7 @@ public class LoginActivity extends BaseActivity {
             maps.put("mac", mac);
             maps.put("measureDevId", mMT.getId() + "");
 
-            new MyHttpUtils().xutilsPost(null, URLCollections.USER_LOGIN, maps, new MyHttpUtils.MyHttpCallback() {
+            new MyHttpUtils().xutilsPost(null, URLCollections.getUserLoginURL(), maps, new MyHttpUtils.MyHttpCallback() {
                 @Override
                 public void onSuccess(Object result, String whereRequest) {
                     LogUtils.e("LoginActivity", "onSuccess  " + result);
@@ -516,7 +585,7 @@ public class LoginActivity extends BaseActivity {
         protected List<MeasureDev> doInBackground(Void... voids) {
             HashMap<String, String> maps = new HashMap<>();
             maps.put("status", "0");
-            new MyHttpUtils().xutilsGet(null, URLCollections.TERMINAL_LIST_GET, maps, new MyHttpUtils.MyHttpCallback() {
+            new MyHttpUtils().xutilsGet(null, URLCollections.getTerminalListURL(), maps, new MyHttpUtils.MyHttpCallback() {
                 @Override
                 public void onSuccess(Object result, String whereRequest) {
                     terminalList.clear();

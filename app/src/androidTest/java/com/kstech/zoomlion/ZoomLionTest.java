@@ -69,7 +69,7 @@ public class ZoomLionTest {
         maps.put("password", "123");
 //        maps.put("portable_dev_id","3");
 //        maps.put("measure_dev_id","2");
-        new MyHttpUtils().xutilsPost(null, URLCollections.USER_LOGIN, maps, new MyHttpUtils.MyHttpCallback() {
+        new MyHttpUtils().xutilsPost(null, URLCollections.getUserLoginURL(), maps, new MyHttpUtils.MyHttpCallback() {
             @Override
             public void onSuccess(Object result, String whereRequest) {
                 DbCookieStore cookie = DbCookieStore.INSTANCE;
@@ -105,7 +105,7 @@ public class ZoomLionTest {
 
     @Test
     public void MeasureDevListTest() throws Exception {
-        new MyHttpUtils().xutilsGet(null, URLCollections.TERMINAL_LIST_GET, null, new MyHttpUtils.MyHttpCallback() {
+        new MyHttpUtils().xutilsGet(null, URLCollections.getTerminalListURL(), null, new MyHttpUtils.MyHttpCallback() {
             @Override
             public void onSuccess(Object result, String whereRequest) {
                 LogUtils.e("ServerTest", "onSuccess  " + result);

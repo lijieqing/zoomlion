@@ -58,7 +58,7 @@ public class QCItemDataReLoadTask extends AbstractDataTransferTask {
 
     @Override
     protected String getURL() {
-        return URLCollections.UPDATE_CHECK_ITEM_DETAIL_DATA;
+        return URLCollections.getUpdateCheckItemDetailDataURL();
     }
 
     @Override
