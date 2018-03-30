@@ -217,7 +217,7 @@ public class CheckResultVerify {
             LogUtils.e("DaoTest", "getMinMouthTemperature");
             result = expression.getMinMouthTemperature();
         } else if (str.contains("expPower")) {
-            // TODO: 2017/12/20 需要处理根据XRange、XParam来计算
+            //需要处理根据XRange、XParam来计算
             param = getParamName(str);
             LogUtils.e("DaoTest", "expPower" + param);
             result = expression.expPower(param);

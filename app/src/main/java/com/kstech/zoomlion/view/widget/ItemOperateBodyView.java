@@ -170,7 +170,7 @@ public class ItemOperateBodyView extends RelativeLayout {
                     switch (i) {
                         case R.id.rb_pass:
                             LogUtils.e("ItemOperateView", "in listener pass:" + checkItemParamValueVO.getValue() + " id:" + i);
-                            // TODO: 2017/10/18 判断是否需要图片，需要图片时，在给出合格不合格时，应该判断是否已保存图片
+                            // 判断是否需要图片，需要图片时，在给出合格不合格时，应该判断是否已保存图片
                             if (checkItemParamValueVO.getPicReq() && !picSaved) {
                                 Toast.makeText(context, "请先保存图片数据", Toast.LENGTH_SHORT).show();
                                 radioGroup.clearCheck();

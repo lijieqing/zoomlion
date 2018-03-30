@@ -294,12 +294,10 @@ public class LoginActivity extends BaseActivity {
     }
 
     private boolean isNameValid(String name) {
-        //TODO: Replace this with your own logic
         return name.trim().length() > 1;
     }
 
     private boolean isPasswordValid(String password) {
-        //TODO: Replace this with your own logic
         return password.length() > 0;
     }
 
@@ -405,6 +403,9 @@ public class LoginActivity extends BaseActivity {
                             }
                         });
                         break;
+                    case R.id.apk_check_update:
+
+                        break;
                 }
                 return false;
             }
@@ -436,7 +437,6 @@ public class LoginActivity extends BaseActivity {
 
         @Override
         protected Integer doInBackground(Void... params) {
-            // TODO: attempt authentication against a network service.
             String mac = null;
             try {
                 mac = DeviceUtil.macAddress();

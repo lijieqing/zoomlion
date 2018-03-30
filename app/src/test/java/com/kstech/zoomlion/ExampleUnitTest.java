@@ -3,6 +3,7 @@ package com.kstech.zoomlion;
 import com.kstech.zoomlion.engine.device.XMLAPI;
 import com.kstech.zoomlion.model.session.DeviceCatSession;
 import com.kstech.zoomlion.model.xmlbean.DSItem;
+import com.kstech.zoomlion.model.xmlbean.Data;
 import com.kstech.zoomlion.model.xmlbean.DataSet;
 import com.kstech.zoomlion.model.xmlbean.J1939;
 import com.kstech.zoomlion.model.xmlbean.PG;
@@ -196,28 +197,23 @@ public class ExampleUnitTest {
 
     @Test
     public void TestAttachPgn() throws IOException, IllegalAccessException, InvocationTargetException {
-        J1939 type = (J1939) XMLAPI.readXML(new FileInputStream("/Users/lijie/Desktop/zoo.xml"));
-        for (PG pg : type.getPgs()) {
-            Iterator<SP> it = pg.getSps().iterator();
-            while (it.hasNext()) {
-                SP sp = it.next();
-                if ("当前检测项目".equals(sp.getRef()) || sp.getRef().contains("K标定系数")) {
-                    it.remove();
-                }
-            }
+        PG pg = (PG) XMLAPI.readXML(new FileInputStream("/Users/lijie/Desktop/zoo.xml"));
+
+        List<SP> sps = pg.getSps();
+
+        System.out.println("总 sp 个数："+sps.size());
+        int total = 0;
+
+        for (int i = 0; i < sps.size(); i++) {
+            String bytes = sps.get(i).getBytes();
+            sps.get(i).setSByte(String.valueOf(total+1));
+            total += Integer.parseInt(bytes);
+
         }
 
-        for (PG pg : type.getPgs()) {
-            int count = 1;
-            for (int i = 0; i < pg.getSps().size(); i++) {
-                SP sp = pg.getSps().get(i);
-                int sbyte = count + i;
-                sp.setSByte("" + sbyte);
-                count++;
-            }
-        }
+        System.out.println("总长度："+total);
 
-        XMLAPI.writeXML2File(type, "/Users/lijie/Desktop/zoo.xml");
+        XMLAPI.writeXML2File(pg, "/Users/lijie/Desktop/spec.xml");
     }
 
     @Test
@@ -230,6 +226,43 @@ public class ExampleUnitTest {
                 type.getQcItems().get(i).setSpectrum(item.getSpectrum());
             }
         }
+
+        XMLAPI.writeXML2File(type, "/Users/lijie/Desktop/spec.xml");
+    }
+
+    @Test
+    public void testDataSet() throws IOException, IllegalAccessException, InvocationTargetException{
+        DataSet type = (DataSet) XMLAPI.readXML(new FileInputStream("/Users/lijie/Desktop/zoo.xml"));
+        List<DSItem> dsItem = type.getDsItems();
+        List<Data> pressList = dsItem.get(0).getDatas();
+        List<Data> minList = dsItem.get(1).getDatas();
+        List<Data> maxList = dsItem.get(2).getDatas();
+
+        DSItem ds = new DSItem();
+
+        List<Data> datas = ds.getDatas();
+        Data d = new Data();
+        d.setValue(pressList.size()+"");
+        datas.add(d);
+        for (int i = 0; i < pressList.size(); i++) {
+            d = new Data();
+            String press = pressList.get(i).getValue();
+            d.setValue(press);
+            datas.add(d);
+
+            d = new Data();
+            String min = minList.get(i).getValue();
+            d.setValue(min);
+            datas.add(d);
+
+            d = new Data();
+            String max = maxList.get(i).getValue();
+            d.setValue(max);
+            datas.add(d);
+        }
+
+        ds.setDatas(datas);
+        dsItem.add(ds);
 
         XMLAPI.writeXML2File(type, "/Users/lijie/Desktop/spec.xml");
     }

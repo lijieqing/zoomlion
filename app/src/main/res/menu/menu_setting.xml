@@ -4,5 +4,6 @@
         <item android:title="服务器 IP" android:id="@+id/server_ip"/>
         <item android:title="服务器 Port" android:id="@+id/server_port"/>
         <item android:title="进入调试界面" android:id="@+id/goto_debug"/>
+        <item android:title="检查更新" android:id="@+id/apk_check_update"/>
     </group>
 </menu>

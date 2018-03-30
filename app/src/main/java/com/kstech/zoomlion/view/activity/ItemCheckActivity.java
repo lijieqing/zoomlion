@@ -45,6 +45,7 @@ import com.kstech.zoomlion.view.widget.CameraCapView;
 import com.kstech.zoomlion.view.widget.ItemOperateBodyView;
 import com.kstech.zoomlion.view.widget.ItemOperateView;
 import com.kstech.zoomlion.view.widget.ItemShowViewInCheck;
+import com.kstech.zoomlion.view.widget.MessageShowView;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
@@ -75,8 +76,8 @@ public class ItemCheckActivity extends BaseActivity implements ItemCheckCallBack
     @ViewInject(R.id.item_check_ll_realtime)
     private LinearLayout llRealTime;
 
-    @ViewInject(R.id.item_check_ll_checkinfo)
-    private LinearLayout llCheckInfo;
+    @ViewInject(R.id.check_msv)
+    private MessageShowView msv_check;
     /**
      * 照片捕获view，包含拍照、保存、重新开始
      */
@@ -398,7 +399,13 @@ public class ItemCheckActivity extends BaseActivity implements ItemCheckCallBack
     }
 
     @Override
-    public void onProgress(String progress) {
+    public void onProgress(final String progress) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                msv_check.updateMessage(new Date(),progress);
+            }
+        });
     }
 
     @Override
@@ -428,7 +435,13 @@ public class ItemCheckActivity extends BaseActivity implements ItemCheckCallBack
     }
 
     @Override
-    public void onResultError(List<CheckItemParamValueVO> headers, String msg) {
+    public void onResultError(List<CheckItemParamValueVO> headers, final String msg) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                msv_check.updateMessage(new Date(),"测量终端调试失败,原因："+msg,true);
+            }
+        });
         hasError = true;
         //将获得的参数数据添加到集合
         valueVOList.addAll(headers);
@@ -438,6 +451,13 @@ public class ItemCheckActivity extends BaseActivity implements ItemCheckCallBack
 
     @Override
     public void onTimeOut(List<CheckItemParamValueVO> headers, String msg, Map<String, List<Float>> specMap) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                msv_check.updateMessage(new Date(),"与测量终端通讯超时",true);
+            }
+        });
+
         hasError = true;
         //利用超时 模拟接收数据
         for (CheckItemParamValueVO header : headers) {
@@ -537,6 +557,9 @@ public class ItemCheckActivity extends BaseActivity implements ItemCheckCallBack
             if (activity != null) {
                 switch (msg.what) {
                     case NEW_CHECKITEM_REFRESH:
+                        //更新信息提示区
+                        activity.msv_check.updateMessage(new Date(),
+                                activity.itemvo.getName()+" 加载成功",true);
                         //更新调试项目参数操作区信息
                         activity.iov.update(activity.itemvo);
                         //更新调试项目界面展示信息，包括调试记录、当前项目名称、机型编号等
@@ -549,9 +572,12 @@ public class ItemCheckActivity extends BaseActivity implements ItemCheckCallBack
                         if (activity.detailData != null)
                             activity.detailData.setParamsValues(JsonUtils.toJson(activity.valueVOList));
                         activity.valueVOList.clear();
-
+                        //更新信息提示区
+                        activity.msv_check.updateMessage(new Date(),"已加载数据",true);
                         if (ItemFunctionUtils.isJustComm(activity.itemvo.getId())) {
                             sendEmptyMessage(AUTO_SAVE_RECORD);
+                            //更新信息提示区
+                            activity.msv_check.updateMessage(new Date(),"数据自动保存中",true);
                         }
                         break;
                     case START_SAVE_RECORD:
@@ -571,9 +597,13 @@ public class ItemCheckActivity extends BaseActivity implements ItemCheckCallBack
                         activity.iov.updateCheckStatus(false, false);
                         //计时器复位
                         activity.iov.chronometerReset(R.color.whiteColor, false);
+                        //更新信息提示区
+                        activity.msv_check.updateMessage(new Date(),"数据保存成功！",true);
                         break;
                     case RECORD_VERIFY_ERROR:
                         activity.progressView.updateProgress("校验数据失败，请确保机型配置正确", 100);
+                        //更新信息提示区
+                        activity.msv_check.updateMessage(new Date(),"校验数据失败，请确保机型配置正确",true);
                         break;
                     case TERMINAL_READY_CHECK:
                         activity.iov.changeBlur();

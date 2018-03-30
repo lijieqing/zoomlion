@@ -174,7 +174,6 @@ public class ParamInitUploadTask extends AbstractDataTransferTask {
                     SystemClock.sleep(500);
 
                 } else if ("检测完成".equals(checkResp)) {
-                    // TODO: 2018/1/29 初始化完成后，保存并上传记录
                     int v = (int) Globals.modelFile.dataSetVO.getDSItem("初始化").getFloatValue();
                     if (v == 1) {
                         packageInitData();

@@ -143,6 +143,81 @@
             <Data Value="0" />
             <Data Value="124.7" />
         </DSItem>
+        <DSItem DataType="WORD" DecLen="1" Name="恒功率压力_次数标准" Rows="55">
+            <Data Value="18" /><!-- 行数 -->
+
+            <Data Value="0" /><!-- 压力值 *10-->
+            <Data Value="241" /><!-- 最小次数 *10-->
+            <Data Value="261" /><!-- 最大次数 *10-->
+
+            <Data Value="1247" />
+            <Data Value="241" />
+            <Data Value="261" />
+
+            <Data Value="1300" />
+            <Data Value="232" />
+            <Data Value="252" />
+
+            <Data Value="1500" />
+            <Data Value="205" />
+            <Data Value="221" />
+
+            <Data Value="1700" />
+            <Data Value="184" />
+            <Data Value="197" />
+
+            <Data Value="1900" />
+            <Data Value="167" />
+            <Data Value="177" />
+
+            <Data Value="2100" />
+            <Data Value="152" />
+            <Data Value="161" />
+
+            <Data Value="2300" />
+            <Data Value="140" />
+            <Data Value="148" />
+
+            <Data Value="2700" />
+            <Data Value="121" />
+            <Data Value="127" />
+
+            <Data Value="2900" />
+            <Data Value="113" />
+            <Data Value="119" />
+
+            <Data Value="3100" />
+            <Data Value="106" />
+            <Data Value="111" />
+
+            <Data Value="3300" />
+            <Data Value="100" />
+            <Data Value="105" />
+
+            <Data Value="3500" />
+            <Data Value="95" />
+            <Data Value="99" />
+
+            <Data Value="3700" />
+            <Data Value="90" />
+            <Data Value="94" />
+
+            <Data Value="3900" />
+            <Data Value="85" />
+            <Data Value="89" />
+
+            <Data Value="4100" />
+            <Data Value="81" />
+            <Data Value="85" />
+
+            <Data Value="4300" />
+            <Data Value="77" />
+            <Data Value="81" />
+
+            <Data Value="4500" />
+            <Data Value="73" />
+            <Data Value="77" />
+        </DSItem>
         <DSItem DataType="FLOAT" Name="第一压力段起始压力" Unit="bar" Value="10" />
         <DSItem DataType="FLOAT" Name="第一压力段中止压力" Unit="bar" Value="10" />
         <DSItem DataType="FLOAT" Name="第二压力段起始压力" Unit="bar" Value="10" />
@@ -208,6 +283,7 @@
         <DSItem DataType="FLOAT" DecLen="0" Name="油泵超速报警值" Unit="U" />
         <DSItem DataType="FLOAT" DecLen="0" Name="超档位传动比" Unit="U" />
         <DSItem DataType="FLOAT" DecLen="0" Name="速度参数自学习" Unit="U" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="泵送减震参数自适应" Unit="U" />
         <DSItem DataType="FLOAT" DecLen="0" Name="主缸停止延时" Unit="U" />
         <DSItem DataType="FLOAT" DecLen="0" Name="分配停止延时" Unit="U" />
         <DSItem DataType="FLOAT" DecLen="0" Name="换向延时时间" Unit="U" />
@@ -215,7 +291,7 @@
         <DSItem DataType="FLOAT" DecLen="0" Name="降排量压力" Unit="U" />
         <DSItem DataType="FLOAT" DecLen="0" Name="超压降排量时间" Unit="U" />
         <DSItem DataType="FLOAT" DecLen="0" Name="起调压力" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="恒功率系数" Unit="U" Value="100"/>
+        <DSItem DataType="FLOAT" DecLen="0" Name="恒功率系数" Unit="U" Value="100" />
         <DSItem DataType="FLOAT" DecLen="0" Name="最小控制压力" Unit="U" />
         <DSItem DataType="FLOAT" DecLen="0" Name="排量修正系数" Unit="U" />
         <DSItem DataType="FLOAT" DecLen="0" Name="优化行程最小时间" Unit="U" />
@@ -1811,7 +1887,7 @@
             <SP Bits="0" Bytes="2" Off="0" Ref="第四压力段最大压力泵送次数的最大值" Res="1" SBit="1" SByte="11"
                 SPN="0" Type="1" />
         </PG>
-        <PG Dir="Tx" Len="144" PGN="0xFFF7" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
+        <PG Dir="Tx" Len="168" PGN="0xFFF7" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
             <SP Bits="0" Bytes="1" Off="0" Ref="主泵品牌" Res="1" SBit="1" SByte="1" SPN="0" Type="1" />
             <SP Bits="0" Bytes="1" Off="0" Ref="主泵排量" Res="1" SBit="1" SByte="2" SPN="0" Type="1" />
             <SP Bits="0" Bytes="1" Off="0" Ref="主泵类型" Res="1" SBit="1" SByte="3" SPN="0" Type="1" />
@@ -1906,9 +1982,7 @@
                 Type="1" />
             <SP Bits="0" Bytes="2" Off="0" Ref="油泵超速报警值" Res="1" SBit="1" SByte="56" SPN="0"
                 Type="1" />
-            <SP Bits="0" Bytes="1" Off="0" Ref="超档位传动比" Res="1" SBit="1" SByte="58" SPN="0"
-                Type="1" />
-            <SP Bits="0" Bytes="1" Off="0" Ref="速度参数自学习" Res="1" SBit="1" SByte="59" SPN="0"
+            <SP Bits="0" Bytes="2" Off="0" Ref="超档位传动比" Res="1" SBit="1" SByte="58" SPN="0"
                 Type="1" />
             <SP Bits="0" Bytes="1" Off="0" Ref="主缸停止延时" Res="1" SBit="1" SByte="60" SPN="0"
                 Type="1" />
@@ -1998,45 +2072,49 @@
                 Type="1" />
             <SP Bits="0" Bytes="1" Off="0" Ref="泵送行程参数" Res="1" SBit="1" SByte="119" SPN="0"
                 Type="1" />
-            <SP Bits="0" Bytes="1" Off="0" Ref="回转启动速度缓冲" Res="1" SBit="1" SByte="120" SPN="0"
+            <SP Bits="0" Bytes="2" Off="0" Ref="回转启动速度缓冲" Res="1" SBit="1" SByte="120" SPN="0"
                 Type="1" />
-            <SP Bits="0" Bytes="1" Off="0" Ref="一臂启动速度缓冲" Res="1" SBit="1" SByte="121" SPN="0"
+            <SP Bits="0" Bytes="2" Off="0" Ref="一臂启动速度缓冲" Res="1" SBit="1" SByte="122" SPN="0"
                 Type="1" />
-            <SP Bits="0" Bytes="1" Off="0" Ref="二臂启动速度缓冲" Res="1" SBit="1" SByte="122" SPN="0"
+            <SP Bits="0" Bytes="2" Off="0" Ref="二臂启动速度缓冲" Res="1" SBit="1" SByte="124" SPN="0"
                 Type="1" />
-            <SP Bits="0" Bytes="1" Off="0" Ref="三臂启动速度缓冲" Res="1" SBit="1" SByte="123" SPN="0"
+            <SP Bits="0" Bytes="2" Off="0" Ref="三臂启动速度缓冲" Res="1" SBit="1" SByte="126" SPN="0"
                 Type="1" />
-            <SP Bits="0" Bytes="1" Off="0" Ref="四臂启动速度缓冲" Res="1" SBit="1" SByte="124" SPN="0"
+            <SP Bits="0" Bytes="2" Off="0" Ref="四臂启动速度缓冲" Res="1" SBit="1" SByte="128" SPN="0"
                 Type="1" />
-            <SP Bits="0" Bytes="1" Off="0" Ref="五臂启动速度缓冲" Res="1" SBit="1" SByte="125" SPN="0"
+            <SP Bits="0" Bytes="2" Off="0" Ref="五臂启动速度缓冲" Res="1" SBit="1" SByte="130" SPN="0"
                 Type="1" />
-            <SP Bits="0" Bytes="1" Off="0" Ref="六臂启动速度缓冲" Res="1" SBit="1" SByte="126" SPN="0"
+            <SP Bits="0" Bytes="2" Off="0" Ref="六臂启动速度缓冲" Res="1" SBit="1" SByte="132" SPN="0"
                 Type="1" />
-            <SP Bits="0" Bytes="1" Off="0" Ref="七臂启动速度缓冲" Res="1" SBit="1" SByte="127" SPN="0"
+            <SP Bits="0" Bytes="2" Off="0" Ref="七臂启动速度缓冲" Res="1" SBit="1" SByte="134" SPN="0"
                 Type="1" />
-            <SP Bits="0" Bytes="1" Off="0" Ref="回转停止速度缓冲" Res="1" SBit="1" SByte="128" SPN="0"
+            <SP Bits="0" Bytes="2" Off="0" Ref="回转停止速度缓冲" Res="1" SBit="1" SByte="136" SPN="0"
                 Type="1" />
-            <SP Bits="0" Bytes="1" Off="0" Ref="一臂停止速度缓冲" Res="1" SBit="1" SByte="129" SPN="0"
+            <SP Bits="0" Bytes="2" Off="0" Ref="一臂停止速度缓冲" Res="1" SBit="1" SByte="138" SPN="0"
                 Type="1" />
-            <SP Bits="0" Bytes="1" Off="0" Ref="二臂停止速度缓冲" Res="1" SBit="1" SByte="130" SPN="0"
+            <SP Bits="0" Bytes="2" Off="0" Ref="二臂停止速度缓冲" Res="1" SBit="1" SByte="140" SPN="0"
                 Type="1" />
-            <SP Bits="0" Bytes="1" Off="0" Ref="三臂停止速度缓冲" Res="1" SBit="1" SByte="131" SPN="0"
+            <SP Bits="0" Bytes="2" Off="0" Ref="三臂停止速度缓冲" Res="1" SBit="1" SByte="142" SPN="0"
                 Type="1" />
-            <SP Bits="0" Bytes="1" Off="0" Ref="四臂停止速度缓冲" Res="1" SBit="1" SByte="132" SPN="0"
+            <SP Bits="0" Bytes="2" Off="0" Ref="四臂停止速度缓冲" Res="1" SBit="1" SByte="144" SPN="0"
                 Type="1" />
-            <SP Bits="0" Bytes="1" Off="0" Ref="五臂停止速度缓冲" Res="1" SBit="1" SByte="133" SPN="0"
+            <SP Bits="0" Bytes="2" Off="0" Ref="五臂停止速度缓冲" Res="1" SBit="1" SByte="146" SPN="0"
                 Type="1" />
-            <SP Bits="0" Bytes="1" Off="0" Ref="六臂停止速度缓冲" Res="1" SBit="1" SByte="134" SPN="0"
+            <SP Bits="0" Bytes="2" Off="0" Ref="六臂停止速度缓冲" Res="1" SBit="1" SByte="148" SPN="0"
                 Type="1" />
-            <SP Bits="0" Bytes="1" Off="0" Ref="七臂停止速度缓冲" Res="1" SBit="1" SByte="135" SPN="0"
+            <SP Bits="0" Bytes="2" Off="0" Ref="七臂停止速度缓冲" Res="1" SBit="1" SByte="150" SPN="0"
                 Type="1" />
-            <SP Bits="0" Bytes="2" Off="0" Ref="合流阀最大电流" Res="1" SBit="1" SByte="136" SPN="0"
+            <SP Bits="0" Bytes="2" Off="0" Ref="合流阀最大电流" Res="1" SBit="1" SByte="152" SPN="0"
                 Type="1" />
-            <SP Bits="0" Bytes="2" Off="0" Ref="合流阀最小电流" Res="1" SBit="1" SByte="138" SPN="0"
+            <SP Bits="0" Bytes="2" Off="0" Ref="合流阀最小电流" Res="1" SBit="1" SByte="154" SPN="0"
                 Type="1" />
-            <SP Bits="0" Bytes="2" Off="0" Ref="臂架降温启动温度" Res="1" SBit="1" SByte="140" SPN="0"
+            <SP Bits="0" Bytes="2" Off="0" Ref="臂架降温启动温度" Res="1" SBit="1" SByte="156" SPN="0"
                 Type="1" />
-            <SP Bits="0" Bytes="1" Off="0" Ref="分配压力" Res="1" SBit="1" SByte="142" SPN="0"
+            <SP Bits="0" Bytes="2" Off="0" Ref="分配压力" Res="1" SBit="1" SByte="158" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="泵送减震参数自适应" Res="1" SBit="1" SByte="160" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="速度参数自学习" Res="1" SBit="1" SByte="162" SPN="0"
                 Type="1" />
         </PG>
         <PG Dir="Tx" Len="40" PGN="0xFFF9" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
@@ -2059,7 +2137,11 @@
             <SP Bits="0" Bytes="20" Off="0" Ref="整机编码_回复" Res="1" SBit="1" SByte="17" SPN="0"
                 Type="1" />
         </PG>
-        <PG Dir="Rx" Len="144" PGN="0xFFFA" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
+        <PG Dir="Tx" Len="112" PGN="0xFFFB" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
+            <SP Bits="0" Bytes="1" Off="0" Ref="恒功率压力_次数标准" Res="1" SBit="1" SByte="1" SPN="0"
+                Type="1" />
+        </PG>
+        <PG Dir="Rx" Len="168" PGN="0xFFFA" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
             <SP Bits="0" Bytes="1" Off="0" Ref="主泵品牌" Res="1" SBit="1" SByte="1" SPN="0" Type="1" />
             <SP Bits="0" Bytes="1" Off="0" Ref="主泵排量" Res="1" SBit="1" SByte="2" SPN="0" Type="1" />
             <SP Bits="0" Bytes="1" Off="0" Ref="主泵类型" Res="1" SBit="1" SByte="3" SPN="0" Type="1" />
@@ -2154,9 +2236,7 @@
                 Type="1" />
             <SP Bits="0" Bytes="2" Off="0" Ref="油泵超速报警值" Res="1" SBit="1" SByte="56" SPN="0"
                 Type="1" />
-            <SP Bits="0" Bytes="1" Off="0" Ref="超档位传动比" Res="1" SBit="1" SByte="58" SPN="0"
-                Type="1" />
-            <SP Bits="0" Bytes="1" Off="0" Ref="速度参数自学习" Res="1" SBit="1" SByte="59" SPN="0"
+            <SP Bits="0" Bytes="2" Off="0" Ref="超档位传动比" Res="1" SBit="1" SByte="58" SPN="0"
                 Type="1" />
             <SP Bits="0" Bytes="1" Off="0" Ref="主缸停止延时" Res="1" SBit="1" SByte="60" SPN="0"
                 Type="1" />
@@ -2246,45 +2326,49 @@
                 Type="1" />
             <SP Bits="0" Bytes="1" Off="0" Ref="泵送行程参数" Res="1" SBit="1" SByte="119" SPN="0"
                 Type="1" />
-            <SP Bits="0" Bytes="1" Off="0" Ref="回转启动速度缓冲" Res="1" SBit="1" SByte="120" SPN="0"
+            <SP Bits="0" Bytes="2" Off="0" Ref="回转启动速度缓冲" Res="1" SBit="1" SByte="120" SPN="0"
                 Type="1" />
-            <SP Bits="0" Bytes="1" Off="0" Ref="一臂启动速度缓冲" Res="1" SBit="1" SByte="121" SPN="0"
+            <SP Bits="0" Bytes="2" Off="0" Ref="一臂启动速度缓冲" Res="1" SBit="1" SByte="122" SPN="0"
                 Type="1" />
-            <SP Bits="0" Bytes="1" Off="0" Ref="二臂启动速度缓冲" Res="1" SBit="1" SByte="122" SPN="0"
+            <SP Bits="0" Bytes="2" Off="0" Ref="二臂启动速度缓冲" Res="1" SBit="1" SByte="124" SPN="0"
                 Type="1" />
-            <SP Bits="0" Bytes="1" Off="0" Ref="三臂启动速度缓冲" Res="1" SBit="1" SByte="123" SPN="0"
+            <SP Bits="0" Bytes="2" Off="0" Ref="三臂启动速度缓冲" Res="1" SBit="1" SByte="126" SPN="0"
                 Type="1" />
-            <SP Bits="0" Bytes="1" Off="0" Ref="四臂启动速度缓冲" Res="1" SBit="1" SByte="124" SPN="0"
+            <SP Bits="0" Bytes="2" Off="0" Ref="四臂启动速度缓冲" Res="1" SBit="1" SByte="128" SPN="0"
                 Type="1" />
-            <SP Bits="0" Bytes="1" Off="0" Ref="五臂启动速度缓冲" Res="1" SBit="1" SByte="125" SPN="0"
+            <SP Bits="0" Bytes="2" Off="0" Ref="五臂启动速度缓冲" Res="1" SBit="1" SByte="130" SPN="0"
                 Type="1" />
-            <SP Bits="0" Bytes="1" Off="0" Ref="六臂启动速度缓冲" Res="1" SBit="1" SByte="126" SPN="0"
+            <SP Bits="0" Bytes="2" Off="0" Ref="六臂启动速度缓冲" Res="1" SBit="1" SByte="132" SPN="0"
                 Type="1" />
-            <SP Bits="0" Bytes="1" Off="0" Ref="七臂启动速度缓冲" Res="1" SBit="1" SByte="127" SPN="0"
+            <SP Bits="0" Bytes="2" Off="0" Ref="七臂启动速度缓冲" Res="1" SBit="1" SByte="134" SPN="0"
                 Type="1" />
-            <SP Bits="0" Bytes="1" Off="0" Ref="回转停止速度缓冲" Res="1" SBit="1" SByte="128" SPN="0"
+            <SP Bits="0" Bytes="2" Off="0" Ref="回转停止速度缓冲" Res="1" SBit="1" SByte="136" SPN="0"
                 Type="1" />
-            <SP Bits="0" Bytes="1" Off="0" Ref="一臂停止速度缓冲" Res="1" SBit="1" SByte="129" SPN="0"
+            <SP Bits="0" Bytes="2" Off="0" Ref="一臂停止速度缓冲" Res="1" SBit="1" SByte="138" SPN="0"
                 Type="1" />
-            <SP Bits="0" Bytes="1" Off="0" Ref="二臂停止速度缓冲" Res="1" SBit="1" SByte="130" SPN="0"
+            <SP Bits="0" Bytes="2" Off="0" Ref="二臂停止速度缓冲" Res="1" SBit="1" SByte="140" SPN="0"
                 Type="1" />
-            <SP Bits="0" Bytes="1" Off="0" Ref="三臂停止速度缓冲" Res="1" SBit="1" SByte="131" SPN="0"
+            <SP Bits="0" Bytes="2" Off="0" Ref="三臂停止速度缓冲" Res="1" SBit="1" SByte="142" SPN="0"
                 Type="1" />
-            <SP Bits="0" Bytes="1" Off="0" Ref="四臂停止速度缓冲" Res="1" SBit="1" SByte="132" SPN="0"
+            <SP Bits="0" Bytes="2" Off="0" Ref="四臂停止速度缓冲" Res="1" SBit="1" SByte="144" SPN="0"
                 Type="1" />
-            <SP Bits="0" Bytes="1" Off="0" Ref="五臂停止速度缓冲" Res="1" SBit="1" SByte="133" SPN="0"
+            <SP Bits="0" Bytes="2" Off="0" Ref="五臂停止速度缓冲" Res="1" SBit="1" SByte="146" SPN="0"
                 Type="1" />
-            <SP Bits="0" Bytes="1" Off="0" Ref="六臂停止速度缓冲" Res="1" SBit="1" SByte="134" SPN="0"
+            <SP Bits="0" Bytes="2" Off="0" Ref="六臂停止速度缓冲" Res="1" SBit="1" SByte="148" SPN="0"
                 Type="1" />
-            <SP Bits="0" Bytes="1" Off="0" Ref="七臂停止速度缓冲" Res="1" SBit="1" SByte="135" SPN="0"
+            <SP Bits="0" Bytes="2" Off="0" Ref="七臂停止速度缓冲" Res="1" SBit="1" SByte="150" SPN="0"
                 Type="1" />
-            <SP Bits="0" Bytes="2" Off="0" Ref="合流阀最大电流" Res="1" SBit="1" SByte="136" SPN="0"
+            <SP Bits="0" Bytes="2" Off="0" Ref="合流阀最大电流" Res="1" SBit="1" SByte="152" SPN="0"
                 Type="1" />
-            <SP Bits="0" Bytes="2" Off="0" Ref="合流阀最小电流" Res="1" SBit="1" SByte="138" SPN="0"
+            <SP Bits="0" Bytes="2" Off="0" Ref="合流阀最小电流" Res="1" SBit="1" SByte="154" SPN="0"
                 Type="1" />
-            <SP Bits="0" Bytes="2" Off="0" Ref="臂架降温启动温度" Res="1" SBit="1" SByte="140" SPN="0"
+            <SP Bits="0" Bytes="2" Off="0" Ref="臂架降温启动温度" Res="1" SBit="1" SByte="156" SPN="0"
                 Type="1" />
-            <SP Bits="0" Bytes="1" Off="0" Ref="分配压力" Res="1" SBit="1" SByte="142" SPN="0"
+            <SP Bits="0" Bytes="2" Off="0" Ref="分配压力" Res="1" SBit="1" SByte="158" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="泵送减震参数自适应" Res="1" SBit="1" SByte="160" SPN="0"
+                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="速度参数自学习" Res="1" SBit="1" SByte="162" SPN="0"
                 Type="1" />
         </PG>
 
