@@ -121,6 +121,13 @@ public final class URLCollections {
         return getADDRESS() + "/file/spectrogram/";
     }
 
+    /**
+     * 获取应用更新信息
+     */
+    public static String getAppUpdateURL(){
+        return getADDRESS()+"/app_update";
+    }
+
     public static String REGISTER_PAD = ADDRESS + "/portabledev/register";//调试终端注册
 
     /**

@@ -230,124 +230,124 @@
         <!--初始化参数-->
         <DSItem DataType="FLOAT" DecLen="0" Name="初始化" Unit="U" />
 
-        <DSItem DataType="FLOAT" DecLen="0" Name="主泵品牌" Unit="U" Value="3" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="主泵排量" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="主泵类型" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="液压系统" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="油缸类型" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="换向类型" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="高低压类型" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="液位传感器" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="油温传感器" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="恒压泵类型" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="锁车模式" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="软件恒功率" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="支撑方式" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="臂架类型" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="臂架EP泵" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="回转阀" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="编码器类型" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="一臂倾角" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="二臂倾角" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="三臂倾角" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="四臂倾角" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="五臂倾角" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="六臂倾角" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="七臂倾角" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="臂架调速模式" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="底盘类型" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="主动减震" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="回转减震" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="臂架防干涉" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="合流功能" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="主泵降温" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="油缸锁紧" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="搅伴安全控制" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="料位安全控制" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="防倾翻" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="应急换向" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="优化行程" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="节能模式" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="分配控制" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="泵送启动方式" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="臂架控制模式" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="泵送点动方式" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="料况自适应" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="泵送行程初始化" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="故障诊断" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="泵送节能速度" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="支腿臂架转速" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="怠速速度" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="最高转速" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="减速延时时间" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="油泵超速报警值" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="超档位传动比" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="速度参数自学习" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="泵送减震参数自适应" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="主缸停止延时" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="分配停止延时" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="换向延时时间" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="降排量时间" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="降排量压力" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="超压降排量时间" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="起调压力" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="恒功率系数" Unit="U" Value="100" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="最小控制压力" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="排量修正系数" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="优化行程最小时间" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="优化行程启动压力" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="优化行程最大时间" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="泵送降温启动温度" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="砼缸直径" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="1100rpm对应功率" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="1500rpm对应功率" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="停泵时间间隔1" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="停泵时间间隔2" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="主缸单独得电时间" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="泵送停止时间" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="主缸停止延时设置0～1.5档（低压）" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="0～1.5档（高压）" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="1.5～2.5档（低压）" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="1.5～2.5档（高压）" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="2.5～3.5档（低压）" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="2.5～3.5档（高压）" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="3.5～4.5档（低压）" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="3.5～4.5档（高压）" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="4.5～6档（低压）" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="4.5～6档（高压）" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="6～10档（低压）" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="主缸停止延时设置6～10档（高压）" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="开机润滑时间" Unit="s" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="关机润滑时间" Unit="s" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="气动润滑时间" Unit="s" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="润滑停歇时间" Unit="s" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="风扇自启动温度" Unit="℃" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="自加热启动温度" Unit="℃" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="自加热停止温度" Unit="℃" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="压力切断值" Unit="bar" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="全支撑安全范围" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="节能档位" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="泵送行程参数" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="回转启动速度缓冲" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="一臂启动速度缓冲" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="二臂启动速度缓冲" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="三臂启动速度缓冲" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="四臂启动速度缓冲" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="五臂启动速度缓冲" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="六臂启动速度缓冲" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="七臂启动速度缓冲" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="回转停止速度缓冲" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="一臂停止速度缓冲" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="二臂停止速度缓冲" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="三臂停止速度缓冲" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="四臂停止速度缓冲" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="五臂停止速度缓冲" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="六臂停止速度缓冲" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="七臂停止速度缓冲" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="合流阀最大电流" Unit="mA" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="合流阀最小电流" Unit="mA" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="臂架降温启动温度" Unit="℃" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="分配压力" Unit="bar" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="主泵品牌" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="主泵排量" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="主泵类型" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="液压系统" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="油缸类型" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="换向类型" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="高低压类型" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="液位传感器" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="油温传感器" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="恒压泵类型" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="锁车模式" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="软件恒功率" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="支撑方式" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="臂架类型" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="臂架EP泵" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="回转阀" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="编码器类型" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="一臂倾角" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="二臂倾角" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="三臂倾角" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="四臂倾角" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="五臂倾角" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="六臂倾角" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="七臂倾角" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="臂架调速模式" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="底盘类型" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="主动减震" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="回转减震" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="臂架防干涉" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="合流功能" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="主泵降温" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="油缸锁紧" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="搅伴安全控制" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="料位安全控制" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="防倾翻" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="应急换向" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="优化行程" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="节能模式" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="分配控制" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="泵送启动方式" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="臂架控制模式" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="泵送点动方式" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="料况自适应" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="泵送行程初始化" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="故障诊断" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="泵送节能速度" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="支腿臂架转速" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="怠速速度" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="最高转速" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="减速延时时间" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="油泵超速报警值" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="超档位传动比" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="速度参数自学习" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="泵送减震参数自适应" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="主缸停止延时" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="分配停止延时" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="换向延时时间" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="降排量时间" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="降排量压力" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="超压降排量时间" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="起调压力" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="恒功率系数" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="最小控制压力" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="排量修正系数" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="优化行程最小时间" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="优化行程启动压力" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="优化行程最大时间" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="泵送降温启动温度" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="砼缸直径" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="1100rpm对应功率" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="1500rpm对应功率" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="停泵时间间隔1" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="停泵时间间隔2" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="主缸单独得电时间" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="泵送停止时间" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="主缸停止延时设置0～1.5档（低压）" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="0～1.5档（高压）" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="1.5～2.5档（低压）" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="1.5～2.5档（高压）" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="2.5～3.5档（低压）" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="2.5～3.5档（高压）" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="3.5～4.5档（低压）" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="3.5～4.5档（高压）" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="4.5～6档（低压）" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="4.5～6档（高压）" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="6～10档（低压）" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="主缸停止延时设置6～10档（高压）" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="开机润滑时间" Unit="s" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="关机润滑时间" Unit="s" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="气动润滑时间" Unit="s" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="润滑停歇时间" Unit="s" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="风扇自启动温度" Unit="℃" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="自加热启动温度" Unit="℃" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="自加热停止温度" Unit="℃" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="压力切断值" Unit="bar" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="全支撑安全范围" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="节能档位" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="泵送行程参数" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="回转启动速度缓冲" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="一臂启动速度缓冲" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="二臂启动速度缓冲" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="三臂启动速度缓冲" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="四臂启动速度缓冲" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="五臂启动速度缓冲" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="六臂启动速度缓冲" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="七臂启动速度缓冲" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="回转停止速度缓冲" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="一臂停止速度缓冲" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="二臂停止速度缓冲" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="三臂停止速度缓冲" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="四臂停止速度缓冲" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="五臂停止速度缓冲" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="六臂停止速度缓冲" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="七臂停止速度缓冲" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="合流阀最大电流" Unit="mA" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="合流阀最小电流" Unit="mA" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="臂架降温启动温度" Unit="℃" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="分配压力" Unit="bar" Value="0" />
         <!--实时显示参数-->
         <DSItem DataType="STRING" DecLen="0" Name="整机编码" Unit="D" />
         <DSItem DataType="STRING" DecLen="0" Name="整机编码_回复" Unit="D" />

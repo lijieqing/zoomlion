@@ -105,6 +105,8 @@ public class DebugActivity extends BaseActivity {
 
         realTimeFragment = new RealTimeViewsFragment();
         value = new HashMap<>();
+        terminalPort.setText("4001");
+        terminalIP.setText("192.168.1.178");
     }
 
     @Event(type = View.OnClickListener.class,

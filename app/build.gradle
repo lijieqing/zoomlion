@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'org.greenrobot.greendao'
 android {
     compileSdkVersion 26
-    buildToolsVersion '26.0.2'
+    buildToolsVersion '27.0.3'
     defaultConfig {
         applicationId "com.kstech.zoomlion"
         minSdkVersion 15
@@ -30,20 +30,20 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     implementation files('/Users/lijie/libs/dom4j-1.6.1.jar')
-    compile 'com.android.support:appcompat-v7:26.1.0'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.google.code.gson:gson:2.8.0'
-    compile 'org.xutils:xutils:3.5.0'
-    compile 'com.github.PhilJay:MPAndroidChart:v3.0.2'
-    compile 'com.github.bumptech.glide:glide:4.3.1'
-    compile 'jp.wasabeef:glide-transformations:3.0.1'
-    compile 'org.greenrobot:greendao:3.2.0'
-    compile 'com.android.support:recyclerview-v7:26.1.0'
-    testCompile 'junit:junit:4.12'
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation 'com.google.code.gson:gson:2.8.0'
+    implementation 'org.xutils:xutils:3.5.0'
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.0.2'
+    implementation 'com.github.bumptech.glide:glide:4.3.1'
+    implementation 'jp.wasabeef:glide-transformations:3.0.1'
+    implementation 'org.greenrobot:greendao:3.2.0'
+    implementation 'com.android.support:recyclerview-v7:26.1.0'
+    testImplementation 'junit:junit:4.12'
     implementation 'com.android.support:design:26.1.0'
 }

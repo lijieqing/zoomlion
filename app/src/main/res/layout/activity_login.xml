@@ -182,6 +182,7 @@
             android:text="@string/copyright"
             android:textColor="#fff" />
         <ImageButton
+            android:padding="20dp"
             android:onClick="showMenu"
             android:layout_marginRight="50dp"
             android:id="@+id/btn_setting"

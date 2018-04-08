@@ -18,9 +18,10 @@ import org.junit.Test;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.util.Iterator;
+import java.nio.channels.FileChannel;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -34,6 +35,30 @@ public class ExampleUnitTest {
     @Test
     public void addition_isCorrect() throws Exception {
         assertEquals(4, 2 + 2);
+    }
+
+    @Test
+    public void FileCopy() {
+        FileChannel outChannel = null;
+        FileChannel inChannel = null;
+        try {
+            outChannel = new FileOutputStream("/Users/lijie/Desktop/out.jpeg").getChannel();
+            inChannel = new FileInputStream("/Users/lijie/Desktop/WechatIMG178.jpeg").getChannel();
+            outChannel.transferFrom(inChannel, 0, inChannel.size());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (outChannel != null)
+                    outChannel.close();
+                if (inChannel != null)
+                    inChannel.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Test
@@ -201,17 +226,17 @@ public class ExampleUnitTest {
 
         List<SP> sps = pg.getSps();
 
-        System.out.println("总 sp 个数："+sps.size());
+        System.out.println("总 sp 个数：" + sps.size());
         int total = 0;
 
         for (int i = 0; i < sps.size(); i++) {
             String bytes = sps.get(i).getBytes();
-            sps.get(i).setSByte(String.valueOf(total+1));
+            sps.get(i).setSByte(String.valueOf(total + 1));
             total += Integer.parseInt(bytes);
 
         }
 
-        System.out.println("总长度："+total);
+        System.out.println("总长度：" + total);
 
         XMLAPI.writeXML2File(pg, "/Users/lijie/Desktop/spec.xml");
     }
@@ -222,7 +247,7 @@ public class ExampleUnitTest {
 
         QCItem item = type.getQcItems().get(0);
         for (int i = 0; i < type.getQcItems().size(); i++) {
-            if (i != 0){
+            if (i != 0) {
                 type.getQcItems().get(i).setSpectrum(item.getSpectrum());
             }
         }
@@ -231,7 +256,7 @@ public class ExampleUnitTest {
     }
 
     @Test
-    public void testDataSet() throws IOException, IllegalAccessException, InvocationTargetException{
+    public void testDataSet() throws IOException, IllegalAccessException, InvocationTargetException {
         DataSet type = (DataSet) XMLAPI.readXML(new FileInputStream("/Users/lijie/Desktop/zoo.xml"));
         List<DSItem> dsItem = type.getDsItems();
         List<Data> pressList = dsItem.get(0).getDatas();
@@ -242,7 +267,7 @@ public class ExampleUnitTest {
 
         List<Data> datas = ds.getDatas();
         Data d = new Data();
-        d.setValue(pressList.size()+"");
+        d.setValue(pressList.size() + "");
         datas.add(d);
         for (int i = 0; i < pressList.size(); i++) {
             d = new Data();
@@ -264,6 +289,15 @@ public class ExampleUnitTest {
         ds.setDatas(datas);
         dsItem.add(ds);
 
+        XMLAPI.writeXML2File(type, "/Users/lijie/Desktop/spec.xml");
+    }
+    @Test
+    public void testInit() throws IOException, IllegalAccessException, InvocationTargetException {
+        DataSet type = (DataSet) XMLAPI.readXML(new FileInputStream("/Users/lijie/Desktop/init.xml"));
+        List<DSItem> dsItems = type.getDsItems();
+        for (DSItem dsItem : dsItems) {
+            dsItem.setValue("0");
+        }
         XMLAPI.writeXML2File(type, "/Users/lijie/Desktop/spec.xml");
     }
 }

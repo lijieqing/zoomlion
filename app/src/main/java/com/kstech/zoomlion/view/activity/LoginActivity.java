@@ -9,9 +9,11 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.SystemClock;
 import android.support.design.widget.Snackbar;
 import android.text.InputType;
@@ -38,17 +40,28 @@ import com.kstech.zoomlion.model.session.RegisterSession;
 import com.kstech.zoomlion.model.session.URLCollections;
 import com.kstech.zoomlion.serverdata.MeasureDev;
 import com.kstech.zoomlion.serverdata.UserInfo;
+import com.kstech.zoomlion.utils.APKVersionCodeUtils;
 import com.kstech.zoomlion.utils.DeviceUtil;
 import com.kstech.zoomlion.utils.Globals;
 import com.kstech.zoomlion.utils.JsonUtils;
 import com.kstech.zoomlion.utils.LogUtils;
 import com.kstech.zoomlion.utils.MyHttpUtils;
 import com.kstech.zoomlion.utils.SharedPreferencesUtils;
+import com.kstech.zoomlion.view.widget.TextProgressView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.xutils.common.Callback;
+import org.xutils.http.RequestParams;
+import org.xutils.x;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.net.SocketException;
+import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -79,7 +92,7 @@ public class LoginActivity extends BaseActivity {
     private List<MeasureDev> terminalList = new ArrayList<>();
     private List<String> user_record;
     private int registerID;
-
+    private String apkPath = Environment.getExternalStorageDirectory().getAbsolutePath()+"/zoomlion_update.apk";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,8 +148,6 @@ public class LoginActivity extends BaseActivity {
         //平板mac地址显示
         //isRegister = isPadRegister();
         changeRegisterStatus(true);
-
-        mPasswordView.setText("52tanwanlanyue");
 
         //获取文件读写权限
         initExternalPermission();
@@ -404,13 +415,224 @@ public class LoginActivity extends BaseActivity {
                         });
                         break;
                     case R.id.apk_check_update:
-
+                        checkVerson();
                         break;
                 }
                 return false;
             }
         });
         menu.show();
+    }
+
+    /**
+     * 请求网络 检查版本是否一致
+     */
+    private void checkVerson(){
+        new AppUpdateTask().executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
+    }
+    /**
+     * 版本更新对话框
+     */
+    private void showUpdateDialog(final AppUpdateTask task,String versionName, String desc, final String url) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("发现新版本：" + versionName);
+        builder.setMessage(desc);
+        builder.setPositiveButton("马上升级", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                downLoadApk(task,url);
+            }
+        });
+        builder.setNegativeButton("以后再说", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        builder.show();
+    }
+    TextProgressView updateProgress;
+    private AlertDialog showUpdateProgress(){
+        updateProgress = new TextProgressView(this);
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setTitle("软件更新")
+                .setView(updateProgress)
+                .create();
+        dialog.show();
+        return dialog;
+    }
+    /**
+     * 文件下载
+     */
+    private void downLoadApk(final AppUpdateTask task, String url){
+        RequestParams params = new RequestParams(url);
+        x.http().get(params, new Callback.ProgressCallback<File>() {
+            @Override
+            public void onSuccess(File result) {
+                FileChannel outChannel = null;
+                FileChannel inChannel = null;
+                try {
+                    outChannel = new FileOutputStream(apkPath).getChannel();
+                    inChannel = new FileInputStream(result).getChannel();
+                    outChannel.transferFrom(inChannel, 0, inChannel.size());
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } finally {
+                    try {
+                        if (outChannel != null)
+                            outChannel.close();
+                        if (inChannel != null)
+                            inChannel.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                task.onProgressUpdate(task.FINISH_UPDATE);
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+                task.onProgressUpdate(task.UPDATE_ERROR);
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+
+            @Override
+            public void onWaiting() {
+
+            }
+
+            @Override
+            public void onStarted() {
+                task.onProgressUpdate(task.START_UPDATE);
+            }
+
+            @Override
+            public void onLoading(long total, long current, boolean isDownloading) {
+                int percent = (int) (current/total *100);
+                int downloading = isDownloading?1:0;
+                task.onProgressUpdate(task.UPDATING,percent,downloading);
+            }
+        });
+    }
+
+    private class AppUpdateTask extends AsyncTask<Void,Integer,Void>{
+        /**软件需要更新*/
+        private final int UPDATE = 0;
+        /**软件已是最新*/
+        private final int NORMAL = 1;
+        /**更新出现异常*/
+        private final int ERROR = 2;
+        private final int START_UPDATE = 3;
+        private final int UPDATING = 4;
+        private final int FINISH_UPDATE = 5;
+        private final int UPDATE_ERROR = 6;
+        String versionName;
+        String desc;
+        String url;
+        String error;
+        AlertDialog updateDialog = null;
+        @Override
+        protected Void doInBackground(Void... voids) {
+            RequestParams params = new RequestParams(URLCollections.getAppUpdateURL());
+            x.http().get(params, new Callback.CommonCallback<String>() {
+                @Override
+                public void onSuccess(String result) {
+                    JSONObject data = null;
+                    try {
+                        data = new JSONObject(result);
+                        if (!data.has("error")){
+                            int versionCode = data.getInt("versionCode");
+                            versionName = data.getString("versionName");
+                            desc = data.getString("desc");
+                            url = data.getString("url");
+
+                            int localCode = APKVersionCodeUtils.getVersionCode(MyApplication.getApplication());
+                            if (localCode < versionCode){
+                                publishProgress(UPDATE);
+                            }else {
+                                publishProgress(NORMAL);
+                            }
+                        }else {
+                            error = data.getString("error");
+                            publishProgress(ERROR);
+                        }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        error = e.getMessage();
+                        publishProgress(ERROR);
+                    }
+
+                }
+
+                @Override
+                public void onError(Throwable ex, boolean isOnCallback) {
+                    error = ex.getMessage();
+                    publishProgress(ERROR);
+                }
+
+                @Override
+                public void onCancelled(CancelledException cex) {
+
+                }
+
+                @Override
+                public void onFinished() {
+
+                }
+            });
+            return null;
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            int status = values[0];
+            switch (status){
+                case UPDATE:
+                    showUpdateDialog(this,versionName,desc,url);
+                    break;
+                case NORMAL:
+                    Toast.makeText(LoginActivity.this,"当前已是最新版本",Toast.LENGTH_SHORT).show();
+                    break;
+                case ERROR:
+                    Toast.makeText(LoginActivity.this,"更新失败\n 错误原因："+error,Toast.LENGTH_SHORT).show();
+                    break;
+                case START_UPDATE:
+                    updateDialog = showUpdateProgress();
+                    break;
+                case UPDATING:
+                    if (updateDialog!=null){
+                        int percent = values[1];
+                        updateProgress.updateProgress("已下载：%"+percent,percent);
+                    }
+                    break;
+                case FINISH_UPDATE:
+                    dialog.cancel();
+                    Intent intent = new Intent();
+                    intent.setAction(Intent.ACTION_VIEW);
+                    intent.addCategory(Intent.CATEGORY_DEFAULT);
+                    intent.setDataAndType(Uri.fromFile(new File(apkPath)),
+                            "application/vnd.android.package-archive");
+                    startActivity(intent);
+                    finish();
+                    break;
+                case UPDATE_ERROR:
+                    dialog.cancel();
+                    Toast.makeText(LoginActivity.this,"更新失败",Toast.LENGTH_SHORT).show();
+                    break;
+            }
+        }
     }
 
 
