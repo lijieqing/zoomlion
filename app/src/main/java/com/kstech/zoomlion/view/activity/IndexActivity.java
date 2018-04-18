@@ -311,6 +311,10 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
      */
     private static final int DEVICE_SN_LENGTH = 17;
     /**
+     * 服务器机型请求次数
+     */
+    private static int REQUEST_TIMES = 0;
+    /**
      * 打印tag
      */
     public static final String TAG = "IndexActivity";
@@ -552,7 +556,7 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
 
             if (!TextUtils.isEmpty(Globals.deviceSN)) {
                 //当整机编码变化且不是ERROR时，请求机型信息
-                if (!Globals.deviceSN.equals(sn) && !deviceLoading) {
+                if (!Globals.deviceSN.equals(sn) && !deviceLoading && REQUEST_TIMES++<5) {
                     deviceLoading = true;
                     Globals.deviceSN = sn;
                     deviceLoadTask = new DeviceLoadTask(Globals.deviceSN, handler);
@@ -565,7 +569,7 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
                     Globals.modelFile.dataSetVO.getDSItem("整机编码_回复").setStrValue(str);
                 }
             } else {
-                if (!TextUtils.isEmpty(sn) && !deviceLoading) {
+                if (!TextUtils.isEmpty(sn) && !deviceLoading && REQUEST_TIMES++<5) {
                     deviceLoading = true;
                     Globals.deviceSN = sn;
                     deviceLoadTask = new DeviceLoadTask(Globals.deviceSN, handler);
@@ -640,6 +644,7 @@ public class IndexActivity extends BaseActivity implements J1939_DataVar_ts.Real
                         break;
                     case DEVICE_LOADING_FINISH:
                         mActivity.deviceLoading = false;
+                        REQUEST_TIMES = 0;
                         mActivity.getInitParams();
                         break;
                     case DEVICE_LOADING_FAILED:
