@@ -143,110 +143,90 @@
             <Data Value="0" />
             <Data Value="124.7" />
         </DSItem>
-        <DSItem DataType="WORD" DecLen="1" Name="恒功率压力_次数标准" Rows="55">
-            <Data Value="18" /><!-- 行数 -->
-
-            <Data Value="0" /><!-- 压力值 *10-->
-            <Data Value="241" /><!-- 最小次数 *10-->
-            <Data Value="261" /><!-- 最大次数 *10-->
-
-            <Data Value="1247" />
-            <Data Value="241" />
-            <Data Value="261" />
-
-            <Data Value="1300" />
-            <Data Value="232" />
-            <Data Value="252" />
-
-            <Data Value="1500" />
-            <Data Value="205" />
-            <Data Value="221" />
-
-            <Data Value="1700" />
-            <Data Value="184" />
-            <Data Value="197" />
-
-            <Data Value="1900" />
-            <Data Value="167" />
-            <Data Value="177" />
-
-            <Data Value="2100" />
-            <Data Value="152" />
-            <Data Value="161" />
-
-            <Data Value="2300" />
-            <Data Value="140" />
-            <Data Value="148" />
-
-            <Data Value="2700" />
-            <Data Value="121" />
-            <Data Value="127" />
-
-            <Data Value="2900" />
-            <Data Value="113" />
-            <Data Value="119" />
-
-            <Data Value="3100" />
-            <Data Value="106" />
-            <Data Value="111" />
-
-            <Data Value="3300" />
-            <Data Value="100" />
-            <Data Value="105" />
-
-            <Data Value="3500" />
-            <Data Value="95" />
-            <Data Value="99" />
-
-            <Data Value="3700" />
-            <Data Value="90" />
-            <Data Value="94" />
-
-            <Data Value="3900" />
-            <Data Value="85" />
-            <Data Value="89" />
-
-            <Data Value="4100" />
-            <Data Value="81" />
-            <Data Value="85" />
-
-            <Data Value="4300" />
-            <Data Value="77" />
-            <Data Value="81" />
-
-            <Data Value="4500" />
-            <Data Value="73" />
-            <Data Value="77" />
-        </DSItem>
-        <DSItem DataType="FLOAT" Name="第一压力段起始压力" Unit="bar" Value="10" />
-        <DSItem DataType="FLOAT" Name="第一压力段中止压力" Unit="bar" Value="10" />
-        <DSItem DataType="FLOAT" Name="第二压力段起始压力" Unit="bar" Value="10" />
-        <DSItem DataType="FLOAT" Name="第二压力段中止压力" Unit="bar" Value="10" />
-        <DSItem DataType="FLOAT" Name="第三压力段起始压力" Unit="bar" Value="10" />
-        <DSItem DataType="FLOAT" Name="第三压力段中止压力" Unit="bar" Value="10" />
-        <DSItem DataType="FLOAT" Name="第四压力段起始压力" Unit="bar" Value="10" />
-        <DSItem DataType="FLOAT" Name="第四压力段中止压力" Unit="bar" Value="10" />
+        <DSItem DataType="FLOAT" Name="恒功率压力_次数标准值_00" Value="18" />
+        <DSItem DataType="FLOAT" Name="恒功率压力_次数标准值_01" Value="0" />
+        <DSItem DataType="FLOAT" Name="恒功率压力_次数标准值_02" Value="241" />
+        <DSItem DataType="FLOAT" Name="恒功率压力_次数标准值_03" Value="261" />
+        <DSItem DataType="FLOAT" Name="恒功率压力_次数标准值_04" Value="12470" />
+        <DSItem DataType="FLOAT" Name="恒功率压力_次数标准值_05" Value="241" />
+        <DSItem DataType="FLOAT" Name="恒功率压力_次数标准值_06" Value="261" />
+        <DSItem DataType="FLOAT" Name="恒功率压力_次数标准值_07" Value="13000" />
+        <DSItem DataType="FLOAT" Name="恒功率压力_次数标准值_08" Value="232" />
+        <DSItem DataType="FLOAT" Name="恒功率压力_次数标准值_09" Value="252" />
+        <DSItem DataType="FLOAT" Name="恒功率压力_次数标准值_010" Value="15000" />
+        <DSItem DataType="FLOAT" Name="恒功率压力_次数标准值_011" Value="205" />
+        <DSItem DataType="FLOAT" Name="恒功率压力_次数标准值_012" Value="221" />
+        <DSItem DataType="FLOAT" Name="恒功率压力_次数标准值_013" Value="17000" />
+        <DSItem DataType="FLOAT" Name="恒功率压力_次数标准值_014" Value="184" />
+        <DSItem DataType="FLOAT" Name="恒功率压力_次数标准值_015" Value="197" />
+        <DSItem DataType="FLOAT" Name="恒功率压力_次数标准值_016" Value="19000" />
+        <DSItem DataType="FLOAT" Name="恒功率压力_次数标准值_017" Value="167" />
+        <DSItem DataType="FLOAT" Name="恒功率压力_次数标准值_018" Value="177" />
+        <DSItem DataType="FLOAT" Name="恒功率压力_次数标准值_019" Value="21000" />
+        <DSItem DataType="FLOAT" Name="恒功率压力_次数标准值_020" Value="152" />
+        <DSItem DataType="FLOAT" Name="恒功率压力_次数标准值_021" Value="161" />
+        <DSItem DataType="FLOAT" Name="恒功率压力_次数标准值_022" Value="23000" />
+        <DSItem DataType="FLOAT" Name="恒功率压力_次数标准值_023" Value="140" />
+        <DSItem DataType="FLOAT" Name="恒功率压力_次数标准值_024" Value="148" />
+        <DSItem DataType="FLOAT" Name="恒功率压力_次数标准值_025" Value="27000" />
+        <DSItem DataType="FLOAT" Name="恒功率压力_次数标准值_026" Value="121" />
+        <DSItem DataType="FLOAT" Name="恒功率压力_次数标准值_027" Value="127" />
+        <DSItem DataType="FLOAT" Name="恒功率压力_次数标准值_028" Value="29000" />
+        <DSItem DataType="FLOAT" Name="恒功率压力_次数标准值_029" Value="113" />
+        <DSItem DataType="FLOAT" Name="恒功率压力_次数标准值_030" Value="119" />
+        <DSItem DataType="FLOAT" Name="恒功率压力_次数标准值_031" Value="31000" />
+        <DSItem DataType="FLOAT" Name="恒功率压力_次数标准值_032" Value="106" />
+        <DSItem DataType="FLOAT" Name="恒功率压力_次数标准值_033" Value="111" />
+        <DSItem DataType="FLOAT" Name="恒功率压力_次数标准值_034" Value="33000" />
+        <DSItem DataType="FLOAT" Name="恒功率压力_次数标准值_035" Value="100" />
+        <DSItem DataType="FLOAT" Name="恒功率压力_次数标准值_036" Value="105" />
+        <DSItem DataType="FLOAT" Name="恒功率压力_次数标准值_037" Value="35000" />
+        <DSItem DataType="FLOAT" Name="恒功率压力_次数标准值_038" Value="95" />
+        <DSItem DataType="FLOAT" Name="恒功率压力_次数标准值_039" Value="99" />
+        <DSItem DataType="FLOAT" Name="恒功率压力_次数标准值_040" Value="37000" />
+        <DSItem DataType="FLOAT" Name="恒功率压力_次数标准值_041" Value="90" />
+        <DSItem DataType="FLOAT" Name="恒功率压力_次数标准值_042" Value="94" />
+        <DSItem DataType="FLOAT" Name="恒功率压力_次数标准值_043" Value="39000" />
+        <DSItem DataType="FLOAT" Name="恒功率压力_次数标准值_044" Value="85" />
+        <DSItem DataType="FLOAT" Name="恒功率压力_次数标准值_045" Value="89" />
+        <DSItem DataType="FLOAT" Name="恒功率压力_次数标准值_046" Value="41000" />
+        <DSItem DataType="FLOAT" Name="恒功率压力_次数标准值_047" Value="81" />
+        <DSItem DataType="FLOAT" Name="恒功率压力_次数标准值_048" Value="85" />
+        <DSItem DataType="FLOAT" Name="恒功率压力_次数标准值_049" Value="43000" />
+        <DSItem DataType="FLOAT" Name="恒功率压力_次数标准值_050" Value="77" />
+        <DSItem DataType="FLOAT" Name="恒功率压力_次数标准值_051" Value="81" />
+        <DSItem DataType="FLOAT" Name="恒功率压力_次数标准值_052" Value="45000" />
+        <DSItem DataType="FLOAT" Name="恒功率压力_次数标准值_053" Value="73" />
+        <DSItem DataType="FLOAT" Name="恒功率压力_次数标准值_054" Value="77" />
+        <DSItem DataType="FLOAT" Name="第一压力段起始压力" Unit="bar" Value="22000" />
+        <DSItem DataType="FLOAT" Name="第一压力段中止压力" Unit="bar" Value="24000" />
+        <DSItem DataType="FLOAT" Name="第二压力段起始压力" Unit="bar" Value="26000" />
+        <DSItem DataType="FLOAT" Name="第二压力段中止压力" Unit="bar" Value="28000" />
+        <DSItem DataType="FLOAT" Name="第三压力段起始压力" Unit="bar" Value="32000" />
+        <DSItem DataType="FLOAT" Name="第三压力段中止压力" Unit="bar" Value="34000" />
+        <DSItem DataType="FLOAT" Name="第四压力段起始压力" Unit="bar" Value="38000" />
+        <DSItem DataType="FLOAT" Name="第四压力段中止压力" Unit="bar" Value="40000" />
 
         <!--初始化参数-->
         <DSItem DataType="FLOAT" DecLen="0" Name="初始化" Unit="U" />
 
         <DSItem DataType="FLOAT" DecLen="0" Name="主泵品牌" Unit="U" Value="0" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="主泵排量" Unit="U" Value="0" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="主泵类型" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="主泵排量" Unit="U" Value="8" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="主泵类型" Unit="U" Value="2" />
         <DSItem DataType="FLOAT" DecLen="0" Name="液压系统" Unit="U" Value="0" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="油缸类型" Unit="U" Value="0" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="换向类型" Unit="U" Value="0" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="高低压类型" Unit="U" Value="0" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="液位传感器" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="油缸类型" Unit="U" Value="1" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="换向类型" Unit="U" Value="2" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="高低压类型" Unit="U" Value="4" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="液位传感器" Unit="U" Value="2" />
         <DSItem DataType="FLOAT" DecLen="0" Name="油温传感器" Unit="U" Value="0" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="恒压泵类型" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="恒压泵类型" Unit="U" Value="1" />
         <DSItem DataType="FLOAT" DecLen="0" Name="锁车模式" Unit="U" Value="0" />
         <DSItem DataType="FLOAT" DecLen="0" Name="软件恒功率" Unit="U" Value="0" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="支撑方式" Unit="U" Value="0" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="臂架类型" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="支撑方式" Unit="U" Value="4" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="臂架类型" Unit="U" Value="11" />
         <DSItem DataType="FLOAT" DecLen="0" Name="臂架EP泵" Unit="U" Value="0" />
         <DSItem DataType="FLOAT" DecLen="0" Name="回转阀" Unit="U" Value="0" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="编码器类型" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="编码器类型" Unit="U" Value="4" />
         <DSItem DataType="FLOAT" DecLen="0" Name="一臂倾角" Unit="U" Value="0" />
         <DSItem DataType="FLOAT" DecLen="0" Name="二臂倾角" Unit="U" Value="0" />
         <DSItem DataType="FLOAT" DecLen="0" Name="三臂倾角" Unit="U" Value="0" />
@@ -255,9 +235,9 @@
         <DSItem DataType="FLOAT" DecLen="0" Name="六臂倾角" Unit="U" Value="0" />
         <DSItem DataType="FLOAT" DecLen="0" Name="七臂倾角" Unit="U" Value="0" />
         <DSItem DataType="FLOAT" DecLen="0" Name="臂架调速模式" Unit="U" Value="0" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="底盘类型" Unit="U" Value="0" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="主动减震" Unit="U" Value="0" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="回转减震" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="底盘类型" Unit="U" Value="2" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="主动减震" Unit="U" Value="1" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="回转减震" Unit="U" Value="1" />
         <DSItem DataType="FLOAT" DecLen="0" Name="臂架防干涉" Unit="U" Value="0" />
         <DSItem DataType="FLOAT" DecLen="0" Name="合流功能" Unit="U" Value="0" />
         <DSItem DataType="FLOAT" DecLen="0" Name="主泵降温" Unit="U" Value="0" />
@@ -266,68 +246,68 @@
         <DSItem DataType="FLOAT" DecLen="0" Name="料位安全控制" Unit="U" Value="0" />
         <DSItem DataType="FLOAT" DecLen="0" Name="防倾翻" Unit="U" Value="0" />
         <DSItem DataType="FLOAT" DecLen="0" Name="应急换向" Unit="U" Value="0" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="优化行程" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="优化行程" Unit="U" Value="1" />
         <DSItem DataType="FLOAT" DecLen="0" Name="节能模式" Unit="U" Value="0" />
         <DSItem DataType="FLOAT" DecLen="0" Name="分配控制" Unit="U" Value="0" />
         <DSItem DataType="FLOAT" DecLen="0" Name="泵送启动方式" Unit="U" Value="0" />
         <DSItem DataType="FLOAT" DecLen="0" Name="臂架控制模式" Unit="U" Value="0" />
         <DSItem DataType="FLOAT" DecLen="0" Name="泵送点动方式" Unit="U" Value="0" />
         <DSItem DataType="FLOAT" DecLen="0" Name="料况自适应" Unit="U" Value="0" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="泵送行程初始化" Unit="U" Value="0" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="故障诊断" Unit="U" Value="0" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="泵送节能速度" Unit="U" Value="0" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="支腿臂架转速" Unit="U" Value="0" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="怠速速度" Unit="U" Value="0" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="最高转速" Unit="U" Value="0" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="减速延时时间" Unit="U" Value="0" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="油泵超速报警值" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="泵送行程初始化" Unit="U" Value="1" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="故障诊断" Unit="U" Value="1" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="泵送节能速度" Unit="rpm" Value="1200" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="支腿臂架转速" Unit="rpm" Value="1100" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="怠速速度" Unit="rpm" Value="650" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="最高转速" Unit="rpm" Value="1550" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="减速延时时间" Unit="ms" Value="800" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="油泵超速报警值" Unit="rpm" Value="2500" />
         <DSItem DataType="FLOAT" DecLen="0" Name="超档位传动比" Unit="U" Value="0" />
         <DSItem DataType="FLOAT" DecLen="0" Name="速度参数自学习" Unit="U" Value="0" />
         <DSItem DataType="FLOAT" DecLen="0" Name="泵送减震参数自适应" Unit="U" Value="0" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="主缸停止延时" Unit="U" Value="0" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="分配停止延时" Unit="U" Value="0" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="换向延时时间" Unit="U" Value="0" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="降排量时间" Unit="U" Value="0" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="降排量压力" Unit="U" Value="0" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="超压降排量时间" Unit="U" Value="0" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="起调压力" Unit="U" Value="0" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="恒功率系数" Unit="U" Value="0" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="最小控制压力" Unit="U" Value="0" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="排量修正系数" Unit="U" Value="0" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="优化行程最小时间" Unit="U" Value="0" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="优化行程启动压力" Unit="U" Value="0" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="优化行程最大时间" Unit="U" Value="0" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="泵送降温启动温度" Unit="U" Value="0" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="砼缸直径" Unit="U" Value="0" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="1100rpm对应功率" Unit="U" Value="0" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="1500rpm对应功率" Unit="U" Value="0" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="停泵时间间隔1" Unit="U" Value="0" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="停泵时间间隔2" Unit="U" Value="0" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="主缸单独得电时间" Unit="U" Value="0" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="泵送停止时间" Unit="U" Value="0" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="主缸停止延时设置0～1.5档（低压）" Unit="U" Value="0" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="0～1.5档（高压）" Unit="U" Value="0" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="1.5～2.5档（低压）" Unit="U" Value="0" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="1.5～2.5档（高压）" Unit="U" Value="0" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="2.5～3.5档（低压）" Unit="U" Value="0" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="2.5～3.5档（高压）" Unit="U" Value="0" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="3.5～4.5档（低压）" Unit="U" Value="0" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="3.5～4.5档（高压）" Unit="U" Value="0" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="4.5～6档（低压）" Unit="U" Value="0" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="4.5～6档（高压）" Unit="U" Value="0" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="6～10档（低压）" Unit="U" Value="0" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="主缸停止延时设置6～10档（高压）" Unit="U" Value="0" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="开机润滑时间" Unit="s" Value="0" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="关机润滑时间" Unit="s" Value="0" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="气动润滑时间" Unit="s" Value="0" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="润滑停歇时间" Unit="s" Value="0" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="风扇自启动温度" Unit="℃" Value="0" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="自加热启动温度" Unit="℃" Value="0" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="自加热停止温度" Unit="℃" Value="0" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="压力切断值" Unit="bar" Value="0" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="全支撑安全范围" Unit="U" Value="0" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="节能档位" Unit="U" Value="0" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="泵送行程参数" Unit="U" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="主缸停止延时" Unit="ms" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="分配停止延时" Unit="ms" Value="60" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="换向延时时间" Unit="ms" Value="90" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="降排量时间" Unit="ms" Value="150" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="降排量压力" Unit="MPa" Value="43" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="超压降排量时间" Unit="s" Value="30" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="起调压力" Unit="bar" Value="125" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="恒功率系数" Unit="U" Value="9" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="最小控制压力" Unit="bar" Value="8" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="排量修正系数" Unit="U" Value="20" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="优化行程最小时间" Unit="ms" Value="50" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="优化行程启动压力" Unit="bar" Value="35" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="优化行程最大时间" Unit="ms" Value="10000" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="泵送降温启动温度" Unit="℃" Value="45" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="砼缸直径" Unit="mm" Value="260" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="1100rpm对应功率" Unit="Kw" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="1500rpm对应功率" Unit="Kw" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="停泵时间间隔1" Unit="min" Value="3" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="停泵时间间隔2" Unit="min" Value="10" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="主缸单独得电时间" Unit="ms" Value="800" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="泵送停止时间" Unit="ms" Value="200" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="主缸停止延时设置0～1.5档（低压）" Unit="ms" Value="1" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="0～1.5档（高压）" Unit="ms" Value="1" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="1.5～2.5档（低压）" Unit="ms" Value="1" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="1.5～2.5档（高压）" Unit="ms" Value="1" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="2.5～3.5档（低压）" Unit="ms" Value="1" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="2.5～3.5档（高压）" Unit="ms" Value="1" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="3.5～4.5档（低压）" Unit="ms" Value="1" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="3.5～4.5档（高压）" Unit="ms" Value="1" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="4.5～6档（低压）" Unit="ms" Value="1" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="4.5～6档（高压）" Unit="ms" Value="1" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="6～10档（低压）" Unit="ms" Value="1" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="主缸停止延时设置6～10档（高压）" Unit="ms" Value="1" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="开机润滑时间" Unit="s" Value="5" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="关机润滑时间" Unit="s" Value="5" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="气动润滑时间" Unit="s" Value="5" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="润滑停歇时间" Unit="s" Value="300" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="风扇自启动温度" Unit="℃" Value="50" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="自加热启动温度" Unit="℃" Value="10" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="自加热停止温度" Unit="℃" Value="20" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="压力切断值" Unit="MPa" Value="49" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="全支撑安全范围" Unit="U" Value="270" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="节能档位" Unit="U" Value="7" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="泵送行程参数" Unit="U" Value="1" />
         <DSItem DataType="FLOAT" DecLen="0" Name="回转启动速度缓冲" Unit="U" Value="0" />
         <DSItem DataType="FLOAT" DecLen="0" Name="一臂启动速度缓冲" Unit="U" Value="0" />
         <DSItem DataType="FLOAT" DecLen="0" Name="二臂启动速度缓冲" Unit="U" Value="0" />
@@ -346,7 +326,7 @@
         <DSItem DataType="FLOAT" DecLen="0" Name="七臂停止速度缓冲" Unit="U" Value="0" />
         <DSItem DataType="FLOAT" DecLen="0" Name="合流阀最大电流" Unit="mA" Value="0" />
         <DSItem DataType="FLOAT" DecLen="0" Name="合流阀最小电流" Unit="mA" Value="0" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="臂架降温启动温度" Unit="℃" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="臂架降温启动温度" Unit="℃" Value="45" />
         <DSItem DataType="FLOAT" DecLen="0" Name="分配压力" Unit="bar" Value="0" />
         <!--实时显示参数-->
         <DSItem DataType="STRING" DecLen="0" Name="整机编码" Unit="D" />
@@ -357,10 +337,10 @@
         <DSItem DataType="FLOAT" DecLen="0" Name="液压油温温度" Unit="℃" />
         <DSItem DataType="FLOAT" DecLen="2" Name="主油泵压力" Unit="bar" />
         <DSItem DataType="FLOAT" DecLen="2" Name="泵送压力" Unit="bar" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="泵送次数" Unit="次" />
+        <DSItem DataType="FLOAT" DecLen="1" Name="泵送次数" Unit="次" />
         <DSItem DataType="FLOAT" DecLen="0" Name="比例阀电流" Unit="mA" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="左直线位移" Unit="mA" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="右直线位移" Unit="mA" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="左直线位移" Unit="mm" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="右直线位移" Unit="mm" />
         <DSItem DataType="BOOL" DecLen="0" Name="左接近开关" Unit="开/关" />
         <DSItem DataType="BOOL" DecLen="0" Name="右接近开关" Unit="开/关" />
         <DSItem DataType="BOOL" DecLen="0" Name="高低压" Unit="开/关" />
@@ -394,9 +374,8 @@
         <DSItem DataType="FLOAT" DecLen="0" Name="左支腿跨距" Unit="mm" />
         <DSItem DataType="FLOAT" DecLen="0" Name="右支腿跨距" Unit="mm" />
         <DSItem DataType="BOOL" DecLen="0" Name="风扇开启开关" Unit="开/关" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="左前支腿水平回收时间" Unit="s" />
         <DSItem DataType="FLOAT" DecLen="0" Name="分配压降" Unit="bar" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="分动箱温度" Unit="mA" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="分动箱温度" Unit="℃" />
         <DSItem DataType="FLOAT" DecLen="0" Name="减震功能" Unit="U" />
         <DSItem DataType="FLOAT" DecLen="0" Name="风扇启动测试" Unit="U" />
         <DSItem DataType="FLOAT" DecLen="0" Name="累计泵送方量" Unit="m³" />
@@ -407,19 +386,25 @@
         <DSItem DataType="FLOAT" DecLen="0" Name="搅伴反转起始压力" Unit="bar" />
         <DSItem DataType="FLOAT" DecLen="0" Name="分配自适应" Unit="U" />
 
-        <DSItem DataType="FLOAT" DecLen="0" Name="右前支腿水平伸出时间" Unit="s" Value="0" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="右前支腿水平回收时间" Unit="s" Value="0" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="右前支腿垂直伸出时间" Unit="s" Value="0" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="右前支腿垂直回收时间" Unit="s" Value="0" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="左后支腿水平伸出时间" Unit="s" Value="0" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="左后支腿水平回收时间" Unit="s" Value="0" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="左后支腿垂直伸出时间" Unit="s" Value="0" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="左后支腿垂直回收时间" Unit="s" Value="0" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="右后支腿水平伸出时间" Unit="s" Value="0" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="右后支腿水平回收时间" Unit="s" Value="0" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="右后支腿垂直伸出时间" Unit="s" Value="0" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="右后支腿垂直回收时间" Unit="s" Value="0" />
+        <DSItem DataType="FLOAT" DecLen="1" Name="左前支腿水平回收时间" Unit="s" />
         <DSItem DataType="FLOAT" DecLen="1" Name="左前支腿水平伸出时间" Unit="s" />
+        <DSItem DataType="FLOAT" DecLen="1" Name="左前支腿垂直回收时间" Unit="s" />
+        <DSItem DataType="FLOAT" DecLen="1" Name="左前支腿垂直伸出时间" Unit="s" />
+
+        <DSItem DataType="FLOAT" DecLen="1" Name="右前支腿水平伸出时间" Unit="s" />
+        <DSItem DataType="FLOAT" DecLen="1" Name="右前支腿水平回收时间" Unit="s" />
+        <DSItem DataType="FLOAT" DecLen="1" Name="右前支腿垂直伸出时间" Unit="s" />
+        <DSItem DataType="FLOAT" DecLen="1" Name="右前支腿垂直回收时间" Unit="s" />
+
+        <DSItem DataType="FLOAT" DecLen="1" Name="左后支腿水平伸出时间" Unit="s" />
+        <DSItem DataType="FLOAT" DecLen="1" Name="左后支腿水平回收时间" Unit="s" />
+        <DSItem DataType="FLOAT" DecLen="1" Name="左后支腿垂直伸出时间" Unit="s" />
+        <DSItem DataType="FLOAT" DecLen="1" Name="左后支腿垂直回收时间" Unit="s" />
+
+        <DSItem DataType="FLOAT" DecLen="1" Name="右后支腿水平伸出时间" Unit="s" />
+        <DSItem DataType="FLOAT" DecLen="1" Name="右后支腿水平回收时间" Unit="s" />
+        <DSItem DataType="FLOAT" DecLen="1" Name="右后支腿垂直伸出时间" Unit="s" />
+        <DSItem DataType="FLOAT" DecLen="1" Name="右后支腿垂直回收时间" Unit="s" />
 
         <DSItem DataType="FLOAT" DecLen="0" Name="风扇开启情况" Unit="U" />
         <DSItem DataType="BOOL" DecLen="0" Name="气动润滑开启开关" Unit="开/关" />
@@ -431,23 +416,26 @@
         <DSItem DataType="FLOAT" DecLen="0" Name="第三压力段泵送次数" Unit="次" />
         <DSItem DataType="FLOAT" DecLen="0" Name="第四压力段泵送次数" Unit="次" />
         <DSItem DataType="FLOAT" DecLen="0" Name="压力段1累计时间" Unit="s" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="左前支腿垂直伸出时间" Unit="s" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="压力段2累计时间" Unit="s" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="压力段3累计时间" Unit="s" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="压力段4累计时间" Unit="s" />
         <DSItem DataType="FLOAT" DecLen="0" Name="恒压泵压力切断值" Unit="bar" />
         <DSItem DataType="FLOAT" DecLen="0" Name="主油缸到位率" Unit="U" />
         <DSItem DataType="FLOAT" DecLen="0" Name="大臂在位限位开关值" Unit="开/关" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="0.6档泵送次数" Unit="次" />
         <DSItem DataType="FLOAT" DecLen="0" Name="润滑系统气压" Unit="bar" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="压力段3累计时间" Unit="s" />
         <DSItem DataType="FLOAT" DecLen="0" Name="节能功能" Unit="U" />
         <DSItem DataType="FLOAT" DecLen="0" Name="泵送油缸动作逻辑" Unit="U" />
         <DSItem DataType="FLOAT" DecLen="0" Name="标定后最大排量电流" Unit="mA" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="一臂慢档展开电流" Unit="mA" />
         <DSItem DataType="FLOAT" DecLen="0" Name="缓冲螺钉位置" Unit="U" />
         <DSItem DataType="FLOAT" DecLen="0" Name="空泵压力值" Unit="bar" />
         <DSItem DataType="FLOAT" DecLen="0" Name="高低压切换" Unit="U" />
         <DSItem DataType="FLOAT" DecLen="0" Name="液压油过滤结束" Unit="U" />
         <DSItem DataType="FLOAT" DecLen="0" Name="搅伴压力开关（指示灯）" Unit="开/关" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="10档泵送次数" Unit="次" />
+
+        <DSItem DataType="FLOAT" DecLen="1" Name="0.6档泵送次数" Unit="次" />
+        <DSItem DataType="FLOAT" DecLen="1" Name="5档泵送次数" Unit="次" />
+        <DSItem DataType="FLOAT" DecLen="1" Name="10档泵送次数" Unit="次" />
+
         <DSItem DataType="FLOAT" DecLen="0" Name="液压油过滤开始" Unit="U" />
         <DSItem DataType="FLOAT" DecLen="0" Name="标定后最小排量电流" Unit="mA" />
         <DSItem DataType="FLOAT" DecLen="0" Name="液压油清洁度" Unit="U" />
@@ -456,24 +444,21 @@
         <DSItem DataType="FLOAT" DecLen="0" Name="液压油位" Unit="U" />
         <DSItem DataType="FLOAT" DecLen="0" Name="补油泵压力" Unit="bar" />
         <DSItem DataType="FLOAT" DecLen="0" Name="分配软启动" Unit="U" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="冲洗阀压力" Unit="bar" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="清洗系统水泵压力值" Unit="bar" />
         <DSItem DataType="FLOAT" DecLen="0" Name="臂架油泵压力切断值" Unit="bar" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="臂架回转限位开关值" Unit="bar" />
         <DSItem DataType="FLOAT" DecLen="0" Name="第一压力段泵送压力" Unit="bar" />
         <DSItem DataType="FLOAT" DecLen="0" Name="第二压力段泵送压力" Unit="bar" />
         <DSItem DataType="FLOAT" DecLen="0" Name="第三压力段泵送压力" Unit="bar" />
         <DSItem DataType="FLOAT" DecLen="0" Name="第四压力段泵送压力" Unit="bar" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="清洗系统水泵压力值" Unit="bar" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="臂架回转限位开关值" Unit="bar" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="冲洗阀压力" Unit="bar" />
         <DSItem DataType="FLOAT" DecLen="0" Name="第一压力段恒功率标定系数" Unit="U" />
         <DSItem DataType="FLOAT" DecLen="0" Name="第二压力段恒功率标定系数" Unit="U" />
         <DSItem DataType="FLOAT" DecLen="0" Name="第三压力段恒功率标定系数" Unit="U" />
         <DSItem DataType="FLOAT" DecLen="0" Name="第四压力段恒功率标定系数" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="压力段2累计时间" Unit="s" />
         <DSItem DataType="FLOAT" DecLen="0" Name="行程过长" Unit="U" />
         <DSItem DataType="FLOAT" DecLen="0" Name="空载搅伴压力值" Unit="bar" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="5档泵送次数" Unit="次" />
         <DSItem DataType="FLOAT" DecLen="0" Name="油脂加注位置" Unit="U" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="左前支腿垂直回收时间" Unit="s" />
         <DSItem DataType="FLOAT" DecLen="0" Name="恒压泵温度" Unit="℃" />
 
         <DSItem DataType="FLOAT" DecLen="0" Name="左前支腿水平伸出平均油温" Unit="℃" />
@@ -493,297 +478,304 @@
         <DSItem DataType="FLOAT" DecLen="0" Name="右后支腿垂直伸出平均油温" Unit="℃" />
         <DSItem DataType="FLOAT" DecLen="0" Name="右后支腿垂直回收平均油温" Unit="℃" />
 
-        <DSItem DataType="FLOAT" DecLen="0" Name="臂架泵溢流压力值" Unit="bar" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="回转溢流压力值" Unit="bar" />
+        <DSItem DataType="FLOAT" DecLen="2" Name="臂架泵溢流压力值" Unit="bar" />
+        <DSItem DataType="FLOAT" DecLen="2" Name="回转溢流压力值" Unit="bar" />
         <DSItem DataType="FLOAT" DecLen="0" Name="恒压泵最小电流" Unit="mA" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="恒压泵最小电流压力" Unit="bar" />
+        <DSItem DataType="FLOAT" DecLen="2" Name="恒压泵最小电流压力" Unit="bar" />
         <DSItem DataType="FLOAT" DecLen="0" Name="恒压泵最大电流" Unit="mA" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="恒压泵最大电流压力" Unit="bar" />
+        <DSItem DataType="FLOAT" DecLen="2" Name="恒压泵最大电流压力" Unit="bar" />
         <DSItem DataType="FLOAT" DecLen="0" Name="恒压泵手控电流" Unit="mA" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="恒压泵手控电流压力" Unit="bar" />
+        <DSItem DataType="FLOAT" DecLen="2" Name="恒压泵手控电流压力" Unit="bar" />
 
         <DSItem DataType="FLOAT" DecLen="0" Name="主油泵温度" Unit="℃" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="支腿溢流压力" Unit="bar" />
+        <DSItem DataType="FLOAT" DecLen="2" Name="支腿溢流压力" Unit="bar" />
         <DSItem DataType="FLOAT" DecLen="2" Name="摆动到位时间" Unit="s" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="润滑间歇时间" Unit="s" />
+        <DSItem DataType="FLOAT" DecLen="1" Name="润滑间歇时间" Unit="s" />
         <DSItem DataType="FLOAT" DecLen="0" Name="复杂料况" Unit="U" />
         <DSItem DataType="FLOAT" DecLen="0" Name="润滑开启开关" Unit="开/关" />
         <DSItem DataType="FLOAT" DecLen="0" Name="主油缸壳体温度" Unit="℃" />
         <DSItem DataType="FLOAT" DecLen="0" Name="液压油过滤时间" Unit="s" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="恒压泵溢流压力值" Unit="bar" />
+        <DSItem DataType="FLOAT" DecLen="2" Name="恒压泵溢流压力值" Unit="bar" />
         <DSItem DataType="FLOAT" DecLen="0" Name="换向次数" Unit="次" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="压力段4累计时间" Unit="s" />
         <DSItem DataType="FLOAT" DecLen="0" Name="超速报警次数" Unit="次" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="一臂慢档展开时间" Unit="s" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="一臂慢档回收时间" Unit="s" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="一臂慢档回收电流" Unit="mA" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="主油泵压力切断值" Unit="mA" />
+        <DSItem DataType="FLOAT" DecLen="2" Name="主油泵压力切断值" Unit="mA" />
         <DSItem DataType="FLOAT" DecLen="0" Name="开机时间" Unit="s" />
 
-        <DSItem DataType="FLOAT" DecLen="0" Name="一臂快档展开时间" Unit="s" />
+        <DSItem DataType="FLOAT" DecLen="1" Name="一臂慢档展开时间" Unit="s" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="一臂慢档展开电流" Unit="mA" />
+        <DSItem DataType="FLOAT" DecLen="1" Name="一臂慢档回收时间" Unit="s" />
+        <DSItem DataType="FLOAT" DecLen="0" Name="一臂慢档回收电流" Unit="mA" />
+        <DSItem DataType="FLOAT" DecLen="1" Name="一臂快档展开时间" Unit="s" />
         <DSItem DataType="FLOAT" DecLen="0" Name="一臂快档展开电流" Unit="mA" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="一臂快档回收时间" Unit="s" />
+        <DSItem DataType="FLOAT" DecLen="1" Name="一臂快档回收时间" Unit="s" />
         <DSItem DataType="FLOAT" DecLen="0" Name="一臂快档回收电流" Unit="mA" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="二臂慢档展开时间" Unit="s" />
+        <DSItem DataType="FLOAT" DecLen="1" Name="二臂慢档展开时间" Unit="s" />
         <DSItem DataType="FLOAT" DecLen="0" Name="二臂慢档展开电流" Unit="mA" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="二臂快档展开时间" Unit="s" />
+        <DSItem DataType="FLOAT" DecLen="1" Name="二臂快档展开时间" Unit="s" />
         <DSItem DataType="FLOAT" DecLen="0" Name="二臂快档展开电流" Unit="mA" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="二臂慢档回收时间" Unit="s" />
+        <DSItem DataType="FLOAT" DecLen="1" Name="二臂慢档回收时间" Unit="s" />
         <DSItem DataType="FLOAT" DecLen="0" Name="二臂慢档回收电流" Unit="mA" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="二臂快档回收时间" Unit="s" />
+        <DSItem DataType="FLOAT" DecLen="1" Name="二臂快档回收时间" Unit="s" />
         <DSItem DataType="FLOAT" DecLen="0" Name="二臂快档回收电流" Unit="mA" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="三臂慢档展开时间" Unit="s" />
+        <DSItem DataType="FLOAT" DecLen="1" Name="三臂慢档展开时间" Unit="s" />
         <DSItem DataType="FLOAT" DecLen="0" Name="三臂慢档展开电流" Unit="mA" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="三臂快档展开时间" Unit="s" />
+        <DSItem DataType="FLOAT" DecLen="1" Name="三臂快档展开时间" Unit="s" />
         <DSItem DataType="FLOAT" DecLen="0" Name="三臂快档展开电流" Unit="mA" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="三臂慢档回收时间" Unit="s" />
+        <DSItem DataType="FLOAT" DecLen="1" Name="三臂慢档回收时间" Unit="s" />
         <DSItem DataType="FLOAT" DecLen="0" Name="三臂慢档回收电流" Unit="mA" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="三臂快档回收时间" Unit="s" />
+        <DSItem DataType="FLOAT" DecLen="1" Name="三臂快档回收时间" Unit="s" />
         <DSItem DataType="FLOAT" DecLen="0" Name="三臂快档回收电流" Unit="mA" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="四臂慢档展开时间" Unit="s" />
+        <DSItem DataType="FLOAT" DecLen="1" Name="四臂慢档展开时间" Unit="s" />
         <DSItem DataType="FLOAT" DecLen="0" Name="四臂慢档展开电流" Unit="mA" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="四臂快档展开时间" Unit="s" />
+        <DSItem DataType="FLOAT" DecLen="1" Name="四臂快档展开时间" Unit="s" />
         <DSItem DataType="FLOAT" DecLen="0" Name="四臂快档展开电流" Unit="mA" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="四臂慢档回收时间" Unit="s" />
+        <DSItem DataType="FLOAT" DecLen="1" Name="四臂慢档回收时间" Unit="s" />
         <DSItem DataType="FLOAT" DecLen="0" Name="四臂慢档回收电流" Unit="mA" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="四臂快档回收时间" Unit="s" />
+        <DSItem DataType="FLOAT" DecLen="1" Name="四臂快档回收时间" Unit="s" />
         <DSItem DataType="FLOAT" DecLen="0" Name="四臂快档回收电流" Unit="mA" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="五臂慢档展开时间" Unit="s" />
+        <DSItem DataType="FLOAT" DecLen="1" Name="五臂慢档展开时间" Unit="s" />
         <DSItem DataType="FLOAT" DecLen="0" Name="五臂慢档展开电流" Unit="mA" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="五臂快档展开时间" Unit="s" />
+        <DSItem DataType="FLOAT" DecLen="1" Name="五臂快档展开时间" Unit="s" />
         <DSItem DataType="FLOAT" DecLen="0" Name="五臂快档展开电流" Unit="mA" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="五臂慢档回收时间" Unit="s" />
+        <DSItem DataType="FLOAT" DecLen="1" Name="五臂慢档回收时间" Unit="s" />
         <DSItem DataType="FLOAT" DecLen="0" Name="五臂慢档回收电流" Unit="mA" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="五臂快档回收时间" Unit="s" />
+        <DSItem DataType="FLOAT" DecLen="1" Name="五臂快档回收时间" Unit="s" />
         <DSItem DataType="FLOAT" DecLen="0" Name="五臂快档回收电流" Unit="mA" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="六臂慢档展开时间" Unit="s" />
+        <DSItem DataType="FLOAT" DecLen="1" Name="六臂慢档展开时间" Unit="s" />
         <DSItem DataType="FLOAT" DecLen="0" Name="六臂慢档展开电流" Unit="mA" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="六臂快档展开时间" Unit="s" />
+        <DSItem DataType="FLOAT" DecLen="1" Name="六臂快档展开时间" Unit="s" />
         <DSItem DataType="FLOAT" DecLen="0" Name="六臂快档展开电流" Unit="mA" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="六臂慢档回收时间" Unit="s" />
+        <DSItem DataType="FLOAT" DecLen="1" Name="六臂慢档回收时间" Unit="s" />
         <DSItem DataType="FLOAT" DecLen="0" Name="六臂慢档回收电流" Unit="mA" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="六臂快档回收时间" Unit="s" />
+        <DSItem DataType="FLOAT" DecLen="1" Name="六臂快档回收时间" Unit="s" />
         <DSItem DataType="FLOAT" DecLen="0" Name="六臂快档回收电流" Unit="mA" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="顺时针回转慢档时间" Unit="s" />
+        <DSItem DataType="FLOAT" DecLen="1" Name="顺时针回转慢档时间" Unit="s" />
         <DSItem DataType="FLOAT" DecLen="0" Name="顺时针回转慢档电流" Unit="mA" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="逆时针回转慢档时间" Unit="s" />
+        <DSItem DataType="FLOAT" DecLen="1" Name="逆时针回转慢档时间" Unit="s" />
         <DSItem DataType="FLOAT" DecLen="0" Name="逆时针回转慢档电流" Unit="mA" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="顺时针回转快档时间" Unit="s" />
+        <DSItem DataType="FLOAT" DecLen="1" Name="顺时针回转快档时间" Unit="s" />
         <DSItem DataType="FLOAT" DecLen="0" Name="顺时针回转快档电流" Unit="mA" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="逆时针回转快档时间" Unit="s" />
+        <DSItem DataType="FLOAT" DecLen="1" Name="逆时针回转快档时间" Unit="s" />
         <DSItem DataType="FLOAT" DecLen="0" Name="逆时针回转快档电流" Unit="mA" />
 
         <DSItem DataType="FLOAT" DecLen="0" Name="传感器零点标定" Unit="U" />
         <DSItem DataType="FLOAT" DecLen="0" Name="传感器最大值标定" Unit="U" />
 
         <!--AttachPGN相关-->
-        <DSItem DataType="BYTE" DecLen="1" Name="一臂快档展开不检测时间" Unit="s" Value="5" />
+        <DSItem DataType="WORD" DecLen="1" Name="一臂慢档展开不检测时间" Unit="s" Value="5" />
+        <DSItem DataType="WORD" DecLen="1" Name="一臂慢档展开终止斜率阀值" Unit="U" Value="1000" />
+        <DSItem DataType="WORD" DecLen="1" Name="一臂慢档展开时间最大值" Unit="s" Value="268" />
+        <DSItem DataType="WORD" DecLen="1" Name="一臂慢档展开时间最小值" Unit="s" Value="216" />
+
+        <DSItem DataType="WORD" DecLen="1" Name="一臂慢档回收不检测时间" Unit="s" Value="5" />
+        <DSItem DataType="WORD" DecLen="1" Name="一臂慢档回收终止斜率阀值" Unit="U" Value="1000" />
+        <DSItem DataType="WORD" DecLen="1" Name="一臂慢档回收时间最大值" Unit="s" Value="396" />
+        <DSItem DataType="WORD" DecLen="1" Name="一臂慢档回收时间最小值" Unit="s" Value="324" />
+
+        <DSItem DataType="WORD" DecLen="1" Name="一臂快档展开不检测时间" Unit="s" Value="5" />
         <DSItem DataType="WORD" DecLen="1" Name="一臂快档展开终止斜率阀值" Unit="U" Value="1000" />
-        <DSItem DataType="BYTE" DecLen="1" Name="一臂快档展开时间最大值" Unit="s" Value="15" />
-        <DSItem DataType="BYTE" DecLen="1" Name="一臂快档展开时间最小值" Unit="s" Value="15" />
+        <DSItem DataType="WORD" DecLen="1" Name="一臂快档展开时间最大值" Unit="s" Value="132" />
+        <DSItem DataType="WORD" DecLen="1" Name="一臂快档展开时间最小值" Unit="s" Value="108" />
 
-        <DSItem DataType="BYTE" DecLen="1" Name="一臂快档回收不检测时间" Unit="s" Value="5" />
+        <DSItem DataType="WORD" DecLen="1" Name="一臂快档回收不检测时间" Unit="s" Value="5" />
         <DSItem DataType="WORD" DecLen="1" Name="一臂快档回收终止斜率阀值" Unit="U" Value="1000" />
-        <DSItem DataType="BYTE" DecLen="1" Name="一臂快档回收时间最大值" Unit="s" Value="15" />
-        <DSItem DataType="BYTE" DecLen="1" Name="一臂快档回收时间最小值" Unit="s" Value="15" />
+        <DSItem DataType="WORD" DecLen="1" Name="一臂快档回收时间最大值" Unit="s" Value="198" />
+        <DSItem DataType="WORD" DecLen="1" Name="一臂快档回收时间最小值" Unit="s" Value="162" />
 
-        <DSItem DataType="BYTE" DecLen="1" Name="二臂慢档展开不检测时间" Unit="s" Value="5" />
+        <DSItem DataType="WORD" DecLen="1" Name="二臂慢档展开不检测时间" Unit="s" Value="5" />
         <DSItem DataType="WORD" DecLen="1" Name="二臂慢档展开终止斜率阀值" Unit="U" Value="1000" />
-        <DSItem DataType="BYTE" DecLen="1" Name="二臂慢档展开时间最大值" Unit="s" Value="15" />
-        <DSItem DataType="BYTE" DecLen="1" Name="二臂慢档展开时间最小值" Unit="s" Value="15" />
+        <DSItem DataType="WORD" DecLen="1" Name="二臂慢档展开时间最大值" Unit="s" Value="198" />
+        <DSItem DataType="WORD" DecLen="1" Name="二臂慢档展开时间最小值" Unit="s" Value="162" />
 
-        <DSItem DataType="BYTE" DecLen="1" Name="二臂快档展开" Unit="s" Value="15" />
-        <DSItem DataType="BYTE" DecLen="1" Name="二臂快档展开不检测时间" Unit="s" Value="5" />
+        <DSItem DataType="WORD" DecLen="1" Name="二臂快档展开不检测时间" Unit="s" Value="5" />
         <DSItem DataType="WORD" DecLen="1" Name="二臂快档展开终止斜率阀值" Unit="U" Value="1000" />
-        <DSItem DataType="BYTE" DecLen="1" Name="二臂快档展开时间最大值" Unit="s" Value="15" />
-        <DSItem DataType="BYTE" DecLen="1" Name="二臂快档展开时间最小值" Unit="s" Value="15" />
+        <DSItem DataType="WORD" DecLen="1" Name="二臂快档展开时间最大值" Unit="s" Value="99" />
+        <DSItem DataType="WORD" DecLen="1" Name="二臂快档展开时间最小值" Unit="s" Value="81" />
 
-        <DSItem DataType="BYTE" DecLen="1" Name="二臂慢档回收不检测时间" Unit="s" Value="5" />
-        <DSItem DataType="WORD" DecLen="1" Name="二臂慢档回收终止斜率阀值" Unit="U" Value="1000" />
-        <DSItem DataType="BYTE" DecLen="1" Name="二臂慢档回收时间最大值" Unit="s" Value="15" />
-        <DSItem DataType="BYTE" DecLen="1" Name="二臂慢档回收时间最小值" Unit="s" Value="15" />
+        <DSItem DataType="WORD" DecLen="1" Name="二臂慢档回收不检测时间" Unit="s" Value="5" />
+        <DSItem DataType="WORD" DecLen="1" Name="二臂慢档回收终止斜率阀值" Unit="U" Value="0" />
+        <DSItem DataType="WORD" DecLen="1" Name="二臂慢档回收时间最大值" Unit="s" Value="198" />
+        <DSItem DataType="WORD" DecLen="1" Name="二臂慢档回收时间最小值" Unit="s" Value="162" />
 
-        <DSItem DataType="BYTE" DecLen="1" Name="二臂快档回收不检测时间" Unit="s" Value="5" />
-        <DSItem DataType="WORD" DecLen="1" Name="二臂快档回收终止斜率阀值" Unit="U" Value="1000" />
-        <DSItem DataType="BYTE" DecLen="1" Name="二臂快档回收时间最大值" Unit="s" Value="15" />
-        <DSItem DataType="BYTE" DecLen="1" Name="二臂快档回收时间最小值" Unit="s" Value="15" />
+        <DSItem DataType="WORD" DecLen="1" Name="二臂快档回收不检测时间" Unit="s" Value="5" />
+        <DSItem DataType="WORD" DecLen="1" Name="二臂快档回收终止斜率阀值" Unit="U" Value="0" />
+        <DSItem DataType="WORD" DecLen="1" Name="二臂快档回收时间最大值" Unit="s" Value="99" />
+        <DSItem DataType="WORD" DecLen="1" Name="二臂快档回收时间最小值" Unit="s" Value="81" />
 
-        <DSItem DataType="BYTE" DecLen="1" Name="三臂慢档展开不检测时间" Unit="s" Value="5" />
+        <DSItem DataType="WORD" DecLen="1" Name="三臂慢档展开不检测时间" Unit="s" Value="5" />
         <DSItem DataType="WORD" DecLen="1" Name="三臂慢档展开终止斜率阀值" Unit="U" Value="1000" />
-        <DSItem DataType="BYTE" DecLen="1" Name="三臂慢档展开时间最大值" Unit="s" Value="15" />
-        <DSItem DataType="BYTE" DecLen="1" Name="三臂慢档展开时间最小值" Unit="s" Value="15" />
+        <DSItem DataType="WORD" DecLen="1" Name="三臂慢档展开时间最大值" Unit="s" Value="154" />
+        <DSItem DataType="WORD" DecLen="1" Name="三臂慢档展开时间最小值" Unit="s" Value="126" />
 
-        <DSItem DataType="BYTE" DecLen="1" Name="三臂快档展开不检测时间" Unit="s" Value="5" />
+        <DSItem DataType="WORD" DecLen="1" Name="三臂快档展开不检测时间" Unit="s" Value="5" />
         <DSItem DataType="WORD" DecLen="1" Name="三臂快档展开终止斜率阀值" Unit="U" Value="1000" />
-        <DSItem DataType="BYTE" DecLen="1" Name="三臂快档展开时间最大值" Unit="s" Value="15" />
-        <DSItem DataType="BYTE" DecLen="1" Name="三臂快档展开时间最小值" Unit="s" Value="15" />
+        <DSItem DataType="WORD" DecLen="1" Name="三臂快档展开时间最大值" Unit="s" Value="77" />
+        <DSItem DataType="WORD" DecLen="1" Name="三臂快档展开时间最小值" Unit="s" Value="63" />
 
-        <DSItem DataType="BYTE" DecLen="1" Name="三臂慢档回收不检测时间" Unit="s" Value="5" />
-        <DSItem DataType="WORD" DecLen="1" Name="三臂慢档回收终止斜率阀值" Unit="U" Value="1000" />
-        <DSItem DataType="BYTE" DecLen="1" Name="三臂慢档回收时间最大值" Unit="s" Value="15" />
-        <DSItem DataType="BYTE" DecLen="1" Name="三臂慢档回收时间最小值" Unit="s" Value="15" />
+        <DSItem DataType="WORD" DecLen="1" Name="三臂慢档回收不检测时间" Unit="s" Value="5" />
+        <DSItem DataType="WORD" DecLen="1" Name="三臂慢档回收终止斜率阀值" Unit="U" Value="0" />
+        <DSItem DataType="WORD" DecLen="1" Name="三臂慢档回收时间最大值" Unit="s" Value="154" />
+        <DSItem DataType="WORD" DecLen="1" Name="三臂慢档回收时间最小值" Unit="s" Value="126" />
 
-        <DSItem DataType="BYTE" DecLen="1" Name="三臂快档回收不检测时间" Unit="s" Value="5" />
-        <DSItem DataType="WORD" DecLen="1" Name="三臂快档回收终止斜率阀值" Unit="U" Value="1000" />
-        <DSItem DataType="BYTE" DecLen="1" Name="三臂快档回收时间最大值" Unit="s" Value="15" />
-        <DSItem DataType="BYTE" DecLen="1" Name="三臂快档回收时间最小值" Unit="s" Value="15" />
+        <DSItem DataType="WORD" DecLen="1" Name="三臂快档回收不检测时间" Unit="s" Value="5" />
+        <DSItem DataType="WORD" DecLen="1" Name="三臂快档回收终止斜率阀值" Unit="U" Value="0" />
+        <DSItem DataType="WORD" DecLen="1" Name="三臂快档回收时间最大值" Unit="s" Value="77" />
+        <DSItem DataType="WORD" DecLen="1" Name="三臂快档回收时间最小值" Unit="s" Value="63" />
 
-        <DSItem DataType="BYTE" DecLen="1" Name="四臂慢档展开不检测时间" Unit="s" Value="5" />
-        <DSItem DataType="WORD" DecLen="1" Name="四臂慢档展开终止斜率阀值" Unit="U" Value="1000" />
-        <DSItem DataType="BYTE" DecLen="1" Name="四臂慢档展开时间最大值" Unit="s" Value="15" />
-        <DSItem DataType="BYTE" DecLen="1" Name="四臂慢档展开时间最小值" Unit="s" Value="15" />
+        <DSItem DataType="WORD" DecLen="1" Name="四臂慢档展开不检测时间" Unit="s" Value="5" />
+        <DSItem DataType="WORD" DecLen="1" Name="四臂慢档展开终止斜率阀值" Unit="U" Value="0" />
+        <DSItem DataType="WORD" DecLen="1" Name="四臂慢档展开时间最大值" Unit="s" Value="110" />
+        <DSItem DataType="WORD" DecLen="1" Name="四臂慢档展开时间最小值" Unit="s" Value="90" />
 
-        <DSItem DataType="BYTE" DecLen="1" Name="四臂快档展开" Unit="s" Value="15" />
-        <DSItem DataType="BYTE" DecLen="1" Name="四臂快档展开不检测时间" Unit="s" Value="5" />
-        <DSItem DataType="WORD" DecLen="1" Name="四臂快档展开终止斜率阀值" Unit="U" Value="1000" />
-        <DSItem DataType="BYTE" DecLen="1" Name="四臂快档展开时间最大值" Unit="s" Value="15" />
-        <DSItem DataType="BYTE" DecLen="1" Name="四臂快档展开时间最小值" Unit="s" Value="15" />
+        <DSItem DataType="WORD" DecLen="1" Name="四臂快档展开不检测时间" Unit="s" Value="5" />
+        <DSItem DataType="WORD" DecLen="1" Name="四臂快档展开终止斜率阀值" Unit="U" Value="0" />
+        <DSItem DataType="WORD" DecLen="1" Name="四臂快档展开时间最大值" Unit="s" Value="55" />
+        <DSItem DataType="WORD" DecLen="1" Name="四臂快档展开时间最小值" Unit="s" Value="45" />
 
-        <DSItem DataType="BYTE" DecLen="1" Name="四臂慢档回收不检测时间" Unit="s" Value="5" />
-        <DSItem DataType="WORD" DecLen="1" Name="四臂慢档回收终止斜率阀值" Unit="U" Value="1000" />
-        <DSItem DataType="BYTE" DecLen="1" Name="四臂慢档回收时间最大值" Unit="s" Value="15" />
-        <DSItem DataType="BYTE" DecLen="1" Name="四臂慢档回收时间最小值" Unit="s" Value="15" />
+        <DSItem DataType="WORD" DecLen="1" Name="四臂慢档回收不检测时间" Unit="s" Value="5" />
+        <DSItem DataType="WORD" DecLen="1" Name="四臂慢档回收终止斜率阀值" Unit="U" Value="0" />
+        <DSItem DataType="WORD" DecLen="1" Name="四臂慢档回收时间最大值" Unit="s" Value="110" />
+        <DSItem DataType="WORD" DecLen="1" Name="四臂慢档回收时间最小值" Unit="s" Value="90" />
 
-        <DSItem DataType="BYTE" DecLen="1" Name="四臂快档回收不检测时间" Unit="s" Value="5" />
-        <DSItem DataType="WORD" DecLen="1" Name="四臂快档回收终止斜率阀值" Unit="U" Value="1000" />
-        <DSItem DataType="BYTE" DecLen="1" Name="四臂快档回收时间最大值" Unit="s" Value="15" />
-        <DSItem DataType="BYTE" DecLen="1" Name="四臂快档回收时间最小值" Unit="s" Value="15" />
+        <DSItem DataType="WORD" DecLen="1" Name="四臂快档回收不检测时间" Unit="s" Value="5" />
+        <DSItem DataType="WORD" DecLen="1" Name="四臂快档回收终止斜率阀值" Unit="U" Value="0" />
+        <DSItem DataType="WORD" DecLen="1" Name="四臂快档回收时间最大值" Unit="s" Value="55" />
+        <DSItem DataType="WORD" DecLen="1" Name="四臂快档回收时间最小值" Unit="s" Value="45" />
 
-        <DSItem DataType="BYTE" DecLen="1" Name="五臂慢档展开不检测时间" Unit="s" Value="5" />
-        <DSItem DataType="WORD" DecLen="1" Name="五臂慢档展开终止斜率阀值" Unit="U" Value="1000" />
-        <DSItem DataType="BYTE" DecLen="1" Name="五臂慢档展开时间最大值" Unit="s" Value="15" />
-        <DSItem DataType="BYTE" DecLen="1" Name="五臂慢档展开时间最小值" Unit="s" Value="15" />
+        <DSItem DataType="WORD" DecLen="1" Name="五臂慢档展开不检测时间" Unit="s" Value="5" />
+        <DSItem DataType="WORD" DecLen="1" Name="五臂慢档展开终止斜率阀值" Unit="U" Value="0" />
+        <DSItem DataType="WORD" DecLen="1" Name="五臂慢档展开时间最大值" Unit="s" Value="55" />
+        <DSItem DataType="WORD" DecLen="1" Name="五臂慢档展开时间最小值" Unit="s" Value="45" />
 
-        <DSItem DataType="BYTE" DecLen="1" Name="五臂快档展开不检测时间" Unit="s" Value="5" />
-        <DSItem DataType="WORD" DecLen="1" Name="五臂快档展开终止斜率阀值" Unit="U" Value="1000" />
-        <DSItem DataType="BYTE" DecLen="1" Name="五臂快档展开时间最大值" Unit="s" Value="15" />
-        <DSItem DataType="BYTE" DecLen="1" Name="五臂快档展开时间最小值" Unit="s" Value="15" />
+        <DSItem DataType="WORD" DecLen="1" Name="五臂快档展开不检测时间" Unit="s" Value="5" />
+        <DSItem DataType="WORD" DecLen="1" Name="五臂快档展开终止斜率阀值" Unit="U" Value="0" />
+        <DSItem DataType="WORD" DecLen="1" Name="五臂快档展开时间最大值" Unit="s" Value="28" />
+        <DSItem DataType="WORD" DecLen="1" Name="五臂快档展开时间最小值" Unit="s" Value="22" />
 
-        <DSItem DataType="BYTE" DecLen="1" Name="五臂慢档回收不检测时间" Unit="s" Value="5" />
-        <DSItem DataType="WORD" DecLen="1" Name="五臂慢档回收终止斜率阀值" Unit="U" Value="1000" />
-        <DSItem DataType="BYTE" DecLen="1" Name="五臂慢档回收时间最大值" Unit="s" Value="15" />
-        <DSItem DataType="BYTE" DecLen="1" Name="五臂慢档回收时间最小值" Unit="s" Value="15" />
+        <DSItem DataType="WORD" DecLen="1" Name="五臂慢档回收不检测时间" Unit="s" Value="5" />
+        <DSItem DataType="WORD" DecLen="1" Name="五臂慢档回收终止斜率阀值" Unit="U" Value="0" />
+        <DSItem DataType="WORD" DecLen="1" Name="五臂慢档回收时间最大值" Unit="s" Value="55" />
+        <DSItem DataType="WORD" DecLen="1" Name="五臂慢档回收时间最小值" Unit="s" Value="45" />
 
-        <DSItem DataType="BYTE" DecLen="1" Name="五臂快档回收不检测时间" Unit="s" Value="5" />
-        <DSItem DataType="WORD" DecLen="1" Name="五臂快档回收终止斜率阀值" Unit="U" Value="1000" />
-        <DSItem DataType="BYTE" DecLen="1" Name="五臂快档回收时间最大值" Unit="s" Value="15" />
-        <DSItem DataType="BYTE" DecLen="1" Name="五臂快档回收时间最小值" Unit="s" Value="15" />
+        <DSItem DataType="WORD" DecLen="1" Name="五臂快档回收不检测时间" Unit="s" Value="5" />
+        <DSItem DataType="WORD" DecLen="1" Name="五臂快档回收终止斜率阀值" Unit="U" Value="0" />
+        <DSItem DataType="WORD" DecLen="1" Name="五臂快档回收时间最大值" Unit="s" Value="28" />
+        <DSItem DataType="WORD" DecLen="1" Name="五臂快档回收时间最小值" Unit="s" Value="22" />
 
-        <DSItem DataType="BYTE" DecLen="1" Name="六臂慢档展开不检测时间" Unit="s" Value="5" />
-        <DSItem DataType="WORD" DecLen="1" Name="六臂慢档展开终止斜率阀值" Unit="U" Value="1000" />
-        <DSItem DataType="BYTE" DecLen="1" Name="六臂慢档展开时间最大值" Unit="s" Value="15" />
-        <DSItem DataType="BYTE" DecLen="1" Name="六臂慢档展开时间最小值" Unit="s" Value="15" />
+        <DSItem DataType="WORD" DecLen="1" Name="六臂慢档展开不检测时间" Unit="s" Value="5" />
+        <DSItem DataType="WORD" DecLen="1" Name="六臂慢档展开终止斜率阀值" Unit="U" Value="0" />
+        <DSItem DataType="WORD" DecLen="1" Name="六臂慢档展开时间最大值" Unit="s" Value="22" />
+        <DSItem DataType="WORD" DecLen="1" Name="六臂慢档展开时间最小值" Unit="s" Value="18" />
 
-        <DSItem DataType="BYTE" DecLen="1" Name="六臂快档展开不检测时间" Unit="s" Value="5" />
-        <DSItem DataType="WORD" DecLen="1" Name="六臂快档展开终止斜率阀值" Unit="U" Value="1000" />
-        <DSItem DataType="BYTE" DecLen="1" Name="六臂快档展开时间最大值" Unit="s" Value="15" />
-        <DSItem DataType="BYTE" DecLen="1" Name="六臂快档展开时间最小值" Unit="s" Value="15" />
+        <DSItem DataType="WORD" DecLen="1" Name="六臂快档展开不检测时间" Unit="s" Value="5" />
+        <DSItem DataType="WORD" DecLen="1" Name="六臂快档展开终止斜率阀值" Unit="U" Value="0" />
+        <DSItem DataType="WORD" DecLen="1" Name="六臂快档展开时间最大值" Unit="s" Value="11" />
+        <DSItem DataType="WORD" DecLen="1" Name="六臂快档展开时间最小值" Unit="s" Value="9" />
 
-        <DSItem DataType="BYTE" DecLen="1" Name="六臂慢档回收不检测时间" Unit="s" Value="5" />
-        <DSItem DataType="WORD" DecLen="1" Name="六臂慢档回收终止斜率阀值" Unit="U" Value="1000" />
-        <DSItem DataType="BYTE" DecLen="1" Name="六臂慢档回收时间最大值" Unit="s" Value="15" />
-        <DSItem DataType="BYTE" DecLen="1" Name="六臂慢档回收时间最小值" Unit="s" Value="15" />
+        <DSItem DataType="WORD" DecLen="1" Name="六臂慢档回收不检测时间" Unit="s" Value="5" />
+        <DSItem DataType="WORD" DecLen="1" Name="六臂慢档回收终止斜率阀值" Unit="U" Value="0" />
+        <DSItem DataType="WORD" DecLen="1" Name="六臂慢档回收时间最大值" Unit="s" Value="22" />
+        <DSItem DataType="WORD" DecLen="1" Name="六臂慢档回收时间最小值" Unit="s" Value="18" />
 
-        <DSItem DataType="BYTE" DecLen="1" Name="六臂快档回收不检测时间" Unit="s" Value="5" />
-        <DSItem DataType="WORD" DecLen="1" Name="六臂快档回收终止斜率阀值" Unit="U" Value="1000" />
-        <DSItem DataType="BYTE" DecLen="1" Name="六臂快档回收时间最大值" Unit="s" Value="15" />
-        <DSItem DataType="BYTE" DecLen="1" Name="六臂快档回收时间最小值" Unit="s" Value="15" />
+        <DSItem DataType="WORD" DecLen="1" Name="六臂快档回收不检测时间" Unit="s" Value="5" />
+        <DSItem DataType="WORD" DecLen="1" Name="六臂快档回收终止斜率阀值" Unit="U" Value="0" />
+        <DSItem DataType="WORD" DecLen="1" Name="六臂快档回收时间最大值" Unit="s" Value="11" />
+        <DSItem DataType="WORD" DecLen="1" Name="六臂快档回收时间最小值" Unit="s" Value="9" />
 
-        <DSItem DataType="BYTE" DecLen="1" Name="顺时针回转慢档不检测时间" Unit="s" Value="5" />
+        <DSItem DataType="WORD" DecLen="1" Name="顺时针回转慢档不检测时间" Unit="s" Value="5" />
         <DSItem DataType="WORD" DecLen="1" Name="顺时针回转慢档终止斜率阀值" Unit="U" Value="1000" />
-        <DSItem DataType="BYTE" DecLen="1" Name="顺时针回转慢档时间最大值" Unit="s" Value="15" />
-        <DSItem DataType="BYTE" DecLen="1" Name="顺时针回转慢档时间最小值" Unit="s" Value="15" />
+        <DSItem DataType="WORD" DecLen="1" Name="顺时针回转慢档时间最大值" Unit="s" Value="660" />
+        <DSItem DataType="WORD" DecLen="1" Name="顺时针回转慢档时间最小值" Unit="s" Value="540" />
 
-        <DSItem DataType="BYTE" DecLen="1" Name="逆时针回转慢档不检测时间" Unit="s" Value="5" />
+        <DSItem DataType="WORD" DecLen="1" Name="逆时针回转慢档不检测时间" Unit="s" Value="5" />
         <DSItem DataType="WORD" DecLen="1" Name="逆时针回转慢档终止斜率阀值" Unit="U" Value="1000" />
-        <DSItem DataType="BYTE" DecLen="1" Name="逆时针回转慢档时间最大值" Unit="s" Value="15" />
-        <DSItem DataType="BYTE" DecLen="1" Name="逆时针回转慢档时间最小值" Unit="s" Value="15" />
+        <DSItem DataType="WORD" DecLen="1" Name="逆时针回转慢档时间最大值" Unit="s" Value="660" />
+        <DSItem DataType="WORD" DecLen="1" Name="逆时针回转慢档时间最小值" Unit="s" Value="540" />
 
-        <DSItem DataType="BYTE" DecLen="1" Name="顺时针回转快档不检测时间" Unit="s" Value="5" />
+        <DSItem DataType="WORD" DecLen="1" Name="顺时针回转快档不检测时间" Unit="s" Value="5" />
         <DSItem DataType="WORD" DecLen="1" Name="顺时针回转快档终止斜率阀值" Unit="U" Value="1000" />
-        <DSItem DataType="BYTE" DecLen="1" Name="顺时针回转快档时间最大值" Unit="s" Value="15" />
-        <DSItem DataType="BYTE" DecLen="1" Name="顺时针回转快档时间最小值" Unit="s" Value="15" />
+        <DSItem DataType="WORD" DecLen="1" Name="顺时针回转快档时间最大值" Unit="s" Value="330" />
+        <DSItem DataType="WORD" DecLen="1" Name="顺时针回转快档时间最小值" Unit="s" Value="270" />
 
-        <DSItem DataType="BYTE" DecLen="1" Name="逆时针回转快档不检测时间" Unit="s" Value="5" />
+        <DSItem DataType="WORD" DecLen="1" Name="逆时针回转快档不检测时间" Unit="s" Value="5" />
         <DSItem DataType="WORD" DecLen="1" Name="逆时针回转快档终止斜率阀值" Unit="U" Value="1000" />
-        <DSItem DataType="BYTE" DecLen="1" Name="逆时针回转快档时间最大值" Unit="s" Value="15" />
-        <DSItem DataType="BYTE" DecLen="1" Name="逆时针回转快档时间最小值" Unit="s" Value="15" />
+        <DSItem DataType="WORD" DecLen="1" Name="逆时针回转快档时间最大值" Unit="s" Value="330" />
+        <DSItem DataType="WORD" DecLen="1" Name="逆时针回转快档时间最小值" Unit="s" Value="270" />
 
-        <DSItem DataType="BYTE" Name="左前支腿水平伸出不检测时间" Unit="s" Value="5" />
-        <DSItem DataType="BYTE" Name="左前支腿水平回收不检测时间" Unit="s" Value="5" />
-        <DSItem DataType="BYTE" Name="左前支腿垂直伸出不检测时间" Unit="s" Value="5" />
-        <DSItem DataType="BYTE" Name="左前支腿垂直回收不检测时间" Unit="s" Value="5" />
-        <DSItem DataType="BYTE" Name="右前支腿水平伸出不检测时间" Value="5" />
-        <DSItem DataType="WORD" Name="右前支腿水平伸出终止斜率阀值" Value="1000" />
-        <DSItem DataType="BYTE" Name="右前支腿水平回收不检测时间" Value="5" />
-        <DSItem DataType="WORD" Name="右前支腿水平回收终止斜率阀值" Value="1000" />
-        <DSItem DataType="BYTE" Name="右前支腿垂直伸出不检测时间" Value="5" />
-        <DSItem DataType="WORD" Name="右前支腿垂直伸出终止斜率阀值" Value="1000" />
-        <DSItem DataType="BYTE" Name="右前支腿垂直回收不检测时间" Value="5" />
-        <DSItem DataType="WORD" Name="右前支腿垂直回收终止斜率阀值" Value="1000" />
-        <DSItem DataType="BYTE" Name="左后支腿水平伸出不检测时间" Value="5" />
-        <DSItem DataType="WORD" Name="左后支腿水平伸出终止斜率阀值" Value="1000" />
-        <DSItem DataType="BYTE" Name="左后支腿水平回收不检测时间" Value="5" />
-        <DSItem DataType="WORD" Name="左后支腿水平回收终止斜率阀值" Value="1000" />
-        <DSItem DataType="BYTE" Name="左后支腿垂直伸出不检测时间" Value="5" />
-        <DSItem DataType="WORD" Name="左后支腿垂直伸出终止斜率阀值" Value="1000" />
-        <DSItem DataType="BYTE" Name="左后支腿垂直回收不检测时间" Value="5" />
-        <DSItem DataType="WORD" Name="左后支腿垂直回收终止斜率阀值" Value="1000" />
-        <DSItem DataType="BYTE" Name="右后支腿水平伸出不检测时间" Value="5" />
-        <DSItem DataType="WORD" Name="右后支腿水平伸出终止斜率阀值" Value="1000" />
-        <DSItem DataType="BYTE" Name="右后支腿水平回收不检测时间" Value="5" />
-        <DSItem DataType="WORD" Name="右后支腿水平回收终止斜率阀值" Value="1000" />
-        <DSItem DataType="BYTE" Name="右后支腿垂直伸出不检测时间" Value="5" />
-        <DSItem DataType="WORD" Name="右后支腿垂直伸出终止斜率阀值" Value="1000" />
-        <DSItem DataType="BYTE" Name="右后支腿垂直回收不检测时间" Value="5" />
-        <DSItem DataType="WORD" Name="右后支腿垂直回收终止斜率阀值" Value="1000" />
+        <DSItem DataType="WORD" Name="左前支腿水平伸出不检测时间" Unit="s" Value="5" />
         <DSItem DataType="WORD" Name="左前支腿水平伸出终止斜率阀值" Value="1000" />
+        <DSItem DataType="WORD" Name="左前支腿水平回收不检测时间" Unit="s" Value="5" />
         <DSItem DataType="WORD" Name="左前支腿水平回收终止斜率阀值" Value="1000" />
+
+        <DSItem DataType="WORD" Name="左前支腿垂直伸出不检测时间" Unit="s" Value="5" />
         <DSItem DataType="WORD" Name="左前支腿垂直伸出终止斜率阀值" Value="1000" />
+        <DSItem DataType="WORD" Name="左前支腿垂直回收不检测时间" Unit="s" Value="5" />
         <DSItem DataType="WORD" Name="左前支腿垂直回收终止斜率阀值" Value="1000" />
 
-        <DSItem DataType="WORD" Name="一臂慢档展开终止斜率阀值" Unit="s" Value="1000" />
-        <DSItem DataType="WORD" Name="一臂慢档回收终止斜率阀值" Unit="s" Value="1000" />
-        <DSItem DataType="BYTE" Name="一臂慢档展开不检测时间" Unit="s" Value="5" />
-        <DSItem DataType="BYTE" Name="一臂慢档回收不检测时间" Unit="s" Value="5" />
-        <DSItem DataType="BYTE" Name="最大排量电流" Value="50" />
-        <DSItem DataType="BYTE" Name="最小排量电流" Value="1" />
-        <DSItem DataType="BYTE" Name="一臂慢档展开时间最大值" Value="100" />
-        <DSItem DataType="BYTE" Name="一臂慢档回收时间最大值" Value="100" />
-        <DSItem DataType="BYTE" Name="一臂慢档展开时间最小值" Value="0" />
-        <DSItem DataType="BYTE" Name="一臂慢档回收时间最小值" Value="0" />
-        <DSItem DataType="BYTE" Name="10档泵送标准次数的最小值" Value="30" />
-        <DSItem DataType="BYTE" Name="10档泵送标准次数的最大值" Value="50" />
-        <DSItem DataType="BYTE" Name="0.6档泵送标准次数的最小值" Value="10" />
-        <DSItem DataType="BYTE" Name="0.6档泵送标准次数的最大值" Value="20" />
+        <DSItem DataType="WORD" Name="右前支腿水平伸出不检测时间" Unit="s" Value="5" />
+        <DSItem DataType="WORD" Name="右前支腿水平伸出终止斜率阀值" Value="1000" />
+        <DSItem DataType="WORD" Name="右前支腿水平回收不检测时间" Unit="s" Value="5" />
+        <DSItem DataType="WORD" Name="右前支腿水平回收终止斜率阀值" Value="1000" />
 
-        <DSItem DataType="BYTE" Name="第一压力段最小压力" Value="0" />
-        <DSItem DataType="BYTE" Name="第一压力段最大压力" Value="100" />
-        <DSItem DataType="BYTE" Name="第一压力段最小压力泵送次数的最小值" Value="10" />
-        <DSItem DataType="BYTE" Name="第一压力段最小压力泵送次数的最大值" Value="60" />
-        <DSItem DataType="BYTE" Name="第一压力段最大压力泵送次数的最小值" Value="20" />
-        <DSItem DataType="BYTE" Name="第一压力段最大压力泵送次数的最大值" Value="70" />
+        <DSItem DataType="WORD" Name="右前支腿垂直伸出不检测时间" Unit="s" Value="5" />
+        <DSItem DataType="WORD" Name="右前支腿垂直伸出终止斜率阀值" Value="1000" />
+        <DSItem DataType="WORD" Name="右前支腿垂直回收不检测时间" Unit="s" Value="5" />
+        <DSItem DataType="WORD" Name="右前支腿垂直回收终止斜率阀值" Value="1000" />
 
-        <DSItem DataType="BYTE" Name="第二压力段最小压力" Value="0" />
-        <DSItem DataType="BYTE" Name="第二压力段最大压力" Value="100" />
-        <DSItem DataType="BYTE" Name="第二压力段最小压力泵送次数的最小值" Value="10" />
-        <DSItem DataType="BYTE" Name="第二压力段最小压力泵送次数的最大值" Value="60" />
-        <DSItem DataType="BYTE" Name="第二压力段最大压力泵送次数的最小值" Value="20" />
-        <DSItem DataType="BYTE" Name="第二压力段最大压力泵送次数的最大值" Value="70" />
+        <DSItem DataType="WORD" Name="左后支腿水平伸出不检测时间" Unit="s" Value="5" />
+        <DSItem DataType="WORD" Name="左后支腿水平伸出终止斜率阀值" Value="1000" />
+        <DSItem DataType="WORD" Name="左后支腿水平回收不检测时间" Unit="s" Value="5" />
+        <DSItem DataType="WORD" Name="左后支腿水平回收终止斜率阀值" Value="1000" />
 
-        <DSItem DataType="BYTE" Name="第三压力段最小压力" Value="0" />
-        <DSItem DataType="BYTE" Name="第三压力段最大压力" Value="100" />
-        <DSItem DataType="BYTE" Name="第三压力段最小压力泵送次数的最小值" Value="10" />
-        <DSItem DataType="BYTE" Name="第三压力段最小压力泵送次数的最大值" Value="60" />
-        <DSItem DataType="BYTE" Name="第三压力段最大压力泵送次数的最小值" Value="20" />
-        <DSItem DataType="BYTE" Name="第三压力段最大压力泵送次数的最大值" Value="70" />
+        <DSItem DataType="WORD" Name="左后支腿垂直伸出不检测时间" Unit="s" Value="5" />
+        <DSItem DataType="WORD" Name="左后支腿垂直伸出终止斜率阀值" Value="1000" />
+        <DSItem DataType="WORD" Name="左后支腿垂直回收不检测时间" Unit="s" Value="5" />
+        <DSItem DataType="WORD" Name="左后支腿垂直回收终止斜率阀值" Value="1000" />
 
-        <DSItem DataType="BYTE" Name="第四压力段最小压力" Value="0" />
-        <DSItem DataType="BYTE" Name="第四压力段最大压力" Value="100" />
-        <DSItem DataType="BYTE" Name="第四压力段最小压力泵送次数的最小值" Value="10" />
-        <DSItem DataType="BYTE" Name="第四压力段最小压力泵送次数的最大值" Value="60" />
-        <DSItem DataType="BYTE" Name="第四压力段最大压力泵送次数的最小值" Value="20" />
-        <DSItem DataType="BYTE" Name="第四压力段最大压力泵送次数的最大值" Value="70" />
+        <DSItem DataType="WORD" Name="右后支腿水平伸出不检测时间" Unit="s" Value="5" />
+        <DSItem DataType="WORD" Name="右后支腿水平伸出终止斜率阀值" Value="1000" />
+        <DSItem DataType="WORD" Name="右后支腿水平回收不检测时间" Unit="s" Value="5" />
+        <DSItem DataType="WORD" Name="右后支腿水平回收终止斜率阀值" Value="1000" />
+
+        <DSItem DataType="WORD" Name="右后支腿垂直伸出不检测时间" Unit="s" Value="5" />
+        <DSItem DataType="WORD" Name="右后支腿垂直伸出终止斜率阀值" Value="1000" />
+        <DSItem DataType="WORD" Name="右后支腿垂直回收不检测时间" Unit="s" Value="5" />
+        <DSItem DataType="WORD" Name="右后支腿垂直回收终止斜率阀值" Value="1000" />
+
+        <DSItem DataType="WORD" Name="最大排量电流" Value="50" />
+        <DSItem DataType="WORD" Name="最小排量电流" Value="1" />
+        <DSItem DataType="WORD" Name="10档泵送标准次数的最小值" Value="241" />
+        <DSItem DataType="WORD" Name="10档泵送标准次数的最大值" Value="261" />
+        <DSItem DataType="WORD" Name="0.6档泵送标准次数的最小值" Value="1" />
+        <DSItem DataType="WORD" Name="0.6档泵送标准次数的最大值" Value="10" />
+
+        <DSItem DataType="WORD" Name="第一压力段最小压力" Value="22000" />
+        <DSItem DataType="WORD" Name="第一压力段最大压力" Value="24000" />
+        <DSItem DataType="WORD" Name="第一压力段最小压力泵送次数的最小值" Value="10" />
+        <DSItem DataType="WORD" Name="第一压力段最小压力泵送次数的最大值" Value="60" />
+        <DSItem DataType="WORD" Name="第一压力段最大压力泵送次数的最小值" Value="20" />
+        <DSItem DataType="WORD" Name="第一压力段最大压力泵送次数的最大值" Value="70" />
+
+        <DSItem DataType="WORD" Name="第二压力段最小压力" Value="26000" />
+        <DSItem DataType="WORD" Name="第二压力段最大压力" Value="28000" />
+        <DSItem DataType="WORD" Name="第二压力段最小压力泵送次数的最小值" Value="10" />
+        <DSItem DataType="WORD" Name="第二压力段最小压力泵送次数的最大值" Value="60" />
+        <DSItem DataType="WORD" Name="第二压力段最大压力泵送次数的最小值" Value="20" />
+        <DSItem DataType="WORD" Name="第二压力段最大压力泵送次数的最大值" Value="70" />
+
+        <DSItem DataType="WORD" Name="第三压力段最小压力" Value="32000" />
+        <DSItem DataType="WORD" Name="第三压力段最大压力" Value="34000" />
+        <DSItem DataType="WORD" Name="第三压力段最小压力泵送次数的最小值" Value="10" />
+        <DSItem DataType="WORD" Name="第三压力段最小压力泵送次数的最大值" Value="60" />
+        <DSItem DataType="WORD" Name="第三压力段最大压力泵送次数的最小值" Value="20" />
+        <DSItem DataType="WORD" Name="第三压力段最大压力泵送次数的最大值" Value="70" />
+
+        <DSItem DataType="WORD" Name="第四压力段最小压力" Value="38000" />
+        <DSItem DataType="WORD" Name="第四压力段最大压力" Value="40000" />
+        <DSItem DataType="WORD" Name="第四压力段最小压力泵送次数的最小值" Value="10" />
+        <DSItem DataType="WORD" Name="第四压力段最小压力泵送次数的最大值" Value="60" />
+        <DSItem DataType="WORD" Name="第四压力段最大压力泵送次数的最小值" Value="20" />
+        <DSItem DataType="WORD" Name="第四压力段最大压力泵送次数的最大值" Value="70" />
 
         <!-- 命令与应答变量 -->
         <DSItem DataType="BYTE" Name="当前检测项目" />
@@ -801,11 +793,11 @@
         <DSItem DataType="DWORD" Name="测试帧序号" />
         <!-- 谱图变量 -->
         <DSItem DataType="WORD" DecLen="0" Name="谱图_顺序号" Unit="" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="谱图_臂架泵压力" Unit="bar" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="谱图_主油泵压力" Unit="bar" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="谱图_泵送次数" Unit="次" />
+        <DSItem DataType="FLOAT" DecLen="2" Name="谱图_臂架泵压力" Unit="bar" />
+        <DSItem DataType="FLOAT" DecLen="2" Name="谱图_主油泵压力" Unit="bar" />
+        <DSItem DataType="FLOAT" DecLen="1" Name="谱图_泵送次数" Unit="次" />
         <DSItem DataType="FLOAT" DecLen="0" Name="谱图_比例阀电流" Unit="mA" />
-        <DSItem DataType="FLOAT" DecLen="0" Name="谱图_摆阀压力" Unit="bar" />
+        <DSItem DataType="FLOAT" DecLen="2" Name="谱图_摆阀压力" Unit="bar" />
         <DSItem DataType="WORD" DecLen="0" Name="谱图_补传顺序号" Unit="num" />
 
         <!-- 用于指示谱图总点数据的变量 -->
@@ -901,15 +893,15 @@
             <SP Bits="0" Bytes="2" Off="0" Ref="发动机转速" Res="1" SBit="1" SByte="1" SPN="0"
                 Type="1" />
             <SP Bits="0" Bytes="2" Off="0" Ref="油泵转速" Res="1" SBit="1" SByte="3" SPN="0" Type="1" />
-            <SP Bits="0" Bytes="2" Off="0" Ref="主油泵压力" Res="0.1" SBit="1" SByte="5" SPN="0"
+            <SP Bits="0" Bytes="2" Off="0" Ref="主油泵压力" Res="0.01" SBit="1" SByte="5" SPN="0"
                 Type="1" />
-            <SP Bits="0" Bytes="2" Off="0" Ref="泵送压力" Res="0.1" SBit="1" SByte="7" SPN="0"
+            <SP Bits="0" Bytes="2" Off="0" Ref="泵送压力" Res="0.01" SBit="1" SByte="7" SPN="0"
                 Type="1" />
         </PG>
         <PG Dir="Rx" Len="8" PGN="0xFF09" Prio="3" Rate="100" Req="0" ReqCyc="0" SA="0x01" Type="2">
-            <SP Bits="0" Bytes="2" Off="50" Ref="液压油温温度" Res="1" SBit="1" SByte="1" SPN="0"
+            <SP Bits="0" Bytes="2" Off="-50" Ref="液压油温温度" Res="1" SBit="1" SByte="1" SPN="0"
                 Type="1" />
-            <SP Bits="0" Bytes="2" Off="0" Ref="泵送次数" Res="0.01" SBit="1" SByte="3" SPN="0"
+            <SP Bits="0" Bytes="2" Off="0" Ref="泵送次数" Res="0.1" SBit="1" SByte="3" SPN="0"
                 Type="1" />
             <SP Bits="0" Bytes="2" Off="0" Ref="左直线位移" Res="1" SBit="1" SByte="5" SPN="0"
                 Type="1" />
@@ -1045,19 +1037,19 @@
                 Type="1" />
         </PG>
         <PG Dir="Rx" Len="8" PGN="0xFF21" Prio="3" Rate="100" Req="0" ReqCyc="0" SA="0x01" Type="2">
-            <SP Bits="0" Bytes="2" Off="0" Ref="10档泵送次数" Res="1" SBit="1" SByte="1" SPN="0"
+            <SP Bits="0" Bytes="2" Off="0" Ref="10档泵送次数" Res="0.1" SBit="1" SByte="1" SPN="0"
                 Type="1" />
             <SP Bits="0" Bytes="2" Off="0" Ref="标定后最大排量电流" Res="1" SBit="1" SByte="3" SPN="0"
                 Type="1" />
         </PG>
         <PG Dir="Rx" Len="8" PGN="0xFF22" Prio="3" Rate="100" Req="0" ReqCyc="0" SA="0x01" Type="2">
-            <SP Bits="0" Bytes="2" Off="0" Ref="0.6档泵送次数" Res="1" SBit="1" SByte="1" SPN="0"
+            <SP Bits="0" Bytes="2" Off="0" Ref="0.6档泵送次数" Res="0.1" SBit="1" SByte="1" SPN="0"
                 Type="1" />
             <SP Bits="0" Bytes="2" Off="0" Ref="标定后最小排量电流" Res="1" SBit="1" SByte="3" SPN="0"
                 Type="1" />
         </PG>
         <PG Dir="Rx" Len="8" PGN="0xFF23" Prio="3" Rate="100" Req="0" ReqCyc="0" SA="0x01" Type="2">
-            <SP Bits="0" Bytes="2" Off="0" Ref="5档泵送次数" Res="0.01" SBit="1" SByte="1" SPN="0"
+            <SP Bits="0" Bytes="2" Off="0" Ref="5档泵送次数" Res="0.1" SBit="1" SByte="1" SPN="0"
                 Type="1" />
         </PG>
         <PG Dir="Rx" Len="8" PGN="0xFF24" Prio="3" Rate="100" Req="0" ReqCyc="0" SA="0x01" Type="2">
@@ -1816,19 +1808,15 @@
                 Type="1" />
         </PG>
         <PG Dir="Tx" Len="8" PGN="0xFFF1" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
-            <SP Bits="0" Bytes="2" Off="0" Ref="最大排量电流" Res="1" SBit="1" SByte="1" SPN="0"
+            <SP Bits="0" Bytes="2" Off="0" Ref="10档泵送标准次数的最大值" Res="1" SBit="1" SByte="1" SPN="0"
                 Type="1" />
-            <SP Bits="0" Bytes="2" Off="0" Ref="10档泵送标准次数的最大值" Res="1" SBit="1" SByte="3" SPN="0"
-                Type="1" />
-            <SP Bits="0" Bytes="2" Off="0" Ref="10档泵送标准次数的最小值" Res="1" SBit="1" SByte="5" SPN="0"
+            <SP Bits="0" Bytes="2" Off="0" Ref="10档泵送标准次数的最小值" Res="1" SBit="1" SByte="3" SPN="0"
                 Type="1" />
         </PG>
         <PG Dir="Tx" Len="8" PGN="0xFFF2" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
-            <SP Bits="0" Bytes="2" Off="0" Ref="最小排量电流" Res="1" SBit="1" SByte="1" SPN="0"
+            <SP Bits="0" Bytes="2" Off="0" Ref="0.6档泵送标准次数的最大值" Res="1" SBit="1" SByte="1" SPN="0"
                 Type="1" />
-            <SP Bits="0" Bytes="2" Off="0" Ref="0.6档泵送标准次数的最大值" Res="1" SBit="1" SByte="3" SPN="0"
-                Type="1" />
-            <SP Bits="0" Bytes="2" Off="0" Ref="0.6档泵送标准次数的最小值" Res="1" SBit="1" SByte="5" SPN="0"
+            <SP Bits="0" Bytes="2" Off="0" Ref="0.6档泵送标准次数的最小值" Res="1" SBit="1" SByte="3" SPN="0"
                 Type="1" />
         </PG>
         <PG Dir="Tx" Len="16" PGN="0xFFF3" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
@@ -2138,8 +2126,61 @@
                 Type="1" />
         </PG>
         <PG Dir="Tx" Len="112" PGN="0xFFFB" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
-            <SP Bits="0" Bytes="1" Off="0" Ref="恒功率压力_次数标准" Res="1" SBit="1" SByte="1" SPN="0"
-                Type="1" />
+            <SP Bits="0" Bytes="2" Off="0" Ref="恒功率压力_次数标准值_00" Res="1" SBit="1" SByte="1" SPN="0" Type="1"/>
+            <SP Bits="0" Bytes="2" Off="0" Ref="恒功率压力_次数标准值_01" Res="1" SBit="1" SByte="3" SPN="0" Type="1"/>
+            <SP Bits="0" Bytes="2" Off="0" Ref="恒功率压力_次数标准值_02" Res="1" SBit="1" SByte="5" SPN="0" Type="1"/>
+            <SP Bits="0" Bytes="2" Off="0" Ref="恒功率压力_次数标准值_03" Res="1" SBit="1" SByte="7" SPN="0" Type="1"/>
+            <SP Bits="0" Bytes="2" Off="0" Ref="恒功率压力_次数标准值_04" Res="1" SBit="1" SByte="9" SPN="0" Type="1"/>
+            <SP Bits="0" Bytes="2" Off="0" Ref="恒功率压力_次数标准值_05" Res="1" SBit="1" SByte="11" SPN="0" Type="1"/>
+            <SP Bits="0" Bytes="2" Off="0" Ref="恒功率压力_次数标准值_06" Res="1" SBit="1" SByte="13" SPN="0" Type="1"/>
+            <SP Bits="0" Bytes="2" Off="0" Ref="恒功率压力_次数标准值_07" Res="1" SBit="1" SByte="15" SPN="0" Type="1"/>
+            <SP Bits="0" Bytes="2" Off="0" Ref="恒功率压力_次数标准值_08" Res="1" SBit="1" SByte="17" SPN="0" Type="1"/>
+            <SP Bits="0" Bytes="2" Off="0" Ref="恒功率压力_次数标准值_09" Res="1" SBit="1" SByte="19" SPN="0" Type="1"/>
+            <SP Bits="0" Bytes="2" Off="0" Ref="恒功率压力_次数标准值_010" Res="1" SBit="1" SByte="21" SPN="0" Type="1"/>
+            <SP Bits="0" Bytes="2" Off="0" Ref="恒功率压力_次数标准值_011" Res="1" SBit="1" SByte="23" SPN="0" Type="1"/>
+            <SP Bits="0" Bytes="2" Off="0" Ref="恒功率压力_次数标准值_012" Res="1" SBit="1" SByte="25" SPN="0" Type="1"/>
+            <SP Bits="0" Bytes="2" Off="0" Ref="恒功率压力_次数标准值_013" Res="1" SBit="1" SByte="27" SPN="0" Type="1"/>
+            <SP Bits="0" Bytes="2" Off="0" Ref="恒功率压力_次数标准值_014" Res="1" SBit="1" SByte="29" SPN="0" Type="1"/>
+            <SP Bits="0" Bytes="2" Off="0" Ref="恒功率压力_次数标准值_015" Res="1" SBit="1" SByte="31" SPN="0" Type="1"/>
+            <SP Bits="0" Bytes="2" Off="0" Ref="恒功率压力_次数标准值_016" Res="1" SBit="1" SByte="33" SPN="0" Type="1"/>
+            <SP Bits="0" Bytes="2" Off="0" Ref="恒功率压力_次数标准值_017" Res="1" SBit="1" SByte="35" SPN="0" Type="1"/>
+            <SP Bits="0" Bytes="2" Off="0" Ref="恒功率压力_次数标准值_018" Res="1" SBit="1" SByte="37" SPN="0" Type="1"/>
+            <SP Bits="0" Bytes="2" Off="0" Ref="恒功率压力_次数标准值_019" Res="1" SBit="1" SByte="39" SPN="0" Type="1"/>
+            <SP Bits="0" Bytes="2" Off="0" Ref="恒功率压力_次数标准值_020" Res="1" SBit="1" SByte="41" SPN="0" Type="1"/>
+            <SP Bits="0" Bytes="2" Off="0" Ref="恒功率压力_次数标准值_021" Res="1" SBit="1" SByte="43" SPN="0" Type="1"/>
+            <SP Bits="0" Bytes="2" Off="0" Ref="恒功率压力_次数标准值_022" Res="1" SBit="1" SByte="45" SPN="0" Type="1"/>
+            <SP Bits="0" Bytes="2" Off="0" Ref="恒功率压力_次数标准值_023" Res="1" SBit="1" SByte="47" SPN="0" Type="1"/>
+            <SP Bits="0" Bytes="2" Off="0" Ref="恒功率压力_次数标准值_024" Res="1" SBit="1" SByte="49" SPN="0" Type="1"/>
+            <SP Bits="0" Bytes="2" Off="0" Ref="恒功率压力_次数标准值_025" Res="1" SBit="1" SByte="51" SPN="0" Type="1"/>
+            <SP Bits="0" Bytes="2" Off="0" Ref="恒功率压力_次数标准值_026" Res="1" SBit="1" SByte="53" SPN="0" Type="1"/>
+            <SP Bits="0" Bytes="2" Off="0" Ref="恒功率压力_次数标准值_027" Res="1" SBit="1" SByte="55" SPN="0" Type="1"/>
+            <SP Bits="0" Bytes="2" Off="0" Ref="恒功率压力_次数标准值_028" Res="1" SBit="1" SByte="57" SPN="0" Type="1"/>
+            <SP Bits="0" Bytes="2" Off="0" Ref="恒功率压力_次数标准值_029" Res="1" SBit="1" SByte="59" SPN="0" Type="1"/>
+            <SP Bits="0" Bytes="2" Off="0" Ref="恒功率压力_次数标准值_030" Res="1" SBit="1" SByte="61" SPN="0" Type="1"/>
+            <SP Bits="0" Bytes="2" Off="0" Ref="恒功率压力_次数标准值_031" Res="1" SBit="1" SByte="63" SPN="0" Type="1"/>
+            <SP Bits="0" Bytes="2" Off="0" Ref="恒功率压力_次数标准值_032" Res="1" SBit="1" SByte="65" SPN="0" Type="1"/>
+            <SP Bits="0" Bytes="2" Off="0" Ref="恒功率压力_次数标准值_033" Res="1" SBit="1" SByte="67" SPN="0" Type="1"/>
+            <SP Bits="0" Bytes="2" Off="0" Ref="恒功率压力_次数标准值_034" Res="1" SBit="1" SByte="69" SPN="0" Type="1"/>
+            <SP Bits="0" Bytes="2" Off="0" Ref="恒功率压力_次数标准值_035" Res="1" SBit="1" SByte="71" SPN="0" Type="1"/>
+            <SP Bits="0" Bytes="2" Off="0" Ref="恒功率压力_次数标准值_036" Res="1" SBit="1" SByte="73" SPN="0" Type="1"/>
+            <SP Bits="0" Bytes="2" Off="0" Ref="恒功率压力_次数标准值_037" Res="1" SBit="1" SByte="75" SPN="0" Type="1"/>
+            <SP Bits="0" Bytes="2" Off="0" Ref="恒功率压力_次数标准值_038" Res="1" SBit="1" SByte="77" SPN="0" Type="1"/>
+            <SP Bits="0" Bytes="2" Off="0" Ref="恒功率压力_次数标准值_039" Res="1" SBit="1" SByte="79" SPN="0" Type="1"/>
+            <SP Bits="0" Bytes="2" Off="0" Ref="恒功率压力_次数标准值_040" Res="1" SBit="1" SByte="81" SPN="0" Type="1"/>
+            <SP Bits="0" Bytes="2" Off="0" Ref="恒功率压力_次数标准值_041" Res="1" SBit="1" SByte="83" SPN="0" Type="1"/>
+            <SP Bits="0" Bytes="2" Off="0" Ref="恒功率压力_次数标准值_042" Res="1" SBit="1" SByte="85" SPN="0" Type="1"/>
+            <SP Bits="0" Bytes="2" Off="0" Ref="恒功率压力_次数标准值_043" Res="1" SBit="1" SByte="87" SPN="0" Type="1"/>
+            <SP Bits="0" Bytes="2" Off="0" Ref="恒功率压力_次数标准值_044" Res="1" SBit="1" SByte="89" SPN="0" Type="1"/>
+            <SP Bits="0" Bytes="2" Off="0" Ref="恒功率压力_次数标准值_045" Res="1" SBit="1" SByte="91" SPN="0" Type="1"/>
+            <SP Bits="0" Bytes="2" Off="0" Ref="恒功率压力_次数标准值_046" Res="1" SBit="1" SByte="93" SPN="0" Type="1"/>
+            <SP Bits="0" Bytes="2" Off="0" Ref="恒功率压力_次数标准值_047" Res="1" SBit="1" SByte="95" SPN="0" Type="1"/>
+            <SP Bits="0" Bytes="2" Off="0" Ref="恒功率压力_次数标准值_048" Res="1" SBit="1" SByte="97" SPN="0" Type="1"/>
+            <SP Bits="0" Bytes="2" Off="0" Ref="恒功率压力_次数标准值_049" Res="1" SBit="1" SByte="99" SPN="0" Type="1"/>
+            <SP Bits="0" Bytes="2" Off="0" Ref="恒功率压力_次数标准值_050" Res="1" SBit="1" SByte="101" SPN="0" Type="1"/>
+            <SP Bits="0" Bytes="2" Off="0" Ref="恒功率压力_次数标准值_051" Res="1" SBit="1" SByte="103" SPN="0" Type="1"/>
+            <SP Bits="0" Bytes="2" Off="0" Ref="恒功率压力_次数标准值_052" Res="1" SBit="1" SByte="105" SPN="0" Type="1"/>
+            <SP Bits="0" Bytes="2" Off="0" Ref="恒功率压力_次数标准值_053" Res="1" SBit="1" SByte="107" SPN="0" Type="1"/>
+            <SP Bits="0" Bytes="2" Off="0" Ref="恒功率压力_次数标准值_054" Res="1" SBit="1" SByte="109" SPN="0" Type="1"/>
         </PG>
         <PG Dir="Rx" Len="168" PGN="0xFFFA" Prio="3" Rate="0" Req="0" ReqCyc="0" SA="0x01" Type="2">
             <SP Bits="0" Bytes="1" Off="0" Ref="主泵品牌" Res="1" SBit="1" SByte="1" SPN="0" Type="1" />
@@ -2976,28 +3017,6 @@
                 <ENVParams />
                 <RealTimeParams />
             </QCItem>
-            <QCItem AttachPGN="0xFFDA" Id="24" Name="二臂快档展开" QCTimeout="20" QCTimes="5"
-                ReadyTimeout="10" Require="true">
-                <Spectrum EndMode="Auto" Interval="50" StartMode="Auto">
-                    <SpecParam Param="臂架泵压力" />
-                </Spectrum>
-                <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
-                    <QCProgressMsg>
-                        <QCProgress Code="" Msg="" />
-                    </QCProgressMsg>
-                    <QCErrMsg>
-                        <QCErr Code="" Msg="" />
-                    </QCErrMsg>
-                </Msgs>
-                <QCParams>
-                    <QCParam Param="二臂快档展开时间" PicReq="false" QCMode="Auto" ValMode="Auto"
-                        ValidAvg="" ValidMax="99" ValidMin="81" ValueReq="true" />
-                    <QCParam Param="二臂快档展开电流" PicReq="false" QCMode="Auto" ValMode="Auto"
-                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
-                </QCParams>
-                <ENVParams />
-                <RealTimeParams />
-            </QCItem>
             <QCItem AttachPGN="0xFFC2" Id="25" Name="二臂慢档回收" QCTimeout="20" QCTimes="5"
                 ReadyTimeout="10" Require="true">
                 <Spectrum EndMode="Auto" Interval="50" StartMode="Auto">
@@ -3015,6 +3034,28 @@
                     <QCParam Param="二臂慢档回收时间" PicReq="false" QCMode="Auto" ValMode="Auto"
                         ValidAvg="" ValidMax="198" ValidMin="162" ValueReq="true" />
                     <QCParam Param="二臂慢档回收电流" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                </QCParams>
+                <ENVParams />
+                <RealTimeParams />
+            </QCItem>
+            <QCItem AttachPGN="0xFFDA" Id="24" Name="二臂快档展开" QCTimeout="20" QCTimes="5"
+                ReadyTimeout="10" Require="true">
+                <Spectrum EndMode="Auto" Interval="50" StartMode="Auto">
+                    <SpecParam Param="臂架泵压力" />
+                </Spectrum>
+                <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
+                    <QCProgressMsg>
+                        <QCProgress Code="" Msg="" />
+                    </QCProgressMsg>
+                    <QCErrMsg>
+                        <QCErr Code="" Msg="" />
+                    </QCErrMsg>
+                </Msgs>
+                <QCParams>
+                    <QCParam Param="二臂快档展开时间" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="99" ValidMin="81" ValueReq="true" />
+                    <QCParam Param="二臂快档展开电流" PicReq="false" QCMode="Auto" ValMode="Auto"
                         ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
                 </QCParams>
                 <ENVParams />
@@ -3064,28 +3105,6 @@
                 <ENVParams />
                 <RealTimeParams />
             </QCItem>
-            <QCItem AttachPGN="0xFFC5" Id="28" Name="三臂快档展开" QCTimeout="20" QCTimes="5"
-                ReadyTimeout="10" Require="true">
-                <Spectrum EndMode="Auto" Interval="50" StartMode="Auto">
-                    <SpecParam Param="臂架泵压力" />
-                </Spectrum>
-                <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
-                    <QCProgressMsg>
-                        <QCProgress Code="" Msg="" />
-                    </QCProgressMsg>
-                    <QCErrMsg>
-                        <QCErr Code="" Msg="" />
-                    </QCErrMsg>
-                </Msgs>
-                <QCParams>
-                    <QCParam Param="三臂快档展开时间" PicReq="false" QCMode="Auto" ValMode="Auto"
-                        ValidAvg="" ValidMax="77" ValidMin="63" ValueReq="true" />
-                    <QCParam Param="三臂快档展开电流" PicReq="false" QCMode="Auto" ValMode="Auto"
-                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
-                </QCParams>
-                <ENVParams />
-                <RealTimeParams />
-            </QCItem>
             <QCItem AttachPGN="0xFFC6" Id="29" Name="三臂慢档回收" QCTimeout="20" QCTimes="5"
                 ReadyTimeout="10" Require="true">
                 <Spectrum EndMode="Auto" Interval="50" StartMode="Auto">
@@ -3103,6 +3122,28 @@
                     <QCParam Param="三臂慢档回收时间" PicReq="false" QCMode="Auto" ValMode="Auto"
                         ValidAvg="" ValidMax="154" ValidMin="126" ValueReq="true" />
                     <QCParam Param="三臂慢档回收电流" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                </QCParams>
+                <ENVParams />
+                <RealTimeParams />
+            </QCItem>
+            <QCItem AttachPGN="0xFFC5" Id="28" Name="三臂快档展开" QCTimeout="20" QCTimes="5"
+                ReadyTimeout="10" Require="true">
+                <Spectrum EndMode="Auto" Interval="50" StartMode="Auto">
+                    <SpecParam Param="臂架泵压力" />
+                </Spectrum>
+                <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
+                    <QCProgressMsg>
+                        <QCProgress Code="" Msg="" />
+                    </QCProgressMsg>
+                    <QCErrMsg>
+                        <QCErr Code="" Msg="" />
+                    </QCErrMsg>
+                </Msgs>
+                <QCParams>
+                    <QCParam Param="三臂快档展开时间" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="77" ValidMin="63" ValueReq="true" />
+                    <QCParam Param="三臂快档展开电流" PicReq="false" QCMode="Auto" ValMode="Auto"
                         ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
                 </QCParams>
                 <ENVParams />
@@ -3152,28 +3193,6 @@
                 <ENVParams />
                 <RealTimeParams />
             </QCItem>
-            <QCItem AttachPGN="0xFFC9" Id="32" Name="四臂快档展开" QCTimeout="20" QCTimes="5"
-                ReadyTimeout="10" Require="true">
-                <Spectrum EndMode="Auto" Interval="50" StartMode="Auto">
-                    <SpecParam Param="臂架泵压力" />
-                </Spectrum>
-                <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
-                    <QCProgressMsg>
-                        <QCProgress Code="" Msg="" />
-                    </QCProgressMsg>
-                    <QCErrMsg>
-                        <QCErr Code="" Msg="" />
-                    </QCErrMsg>
-                </Msgs>
-                <QCParams>
-                    <QCParam Param="四臂快档展开时间" PicReq="false" QCMode="Auto" ValMode="Auto"
-                        ValidAvg="" ValidMax="55" ValidMin="45" ValueReq="true" />
-                    <QCParam Param="四臂快档展开电流" PicReq="false" QCMode="Auto" ValMode="Auto"
-                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
-                </QCParams>
-                <ENVParams />
-                <RealTimeParams />
-            </QCItem>
             <QCItem AttachPGN="0xFFCA" Id="33" Name="四臂慢档回收" QCTimeout="20" QCTimes="5"
                 ReadyTimeout="10" Require="true">
                 <Spectrum EndMode="Auto" Interval="50" StartMode="Auto">
@@ -3191,6 +3210,28 @@
                     <QCParam Param="四臂慢档回收时间" PicReq="false" QCMode="Auto" ValMode="Auto"
                         ValidAvg="" ValidMax="110" ValidMin="90" ValueReq="true" />
                     <QCParam Param="四臂慢档回收电流" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                </QCParams>
+                <ENVParams />
+                <RealTimeParams />
+            </QCItem>
+            <QCItem AttachPGN="0xFFC9" Id="32" Name="四臂快档展开" QCTimeout="20" QCTimes="5"
+                ReadyTimeout="10" Require="true">
+                <Spectrum EndMode="Auto" Interval="50" StartMode="Auto">
+                    <SpecParam Param="臂架泵压力" />
+                </Spectrum>
+                <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
+                    <QCProgressMsg>
+                        <QCProgress Code="" Msg="" />
+                    </QCProgressMsg>
+                    <QCErrMsg>
+                        <QCErr Code="" Msg="" />
+                    </QCErrMsg>
+                </Msgs>
+                <QCParams>
+                    <QCParam Param="四臂快档展开时间" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="55" ValidMin="45" ValueReq="true" />
+                    <QCParam Param="四臂快档展开电流" PicReq="false" QCMode="Auto" ValMode="Auto"
                         ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
                 </QCParams>
                 <ENVParams />
@@ -3240,28 +3281,6 @@
                 <ENVParams />
                 <RealTimeParams />
             </QCItem>
-            <QCItem AttachPGN="0xFFCD" Id="36" Name="五臂快档展开" QCTimeout="20" QCTimes="5"
-                ReadyTimeout="10" Require="true">
-                <Spectrum EndMode="Auto" Interval="50" StartMode="Auto">
-                    <SpecParam Param="臂架泵压力" />
-                </Spectrum>
-                <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
-                    <QCProgressMsg>
-                        <QCProgress Code="" Msg="" />
-                    </QCProgressMsg>
-                    <QCErrMsg>
-                        <QCErr Code="" Msg="" />
-                    </QCErrMsg>
-                </Msgs>
-                <QCParams>
-                    <QCParam Param="五臂快档展开时间" PicReq="false" QCMode="Auto" ValMode="Auto"
-                        ValidAvg="" ValidMax="27.5" ValidMin="22.5" ValueReq="true" />
-                    <QCParam Param="五臂快档展开电流" PicReq="false" QCMode="Auto" ValMode="Auto"
-                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
-                </QCParams>
-                <ENVParams />
-                <RealTimeParams />
-            </QCItem>
             <QCItem AttachPGN="0xFFCE" Id="37" Name="五臂慢档回收" QCTimeout="20" QCTimes="5"
                 ReadyTimeout="10" Require="true">
                 <Spectrum EndMode="Auto" Interval="50" StartMode="Auto">
@@ -3279,6 +3298,28 @@
                     <QCParam Param="五臂慢档回收时间" PicReq="false" QCMode="Auto" ValMode="Auto"
                         ValidAvg="" ValidMax="55" ValidMin="45" ValueReq="true" />
                     <QCParam Param="五臂慢档回收电流" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                </QCParams>
+                <ENVParams />
+                <RealTimeParams />
+            </QCItem>
+            <QCItem AttachPGN="0xFFCD" Id="36" Name="五臂快档展开" QCTimeout="20" QCTimes="5"
+                ReadyTimeout="10" Require="true">
+                <Spectrum EndMode="Auto" Interval="50" StartMode="Auto">
+                    <SpecParam Param="臂架泵压力" />
+                </Spectrum>
+                <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
+                    <QCProgressMsg>
+                        <QCProgress Code="" Msg="" />
+                    </QCProgressMsg>
+                    <QCErrMsg>
+                        <QCErr Code="" Msg="" />
+                    </QCErrMsg>
+                </Msgs>
+                <QCParams>
+                    <QCParam Param="五臂快档展开时间" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="27.5" ValidMin="22.5" ValueReq="true" />
+                    <QCParam Param="五臂快档展开电流" PicReq="false" QCMode="Auto" ValMode="Auto"
                         ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
                 </QCParams>
                 <ENVParams />
@@ -3328,28 +3369,6 @@
                 <ENVParams />
                 <RealTimeParams />
             </QCItem>
-            <QCItem AttachPGN="0xFFD1" Id="40" Name="六臂快档展开" QCTimeout="20" QCTimes="5"
-                ReadyTimeout="10" Require="true">
-                <Spectrum EndMode="Auto" Interval="50" StartMode="Auto">
-                    <SpecParam Param="臂架泵压力" />
-                </Spectrum>
-                <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
-                    <QCProgressMsg>
-                        <QCProgress Code="" Msg="" />
-                    </QCProgressMsg>
-                    <QCErrMsg>
-                        <QCErr Code="" Msg="" />
-                    </QCErrMsg>
-                </Msgs>
-                <QCParams>
-                    <QCParam Param="六臂快档展开时间" PicReq="false" QCMode="Auto" ValMode="Auto"
-                        ValidAvg="" ValidMax="11" ValidMin="9" ValueReq="true" />
-                    <QCParam Param="六臂快档展开电流" PicReq="false" QCMode="Auto" ValMode="Auto"
-                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
-                </QCParams>
-                <ENVParams />
-                <RealTimeParams />
-            </QCItem>
             <QCItem AttachPGN="0xFFD2" Id="41" Name="六臂慢档回收" QCTimeout="20" QCTimes="5"
                 ReadyTimeout="10" Require="true">
                 <Spectrum EndMode="Auto" Interval="50" StartMode="Auto">
@@ -3367,6 +3386,28 @@
                     <QCParam Param="六臂慢档回收时间" PicReq="false" QCMode="Auto" ValMode="Auto"
                         ValidAvg="" ValidMax="22" ValidMin="18" ValueReq="true" />
                     <QCParam Param="六臂慢档回收电流" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
+                </QCParams>
+                <ENVParams />
+                <RealTimeParams />
+            </QCItem>
+            <QCItem AttachPGN="0xFFD1" Id="40" Name="六臂快档展开" QCTimeout="20" QCTimes="5"
+                ReadyTimeout="10" Require="true">
+                <Spectrum EndMode="Auto" Interval="50" StartMode="Auto">
+                    <SpecParam Param="臂架泵压力" />
+                </Spectrum>
+                <Msgs AbortMsg="" NotReadyMsg="" OkMsg="" ReadyMsg="">
+                    <QCProgressMsg>
+                        <QCProgress Code="" Msg="" />
+                    </QCProgressMsg>
+                    <QCErrMsg>
+                        <QCErr Code="" Msg="" />
+                    </QCErrMsg>
+                </Msgs>
+                <QCParams>
+                    <QCParam Param="六臂快档展开时间" PicReq="false" QCMode="Auto" ValMode="Auto"
+                        ValidAvg="" ValidMax="11" ValidMin="9" ValueReq="true" />
+                    <QCParam Param="六臂快档展开电流" PicReq="false" QCMode="Auto" ValMode="Auto"
                         ValidAvg="" ValidMax="" ValidMin="" ValueReq="true" />
                 </QCParams>
                 <ENVParams />

@@ -220,7 +220,8 @@ public class ItemCheckActivity extends BaseActivity implements ItemCheckCallBack
             @Override
             public void run() {
                 itemvo = Globals.modelFile.getCheckItemVO(itemID);
-                itemData = itemDao.queryBuilder().where(CheckItemDataDao.Properties.QcId.eq(Integer.parseInt(itemvo.getId()))).build().unique();
+                itemData = itemDao.queryBuilder().where(CheckItemDataDao.Properties.QcId.eq(Integer.parseInt(itemvo.getId())),
+                        CheckItemDataDao.Properties.DictId.eq(itemvo.getDictId())).build().unique();
                 itemDBID = itemData.getCheckItemId();
                 itemData.resetCheckItemDetailDatas();
 

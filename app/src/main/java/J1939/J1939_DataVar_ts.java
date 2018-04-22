@@ -177,6 +177,8 @@ public class J1939_DataVar_ts {
             // TODO:需要跟老吴商量
         } else if (bDataType == VARTYPE.FLOAT) {
             this.unValue = Float.floatToIntBits(Float.valueOf(value));
+        } else if (bDataType == VARTYPE.STRING) {
+            this.strValue = value;
         } else {
             int iValue = Integer.valueOf(value);
             if (bDataType.equals(VARTYPE.SHORT)
@@ -188,8 +190,6 @@ public class J1939_DataVar_ts {
                 this.unValue = iValue & 0x0000FFFF;
             } else if (bDataType == VARTYPE.DWORD) {
                 this.unValue = ((long) iValue) & 0xFFFFFFFFl;
-            } else if (bDataType == VARTYPE.STRING) {
-                this.strValue = value;
             } else {
                 this.unValue = (long) iValue; // Short, int类型
             }
@@ -435,6 +435,8 @@ public class J1939_DataVar_ts {
                 return (float) (unValue & 0xFFFFFFFFl);
             }
         } else {
+            if (vValue==null || ((Object[]) vValue).length==0)
+                return fRet;
             if (bDataType == VARTYPE.FLOAT) {
                 return (Float) ((Object[]) vValue)[wRowIdx];
             } else if (bDataType == VARTYPE.BYTE) {
